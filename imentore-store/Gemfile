@@ -25,6 +25,7 @@ group :test, :development do
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'guard-cucumber'
+  gem 'database_cleaner'
 end
 
 # Declare any dependencies that are still in development here instead of in
