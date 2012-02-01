@@ -1,0 +1,11 @@
+- @store.build_owner unless @store.owner
+- @store.owner.build_user unless @store.owner.user
+
+= simple_form_for @store, url: stores_path do |f|
+  = f.input :url
+  = f.simple_fields_for :owner, @store.owner do |owner|
+    = owner.simple_fields_for :user, @store.owner.user do |user|
+      = user.input :email
+      = user.input :password
+      = user.input :password_confirmation
+  = f.button :submit, id: 'create-store'
