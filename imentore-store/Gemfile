@@ -19,13 +19,13 @@ gem 'imentore-user',  path: '../imentore-user'
 gem 'personhood',     path: '../personhood'
 
 group :test, :development do
-  gem "guard-rspec"
-  gem "rspec-rails"
-  gem "shoulda-matchers"
-  gem 'cucumber-rails'
+  gem 'guard-rspec'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
   gem 'database_cleaner'
-  gem 'guard-cucumber'
-  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'pry'
 end
 
 # Declare any dependencies that are still in development here instead of in
