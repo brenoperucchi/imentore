@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Imentore::StoresController do
   describe "#create" do
-    context "with valid attributes" do
+    context "given valid attributes" do
       before { post(:create, store_attrs) }
 
       it "creates a store" do
