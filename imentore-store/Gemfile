@@ -14,24 +14,20 @@ gem 'devise', '1.5.3'
 gem 'simple_form', '1.5.2'
 gem 'slim', '1.1.0'
 
-gem 'imentore-site',  path: '../imentore-site'
+gem 'imentore-core',  path: '../imentore-core'
 gem 'imentore-user',  path: '../imentore-user'
 gem 'personhood',     path: '../personhood'
 
 group :test, :development do
   gem 'guard-rspec'
+  gem 'guard-cucumber'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'pry'
+  gem 'ruby-debug19'
 end
-
-# Declare any dependencies that are still in development here instead of in
-# your gemspec. These might include edge Rails or gems from your path or
-# Git. Remember to move these dependencies to your gemspec before releasing
-# your gem to rubygems.org.
-
-# To use debugger
-# gem 'ruby-debug'
