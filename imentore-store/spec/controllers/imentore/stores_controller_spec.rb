@@ -6,7 +6,7 @@ describe Imentore::StoresController do
       before { post(:create, store_attrs) }
 
       it "creates a store" do
-        Imentore::Store.count.should eq(2)
+        Imentore::Store.count.should eq(1)
       end
 
       it "redirects to success" do

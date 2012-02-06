@@ -11,4 +11,19 @@ describe "Stores" do
       page.should have_button('Create Store')
     end
   end
+
+  describe "#show" do
+    it "renders show when store exists" do
+      Factory.create(:myshop)
+      get "http://myshop.imentore.dev"
+      response.status.should eq(200)
+      response.should render_template('show')
+    end
+
+    it "gives 404 when store not found" do
+      get "http://oops.imentore.dev"
+      response.status.should eq(404)
+      response.should render_template('not_found')
+    end
+  end
 end
