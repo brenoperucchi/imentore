@@ -207,3 +207,9 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 end
+
+module Imentore
+  module Admin
+    SessionsController = Class.new(Devise::SessionsController)
+  end
+end
