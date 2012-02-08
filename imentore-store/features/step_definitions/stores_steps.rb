@@ -28,3 +28,19 @@ end
 Then /^I see a store not found error page$/ do
   page.should have_content("Store not found")
 end
+
+Given /^I am on the page to create a new store$/ do
+  visit new_store_path
+end
+
+When /^I create my store$/ do
+  fill_in("Url", with: "myshop")
+  fill_in("Email", with: "owner@myshop.imentore.dev")
+  fill_in("Password", with: "123123")
+  fill_in("Password confirmation", with: "123123")
+  click_button "Create Store"
+end
+
+Then /^I should see the congratulations page$/ do
+  page.should have_content("Congrats!")
+end
