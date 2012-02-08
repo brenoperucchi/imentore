@@ -39,7 +39,7 @@ module Imentore
     #     # devise :database_authenticatable, :recoverable, :rememberable, :trackable, :activatable, :validatable
     #   # end
 
-    # belongs_to :store
+    belongs_to :store
     belongs_to :userable, polymorphic: true
 
     #
