@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :myshop, class: Imentore::Store do
-    name 'MyShop'
+    brand 'MyShop'
     url 'myshop'
   end
 end

@@ -8,10 +8,10 @@ describe Imentore::Store do
   # it { should have_many :customers }
   # it { should have_many :suppliers }
 
-  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:brand) }
   it { should validate_presence_of(:url) }
   it do
-    Imentore::Store.create(name: 'Store', url: 'url')
+    Imentore::Store.create(brand: 'Store', url: 'url')
     should validate_uniqueness_of(:url)
   end
   it { should allow_value('valid').for(:url) }
@@ -23,5 +23,8 @@ describe Imentore::Store do
   # it { should validate_acceptance_of(:contract_term) }
   it { should have_many(:employees) }
   it { should have_one(:owner) }
-
+  it { should respond_to(:config) }
+  it { should respond_to(:name) }
+  it { should respond_to(:irs_id) }
+  it { should respond_to(:national_id) }
 end

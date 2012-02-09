@@ -6,7 +6,7 @@ module Imentore
 
     def create
       @store = Store.new(params[:imentore_store])
-      @store.name = @store.url
+      @store.brand = @store.url.capitalize
       @store.owner.user.store = @store
       @store.owner.person_type = 'person'
       @store.owner.name = "Name"
