@@ -23,9 +23,6 @@ Capybara.javascript_driver = :webkit
 require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 
-# Run any available migration
-ActiveRecord::Migrator.migrate File.expand_path("../../db/migrate/", __FILE__)
-
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
