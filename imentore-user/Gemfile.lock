@@ -5,6 +5,12 @@ PATH
       rails (~> 3.1.3)
 
 PATH
+  remote: ../imentore-core
+  specs:
+    imentore-core (0.0.1)
+      rails (~> 3.1.3)
+
+PATH
   remote: ../imentore-dashboard
   specs:
     imentore-dashboard (0.0.1)
@@ -225,6 +231,7 @@ DEPENDENCIES
   factory_girl_rails
   guard-cucumber
   guard-rspec
+  imentore-core!
   imentore-dashboard!
   imentore-store!
   imentore-user!
