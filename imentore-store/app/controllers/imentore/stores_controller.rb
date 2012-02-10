@@ -1,8 +1,8 @@
 module Imentore
-  class StoresController < ApplicationController
+  class StoresController < BaseController
     inherit_resources
 
-    before_filter :check_current_store, only: [:show]
+    skip_before_filter :check_store, only: [:new, :create, :create_success]
 
     def create
       @store = Store.new(params[:imentore_store])
@@ -18,17 +18,6 @@ module Imentore
 
     def show
       @store = current_store
-    end
-
-    def current_store
-      @current_store ||= Store.find_by_url(request.subdomain)
-    end
-
-    def check_current_store
-      unless current_store
-        render(:not_found, status: 404)
-        return false
-      end
     end
   end
 end
