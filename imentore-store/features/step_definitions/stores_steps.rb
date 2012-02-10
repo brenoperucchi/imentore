@@ -44,3 +44,19 @@ end
 Then /^I should see the congratulations page$/ do
   page.should have_content("Congrats!")
 end
+
+Given /^the owner is on it's dashboard$/ do
+  visit new_admin_session_path
+  fill_in("Email", with: "owner@myshop.imentore.dev")
+  fill_in("Password", with: "123123")
+  click_button "Sign in"
+  visit admin_dashboard_path
+end
+
+When /^she access General Settings$/ do
+  click_link "General Settings"
+end
+
+Then /^she should see the general settings form$/ do
+  find('h2.page-title').should have_content("General Settings")
+end
