@@ -37,6 +37,7 @@ class CreateUsers < ActiveRecord::Migration
       # t.string :authentication_token
 
       t.integer :store_id
+      t.references :userable, polymorphic: true
       t.timestamps
     end
   end

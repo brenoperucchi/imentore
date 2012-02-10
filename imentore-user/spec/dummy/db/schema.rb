@@ -11,7 +11,42 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120130201054) do
+ActiveRecord::Schema.define(:version => 20120207203206) do
+
+  create_table "employees", :force => true do |t|
+    t.string   "name"
+    t.string   "brand"
+    t.string   "irs_id"
+    t.date     "birthdate"
+    t.string   "national_id"
+    t.string   "gender"
+    t.string   "person_type"
+    t.integer  "store_id"
+    t.string   "department"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stores", :force => true do |t|
+    t.string   "name"
+    t.string   "brand"
+    t.string   "url"
+    t.string   "irs_id"
+    t.boolean  "active",                :default => false
+    t.text     "settings"
+    t.string   "national_id"
+    t.string   "date_initial_business"
+    t.string   "where_meet_us"
+    t.string   "email"
+    t.string   "store_type"
+    t.integer  "plan_id"
+    t.integer  "user_agent_id"
+    t.string   "state",                 :default => "pending"
+    t.datetime "disabled_at"
+    t.datetime "actived_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -28,6 +63,8 @@ ActiveRecord::Schema.define(:version => 20120130201054) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.integer  "store_id"
+    t.integer  "userable_id"
+    t.string   "userable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
