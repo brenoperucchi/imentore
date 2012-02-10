@@ -1,5 +1,0 @@
-myshop_owner_user:
-  id: 1
-  email: owner@myshop.imentore.com
-  userable_id: employees(:myshop_owner).id
-  store_id: stores(:myshop).id
