@@ -45,7 +45,8 @@ Then /^I should see the congratulations page$/ do
   page.should have_content("Congrats!")
 end
 
-Given /^the owner is on it's dashboard$/ do
+Given /^the owner is on its dashboard$/ do
+  Capybara.default_host = 'http://myshop.imentore.dev'
   visit new_admin_session_path
   fill_in("Email", with: "owner@myshop.imentore.dev")
   fill_in("Password", with: "123123")
