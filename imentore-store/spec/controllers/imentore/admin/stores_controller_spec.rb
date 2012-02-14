@@ -9,7 +9,8 @@ describe Imentore::Admin::StoresController do
   describe "#update" do
     it "redirects to dashboard" do
       put(:update, imentore_store: { url: 'url', brand: 'brand' })
-      response.should redirect_to(admin_dashboard_path)
+      response.should redirect_to(edit_admin_store_path)
+      flash[:success].should be
     end
   end
 end

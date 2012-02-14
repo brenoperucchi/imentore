@@ -4,6 +4,13 @@ module Imentore
 
     skip_before_filter :check_store, only: [:new, :create, :create_success]
 
+    def new
+      @store = Store.new
+      @store.build_owner
+      @store.owner.build_user
+      new!
+    end
+
     def create
       @store = Store.new(params[:imentore_store])
       @store.brand = @store.url.capitalize

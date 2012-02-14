@@ -4,8 +4,13 @@ module Imentore
       inherit_resources
       actions :edit, :update
 
+      def edit
+        resource.build_address if resource.address.blank?
+        edit!
+      end
+
       def update
-        update! { admin_dashboard_path }
+        update! { edit_admin_store_path }
       end
 
       protected

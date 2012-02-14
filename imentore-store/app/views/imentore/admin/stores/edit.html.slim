@@ -4,4 +4,7 @@ h2.page-title General Settings
   = f.input :url
   = f.input :name
   = f.input :brand
+  = f.input :irs_id
+  = f.input :national_id
+  = render 'shared/address', form: f
   = f.submit

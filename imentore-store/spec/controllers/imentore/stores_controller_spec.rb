@@ -5,8 +5,14 @@ describe Imentore::StoresController do
     context "given valid attributes" do
       before { post(:create, store_attrs) }
 
-      it "creates a store" do
-        Imentore::Store.count.should eq(1)
+      it "creates a store, owner and user" do
+        store = Imentore::Store.first
+        store.url.should eq('url')
+
+        store.owner.should be
+
+        user = store.owner.user
+        user.email.should eq('john@doe.com')
       end
 
       it "redirects to success" do
