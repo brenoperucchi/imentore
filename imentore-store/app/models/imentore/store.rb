@@ -95,10 +95,11 @@ module Imentore
                       exclusion: { in: INVALID_DOMAINS }
     # validates :contract_term, acceptance: true
 
-    has_many  :employees
-    has_one   :owner, class_name: 'Imentore::Employee', conditions: { department: 'owner' }
+    has_many :employees
+    has_one  :owner, class_name: 'Imentore::Employee', conditions: { department: 'owner' }
+    has_one  :address, class_name: 'Imentore::Address', as: 'addressable'
 
-    accepts_nested_attributes_for :owner
+    accepts_nested_attributes_for :owner, :address
 
     # http://www.ietf.org/rfc/rfc1035.txt
     # [a-z][a-z0-9-]*[a-z0-9]
