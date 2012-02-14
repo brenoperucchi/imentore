@@ -1,6 +1,38 @@
 module Imentore
   class Settings# < Hash
+    include ActiveModel::Conversion
+    extend ActiveModel::Naming
+    extend ActiveModel::Translation
+    include ActiveModel::Validations
+    include ActiveModel::AttributeMethods
+
+    class_attribute :_attributes
+    self._attributes = []
+
+    def self.<<(attrs)
+      attr_accessor *attrs
+      self._attributes += [*attrs]
+    end
+
+    def attributes
+      self._attributes.inject({}) do |hash, attr|
+        hash[attr.to_s] = send(attr)
+        hash
+      end
+    end
+
+    def persisted?
+      false
+    end
+
+    def attributes=(attrs)
+      attrs.each do |attr, value|
+        send("#{attr}=", value)
+      end
+    end
+
     include Virtual
+
   #
   #   # def theme?
   #   #   fetch('theme')+ "_" + theme_variant
