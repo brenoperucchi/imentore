@@ -1,17 +1,16 @@
 module Imentore
   class Settings# < Hash
-    include ActiveModel::Conversion
     extend ActiveModel::Naming
     extend ActiveModel::Translation
+    include ActiveModel::Conversion
     include ActiveModel::Validations
     include ActiveModel::AttributeMethods
 
     class_attribute :_attributes
     self._attributes = []
 
-    def self.<<(attrs)
-      attr_accessor *attrs
-      self._attributes += [*attrs]
+    def self.register_attributes(*attrs)
+      self._attributes += attrs
     end
 
     def attributes
