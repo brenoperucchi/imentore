@@ -18,6 +18,7 @@ gem 'imentore-core', path: '../imentore-core'
 gem 'imentore-user', path: '../imentore-user'
 gem 'imentore-store', path: '../imentore-store'
 gem 'imentore-dashboard', path: '../imentore-dashboard'
+gem 'imentore-cms', path: '../imentore-cms'
 
 
 # Gems used only for assets and not required
