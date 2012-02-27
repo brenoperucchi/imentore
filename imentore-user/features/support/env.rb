@@ -1,12 +1,5 @@
 # Point RAILS_ROOT to the dummy app
-ENV['RAILS_ROOT'] = File.expand_path(File.dirname(__FILE__) + '/../../spec/dummy/')
+ENV['RAILS_ROOT'] = File.expand_path('../../../spec/dummy/', __FILE__)
+require "cucumber/rails"
 
-require 'cucumber/rails'
-require 'database_cleaner'
-require 'factory_girl_rails'
-require 'pry'
-
-# Every exception will make the feature fail
-ActionController::Base.allow_rescue = false
-
-DatabaseCleaner.strategy = :truncation
+require "imentore-testing/env"

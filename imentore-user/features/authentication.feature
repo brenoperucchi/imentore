@@ -4,10 +4,9 @@ Feature: Login
   So I can access my personal stuff
 
   Background:
-    Given there is a store named MyShop
+    Given there is a store MyShop
     And I am a visitor
 
   Scenario: Owner login
-    When I go to the admin login page
-    And login with the owner account
+    When I log in as MyShop's owner
     Then I should see the MyShop's dashboard

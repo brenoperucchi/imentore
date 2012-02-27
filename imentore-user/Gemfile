@@ -14,6 +14,7 @@ gem 'personhood',     path: '../personhood'
 gem 'imentore-core', path: '../imentore-core'
 gem 'imentore-store', path: '../imentore-store'
 gem 'imentore-dashboard', path: '../imentore-dashboard'
+gem 'imentore-cms',  path: '../imentore-cms'
 
 group :test, :development do
   gem 'guard-rspec'
@@ -27,6 +28,7 @@ group :test, :development do
   gem 'capybara-webkit'
   gem 'pry'
   gem 'ruby-debug19'
+  gem 'imentore-testing',  path: '../imentore-testing'
 end
 
 # jquery-rails is used by the dummy application
