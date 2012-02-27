@@ -28,4 +28,5 @@ describe Imentore::Store do
   it { should respond_to(:irs_id) }
   it { should respond_to(:national_id) }
   it { should have_one(:address) }
+  it { should have_many(:themes) }
 end
