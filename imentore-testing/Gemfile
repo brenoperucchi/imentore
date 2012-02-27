@@ -1,0 +1,24 @@
+source "http://rubygems.org"
+
+# Declare your gem's dependencies in imentore-cms.gemspec.
+# Bundler will treat runtime dependencies like base dependencies, and
+# development dependencies will be added by default to the :development group.
+gemspec
+
+# jquery-rails is used by the dummy application
+gem "jquery-rails"
+
+group :test, :development do
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-stack_explorer'
+end

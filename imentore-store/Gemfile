@@ -17,6 +17,7 @@ gem 'country_select', '0.0.1'
 gem 'imentore-core',  path: '../imentore-core'
 gem 'imentore-user',  path: '../imentore-user'
 gem 'imentore-dashboard',  path: '../imentore-dashboard'
+gem 'imentore-cms',  path: '../imentore-cms'
 gem 'personhood',     path: '../personhood'
 
 group :test, :development do
@@ -31,4 +32,5 @@ group :test, :development do
   gem 'capybara-webkit'
   gem 'pry'
   gem 'ruby-debug19'
+  gem 'imentore-testing',  path: '../imentore-testing'
 end

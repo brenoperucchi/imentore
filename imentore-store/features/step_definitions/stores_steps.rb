@@ -1,7 +1,3 @@
-Given /^there is a store MyShop$/ do
-  Factory.create(:myshop)
-end
-
 Given /^they also own the domain myshop\.dev$/ do
   pending
 end
