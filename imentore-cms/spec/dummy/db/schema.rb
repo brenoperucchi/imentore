@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120227173446) do
+ActiveRecord::Schema.define(:version => 20120229183726) do
 
   create_table "employees", :force => true do |t|
     t.string   "name"
@@ -47,6 +47,19 @@ ActiveRecord::Schema.define(:version => 20120227173446) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "config"
+  end
+
+  create_table "templates", :force => true do |t|
+    t.string   "path"
+    t.text     "body"
+    t.boolean  "partial",    :default => false
+    t.string   "layout"
+    t.string   "format",     :default => "text/html"
+    t.string   "locale",     :default => "en"
+    t.string   "handler",    :default => "liquid"
+    t.integer  "theme_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "themes", :force => true do |t|
