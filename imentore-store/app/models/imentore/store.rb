@@ -102,6 +102,8 @@ module Imentore
 
     accepts_nested_attributes_for :owner, :address
 
+    has_many :domains
+
     # http://www.ietf.org/rfc/rfc1035.txt
     # [a-z][a-z0-9-]*[a-z0-9]
     # labels are restricted to 63 octets

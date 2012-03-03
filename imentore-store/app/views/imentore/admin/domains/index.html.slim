@@ -1,0 +1,7 @@
+p Create Domain
+
+= resource
+
+/ = simple_form_for(resource, url: admin_domains_path, method: 'post') do |f|
+/ 	= f.file_field :name
+/ 	= f.button :submit
