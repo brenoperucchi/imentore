@@ -13,6 +13,19 @@
 
 ActiveRecord::Schema.define(:version => 20120302231906) do
 
+  create_table "addresses", :force => true do |t|
+    t.string  "name"
+    t.string  "street"
+    t.string  "complement"
+    t.string  "city"
+    t.string  "state"
+    t.string  "country"
+    t.string  "zip_code"
+    t.string  "phone"
+    t.integer "addressable_id"
+    t.string  "addressable_type"
+  end
+
   create_table "domains", :force => true do |t|
     t.string   "name"
     t.integer  "store_id"
@@ -54,6 +67,32 @@ ActiveRecord::Schema.define(:version => 20120302231906) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "config"
+  end
+
+  create_table "themes", :force => true do |t|
+    t.string  "name"
+    t.integer "store_id"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.integer  "store_id"
+    t.integer  "userable_id"
+    t.string   "userable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

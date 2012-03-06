@@ -1,6 +1,4 @@
 module Imentore
-
-	class Domain < ActiveRecord::Base
-		include Personhood
-	end
+  class Domain < ActiveRecord::Base
+  end
 end
