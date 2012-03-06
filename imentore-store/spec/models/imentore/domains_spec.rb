@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Imentore::Domain do
-  # it { should have_one :address }
+  it { should belong_to :store }
   # it { should have_many :urls }
   # it { should have_many :employees }
   # it { should have_many :customers }

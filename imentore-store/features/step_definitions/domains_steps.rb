@@ -1,6 +1,6 @@
 Given /^I am on the page to create new domain$/ do
   # Capybara.default_host = 'http://myshop.imentore.dev'
-  visit admin_domains_path(:host => 'myshop.imentore.dev')
+  visit admin_domains_url(:host => 'myshop.imentore.dev')
   page.should have_content("List Domains")
 end
 
@@ -13,4 +13,12 @@ end
 
 Then /^I should see myshop\.com created$/ do
   page.should have_content("myshop.com")
+end
+
+When /^I access www\.myshop\.com domain$/ do
+  visit root_url(:host => 'www.myshop.com')
+end
+
+Then /^I should see MyShop home page$/ do
+  page.should have_content("MyShop!")
 end

@@ -5,7 +5,12 @@ module Imentore
   	helper_method :current_store
 
   	def current_store
-  	  @current_store ||= Imentore::Store.find_by_url(request.subdomain)
+
+  	  @current_store ||= if Imentore::Store.find_by_url(request.subdomain).present?
+                            Imentore::Store.find_by_url(request.subdomain)
+                          else
+                            Imentore::Domain.find_by_name(request.domain).store
+                          end
   	end
 
   	def check_store
@@ -14,6 +19,6 @@ module Imentore
   	    return false
   	  end
   	end
-  	
+
   end
 end
