@@ -13,6 +13,7 @@ gem 'devise', '2.0.4'
 gem 'simple_form', '1.5.2'
 gem 'slim', '1.1.0'
 gem 'country_select', '0.0.1'
+gem "liquid", "2.3.0"
 
 gem 'imentore-core',  path: '../imentore-core'
 gem 'imentore-store',  path: '../imentore-store'

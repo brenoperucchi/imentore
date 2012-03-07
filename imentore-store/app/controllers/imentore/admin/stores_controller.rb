@@ -1,6 +1,6 @@
 module Imentore
   module Admin
-    class StoresController < BaseController
+    class StoresController < Admin::BaseController
       inherit_resources
       actions :edit, :update
 

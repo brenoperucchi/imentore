@@ -1,6 +1,6 @@
 module Imentore
   module Admin
-    class ThemesController < BaseController
+    class ThemesController < Admin::BaseController
       inherit_resources
       actions :all
 

@@ -1,1 +1,4 @@
-= @theme.name
+h2.title= @theme.name
+= link_to("New Template", new_admin_theme_template_path(@theme))
+- @theme.templates.each do |template|
+  = template.path
