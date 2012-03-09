@@ -20,3 +20,11 @@ end
 Then /^I should see MyShop home page$/ do
   page.should have_content("MyShop!")
 end
+
+When /^I delete myshop\.com$/ do
+  click_button "Destroy"
+end
+
+Then /^I shouldn't see myshop\.com$/ do
+  page.should_not have_content "myshop.com"
+end
