@@ -1,3 +1,4 @@
 Given /^there is a store MyShop$/ do
-  Factory.create(:myshop)
+  @store = Factory.create(:myshop)
+  Factory.create(:green_theme)
 end

@@ -222,9 +222,3 @@ Devise.setup do |config|
   # end
   config.parent_controller = "Imentore::BaseController"
  end
-
-module Imentore
-  module Admin
-    SessionsController = Class.new(Devise::SessionsController)
-  end
-end
