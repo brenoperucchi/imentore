@@ -6,11 +6,7 @@ module Imentore
 
   	def current_store
 
-  	  @current_store ||= if Imentore::Store.find_by_url(request.subdomain).present?
-                            Imentore::Store.find_by_url(request.subdomain)
-                          else
-                            Imentore::Domain.find_by_name(request.domain).store
-                          end
+  	  @current_store ||= (Store.joins(:domains).where("domains.name" => request.domain).first || Store.find_by_url(request.subdomain))
   	end
 
   	def check_store

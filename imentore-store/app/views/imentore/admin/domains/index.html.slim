@@ -1,14 +1,13 @@
 p List Domains
 
 ul
-- collection.each do |object|
+- @domains.each do |domain|
 	li
-		= object.name
-		= button_to "Destroy", admin_domain_path(object), :method=> :delete
+		= domain.name
+		= button_to("Destroy", admin_domain_path(domain), method: :delete)
 
 p Create Domain
 
-= simple_form_for(resource, url: admin_domains_path, method: 'post') do |f|
+= simple_form_for(@domain, url: admin_domains_path) do |f|
 	= f.text_field :name
 	= f.button :submit
-	

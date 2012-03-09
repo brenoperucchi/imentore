@@ -8,3 +8,8 @@ Feature: Create
     Given I am on the page to create new domain
     When I create myshop.com domain
     Then I should see myshop.com created
+
+  Scenario: can create I
+    Given I am on the page to create new domain
+    When I create myshop.com domain
+    Then I should see myshop.com created
