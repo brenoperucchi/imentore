@@ -96,7 +96,6 @@ module Imentore
     # validates :contract_term, acceptance: true
 
     has_many :employees
-    has_many :themes
     has_one  :owner, class_name: 'Imentore::Employee', conditions: { department: 'owner' }
     has_one  :address, class_name: 'Imentore::Address', as: 'addressable'
 

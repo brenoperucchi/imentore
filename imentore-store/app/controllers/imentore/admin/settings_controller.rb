@@ -1,6 +1,6 @@
 module Imentore
   module Admin
-    class SettingsController < BaseController
+    class SettingsController < Admin::BaseController
       inherit_resources
       actions :edit, :update
 

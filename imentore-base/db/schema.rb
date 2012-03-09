@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214181709) do
+ActiveRecord::Schema.define(:version => 20120306135521) do
 
   create_table "addresses", :force => true do |t|
     t.string  "name"
@@ -60,6 +60,24 @@ ActiveRecord::Schema.define(:version => 20120214181709) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "config"
+  end
+
+  create_table "templates", :force => true do |t|
+    t.string   "path"
+    t.text     "body"
+    t.boolean  "partial",    :default => false
+    t.string   "layout"
+    t.string   "format",     :default => "text/html"
+    t.string   "locale",     :default => "en"
+    t.string   "handler",    :default => "liquid"
+    t.integer  "theme_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "themes", :force => true do |t|
+    t.string  "name"
+    t.integer "store_id"
   end
 
   create_table "users", :force => true do |t|
