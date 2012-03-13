@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120306135521) do
+ActiveRecord::Schema.define(:version => 20120309224846) do
 
-  create_table "addresses", :force => true do |t|
+  create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
     t.string  "street"
     t.string  "complement"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20120306135521) do
     t.string  "addressable_type"
   end
 
-  create_table "employees", :force => true do |t|
+  create_table "imentore_employees", :force => true do |t|
     t.string   "name"
     t.string   "brand"
     t.string   "irs_id"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20120306135521) do
     t.datetime "updated_at"
   end
 
-  create_table "stores", :force => true do |t|
+  create_table "imentore_stores", :force => true do |t|
     t.string   "name"
     t.string   "brand"
     t.string   "url"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20120306135521) do
     t.text     "config"
   end
 
-  create_table "templates", :force => true do |t|
+  create_table "imentore_templates", :force => true do |t|
     t.string   "path"
     t.text     "body"
     t.boolean  "partial",    :default => false
@@ -75,12 +75,13 @@ ActiveRecord::Schema.define(:version => 20120306135521) do
     t.datetime "updated_at"
   end
 
-  create_table "themes", :force => true do |t|
+  create_table "imentore_themes", :force => true do |t|
     t.string  "name"
     t.integer "store_id"
+    t.boolean "default",  :default => false
   end
 
-  create_table "users", :force => true do |t|
+  create_table "imentore_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"

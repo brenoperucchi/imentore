@@ -1,5 +1,7 @@
 module Imentore
   class BaseController < ::ApplicationController
+    include Imentore::Core::Engine.routes.url_helpers
+
   	before_filter :check_store
 
   	helper_method :current_store

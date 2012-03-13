@@ -1,7 +1,9 @@
 require "spec_helper"
 
-describe "Themes routing" do
-  it "routes /admin/themes to themes#index" do
-    { get: '/admin/themes' }.should route_to(controller: 'imentore/admin/themes', action: 'index')
+describe "Themes routes" do
+  before { @routes = Imentore::Core::Engine.routes }
+
+  it "/admin/themes to themes#index" do
+    get("/admin/themes").should route_to("imentore/admin/themes#index")
   end
 end

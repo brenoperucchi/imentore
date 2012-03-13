@@ -1,7 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe "Dashboard routing" do
-  it "routes /admin to dashboard#index" do
-    { get: '/admin' }.should route_to(controller: 'imentore/admin/dashboard', action: 'index')
+describe "Dashboard routes" do
+  before { @routes = Imentore::Core::Engine.routes }
+
+  it "/admin to dashboard#index" do
+    get("/admin").should route_to("imentore/admin/dashboard#index")
   end
 end

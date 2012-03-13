@@ -11,9 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120307131934) do
+ActiveRecord::Schema.define(:version => 20120312164820) do
 
-  create_table "employees", :force => true do |t|
+  create_table "imentore_addresses", :force => true do |t|
+    t.string  "name"
+    t.string  "street"
+    t.string  "complement"
+    t.string  "city"
+    t.string  "state"
+    t.string  "country"
+    t.string  "zip_code"
+    t.string  "phone"
+    t.integer "addressable_id"
+    t.string  "addressable_type"
+  end
+
+  create_table "imentore_employees", :force => true do |t|
     t.string   "name"
     t.string   "brand"
     t.string   "irs_id"
@@ -23,11 +36,11 @@ ActiveRecord::Schema.define(:version => 20120307131934) do
     t.string   "person_type"
     t.integer  "store_id"
     t.string   "department"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  create_table "stores", :force => true do |t|
+  create_table "imentore_stores", :force => true do |t|
     t.string   "name"
     t.string   "brand"
     t.string   "url"
@@ -44,12 +57,12 @@ ActiveRecord::Schema.define(:version => 20120307131934) do
     t.string   "state",                 :default => "pending"
     t.datetime "disabled_at"
     t.datetime "actived_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.text     "config"
   end
 
-  create_table "templates", :force => true do |t|
+  create_table "imentore_templates", :force => true do |t|
     t.string   "path"
     t.text     "body"
     t.boolean  "partial",    :default => false
@@ -58,17 +71,17 @@ ActiveRecord::Schema.define(:version => 20120307131934) do
     t.string   "locale",     :default => "en"
     t.string   "handler",    :default => "liquid"
     t.integer  "theme_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
-  create_table "themes", :force => true do |t|
+  create_table "imentore_themes", :force => true do |t|
     t.string  "name"
     t.integer "store_id"
     t.boolean "default",  :default => false
   end
 
-  create_table "users", :force => true do |t|
+  create_table "imentore_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
@@ -85,8 +98,8 @@ ActiveRecord::Schema.define(:version => 20120307131934) do
     t.integer  "store_id"
     t.integer  "userable_id"
     t.string   "userable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
 end

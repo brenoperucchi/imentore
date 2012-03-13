@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20120210192304) do
 
-  create_table "addresses", :force => true do |t|
+  create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
     t.string  "street"
     t.string  "complement"

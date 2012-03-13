@@ -1,2 +1,2 @@
-Rails.application.routes.draw do
+Imentore::Core::Engine.routes.draw do
 end

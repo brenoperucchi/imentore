@@ -16,8 +16,8 @@ gem 'country_select', '0.0.1'
 gem "liquid", "2.3.0"
 
 gem 'imentore-core',  path: '../imentore-core'
-gem 'imentore-store',  path: '../imentore-store'
-gem 'imentore-user',  path: '../imentore-user'
+gem 'imentore-ecommerce',  path: '../imentore-ecommerce'
+gem 'imentore-auth',  path: '../imentore-auth'
 gem 'imentore-dashboard',  path: '../imentore-dashboard'
 gem 'personhood',     path: '../personhood'
 

@@ -1,3 +1,5 @@
-module ImentoreCms
+module Imentore
+  module CMS
   VERSION = "0.0.1"
+end
 end

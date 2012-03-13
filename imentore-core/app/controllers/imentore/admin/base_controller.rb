@@ -1,6 +1,8 @@
 module Imentore
   module Admin
     class BaseController < ::ApplicationController
+      include Imentore::Core::Engine.routes.url_helpers
+
       layout "admin"
 
       helper_method :current_store

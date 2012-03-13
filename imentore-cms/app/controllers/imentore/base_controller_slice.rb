@@ -8,10 +8,12 @@ Imentore::BaseController.class_eval do
   protected
 
   def prepend_theme_path
-    prepend_view_path ::SqlTemplate::Resolver.instance_for_store(current_store, request)
+    if current_store
+      prepend_view_path ::SqlTemplate::Resolver.instance_for_store(current_store, request)
+    end
   end
 
   def theme_layout
-    current_store.theme.default_layout || "application"
+    (current_store && current_store.theme.default_layout) || "application"
   end
 end

@@ -1,9 +1,13 @@
 require "pry"
 
-# require "capybara/webkit"
+require "capybara/webkit"
 Capybara.javascript_driver = :webkit
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+Cucumber::Rails::World.class_eval do
+  include Imentore::Core::Engine.routes.url_helpers
+end
 
 require "imentore-testing/factories"
 

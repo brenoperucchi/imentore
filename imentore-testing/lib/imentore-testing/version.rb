@@ -1,3 +1,5 @@
-module ImentoreTesting
-  VERSION = "0.0.1"
+module Imentore
+  module Testing
+    VERSION = "0.0.1"
+  end
 end

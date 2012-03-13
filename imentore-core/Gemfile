@@ -14,8 +14,9 @@ gem 'simple_form', '1.5.2'
 gem 'slim', '1.1.0'
 gem 'country_select', '0.0.1'
 
-gem 'imentore-user',  path: '../imentore-user'
-gem 'imentore-store',  path: '../imentore-store'
+gem 'imentore-auth',  path: '../imentore-auth'
+gem 'imentore-ecommerce',  path: '../imentore-ecommerce'
+gem 'imentore-cms',  path: '../imentore-cms'
 gem 'personhood',     path: '../personhood'
 
 group :test, :development do

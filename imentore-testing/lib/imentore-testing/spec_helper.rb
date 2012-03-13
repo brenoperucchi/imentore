@@ -23,9 +23,27 @@ require "shoulda-matchers"
 require "imentore-testing/factories"
 
 RSpec.configure do |config|
+  config.include Imentore::Core::Engine.routes.url_helpers
+  config.include Devise::TestHelpers, type: :controller
+
   config.before(:each) do
     DatabaseCleaner.start
     Capybara.reset_sessions!
+    # https://github.com/rspec/rspec-rails/pull/471
+    #
+    # Currently I need to set routes manually in before block in every test. I
+    # can't do it in RSpec config because before block of ControllerExampleGroup
+    # runs after before block in RSpec config and overwrites @route variable.
+    #
+    # @routes = Imentore::Core::Engine.routes
+    #
+    # http://stackoverflow.com/a/7967503
+    # http://gavinmorrice.com/blog/posts/22-how-to-test-routes-in-a-rails-3-1-mountable-engine
+    # http://www.builtfromsource.com/2011/09/21/testing-routes-with-rails-3-1-engines/
+    #
+    # use_route: doesn't seem to work in rails 3.2
+    # http://stackoverflow.com/a/5832908
+    # http://stackoverflow.com/a/7506094
   end
 
   config.after(:each) do
