@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120302231906) do
+ActiveRecord::Schema.define(:version => 20120309222106) do
 
   create_table "addresses", :force => true do |t|
     t.string  "name"
@@ -26,12 +26,8 @@ ActiveRecord::Schema.define(:version => 20120302231906) do
     t.string  "addressable_type"
   end
 
-  create_table "domains", :force => true do |t|
-    t.string   "name"
-    t.integer  "store_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "domains" because of following StandardError
+#   Unknown type 'bollean' for column 'hosting'
 
   create_table "employees", :force => true do |t|
     t.string   "name"

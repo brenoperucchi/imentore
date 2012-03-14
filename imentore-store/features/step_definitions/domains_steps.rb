@@ -1,4 +1,4 @@
-Given /^I am on the page to create new domain$/ do
+Given /^I go to the page to create new domain$/ do
   visit admin_domains_url(host: 'myshop.imentore.dev')
   page.should have_content("List Domains")
 end
@@ -25,6 +25,14 @@ When /^I delete myshop\.com$/ do
   click_button "Destroy"
 end
 
-Then /^I shouldn't see myshop\.com$/ do
+Then /^I should not see myshop\.com$/ do
   page.should_not have_content "myshop.com"
+end
+
+Given /^I create Myshop\.com with option hosting$/ do
+  check("imentore_domain_hosting")
+end
+
+Then /^I should see status ok$/ do
+  pending # express the regexp above with the code you wish you had
 end
