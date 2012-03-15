@@ -1,0 +1,14 @@
+p List Domains
+
+ul
+- @domains.each do |domain|
+  li
+    = domain.name
+    = button_to("Destroy", admin_domain_path(domain), method: :delete)
+
+p Create Domain
+
+= simple_form_for(@domain, url: admin_domains_path) do |f|
+  = f.text_field :name
+  = f.check_box :hosting
+  = f.button :submit
