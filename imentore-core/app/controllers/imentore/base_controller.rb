@@ -8,7 +8,7 @@ module Imentore
 
   	def current_store
       @current_store ||=
-        Store.joins(:domains).where("domains.name" => request.domain).first ||
+        Store.joins(:domains).where("imentore_domains.name" => request.domain).first ||
         Store.find_by_url(request.subdomain)
   	end
 
