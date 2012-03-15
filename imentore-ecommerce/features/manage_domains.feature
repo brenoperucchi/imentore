@@ -1,15 +1,12 @@
-Feature: Domain
+Feature: Manage domains
 
   Background:
-    Given there is a store MyShop
-    And I go to the page to create new domain
-    And I create myshop.com domain
-    And I should see myshop.com created
+    Given there is a store
+    And I am logged in as the owner
 
-  Scenario: Create Domain
-    Given I go to the page to create new domain
-    When I create myshop.com domain
-    Then I should see myshop.com created
+  Scenario: Create domain
+    When I create a new domain
+    Then it appears in the domains list
 
   Scenario: Access Domain created
     And I access www.myshop.com domain

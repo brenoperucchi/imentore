@@ -36,3 +36,13 @@ end
 Then /^I should see status ok$/ do
   pending # express the regexp above with the code you wish you had
 end
+
+When "I create a new domain" do
+  click_link "Domains"
+  fill_in("Name", with: "myshop.biz")
+  click_button "Create Domain"
+end
+
+Then "it appears in the domains list" do
+  page.should have_content("myshop.biz")
+end

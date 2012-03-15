@@ -8,7 +8,6 @@ ul
 
 p Create Domain
 
-= simple_form_for(@domain, url: admin_domains_path) do |f|
-  = f.text_field :name
-  = f.check_box :hosting
-  = f.button :submit
+= simple_form_for([:admin, @domain]) do |f|
+  = f.input :name
+  = f.submit
