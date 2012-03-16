@@ -8,5 +8,9 @@ module Imentore
     validates :department, presence: true
 
     accepts_nested_attributes_for :user
+
+    def owner?
+      department == "owner"
+    end
   end
 end
