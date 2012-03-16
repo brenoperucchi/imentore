@@ -46,3 +46,15 @@ end
 Then "it appears in the domains list" do
   page.should have_content("myshop.biz")
 end
+
+Given "the store owns the domain myshop.com" do
+  @store.domains.create(name: "myshop.com")
+end
+
+When "I go to myshop.com" do
+  visit root_url(host: "myshop.com")
+end
+
+Then "I see the store's home page" do
+  page.should have_content("Welcome to MyShop")
+end

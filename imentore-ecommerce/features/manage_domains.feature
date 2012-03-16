@@ -8,9 +8,10 @@ Feature: Manage domains
     When I create a new domain
     Then it appears in the domains list
 
-  Scenario: Access Domain created
-    And I access www.myshop.com domain
-    Then I should see MyShop home page
+  Scenario: Access store using custom domain
+    Given the store owns the domain myshop.com
+    When I go to myshop.com
+    Then I see the store's home page
 
   Scenario: Destroy domain created
     And I go to the page to create new domain
