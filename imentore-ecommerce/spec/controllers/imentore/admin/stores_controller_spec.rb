@@ -4,6 +4,7 @@ describe Imentore::Admin::StoresController do
   before do
     Factory.create(:myshop)
     request.host = "myshop.imentore.dev"
+    subject.stub(check_store: true, authorize_admin: true)
   end
 
   describe "#update" do
