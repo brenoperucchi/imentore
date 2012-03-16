@@ -21,3 +21,8 @@ group :features do
     watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
   end
 end
+
+group :all do
+  guard :rspec, version: 2
+  guard :cucumber
+end

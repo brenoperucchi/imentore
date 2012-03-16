@@ -58,3 +58,13 @@ end
 Then "I see the store's home page" do
   page.should have_content("Welcome to MyShop")
 end
+
+When "I go to the domain listing" do
+  click_link "Domains"
+  page.should have_content("myshop.com")
+end
+
+Then "I can delete it" do
+  click_button "Destroy"
+  page.should_not have_content("myshop.com")
+end
