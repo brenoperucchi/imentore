@@ -1,5 +1,6 @@
 # require "bundler/setup"
 require "pry"
+require "pry-nav"
 
 # Bundler.require(:default, :test)
 
