@@ -6,4 +6,5 @@ describe Imentore::Product do
   it { should validate_presence_of(:permalink) }
   it { should have_many(:options) }
   it { should belong_to(:store) }
+  it { should have_many(:variants) }
 end
