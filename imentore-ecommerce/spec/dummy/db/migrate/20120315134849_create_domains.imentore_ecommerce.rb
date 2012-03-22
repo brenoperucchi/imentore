@@ -3,6 +3,8 @@ class CreateDomains < ActiveRecord::Migration
   def up
     create_table(:imentore_domains) do |t|
     	t.string :name
+      t.integer :plesk_id
+      t.boolean :hosting
     	t.references :store
       t.timestamps
     end
