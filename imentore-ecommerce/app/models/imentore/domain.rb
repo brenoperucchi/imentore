@@ -1,6 +1,6 @@
 module Imentore
   # require 'plesk'
-  load  "/Users/breno/app/imentore/imentore-ecommerce/lib/plesk.rb"
+  load  "~/app/imentore/imentore-ecommerce/lib/plesk.rb"
 
   class Domain < ActiveRecord::Base
     # after_save :add_domain_plesk

@@ -6,6 +6,8 @@ describe Imentore::Plesk do
   let(:plesk) { Imentore::Plesk.new }
   # let(:domain_name) { 'test.com'}
   let(:domain_name) { 'test' + rand(10).to_s + '.com'}
+  let(:mail_name) { 'test_user' }
+  let(:mail_password) { '123123' }
 
   # stub_request(:any, "plesk.dev/conn-refused").to_raise(Errno::ECONNREFUSED)
   # stub_request(:any, "plesk.ved").to_raise(SocketError)
@@ -66,10 +68,21 @@ describe Imentore::Plesk do
       @@result.status.should be  == "ok"
     end
 
-    it "delete domain" do
+    it "can add mail on domain" do
+      result_mail = plesk.add_mail_domain(@@result.plesk_id, mail_name, mail_password)
+      result_mail.status.should be  == "ok"
+    end
+
+    it "can remove mail on domain" do
+      result_mail = plesk.del_mail_domain(@@result.plesk_id, mail_name)
+      result_mail.status.should be  == "ok"
+    end
+
+    it "can remove domain" do
       @@result = plesk.del_domain(@@result.plesk_id)
       @@result.status.should be == "ok"
     end
+
 
   end
 end

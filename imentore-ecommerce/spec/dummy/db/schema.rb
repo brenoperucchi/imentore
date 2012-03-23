@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120321120529) do
+ActiveRecord::Schema.define(:version => 20120321121906) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -53,6 +53,12 @@ ActiveRecord::Schema.define(:version => 20120321120529) do
     t.string  "name"
     t.string  "handle"
     t.integer "product_id"
+  end
+
+  create_table "imentore_option_values", :force => true do |t|
+    t.integer "option_type_id"
+    t.integer "product_variant_id"
+    t.string  "value"
   end
 
   create_table "imentore_product_variants", :force => true do |t|
