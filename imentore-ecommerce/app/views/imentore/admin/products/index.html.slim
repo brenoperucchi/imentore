@@ -1,0 +1,5 @@
+p= link_to("Add Product", new_admin_product_path)
+table
+  - @products.each do |product|
+    tr
+      td= product.name

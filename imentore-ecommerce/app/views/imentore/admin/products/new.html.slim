@@ -1,0 +1,9 @@
+= simple_form_for([:admin, @product]) do |f|
+  = f.error_notification
+  = f.input :name
+  = f.input :description
+  = f.simple_fields_for(:variants) do |v|
+    = v.input :price
+    = v.input :quantity
+    = v.input :weight
+  = f.submit

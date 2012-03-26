@@ -99,6 +99,7 @@ module Imentore
     has_one  :owner, class_name: 'Imentore::Employee', conditions: { department: 'owner' }
     has_one  :address, class_name: 'Imentore::Address', as: 'addressable'
     has_many :domains
+    has_many :products
 
     accepts_nested_attributes_for :owner, :address
 

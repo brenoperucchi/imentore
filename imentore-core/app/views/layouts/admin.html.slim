@@ -9,4 +9,5 @@ html
 body
   p core/views/layouts/admin
   = link_to(:logout, destroy_user_session_path, method: "delete")
+  p= debug flash
   = yield
