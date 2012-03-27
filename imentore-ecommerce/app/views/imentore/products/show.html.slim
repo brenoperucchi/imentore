@@ -1,0 +1,6 @@
+h2= @product.name
+p= @product.description
+
+- @product.variants.each do |variant|
+  - variant.options.each do |option|
+    p= "#{option.option_type.name}: #{option.value}"
