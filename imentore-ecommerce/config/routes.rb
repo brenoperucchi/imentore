@@ -11,4 +11,6 @@ Imentore::Core::Engine.routes.draw do
       resources :domains, only: [:index, :create, :destroy]
       resources :products, only: [:index, :new, :create]
     end
+
+    resources :products, only: [:index, :show]
 end

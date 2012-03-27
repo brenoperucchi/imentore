@@ -14,3 +14,8 @@ end
 Then "it appears in the product list" do
   page.should have_content("RUNNERS Magazine")
 end
+
+Then "I see the products list" do
+  product = @store.products.first
+  page.should have_content(product.name)
+end

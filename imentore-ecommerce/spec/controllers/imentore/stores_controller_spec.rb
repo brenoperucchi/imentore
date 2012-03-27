@@ -1,12 +1,25 @@
 require 'spec_helper'
 
 describe Imentore::StoresController do
+  before do
+    @store = Factory.create(:myshop)
+    Factory.create(:green_theme)
+    subject.stub(check_store: true, authorize_admin: true, current_store: @store)
+  end
+
+  describe "#show" do
+    it "has the list of products" do
+      get :show
+      assigns(:products).should be
+    end
+  end
+
   describe "#create" do
     context "given valid attributes" do
       before { post(:create, store_attrs) }
 
       it "creates a store, owner and user" do
-        store = Imentore::Store.first
+        store = Imentore::Store.last
         store.url.should eq('url')
 
         store.owner.should be

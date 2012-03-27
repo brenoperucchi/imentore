@@ -25,6 +25,7 @@ module Imentore
 
     def show
       @store = current_store
+      @products = @store.products
     end
   end
 end
