@@ -1,4 +1,6 @@
 p Welcome to MyShop!
 
+p= link_to("My Cart", cart_path)
+
 - @products.each do |product|
   = link_to(product.name, product)
