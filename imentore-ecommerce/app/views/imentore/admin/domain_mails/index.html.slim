@@ -1,0 +1,14 @@
+p List Mail Domain Accounts
+
+ul
+- @domain_mails.each do |mail|
+  li
+    = mail.name
+    = button_to("Destroy", admin_domain_path(domain), method: :delete)
+
+p Create Mail Domain Account
+
+= simple_form_for([:admin, @domain_mail]) do |f|
+  = f.input :name
+  = f.input :password
+  = f.submit

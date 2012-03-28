@@ -11,6 +11,7 @@ describe Imentore::Plesk do
 
   # stub_request(:any, "plesk.dev/conn-refused").to_raise(Errno::ECONNREFUSED)
   # stub_request(:any, "plesk.ved").to_raise(SocketError)
+  # stub_request(:any, "plesk.com").to_return(:body => "abc", :status => 200,  :headers => { 'Content-Length' => 3 } )
 
   describe "#add_domain" do
     it "raises PleskError when connection refused error" do
@@ -29,16 +30,11 @@ describe Imentore::Plesk do
       expect { plesk.add_domain }.to raise_error(Imentore::PleskException)
     end
 
-    # it "raises PleskError when whatever other error" do
-    #   plesk.host = "http://imentore.com.br"
-    #   plesk.timeout = 1
-    #   expect { plesk.add_domain }.to raise_error(Imentore::PleskException)
-    # end
-
     it "raises PleskError on API system error" do
       plesk.host = "http://imentore.com.br"
       plesk.rpc_version = '1.40.2.0'
       expect { plesk.add_domain }.to raise_error(Imentore::PleskException)
+      
     end
 
     # it "raises PleskError on agent error" do
@@ -50,52 +46,61 @@ describe Imentore::Plesk do
     it "raises PleskError on wrong username" do
       plesk.user = "test"
       plesk.host = 'imentore.com.br'
-      expect { plesk.add_domain }.to raise_error(Imentore::PleskException)
+      response = plesk.add_domain 
+      response.success?.should be_false
+      response.code.should be == "1001"
     end
 
     it "raises PleskError on wrong password" do
+      plesk.user = "admin"
       plesk.pass = "123"
       plesk.host = 'imentore.com.br'
-      expect { plesk.add_domain}.to raise_error(Imentore::PleskException)
+      response = plesk.add_domain 
+      response.success?.should be_false
+      response.code.should be == "1001"
     end
 
     it "raises PleskError on domain already exist" do
-      expect { plesk.add_domain("imentore.com.br")}.to raise_error(Imentore::PleskException)
+      response = plesk.add_domain('imentore.com.br')
+      response.success?.should be_false
+      response.code.should be == "1007"
+
     end
 
     it "can add a domain" do
-      @@result = plesk.add_domain(domain_name)
-      @@result.status.should be  == "ok"
+      response = plesk.add_domain(domain_name)
+      @@plesk_id = response.plesk_id
+      response.success?.should be_true
     end
 
     it "can add mail account on domain" do
-      result_mail = plesk.add_mail_domain(@@result.plesk_id, mail_name, mail_password)
-      result_mail.status.should be  == "ok"
+      response = plesk.add_mail_domain(@@plesk_id, mail_name, mail_password)
+      response.success?.should be_true
     end
 
     it "'can change mail account password'" do
-      result_mail = plesk.change_mail_domain(@@result.plesk_id, mail_name, "321321")
-      result_mail.status.should be  == "ok"
+      response = plesk.change_mail_domain(@@plesk_id, mail_name, "321321")
+      response.success?.should be_true
     end
 
     it "can remove mail account on domain" do
-      result_mail = plesk.del_mail_domain(@@result.plesk_id, mail_name)
-      result_mail.status.should be  == "ok"
+      response = plesk.del_mail_domain(@@plesk_id, mail_name)
+      response.success?.should be_true
     end
 
     it "can be enable mail domain " do
-      result_mail = plesk.enable_mail_domain(@@result.plesk_id)
-      result_mail.status.should be  == "ok"      
+      response = plesk.enable_mail_domain(@@plesk_id)
+      response.success?.should be_true      
     end
 
     it "can be disable mail domain " do
-      result_mail = plesk.disable_mail_domain(@@result.plesk_id)
-      result_mail.status.should be  == "ok"      
+      response = plesk.disable_mail_domain(@@plesk_id)
+      response.success?.should be_true      
     end
 
     it "can remove domain" do
-      @@result = plesk.del_domain(@@result.plesk_id)
-      @@result.status.should be == "ok"
+      response = plesk.del_domain(@@plesk_id)
+      response.success?.should be_true
     end
 
   end

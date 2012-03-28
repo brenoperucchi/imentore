@@ -33,10 +33,6 @@ Given /^I create Myshop\.com with option hosting$/ do
   check("imentore_domain_hosting")
 end
 
-Then /^I should see status ok$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 When "I create a new domain" do
   click_link "Domains"
   fill_in("Name", with: "myshop.biz")
@@ -67,4 +63,22 @@ end
 Then "I can delete it" do
   click_button "Destroy"
   page.should_not have_content("myshop.com")
+end
+
+Given /^the store owns domain hosting created$/ do
+  visit admin_domains_url(host: 'myshop.imentore.dev')
+  page.should have_content("Create Domain")
+  fill_in("domain_name", with: "myshop.com")
+  check("domain_hosting")
+  click_button "Create Domain"
+
+end
+
+When /^I go to the domain mail listing$/ do
+  pending
+  # visit admin_domain_mails_url(host: '')
+end
+
+Then /^I see the domain mail account list$/ do
+  pending # express the regexp above with the code you wish you had
 end

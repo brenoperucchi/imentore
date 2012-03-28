@@ -17,3 +17,9 @@ Feature: Manage domains
     Given the store owns the domain myshop.com
     When I go to the domain listing
     Then I can delete it
+
+  Scenario: Create mail domain
+    Given the store owns domain hosting created 
+    When I go to the domain mail listing
+    Then I see the domain mail account list 
+  

@@ -7,6 +7,9 @@ html
   = csrf_meta_tags
 
 body
+  - unless flash.empty?
+    - if flash[:notice]
+      = flash[:notice]
   p core/views/layouts/admin
   = link_to(:logout, destroy_user_session_path, method: "delete")
   = yield

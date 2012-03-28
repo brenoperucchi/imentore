@@ -10,11 +10,23 @@ module Imentore
       end
 
       def create
-        create! { admin_domains_path }
+        @domain = current_store.domains.build(params[:domain])
+        if @domain.add_domain_plesk
+          create! { admin_domains_path }
+        else
+          flash[:notice] = @domain.errors.full_messages.first
+          redirect_to admin_domains_path
+        end
       end
 
       def destroy
-        destroy! { admin_domains_path }
+        @domain = current_store.domains.find(params[:id])
+        if @domain.del_domain_plesk
+          destroy! { admin_domains_path }
+        else
+          flash[:notice] = @domain.errors.full_messages.first
+          redirect_to admin_domains_path
+        end
       end
 
       protected

@@ -6,25 +6,22 @@ module Imentore
     # after_save :add_domain_plesk
     belongs_to :store
 
-    def hosting?
-      true if plesk_id.present?
-    end
-
     def add_domain_plesk
-      return unless hosting
+      return true unless hosting
       plesk = Imentore::Plesk.new
-      result = plesk.add_domain(name)
-      return false if result.status != "ok"
-      update_attribute(:plesk_id, result.plesk_id)
-      return self
+      response = plesk.add_domain(name)
+      update_attribute(:plesk_id, response.plesk_id) if response.plesk_id.present?
+      errors.add :base, response.message if not response.success?
+      return response.success?
     end
 
     def del_domain_plesk
-      return unless hosting
+        return true unless hosting
       plesk = Imentore::Plesk.new
-      result = plesk.del_domain(plesk_id)
-      return false if result.status != "ok"
-      return self
+      response = plesk.del_domain(plesk_id)
+      Rails.logger.debug { "response.inspect=>#{response.inspect}"}
+      errors.add :base, response.message if not response.success?
+      return response.success?
     end
 
   end

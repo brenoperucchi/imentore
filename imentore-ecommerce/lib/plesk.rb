@@ -2,7 +2,6 @@ require 'net/http'
 require 'builder'
 require "open-uri"
 require "rexml/document"
-# include REXML
 
 module Imentore
 
@@ -15,18 +14,34 @@ module Imentore
     def initialize(status = nil, code = nil, message = nil)
       @status, @code, @message = status, code, message
     end
+
+    def success?
+      @status == "ok"
+    end
+
+    def self.build_from_xml(string)
+      response = self.new
+      xml = REXML::Document.new(string)
+      response.status = xml.root.elements['//status'].text
+      if response.status == "error"
+        response.code = xml.root.elements['//errcode'].text
+        response.message = xml.root.elements['//errtext'].text
+      else
+        response.plesk_id = xml.root.elements['//id'].text if xml.root.elements['//id'].present?
+      end
+      return response
+    end
+
   end
 
   class Plesk
-
     attr_accessor :host, :user, :pass, :timeout, :rpc_version, :xml_response, :xml_target
 
-    def initialize(host = "207.7.84.39", user = 'admin', pass = 'plaszx12qw', timeout = 5, rpc_version = "1.6.0.2")
-      @host, @user, @pass, @timeout, @rpc_version = host, user, pass, timeout, rpc_version
+    def initialize(host = "207.7.84.39", user = 'admin', pass = 'plaszx12qw', timeout = 5)
+      @host, @user, @pass, @timeout = host, user, pass, timeout
     end
 
     def add_domain(domain_name = "test.com", ip_address = '207.7.85.39', owner_id = 1, template_id = 1)
-      # hash = {:domain=>{:add=>{:gen_setup=>{:name=>domain_name, 'owner-id'=> owner_id.to_s, :ip_address=>ip_address}, 'template-id'=>template_id.to_s}}}
 string = <<EOF
 <domain> 
   <add> 
@@ -40,6 +55,7 @@ string = <<EOF
 </domain>
 EOF
 xml = REXML::Document.new(string)
+      rpc_version = "1.6.0.2"
       begin
         Timeout.timeout(timeout) { open(host) if host.include?('http')}
       rescue Errno::ECONNREFUSED => e
@@ -49,27 +65,9 @@ xml = REXML::Document.new(string)
       rescue Timeout::Error => e
         raise Imentore::PleskException.new(e.message)
       end
-      pleskresponse = PleskResponse.new
-      # @xml_response, @xml_target = add_domain_rpc(domain_name, ip_address, owner_id ,template_id)
-      @xml_response, @xml_target = remote_rpc(xml, @rpc_version)
-      pleskresponse.status = Hash.from_xml(@xml_response)['packet']['domain']['add']['result']['status']
-      if pleskresponse.status == "error"
-        pleskresponse.message = Hash.from_xml(@xml_response)['packet']['domain']['add']['result']['errtext']
-        pleskresponse.code =  Hash.from_xml(@xml_response)['packet']['domain']['add']['result']['errcode']
-        if (Hash.from_xml(@xml_response)['packet']['system']).present? and (Hash.from_xml(@xml_response)['packet']['system']['errcode'] == "1005" or Hash.from_xml(@xml_response)['packet']['system']['errcode'] == "1001")
-          pleskresponse.message = Hash.from_xml(@xml_response)['packet']['system']['errtext']
-          pleskresponse.code =  Hash.from_xml(@xml_response)['packet']['system']['errcode']
-        end
-        if Hash.from_xml(@xml_response)['packet']['domain']['add']['result']['errcode'] === "1007"
-          pleskresponse.message = Hash.from_xml(@xml_response)['packet']['domain']['add']['result']['errtext']
-          pleskresponse.code =  Hash.from_xml(@xml_response)['packet']['domain']['add']['result']['errcode']
-          raise Imentore::PleskException.new(pleskresponse.message) if pleskresponse.code == "1007"
-        end
-      end
-      pleskresponse.plesk_id = Hash.from_xml(@xml_response)['packet']['domain']['add']['result']['id']
+      @xml_response, @xml_target = remote_rpc(xml, rpc_version)
+      pleskresponse = PleskResponse.build_from_xml(@xml_response)
       return pleskresponse
-      rescue NoMethodError => e
-        raise Imentore::PleskException.new(e.message)
     end
 
     def remote_rpc(xml2, rpc_version = @rpc_version)
@@ -93,12 +91,10 @@ doc = REXML::Document.new(string)
       res, data = http.post2(path, doc.to_s, @headers)
       return res.body, doc.to_s
     rescue SocketError
-      raise Imentore::PleskException.new("Remote Protocol Comunnication Error")
+      raise Imentore::PleskException.new("Remote Protocol Comunnication Socket Error")
     end
 
     # def add_domain_rpc(domain_name, ip_address, owner_id ,template_id)
-    #   begin
-    #     path = "/enterprise/control/agent.php"
     #     xml = Builder::XmlMarkup.new
     #     xml.instruct!
     #     xml.packet(:version => rpc_version) {
@@ -113,24 +109,10 @@ doc = REXML::Document.new(string)
     #         }
     #       }
     #     }
-    #     http = Net::HTTP.new(@host, 8443)
-    #     http.use_ssl = true
-    #     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    #     @headers = {
-    #           'HTTP_AUTH_LOGIN' => user,
-    #           'HTTP_AUTH_PASSWD' => pass,
-    #           'Accept' => '*/*',
-    #           'Content-Type' => 'text/xml',
-    #         }
-    #     res, data = http.post2(path, xml.target!, @headers)
-
-    #     return res.body, xml.target!
-    #   rescue SocketError
-    #     raise Imentore::PleskException.new("Remote Protocol Comunnication Error")
-    #   end
     # end
 
     def del_domain(plesk_id)
+    rpc_version = "1.6.0.2"
 string = <<EOF
 <domain> 
   <del>
@@ -141,22 +123,12 @@ string = <<EOF
 </domain>
 EOF
 xml = REXML::Document.new(string)
-      @xml_response, @xml_target = remote_rpc(xml)
-      pleskresponse = PleskResponse.new
-      pleskresponse.status = Hash.from_xml(@xml_response)['packet']['domain']['del']['result']['status']
-      if pleskresponse.status == "error"
-        pleskresponse.message = Hash.from_xml(@xml_response)['packet']['domain']['del']['result']['errtext']
-        pleskresponse.code = Hash.from_xml(@xml_response)['packet']['domain']['del']['result']['errcode']
-        raise Imentore::PleskException.new(pleskresponse.message)
-      end
+      @xml_response, @xml_target = remote_rpc(xml, rpc_version)
+      pleskresponse = PleskResponse.build_from_xml(@xml_response)
       return pleskresponse      
-      rescue NoMethodError => e
-        raise Imentore::PleskException.new(e.message)
     end
 
     # def del_domain_rpc(plesk_id)
-    #   begin
-    #     path = "/enterprise/control/agent.php"
     #     xml = Builder::XmlMarkup.new
     #     xml.instruct!
     #     xml.packet(:version => rpc_version) {
@@ -168,20 +140,6 @@ xml = REXML::Document.new(string)
     #         }
     #       }
     #     }
-    #     http = Net::HTTP.new(@host, 8443)
-    #     http.use_ssl = true
-    #     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    #     @headers = {
-    #           'HTTP_AUTH_LOGIN' => @user,
-    #           'HTTP_AUTH_PASSWD' => @pass,
-    #           'Accept' => '*/*',
-    #           'Content-Type' => 'text/xml',
-    #         }
-    #     res, data = http.post2(path, xml.target!, @headers)
-    #     return res.body, xml.target!  
-    #   rescue 
-    #     raise Imentore::PleskException.new("RPC Error")
-    #   end
     # end
 
     def add_mail_domain(plesk_id, mail_name, password)
@@ -203,22 +161,11 @@ string = <<EOF
 EOF
 xml = REXML::Document.new(string)
       @xml_response, @xml_target = remote_rpc(xml, '1.4.2.0')
-      pleskresponse = PleskResponse.new
-      pleskresponse.status = Hash.from_xml(@xml_response)['packet']['mail']['create']['result']['status']
-      if pleskresponse.status == "error"
-        pleskresponse.message = Hash.from_xml(@xml_response)['packet']['mail']['create']['result']['errtext']
-        pleskresponse.code = Hash.from_xml(@xml_response)['packet']['mail']['create']['result']['errcode']
-        raise Imentore::PleskException.new(pleskresponse.message)
-      end
-      pleskresponse.plesk_id = Hash.from_xml(@xml_response)['packet']['mail']['create']['result']['mailname']['id']
+      pleskresponse = PleskResponse.build_from_xml(@xml_response)
       return pleskresponse
-      rescue NoMethodError 
-        raise Imentore::PleskException.new("Error in code")
     end
 
     # def add_mail_domain_rpc(plesk_id, mail_name, password)
-    #   begin
-    #     path = "/enterprise/control/agent.php"
     #     xml = Builder::XmlMarkup.new
     #     xml.instruct!
     #     xml.packet(:version => @rpc_version) {
@@ -237,20 +184,6 @@ xml = REXML::Document.new(string)
     #         }
     #       }
     #     }
-    #     http = Net::HTTP.new(@host, 8443)
-    #     http.use_ssl = true
-    #     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    #     @headers = {
-    #           'HTTP_AUTH_LOGIN' => @user,
-    #           'HTTP_AUTH_PASSWD' => @pass,
-    #           'Accept' => '*/*',
-    #           'Content-Type' => 'text/xml',
-    #         }
-    #     res, data = http.post2(path, xml.target!, @headers)
-    #     return res.body, xml.target!
-    #   rescue 
-    #     raise Imentore::PleskException.new("RPC Error")
-    #   end
     # end
 
     def del_mail_domain(plesk_id, mail_name)
@@ -267,16 +200,8 @@ string = <<EOF
 EOF
 xml = REXML::Document.new(string)
       @xml_response, @xml_target = remote_rpc(xml, '1.4.2.0')
-      pleskresponse = PleskResponse.new
-      pleskresponse.status = Hash.from_xml(@xml_response)['packet']['mail']['remove']['result']['status']
-      if pleskresponse.status == "error"
-        pleskresponse.message = Hash.from_xml(@xml_response)['packet']['mail']['remove']['result']['errtext']
-        pleskresponse.code = Hash.from_xml(@xml_response)['packet']['mail']['remove']['result']['errcode']
-        raise Imentore::PleskException.new(pleskresponse.message)
-      end
+      pleskresponse = PleskResponse.build_from_xml(@xml_response)
       return pleskresponse
-      rescue NoMethodError => e 
-        raise Imentore::PleskException.new(e.message)
     end
 
 
@@ -298,20 +223,9 @@ xml = REXML::Document.new(string)
 EOF
 xml = REXML::Document.new(string)
       @xml_response, @xml_target = remote_rpc(xml, '1.4.2.0')
-      pleskresponse = PleskResponse.new
-      pleskresponse.status = Hash.from_xml(@xml_response)['packet']['mail']['update']['set']['result']['status']
-      if pleskresponse.status == "error"
-        pleskresponse.message = Hash.from_xml(@xml_response)['packet']['mail']['update']['set']['result']['errtext']
-        pleskresponse.code = Hash.from_xml(@xml_response)['packet']['mail']['update']['set']['result']['errcode']
-        raise Imentore::PleskException.new(pleskresponse.message)
-      end
+      pleskresponse = PleskResponse.build_from_xml(@xml_response)
       return pleskresponse
-      rescue NoMethodError => e 
-        raise Imentore::PleskException.new(e.message)
     end
-
-
-
 
 
     def enable_mail_domain(plesk_id)
@@ -324,16 +238,8 @@ string = <<EOF
 EOF
 xml = REXML::Document.new(string)
       @xml_response, @xml_target = remote_rpc(xml, '1.4.2.0')
-      pleskresponse = PleskResponse.new
-      pleskresponse.status = Hash.from_xml(@xml_response)['packet']['mail']['enable']['result']['status']
-      if pleskresponse.status == "error"
-        pleskresponse.message = Hash.from_xml(@xml_response)['packet']['mail']['enable']['result']['errtext']
-        pleskresponse.code = Hash.from_xml(@xml_response)['packet']['mail']['enable']['result']['errcode']
-        raise Imentore::PleskException.new(pleskresponse.message)
-      end
+      pleskresponse = PleskResponse.build_from_xml(@xml_response)
       return pleskresponse
-      rescue NoMethodError => e 
-        raise Imentore::PleskException.new(e.message)
     end
 
     def disable_mail_domain(plesk_id)
@@ -346,16 +252,8 @@ string = <<EOF
 EOF
 xml = REXML::Document.new(string)
       @xml_response, @xml_target = remote_rpc(xml, '1.4.2.0')
-      pleskresponse = PleskResponse.new
-      pleskresponse.status = Hash.from_xml(@xml_response)['packet']['mail']['disable']['result']['status']
-      if pleskresponse.status == "error"
-        pleskresponse.message = Hash.from_xml(@xml_response)['packet']['mail']['disable']['result']['errtext']
-        pleskresponse.code = Hash.from_xml(@xml_response)['packet']['mail']['disable']['result']['errcode']
-        raise Imentore::PleskException.new(pleskresponse.message)
-      end
+      pleskresponse = PleskResponse.build_from_xml(@xml_response)
       return pleskresponse
-      rescue NoMethodError => e 
-        raise Imentore::PleskException.new(e.message)
     end
 
   end

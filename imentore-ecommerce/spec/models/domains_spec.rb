@@ -10,16 +10,14 @@ describe Imentore::Domain do
   it "can add a domain in plesk api" do
     domain.name = domain_name
     domain.hosting = true
-    domain.save
-    @@result = domain.add_domain_plesk
-    # puts "result => #{@@result.inspect}"
-    # @@result.should be  == "ok"
+    result = domain.add_domain_plesk
+    result.should be_true
+    @@domain = domain.save
   end
 
   it "delete domain in plesk_api" do
-    # puts "del result => #{@@result.inspect}"
-    result = @@result.del_domain_plesk
-    # result.should be  == "ok"
+    result = @@domain.del_domain_plesk
+    result.should be_true
   end
 
 

@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(:version => 20120328215530) do
 
+  create_table "domain_mails", :force => true do |t|
+    t.string   "name"
+    t.integer  "plesk_id"
+    t.integer  "url_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
     t.string  "street"
@@ -24,14 +32,6 @@ ActiveRecord::Schema.define(:version => 20120328215530) do
     t.string  "phone"
     t.integer "addressable_id"
     t.string  "addressable_type"
-  end
-
-  create_table "imentore_domain_mails", :force => true do |t|
-    t.string   "name"
-    t.integer  "plesk_id"
-    t.integer  "url_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "imentore_domains", :force => true do |t|
