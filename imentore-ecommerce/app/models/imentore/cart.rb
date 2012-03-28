@@ -1,7 +1,9 @@
 module Imentore
-  class Cart
+  class Cart < ActiveRecord::Base
+    serialize :items, Array
+
     def empty?
-      true
+      items.empty?
     end
   end
 end
