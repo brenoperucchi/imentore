@@ -6,7 +6,7 @@ ul
     = domain.name
     = " => " + domain.hosting.to_s
     = button_to("Destroy", admin_domain_path(domain), method: :delete)
-    = link_to "Mails", admin_domain_domain_mails_path(domain)
+    = link_to "Mails", emails_admin_domain_path(domain)
 
 p Create Domain
 

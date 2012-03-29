@@ -44,7 +44,7 @@ Then "it appears in the domains list" do
 end
 
 Given "the store owns the domain myshop.com" do
-  @store.domains.create(name: "myshop.com")
+  @store.domains.create(name: "myshop.com", hosting: true)
 end
 
 When "I go to myshop.com" do
@@ -65,20 +65,8 @@ Then "I can delete it" do
   page.should_not have_content("myshop.com")
 end
 
-Given /^the store owns domain hosting created$/ do
-  visit admin_domains_url(host: 'myshop.imentore.dev')
-  page.should have_content("Create Domain")
-  fill_in("domain_name", with: "myshop.com")
-  check("domain_hosting")
-  click_button "Create Domain"
-
-end
-
 When /^I go to the domain mail listing$/ do
-  pending
-  # visit admin_domain_mails_url(host: '')
+  visit emails_admin_domain_path(host: 'myshop.imentore.dev')
+  page.should have_content ("Create Domain Account")
 end
 
-Then /^I see the domain mail account list$/ do
-  pending # express the regexp above with the code you wish you had
-end

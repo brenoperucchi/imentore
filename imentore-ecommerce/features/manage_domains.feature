@@ -18,8 +18,9 @@ Feature: Manage domains
     When I go to the domain listing
     Then I can delete it
 
-  Scenario: Create mail domain
-    Given the store owns domain hosting created 
-    When I go to the domain mail listing
-    Then I see the domain mail account list 
+  Scenario: Create email account domain
+    Given the store owns the domain myshop.com
+    When I go to the domain email listing
+    And I create email account domain
+    Then I see the email account created
   
