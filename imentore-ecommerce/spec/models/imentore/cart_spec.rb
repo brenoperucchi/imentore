@@ -5,13 +5,8 @@ describe Imentore::Cart do
     @cart = Imentore::Cart.new
   end
 
-  it "has a session_id" do
-    @cart.session_id = 123
-    @cart.session_id.should eq(123)
-  end
-
   it "has items" do
-    @cart.items = [1, 2]
+    @cart.items = { p1: { v1: 1 }, p2: { v2: 1 } }
     @cart.items.should have(2).items
   end
 
@@ -20,7 +15,13 @@ describe Imentore::Cart do
   end
 
   it "is not empty if has at least one item" do
-    @cart.items = [1]
+    @cart.items = { p1: { v1: 1 } }
     @cart.empty?.should be_false
+  end
+
+  it "adds an item" do
+    @cart.add("p1", "v1", "2")
+    cart = Imentore::Cart.first
+    cart.items["p1"]["v1"].should eq("2")
   end
 end

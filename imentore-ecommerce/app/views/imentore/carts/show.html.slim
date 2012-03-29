@@ -1,2 +1,5 @@
-- if @cart.empty?
+- if current_cart.empty?
   p Your cart is empty.
+
+- current_cart.items.each do |product, variant|
+  = product.name
