@@ -12,7 +12,9 @@ describe Imentore::Admin::ProductsController do
         variants_attributes: { "0" => { price: "10", quantity: "50" } }
       })
 
-      product = @store.products.first
+      response.should redirect_to(admin_products_path)
+
+      product = @store.products.last
 
       product.variants.should have(1).item
       product.options.should have(1).item
