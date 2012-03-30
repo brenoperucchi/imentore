@@ -16,3 +16,14 @@ end
 Then "I see the list of items" do
   page.should have_content(@product.name)
 end
+
+Given "I add a product to my cart" do
+  @product = @store.products.first
+
+  click_link @product.name
+  click_button "Add to cart"
+end
+
+Then "it appears in the items list" do
+  page.should have_content(@product.name)
+end

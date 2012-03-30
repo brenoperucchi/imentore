@@ -12,3 +12,7 @@ Feature: Manage cart
     Given my cart is not empty
     When I go to my cart
     Then I see the list of items
+
+  Scenario: Add item to cart
+    Given I add a product to my cart
+    Then it appears in the items list

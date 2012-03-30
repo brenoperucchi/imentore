@@ -13,5 +13,5 @@ Imentore::Core::Engine.routes.draw do
     end
 
     resources :products, only: [:index, :show]
-    resource  :cart, only: [:show]
+    resource  :cart, only: [:show, :create]
 end

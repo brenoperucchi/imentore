@@ -4,3 +4,9 @@ p= @product.description
 - @product.variants.each do |variant|
   - variant.options.each do |option|
     p= "#{option.option_type.name}: #{option.value}"
+
+= form_tag(cart_path, method: "post") do
+  = hidden_field_tag "item[product_id]", @product.id
+  = hidden_field_tag "item[variant_id]", @product.variants.first.id
+  = hidden_field_tag "item[quantity]", 1
+  = submit_tag "Add to cart"
