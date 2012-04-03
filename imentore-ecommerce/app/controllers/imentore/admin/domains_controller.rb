@@ -24,8 +24,8 @@ module Imentore
         elsif request.put?
           response = plesk.change_mail_domain(@domain.plesk_id, params[:name], params[:password])
         end
-        # binding.pry
         response.success? ? flash[:notice] = "Successfully on action" : flash[:notice] = "Error on action" if response
+        # binding.pry
         @emails = @domain.emails
       end
 
@@ -38,14 +38,13 @@ module Imentore
         @domain = current_store.domains.build(params[:domain])
         if @domain.hosting
           plesk = Imentore::Plesk.new
-          response = plesk.add_domain(name)
+          response = plesk.add_domain(@domain.name)
           if response.success?
             @domain.plesk_id = response.plesk_id
           else
             @domain.errors.add(:hosting, response.message)
           end
         end
-
         if @domain.errors.empty?
           create! { admin_domains_path }
         else
@@ -57,12 +56,15 @@ module Imentore
       end
 
       def destroy
-        @domain = current_store.domains.find(params[:id])
-        if @domain.del_domain_plesk
-          destroy! { admin_domains_path }
-        else
-          flash[:notice] = @domain.errors.full_messages.first
-          redirect_to admin_domains_path
+        destroy! do |success, failure|
+          failure.html do 
+            flash[:notice] = "Error on destroy domain"
+            redirect_to admin_domains_path 
+          end
+          success.html do
+            flash[:notice] = "Successfully on destroy domain"
+            redirect_to admin_domains_path             
+          end
         end
       end
 

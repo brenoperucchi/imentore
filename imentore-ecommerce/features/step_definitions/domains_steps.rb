@@ -50,7 +50,7 @@ end
 When "I go to myshop.com" do
   visit root_url(host: "myshop.com")
 end
-
+# 
 Then "I see the store's home page" do
   page.should have_content("Welcome to MyShop")
 end
@@ -62,11 +62,15 @@ end
 
 Then "I can delete it" do
   click_button "Destroy"
-  page.should_not have_content("myshop.com")
 end
 
-When /^I go to the domain mail listing$/ do
-  visit emails_admin_domain_path(host: 'myshop.imentore.dev')
-  page.should have_content ("Create Domain Account")
+When /^I go to the domain email listing$/ do
+  @domain = @store.domains.find_by_name("myshop.com")
+  visit emails_admin_domain_url(@domain, host: 'myshop.imentore.dev')
+  page.should have_content ("Create Mail Account")
 end
 
+Then /^I can create email account$/ do
+  @domain = @store.domains.find_by_name("myshop.com")
+  @domain.emails.merge(:test=>"1")
+end

@@ -12,15 +12,16 @@ Feature: Manage domains
     Given the store owns the domain myshop.com
     When I go to myshop.com
     Then I see the store's home page
+    
+  Scenario: Create email account domain
+    Given the store owns the domain myshop.com
+    When I go to the domain email listing
+    Then I can create email account 
 
   Scenario: Delete domain
     Given the store owns the domain myshop.com
     When I go to the domain listing
     Then I can delete it
 
-  Scenario: Create email account domain
-    Given the store owns the domain myshop.com
-    When I go to the domain email listing
-    And I create email account domain
-    Then I see the email account created
+
   
