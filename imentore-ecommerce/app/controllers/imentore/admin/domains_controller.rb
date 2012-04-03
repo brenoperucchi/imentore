@@ -3,9 +3,29 @@ module Imentore
     class DomainsController < Admin::BaseController
       inherit_resources
       actions :index, :create, :destroy
+      require 'pry'
 
       def emails
         @domain = current_store.domains.find(params[:id])
+        plesk = Imentore::Plesk.new
+        if request.post?
+          response = plesk.add_mail_domain(@domain.plesk_id, params[:name], params[:password])
+          if response.success?
+            @domain.emails = @domain.emails.merge(params[:name] => response.plesk_id)
+            @domain.save
+          end
+          @emails = @domain.emails
+        elsif request.delete?
+          response = plesk.del_mail_domain(@domain.plesk_id, params[:name])
+          if response.success?
+            @domain.emails.delete(params[:name])
+            @domain.save
+          end
+        elsif request.put?
+          response = plesk.change_mail_domain(@domain.plesk_id, params[:name], params[:password])
+        end
+        # binding.pry
+        response.success? ? flash[:notice] = "Successfully on action" : flash[:notice] = "Error on action" if response
         @emails = @domain.emails
       end
 
