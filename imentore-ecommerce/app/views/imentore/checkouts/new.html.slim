@@ -1,0 +1,9 @@
+= simple_form_for(@order, url: confirm_checkout_path) do |f|
+  = f.input :customer_email
+  fieldset#billing-address
+    = f.simple_fields_for :billing_address do |addr|
+      = render("shared/address", addr: addr)
+  fieldset#shipping-address
+    = f.simple_fields_for :shipping_address do |addr|
+      = render("shared/address", addr: addr)
+  = f.submit "Place order"

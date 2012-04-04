@@ -6,12 +6,16 @@ Imentore::Core::Engine.routes.draw do
 
     namespace :admin do
       resource :store, only: [:edit, :update]
-      match 'store/settings/:group', to: "settings#edit", via: 'get', as: 'edit_settings'
+      match 'store/settings/:group', to: "settings#edit",   via: 'get', as: 'edit_settings'
       match 'store/settings/:group', to: "settings#update", via: 'put', as: 'update_settings'
-      resources :domains, only: [:index, :create, :destroy]
-      resources :products, only: [:index, :new, :create]
+      resources :domains,   only: [:index, :create, :destroy]
+      resources :products,  only: [:index, :new, :create]
     end
 
-    resources :products, only: [:index, :show]
-    resource  :cart, only: [:show, :create]
+    resources :products,  only: [:index, :show]
+    resource  :cart,      only: [:show, :create]
+
+    match "checkout",           to: "checkouts#new",      via: "get",   as: "checkout"
+    match "checkout/confirm",   to: "checkouts#confirm",  via: "put",   as: "confirm_checkout"
+    match "checkout/complete",  to: "checkouts#complete", as: "complete_checkout"
 end
