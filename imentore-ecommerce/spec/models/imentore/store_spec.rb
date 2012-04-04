@@ -30,4 +30,5 @@ describe Imentore::Store do
   it { should have_one(:address) }
   it { should have_many(:themes) }
   it { should have_many(:products) }
+  it { should have_many(:orders) }
 end
