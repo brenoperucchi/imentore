@@ -2,3 +2,7 @@ h2.title= @theme.name
 = link_to("New Template", new_admin_theme_template_path(@theme))
 - @theme.templates.each do |template|
   = template.path
+
+= link_to("New Assets", new_admin_theme_asset_path(@theme))
+- @theme.assets.each do |asset|
+  = asset.name
