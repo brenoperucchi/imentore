@@ -9,10 +9,7 @@ Imentore::Core::Engine.routes.draw do
       match 'store/settings/:group', to: "settings#edit", via: 'get', as: 'edit_settings'
       match 'store/settings/:group', to: "settings#update", via: 'put', as: 'update_settings'
       resources :domains, only: [:index, :create, :destroy] do
-        get 'emails', on: :member
-        post 'emails', on: :member
-        delete 'emails', on: :member
-        put 'emails', on: :member
+        resources :emails, only: [:index, :create, :update, :destroy], controller: 'domain_emails'
       end
     end
 end

@@ -5,30 +5,6 @@ module Imentore
       actions :index, :create, :destroy
       require 'pry'
 
-      def emails
-        @domain = current_store.domains.find(params[:id])
-        plesk = Imentore::Plesk.new
-        if request.post?
-          response = plesk.add_mail_domain(@domain.plesk_id, params[:name], params[:password])
-          if response.success?
-            @domain.emails = @domain.emails.merge(params[:name] => response.plesk_id)
-            @domain.save
-          end
-          @emails = @domain.emails
-        elsif request.delete?
-          response = plesk.del_mail_domain(@domain.plesk_id, params[:name])
-          if response.success?
-            @domain.emails.delete(params[:name])
-            @domain.save
-          end
-        elsif request.put?
-          response = plesk.change_mail_domain(@domain.plesk_id, params[:name], params[:password])
-        end
-        response.success? ? flash[:notice] = "Successfully on action" : flash[:notice] = "Error on action" if response
-        # binding.pry
-        @emails = @domain.emails
-      end
-
       def index
         build_resource
         index!
@@ -56,16 +32,19 @@ module Imentore
       end
 
       def destroy
-        destroy! do |success, failure|
-          failure.html do 
-            flash[:notice] = "Error on destroy domain"
-            redirect_to admin_domains_path 
-          end
-          success.html do
-            flash[:notice] = "Successfully on destroy domain"
-            redirect_to admin_domains_path             
+        @domain = resource
+
+        if @domain.hosting
+          plesk = Imentore::Plesk.new
+          response = plesk.del_domain(@domain.plesk_id)
+
+          unless response.success?
+            flash[:error] = "Erro apagando dominio. Tente mais tarde."
+            redirect_to admin_domains_path
           end
         end
+
+        destroy! { admin_domains_path }
       end
 
       protected

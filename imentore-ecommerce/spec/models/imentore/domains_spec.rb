@@ -15,7 +15,7 @@ describe Imentore::Domain do
     domain.hosting = true
     domain.save
     domain.destroy
-    domain.should be_nil
+    Imentore::Domain.find(1).shouldwww be_nil
   end
 
 end
