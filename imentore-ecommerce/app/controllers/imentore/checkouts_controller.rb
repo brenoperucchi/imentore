@@ -11,6 +11,8 @@ module Imentore
     end
 
     def confirm
+      @order = current_order
+      CheckoutService.place_order(@order)
     end
 
     def complete

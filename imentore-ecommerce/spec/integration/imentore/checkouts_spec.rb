@@ -33,10 +33,9 @@ describe "Checkout" do
       click_button "Place order"
 
       order = store.orders.first
-      order.total_amount.should eq(15)
+      order.status.should eq("placed")
       order.invoice.should be
       order.delivery.should be
-      order.status.should eq("placed")
     end
   end
 end

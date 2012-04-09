@@ -7,8 +7,7 @@ describe Imentore::CheckoutsController do
 
   before do
     request.host = "#{store.url}.imentore.dev"
-    subject.stub(current_cart: cart)
-    subject.stub(current_order: order)
+    subject.stub(current_cart: cart, current_order: order)
   end
 
   def orders_params(params = {})
