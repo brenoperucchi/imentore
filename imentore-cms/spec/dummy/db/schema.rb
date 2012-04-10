@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405225934) do
+ActiveRecord::Schema.define(:version => 20120409221238) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20120405225934) do
     t.integer  "theme_id"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+    t.text     "head"
   end
 
   create_table "imentore_themes", :force => true do |t|
