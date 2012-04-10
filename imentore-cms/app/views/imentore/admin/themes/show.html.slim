@@ -12,8 +12,9 @@ br
 
 p = "Assets"
 = link_to("New Asset", new_admin_theme_asset_path(@theme), id: 'New Asset')
+
 ul
 - @theme.assets.each do |asset|
-  li= asset.read_attribute(:file)
+  li= asset.file_identifier
   li= button_to("Destroy", admin_theme_asset_path(@theme, asset), method: :delete)
 

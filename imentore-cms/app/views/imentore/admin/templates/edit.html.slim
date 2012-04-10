@@ -1,5 +1,4 @@
 = simple_form_for(@template, url: admin_theme_template_path(@theme, @template)) do |f|
   = f.input :path
-  = f.input :head, input_html: {:value => f.object.head}
   = f.input :body
   = f.button :submit

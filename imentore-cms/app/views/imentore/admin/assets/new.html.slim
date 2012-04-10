@@ -1,3 +1,31 @@
-= simple_form_for @asset, url: admin_theme_assets_path do |f|
-  = f.file_field :file
-  = f.submit "Submit", :disable_with => 'Submiting...'
+- content_for :footer do
+  = javascript_include_tag 'fileuploader.js'
+  = stylesheet_link_tag 'fileuploader.css'
+  javascript:
+    var uploader = new qq.FileUploader({
+      element: document.getElementById('file_uploader'),
+      action: '/admin/themes/#{@asset.theme.id}/assets',
+    })
+    $(document).ready(function(){
+      uploader.setParams({
+
+        debug: true
+      });
+    });
+    //createUploader();
+    // $(document).ready(function(){
+    $("div.qq-uploader input[name='file']").live('click',function(){
+      cart_item_id = $('#cart_item_id').val()
+      uploader.setParams({
+        theme_id: #{@asset.theme_id},
+        authenticity_token: '#{form_authenticity_token}'
+      })
+    });
+.content
+  ul
+    fieldset.forms-pattern
+      = hidden_field_tag :cart_item_id, current_store.id
+      ul.wrap-form#file_uploader
+  / = simple_form_for @asset, url: admin_theme_assets_path do |f|
+  /   = f.file_field :file, :id=> "file_uploader"
+  /   = f.submit "Submit", :disable_with => 'Submiting...'
