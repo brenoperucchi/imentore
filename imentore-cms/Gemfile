@@ -15,6 +15,7 @@ gem 'slim', '1.1.0'
 gem 'country_select', '0.0.1'
 gem "liquid", "2.3.0"
 gem 'carrierwave', "0.6.1"
+gem 'mini_magick', "3.4"
 
 gem 'imentore-core',  path: '../imentore-core'
 gem 'imentore-ecommerce',  path: '../imentore-ecommerce'

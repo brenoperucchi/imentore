@@ -13,6 +13,12 @@ gem 'inherited_resources', '1.3.0'
 gem 'slim', '1.1.0'
 gem 'country_select', '0.0.1'
 gem "liquid", "2.3.0"
+gem 'carrierwave', "0.6.1"
+gem 'pry', "0.9.8.2"
+gem 'pry-nav', "0.1.0"
+gem 'pry-stack_explorer', "0.4.1"
+gem 'mini_magick', '3.4'
+
 
 gem 'personhood',     path: '../personhood'
 gem 'imentore-core', path: '../imentore-core'
