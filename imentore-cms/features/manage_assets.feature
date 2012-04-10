@@ -5,13 +5,10 @@ Feature: Manage Assets
     And I am logged in as the owner
 
 
-  Scenario: Create Assets
+  Scenario: Create Asset
     Given I am at the green theme detalis page
-    When I create new asset
-    Then I see it in the assets list
+    Then I should create new asset
 
-  # Scenario: Create template for a theme
-  #   Given I am on the details page of the theme Ocean
-  #   When I create a new default layout
-  #   And I go to myshop's home page
-  #   Then I see my default layout
+  Scenario: Destroy Asset
+    Given I am at the green theme detalis page
+    Then I should destroy the asset
