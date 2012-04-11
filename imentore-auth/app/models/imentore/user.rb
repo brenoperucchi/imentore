@@ -1,6 +1,6 @@
 module Imentore
   class User < ActiveRecord::Base
-    devise :database_authenticatable, :validatable, :confirmable
+    devise :database_authenticatable, :validatable
     #   include SentientUser
     #
     #   # Soft delete.

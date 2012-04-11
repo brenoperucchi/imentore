@@ -1,7 +1,8 @@
 Imentore::Core::Engine.routes.draw do
   namespace :admin do
     resources :themes do
-      resources :templates, only: [:new, :create]
+      resources :assets
+      resources :templates
     end
   end
 end
