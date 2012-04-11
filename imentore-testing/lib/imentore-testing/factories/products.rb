@@ -12,8 +12,9 @@ end
 
 FactoryGirl.define do
   factory :default_mug, class: Imentore::ProductVariant do
-    price     15
-    quantity  50
+    price       15
+    quantity    50
+    deliverable true
 
     after_create do |variant|
       option_type = variant.product.options.first

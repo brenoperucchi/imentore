@@ -19,9 +19,6 @@ describe Imentore::CartsController do
       post(:create, item: item_params)
 
       cart.should have(1).item
-      cart.items.should have_key(product)
-      cart.items[product].should have_key(variant)
-      cart.items[product][variant].should eq(1)
     end
 
     it "does not add item if quantity less or equal than zero" do

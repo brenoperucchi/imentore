@@ -8,7 +8,7 @@ class CreateProductVariants < ActiveRecord::Migration
       t.decimal     :height
       t.decimal     :width
       t.decimal     :depth
-      t.boolean     :shippable
+      t.boolean     :deliverable
       t.references  :product
     end
   end
