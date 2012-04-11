@@ -2,6 +2,7 @@ module Imentore
   class Theme < ActiveRecord::Base
     belongs_to :store
     has_many :templates
+    has_many :assets
 
     validates :name,  presence: true
 

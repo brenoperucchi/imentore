@@ -5,9 +5,13 @@ html
   = stylesheet_link_tag    "application"
   = javascript_include_tag "application"
   = csrf_meta_tags
+  = yield :head
 
 body
-  p core/views/layouts/admin
-  = link_to(:logout, destroy_user_session_path, method: "delete")
-  p= debug flash
-  = yield
+  .content
+    p core/views/layouts/admin
+    = link_to(:logout, destroy_user_session_path, method: "delete")
+    p= debug flash
+    = yield
+  .footer
+    = yield :footer

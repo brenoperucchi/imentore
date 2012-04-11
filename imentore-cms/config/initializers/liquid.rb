@@ -1,4 +1,12 @@
 # http://www.royvandermeij.com/blog/2011/09/21/create-a-liquid-handler-for-rails-3-dot-1/
+require 'liquid_filter'
+
+# Liquid::Template.class_eval do
+#   def register_filter(mod)
+#     # binding.pry
+#     Strainer.global_filter(mod)
+#   end
+# end
 
 class LiquidView
   def self.call(template)
@@ -28,8 +36,11 @@ class LiquidView
                 [controller._helpers]
               end
 
-    liquid = Liquid::Template.parse(template)
-    liquid.render(assigns, :filters => filters, :registers => {:action_view => @view, :controller => @view.controller})
+    # liquid = Liquid::Template.parse(template)
+    liquid = Liquid::Template.new
+    t = liquid.parse(template)
+    t.class.register_filter(LiquidFilter)
+    t.render(assigns, :filters => filters, :registers => {current_store: @view.controller.current_store, :action_view => @view, :controller => @view.controller})
   end
 
   def compilable?
@@ -37,4 +48,7 @@ class LiquidView
   end
 end
 
+
+
 ActionView::Template.register_template_handler(:liquid, LiquidView)
+
