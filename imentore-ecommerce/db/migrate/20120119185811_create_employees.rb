@@ -4,7 +4,6 @@ class CreateEmployees < ActiveRecord::Migration
       t.personhood
       t.references :store
       t.string :department
-      t.timestamps
     end
   end
 

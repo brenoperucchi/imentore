@@ -5,7 +5,6 @@ class CreateProducts < ActiveRecord::Migration
       t.text        :description
       t.string      :permalink
       t.references  :store
-      t.timestamps
     end
   end
 
