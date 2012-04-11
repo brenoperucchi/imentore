@@ -12,7 +12,11 @@ module Imentore
 
     def confirm
       @order = current_order
-      CheckoutService.place_order(@order)
+      CheckoutService.place_order(@order, params[:order])
+
+      unless @order.chargeable?
+        redirect_to complete_checkout_path
+      end
     end
 
     def complete
