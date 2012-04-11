@@ -17,7 +17,7 @@ class FileUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     # binding.pry
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/current_store/#{model.theme.store.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.theme.store.id}/#{model.theme.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

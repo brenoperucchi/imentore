@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410193442) do
+ActiveRecord::Schema.define(:version => 20120405225934) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(:version => 20120410193442) do
     t.integer  "theme_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "store_id"
   end
 
   create_table "imentore_carts", :force => true do |t|
@@ -137,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20120410193442) do
     t.integer  "theme_id"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+    t.text     "header"
     t.text     "head"
   end
 
