@@ -13,3 +13,5 @@ end
 require "imentore-testing/factories"
 
 Dir["#{File.dirname(__FILE__)}/step_definitions/**/*.rb"].each { |f| require f }
+
+Imentore.config.domain = "imentore.dev"

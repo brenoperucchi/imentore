@@ -8,7 +8,15 @@ PATH
   remote: ../imentore-cms
   specs:
     imentore-cms (0.0.1)
+      carrierwave (~> 0.6.1)
+      country_select (~> 0.0.1)
+      devise (~> 2.0.4)
+      inherited_resources (~> 1.3.0)
+      liquid (~> 2.3.0)
+      mini_magick (~> 3.4)
       rails (~> 3.2.2)
+      simple_form (~> 1.5.2)
+      slim (~> 1.1.0)
 
 PATH
   remote: ../imentore-core
