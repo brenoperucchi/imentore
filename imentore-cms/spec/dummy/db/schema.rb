@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405225934) do
+ActiveRecord::Schema.define(:version => 20120412202341) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -40,22 +40,32 @@ ActiveRecord::Schema.define(:version => 20120405225934) do
   create_table "imentore_domains", :force => true do |t|
     t.string   "name"
     t.integer  "store_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "hosting",    :default => false
+    t.integer  "plesk_id"
   end
 
   create_table "imentore_employees", :force => true do |t|
-    t.string   "name"
-    t.string   "brand"
-    t.string   "irs_id"
-    t.date     "birthdate"
-    t.string   "national_id"
-    t.string   "gender"
-    t.string   "person_type"
-    t.integer  "store_id"
-    t.string   "department"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string  "name"
+    t.string  "brand"
+    t.string  "irs_id"
+    t.date    "birthdate"
+    t.string  "national_id"
+    t.string  "gender"
+    t.string  "person_type"
+    t.integer "store_id"
+    t.string  "department"
+  end
+
+  create_table "imentore_invoices", :force => true do |t|
+    t.integer  "order_id"
+    t.string   "provider_id"
+    t.integer  "payment_method_id"
+    t.string   "status"
+    t.decimal  "amount"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "imentore_option_types", :force => true do |t|
@@ -71,15 +81,14 @@ ActiveRecord::Schema.define(:version => 20120405225934) do
   end
 
   create_table "imentore_orders", :force => true do |t|
-    t.text    "shipping_address"
-    t.text    "billing_address"
-    t.decimal "total_amount"
-    t.string  "status"
-    t.string  "customer_email"
-    t.text    "items"
-    t.integer "invoice_id"
-    t.integer "delivery_id"
-    t.integer "store_id"
+    t.text     "shipping_address"
+    t.text     "billing_address"
+    t.string   "status"
+    t.string   "customer_email"
+    t.text     "items"
+    t.integer  "store_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "imentore_product_variants", :force => true do |t|
@@ -90,17 +99,15 @@ ActiveRecord::Schema.define(:version => 20120405225934) do
     t.decimal "height"
     t.decimal "width"
     t.decimal "depth"
-    t.boolean "shippable"
+    t.boolean "deliverable"
     t.integer "product_id"
   end
 
   create_table "imentore_products", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.string   "permalink"
-    t.integer  "store_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string  "name"
+    t.text    "description"
+    t.string  "permalink"
+    t.integer "store_id"
   end
 
   create_table "imentore_stores", :force => true do |t|
@@ -136,8 +143,6 @@ ActiveRecord::Schema.define(:version => 20120405225934) do
     t.integer  "theme_id"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
-    t.text     "header"
-    t.text     "head"
   end
 
   create_table "imentore_themes", :force => true do |t|

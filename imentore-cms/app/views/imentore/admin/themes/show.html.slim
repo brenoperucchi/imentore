@@ -16,5 +16,5 @@ p = "Assets"
 ul
 - @theme.assets.each do |asset|
   li= asset.file_identifier
-  li= button_to("Destroy", admin_theme_asset_path(@theme, asset), method: :delete)
+  li= link_to("Destroy", admin_theme_asset_path(@theme, asset), method: :delete)
 
