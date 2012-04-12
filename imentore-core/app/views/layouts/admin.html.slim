@@ -10,8 +10,12 @@ html
 body
   .content
     p core/views/layouts/admin
+
     = link_to(:logout, destroy_user_session_path, method: "delete")
-    p= debug flash
+
+    = flash[:notice]
+
     = yield
+
   .footer
     = yield :footer

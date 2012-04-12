@@ -1,0 +1,19 @@
+p List Mail Account
+
+ul
+- @emails.each do |name|
+  li
+    = name
+    = button_to("Destroy", emails_admin_domain_path(@domain, name: name.first), method: :delete)
+    = form_tag(emails_admin_domain_path(@domain), method: :put) do
+      = hidden_field_tag :name , name.first
+      = text_field_tag :password
+
+p Create Mail Account
+
+= form_tag(emails_admin_domain_path(@domain), method: :post) do
+  = label_tag 'name'
+  = text_field_tag :name
+  = label_tag 'password'
+  = password_field_tag :password
+  = submit_tag "Created"

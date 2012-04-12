@@ -4,10 +4,13 @@ ul
 - @domains.each do |domain|
   li
     = domain.name
+    = " => " + domain.hosting.to_s
     = button_to("Destroy", admin_domain_path(domain), method: :delete)
+    = link_to "Mails", admin_domain_emails_path(domain) if domain.hosting
 
 p Create Domain
 
 = simple_form_for([:admin, @domain]) do |f|
   = f.input :name
+  = f.check_box :hosting
   = f.submit

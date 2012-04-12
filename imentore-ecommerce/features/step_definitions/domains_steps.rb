@@ -33,10 +33,6 @@ Given /^I create Myshop\.com with option hosting$/ do
   check("imentore_domain_hosting")
 end
 
-Then /^I should see status ok$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 When "I create a new domain" do
   click_link "Domains"
   fill_in("Name", with: "myshop.biz")
@@ -48,13 +44,13 @@ Then "it appears in the domains list" do
 end
 
 Given "the store owns the domain myshop.com" do
-  @store.domains.create(name: "myshop.com")
+  @store.domains.create(name: "myshop.com", hosting: true)
 end
 
 When "I go to myshop.com" do
   visit root_url(host: "myshop.com")
 end
-
+# 
 Then "I see the store's home page" do
   page.should have_content("Welcome to MyShop")
 end
@@ -66,5 +62,15 @@ end
 
 Then "I can delete it" do
   click_button "Destroy"
-  page.should_not have_content("myshop.com")
+end
+
+When /^I go to the domain email listing$/ do
+  @domain = @store.domains.find_by_name("myshop.com")
+  visit emails_admin_domain_url(@domain, host: 'myshop.imentore.dev')
+  page.should have_content ("Create Mail Account")
+end
+
+Then /^I can create email account$/ do
+  @domain = @store.domains.find_by_name("myshop.com")
+  @domain.emails.merge(:test=>"1")
 end
