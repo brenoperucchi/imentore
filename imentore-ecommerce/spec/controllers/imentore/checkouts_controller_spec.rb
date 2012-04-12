@@ -6,8 +6,7 @@ describe Imentore::CheckoutsController do
   let(:order)   { mock("order", total_amount: 15) }
 
   before do
-    request.host = "#{store.url}.imentore.dev"
-    subject.stub(current_cart: cart, current_order: order)
+    subject.stub(current_cart: cart, current_order: order, current_store: store)
   end
 
   def orders_params(params = {})

@@ -8,7 +8,6 @@ When "I create a product" do
   fill_in("Weight", with: "0.3")
   click_button "Create Product"
   page.should have_content("Product was successfully created.")
-
 end
 
 Then "it appears in the product list" do

@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe "Admin::Stores" do
   before do
-    Factory.create(:myshop)
-    Factory.create(:green_theme)
+    FactoryGirl.create(:myshop)
     sign_in_as_owner
   end
 

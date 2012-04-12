@@ -1,18 +1,12 @@
 class ProductDrop < Liquid::Drop
   include Imentore::Core::Engine.routes.url_helpers
 
-  # def before_method(method)
-  #   binding.pry
-  #  end
-
   def initialize(product)
-    # binding.pry
     @product = product
   end
 
   def name
-    # binding.pry
-    @product["name"]
+    @product.name
   end
 
   def id
@@ -21,7 +15,6 @@ class ProductDrop < Liquid::Drop
 
   def url
     product_path(@product)
-    # binding.pry
   end
 
   def price
@@ -32,7 +25,11 @@ class ProductDrop < Liquid::Drop
     XYZ
   end
 
-  # def to_liquid
-  # end
+  def description
+    @product.description
+  end
 
+  def variants
+    @product.variants
+  end
 end

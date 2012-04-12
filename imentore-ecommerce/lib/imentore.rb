@@ -1,6 +1,6 @@
 module Imentore
   extend self
-  
+
   class << self
     attr_accessor :configuration
 
@@ -10,7 +10,7 @@ module Imentore
     end
 
   end
-  
+
   class Configuration
     attr_accessor :cost_centers
 

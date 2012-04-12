@@ -45,6 +45,8 @@ RSpec.configure do |config|
     # use_route: doesn't seem to work in rails 3.2
     # http://stackoverflow.com/a/5832908
     # http://stackoverflow.com/a/7506094
+
+    Imentore.config.domain = "imentore.dev"
   end
 
   config.after(:each) do

@@ -4,10 +4,6 @@ describe "Checkout" do
   context "#confirm" do
     let(:store) { FactoryGirl.create(:myshop) }
 
-    before do
-      FactoryGirl.create(:green_theme)
-    end
-
     it "places an order" do
       visit root_url(host: "#{store.url}.imentore.dev")
       click_link "I <3 NY mug"

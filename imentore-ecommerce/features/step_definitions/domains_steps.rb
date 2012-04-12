@@ -50,7 +50,7 @@ end
 When "I go to myshop.com" do
   visit root_url(host: "myshop.com")
 end
-# 
+
 Then "I see the store's home page" do
   page.should have_content("Welcome to MyShop")
 end
@@ -66,7 +66,7 @@ end
 
 When /^I go to the domain email listing$/ do
   @domain = @store.domains.find_by_name("myshop.com")
-  visit emails_admin_domain_url(@domain, host: 'myshop.imentore.dev')
+  visit admin_domain_emails_url(@domain, host: 'myshop.imentore.dev')
   page.should have_content ("Create Mail Account")
 end
 

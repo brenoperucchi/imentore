@@ -3,7 +3,6 @@ module Imentore
     class DomainsController < Admin::BaseController
       inherit_resources
       actions :index, :create, :destroy
-      require 'pry'
 
       def index
         build_resource
@@ -40,7 +39,7 @@ module Imentore
 
           unless response.success?
             flash[:error] = "Erro apagando dominio. Tente mais tarde."
-            redirect_to admin_domains_path
+            redirect_to(admin_domains_path) and return
           end
         end
 

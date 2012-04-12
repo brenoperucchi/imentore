@@ -4,4 +4,3 @@ module Imentore
     serialize :emails, Hash
   end
 end
-
