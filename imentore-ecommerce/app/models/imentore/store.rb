@@ -101,6 +101,9 @@ module Imentore
     has_many :domains
     has_many :products
     has_many :orders
+    has_many :themes
+    has_many :templates, :through => :themes, :source => :templates
+    has_many :assets, :through => :themes, :source => :assets
 
     accepts_nested_attributes_for :owner, :address
 

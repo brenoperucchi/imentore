@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403120126) do
+ActiveRecord::Schema.define(:version => 20120405232609) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 20120403120126) do
     t.string  "phone"
     t.integer "addressable_id"
     t.string  "addressable_type"
+  end
+
+  create_table "imentore_assets", :force => true do |t|
+    t.string   "file"
+    t.integer  "theme_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "imentore_carts", :force => true do |t|
@@ -47,8 +54,8 @@ ActiveRecord::Schema.define(:version => 20120403120126) do
     t.string   "person_type"
     t.integer  "store_id"
     t.string   "department"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "imentore_option_types", :force => true do |t|
@@ -113,8 +120,8 @@ ActiveRecord::Schema.define(:version => 20120403120126) do
     t.string   "state",                 :default => "pending"
     t.datetime "disabled_at"
     t.datetime "actived_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.text     "config"
   end
 
@@ -127,8 +134,8 @@ ActiveRecord::Schema.define(:version => 20120403120126) do
     t.string   "locale",     :default => "en"
     t.string   "handler",    :default => "liquid"
     t.integer  "theme_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "imentore_themes", :force => true do |t|
@@ -154,8 +161,8 @@ ActiveRecord::Schema.define(:version => 20120403120126) do
     t.integer  "store_id"
     t.integer  "userable_id"
     t.string   "userable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
 end

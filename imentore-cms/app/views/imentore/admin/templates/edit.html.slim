@@ -1,0 +1,4 @@
+= simple_form_for(@template, url: admin_theme_template_path(@theme, @template)) do |f|
+  = f.input :path
+  = f.input :body, :input_html=> {:style=> 'width:100%; height:300px;'}
+  = f.button :submit

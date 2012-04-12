@@ -1,4 +1,20 @@
-h2.title= @theme.name
+h3 = "theme " + @theme.name
+
+p = "Templates"
 = link_to("New Template", new_admin_theme_template_path(@theme))
+ul
 - @theme.templates.each do |template|
-  = template.path
+  li
+    = link_to(template.path, edit_admin_theme_template_path(@theme, template))
+    = button_to("Destroy", admin_theme_template_path(@theme, template), method: :delete)
+
+br
+
+p = "Assets"
+= link_to("New Asset", new_admin_theme_asset_path(@theme), id: 'New Asset')
+
+ul
+- @theme.assets.each do |asset|
+  li= asset.file_identifier
+  li= button_to("Destroy", admin_theme_asset_path(@theme, asset), method: :delete)
+
