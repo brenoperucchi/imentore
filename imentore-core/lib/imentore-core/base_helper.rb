@@ -11,7 +11,7 @@ module Imentore
     def current_store
       @current_store ||=
         Store.joins(:domains).where("imentore_domains.name" => request.domain).first ||
-        Store.find_by_url(request.subdomain)
+        (Store.find_by_url(request.subdomain) if request.domain.include?('imentore.com'))
     end
 
     def check_store
