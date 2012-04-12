@@ -1,1 +1,12 @@
 require "imentore-cms/engine"
+
+require "carrierwave"
+require "carrierwave/orm/activerecord"
+require "carrierwave/processing/mime_types"
+require "liquid"
+require "slim"
+require "mini_magick"
+require "inherited_resources"
+require "devise"
+require "simple_form"
+require "country_select"
