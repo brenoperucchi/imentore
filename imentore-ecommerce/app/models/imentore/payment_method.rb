@@ -1,4 +1,4 @@
 module Imentore
-  class PaymentMethod
+  class PaymentMethod < ActiveRecord::Base
   end
 end

@@ -34,4 +34,5 @@ describe Imentore::Store do
   it { should have_many(:themes) }
   it { should have_many(:templates) }
   it { should have_many :domains }
+  it { should have_many(:payment_methods) }
 end
