@@ -11,21 +11,25 @@ module Imentore
 
       def create
         @domain = current_store.domains.build(params[:domain])
+
         if @domain.hosting
-          plesk = Imentore::Plesk.new
-          response = plesk.add_domain(@domain.name)
+          plesk = Plesk::Client.new("207.7.84.39", "admin", "plaszx12qw")
+          response = plesk.add_domain(@domain.name, "207.7.85.39", {owner_id: 1, template_id: 1})
+
           if response.success?
             @domain.plesk_id = response.plesk_id
           else
             @domain.errors.add(:hosting, response.message)
           end
         end
+
         if @domain.errors.empty?
           create! { admin_domains_path }
         else
           render :new
         end
-      rescue Imentore::PleskException => e
+
+      rescue Plesk::Exception => e
         flash[:notice] = e.message
         redirect_to admin_domains_path
       end
@@ -34,7 +38,7 @@ module Imentore
         @domain = resource
 
         if @domain.hosting
-          plesk = Imentore::Plesk.new
+          plesk = Plesk::Client.new("207.7.84.39", "admin", "plaszx12qw")
           response = plesk.del_domain(@domain.plesk_id)
 
           unless response.success?

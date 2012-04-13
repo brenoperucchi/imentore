@@ -9,7 +9,7 @@ describe Imentore::Admin::DomainsController do
     end
 
     it "returns the specified value on any instance of the class" do
-      Imentore::Plesk.any_instance.should_receive(:add_domain).and_return(mock(:domain, success?: true, plesk_id: 123))
+      Plesk::Client.any_instance.should_receive(:add_domain).and_return(mock(:domain, success?: true, plesk_id: 123))
 
       post(:create, domain: { name: "imentore.com", hosting: "1" })
     end
