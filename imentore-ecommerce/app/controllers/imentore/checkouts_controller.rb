@@ -7,6 +7,11 @@ module Imentore
       end
 
       @order = current_order
+
+      if @order.deliverable?
+        @order.build_delivery
+      end
+
       @order.update_attribute(:items, current_cart.items)
     end
 

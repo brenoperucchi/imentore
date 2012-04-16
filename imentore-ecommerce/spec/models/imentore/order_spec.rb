@@ -33,8 +33,9 @@ describe Imentore::Order do
   end
 
   it "has a delivery" do
-    order.delivery = "delivery"
-    order.delivery.should eq("delivery")
+    delivery = Imentore::Delivery.new
+    order.delivery = delivery
+    order.delivery.should eq(delivery)
   end
 
   it "has a store" do

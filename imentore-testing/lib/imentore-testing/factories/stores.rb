@@ -8,6 +8,7 @@ FactoryGirl.define do
       FactoryGirl.create(:green_theme, store: store)
       FactoryGirl.create(:mug, store: store)
       FactoryGirl.create(:cielo, store: store)
+      FactoryGirl.create(:fedex, store: store)
     end
   end
 end

@@ -21,6 +21,7 @@ describe Imentore::CheckoutsController do
 
   describe "#new" do
     it "updates order items" do
+      order.stub(deliverable?: false)
       order.should_receive(:update_attribute).with(:items, cart.items)
 
       get(:new)
