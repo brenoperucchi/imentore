@@ -1,3 +1,4 @@
+# This migration comes from imentore_auth (originally 20120118203657)
 class CreateUsers < ActiveRecord::Migration
   def up
     create_table :imentore_users do |t|

@@ -1,3 +1,4 @@
+# This migration comes from imentore_ecommerce (originally 20090228122247)
 class CreateStores < ActiveRecord::Migration
   def self.up
     create_table :imentore_stores do |t|

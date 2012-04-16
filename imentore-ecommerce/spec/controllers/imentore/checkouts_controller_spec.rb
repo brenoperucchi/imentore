@@ -38,6 +38,7 @@ describe Imentore::CheckoutsController do
       context "when chargeable order" do
         it "render confirmation page" do
           order.stub(chargeable?: true)
+          order.should_receive(:invoice)
 
           put(:confirm, order: orders_params)
 

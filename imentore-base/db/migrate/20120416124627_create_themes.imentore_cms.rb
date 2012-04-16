@@ -1,3 +1,4 @@
+# This migration comes from imentore_cms (originally 20120224182739)
 class CreateThemes < ActiveRecord::Migration
   def up
     create_table(:imentore_themes) do |t|

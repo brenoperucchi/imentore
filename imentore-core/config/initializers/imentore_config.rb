@@ -11,3 +11,7 @@ module Imentore
     @config ||= OpenStruct.new(defaults)
   end
 end
+
+if Rails.env.development?
+  Imentore.config.domain = "imentore.dev"
+end

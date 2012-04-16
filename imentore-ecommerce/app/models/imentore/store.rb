@@ -105,6 +105,7 @@ module Imentore
     has_many :templates, :through => :themes, :source => :templates
     has_many :assets, :through => :themes, :source => :assets
     has_many :payment_methods
+    has_many :delivery_methods
 
     accepts_nested_attributes_for :owner, :address
 

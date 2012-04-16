@@ -18,6 +18,7 @@ gem 'pry', "0.9.8.2"
 gem 'pry-nav', "0.1.0"
 gem 'pry-stack_explorer', "0.4.1"
 gem 'mini_magick', '3.4'
+gem "plesk-ruby",         git:  "git://github.com/wicz/plesk-ruby.git"
 
 
 gem 'personhood',     path: '../personhood'

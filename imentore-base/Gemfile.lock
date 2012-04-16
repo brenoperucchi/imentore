@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/wicz/plesk-ruby.git
+  revision: 837029b876726c95ceb9d5392c54491bd8f651f0
+  specs:
+    plesk-ruby (0.0.1)
+
 PATH
   remote: ../imentore-auth
   specs:
@@ -207,6 +213,7 @@ DEPENDENCIES
   liquid (= 2.3.0)
   mini_magick (= 3.4)
   personhood!
+  plesk-ruby!
   pry (= 0.9.8.2)
   pry-nav (= 0.1.0)
   pry-stack_explorer (= 0.4.1)

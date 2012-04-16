@@ -1,3 +1,4 @@
+# This migration comes from imentore_cms (originally 20120229183726)
 class CreateTemplates < ActiveRecord::Migration
   def up
     create_table(:imentore_templates) do |t|

@@ -15,8 +15,10 @@ module Imentore
       CheckoutService.place_order(@order, params[:order])
 
       unless @order.chargeable?
-        redirect_to complete_checkout_path
+        redirect_to(complete_checkout_path) and return
       end
+
+      @invoice = @order.invoice
     end
 
     def complete

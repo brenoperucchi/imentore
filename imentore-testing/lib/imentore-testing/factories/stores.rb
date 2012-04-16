@@ -7,6 +7,7 @@ FactoryGirl.define do
     after_create do |store|
       FactoryGirl.create(:green_theme, store: store)
       FactoryGirl.create(:mug, store: store)
+      FactoryGirl.create(:cielo, store: store)
     end
   end
 end

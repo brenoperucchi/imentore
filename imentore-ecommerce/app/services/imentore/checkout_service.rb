@@ -7,8 +7,7 @@ module Imentore
       order.status = "placed"
 
       if order.chargeable?
-        # payment_method = store.payment_methods.find(params[:payment_method_id])
-        payment_method = nil
+        payment_method = store.payment_methods.find(params[:payment_method])
         order.build_invoice(amount: order.total_amount, payment_method: payment_method)
       end
 
