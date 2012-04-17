@@ -40,7 +40,7 @@ describe "Checkout" do
       order = store.orders.first
       order.status.should eq("placed")
       order.invoice.should be
-      # order.delivery.should be
+      order.delivery.should be
     end
   end
 end
