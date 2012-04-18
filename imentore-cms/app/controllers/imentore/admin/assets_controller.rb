@@ -1,23 +1,12 @@
 module Imentore
   module Admin
-
-    class AssetsController < Admin::BaseController
+    class AssetsController < BaseController
       inherit_resources
-      # belongs_to :theme, parent_class: Imentore::Theme
-      # belongs_to :store, parent_class: Imentore::Store
-
-      # actions :new, :create, :show
-
-      # def new
-      #   new!
-
-      # end
+      belongs_to :theme
+      actions :new, :create, :destroy
 
       def destroy
-        destroy! do
-          # flash[:notice] = "Successfully deleted"
-          admin_theme_path(@asset.theme)
-        end
+        destroy! { admin_theme_path(@asset.theme) }
       end
 
       def create
@@ -37,10 +26,11 @@ module Imentore
         end
       end
 
-      def begin_of_association_chain
-        current_store.themes.find(params[:theme_id])
-      end
+      protected
 
+      def begin_of_association_chain
+        current_store
+      end
     end
   end
 end

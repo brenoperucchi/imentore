@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "TODO: Summary of ImentoreCms."
   s.description = "TODO: Description of ImentoreCms."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails",               "~> 3.2.2"
   s.add_dependency "carrierwave",         "~> 0.6.1"

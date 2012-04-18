@@ -1,3 +1,5 @@
-= link_to("New Theme", new_admin_theme_path)
-- @themes.each do |theme|
-  = link_to(theme.name, admin_theme_path(theme))
+p= link_to("New Theme", new_admin_theme_path)
+
+ul
+  - @themes.each do |theme|
+    li= link_to(theme.name, admin_theme_path(theme))

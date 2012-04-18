@@ -2,13 +2,12 @@ doctype html
 html
   head
   title ImentoreBase
-  = stylesheet_link_tag    "application"
-  = javascript_include_tag "application"
+  = stylesheet_link_tag "admin"
   = csrf_meta_tags
   = yield :head
 
 body
-  .content
+  .container
     p core/views/layouts/admin
 
     = link_to(:logout, destroy_user_session_path, method: "delete")
@@ -18,4 +17,5 @@ body
     = yield
 
   .footer
+    = javascript_include_tag "admin"
     = yield :footer

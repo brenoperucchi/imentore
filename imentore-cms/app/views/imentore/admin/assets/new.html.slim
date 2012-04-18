@@ -1,31 +1,30 @@
-- content_for :footer do
-  = javascript_include_tag 'fileuploader.js'
-  = stylesheet_link_tag 'fileuploader.css'
-  javascript:
-    var uploader = new qq.FileUploader({
-      element: document.getElementById('file_uploader'),
-      action: '/admin/themes/#{@asset.theme.id}/assets',
-    })
-    $(document).ready(function(){
-      uploader.setParams({
+= form_for([:admin, @theme, @asset], html: { multipart: true }) do |f|
+  .row.fileupload-buttonbar
+    .span7
+      span.btn.btn-success.fileinput-button
+        i.icon-plus.icon-white
+        span Add files
+        = f.file_field :file, multiple: true
 
-        debug: true
-      });
-    });
-    //createUploader();
-    // $(document).ready(function(){
-    $("div.qq-uploader input[name='file']").live('click',function(){
-      cart_item_id = $('#cart_item_id').val()
-      uploader.setParams({
-        theme_id: #{@asset.theme_id},
-        authenticity_token: '#{form_authenticity_token}'
-      })
-    });
-.content
-  ul
-    fieldset.forms-pattern
-      = hidden_field_tag :cart_item_id, current_store.id
-      ul.wrap-form#file_uploader
-  / = simple_form_for @asset, url: admin_theme_assets_path do |f|
-  /   = f.file_field :file, :id=> "file_uploader"
-  /   = f.submit "Submit", :disable_with => 'Submiting...'
+      button.btn.btn-primary.start(type="submit")
+        i.icon-upload.icon-white
+        span Start upload
+
+      button.btn.btn-warning.cancel(type="reset")
+        i.icon-ban-circle.icon-white
+        span Cancel upload
+
+      button.btn.btn-danger.delete
+        i.icon-trash.icon-white
+        span Delete
+
+    .span5
+      .progress.progress-success.progress-striped.active.fade
+        .bar(style="width:0%;")
+
+  .fileupload-loading
+
+  table.table.table-striped
+    tbody.files(data-toggle="modal-gallery" data-target="#modal-gallery")
+
+= render "imentore/admin/assets/jquery-file-upload-templates"
