@@ -15,7 +15,7 @@ module LiquidFilter
 
   def theme_include(name)
     begin
-      url = @context.registers[:controller].current_store.assets.find_by_file(name).file_url
+      url = @context.registers[:current_store].assets.find_by_file(name).file_url
       if name.include?(".js",)
         "#{content_tag("script", "", { "type" => "text/javascript", "src" => url })}\n"
       elsif name.include?(".css")
