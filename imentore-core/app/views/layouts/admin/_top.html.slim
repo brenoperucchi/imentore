@@ -1,0 +1,40 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container-fluid
+      a.btn.btn-navbar[data-toggle="collapse" data-target=".nav-collapse"]
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.brand[href="#"]
+        | Imentore
+      .nav-collapse
+        ul.nav
+          .tabbable
+            ul.nav.nav-tabs
+              li.active
+                a[href="#1" data-toggle="tab"]
+                  | Section 1
+              li
+                a[href="#2" data-toggle="tab"]
+                  | Section 2
+            .tab-content
+              #1.tab-pane.active
+                p
+                  | I'm in Section 1.
+              #2.tab-pane
+                p
+                  | Howdy, I'm in Section 2.
+
+          / li.active
+          /   a[href="#"]
+          /     | Home
+          / li
+          /   a[href="#about"]
+          /     | About
+          / li
+          /   a[href="#contact"]
+          /     | Contact
+        p.navbar-text.pull-right
+          | Logged in as
+          a[href="#"]
+            = current_user.userable.name

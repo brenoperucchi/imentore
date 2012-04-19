@@ -5,16 +5,79 @@ html
   = stylesheet_link_tag "admin"
   = csrf_meta_tags
   = yield :head
+  css:
+    body {
+            padding-top: 90px;
+            padding-bottom: 40px;
+          }
+          .sidebar-nav {
+            padding: 9px 0;
+          }
 
 body
-  .container
-    p core/views/layouts/admin
+  = render 'layouts/admin/top'
+  .container-fluid
+    .row-fluid
+      .span3
+        .well.sidebar-nav
+          ul.nav.nav-list
+            li.nav-header
+              | Sidebar
+            li.active
+                li= link_to("General Settings", edit_admin_store_path)
+                li= link_to("Virtual Settings", admin_edit_settings_path(:virtual))
+                li= link_to("Themes", admin_themes_path, id: 'Themes')
+                li= link_to("Domains", admin_domains_path)
+                li= link_to("Products", admin_products_path)
+            li
+              a[href="#"]
+                | Link
+            li
+              a[href="#"]
+                | Link
+            li
+              a[href="#"]
+                | Link
+            li.nav-header
+              | Sidebar
+            li
+              a[href="#"]
+                | Link
+            li
+              a[href="#"]
+                | Link
+            li
+              a[href="#"]
+                | Link
+            li
+              a[href="#"]
+                | Link
+            li
+              a[href="#"]
+                | Link
+            li
+              a[href="#"]
+                | Link
+            li.nav-header
+              | Sidebar
+            li
+              a[href="#"]
+                | Link
+            li
+              a[href="#"]
+                | Link
+            li
+              a[href="#"]
+                | Link
+      .span9
+            p core/views/layouts/admin
 
-    = link_to(:logout, destroy_user_session_path, method: "delete")
-
-    = flash[:success]
-
-    = yield
+            = flash[:success]
+            = yield
+    hr
+    footer
+      p
+        | © Company 2012
 
   .footer
     = javascript_include_tag "admin"
