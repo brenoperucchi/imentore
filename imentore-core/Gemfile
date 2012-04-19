@@ -10,7 +10,7 @@ gem "jquery-rails"
 
 gem 'inherited_resources', '1.3.0'
 gem 'devise', '2.0.4'
-gem 'simple_form', '1.5.2'
+gem 'simple_form', '2.0.1'
 gem 'slim', '1.1.0'
 
 gem 'imentore-auth',  path: '../imentore-auth'
