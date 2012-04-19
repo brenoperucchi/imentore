@@ -3,25 +3,18 @@ module Imentore
     class AssetsController < BaseController
       inherit_resources
       belongs_to :theme
-      actions :new, :create, :destroy
+      actions :new, :create, :destroy, :index
 
-      def destroy
-        destroy! { admin_theme_path(@asset.theme) }
+      respond_to :json, only: [:create, :index, :destroy]
+
+      def index
+        respond_with(collection.map { |asset| AssetPresenter.new(asset).to_json })
       end
 
       def create
-        filename = "#{ENV['TMPDIR']}/#{params[:qqfile]}"
-          newf = File.open(filename, "wb")
-          str =  request.body.read
-          newf.write(str)
-          newf.close
-        @asset = current_store.themes.find(params[:theme_id]).assets.new(:file =>File.open(filename) )
         create! do |success, failure|
-          failure.html{
-            render :text => '{error:false}', :status => 404, :layout => false
-          }
-          success.html{
-            render :text => '{success:true}', :status => 200, :layout => false
+          success.json {
+            render json: [AssetPresenter.new(@asset).to_json]
           }
         end
       end

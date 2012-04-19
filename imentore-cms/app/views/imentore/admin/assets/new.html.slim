@@ -4,19 +4,11 @@
       span.btn.btn-success.fileinput-button
         i.icon-plus.icon-white
         span Add files
-        = f.file_field :file, multiple: true
+        = file_field_tag "asset[file]", multiple: true
 
       button.btn.btn-primary.start(type="submit")
         i.icon-upload.icon-white
         span Start upload
-
-      button.btn.btn-warning.cancel(type="reset")
-        i.icon-ban-circle.icon-white
-        span Cancel upload
-
-      button.btn.btn-danger.delete
-        i.icon-trash.icon-white
-        span Delete
 
     .span5
       .progress.progress-success.progress-striped.active.fade
