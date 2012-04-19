@@ -3,3 +3,4 @@ table
   - @products.each do |product|
     tr
       td= product.name
+      td= link_to("Variants", admin_product_variants_path(product))

@@ -1,0 +1,6 @@
+/ p= link_to("Add Product", new_admin_product_path)
+table
+  - @variants.each do |variant|
+    tr
+      td= variant.id
+      td= link_to("Images", new_admin_product_variant_image_path(parent, variant))
