@@ -8,4 +8,16 @@
 
 $(function() {
   $("#new_asset").fileupload();
+
+  $.getJSON($('#new_asset').prop('action'), function (files) {
+    var fu = $('#new_asset').data('fileupload'), template;
+
+    fu._adjustMaxNumberOfFiles(-files.length);
+    template = fu._renderDownload(files).appendTo($('#new_asset .files'));
+
+    fu._reflow = fu._transition && template.length && template[0].offsetWidth;
+    template.addClass('in');
+    $('#loading').remove();
+  });
+
 });

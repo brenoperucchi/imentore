@@ -22,7 +22,7 @@ PATH
       liquid (~> 2.3.0)
       mini_magick (~> 3.4)
       rails (~> 3.2.2)
-      simple_form (~> 1.5.2)
+      simple_form (~> 2.0.1)
       slim (~> 1.1.0)
 
 PATH
@@ -87,7 +87,7 @@ GEM
     capybara-webkit (0.10.0)
       capybara (>= 1.0.0, < 1.2)
       json
-    carrierwave (0.6.1)
+    carrierwave (0.6.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
     childprocess (0.3.1)
@@ -207,7 +207,7 @@ GEM
       multi_json (~> 1.0)
       rubyzip
     shoulda-matchers (1.0.0)
-    simple_form (1.5.2)
+    simple_form (2.0.1)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     slim (1.1.0)
@@ -258,6 +258,6 @@ DEPENDENCIES
   pry-stack_explorer (= 0.4.1)
   rspec-rails (= 2.8.1)
   shoulda-matchers (= 1.0.0)
-  simple_form (= 1.5.2)
+  simple_form (= 2.0.1)
   slim (= 1.1.0)
   sqlite3
