@@ -13,13 +13,19 @@ describe Imentore::PaymentMethod do
     payment_method.options.should eq({ token: "123" })
   end
 
-  it "has store_id" do
-    payment_method.store_id = 1
-    payment_method.store_id.should eq(1)
+  it "references a store" do
+    store = Imentore::Store.new
+    payment_method.store = store
+    payment_method.store.should eq(store)
   end
 
   it "has handle" do
     payment_method.handle = "cielo"
     payment_method.handle.should eq("cielo")
+  end
+
+  it "has active" do
+    payment_method.active = true
+    payment_method.should be_active
   end
 end

@@ -32,7 +32,6 @@ describe Imentore::Store do
   it { should have_many(:products) }
   it { should have_many(:orders) }
   it { should have_many(:themes) }
-  it { should have_many(:templates) }
   it { should have_many :domains }
   it { should have_many(:payment_methods) }
   it { should have_many(:delivery_methods) }
