@@ -1,0 +1,3 @@
+= f.simple_fields_for :options do |fo|
+  = fo.input :client_id,  input_html: { value: @payment_method.options["client_id"] }
+  = fo.input :password,   input_html: { value: @payment_method.options["password"] }
