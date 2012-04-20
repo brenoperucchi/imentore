@@ -1,0 +1,4 @@
+= simple_form_for([:admin, @payment_method]) do |f|
+  = render(@payment_method.handle, f: f)
+  = f.input :active
+  = f.button :submit
