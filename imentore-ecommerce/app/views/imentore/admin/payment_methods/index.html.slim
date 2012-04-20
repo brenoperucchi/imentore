@@ -1,0 +1,5 @@
+h2 Payment methods
+
+ul
+  - @payment_methods.each do |pm|
+    li= link_to(pm.name, edit_admin_payment_method_path(pm))
