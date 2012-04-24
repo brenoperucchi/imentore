@@ -1,0 +1,4 @@
+= simple_form_for([:admin, @delivery_method]) do |f|
+  = render(@delivery_method.calculator, f: f)
+  = f.input :active
+  = f.button :submit

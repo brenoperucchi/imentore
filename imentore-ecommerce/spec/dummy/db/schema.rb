@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420132630) do
+ActiveRecord::Schema.define(:version => 20120424115329) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(:version => 20120420132630) do
     t.integer "store_id"
     t.string  "handle"
     t.text    "options"
+    t.boolean "active",     :default => false
+    t.string  "calculator"
   end
 
   create_table "imentore_domains", :force => true do |t|

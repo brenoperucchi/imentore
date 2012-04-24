@@ -10,8 +10,7 @@
       = render("shared/address", addr: addr)
 
   fieldset#delivery-method
-    = f.simple_fields_for @order.delivery do |df|
-      = df.association :delivery_method, collection: current_store.delivery_methods
+    = f.input :delivery_method, collection: current_store.delivery_methods
 
   fieldset#payment-method
     = f.input :payment_method, collection: current_store.payment_methods
