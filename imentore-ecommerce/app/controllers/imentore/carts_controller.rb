@@ -10,6 +10,7 @@ module Imentore
 
       if quantity > 0
         current_cart.add(product, variant, quantity)
+        current_cart.save
       end
 
       redirect_to cart_path
