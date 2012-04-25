@@ -37,12 +37,28 @@ ActiveRecord::Schema.define(:version => 20120419010929) do
     t.text "items"
   end
 
+  create_table "imentore_deliveries", :force => true do |t|
+    t.integer "order_id"
+    t.text    "address"
+    t.string  "tracking_code"
+    t.string  "status"
+    t.integer "delivery_method_id"
+  end
+
+  create_table "imentore_delivery_methods", :force => true do |t|
+    t.string  "name"
+    t.integer "store_id"
+    t.string  "handle"
+    t.text    "options"
+  end
+
   create_table "imentore_domains", :force => true do |t|
     t.string   "name"
     t.integer  "store_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "hosting",    :default => false
+    t.text     "emails"
   end
 
   create_table "imentore_employees", :force => true do |t|
@@ -88,6 +104,13 @@ ActiveRecord::Schema.define(:version => 20120419010929) do
     t.text    "items"
     t.integer "invoice_id"
     t.integer "delivery_id"
+    t.integer "store_id"
+  end
+
+  create_table "imentore_payment_methods", :force => true do |t|
+    t.string  "name"
+    t.string  "handle"
+    t.text    "options"
     t.integer "store_id"
   end
 
