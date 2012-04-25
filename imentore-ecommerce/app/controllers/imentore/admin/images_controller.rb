@@ -3,33 +3,21 @@ module Imentore
     class ImagesController < BaseController
       inherit_resources
       belongs_to :variant, parent_class: Imentore::ProductVariant
-      # actions :index, :new, :create
 
+      respond_to :json, only: [:create, :index, :destroy, :new]
 
-      # def index
+      def index
+        respond_with(collection.map { |image| ImagePresenter.new(image).to_json })
+      end
 
+      def create
+        create! do |success, failure|
+          success.json {
+            render json: [ImagePresenter.new(@image).to_json]
+          }
+        end
+      end
 
-      # def new
-      #   @product = build_resource
-      #   @product.variants.build
-      #   new!
-      # end
-
-      # def create
-      #   create! do
-      #     default_option = @product.options.create(name: "Model", handle: "model")
-      #     variant = @product.variants.first
-      #     variant.options.create(option_type: default_option, value: "default")
-
-      #     admin_products_path
-      #   end
-      # end
-
-      # protected
-
-      # def begin_of_association_chain
-      #   current_store
-      # end
     end
   end
 end

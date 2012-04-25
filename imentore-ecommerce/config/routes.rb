@@ -13,13 +13,13 @@ Imentore::Core::Engine.routes.draw do
       end
       resources :products,  only: [:index, :new, :create] do
         resources :variants, only: [:index], to:'product_variants' do
-          resources :images, only: [:new, :create, :destroy], to: 'images'
+          resources :images, only: [:new, :create, :destroy, :index], to: 'images'
         end
       end
     end
 
     resources :products,  only: [:index, :show]
-    resource  :cart,      only: [:show, :create]
+    resource  :cart,      only: [:show, :create, :update, :destroy]
 
     match "checkout",           to: "checkouts#new",      via: "get",   as: "checkout"
     match "checkout/confirm",   to: "checkouts#confirm",  via: "put",   as: "confirm_checkout"

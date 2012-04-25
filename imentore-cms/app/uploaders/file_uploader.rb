@@ -40,6 +40,34 @@ class FileUploader < CarrierWave::Uploader::Base
   #   process :scale => [50, 50]
   # end
 
+  # process :resize_to_fit => [200, 200]
+
+  version :bigger do
+    process :resize_to_fill => [900, 900]
+  end
+  version :big do
+    process :resize_to_fill => [600, 600]
+  end
+  version :larger do
+    process :resize_to_fill => [300, 300]
+  end
+  version :medium do
+    process :resize_to_fill => [200, 200]
+  end
+  version :small do
+    process :resize_to_fill => [150, 150]
+  end
+  version :thumb do
+    process :resize_to_fill => [100, 100]
+  end
+  version :mini_thumb do
+    process :resize_to_fill => [75, 75]
+  end
+  version :super_thumb do
+    process :resize_to_fill => [50, 50]
+  end
+
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
