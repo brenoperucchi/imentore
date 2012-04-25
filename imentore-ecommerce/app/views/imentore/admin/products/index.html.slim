@@ -1,6 +1,20 @@
-p= link_to("Add Product", new_admin_product_path)
-table
-  - @products.each do |product|
+- content_for :breadcrumb do
+  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+
+/ legend Themes
+/ p= link_to("New Theme", new_admin_theme_path, :class=>'btn btn-small btn-primary')
+
+legend Products
+
+table.table
+  thead
     tr
-      td= product.name
-      td= link_to("Variants", admin_product_variants_path(product))
+      th Name
+      th
+      th action
+  tbody
+    - @products.each do |product|
+      tr
+        td= product.name
+        td
+        td= link_to("Variants", admin_product_variants_path(product))

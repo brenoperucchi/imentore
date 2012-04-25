@@ -1,6 +1,6 @@
-h2.page-title General Settings
+legend.page-title General Settings
 
-= simple_form_for(@store, url: [:admin, :store]) do |f|
+= simple_form_for(@store, url: [:admin, :store], :html=> { :class=> 'form-horizontal' }) do |f|
   = f.input :url
   = f.input :name
   = f.input :brand
@@ -8,4 +8,7 @@ h2.page-title General Settings
   = f.input :national_id
   = f.simple_fields_for :address do |addr|
     = render("shared/address", addr: addr)
-  = f.submit
+  .form-actions
+    = f.button :submit, :class=> 'btn btn-primary'
+    = " "
+    = button_tag "Cancel", class: "btn"

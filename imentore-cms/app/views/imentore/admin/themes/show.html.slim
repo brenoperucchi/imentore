@@ -1,19 +1,36 @@
-h3= "Theme #{@theme.name}"
+- content_for :breadcrumb do
+  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }, { @theme.name => ''} ])
 
-p Templates
-p= link_to("New Template", new_admin_theme_template_path(@theme))
+legend Theme #{@theme.name}
 
-ul
-  - @theme.templates.each do |template|
-    li
-      = link_to(template.path, edit_admin_theme_template_path(@theme, template)) + " "
-      = link_to("delete", admin_theme_template_path(@theme, template), method: :delete)
+h3 Templates
+p= link_to("New Template", new_admin_theme_template_path(@theme), :class=>'btn btn-mini btn-primary')
 
-p Assets
-p= link_to("New Asset", new_admin_theme_asset_path(@theme))
 
-ul
-  - @theme.assets.each do |asset|
-    li
-      = asset.file_identifier + " "
-      = link_to("delete", admin_theme_asset_path(@theme, asset), method: :delete)
+table.table
+  thead
+    tr
+      th action
+      th name
+      th remove
+  tbody
+    - @theme.templates.each do |template|
+      tr
+        td= link_to(template.path, edit_admin_theme_template_path(@theme, template)) + " "
+        td= template.path
+        td= link_to("delete", admin_theme_template_path(@theme, template), method: :delete)
+
+
+h3 Assets
+p= link_to("New Asset", new_admin_theme_asset_path(@theme), :class=>'btn btn-mini btn-primary')
+
+table.table
+  thead
+    tr
+      th name
+      th remove
+  tbody
+    - @theme.assets.each do |asset|
+      tr
+        td= asset.file_identifier + " "
+        td= link_to("delete", admin_theme_asset_path(@theme, asset), method: :delete)

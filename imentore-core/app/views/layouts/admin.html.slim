@@ -7,7 +7,7 @@ html
   = yield :head
   css:
     body {
-            padding-top: 90px;
+            padding-top: 60px;
             padding-bottom: 40px;
           }
           .sidebar-nav {
@@ -18,7 +18,7 @@ body
   = render 'layouts/admin/top'
   .container-fluid
     .row-fluid
-      .span3
+      .span2
         .well.sidebar-nav
           ul.nav.nav-list
             li.nav-header
@@ -69,11 +69,10 @@ body
             li
               a[href="#"]
                 | Link
-      .span9
-            p core/views/layouts/admin
-
-            = flash[:success]
-            = yield
+      .span10
+        = yield :breadcrumb
+        = flash[:success]
+        = yield
     hr
     footer
       p

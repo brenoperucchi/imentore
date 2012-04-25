@@ -10,7 +10,7 @@ module Imentore
       end
 
       def update
-        update! { admin_theme_path(params[:theme_id]) }
+        update! { edit_admin_theme_template_path(params[:theme_id], params[:id]) }
       end
 
       def destroy
