@@ -12,7 +12,9 @@ module Imentore
         @order.build_delivery
       end
 
-      @order.update_attribute(:items, current_cart.items)
+      # @order.update_attribute(:items, current_cart.items)
+      # @order.update_attribute(:items, [Imentore::LineItem.new(1,1,1)])
+      @order.items = current_cart.items.dup
     end
 
     def confirm
