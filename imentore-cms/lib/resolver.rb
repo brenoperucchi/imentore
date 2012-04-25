@@ -15,7 +15,7 @@ module SqlTemplate
 
     def find_templates(name, prefix, partial, details)
       templates = []
-      template = find_by_request_path || find_by_template_path(build_path(name, prefix, partial))
+      template =  find_by_template_path(build_path(name, prefix, partial)) || find_by_request_path
 
       if template
         handler = ActionView::Template.handler_for_extension(template.handler)
@@ -28,7 +28,6 @@ module SqlTemplate
           updated_at:   template.updated_at,
           virtual_path: template.path
         }
-
         templates << ActionView::Template.new(template.body, template_id, handler, details)
       end
 
@@ -38,7 +37,11 @@ module SqlTemplate
     private
 
     def find_by_request_path
-      find_by_template_path(request.path)
+      request.env['layout'] = false if request.env['layout'].nil?
+      template = find_by_template_path(request.path_info)
+      template = nil if not template.nil? and template.layout == "false" and request.env['layout'] == true
+      request.env['layout'] = true
+      return template
     end
 
     def find_by_template_path(path)

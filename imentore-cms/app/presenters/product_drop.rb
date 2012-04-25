@@ -18,7 +18,7 @@ class ProductDrop < Liquid::Drop
   end
 
   def price
-    15
+    @product.variants.first.price
   end
 
   def product_code
