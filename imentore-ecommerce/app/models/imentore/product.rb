@@ -7,5 +7,15 @@ module Imentore
     validates :name, :description, :store, presence: true
 
     accepts_nested_attributes_for :variants
+
+
+    def all_images
+      imgs = []
+      variants.each do |variant|
+        imgs = variant.images.collect {|image| image}
+      end
+      return imgs
+    end
+
   end
 end

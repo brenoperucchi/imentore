@@ -13,5 +13,9 @@ module Imentore
     def quantity
       @quantity.to_i
     end
+
+    def amount
+      quantity * variant.price
+    end
   end
 end

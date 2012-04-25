@@ -16,7 +16,7 @@ module Imentore
     end
 
     def deliverable?
-      items.map(&:deliverable?).inject(true, :&)
+      # items.map(&:deliverable?).inject(true, :&)
     end
   end
 end
