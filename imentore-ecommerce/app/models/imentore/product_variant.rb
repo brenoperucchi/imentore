@@ -4,8 +4,6 @@ module Imentore
     has_many    :images, as: :imageable
     belongs_to  :product
 
-    mount_uploader :picture, PictureUploader
-
     validates :price, :quantity, presence: true
   end
 end

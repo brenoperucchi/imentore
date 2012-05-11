@@ -15,7 +15,11 @@ module Imentore
     end
 
     def amount
-      quantity * variant.price
+      @quantity * variant.price
+    end
+
+    def deliverable?
+      true
     end
   end
 end

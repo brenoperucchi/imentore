@@ -105,6 +105,7 @@ module Imentore
     has_many :delivery_methods
     has_many :themes
     has_many :assets, :through => :themes, :source => :assets
+    has_many :customers
     accepts_nested_attributes_for :owner, :address
 
     # http://www.ietf.org/rfc/rfc1035.txt

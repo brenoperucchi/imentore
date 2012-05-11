@@ -2,7 +2,7 @@ module Imentore
   class Settings
     module Virtual
       def self.attributes
-        :theme
+        [:theme, :authenticate_to_buy]
       end
 
       attr_accessor *attributes
@@ -16,6 +16,9 @@ module Imentore
 
       def theme
         @theme || :default
+      end
+      def authenticate_to_buy
+        @authenticate_to_buy || "1"
       end
     end
   end
