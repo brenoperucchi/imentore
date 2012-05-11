@@ -1,0 +1,7 @@
+= simple_form_for @variant, as: "variant", url: admin_product_variant_path(@product, @variant) do |f|
+  = f.input :sku
+  = f.input :price
+  = f.input :quantity
+  = f.simple_fields_for :options do |of|
+    = of.input :value, label: of.object.option_type.name
+  = f.button :submit

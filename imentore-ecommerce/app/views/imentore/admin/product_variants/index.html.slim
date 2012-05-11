@@ -17,4 +17,7 @@ table.table
       tr
         td= variant.id
         td
-        td= link_to("Images", new_admin_product_variant_image_path(parent, variant))
+        td
+          = link_to("Edit", edit_admin_product_variant_path(@product, variant))
+          '
+          = link_to("Images", new_admin_product_variant_image_path(parent, variant))

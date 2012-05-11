@@ -4,6 +4,11 @@ module Imentore
       inherit_resources
       defaults :resource_class => Imentore::ProductVariant, :collection_name => 'variants', :instance_name => 'variant'
       belongs_to :product, parent_class: Imentore::Product
+
+      def update
+        update! { admin_product_variants_path }
+      end
+
       # actions :index, :new, :create
 
       # def new
