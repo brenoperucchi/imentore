@@ -11,9 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20120420132654) do
-
+ActiveRecord::Schema.define(:version => 20120503002954) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -37,6 +35,20 @@ ActiveRecord::Schema.define(:version => 20120420132654) do
 
   create_table "imentore_carts", :force => true do |t|
     t.text "items"
+  end
+
+  create_table "imentore_customers", :force => true do |t|
+    t.string   "name"
+    t.string   "brand"
+    t.string   "irs_id"
+    t.date     "birthdate"
+    t.string   "national_id"
+    t.string   "gender"
+    t.string   "person_type"
+    t.integer  "store_id"
+    t.string   "department"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "imentore_deliveries", :force => true do |t|
@@ -85,6 +97,16 @@ ActiveRecord::Schema.define(:version => 20120420132654) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "imentore_invoices", :force => true do |t|
+    t.integer  "order_id"
+    t.string   "provider_id"
+    t.integer  "payment_method_id"
+    t.string   "status"
+    t.decimal  "amount"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "imentore_option_types", :force => true do |t|
     t.string  "name"
     t.string  "handle"
@@ -114,7 +136,6 @@ ActiveRecord::Schema.define(:version => 20120420132654) do
     t.string  "handle"
     t.text    "options"
     t.integer "store_id"
-    t.boolean "active",   :default => false
   end
 
   create_table "imentore_product_variants", :force => true do |t|

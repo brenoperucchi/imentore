@@ -11,7 +11,7 @@ Imentore::Core::Engine.routes.draw do
       resources :domains, only: [:index, :create, :destroy] do
         resources :emails, only: [:index, :create, :update, :destroy], controller: "domain_emails"
       end
-      resources :products,  only: [:index, :new, :create] do
+      resources :products,  only: [:index, :new, :create, :edit, :update] do
         resources :variants, only: [:index], to:'product_variants' do
           resources :images, only: [:new, :create, :destroy, :index], to: 'images'
         end
