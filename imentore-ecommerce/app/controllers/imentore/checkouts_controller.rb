@@ -18,6 +18,7 @@ module Imentore
 
     def charge
       @invoice = current_order.invoice
+      @invoice.prepare
     end
 
     def complete
