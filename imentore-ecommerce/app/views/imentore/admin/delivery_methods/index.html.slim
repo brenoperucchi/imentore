@@ -1,0 +1,7 @@
+h2 Delivery methods
+
+p= link_to(:new, new_admin_delivery_method_path)
+
+ul
+  - @delivery_methods.each do |dm|
+    li= link_to(dm.name, edit_admin_delivery_method_path(dm))

@@ -1,11 +1,11 @@
 module Imentore
   class Order < ActiveRecord::Base
-    attr_accessor :payment_method
+    attr_accessor :payment_method, :delivery_method
     serialize :items, Array
 
-    has_one     :invoice
     belongs_to  :store
-    has_one     :delivery
+    has_one     :invoice,   dependent: :destroy
+    has_one     :delivery,  dependent: :destroy
 
     def total_amount
       items.sum(&:price)

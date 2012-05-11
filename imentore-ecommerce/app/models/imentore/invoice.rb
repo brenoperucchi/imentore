@@ -1,6 +1,9 @@
 module Imentore
   class Invoice < ActiveRecord::Base
-    # attr_accessor :payment_method
     belongs_to :payment_method
+
+    def prepare
+      payment_method.prepare
+    end
   end
 end

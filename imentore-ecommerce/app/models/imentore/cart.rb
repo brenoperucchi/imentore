@@ -12,7 +12,6 @@ module Imentore
 
     def add(product, variant, quantity)
       items << LineItem.new(product, variant, quantity)
-      save
     end
 
     def amount

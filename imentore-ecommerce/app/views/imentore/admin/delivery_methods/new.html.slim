@@ -1,0 +1,4 @@
+= simple_form_for([:admin, @delivery_method]) do |f|
+  = f.input :name
+  = f.input :calculator, collection: [["Flat rate", "flat_rate"]]
+  = f.button :submit

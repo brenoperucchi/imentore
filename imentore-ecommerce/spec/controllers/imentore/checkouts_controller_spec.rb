@@ -19,17 +19,6 @@ describe Imentore::CheckoutsController do
     }.stringify_keys
   end
 
-  describe "#new" do
-    it "updates order items" do
-      order.stub(deliverable?: false)
-      order.should_receive(:update_attribute).with(:items, cart.items)
-
-      get(:new)
-
-      subject.should render_template("new")
-    end
-  end
-
   describe "#confirm" do
     context "places an order" do
       before do
@@ -37,13 +26,12 @@ describe Imentore::CheckoutsController do
       end
 
       context "when chargeable order" do
-        it "render confirmation page" do
+        it "redirect to charge" do
           order.stub(chargeable?: true)
-          order.should_receive(:invoice)
 
           put(:confirm, order: orders_params)
 
-          subject.should render_template("confirm")
+          subject.should redirect_to(charge_checkout_path)
         end
       end
 
