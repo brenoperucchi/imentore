@@ -1,7 +1,5 @@
 module LiquidFilter
   include ActionView::Context
-  require 'pry'
-
   # include ActionView::Helpers::URLHelper
   # include ActionDispatch::Routing::Mapper
   include Imentore::Core::Engine.routes.url_helpers
