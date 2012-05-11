@@ -1,3 +1,8 @@
+- content_for :breadcrumb do
+  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) },{'Themes' => admin_themes_path},{@theme.name => admin_theme_path(@theme)}, {'Templates' => admin_theme_path(@theme)},  { @template.path => ''} ])
+
+legend Template #{@template.path}
+
 = simple_form_for(@template, url: admin_theme_template_path(@theme, @template)) do |f|
   = f.input :path
   = f.input :body, :input_html=> {:style=> 'width:100%; height:300px;'}

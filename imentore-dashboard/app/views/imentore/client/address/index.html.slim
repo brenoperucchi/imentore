@@ -1,0 +1,19 @@
+/ - content_for :breadcrumb do
+  / == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+
+/ = binding.pry
+legend Address
+/ p= link_to("New Theme", new_admin_theme_path, :class=>'btn btn-small btn-primary')
+
+table.table
+  thead
+    tr
+      th action
+      th name
+      th remove
+  tbody
+    - @addresses.each do |address|
+      tr
+        / td= link_to("Edit", admin_theme_path(theme))
+        / td= theme.name
+        td= address.name

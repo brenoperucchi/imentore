@@ -7,23 +7,60 @@
         span.icon-bar
       a.brand[href="/admin"]
         | Imentore
+      .btn-group.pull-right
+        a(class="btn dropdown-toggle" data-toggle="dropdown" href="#")
+          i(class="icon-user")
+          '
+          | Username
+          '
+          span.caret
+        - if user_signed_in?
+          ul.dropdown-menu
+            li
+              a(href='#')
+                | Profile
+            li.divider
+            li
+              a(href='#')
+                | Sign_out
+        - else
+          ul.dropdown-menu
+            li
+              = link_to("Sign-in", new_admin_session_path)
+              a(href='#')
+                | Profile
+            li.divider
+            li
+              a(href='#')
+                | Sign_out
+
+
       .nav-collapse
         ul.nav
-          .tabbable
-          li.active
-            a[href="#"]
-              | Configuration
-          li
-            a[href="#about"]
-              | Managament
-          li
-            a[href="#contact"]
-              | Reports
-        - if user_signed_in?
-          p.navbar-text.pull-right
+          - if user_signed_in?
+            .tabbable
+            li#dashboard
+              a[href=admin_dashboard_path]
+                | Dashboard
+            li#configuration
+              a[]
+                | Configuration
+            li#managament
+              a[]
+                | Managament
+            li#reports
+              a[]
+                | Reports
             | Logged in as
-            a[href="#"]
-              =' current_user.userable.name
+            a[]
+              '
+              = current_user.userable.name
             '  and
             = link_to("Logout", destroy_admin_session_path, method: :delete)
+          - else
+            p.navbar-text.pull-right
+              = link_to "Sign-in", new_admin_session_path
+              / | Sign-in as
+              / a[href="#"]
+
 = yield :top_nav

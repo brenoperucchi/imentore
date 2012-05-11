@@ -1,19 +1,87 @@
-= simple_form_for(@order, url: confirm_checkout_path) do |f|
-  = f.input :customer_email
+- content_for :footer do
+  css:
+    label.inline {
+      display: inline-block;
+      padding-top: 5px;
+      margin-bottom: 0;
+      vertical-align: middle;
+    }
+  javascript:
+    $(document).ready(function(){
+      $('input.checkbox').click(function(){
+      var type = $(this).parents('div').first().attr('id');
+        if ( $(this).is(':checked') == true ) {
+          $('#order_'+type+'_name').val($('label.hide#name').html());
+          $('#order_'+type+'_street').val($('label.hide#street').html());
+          $('#order_'+type+'_complement').val($('label.hide#complement').html());
+          $('#order_'+type+'_city').val($('label.hide#city').html());
+          $('#order_'+type+'_state').val($('label.hide#state').html());
+          $('#order_'+type+'_country').val($('label.hide#country').html());
+          $('#order_'+type+'_zip_code').val($('label.hide#zip_code').html());
+          $('#order_'+type+'_phone').val($('label.hide#phone').html());
+        } else {
+          $('#order_'+type+'_name').val("");
+          $('#order_'+type+'_street').val("");
+          $('#order_'+type+'_complement').val("");
+          $('#order_'+type+'_city').val("");
+          $('#order_'+type+'_state').val("");
+          $('#order_'+type+'_country').val("");
+          $('#order_'+type+'_zip_code').val("");
+          $('#order_'+type+'_phone').val("");
+        }
+      })
+    })
 
-  fieldset#billing-address
-    = f.simple_fields_for :billing_address do |addr|
-      = render("shared/address", addr: addr)
+/ = binding.pry
+.row-fluid
+  .span12
+    = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal'}) do |f|
+      fieldset#address_customer
+        - if user_signed_in?
+          .info.hide
+            label.hide#name
+              = current_user.userable.address.name
+            label.hide#street
+              = current_user.userable.address.street
+            label.hide#complement
+              = current_user.userable.address.complement
+            label.hide#city
+              = current_user.userable.address.city
+            label.hide#state
+              = current_user.userable.address.state
+            label.hide#country
+              = current_user.userable.address.country
+            label.hide#zip_code
+              = current_user.userable.address.zip_code
+            label.hide#phone
+              = current_user.userable.address.phone
+        - else
+          = f.input :customer_email
+      .row-fluid
+        .span6
+          #billing_address
+            - if user_signed_in?
+              label.checkbox
+                = check_box_tag :address_customer, true, false, :class  => 'checkbox'
+                'Use same address of Customer'
+            .address
+              = f.simple_fields_for :billing_address do |addr|
+                = render("shared/address", addr: addr)
+        .span6
+          #shipping_address
+            - if user_signed_in?
+              label.checkbox
+                = check_box_tag :address_customer, true, false, :class  => 'checkbox'
+                'Use same address of Customer'
+            .address
+              = f.simple_fields_for :shipping_address do |addr|
+                = render("shared/address", addr: addr)
 
-  fieldset#shipping-address
-    = f.simple_fields_for :shipping_address do |addr|
-      = render("shared/address", addr: addr)
+        fieldset#delivery-method
+          = f.simple_fields_for @order.delivery do |df|
+            = df.association :delivery_method, collection: current_store.delivery_methods
 
-  fieldset#delivery-method
-    = f.simple_fields_for @order.delivery do |df|
-      = df.association :delivery_method, collection: current_store.delivery_methods
+        fieldset#payment-method
+          = f.input :payment_method, collection: current_store.payment_methods
 
-  fieldset#payment-method
-    = f.input :payment_method, collection: current_store.payment_methods
-
-  = f.submit "Place order"
+        = f.submit "Place order", :class => 'btn-primary'

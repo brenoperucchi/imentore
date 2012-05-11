@@ -13,65 +13,55 @@ html
           .sidebar-nav {
             padding: 9px 0;
           }
+    table tr th:first-child{
+      width: 30px;
+    }
 
 body
   = render 'layouts/admin/top'
   .container-fluid
     .row-fluid
       .span2
-        .well.sidebar-nav
-          ul.nav.nav-list
-            li.nav-header
-              | Sidebar
-            li.active
-                li= link_to("General Settings", edit_admin_store_path)
-                li= link_to("Virtual Settings", admin_edit_settings_path(:virtual))
-                li= link_to("Themes", admin_themes_path, id: 'Themes')
-                li= link_to("Domains", admin_domains_path)
-                li= link_to("Products", admin_products_path)
-            li
-              a[href="#"]
-                | Link
-            li
-              a[href="#"]
-                | Link
-            li
-              a[href="#"]
-                | Link
-            li.nav-header
-              | Sidebar
-            li
-              a[href="#"]
-                | Link
-            li
-              a[href="#"]
-                | Link
-            li
-              a[href="#"]
-                | Link
-            li
-              a[href="#"]
-                | Link
-            li
-              a[href="#"]
-                | Link
-            li
-              a[href="#"]
-                | Link
-            li.nav-header
-              | Sidebar
-            li
-              a[href="#"]
-                | Link
-            li
-              a[href="#"]
-                | Link
-            li
-              a[href="#"]
-                | Link
+        - if user_signed_in?
+          .well.sidebar-nav
+            ul.nav.nav-list.dashboard.hide
+              li.nav-header
+                | Dashboard
+              li
+                a[href="#"]
+                  | Link
+
+            ul.nav.nav-list.report.hide
+              li.nav-header
+                | Report
+              li
+                a[href="#"]
+                  | Link
+
+            ul.nav.nav-list.managament.hide
+              li.nav-header
+                | Managament
+              li.action#products
+                = link_to("Products", admin_products_path)
+
+            ul.nav.nav-list.configuration.hide
+              li.nav-header
+                | Configuration
+              li.action#general_settings
+                = link_to("General Settings", edit_admin_store_path)
+              li.action#virtual_settings
+                = link_to("Virtual Settings", admin_edit_settings_path(:virtual))
+              li.action#themes
+                = link_to("Themes", admin_themes_path)
+              li.action#domains
+                = link_to("Domains", admin_domains_path)
+
       .span10
         = yield :breadcrumb
+        p core/layouts/admin
+        / = debug flash
         = flash[:success]
+        = flash[:alert]
         = yield
     hr
     footer

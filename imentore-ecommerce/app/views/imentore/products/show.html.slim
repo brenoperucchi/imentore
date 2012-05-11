@@ -1,9 +1,16 @@
 h2= @product.name
 p= @product.description
 
-- @product.variants.each do |variant|
-  - variant.options.each do |option|
-    p= "#{option.option_type.name}: #{option.value}"
+dl
+  - @product.variants.each do |variant|
+    dt= variant.id
+    - variant.options.each do |option|
+      dd= "#{option.option_type.name}: #{option.value}"
+
+= simple_form_for(@current_cart, url: cart_path, :method => "post", :html => {:class => 'form-horizontal'}) do |f|
+  = f.simple_fields_for :items do |i|
+    = i.input :variant_id, :collection => collection_product(@variants), :as => :radio_buttons
+  = f.submit
 
 = form_tag(cart_path, method: "post") do
   = hidden_field_tag "item[product_id]", @product.id

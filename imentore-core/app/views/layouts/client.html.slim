@@ -5,7 +5,6 @@ html
   = stylesheet_link_tag    "client"
   = javascript_include_tag "client"
   = csrf_meta_tags
-  = yield :head
   css:
     body {
             padding-top: 60px;
@@ -14,7 +13,6 @@ html
           .sidebar-nav {
             padding: 9px 0;
           }
-
 
 body
   .navbar.navbar-fixed-top
@@ -28,12 +26,8 @@ body
           | Imentore
         .nav-collapse
           ul.nav
-            li
-              = link_to("Home", root_path)
-            li
-              = link_to("My Cart", cart_path)
-            li
-              = link_to("New Customer", new_customer_path)
+            .tabbable
+            / li.active
             /   a[href="#"]
             /     | Configuration
             / li
@@ -55,11 +49,24 @@ body
               = link_to "Sign-in", new_client_session_path
               / | Sign-in as
               / a[href="#"]
+
   .container-fluid
-    p core/views/layouts/public
-    p = flash[:alert]
-    p = flash[:success]
-    p = debug current_cart.items
-    = yield
-  .footer
-    = yield :footer
+    .row-fluid
+      .span2
+        - if user_signed_in?
+          .well.sidebar-nav
+            ul.nav.nav-list
+              li.nav-header
+                | Sidebar
+              li
+                = link_to("My Cart", cart_path)
+              li
+                = link_to("Login", new_user_session_path)
+              li= link_to("Address", client_address_path)
+              / li
+              /   a[href="#"]
+              /     | Link
+      .span10
+        p core/layouts/client
+        = debug flash
+        = yield

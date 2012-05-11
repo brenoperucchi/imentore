@@ -1,2 +1,9 @@
+- content_for :footer do
+  css:
+    .radio, .checkbox {
+      min-height: 0;
+    }
+
 legend virtual_store
 = f.input :theme, :input_html => { :class => "span6" }, :hint => "add your article title here"
+= f.input :authenticate_to_buy, :as => :boolean
