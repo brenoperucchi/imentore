@@ -14,6 +14,10 @@ Imentore::BaseController.class_eval do
   end
 
   def theme_layout
-    (current_store && current_store.theme.default_layout) || "application"
+    if current_store && current_store.theme.default_layout
+      current_store.theme.default_layout
+    else
+      'public'
+    end
   end
 end

@@ -1,20 +1,28 @@
 module Imentore
   class CheckoutsController < BaseController
+    before_filter :authenticate_to_buy!, only: [:new, :confirm, :complete]
+    before_filter :customer_only
+
+    def customer_only
+      redirect_to(root_path, alert: :admin_denied) if user_signed_in? and current_user.userable.owner?
+    end
+
+    def authenticate_to_buy!
+      authenticate_user! if current_store.config.authenticate_to_buy == "1"
+    end
+
     def new
       unless current_order
         order = current_store.orders.create
         session[:order_id] = order.id
       end
-
       @order = current_order
 
       if @order.deliverable?
         @order.build_delivery
       end
-
-      # @order.update_attribute(:items, current_cart.items)
-      # @order.update_attribute(:items, [Imentore::LineItem.new(1,1,1)])
-      @order.items = current_cart.items.dup
+      @order.items = current_cart.items
+      @order.save
     end
 
     def confirm

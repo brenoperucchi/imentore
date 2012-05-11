@@ -8,13 +8,13 @@ module Imentore
       respond_to :json, only: [:create, :index, :destroy]
 
       def index
-        respond_with(collection.map { |asset| AssetPresenter.new(asset).to_json })
+        respond_with(collection.map { |asset| Imentore::AssetPresenter.new(asset).to_json })
       end
 
       def create
         create! do |success, failure|
           success.json {
-            render json: [AssetPresenter.new(@asset).to_json]
+            render json: [Imentore::AssetPresenter.new(@asset).to_json]
           }
         end
       end

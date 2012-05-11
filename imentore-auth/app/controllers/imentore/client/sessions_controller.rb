@@ -1,9 +1,12 @@
 module Imentore
-  module Admin
+  module Client
     class SessionsController < Devise::SessionsController
-      layout "admin"
+      layout "client"
 
       def after_sign_in_path_for(resource)
+        if session[:user_return_to].include?('checkout')
+          checkout_path
+        end
         resource.userable.owner? ? admin_dashboard_path : client_dashboard_path
       end
 

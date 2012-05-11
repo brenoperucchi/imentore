@@ -30,10 +30,17 @@ module ApplicationHelper
     end
   end
 
-  def asset_url(name)
-    # binding.pry
+  def teste(name)
+    "teste"
   end
 
+  def collection_product(variants)
+    test = variants.collect do |v_drop|
+      Imentore::ProductVariant.find(v_drop.id).options.collect{|option| [option.option_type.name, option.value ]}
+      # Imentore::ProductVariant.find(v_drop.id).options.collect{|option| [option.option_type.name, option.option_type.id, option.product_variant_id, option.value ]}
+    end
+    # binding.pry
+  end
 
 
 end

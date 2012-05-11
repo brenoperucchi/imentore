@@ -2,7 +2,7 @@ module Imentore
   module Admin
     class ProductsController < BaseController
       inherit_resources
-      actions :index, :new, :create
+      actions :index, :new, :create, :edit, :update
 
       def new
         @product = build_resource
