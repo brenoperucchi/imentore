@@ -9,12 +9,13 @@ Imentore::Core::Engine.routes.draw do
       match "store/settings/:group", to: "settings#edit",   via: "get", as: "edit_settings"
       match "store/settings/:group", to: "settings#update", via: "put", as: "update_settings"
       resources :domains, only: [:index, :create, :destroy] do
-        resources :emails, only: [:index, :create, :update, :destroy], controller: "domain_emails"
+        resources :emails, only: [:index, :create, :update, :destroy], to: "domain_emails"
       end
       resources :products,  only: [:index, :new, :create, :edit, :update] do
-        resources :variants, only: [:index], to:'product_variants' do
+        resources :variants, to: 'product_variants' do
           resources :images, only: [:new, :create, :destroy, :index], to: 'images'
         end
+        resources :options, to: "product_options"
       end
       resources :payment_methods,   only: [:index, :edit, :update], path: "payment-methods"
       resources :delivery_methods,  except: [:show], path: "delivery-methods"
