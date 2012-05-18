@@ -12,10 +12,10 @@ Imentore::Core::Engine.routes.draw do
         resources :emails, only: [:index, :create, :update, :destroy], to: "domain_emails"
       end
       resources :products,  only: [:index, :new, :create, :edit, :update] do
+        resources :options,  to: "product_options"
         resources :variants, to: 'product_variants' do
           resources :images, only: [:new, :create, :destroy, :index], to: 'images'
         end
-        resources :options, to: "product_options"
       end
       resources :payment_methods,   only: [:index, :edit, :update], path: "payment-methods"
       resources :delivery_methods,  except: [:show], path: "delivery-methods"
