@@ -18,6 +18,24 @@ $(document).ready(function(){
     })
   }
 
+  function session_get(key){
+    var res;
+    $.ajax({
+      url: '/client/key_session',
+      type: 'get',
+      data: {key:key},
+      dataType: 'json',
+      async:false,
+      success: function(json) {
+         res = json
+      },
+      error: function(json) {
+        res = false
+      }
+    });
+    return res
+  }
+
   $('div.sidebar-nav ul.nav-list').find('li.action').click(function(e){
     e.preventDefault();
     var value = $(this).attr('id')
@@ -28,32 +46,21 @@ $(document).ready(function(){
     window.setTimeout(function() {
         document.location.href=url;
     }, 400);
-
   })
 
-  $.ajax({
-    url: '/client/key_session',
-    type: 'get',
-    data: {key:key_nav},
-    dataType: 'json',
-    success: function(json) {
-      $('div.navbar ul.nav').find('li#'+json[key_nav]).attr('class','active')
-      $('ul.nav.nav-list').each(function(){
-        $(this).slideUp("slow")
-      })
-      $('ul.nav.nav-list.'+json[key_nav]).slideDown('slow')
-    }
-  })
+  if (session_get('key_nav') != false){
+    var json = session_get('key_nav')
+    $('div.navbar ul.nav').find('li#'+json[key_nav]).attr('class','active')
+    $('ul.nav.nav-list').each(function(){
+      $(this).slideUp("slow")
+    })
+    $('ul.nav.nav-list.'+json[key_nav]).slideDown('slow')
+  }
 
-  $.ajax({
-    url: '/client/key_session',
-    type: 'get',
-    data: {key:key_bar},
-    dataType: 'json',
-    success: function(json) {
-      $('div.sidebar-nav ul.nav-list').find('li#'+json[key_bar]).attr('class','active action')
-    }
-  })
+  if (session_get('key_bar') != false){
+    var json = session_get('key_bar')
+    $('div.sidebar-nav ul.nav-list').find('li#'+json[key_bar]).attr('class','active action')
+  }
 
 
 
