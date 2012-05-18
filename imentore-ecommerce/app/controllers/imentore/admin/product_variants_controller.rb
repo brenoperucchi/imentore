@@ -4,28 +4,49 @@ module Imentore
       inherit_resources
       defaults :resource_class => Imentore::ProductVariant, :collection_name => 'variants', :instance_name => 'variant'
       belongs_to :product, parent_class: Imentore::Product
-
       def update
-        update! { admin_product_variants_path }
+        update! do |success, failure|
+          success.html { redirect_to admin_product_variants_path(@product) }
+          failure.html { render :index }
+        end
       end
 
-      # actions :index, :new, :create
+      def new
+        @variant = build_resource
+        @product.options.each do |option_type|
+          @variant.options.build(option_type: option_type, product_variant: @variant)
+        end
+      end
 
-      # def new
-      #   @product = build_resource
-      #   @product.variants.build
-      #   new!
-      # end
+      def create
+        @product = current_store.products.find(params[:product_id])
+        @variant = @product.variants.new(params[:variant])
+        @variant.options.delete_all
+        @variant.transaction do
+          @variant.save
+          params[:variant][:options_attributes].each do |attribute|
+            # binding.pry
+            @variant.options.build(product_variant: @variant, option_type_id: attribute[1]['option_type_id'], value: attribute[1]['value'])
+          end
+        end
+        if @variant.save
+          redirect_to admin_product_variants_path(@product)
+        else
+          render :index
+        end
+        # create! do |success, failure|
+        # # binding.pry
+        #   success.html { redirect_to admin_product_variants_path(@product) }
+        #   failure.html {
 
-      # def create
-      #   create! do
-      #     default_option = @product.options.create(name: "Model", handle: "model")
-      #     variant = @product.variants.first
-      #     variant.options.create(option_type: default_option, value: "default")
-
-      #     admin_products_path
-      #   end
-      # end
+        #     @product = Imentore::Product.find(params[:product_id])
+        #     # @product.options.each do |option_type|
+        #       # @variant.options.build(option_type: option_type, product_variant: @variant)
+        #     # end
+        #     render :new
+        #   }
+        # end
+      end
 
       # protected
 
