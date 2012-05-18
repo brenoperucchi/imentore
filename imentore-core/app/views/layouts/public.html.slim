@@ -59,7 +59,7 @@ body
     p core/views/layouts/public
     p = flash[:alert]
     p = flash[:success]
-    p = debug current_cart.items
+    p = "Cart Size Items:" + current_cart.items.count.to_s
     = yield
   .footer
     = yield :footer

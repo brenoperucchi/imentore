@@ -9,14 +9,14 @@
   javascript:
     $(document).ready(function(){
       $('input.checkbox').click(function(){
-      var type = $(this).parents('div').first().attr('id');
+      var type = $(this).attr('id');
         if ( $(this).is(':checked') == true ) {
           $('#order_'+type+'_name').val($('label.hide#name').html());
           $('#order_'+type+'_street').val($('label.hide#street').html());
           $('#order_'+type+'_complement').val($('label.hide#complement').html());
           $('#order_'+type+'_city').val($('label.hide#city').html());
-          $('#order_'+type+'_state').val($('label.hide#state').html());
-          $('#order_'+type+'_country').val($('label.hide#country').html());
+          // $('#order_'+type+'_state').val($('label.hide#state').html());
+          // $('#order_'+type+'_country').val($('label.hide#country').html());
           $('#order_'+type+'_zip_code').val($('label.hide#zip_code').html());
           $('#order_'+type+'_phone').val($('label.hide#phone').html());
         } else {
@@ -24,18 +24,18 @@
           $('#order_'+type+'_street').val("");
           $('#order_'+type+'_complement').val("");
           $('#order_'+type+'_city').val("");
-          $('#order_'+type+'_state').val("");
-          $('#order_'+type+'_country').val("");
+          // $('#order_'+type+'_state').val("");
+          // $('#order_'+type+'_country').val("");
           $('#order_'+type+'_zip_code').val("");
           $('#order_'+type+'_phone').val("");
         }
       })
     })
 
-/ = binding.pry
+= "Order ##{@order.id}"
 .row-fluid
   .span12
-    = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal'}) do |f|
+    = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
       fieldset#address_customer
         - if user_signed_in?
           .info.hide
@@ -59,23 +59,25 @@
           = f.input :customer_email
       .row-fluid
         .span6
-          #billing_address
-            - if user_signed_in?
-              label.checkbox
-                = check_box_tag :address_customer, true, false, :class  => 'checkbox'
-                'Use same address of Customer'
-            .address
-              = f.simple_fields_for :billing_address do |addr|
-                = render("shared/address", addr: addr)
+          / #billing_address
+          /   - if user_signed_in?
+          /     label.checkbox
+          /       = check_box_tag :address_customer, true, false, :class  => 'checkbox'
+          /       'Use same address of Customer'
+          .address
+            = f.input :billing_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'billing_address' }
+            = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
+              = render("shared/address", addr: addr)
         .span6
-          #shipping_address
-            - if user_signed_in?
-              label.checkbox
-                = check_box_tag :address_customer, true, false, :class  => 'checkbox'
-                'Use same address of Customer'
-            .address
-              = f.simple_fields_for :shipping_address do |addr|
-                = render("shared/address", addr: addr)
+          / #shipping_address
+          /   - if user_signed_in?
+          /     label.checkbox
+          /       = check_box_tag :address_customer, true, false, :class  => 'checkbox'
+          /       'Use same address of Customer'
+          .address
+            = f.input :shipping_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'shipping_address' }
+            = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
+              = render("shared/address", addr: addr)
 
         fieldset#payment-method
           = f.input :payment_method, collection: current_store.payment_methods
