@@ -4,7 +4,8 @@ module Imentore
     serialize :options, Hash
 
     def prepare
-      provider.prepare
+      provider
+      # provider.prepare
     end
 
     def provider

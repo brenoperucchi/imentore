@@ -5,7 +5,6 @@ module Imentore
     belongs_to  :product
 
     accepts_nested_attributes_for :options
-
     validates :price, :quantity, presence: true
   end
 end

@@ -17,9 +17,15 @@ module Imentore
       def theme
         @theme || :default
       end
+
       def authenticate_to_buy
-        @authenticate_to_buy || "1"
+        @authenticate_to_buy.nil? ? true : @authenticate_to_buy
       end
+
+      def authenticate_to_buy=(value)
+        @authenticate_to_buy = (value == "1")
+      end
+
     end
   end
 end
