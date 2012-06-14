@@ -11,20 +11,29 @@ Imentore::Core::Engine.routes.draw do
       resources :domains, only: [:index, :create, :destroy] do
         resources :emails, only: [:index, :create, :update, :destroy], to: "domain_emails"
       end
+      resources :coupons
       resources :products,  only: [:index, :new, :create, :edit, :update] do
         resources :options,  to: "product_options"
         resources :variants, to: 'product_variants' do
           resources :images, only: [:new, :create, :destroy, :index], to: 'images'
         end
       end
-      resources :payment_methods,   only: [:index, :edit, :update], path: "payment-methods"
+      resources :payment_methods,   only: [:index, :edit, :update, :new, :create], path: "payment-methods"
       resources :delivery_methods,  except: [:show], path: "delivery-methods"
+      resources :orders,  only: [:index, :edit, :destroy] do
+        get 'confirm_invoice', 'confirm_delivery', :on => :member
+      end
     end
 
+    resources :order_assets, only: [:new, :create, :destroy, :index]
     resources :products,  only: [:index, :show]
-    resource  :cart,      only: [:show, :create, :update, :destroy]
+    resource  :cart,      only: [:show, :create, :update, :destroy, :calculate_shipping] do
+      get 'calculate_shipping', on: :member
+    end
 
+    match "coupon",             to: "carts#add_coupon",   as: "add_coupon"
     match "checkout",           to: "checkouts#new",      as: "checkout"
+    match "checkout/confirm",   to: "checkouts#confirm",  via: "get",   as: "confirm_checkout"
     match "checkout/confirm",   to: "checkouts#confirm",  via: "put",   as: "confirm_checkout"
     match "checkout/charge",    to: "checkouts#charge",   as: "charge_checkout"
     match "checkout/complete",  to: "checkouts#complete", as: "complete_checkout"

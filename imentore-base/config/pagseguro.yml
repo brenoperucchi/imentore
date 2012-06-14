@@ -1,0 +1,15 @@
+development: &development
+  developer: false
+  base: "http://localhost:3000"
+  return_to: "/sync/pagseguro"
+  authenticity_token: 088AB9C2362947F889AA9DE2527E8B09
+  email: bperucchi@hotmail.com
+
+test:
+  <<: *development
+
+production:
+  authenticity_token: 088AB9C2362947F889AA9DE2527E8B09
+  email: bperucchi@hotmail.com
+  return_to: http://lojateste.imentore.com.br/return_pg?id=3
+

@@ -16,9 +16,9 @@ module SqlTemplate
     def find_templates(name, prefix, partial, details)
       templates     = []
       template_path = build_path(name, prefix, partial)
-      template      = find_by_request_path unless template_path.include?("layouts/")
-      template      ||= find_by_template_path(template_path)
-      # binding.pry
+      template      = find_by_template_path(template_path)
+      template      ||= find_by_request_path
+
 
 
       if template
@@ -45,7 +45,7 @@ module SqlTemplate
 
     def find_by_request_path
       request.env['layout'] = false if request.env['layout'].nil?
-      template = find_by_template_path(request.path_info)
+      template = find_by_template_path('/layouts/green')
       template = nil if not template.nil? and template.layout == "false" and request.env['layout'] == true
       request.env['layout'] = true
       return template
@@ -57,18 +57,18 @@ module SqlTemplate
   end
 end
 
-module Foo
-  def render(*args, &block)
-    binding.pry
-    super
-  end
-  # alias_method_chain :render, :dblayout
-  # def render_with_dblayout options = nil, extra_options = {}, &block
-  #  if options.include? :layout
-  #  else
-  #    render_without_dblayout options, extra_options { yield }
-  #  end
-  # end
-end
+# module Foo
+#   def render(*args, &block)
+#     binding.pry
+#     super
+#   end
+#   # alias_method_chain :render, :dblayout
+#   # def render_with_dblayout options = nil, extra_options = {}, &block
+#   #  if options.include? :layout
+#   #  else
+#   #    render_without_dblayout options, extra_options { yield }
+#   #  end
+#   # end
+# end
 
 # ActionController::Base.send(:include, Foo)
