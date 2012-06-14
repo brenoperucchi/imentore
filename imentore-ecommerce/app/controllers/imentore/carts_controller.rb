@@ -1,10 +1,51 @@
 module Imentore
   class CartsController < BaseController
-    # require_dependency 'line_item'
 
     skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
-    respond_to :json, only: [:create, :index, :destroy, :show]
+    respond_to :json, only: [:create, :index, :destroy, :show, :calculate_shipping, :add_coupon]
 
+
+    def add_coupon
+      coupon = current_store.coupons.active.find_by_code(params[:coupon_code])
+      return render nothing: true, status: 200 if coupon.nil?
+      if coupon.check_valid?
+        Imentore::CouponsOrder.add(current_cart, coupon)
+
+        # current_cart.coupon = coupons.add(coupon)
+        # current_cart.save
+        render :status => 200, :json => current_cart.coupons.to_json
+      else
+        render nothing: true, status: 200
+      end
+    end
+
+
+
+    def calculate_shipping
+      zip = params[:zip_code]
+        method = current_store.delivery_methods.find_by_id(params[:method])
+      unless method.nil?
+        session[:delivery_method_id] = method.id
+        respond_to do |wants|
+          wants.json do
+            render json: Imentore::DeliveryHandle.calculate_items(current_cart.items, zip, method).to_json
+          end
+        end
+      else
+        render nothing: true, status: 403
+      end
+    end
+
+    def update
+      params[:items].each do |item|
+        quantity = item[1][:quantity].to_i
+        return if quantity.blank?
+        product = current_store.products.find_by_id(item[1][:product_id])
+        variant = product.variants.find_by_id(item[1][:variant_id])
+        current_cart.renew(product, variant, quantity)
+      end
+      redirect_to cart_path
+    end
 
     def show
       respond_to do |wants|
@@ -19,9 +60,7 @@ module Imentore
       respond_to do |wants|
         wants.json do
           begin
-            # i = params[:number_id].to_i
             items = current_cart.items
-            # binding.pry
             items.each_with_index do |item, i|
               items.delete_at(i) if items[i].variant.id == params[:variant_id].to_i and items[i].quantity == params[:quantity].to_i
             end
@@ -29,19 +68,30 @@ module Imentore
             current_cart.save
             render json: Imentore::CartPresenter.new(current_cart).to_json
           rescue Exception => msg
-            binding.pry
+            render nothing: true, status: 403
           end
+        end
+        wants.html do
+          product = current_store.products.find_by_id(params[:product_id])
+          variant = product.variants.find_by_id(params[:variant_id])
+          current_cart.renew(product, variant, 0)
+          redirect_to cart_path
         end
       end
     end
 
     def create
+      if not params[:item][:variant_id].present?
+        flash[:alert] = "Need to select an variant"
+        redirect_to product_path(current_store.products.find(params[:item][:product_id]))
+        return false
+      end
+      product = current_store.products.find(params[:item][:product_id])
+      variant = product.variants.find(params[:item][:variant_id])
+      quantity = params[:item][:quantity].to_i
       respond_to do |wants|
         wants.json do
           begin
-            product = current_store.products.find(params[:product_id])
-            variant = product.variants.find(params[:variant_id])
-            quantity = params[:quantity].to_i
             if quantity > 0
               current_cart.add(product, variant, quantity)
             end
@@ -51,9 +101,6 @@ module Imentore
           end
         end
         wants.html do
-          product = current_store.products.find(params[:item][:product_id])
-          variant = product.variants.find(params[:item][:variant_id])
-          quantity = params[:item][:quantity].to_i
           if quantity > 0
             current_cart.add(product, variant, quantity)
           end

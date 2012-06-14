@@ -4,12 +4,27 @@ module Imentore
       inherit_resources
       actions :all, except: [:show]
 
+      def new
+        @delivery_method = build_resource
+        @delivery_method.handle = 'custom'
+      end
+
       def update
         update! { admin_delivery_methods_path }
       end
 
       def create
-        create! { edit_admin_delivery_method_path(@delivery_method) }
+        create! do |success, failure|
+          success.html{
+            @delivery_method.update_attribute(:handle, "custom")
+            flash[:success] = 'Delivery Method Successfully Created '
+            redirect_to admin_delivery_methods_path
+          }
+          failure.html{
+            @delivery_method.handle = 'custom'
+            # flash[:alert] = 'Could not updated'
+            render :new }
+        end
       end
 
       protected

@@ -15,9 +15,12 @@ module Imentore
           default_option = @product.options.create(name: "Model", handle: "model")
           variant = @product.variants.first
           variant.options.create(option_type: default_option, value: "default")
-
           admin_products_path
         end
+      end
+
+      def update
+        update! { edit_admin_product_path(@product) }
       end
 
       protected

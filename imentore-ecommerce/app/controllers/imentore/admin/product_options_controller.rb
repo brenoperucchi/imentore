@@ -6,15 +6,15 @@ module Imentore
       actions :index, :create, :destroy
       belongs_to :product, parent_class: Imentore::Product
 
-      after_filter :create_option_value, only: [:create]
-      after_filter :destroy_option_value, only: [:destroy]
+      after_filter :create_option_types, only: [:create]
+      after_filter :destroy_option_types, only: [:destroy]
 
-      def create_option_value
-        @option.create_option_value(@product)
+      def create_option_types
+        @option.create_option_types(@product)
       end
 
-      def destroy_option_value
-        @option.destroy_option_value(@product, @option)
+      def destroy_option_types
+        @option.destroy_option_types(@product, @option)
       end
 
       def create
