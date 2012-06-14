@@ -32,19 +32,6 @@ module Imentore
                        "warning" => 'Product not found'
                      }
                  }
-
-      # { 'success' => { 'items' => { "1" => 'teste',
-      #                               "2" => 'teste2'
-      #                             }
-      #                }
-      # }
-                   # { "success" => "success",
-                   #   "cart_total" =>  "#{"#{@cart.items.size} item(s) - #{"#{@cart.amount}",
-                   #   "total" => "#{@cart.amount
-                   # }
-
-
-      # end
     end
   end
 end

@@ -3,9 +3,18 @@ module Imentore
     belongs_to :store
     serialize :options, Hash
 
-    def prepare
+    scope :active, where(active: true)
+
+    validates :name, presence: true
+    # validate :validate_provider
+
+    # def validate_provider
+      # errors.add(:handle, :invalid) if handle.blank? || provider.valid?
+    # end
+
+    def prepare(order = nil)
       provider
-      # provider.prepare
+      provider.checkout(order)
     end
 
     def provider

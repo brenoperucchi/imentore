@@ -1,5 +1,5 @@
 module Imentore
-  class PaymentMethod::Cielo
+  class PaymentMethod::Custom
     def self.options
       @options ||= [:client_id, :password]
     end
@@ -10,6 +10,13 @@ module Imentore
 
     def valid?
       true
+    end
+
+    def checkout(*param)
+      {
+        'redirect_to' => nil,
+        'render' => true,
+      }
     end
   end
 end
