@@ -8,6 +8,6 @@ class CreateImages < ActiveRecord::Migration
   end
 
   def down
-    remove_table(:imentore_images)
+    drop_table(:imentore_images)
   end
 end

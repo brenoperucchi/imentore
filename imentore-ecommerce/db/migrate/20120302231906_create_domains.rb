@@ -8,6 +8,6 @@ class CreateDomains < ActiveRecord::Migration
   end
 
   def down
-    remove_table :imentore_domains
+    drop_table :imentore_domains
   end
 end
