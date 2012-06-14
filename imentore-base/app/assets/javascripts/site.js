@@ -7,4 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require imentore-cms
+//= require site_index
+//= require site_jquery.colorbox-min
