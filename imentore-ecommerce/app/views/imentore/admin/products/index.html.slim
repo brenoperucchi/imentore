@@ -2,7 +2,12 @@
   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
 legend Products
-p= link_to("New Product", new_admin_product_path, :class=>'btn btn-primary')
+p
+  = link_to(new_admin_product_path, :class=>'btn btn-primary') do
+    i.icon-white.icon-plus
+    '
+    | New Product
+
 
 table.table.table-bordered.table-striped
   thead
@@ -16,8 +21,17 @@ table.table.table-bordered.table-striped
         td= product.id
         td= link_to(product.name, edit_admin_product_path(product))
         td
-          = link_to("Edit", edit_admin_product_path(product))
+          = link_to(edit_admin_product_path(product), class: 'btn btn-small') do
+            i.icon-black.icon-edit
+            '
+            | Edit
           '
-          = link_to("Variants", admin_product_variants_path(product))
+          = link_to(admin_product_variants_path(product), :class=>"btn btn-small") do
+            i.icon-black.icon-share
+            '
+            | Variants
           '
-          = link_to("Options", admin_product_options_path(product))
+          = link_to(admin_product_options_path(product), :class=>"btn btn-small") do
+            i.icon-black.icon-plus
+            '
+            | Options

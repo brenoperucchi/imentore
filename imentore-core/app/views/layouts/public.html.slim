@@ -15,6 +15,52 @@ html
             padding: 9px 0;
           }
 
+- content_for :footer do
+  javascript:
+    function calculate_items(){
+      var total = 0
+      var sub_total = 0
+      var shipping = 0
+      var coupon = 0
+      sub_total = $('td#sub_total').text()
+      shipping = $('td#shipping_value').text()
+      coupon = $('td#coupon_value').text()
+      total = Number(sub_total) + Number(shipping) + Number(coupon)
+      $('td#total_amount h4').text(total)
+    }
+    function delivery_calculate(zip_code, method){
+      $.ajax({
+        url: '/cart/calculate_shipping',
+        type: 'get',
+        data: {zip_code:zip_code, method:method},
+        dataType: 'json',
+        success: function(json) {
+          $('td#shipping_value').html(json['value'])
+          calculate_items()
+        }
+      })
+    }
+    $(document).ready(function(){
+      if ($('select#delivery_method').find('option:selected').val() != "") {
+        var zip_code = $('input#zip_code').val()
+        var method = $('select#delivery_method').find('option:selected').val()
+        delivery_calculate(zip_code,method)
+      }
+    })
+
+- content_for :footer do
+  javascript:
+    $(document).ready(function(){
+      if ( $('div.alert.alert-success').text().length > 1 ) {
+        $('div.alert.alert-success').slideDown('');
+      }
+      if ( $('div.alert.alert-error').text().length > 1 ) {
+        $('div.alert.alert-error').slideDown('');
+      }
+      $('.close').bind('click',function(){
+        $(this).parents('div.hide').first().slideUp('slow');
+      })
+    })
 
 body
   .navbar.navbar-fixed-top
@@ -31,17 +77,9 @@ body
             li
               = link_to("Home", root_path)
             li
-              = link_to("My Cart", cart_path)
+              = link_to("My Cart (#{current_cart.items.size})", cart_path)
             li
               = link_to("New Customer", new_customer_path)
-            /   a[href="#"]
-            /     | Configuration
-            / li
-            /   a[href="#about"]
-            /     | Managament
-            / li
-            /   a[href="#contact"]
-            /     | Reports
           - if user_signed_in?
             p.navbar-text.pull-right
               | Logged in as
@@ -53,13 +91,17 @@ body
           - else
             p.navbar-text.pull-right
               = link_to "Sign-in", new_client_session_path
-              / | Sign-in as
-              / a[href="#"]
-  .container-fluid
-    p core/views/layouts/public
-    p = flash[:alert]
-    p = flash[:success]
-    p = "Cart Size Items:" + current_cart.items.count.to_s
-    = yield
+  .container
+    section(id="gridSystem")
+      .notification
+        .div.alert.alert-error.hide
+          a(class="close" data-dismiss="alert" href="#")
+            = "x"
+          = flash[:alert]
+        .div.alert.alert-success.hide
+          a(class="close" data-dismiss="alert" href="#")
+            = "x"
+          = flash[:success]
+      = yield
   .footer
     = yield :footer

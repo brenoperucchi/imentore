@@ -1,0 +1,69 @@
+- content_for :footer do
+  css:
+    dl.dl-horizontal{
+      padding:10px;
+    }
+    dl.dl-horizontal dt{
+      width:150px;
+      text-align:left;
+    }
+  javascript:
+    $(document).ready(function(){
+      jQuery('.my-wymeditor').wymeditor({
+          skin: 'compact',
+          lang: 'pt-br'
+        });
+    })
+
+= simple_form_for([:admin, @send_email], :html => {:class => 'form-horizontal'}) do |f|
+  = f.error_notification
+  = f.input :active, as: :boolean
+  = f.input :name, input_html: {:class => 'span6'}
+  #, disabled: true
+  = f.input :subject, input_html: {:class => 'span6'}
+  .control-group.string.optional
+    label.string.optional.control-label Tags
+    .controls
+      #accordion2.accordion
+        .accordion-group
+          .accordion-heading
+            a.accordion-toggle[data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"]
+              |  Show Tags
+          #collapseOne.accordion-body.in.collapse[style="height: 0px; "]
+            .accordion-inner
+              .span6
+                dl.dl-horizontal
+                  dt.text_left "#empresa_nome#"
+                  dd "Nome da sua Empresa"
+                  /! %dt.right= "10"
+                  dt "#empresa_url#"
+                  dd "Url da sua empresa"
+                  /! %dt.right= "10"
+                  dt "#empresa_nome_loja#"
+                  dd "Nome da sua Loja"
+                  dt "#empresa_email#"
+                  dd "Email de contato da loja"
+                  dt "#cliente_nome#"
+                  dd "Nome do cliente"
+                  dt "#cliente_nome#"
+                  dd "Nome do cliente"
+                  dt "#cliente_email#"
+                  dd "Email do Cliente"
+              .span6
+                dl.dl-horizontal
+                  dt "#pedido_codigo#"
+                  dd "Código do pedido"
+                  dt "#pedido_data#"
+                  dd "Data do Pedido"
+                  dt "#pedido_info_cliente#"
+                  dd "Cliente do pedido"
+                  dt "#pedido_produtos#"
+                  dd "Produtos do pedido"
+                  dt "#pedido_frete#"
+                  dd "Informações de envio do pedido"
+                  dt "#link_rastreamento#"
+                  dd "Link de Rastreamento da Loja"
+
+  = f.input :body, input_html: {:class => 'span6 my-wymeditor'}
+  .form-actions
+    = f.button :submit, :class => 'btn-primary wymupdate'

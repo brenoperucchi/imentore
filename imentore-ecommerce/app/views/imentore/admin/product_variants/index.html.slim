@@ -1,41 +1,38 @@
 - content_for :footer do
   javascript:
-
     $('a#update_item').click(function(){
-      //$(this).attr('checked',true);
-      // if ($(this).is(':checked')) {
-        $('div#form').slideUp('fast');
-        $('div#update').slideDown('fast')
-        $('div.new div#action').show();
-        var setname = $(this).attr('id'), elements = {};
-        $(this).parents('tr').find('td.change').each(function(e){
-          var setname = $(this).attr('id')
-          elements[setname] = $(this).text();
-        })
-        $('form input.change').each(function(index, item){
-          $(this).val((elements[$(item).attr('id')]))
-        })
-        var product_id = #{@product.id}
-        var variant_id = $(this).parents('td').find('input#variant_id').val();
-        $(this).parents('tr').find('input#option_value_id').each(function(n, item){
-          var id = $(item).val();
-          $('input#variant_options_attributes_'+n+'_id').val(id)
-        })
-        url = "/admin/products/"+product_id+"/variants/"+variant_id
-        $('form#edit_variant').attr('action', url)
-        //} else{
-        //  $('div#update').slideUp('slow')
-        //}
+      $('div#form').slideUp('fast');
+      $('div#update').slideDown('fast')
+      $('div.new div#action').show();
+      var setname = $(this).attr('id'), elements = {};
+      $(this).parents('tr').find('td.change').each(function(e){
+        var setname = $(this).attr('id')
+        elements[setname] = $(this).text();
       })
-      $('input#new_variant').click(function(){
-        $('div.new div#action').hide();
-        $('div#form').slideDown('fast');
-        $('div#update').slideUp('fast')
+
+      $(this).first().parents('tr').first().find('#option_value_id').each(function(e){
+        $('#variant_options_attributes_'+e+'_id').val($(this).val())
       })
-      $('.error').parents('div.hide').show();
-      if ($('.error').parents('div.hide').attr('id') == 'form'){
-        $('div.new div#action').hide();
-      }
+      $('form input.change').each(function(index, item){
+        $(this).val((elements[$(item).attr('id')]))
+      })
+      var product_id = #{@product.id}
+      var variant_id = $(this).parents('tr').find('input#variant_id').val();
+      var option_type_id = $(this).parents('tr').find('#option_value_id').val();
+      $('input#variant_options_attributes_0_product_variant_id').val(variant_id)
+
+      url = "/admin/products/"+product_id+"/variants/"+variant_id
+      $('form#edit_variant').attr('action', url)
+    })
+    $('input#new_variant').click(function(){
+      $('div.new div#action').hide();
+      $('div#form').slideDown('fast');
+      $('div#update').slideUp('fast')
+    })
+    $('.error').parents('div.hide').show();
+    if ($('.error').parents('form').attr('id') == 'new_variant'){
+      $('div.new div#action').hide();
+    }
 
 - content_for :breadcrumb do
   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
@@ -60,8 +57,6 @@
           tr
             td
               = hidden_field_tag(:variant_id, variant.id, :class=>'change', :id =>'variant_id')
-              / = check_box_tag "check_box"
-              / '
               = variant.id
             td.change(id='sku')
               a(href='#' id='update_item')
@@ -80,23 +75,13 @@
               '
               = link_to("Images", new_admin_product_variant_image_path(@product, variant))
 
-/ = simple_form_for([:admin, @product], :html => {:class => 'form-horizontal'}) do |f|
-/   = f.simple_fields_for(:variants) do |v|
-/     = v.input :price
-/     = v.input :quantity
-/     = v.input :weight
-/     = v.simple_fields_for :options do |of|
-/       = of.input :value, label: of.object.option_type.name
-/   .form-actions
-/     = f.submit(:class => "btn-primary")
 #update.hide
-  - variant_update = @product.variants.first
-  = simple_form_for variant_update, as: "variant", url: admin_product_variant_path(@product, variant_update), :html => {:class => 'form-horizontal', method: :put} do |f|
+  = simple_form_for @variant_update, as: "variant", url: admin_product_variant_path(@product, @variant_update), :html => {:class => 'form-horizontal', method: :put} do |f|
     = f.error_notification
     = f.input :sku, input_html: { :class => 'change', :id => 'sku'}
-    = f.simple_fields_for :options do |of|
-      = of.input :option_type_id, as: :hidden, input_html: { :value => of.object.option_type_id }
-      = of.input :value, label: of.object.option_type.name, input_html: { :class => 'change', :id => of.object.option_type.name}
+    .values
+      = f.simple_fields_for :options do |of|
+        = of.input :value, label: of.object.option_type.name, input_html: { :class => 'change', :id => of.object.option_type.name}
     = f.input :price, input_html: { :class => 'change', :id => 'price'}
     = f.input :quantity, input_html: { :class => 'change', :id => 'quantity'}
     = f.input :weight, input_html: { :class => 'change', :id => 'weight'}
@@ -107,10 +92,6 @@
   #action
     = text_field_tag "new_variant", 'New Variant', :class=>'btn btn-primary', :type=> "submit"
   #form.hide
-    - if @variant.nil?
-      - @variant ||= @product.variants.build
-      - @product.options.each do |option_type|
-        - @variant.options.build(option_type: option_type, product_variant: @variant)
     = simple_form_for @variant, as: "variant", url: admin_product_variants_path(@product), :html => {:class => 'form-horizontal'}, input_html: { method: :post } do |f|
       = f.error_notification
       = f.input :sku

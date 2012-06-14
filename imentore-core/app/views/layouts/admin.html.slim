@@ -22,9 +22,52 @@ html
     span.help-inline{
       margin:0px 10px 0px 0px;
     }
+    .color-white{
+      color:white;
+    }
+    .color-black{
+      color:#333;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    }
+    i.true{
+      background-image:url(/images/admin/success16.png);
+      display: inline-block;
+      width: 16px;
+      height: 15px;
+      line-height: 14px;
+      vertical-align: text-top;
+      background-position: 0px 0px;
+      background-repeat: no-repeat;
+
+    }
+    i.false{
+      background-image:url(/images/admin/failure.png);
+      display: inline-block;
+      width: 16px;
+      height: 15px;
+      line-height: 14px;
+      vertical-align: text-top;
+      background-position: 0px 0px;
+      background-repeat: no-repeat;
+
+    }
+- content_for :footer do
+  javascript:
+    $(document).ready(function(){
+      if ( $('div.alert.alert-success.hide').text().length > 1 ) {
+        $('div.alert.alert-success.hide').slideDown('');
+      }
+      if ( $('div.alert.alert-error.hide').text().length > 1 ) {
+        $('div.alert.alert-error.hide').slideDown('');
+      }
+      $('.close').bind('click',function(){
+        $(this).parents('div.hide').first().slideUp('slow');
+      })
+    })
+
 
 body
-  = render 'layouts/admin/top'
+  = render 'layouts/admin/menu'
   .container-fluid
     .row-fluid
       .span2
@@ -47,8 +90,12 @@ body
             ul.nav.nav-list.managament.hide
               li.nav-header
                 | Managament
+              li.action#orders
+                = link_to("Orders", admin_orders_path)
               li.action#products
                 = link_to("Products", admin_products_path)
+              li.action#coupons
+                = link_to("Coupons", admin_coupons_path)
 
             ul.nav.nav-list.configuration.hide
               li.nav-header
@@ -57,17 +104,34 @@ body
                 = link_to("General Settings", edit_admin_store_path)
               li.action#virtual_settings
                 = link_to("Virtual Settings", admin_edit_settings_path(:virtual))
+
+              li.nav-header
+                | Others  (new)
               li.action#themes
                 = link_to("Themes", admin_themes_path)
               li.action#domains
                 = link_to("Domains", admin_domains_path)
+              li.action#send_emails
+                = link_to("Send Emails", admin_send_emails_path)
+
+              li.nav-header
+                | Methods
+              li.action#payment_method
+                = link_to("Payment Methods", admin_payment_methods_path)
+              li.action#delivery_method
+                = link_to("Delivery Methods", admin_delivery_methods_path)
 
       .span10
         = yield :breadcrumb
-        p core/layouts/admin
-        / = debug flash
-        = flash[:success]
-        = flash[:alert]
+        .notification
+          .div.alert.alert-error.hide
+            a(class="close" data-dismiss="alert" href="#")
+              = "x"
+            = flash[:alert]
+          .div.alert.alert-success.hide
+            a(class="close" data-dismiss="alert" href="#")
+              = "x"
+            = flash[:success]
         = yield
     hr
     footer

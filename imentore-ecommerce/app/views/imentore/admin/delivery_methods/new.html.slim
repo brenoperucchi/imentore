@@ -1,4 +1,7 @@
-= simple_form_for([:admin, @delivery_method]) do |f|
-  = f.input :name
-  = f.input :calculator, collection: [["Flat rate", "flat_rate"]]
-  = f.button :submit
+= simple_form_for([:admin, @delivery_method], :html => {:class => 'form-horizontal'}) do |f|
+  = f.error_notification
+  = f.input :active
+  = render(@delivery_method.handle, f: f)
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    / = f.input :calculator, collection: [["Flat rate", "flat_rate"]]

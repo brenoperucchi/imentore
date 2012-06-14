@@ -1,0 +1,124 @@
+- content_for :footer do
+  css:
+    .data-block{
+      // margin-bottom:18px;
+    }
+.row-fluid
+  .well
+    .span2
+      .row-fluid
+        .data-block
+          h6.data-heading
+            | Order ID
+          h3
+            | #
+            = @order.id
+      hr
+      .row-fluid
+        .data-block
+          h6.data-heading
+            | Order Amount
+          h3
+            = @order.total_amount
+
+    .span8
+      .row-fluid
+        .span4
+          .data-block
+            h6.data-heading
+              | Order Status
+            h3
+              = @order.status
+        .span4
+          .data-block
+            h6.data-heading
+              | Invoice Status
+            h3
+              = @order.invoice.status
+        .span4
+          .data-block
+            h6.data-heading
+              | Delivery Status
+            h3
+              = @order.delivery.status
+      hr
+      .row-fluid
+        .span4
+          .data-block
+            h6.data-heading
+              | Product Amount
+            h3
+              = @order.products_amount
+        .span4
+          .data-block
+            h6.data-heading
+              | Delivery Amount
+            h3
+              = @order.delivery_amount
+        .span4
+          .data-block
+            h6.data-heading
+              | Coupon Amount
+            h3
+              = @order.coupons_amount
+    .clearfix
+
+.row-fluid
+  .well.well-small
+    .btn-toolbar.ac.pagination-centered
+      .btn-group
+        = link_to(confirm_invoice_admin_order_path(@order), class: 'btn') do
+          i.icon-black.icon-ok
+          '
+          | Confirm Payment
+        = link_to(confirm_delivery_admin_order_path(@order), class: 'btn') do
+          i.icon-black.icon-envelope
+          '
+          | Confirm Delivery
+
+h4 Products
+.row-fluid
+  .span12
+    table.table.table-striped
+      thead
+        tr
+          th.minimal #
+          th Product Name
+          th Variants
+          th Qtd
+          th Amount
+          th Action
+      tbody
+        - @order.items.each do |item|
+          tr
+            td= item.product.id
+            td= item.name
+            td= item.variant_options.collect{|x,k| "#{x}: #{k}"}.join(' - ')
+            td= item.quantity
+            td= item.amount
+            td
+
+
+.row-fluid
+  .tabbable
+    ul.nav.nav-tabs#myTab
+      li.active
+        a[href='#tab1' data-toggle='tab']
+          | Customer Info
+      li
+        a[href='#tab2' data-toggle='tab']
+          | Invoice Info
+      li
+        a[href='#tab2' data-toggle='tab']
+          | Log Info
+    .tab-content
+      .tab-pane.active#tab1
+        table.table.table-striped
+          tbody
+            tr
+              th Name:
+              td= @order.customer_name
+              th Email:
+              td= @order.customer_email
+      .tab-pane#tab2
+        p I'm in Section 2.

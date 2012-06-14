@@ -1,0 +1,9 @@
+= simple_form_for([:admin, @payment_method], :html => {:class => 'form-horizontal'}) do |f|
+  = f.error_notification
+  .row-fluid
+    .span6
+      = f.input :active
+      / = f.input :handle, as: :select, collection: Imentore.config.payment_methods
+      = render(@payment_method.handle, f: f)
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'

@@ -1,0 +1,25 @@
+- content_for :footer do
+  javascript:
+    $(document).ready(function(){
+      $('input#bank').change(function(){
+        $('div#bank.hide').toggle('show')
+      })
+      $('input.boolean').each(function(){
+        if ($(this).is(':checked') == true){
+          var id = $(this).attr('id')
+          $('div#'+id+'.hide').show();
+        }
+      })
+    })
+= f.input :name
+.row-fluid
+  = f.input :description, input_html: { rows: 5, class: 'textarea'}
+  / = f.simple_fields_for :options do |fo|
+  /   / = fo.input :instruction,   input_html: { value: @payment_method.options["instruction"],  :rows => 5, :class => 'textarea' }, :as => :text
+  /   = fo.input :bank,   input_html: { checked: @payment_method.options["bank"] == "1", :id=>"bank"}, :as => :boolean
+  /   #bank.hide
+  /     = fo.input :bank_name,   input_html: { value: @payment_method.options["bank_name"] }
+  /     = fo.input :bank_number,   input_html: { value: @payment_method.options["bank_number"] }
+  /     = fo.input :bank_account,   input_html: { value: @payment_method.options["bank_account"] }
+  /     = fo.input :bank_holder,   input_html: { value: @payment_method.options["bank_holder"] }
+  /     = fo.input :bank_account,   input_html: { value: @payment_method.options["bank_irs_id"] }

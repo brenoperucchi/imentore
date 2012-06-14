@@ -5,26 +5,11 @@
       var id = $('div.tab').attr('id');
       $('ul.nav.nav-tabs li#'+id).attr('class','active');
     })
-    // $('ul.nav-tabs li').bind('click',function(){
-    //   if ($(this).attr('class') != "active"){
-    //     $('ul.nav li.active').attr('class','');
-    //    $(this).attr('class','active');
-    //     var id = $(this).attr('id');
-    //     $('div.tabs').hide();
-    //     $('div.tabs#'+id).show();
-    //  }
-    // })
 
 ul.nav.nav-tabs
   li#product
     = link_to("Product", edit_admin_product_path(@product))
-    / a(href='#')
-      / = "Product"
   li#variants
     = link_to("Variants", admin_product_variants_path(@product))
-    / a(href='#')
-      / = "Options"
   li#options
     = link_to("Options", admin_product_options_path(@product))
-    / a(href='#')
-      / = "Variant"

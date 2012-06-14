@@ -1,0 +1,31 @@
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+
+legend SendEmails
+/ p
+/   = link_to(new_admin_send_email_path, :class=>'btn btn-primary') do
+/     i.icon-white.icon-plus
+/     '
+/     | New SendEmail
+
+
+table.table
+  thead
+    tr
+      th.minimal Active
+      th Name
+      th subject
+      th action
+  tbody
+    - @send_emails.each do |send_email|
+      tr
+        td
+          i(class='#{send_email.active}')
+        td= send_email.name
+        td= send_email.subject
+        / td= button_to("Destroy", admin_send_email_path(send_email), method: :delete, :class=>"btn-danger")
+        td
+          = link_to(edit_admin_send_email_path(send_email), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            | Edit

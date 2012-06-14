@@ -1,0 +1,42 @@
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+
+legend Coupons
+p
+  = link_to(new_admin_coupon_path, :class=>'btn btn-primary') do
+    i.icon-white.icon-plus
+    '
+    | New Coupon
+
+
+table.table
+  thead
+    tr
+      th.minimal Active
+      th Name
+      th code
+      th limit / customer
+      th limit / use
+      th value
+      th action
+  tbody
+    - @coupons.each do |coupon|
+      tr
+        td
+          i(class='#{coupon.active}')
+        td= coupon.name
+        td= coupon.code
+        td= coupon.limit_customer
+        td= coupon.limit_use
+        td= coupon.value
+        / td= button_to("Destroy", admin_coupon_path(coupon), method: :delete, :class=>"btn-danger")
+        td
+          = link_to(edit_admin_coupon_path(coupon), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            | Edit
+          '
+          = link_to(admin_coupon_path(coupon), method: :delete, :class=>"btn btn-danger") do
+            i.icon-white.icon-trash
+            '
+            | Remove

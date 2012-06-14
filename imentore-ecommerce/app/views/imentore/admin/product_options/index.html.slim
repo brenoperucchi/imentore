@@ -13,13 +13,14 @@
         th handle
         th action
     tbody
-    - @options.each do |option_type|
+      - @options.each do |option_type|
         tr
           td= option_type.name
           td= option_type.handle
           td
-            / = binding.pry
             = link_to("Edit", edit_admin_product_option_path(@product, option_type))
+            '
+            '|
             '
             = link_to("Delete", admin_product_option_path(@product, option_type), method: "delete")
 
