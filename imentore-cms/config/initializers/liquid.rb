@@ -40,7 +40,7 @@ class LiquidView
     liquid = Liquid::Template.new
     t = liquid.parse(template)
     t.class.register_filter(LiquidFilter)
-    t.render(assigns, :filters => filters, :registers => {current_store: @view.controller.current_store, :action_view => @view, :controller => @view.controller})
+    t.render(assigns.merge("current_cart" => Imentore::CartDrop.new(controller.current_cart)), :filters => filters, :registers => {current_store: @view.controller.current_store, :action_view => @view, :controller => @view.controller})
   end
 
   def compilable?

@@ -1,0 +1,21 @@
+legend.page-title Customer Edit
+
+= simple_form_for([:admin, @customer], :html=> { :class=> 'form-horizontal' }) do |f|
+  .row
+    .span12
+      .row
+        .span4
+          = f.input :active
+          = f.input :name
+          = f.input :brand
+          = f.input :irs_id
+          = f.input :national_id
+          = f.simple_fields_for :user do |user|
+            = user.input :email
+        .span4
+          = f.simple_fields_for :addresses do |addr|
+            = render("shared/address", addr: addr)
+  .form-actions
+    = f.button :submit, :class=> 'btn btn-primary'
+    = " "
+    = button_tag "Cancel", class: "btn"

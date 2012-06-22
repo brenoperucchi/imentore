@@ -1,0 +1,89 @@
+$(document).ready(function(){
+  var key_nav = 'key_nav'
+  var key_bar = 'key_bar'
+
+  jQuery.fn.unactived = function(){
+    if ($(this) != $('ul.nav').find('li.active')){
+      $('div.navbar ul.nav').find('li.active').attr('class','')
+    };
+  }
+
+  function session_save(key,value) {
+    $.ajax({
+      url: '/client/key_session',
+      type: 'post',
+      data: {key:key, value:value},
+      dataType: 'json',
+      success: function(json) {}
+    })
+  }
+
+  function session_get(key){
+    var res;
+    $.ajax({
+      url: '/client/key_session',
+      type: 'get',
+      data: {key:key},
+      dataType: 'json',
+      async:false,
+      success: function(json) {
+         res = json
+      },
+      error: function(json) {
+        res = false
+      }
+    });
+    return res
+  }
+
+  $('div.sidebar-nav ul.nav-list').find('li.action').click(function(e){
+    e.preventDefault();
+    var value = $(this).attr('id')
+    session_save(key_bar,value)
+    $('div.sidebar-nav ul.nav-list').find('li.active.action').attr('class','');
+    $(this).attr('class','active action')
+    var url = $(this).find('a').attr('href')
+    window.setTimeout(function() {
+        document.location.href=url;
+    }, 400);
+  })
+
+  if (session_get('key_nav') != false){
+    var json = session_get('key_nav')
+    $('div.navbar ul.nav').find('li#'+json[key_nav]).attr('class','active')
+    $('ul.nav.nav-list').each(function(){
+      $(this).slideUp("slow")
+    })
+    $('ul.nav.nav-list.'+json[key_nav]).slideDown('slow')
+  }
+
+  if (session_get('key_bar') != false){
+    var json = session_get('key_bar')
+    $('div.sidebar-nav ul.nav-list').find('li#'+json[key_bar]).attr('class','active action')
+  }
+
+
+
+
+  $('div.navbar ul.nav').find('li').bind('click', function(e){
+    e.preventDefault()
+    if ($(this).attr('class') != "active") {
+      var value = $(this).attr("id")
+      $(this).unactived();
+      $(this).attr('class', 'active');
+      $('ul.nav.nav-list').each(function(){
+        $(this).slideUp("slow")
+      })
+      $('ul.nav.nav-list.'+value).slideDown('slow')
+      // e.preventDefault();
+      session_save(key_nav,value)
+      if ($(this).find('a').attr('href') != undefined){
+        var url = $(this).find('a').attr('href')
+        window.setTimeout(function() {
+            document.location.href=url;
+        }, 400);
+      }
+    }
+  })
+
+});

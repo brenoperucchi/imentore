@@ -1,16 +1,31 @@
-p List Domains
+- content_for :breadcrumb do
+  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
-ul
-- @domains.each do |domain|
-  li
-    = domain.name
-    = " => " + domain.hosting.to_s
-    = button_to("Destroy", admin_domain_path(domain), method: :delete)
-    = link_to "Mails", admin_domain_emails_path(domain) if domain.hosting
+/ legend Themes
+/ p= link_to("New Theme", new_admin_theme_path, :class=>'btn btn-small btn-primary')
 
-p Create Domain
+legend List Domains
 
-= simple_form_for([:admin, @domain]) do |f|
-  = f.input :name
-  = f.check_box :hosting
-  = f.submit
+table.table
+  thead
+    tr
+      th Name
+      th Hosting
+      th action
+  tbody
+    - @domains.each do |domain|
+      tr
+        td= domain.name
+        td= domain.hosting.to_s
+        td= button_to("Destroy", admin_domain_path(domain), method: :delete, :class=>"btn-danger")
+        td= link_to "Mails", admin_domain_emails_path(domain) if domain.hosting
+
+h3 Create Domain
+
+= simple_form_for([:admin, @domain], :html=> { :class=>'form-inline'} ) do |f|
+  = f.input :name,:input_html => { :class => "" }, :hint => "add your article title here"
+  / = f.label :hosting, :class => "checkbox" do
+  = f.check_box :hosting, :wrapper_htnl => {:label => 'hosting'}
+  |  Hosting
+  .form-actions
+    = f.submit(:class => "btn-small btn-primary")

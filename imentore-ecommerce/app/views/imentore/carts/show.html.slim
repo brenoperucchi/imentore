@@ -1,7 +1,153 @@
+- content_for :footer do
+  javascript:
+    $(document).ready(function(){
+      $('a#calculate_zip').click(function(e){
+        var zip_code = $('input#zip_code').last().val()
+        var method = $('select#delivery_method').find('option:selected').val()
+        delivery_calculate(zip_code,method)
+        e.preventDefault();
+      })
+      $('select#delivery_method').change(function(){
+        var zip_code = $("input[id$='zip_code']").last().val();
+        var method = $('select#delivery_method').find('option:selected').val();
+        delivery_calculate(zip_code,method)
+      })
+
+      function add_coupon(code){
+        $.ajax({
+          url: '/coupon',
+          type: 'get',
+          data: {coupon_code:code},
+          dataType: 'json',
+          success: function(json) {
+            $.each(json, function() {
+              $('div.span2#coupons').append("<icon class='icon-remove'></icon>"+this.name+":"+ this.value +"<br>");
+              $('td#coupon_value').text(this.value)
+            })
+            calculate_items()
+          }
+        })
+      }
+      $('a#add_coupon').click(function(e){
+        var code = $('input#coupon_code').val()
+        add_coupon(code);
+        e.preventDefault();
+      })
+
+
+    })
+
 - if current_cart.empty?
   p Your cart is empty.
 
-- current_cart.items.each do |product, variant|
-  = product.name
+legend cart
 
-p= link_to("Checkout", checkout_path)
+
+= form_tag(cart_path, method: 'put') do
+  table.table.table-bordered.table-striped
+      thead
+        tr
+          th action
+          th product
+          th variant
+          th quantity
+          th price
+          th amount
+      tbody
+          - current_cart.items.each_with_index do |item, index|
+            tr
+              td
+                = link_to(cart_path(:variant_id => item.variant.id, :product_id => item.product.id), method: :delete, :class=>"btn btn-danger") do
+                  i.icon-trash.icon-white
+                  '
+                  ' Remove
+
+              td
+                = "#" + item.product.id.to_s
+                '
+                = item.product.name
+              td
+                - item.variant.options.each do |type|
+                  = "#" + type.product_variant_id.to_s
+                  '
+                  = "#{type.option_type.name}: #{type.value}"
+                  = " | "
+              td
+                = text_field_tag "[items][#{index}]quantity", item.quantity, :class => "input-mini"
+                = hidden_field_tag "[items][#{index}]product_id", item.product.id
+                = hidden_field_tag "[items][#{index}]variant_id", item.variant.id
+              td= item.price
+              td= item.amount
+          tr
+            td
+            td
+            td
+            td(colspan='2' style='text-align:center;')
+              'Sub-Total
+            td#sub_total
+              = current_cart.amount
+          tr
+            td
+            td
+            td
+            td(colspan='2' style='text-align:center;')
+              | Shipping Value
+            td#shipping_value
+              | 0
+          tr
+            td
+            td
+            td
+              .span3
+                = text_field_tag "coupon_code", nil, class: 'input-small', style: "margin-bottom:0px;"
+                a(href='#' type='submit' class='btn btn-small' id='add_coupon')
+                  i.icon-plus
+                  '
+                  | Coupon
+              .span2#coupons
+
+            td(colspan='2' style='text-align:center;')
+              | Coupon Value
+            td#coupon_value
+              = current_cart.coupons_amount
+          tr
+            td
+            td
+            td
+            td(colspan='2' style='text-align:center;')
+              h3 TOTAL
+            td#total_amount
+              h4= current_cart.amount
+.row
+  form.form-horizontal
+    .span6
+      .controls
+        button(type='submit' class='btn')
+          i.icon-refresh
+          | Update
+    .span4.offset1
+      .controls
+        = link_to(checkout_path, :class=>'btn-large btn-success') do
+          i.icon-shopping-cart.icon-white
+          ' Checkout
+    br
+    hr
+    .span6
+        .control-group
+          label.control-label
+            | Delivery Methods
+          .controls
+            label.radio
+              = select_tag 'delivery_method', options_from_collection_for_select(current_store.delivery_methods.active, "id", "name", :id => 'delivery_method')
+    .span4.offset1
+      .control-group
+        label.control-label
+          | Zip Code
+        .controls
+          = text_field_tag "zip_code", nil, class: 'input-small'
+          a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
+            i.icon-refresh
+            | Calculate
+    .clearfix
+    hr
+

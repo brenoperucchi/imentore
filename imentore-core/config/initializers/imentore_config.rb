@@ -1,3 +1,4 @@
+require 'ostruct'
 module Imentore
   extend self
 

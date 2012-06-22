@@ -1,4 +1,4 @@
-= simple_form_for([:admin, @product]) do |f|
+= simple_form_for([:admin, @product], :html => {:class => 'form-horizontal'}) do |f|
   = f.error_notification
   = f.input :name
   = f.input :description
@@ -6,4 +6,5 @@
     = v.input :price
     = v.input :quantity
     = v.input :weight
-  = f.submit
+  .form-actions
+    = f.submit(:class => "btn-primary")

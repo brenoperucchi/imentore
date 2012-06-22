@@ -1,0 +1,58 @@
+- content_for :footer do
+  javascript:
+    $('a#new_line').click(function(e){
+      var html = $('div#new_line.hide').find('tbody').html()
+      $('table.table').find('tbody').append(html)
+      $('table.table:first input:disabled').removeAttr('disabled')
+      e.preventDefault()
+    })
+    $('a#remove_line').live('click',function(e){
+      $(this).parents('tr:first').remove();
+      e.preventDefault()
+    })
+= f.input :name
+= f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
+= f.simple_fields_for :options do |fo|
+  = fo.input :fixed_rate, input_html: { value: @delivery_method.options["fixed_rate"] }
+  = fo.input :percent_rate, input_html: { value: @delivery_method.options["percent_rate"] }
+
+legend Values weight
+table.table
+  thead
+    tr
+      th.minimal #
+      th Initial (gr)
+      th Final (gr)
+      th Value ($)
+      th Action
+  tbody
+    - resource.options[:weight].each_with_index do |option, index|
+      tr
+        td
+          h3= index + 1
+        td= text_field_tag("[delivery_method][options][weight][][initial]", option[:initial], :alt=>'weight', :id=>"weight_initial")
+        td= text_field_tag("[delivery_method][options][weight][][final]", option[:final], :alt=>'weight', :id=>"weight_final")
+        td= text_field_tag("[delivery_method][options][weight][][value]", option[:value], :alt=>'weight', :id=>"weight_value")
+        td
+          a.btn.btn-small.btn-danger(href='#' id='remove_line')
+            i.icon-trash.icon-white
+            '
+            ' Remove
+
+#new_line.hide
+  table
+    tr
+      td
+      td= text_field_tag("[delivery_method][options][weight][][initial]", '', :alt=>'weight', :id=>"weight_initial", disabled: true)
+      td= text_field_tag("[delivery_method][options][weight][][final]", '', :alt=>'weight', :id=>"weight_final", disabled: true)
+      td= text_field_tag("[delivery_method][options][weight][][value]", '', :alt=>'weight', :id=>"weight_value", disabled: true)
+      td
+        a.btn.btn-small.btn-danger(href='#' id='remove_line')
+          i.icon-trash.icon-white
+          '
+          ' Remove
+
+.clear
+a.btn.btn-small(href='#' id='new_line')
+  i.icon-plus
+  'New Line

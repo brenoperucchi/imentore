@@ -1,0 +1,12 @@
+= simple_form_for(@product_brand, url: admin_product_brands_path(product_id: @product.id), html: { multipart: true, class: 'form-horizontal' }) do |f|
+  .modal-header
+    button(type="button" class="close" data-dismiss="modal")
+     ' x
+    h3 New Product Brand
+  .modal-body(style='height:65px;')
+    = f.input :name, input_html: {}, placeholder: 'Type new Product Brand'
+  .modal-footer
+    a.btn[href='#' data-dismiss='modal']
+      | Close
+    = f.submit :class => 'btn btn-primary' do
+      | Save Changes

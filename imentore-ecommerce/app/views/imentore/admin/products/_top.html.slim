@@ -1,0 +1,15 @@
+- content_for :footer do
+  javascript:
+    $(document).ready(function(){
+      $('ul.nav.nav-tabs li.active').attr('class','');
+      var id = $('div.tab').attr('id');
+      $('ul.nav.nav-tabs li#'+id).attr('class','active');
+    })
+
+ul.nav.nav-tabs
+  li#product
+    = link_to("Product", edit_admin_product_path(@product))
+  li#variants
+    = link_to("Variants", admin_product_variants_path(@product))
+  li#options
+    = link_to("Options", admin_product_options_path(@product))

@@ -7,8 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= debug flash %>
 <%= yield %>
+
+<%= link_to("My Cart", cart_path) %>
+<%= link_to("New Customer", new_customer_path) %>
+<%= link_to("Login", new_user_session_path) %>
 
 </body>
 </html>

@@ -1,0 +1,32 @@
+- content_for :breadcrumb do
+  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+
+/ legend Options
+/ p= link_to("New Theme", new_admin_theme_path, :class=>'btn btn-small btn-primary')
+
+= render "imentore/admin/products/top"
+.tab#options
+  table.table
+    thead
+      tr
+        th name
+        th handle
+        th action
+    tbody
+      - @options.each do |option_type|
+        tr
+          td= option_type.name
+          td= option_type.handle
+          td
+            = link_to("Edit", edit_admin_product_option_path(@product, option_type))
+            '
+            '|
+            '
+            = link_to("Delete", admin_product_option_path(@product, option_type), method: "delete")
+
+- @option = @product.options.build if @option.nil?
+= simple_form_for @option, as: "option", :html=> {:class =>"well form-inline"}, url: admin_product_options_path(@product) do |f|
+  = f.error_notification
+  = f.input :name, :placeholder => "Enter Option Name", input_html: {:class =>  "inline"}, :label => false
+  = f.input :handle, placeholder: "Enter Handle Name", input_html: {:class =>  "inline"}, :label => false
+  = f.button :submit

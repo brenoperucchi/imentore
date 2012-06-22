@@ -1,0 +1,48 @@
+module Imentore
+  module Admin
+    class CategoriesController < BaseController
+      inherit_resources
+      respond_to :json, only: [:index]
+
+      def index
+        build_resource
+        index! do |format|
+          format.json do
+            @product = current_store.products.find_by_id(params[:product_id])
+            render json: Imentore::CategoryPresenter.new(current_store.categories, @product).to_json
+          end
+        end
+      end
+
+      def new
+        @category = build_resource
+
+      end
+
+      def create
+        respond_to do |wants|
+          wants.html do
+            @category = current_store.categories.new(params[:category])
+            @category.parent = current_store.categories.find_by_id(params[:category][:ancestry])
+            if @category.save
+              redirect_to admin_categories_path
+            else
+              render :index
+            end
+          end
+        end
+      end
+
+      def update
+        update! {
+          admin_categories_path }
+      end
+
+      protected
+
+      def begin_of_association_chain
+        current_store
+      end
+    end
+  end
+end

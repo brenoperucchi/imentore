@@ -1,0 +1,34 @@
+- content_for :breadcrumb do
+  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+
+legend Orders
+/ p= link_to("New delivery Method", new_admin_delivery_method_path, :class=>'btn btn-primary')
+
+table.table
+  thead
+    tr
+      th.minimal #
+      th Status
+      th Data
+      th Client
+      th Action
+  tbody
+    - @orders.each do |order|
+      tr
+        td= order.id
+        td
+          = button_status(order.status, '#', 'placed', 'not_placed')
+        td= order.created_at
+        td= order.customer_email
+        td
+          = link_to(edit_admin_order_path(order), :class=>"btn btn-small") do
+            i.icon-edit.icon-black
+            '
+            ' Edit
+
+          '
+          '
+          = link_to(admin_order_path(order), method: :delete, :class=>"btn btn-danger btn-small") do
+            i.icon-trash.icon-white
+            '
+            ' Remove

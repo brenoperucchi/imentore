@@ -9,8 +9,14 @@ describe Imentore::Invoice do
   end
 
   it "has payment method" do
-    invoice.payment_method = :cielo
-    invoice.payment_method.should eq(:cielo)
+    payment_method = Imentore::PaymentMethod.new
+    invoice.payment_method = payment_method
+    invoice.payment_method.should eq(payment_method)
+  end
+
+  it "has payment_method_id" do
+    invoice.payment_method_id = 1
+    invoice.payment_method_id.should eq(1)
   end
 
   it "has status" do

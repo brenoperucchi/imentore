@@ -1,0 +1,73 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container-fluid
+      a.btn.btn-navbar[data-toggle="collapse" data-target=".nav-collapse"]
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.brand[href="/admin"]
+        | Imentore
+      .btn-group.pull-right
+        - if user_signed_in?
+          a(class="btn dropdown-toggle" data-toggle="dropdown" href="#")
+            i(class="icon-user")
+            '
+            = current_user.userable.name
+            '
+            span.caret
+          ul.dropdown-menu
+            li
+              a(href='#')
+                | Profile
+            li.divider
+            li
+              = link_to("Sign-out", destroy_admin_session_path, method: :delete)
+              / a(href=destroy_admin_session_path)
+                / | Sign-out
+        - else
+          a(class="btn dropdown-toggle" data-toggle="dropdown" href=new_admin_session_path)
+            i(class="icon-user")
+            '
+            | Sign-in
+            '
+            / span.caret
+          / ul.dropdown-menu
+          /   li
+          /     = link_to("Sign-in", new_admin_session_path)
+          /     a(href='#')
+          /       | Profile
+          /   li.divider
+          /   li
+          /     a(href='#')
+          /       | Sign_out
+
+
+      .nav-collapse
+        ul.nav
+          - if user_signed_in?
+            .tabbable
+            li#dashboard
+              a[href=admin_dashboard_path]
+                | Dashboard
+            li#configuration
+              a[]
+                | Configuration
+            li#managament
+              a[]
+                | Management
+            li#reports
+              a[]
+                | Reports
+            / | Logged in as
+            / a[]
+            /   '
+            /   = current_user.userable.name
+            / '  and
+            / = link_to("Logout", destroy_admin_session_path, method: :delete)
+          / - else
+          /   p.navbar-text.pull-right
+          /     = link_to "Sign-in", new_admin_session_path
+              / | Sign-in as
+              / a[href="#"]
+
+= yield :top_nav

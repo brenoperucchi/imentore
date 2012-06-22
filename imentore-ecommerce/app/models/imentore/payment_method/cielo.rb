@@ -7,5 +7,9 @@ module Imentore
     def initialize(options = {})
       @options = options
     end
+
+    def valid?
+      true
+    end
   end
 end

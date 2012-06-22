@@ -13,7 +13,7 @@ module Imentore
       protected
 
       def update_resource(object, attributes)
-        resource.attributes = params[:imentore_settings]
+        resource.attributes = params[:settings]
         if resource.valid?
           current_store.save
         end

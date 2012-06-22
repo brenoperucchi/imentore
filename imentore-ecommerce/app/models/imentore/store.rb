@@ -103,8 +103,21 @@ module Imentore
     has_many :orders
     has_many :payment_methods
     has_many :delivery_methods
+    has_many :themes
+    has_many :assets, :through => :themes, :source => :assets
+    has_many :customers
+    has_many :coupons
+    has_many :coupons_orders
+    has_many :send_emails
+    has_many :categories
+    has_many :product_brands
+    has_many :pages
 
     accepts_nested_attributes_for :owner, :address
+
+    def email_contact
+      config.email_contact.present? ? config.email_contact : email
+    end
 
     # http://www.ietf.org/rfc/rfc1035.txt
     # [a-z][a-z0-9-]*[a-z0-9]

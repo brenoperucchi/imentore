@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412194547) do
+ActiveRecord::Schema.define(:version => 20120502232943) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -37,6 +37,35 @@ ActiveRecord::Schema.define(:version => 20120412194547) do
     t.text "items"
   end
 
+  create_table "imentore_customers", :force => true do |t|
+    t.string   "name"
+    t.string   "brand"
+    t.string   "irs_id"
+    t.date     "birthdate"
+    t.string   "national_id"
+    t.string   "gender"
+    t.string   "person_type"
+    t.integer  "store_id"
+    t.string   "department"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "imentore_deliveries", :force => true do |t|
+    t.integer "order_id"
+    t.text    "address"
+    t.string  "tracking_code"
+    t.string  "status"
+    t.integer "delivery_method_id"
+  end
+
+  create_table "imentore_delivery_methods", :force => true do |t|
+    t.string  "name"
+    t.integer "store_id"
+    t.string  "handle"
+    t.text    "options"
+  end
+
   create_table "imentore_domains", :force => true do |t|
     t.string   "name"
     t.integer  "store_id"
@@ -44,18 +73,29 @@ ActiveRecord::Schema.define(:version => 20120412194547) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "hosting",    :default => false
     t.integer  "plesk_id"
+    t.text     "emails"
   end
 
   create_table "imentore_employees", :force => true do |t|
-    t.string  "name"
-    t.string  "brand"
-    t.string  "irs_id"
-    t.date    "birthdate"
-    t.string  "national_id"
-    t.string  "gender"
-    t.string  "person_type"
-    t.integer "store_id"
-    t.string  "department"
+    t.string   "name"
+    t.string   "brand"
+    t.string   "irs_id"
+    t.date     "birthdate"
+    t.string   "national_id"
+    t.string   "gender"
+    t.string   "person_type"
+    t.integer  "store_id"
+    t.string   "department"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "imentore_images", :force => true do |t|
+    t.string   "picture"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "imentore_invoices", :force => true do |t|
@@ -89,6 +129,14 @@ ActiveRecord::Schema.define(:version => 20120412194547) do
     t.integer  "store_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+  end
+
+  create_table "imentore_payment_methods", :force => true do |t|
+    t.string  "name"
+    t.string  "handle"
+    t.text    "options"
+    t.integer "store_id"
+    t.boolean "active",   :default => false
   end
 
   create_table "imentore_product_variants", :force => true do |t|

@@ -1,7 +1,8 @@
+= addr.input :name
 = addr.input :street
 = addr.input :complement
 = addr.input :city
-= addr.input :state
-= addr.input :country
+= addr.input :country, :collection => countries, :selected=> "BR"
+= addr.input :state, :collection => states, :prompt=> "Select State"
 = addr.input :zip_code
 = addr.input :phone

@@ -9,6 +9,6 @@ class CreateAssets < ActiveRecord::Migration
   end
 
   def down
-    remove_table(:imentore_assets)
+    drop_table(:imentore_assets)
   end
 end

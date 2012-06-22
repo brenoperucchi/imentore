@@ -2,10 +2,104 @@ doctype html
 html
   head
   title ImentoreBase
-  = stylesheet_link_tag    "application"
-  = javascript_include_tag "application"
+  = stylesheet_link_tag    "client"
+  = javascript_include_tag "client"
   = csrf_meta_tags
+  = yield :head
+  css:
+    body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+          }
+          .sidebar-nav {
+            padding: 9px 0;
+          }
+
+- content_for :footer do
+  javascript:
+    function calculate_items(){
+      var total = 0
+      var sub_total = 0
+      var shipping = 0
+      var coupon = 0
+      sub_total = $('td#sub_total').text()
+      shipping = $('td#shipping_value').text()
+      coupon = $('td#coupon_value').text()
+      total = Number(sub_total) + Number(shipping) + Number(coupon)
+      $('td#total_amount h4').text(total)
+    }
+    function delivery_calculate(zip_code, method){
+      $.ajax({
+        url: '/cart/calculate_shipping',
+        type: 'get',
+        data: {zip_code:zip_code, method:method},
+        dataType: 'json',
+        success: function(json) {
+          $('td#shipping_value').html(json['value'])
+          calculate_items()
+        }
+      })
+    }
+    $(document).ready(function(){
+      if ($('select#delivery_method').find('option:selected').val() != "") {
+        var zip_code = $('input#zip_code').val()
+        var method = $('select#delivery_method').find('option:selected').val()
+        delivery_calculate(zip_code,method)
+      }
+    })
+
+- content_for :footer do
+  javascript:
+    $(document).ready(function(){
+      $('div.alert').each(function(){
+        if ( $(this).text().length > 1 ) {
+         $(this).slideDown('slow')
+        }
+      })
+      $('.close').bind('click',function(){
+        $(this).parents('div.hide').first().slideUp('slow');
+      })
+    })
 
 body
-  p core/views/layouts/public
-  = yield
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container-fluid
+        a.btn.btn-navbar[data-toggle="collapse" data-target=".nav-collapse"]
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.brand[href="/client"]
+          | Imentore
+        .nav-collapse
+          ul.nav
+            li
+              = link_to("Home", root_path)
+            li
+              = link_to("My Cart (#{current_cart.items.size})", cart_path)
+            li
+              = link_to("New Customer", new_customer_path)
+          - if user_signed_in?
+            p.navbar-text.pull-right
+              | Logged in as
+              '
+              a[href="#"]
+                = current_user.userable.name
+              '  and
+              = link_to("Logout", destroy_user_session_path, method: :delete)
+          - else
+            p.navbar-text.pull-right
+              = link_to "Sign-in", new_client_session_path
+  .container
+    .notification
+      .div.alert.alert-error.hide
+        a(class="close" data-dismiss="alert" href="#")
+          = "x"
+        = flash[:alert]
+      .div.alert.alert-success.hide
+        a(class="close" data-dismiss="alert" href="#")
+          = "x"
+        = flash[:success]
+    = yield
+  .footer
+    = yield :footer

@@ -1,0 +1,34 @@
+legend Users
+/ p
+/   = link_to(new_admin_employee_path, :class=>'btn btn-primary') do
+/     i.icon-white.icon-plus
+/     '
+/     | New SendEmail
+
+
+table.table.table-striped
+  thead
+    tr
+      th.span1 Active
+      th Name
+      th Email
+      th Created At
+      th Actions
+  tbody
+    - @employees.each do |employee|
+      tr
+        td
+          / = button_status(employee.active, '#')
+        td= employee.name
+        td= employee.user.email
+        td= employee.created_at
+        td
+          = link_to(edit_admin_employee_path(employee), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            | Edit
+          '
+          = link_to(admin_employee_path(employee), class: 'btn btn-danger', method: :delete) do
+            i.icon-white.icon-trash
+            '
+            | Remove

@@ -1,5 +1,29 @@
-h2 Payment methods
+- content_for :breadcrumb do
+  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
-ul
-  - @payment_methods.each do |pm|
-    li= link_to(pm.name, edit_admin_payment_method_path(pm))
+legend Payment methods
+p= link_to("New Payment Method", new_admin_payment_method_path, :class=>'btn btn-primary')
+
+table.table
+  thead
+    tr
+      th Active
+      th Name
+      th action
+  tbody
+    - @payment_methods.each do |payment|
+      tr
+        td
+          = button_status(payment.active, '#')
+        td= payment.handle
+        td
+          = link_to(edit_admin_payment_method_path(payment), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            | Edit
+          '
+          - if payment.handle == "custom"
+            = link_to(admin_payment_method_path(payment), method: :delete, :class=>"btn btn-danger") do
+              i.icon-white.icon-remove
+              '
+              | Remove

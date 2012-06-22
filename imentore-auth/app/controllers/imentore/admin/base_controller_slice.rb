@@ -3,7 +3,8 @@ Imentore::Admin::BaseController.class_eval do
 
   def authorize_admin
     unless(user_signed_in? && current_user.userable.owner?)
-      redirect_to(root_url, alert: :permission_denied)
+      sign_out
+      redirect_to(new_admin_session_url, alert: :permission_denied)
     end
   end
 end

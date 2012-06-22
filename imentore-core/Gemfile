@@ -11,7 +11,7 @@ gem "jquery-rails"
 gem 'inherited_resources', '1.3.0'
 gem 'devise', '2.0.4'
 gem 'simple_form', '2.0.1'
-gem 'slim', '1.1.0'
+gem 'slim', '1.2.1'
 
 gem 'imentore-auth',  path: '../imentore-auth'
 gem 'imentore-ecommerce',  path: '../imentore-ecommerce'

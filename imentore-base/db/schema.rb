@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420132654) do
+ActiveRecord::Schema.define(:version => 20120621233129) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -37,6 +37,59 @@ ActiveRecord::Schema.define(:version => 20120420132654) do
     t.text "items"
   end
 
+  create_table "imentore_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "handle"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "ancestry"
+  end
+
+  add_index "imentore_categories", ["ancestry"], :name => "index_imentore_categories_on_ancestry"
+
+  create_table "imentore_categories_products", :force => true do |t|
+    t.integer "product_id"
+    t.integer "category_id"
+  end
+
+  create_table "imentore_coupons", :force => true do |t|
+    t.boolean  "active"
+    t.string   "name"
+    t.string   "code"
+    t.float    "value"
+    t.integer  "store_id"
+    t.integer  "limit_customer"
+    t.integer  "limit_use"
+    t.datetime "due_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "imentore_coupons_orders", :force => true do |t|
+    t.string  "email"
+    t.integer "coupon_id"
+    t.integer "cart_id"
+    t.integer "order_id"
+    t.integer "user_id"
+    t.integer "store_id"
+  end
+
+  create_table "imentore_customers", :force => true do |t|
+    t.string   "name"
+    t.string   "brand"
+    t.string   "irs_id"
+    t.date     "birthdate"
+    t.string   "national_id"
+    t.string   "gender"
+    t.string   "person_type"
+    t.integer  "store_id"
+    t.string   "department"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "active",      :default => true
+  end
+
   create_table "imentore_deliveries", :force => true do |t|
     t.integer "order_id"
     t.text    "address"
@@ -50,6 +103,8 @@ ActiveRecord::Schema.define(:version => 20120420132654) do
     t.integer "store_id"
     t.string  "handle"
     t.text    "options"
+    t.boolean "active",      :default => false
+    t.text    "description"
   end
 
   create_table "imentore_domains", :force => true do |t|
@@ -58,20 +113,29 @@ ActiveRecord::Schema.define(:version => 20120420132654) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "hosting",    :default => false
-    t.integer  "plesk_id"
     t.text     "emails"
   end
 
   create_table "imentore_employees", :force => true do |t|
-    t.string  "name"
-    t.string  "brand"
-    t.string  "irs_id"
-    t.date    "birthdate"
-    t.string  "national_id"
-    t.string  "gender"
-    t.string  "person_type"
-    t.integer "store_id"
-    t.string  "department"
+    t.string   "name"
+    t.string   "brand"
+    t.string   "irs_id"
+    t.date     "birthdate"
+    t.string   "national_id"
+    t.string   "gender"
+    t.string   "person_type"
+    t.integer  "store_id"
+    t.string   "department"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "imentore_images", :force => true do |t|
+    t.string   "picture"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "imentore_invoices", :force => true do |t|
@@ -96,15 +160,41 @@ ActiveRecord::Schema.define(:version => 20120420132654) do
     t.string  "value"
   end
 
+  create_table "imentore_order_assets", :force => true do |t|
+    t.string   "file"
+    t.integer  "assetable_id"
+    t.string   "assetable_type"
+    t.integer  "store_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "imentore_orders", :force => true do |t|
     t.text     "shipping_address"
     t.text     "billing_address"
+    t.decimal  "total_amount"
     t.string   "status"
     t.string   "customer_email"
     t.text     "items"
+    t.integer  "invoice_id"
+    t.integer  "delivery_id"
     t.integer  "store_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "customer_name"
+  end
+
+  create_table "imentore_pages", :force => true do |t|
+    t.boolean  "active"
+    t.string   "name"
+    t.string   "handle"
+    t.text     "body"
+    t.text     "html"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "imentore_payment_methods", :force => true do |t|
@@ -112,7 +202,15 @@ ActiveRecord::Schema.define(:version => 20120420132654) do
     t.string  "handle"
     t.text    "options"
     t.integer "store_id"
-    t.boolean "active",   :default => false
+    t.boolean "active",      :default => false
+    t.text    "description"
+  end
+
+  create_table "imentore_product_brands", :force => true do |t|
+    t.string   "name"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "imentore_product_variants", :force => true do |t|
@@ -123,15 +221,29 @@ ActiveRecord::Schema.define(:version => 20120420132654) do
     t.decimal "height"
     t.decimal "width"
     t.decimal "depth"
-    t.boolean "deliverable"
+    t.boolean "shippable"
     t.integer "product_id"
   end
 
   create_table "imentore_products", :force => true do |t|
-    t.string  "name"
-    t.text    "description"
-    t.string  "permalink"
-    t.integer "store_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "permalink"
+    t.integer  "store_id"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "active",           :default => false
+    t.integer  "product_brand_id"
+  end
+
+  create_table "imentore_send_emails", :force => true do |t|
+    t.boolean  "active"
+    t.string   "name"
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "imentore_stores", :force => true do |t|
@@ -167,6 +279,7 @@ ActiveRecord::Schema.define(:version => 20120420132654) do
     t.integer  "theme_id"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+    t.text     "head"
   end
 
   create_table "imentore_themes", :force => true do |t|

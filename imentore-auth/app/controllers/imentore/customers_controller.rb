@@ -1,0 +1,55 @@
+module Imentore
+  class CustomersController < BaseController
+    inherit_resources
+    # nested_belongs_to :user
+    # belongs_to :user
+    # actions :new, :create, :destroy, :index
+
+    # respond_to :json, only: [:create, :index, :destroy]
+
+    # def index
+    #   respond_with(collection.map { |Customer| Imentore::CustomerPresenter.new(Customer).to_json })
+    # end
+
+    # def create
+    #   create! do |success, failure|
+    #     success.json {
+    #       render json: [Imentore::CustomerPresenter.new(@Customer).to_json]
+    #     }
+    #   end
+    # end
+
+    def new
+      @customer = build_resource
+      @customer.build_user
+      # @customer = Imentore::Customer.new
+      # @customer.build_user
+    end
+
+    def create
+      create! do |success, failure|
+        # binding.pry
+        success.html do
+          flash[:success] = "created customer"
+          redirect_to new_user_session_path
+        end
+        failure.html do
+          flash[:alert] = @customer.errors.full_messages
+          render :new
+        end
+      end
+    end
+
+
+    # protected
+
+    def begin_of_association_chain
+      current_store
+    end
+
+    def resource
+      current_store
+    end
+
+  end
+end

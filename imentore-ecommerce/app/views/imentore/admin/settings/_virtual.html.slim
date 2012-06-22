@@ -1,1 +1,13 @@
-= f.input :theme
+- content_for :footer do
+  css:
+    .radio, .checkbox {
+      min-height: 0;
+    }
+
+legend virtual_store
+= f.input :theme, :input_html => { :class => "span3" }, :hint => "add your article title here"
+= f.input :email_contact, :input_html => { :class => "span3" }
+= f.input :site, :input_html => { :class => "span3" }
+= f.input :store_zip_code, :input_html => { :class => "span3" }, :hint => "add your article title here"
+= f.input :authenticate_to_buy, :as => :boolean
+= f.input :order_asset, :as => :boolean

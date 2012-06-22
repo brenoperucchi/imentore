@@ -1,0 +1,8 @@
+table.table
+  thead
+    tr
+      th product name
+  tbody
+    - @products.each do |product|
+      tr
+        td= product.name

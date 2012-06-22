@@ -1,0 +1,240 @@
+doctype html
+html
+  head
+  title Online Fleet Maintenance Software | Fleetio
+  = stylesheet_link_tag    "site"
+  = javascript_include_tag "site"
+  = csrf_meta_tags
+  css:
+    .span#slogan{
+      font: .79em Lucida Grande, Arial, Helvetica, sans-serif;
+      width: 230px;
+      position: relative;
+      top: 49px;
+      left: -148px;
+      color:#666;
+    }
+    a.brand:hover{
+      background-position:0 -64px!important;
+    }
+  meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+
+body#home
+  .topbar(style='display:block')
+    .header
+      .container
+        a.brand href="/" title="Effortless vehicle &amp; fleet management" style='background:url(/images/site/imentore-logo-trans-208x128.png) no-repeat 0 0;height:44px; width:161px; border:0px; outline:none;'
+        .span#slogan Gestão Empresarial e Comércio Eletrônico
+        h1.site-title
+          a href="/" title="Online vehicle and fleet maintenance management"
+            | Fleetio
+        ul.nav
+          li
+            a.btn.disabled href="/"
+              | Home
+          li
+            a href="/tour"
+              | Veja mais
+          li
+            a href="/pricing"
+              | Preço &amp; Assine
+          li
+            a href="/why"
+              | Porque Imentore?
+          li
+            a href="/about"
+              | Sobre
+          li
+            a.btn.primary href="https://secure.fleetio.com/login" title="Log in to Fleetio"
+              | Entre
+  .hero.ac
+    .container
+      h2 Venda na Internet de maneira fácil e segura!
+      .big-media
+        img alt="Fleet maintenance software, and so much more." height="140" src="/images/site/fleetio-screenshots.jpg" width="940"
+  .container.content
+    .row
+      .span12
+        h1.lead
+          strong Web-based fleet software
+          | that makes it easy to manage vehicles and
+          | equipment from anywhere.
+      .span4
+        p.ac
+          a.btn.huge.success href="https://secure.fleetio.com/register" style="width:80%" title="Register for Fleetio Fleet Management System"
+            strong
+              | Assine sem Custo
+        h3.ac style="line-height: 1;"
+          | 100% FREE
+          br/
+          small
+            | para 10 produtos
+    hr/
+    #fleetio-benefits.row
+      .span8
+        .row
+          .span1
+            #one-place.benefit-icon
+          .span7
+            h3 All vehicle details in one place
+            p
+              | Eliminate clutter and keep all fleet information in one safe and secure place &mdash;
+              | accessible online anytime, anywhere.
+            p
+              | Maintenance records, purchase &amp; disposal data, insurance history... Everything in a
+              | vehicle's lifecycle can be kept in Fleetio.
+        .row
+          .span1
+            #maintenance-tracking.benefit-icon
+          .span7
+            h3 Web-based maintenance tracking
+            p
+              | Log vehicle maintenance online and keep your fleet's preventative maintenance records
+              | organized.
+            p
+              | Create custom PM schedules for all your equipment to ensure maintenance gets done on time.
+        .row
+          .span1
+            #maintenance-reminders.benefit-icon
+          .span7
+            h3 PM reminders in your inbox
+            p
+              | Reminders automatically email you when preventative maintenance
+              | tasks or inspections are coming due or overdue.
+            p
+              | The next due date or meter value (in miles, kilometers, or hours) automatically recalculates when you log
+              | maintenance based on the PM schedule you setup.
+        .row
+          .span1
+            #fuel-log.benefit-icon
+          .span7
+            h3 Online fuel log
+            p
+              | Measure fuel economy for each vehicle and stay on top of fuel expenses. See your
+              | cost per mile for each vehicle, and save money by easily identifying poorly performing
+              | vehicles.
+        .row
+          .span1
+            #reduce-risk.benefit-icon
+          .span7
+            h3 Reduce risk &amp; ensure compliance
+            p
+              | Track inspections and adhere to regulatory laws. Pinpoint problem vehicles and drivers in your fleet, and
+              | become proactive instead of reactive to issues.
+      .span8
+        .row
+          .span1
+            #operate-efficiently.benefit-icon
+          .span7
+            h3 Improve fleet efficiency
+            p
+              | Minimize unplanned downtime and keep your vehicles on the road longer. Automate preventative
+              | maintenance scheduling and be reminded when it's time for service.
+            p
+              | Save time and money by being more organized.
+        .row
+          .span1
+            #manage-expenses.benefit-icon
+          .span7
+            h3 Manage expenses and reduce costs
+            p
+              | Increase your bottom line by reducing rework costs and saving on fuel expenditures. Eliminate
+              | fines and late fees because of overdue licenses and permits.
+        .row
+          .span1
+            #work-together.benefit-icon
+          .span7
+            h3 Multiple users per account
+            p
+              | Vehicles are a mission-critical part of daily operations and better visibility leads to
+              | better decisions.
+            p
+              | Increase visibility into fleet maintenance and equipment costs for all stakeholders and
+              | keep everyone in the loop.
+        .well
+          a.youtube href="http://www.youtube.com/embed/LrywyB-_a2M?rel=0&amp;wmode=transparent&amp;autoplay=1" title="Reports in Fleetio"
+            img alt="Fleet management software reports" height="252" src="/images/site/reports-video-thumb.png" width="420"
+          h6 Introducing new reports in Fleetio
+          p style="font-size: 90%; margin:0;"
+    hr/
+    blockquote.big-quote
+      h2
+        | Fleetio has allowed us to focus on our primary concentration &mdash; Landscape &amp; Artificial
+        | Turf Services. We have been able to maintain our fleet with little downtime due to poor vehicle
+        | performance.
+      small
+        | Cory Milam,
+        a href="http://www.eliteturfcare.com/" target="_blank" title="Elite TurfCare Group website"
+          | Elite TurfCare Group
+    .well.ac
+      h3
+        a href="/tour" title="Fleet maintenance software tour"
+        | ,
+        a href="/pricing" title="Fleet maintenance software pricing"
+          | check out our pricing
+        | or
+        a href="https://secure.fleetio.com/register" title="Sign up for Fleetio"
+          | sign up for free
+        | \&rarr;
+  footer
+    .container
+      .row
+        .span10
+          .row
+            .span3
+              h4 Product
+              ul.unstyled
+                li
+                  a href="/"
+                li
+                  a href="/why"
+                li
+                  a href="/tour"
+                li
+                  a href="/pricing"
+                li
+                  a href="/faq"
+            .span4
+              h4 More
+              ul.unstyled
+                li
+                  a href="http://blog.fleetio.com"
+                li
+                  a href="/roi"
+                li
+                  a href="/fleet-management-software"
+                li
+                  a href="/vehicle-maintenance-software"
+            .span3
+              h4 Company
+              ul.unstyled
+                li
+                  a href="/about"
+          h4
+            | Subscribe to our newsletter
+          p
+            | Hear about new features, tips & other updates.
+          form#newsletter_list_form action="http://rarestep.us1.list-manage.com/subscribe/post?u=d4a006f9816053fb9b37816ea&amp;id=61cdd86e5c" method="post" name="mc-embedded-subscribe-form" target="_blank"
+            .clearfix
+              input.span4 name="EMAIL" placeholder="email address" type="email"
+              input.btn name="subscribe" type="submit" value="Subscribe"
+    #footer-floor
+      .container
+        .row
+          .span10
+            h3#phone
+              | 1-800-975-5304
+            p
+              | \&copy; 2011
+                a href="http://www.rarestep.com" title="RareStep - Remarkable web-based software and websites in Birmingham, AL"
+              | All Rights Reserved.
+              | \&nbsp;
+              a href="/terms"
+              | \&nbsp;&&nbsp;
+              a href="/privacy"
+              | \.
+          #elsewhere-msg.span3.ar
+            h4 Stay in touch:
+          #elsewhere-icons.span3
+            a.twitter href="http://twitter.com/fleetio"
+

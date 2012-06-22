@@ -1,0 +1,34 @@
+legend Customers
+/ p
+/   = link_to(new_admin_customer_path, :class=>'btn btn-primary') do
+/     i.icon-white.icon-plus
+/     '
+/     | New SendEmail
+
+
+table.table.table-striped
+  thead
+    tr
+      th.span1 Active
+      th Name
+      th Email
+      th Created At
+      th Actions
+  tbody
+    - @customers.each do |customer|
+      tr
+        td
+          = button_status(customer.active, '#')
+        td= customer.name
+        td= customer.user.email
+        td= customer.created_at
+        td
+          = link_to(edit_admin_customer_path(customer), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            | Edit
+          '
+          = link_to(admin_customer_path(customer), class: 'btn btn-danger', method: :delete) do
+            i.icon-white.icon-trash
+            '
+            | Remove

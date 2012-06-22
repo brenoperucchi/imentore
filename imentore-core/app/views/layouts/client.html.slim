@@ -1,0 +1,72 @@
+doctype html
+html
+  head
+  title ImentoreBase
+  = stylesheet_link_tag    "client"
+  = javascript_include_tag "client"
+  = csrf_meta_tags
+  css:
+    body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+          }
+          .sidebar-nav {
+            padding: 9px 0;
+          }
+
+body
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container-fluid
+        a.btn.btn-navbar[data-toggle="collapse" data-target=".nav-collapse"]
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.brand[href="/client"]
+          | Imentore
+        .nav-collapse
+          ul.nav
+            .tabbable
+            / li.active
+            /   a[href="#"]
+            /     | Configuration
+            / li
+            /   a[href="#about"]
+            /     | Managament
+            / li
+            /   a[href="#contact"]
+            /     | Reports
+          - if user_signed_in?
+            p.navbar-text.pull-right
+              | Logged in as
+              '
+              a[href="#"]
+                = current_user.userable.name
+              '  and
+              = link_to("Logout", destroy_user_session_path, method: :delete)
+          - else
+            p.navbar-text.pull-right
+              = link_to "Sign-in", new_client_session_path
+              / | Sign-in as
+              / a[href="#"]
+
+  .container-fluid
+    .row-fluid
+      .span2
+        - if user_signed_in?
+          .well.sidebar-nav
+            ul.nav.nav-list
+              li.nav-header
+                | Sidebar
+              li
+                = link_to("My Cart", cart_path)
+              li
+                = link_to("Login", new_user_session_path)
+              li= link_to("Address", client_address_path)
+              / li
+              /   a[href="#"]
+              /     | Link
+      .span10
+        p core/layouts/client
+        = debug flash
+        = yield

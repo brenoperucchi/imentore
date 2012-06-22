@@ -18,3 +18,8 @@ Then "I see the products list" do
   product = @store.products.first
   page.should have_content(product.name)
 end
+
+When /^I edit a product variant$/ do
+  visit admin_products_url(host: 'myshop.imentore.dev')
+  click_link "Variants"
+end

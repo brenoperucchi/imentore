@@ -11,3 +11,7 @@ Feature: Manage products
   Scenario: Products list in root
     When I go to myshop.imentore.dev
     Then I see the products list
+
+  Scenario: Add Image to product variant
+    When I edit a product variant
+

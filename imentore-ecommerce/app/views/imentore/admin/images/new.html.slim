@@ -1,0 +1,27 @@
+- content_for :breadcrumb do
+  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+
+legend Images
+
+= form_for(@image, url: admin_product_variant_images_path(@variant.product.id, @variant.id), html: { multipart: true }) do |f|
+  .row.fileupload-buttonbar
+    .span7
+      span.btn.btn-success.fileinput-button
+        i.icon-plus.icon-white
+        span Add files
+        = file_field_tag "image[picture]", multiple: true
+
+      button.btn.btn-primary.start(type="submit")
+        i.icon-upload.icon-white
+        span Start upload
+
+    .span5
+      .progress.progress-success.progress-striped.active.fade
+        .bar(style="width:0%;")
+
+  .fileupload-loading
+
+  table.table.table-striped
+    tbody.files(data-toggle="modal-gallery" data-target="#modal-gallery")
+
+= render "imentore/admin/assets/jquery-file-upload-templates"
