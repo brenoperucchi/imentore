@@ -109,6 +109,9 @@ module Imentore
     has_many :coupons
     has_many :coupons_orders
     has_many :send_emails
+    has_many :categories
+    has_many :product_brands
+    has_many :pages
 
     accepts_nested_attributes_for :owner, :address
 

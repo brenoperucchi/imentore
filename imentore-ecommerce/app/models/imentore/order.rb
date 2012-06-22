@@ -35,6 +35,9 @@ module Imentore
   class Order < ActiveRecord::Base
     attr_accessor :billing_checkbox, :shipping_checkbox
 
+    mattr_accessor :sent_email
+    self.sent_email = false
+
     serialize :items, Array
 
     serialize :billing_address, Imentore::Address
@@ -48,19 +51,12 @@ module Imentore
 
     has_many :coupons_orders
     has_many :coupons, :through => :coupons_orders, :source => :coupon
-
+    validate :valid_addresses, :on => :update
 
     validates :customer_name, :customer_email, presence: true, :on => :update
 
-    validates_each :billing_address, :shipping_address, :on => :update do |record, attr, value|
-      problems = ''
-      attributes = [:name, :street, :city, :state, :country, :zip_code, :phone]
-      attributes.each do |key|
-        if value[key].blank?
-          value.errors.add(key, "blank")
-            record.errors.add(:base, "address problem")
-        end
-      end
+    def valid_addresses
+      errors.add(:base, "err") unless (billing_address.valid? && shipping_address.valid?)
     end
 
     def update_status
@@ -110,7 +106,7 @@ module Imentore
     end
 
     def chargeable?
-      delivery_calculate(zip_code, delivery_method).value + total_amount > 0
+       total_amount > 0
     end
 
     def deliverable?
