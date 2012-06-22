@@ -14,18 +14,25 @@ Imentore::BaseController.class_eval do
   end
 
   def theme_layout
-    if current_store && current_store.theme.default_layout
-      current_store.theme.default_layout
-    else
-      'public'
-    end
+    "layouts/#{current_store.theme.name}"
   end
 
   private
 
-  # def _render_template(options = {})
-  #   binding.pry
-  #   options[:layout] = lookup_context.view_paths.paths.first.the_template.layout if lookup_context.view_paths.paths.first.the_template
-  #   super
-  # end
+  def _process_options(options)
+    return if options.key?(:text) || options.key?(:inline)
+
+    template_id = view_paths.find(options[:template], options[:prefixes])
+
+    if template_id
+      template_id = template_id.identifier.split("-").first
+      template = Imentore::Template.find(template_id)
+
+      if template && template.layout.present?
+        options[:layout] = template.layout
+      end
+    end
+  end
+
 end
+
