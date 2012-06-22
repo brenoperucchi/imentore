@@ -12,6 +12,7 @@ Imentore::Core::Engine.routes.draw do
         resources :emails, only: [:index, :create, :update, :destroy], to: "domain_emails"
       end
       resources :coupons
+      resources :product_brands,  only: [:new, :create]
       resources :products,  only: [:index, :new, :create, :edit, :update] do
         resources :options,  to: "product_options"
         resources :variants, to: 'product_variants' do
@@ -23,6 +24,8 @@ Imentore::Core::Engine.routes.draw do
       resources :orders,  only: [:index, :edit, :destroy] do
         get 'confirm_invoice', 'confirm_delivery', :on => :member
       end
+
+      resources :categories, only: [:edit, :index, :update, :create, :destroy]
     end
 
     resources :order_assets, only: [:new, :create, :destroy, :index]
@@ -31,7 +34,9 @@ Imentore::Core::Engine.routes.draw do
       get 'calculate_shipping', on: :member
     end
 
-    match "coupon",             to: "carts#add_coupon",   as: "add_coupon"
+    match "pages/:page",                to: "pages#show",         as: "page"
+    match "categories/*categories",     to: "categories#index",   as: "categories"
+    match "coupon",                     to: "coupons#add_coupon", as: "add_coupon"
     match "checkout",           to: "checkouts#new",      as: "checkout"
     match "checkout/confirm",   to: "checkouts#confirm",  via: "get",   as: "confirm_checkout"
     match "checkout/confirm",   to: "checkouts#confirm",  via: "put",   as: "confirm_checkout"

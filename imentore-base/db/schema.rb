@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612185726) do
+ActiveRecord::Schema.define(:version => 20120621233129) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -35,6 +35,22 @@ ActiveRecord::Schema.define(:version => 20120612185726) do
 
   create_table "imentore_carts", :force => true do |t|
     t.text "items"
+  end
+
+  create_table "imentore_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "handle"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "ancestry"
+  end
+
+  add_index "imentore_categories", ["ancestry"], :name => "index_imentore_categories_on_ancestry"
+
+  create_table "imentore_categories_products", :force => true do |t|
+    t.integer "product_id"
+    t.integer "category_id"
   end
 
   create_table "imentore_coupons", :force => true do |t|
@@ -69,8 +85,9 @@ ActiveRecord::Schema.define(:version => 20120612185726) do
     t.string   "person_type"
     t.integer  "store_id"
     t.string   "department"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "active",      :default => true
   end
 
   create_table "imentore_deliveries", :force => true do |t|
@@ -169,6 +186,17 @@ ActiveRecord::Schema.define(:version => 20120612185726) do
     t.string   "customer_name"
   end
 
+  create_table "imentore_pages", :force => true do |t|
+    t.boolean  "active"
+    t.string   "name"
+    t.string   "handle"
+    t.text     "body"
+    t.text     "html"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "imentore_payment_methods", :force => true do |t|
     t.string  "name"
     t.string  "handle"
@@ -176,6 +204,13 @@ ActiveRecord::Schema.define(:version => 20120612185726) do
     t.integer "store_id"
     t.boolean "active",      :default => false
     t.text    "description"
+  end
+
+  create_table "imentore_product_brands", :force => true do |t|
+    t.string   "name"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "imentore_product_variants", :force => true do |t|
@@ -195,8 +230,10 @@ ActiveRecord::Schema.define(:version => 20120612185726) do
     t.text     "description"
     t.string   "permalink"
     t.integer  "store_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "active",           :default => false
+    t.integer  "product_brand_id"
   end
 
   create_table "imentore_send_emails", :force => true do |t|
