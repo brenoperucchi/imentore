@@ -3,7 +3,7 @@ module Imentore
     class ProductOptionsController < BaseController
       inherit_resources
       defaults resource_class: Imentore::OptionType, collection_name: 'options', instance_name: 'option'
-      actions :index, :create, :destroy
+      actions :index, :create, :destroy, :edit, :update
       belongs_to :product, parent_class: Imentore::Product
 
       after_filter :create_option_types, only: [:create]

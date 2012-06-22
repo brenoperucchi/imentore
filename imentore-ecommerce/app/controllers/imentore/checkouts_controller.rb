@@ -43,7 +43,9 @@ module Imentore
 
           @order.billing_checkbox = params[:order][:billing_checkbox] if params[:order][:billing_checkbox]
           @order.shipping_checkbox = params[:order][:shipping_checkbox] if params[:order][:shipping_checkbox]
-          @order.save
+          if @order.save
+            @order.place
+          end
         end
         if not @order.valid?
           render :new

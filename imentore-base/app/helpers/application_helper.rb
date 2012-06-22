@@ -2,6 +2,23 @@
 module ApplicationHelper
   include ActionView::Helpers
 
+  def button_status(status, url, msg_ok = nil, msg_err = nil)
+    msg_ok ||= 'Active'
+    msg_err ||= 'Disabled'
+    case status
+    when 'placed', true
+      link_to(url, class: 'btn disabled btn-warning') do
+        concat(content_tag(:i, '', :class=>'icon-white icon-ok'))
+        concat(' ' + msg_ok)
+      end
+    when 'pending', false
+      link_to(url, class: 'btn disabled btn-danger') do
+        concat(content_tag(:i, '', :class=>'icon-white icon-asterisk'))
+        concat(' ' + msg_err)
+      end
+    end
+  end
+
   def states
     # encoding: utf-8
     { "Alagoas" => "AL", "Amapá" => "AP",
@@ -140,11 +157,10 @@ module ApplicationHelper
   end
 
   def collection_product(variants)
-    test = variants.collect do |v_drop|
-      Imentore::ProductVariant.find(v_drop.id).options.collect{|option| [option.option_type.name, option.value ]}
-      # Imentore::ProductVariant.find(v_drop.id).options.collect{|option| [option.option_type.name, option.option_type.id, option.product_variant_id, option.value ]}
+    test = variants.collect do |variant_drop|
+      Imentore::ProductVariant.find(variant_drop.id).options.collect{|option| [option.option_type.name, option.value ]}
+      # Imentore::ProductVariant.find(variant_drop.id).options.collect{|option| [option.option_type.name, option.option_type.id, option.product_variant_id, option.value ]}
     end
-    # binding.pry
   end
 
 
