@@ -1,0 +1,49 @@
+- content_for :footer do
+  javascript:
+    $(document).ready(function(){
+      var action = $('form#edit').attr('action')
+      $('a#edit_category').click(function(e){
+        $('.div#edit').slideDown('slow')
+        var id = $(this).attr('category_id')
+        var parent_id = $(this).attr('parent_id')
+        var name = $(this).parents('tr').find('td#name').text()
+        var handle = $(this).parents('tr').find('td#handle').text()
+
+        $('form#edit').find('input#category_name').val(name)
+        $('form#edit').find('input#category_handle').val(handle)
+        if (parent_id == undefined) {
+          $('form#edit').find('select').find('option:selected').removeAttr('selected')
+          $('form#edit').find('select').find('option').first().attr('selected', 'selected')
+        }else{
+          $('form#edit').find('select').find('option').first().removeAttr('selected')
+          $('form#edit').find('select').find('option[value='+parent_id+']').attr('selected', true)
+        }
+        $('form#edit').attr('action', action+'/'+id)
+        $('form#edit').attr('method', 'post')
+        e.preventDefault();
+      })
+
+
+    })
+
+legend List Categories
+
+= categories_table(@categories)
+
+hr
+.div.hide#edit
+  h3 Edit Categories
+  = simple_form_for([:admin, @category], :html=> {:class =>"well form-inline", id: 'edit', method: 'put'}) do |f|
+    = f.error_notification
+    = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => "Select Parent", input_html: {:class =>  "inline"}, :label => false, :disabled => true
+    = f.input :name, :placeholder => "Enter Option Name", input_html: {:class =>  "inline"}, :label => false
+    = f.input :handle, placeholder: "Enter Handle Name", input_html: {:class =>  "inline"}, :label => false
+    = f.button :submit, "Update Category"
+
+h3 Create Categories
+= simple_form_for([:admin, @category], :html=> {:class =>"well form-inline"})do |f|
+  = f.error_notification
+  = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => "Select Parent", input_html: {:class =>  "inline"}, :label => false
+  = f.input :name, :placeholder => "Enter Option Name", input_html: {:class =>  "inline"}, :label => false
+  = f.input :handle, placeholder: "Enter Handle Name", input_html: {:class =>  "inline"}, :label => false
+  = f.button :submit
