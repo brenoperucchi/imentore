@@ -114,14 +114,14 @@
         = f.input :product_brand_name, label: 'Product Brand', input_html: {class: 'span5', 'data-provide'=>"typeahead", 'data-source'=>"#{brand_collection(current_store)}", value: f.object.try(:product_brand).try(:name), autocomplete:"off"}, placeholder: 'Choose a service Type...'
     .row-fluid
       .span10
-        = link_to('#modalNewProductBrand', class: :btn, 'data-toggle'=>'modal') do
+        = link_to('#product-brand', class: :btn, 'data-toggle'=>'modal') do
           i.icon-black.icon-plus
           | New Brand
 
     .form-actions
       = f.submit(:class => "btn btn-primary")
 
-.modal#modalNewProductBrand.hide.fade.in
+#product_brand.modal.hide.fade.in
   = render file: 'imentore/admin/product_brands/new.html.slim', product: @product
 
 .hide

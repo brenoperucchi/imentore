@@ -112,6 +112,7 @@ module Imentore
     has_many :categories
     has_many :product_brands
     has_many :pages
+    has_many :feedbacks
 
     accepts_nested_attributes_for :owner, :address
 

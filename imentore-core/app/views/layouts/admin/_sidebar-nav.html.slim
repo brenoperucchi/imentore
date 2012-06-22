@@ -7,12 +7,11 @@
         a[href="#"]
           | Link
 
-    ul.nav.nav-list.report.hide
+    ul.nav.nav-list.reports.hide
       li.nav-header
-        | Report
-      li
-        a[href="#"]
-          | Link
+        | Reports
+      li.action#feedback
+        = link_to("Feedback", admin_feedbacks_path)
 
     ul.nav.nav-list.managament.hide
       li.nav-header

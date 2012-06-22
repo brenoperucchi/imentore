@@ -1,0 +1,33 @@
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+
+legend Feedbacks
+
+table.table
+  thead
+    tr
+      th.minimal Status
+      th Name
+      th subject
+      th About
+      th action
+  tbody
+    - @feedbacks.each do |feedback|
+      tr
+        td
+          = button_status(feedback.active, edit_admin_feedback_path(feedback))
+        td= feedback.name
+        td= feedback.email
+        td= feedback.subject
+        td= feedback.feedbackable.class.name
+        / td= button_to("Destroy", admin_feedback_path(feedback), method: :delete, :class=>"btn-danger")
+        td
+          = link_to(edit_admin_feedback_path(feedback), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            | Edit
+          '
+          = link_to(admin_feedback_path(feedback), method: :delete, :class=>"btn btn-danger") do
+            i.icon-white.icon-trash
+            '
+            | Remove

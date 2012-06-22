@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120621233129) do
+ActiveRecord::Schema.define(:version => 20120622200232) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -128,6 +128,20 @@ ActiveRecord::Schema.define(:version => 20120621233129) do
     t.string   "department"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "imentore_feedbacks", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "subject"
+    t.text     "question"
+    t.text     "answer"
+    t.integer  "feedbackable_id"
+    t.string   "feedbackable_type"
+    t.integer  "user_id"
+    t.integer  "store_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "imentore_images", :force => true do |t|

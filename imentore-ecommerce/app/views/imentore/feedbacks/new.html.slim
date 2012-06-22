@@ -1,0 +1,16 @@
+- @feedback = current_store.feedbacks.new if @feedback.nil?
+= simple_form_for(@feedback, html: { multipart: true, class: 'form-horizontal' }) do |f|
+  .modal-header
+    button(type="button" class="close" data-dismiss="modal")
+     ' x
+    h3 FeedBack
+  .modal-body(style='height:265px;')
+    = f.input :name, input_html: {}, placeholder: 'Type new Product Brand'
+    = f.input :subject, input_html: {}, placeholder: 'Type new Product Brand'
+    = f.input :question, input_html: {class: 'input-xlarge'}, placeholder: 'Type new Product Brand'
+
+  .modal-footer
+    a.btn[href='#' data-dismiss='modal']
+      | Close
+    = f.submit :class => 'btn btn-primary' do
+      | Save Changes

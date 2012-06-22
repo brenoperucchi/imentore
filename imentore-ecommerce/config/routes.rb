@@ -11,6 +11,7 @@ Imentore::Core::Engine.routes.draw do
       resources :domains, only: [:index, :create, :destroy] do
         resources :emails, only: [:index, :create, :update, :destroy], to: "domain_emails"
       end
+      resources :feedbacks, only: [:uodate, :edit, :index, :destroy]
       resources :coupons
       resources :product_brands,  only: [:new, :create]
       resources :products,  only: [:index, :new, :create, :edit, :update] do
@@ -28,6 +29,7 @@ Imentore::Core::Engine.routes.draw do
       resources :categories, only: [:edit, :index, :update, :create, :destroy]
     end
 
+    resources :feedbacks, only: [:create, :new]
     resources :order_assets, only: [:new, :create, :destroy, :index]
     resources :products,  only: [:index, :show]
     resource  :cart,      only: [:show, :create, :update, :destroy, :calculate_shipping] do

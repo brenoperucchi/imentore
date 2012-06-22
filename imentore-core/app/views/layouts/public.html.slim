@@ -14,6 +14,15 @@ html
           .sidebar-nav {
             padding: 9px 0;
           }
+    [class^="picons-16-white"], [class*=" picons-16-white"] {
+      background-image: url(/images/public/picons-16-white.png);
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 20px;
+      height: 16px;
+      line-height: 16px;
+      vertical-align: text-top;
+    }
 
 - content_for :footer do
   javascript:
@@ -62,6 +71,9 @@ html
     })
 
 body
+
+  #feedback.hide.fade.in.modal
+    = render template: 'imentore/feedbacks/new'
   .navbar.navbar-fixed-top
     .navbar-inner
       .container-fluid
@@ -81,6 +93,10 @@ body
               = link_to("New Customer", new_customer_path)
           - if user_signed_in?
             p.navbar-text.pull-right
+              = link_to('#feedback', style:'margin-right:35px;', 'data-toggle'=>'modal') do
+                i.picons-16-white
+                | FeedBack
+
               | Logged in as
               '
               a[href="#"]
