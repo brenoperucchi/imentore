@@ -3,4 +3,5 @@
  *= require bootstrap-responsive
  *= require_tree .
  *= require imentore-cms
+ *= require admin/ui.dynatree
 */

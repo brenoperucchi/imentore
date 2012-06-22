@@ -48,34 +48,47 @@
           $('#order_'+type+'_phone').val("");
         }
       })
-      // $('a.accordion-toggle').click(function(){
-      //   $('.form-actions.hide').fadeOut('slow');
-      // })
-      $('a.next').click(function(){
-        $('#collapseOne').collapse('toggle')
-        $('#collapseTwo').collapse('toggle')
-        $('.form-actions.hide').slideDown('slow');
+      $.fn.collapsy = function(option, id) {
+        var self = $(this).attr('href');
+        if (self == undefined){
+          self = id;
+        }
+        if (self == '#collapseTwo'){
+          $('.form-actions.hide').fadeIn('slow');
+        }
+        switch(option){
+          case 'show':
+            $(self).slideDown('slow');
+            break;
+          case 'hide':
+            $(self).slideUp('slow');
+            break;
+          case 'toggle':
+            if (!$(self).is(':visible')){
+              $(self).slideDown('slow')
+            } else {
+              $(self).slideUp('slow')
+            }
+            break
+        }
+      }
+      $('a.accordion-toggle[data-toggle=collapsy]').click(function(e){
+        $('.accordion-body.collapsy').slideUp();
+        $(this).collapsy('toggle')
+        e.preventDefault();
       })
-      $('a.accordion-toggle:last').click(function(){
+      $('a.next').click(function(e){
+        $('#collapseOne').collapsy('hide', '#collapseOne');
+        $('#collapseTwo').collapsy('show', '#collapseTwo');
         $('.form-actions.hide').slideDown('slow');
+        e.preventDefault();
       })
-      // $('a.next').click(function(){
-      //   var self = $(this).parents('div[id^="collapse"]')
-      //   var open = false
-      //   $(this).parents('div[id^="collapse"]').collapse('toggle')
-      //   $('div[id^="collapse"]').each(function(e){
-      //     if ($(this)[0] == self[0]){
-      //       if (e != 1){
-      //         open = $('div[id^="collapse"]')[1+e]
-      //       }
-      //     }
-      //   })
-      //   if (open == false){
-      //     $('.form-actions.hide').toggle('slow');
-      //   }else{
-      //     $(open).collapse('show')
-      //   }
-      // })
+      $('span.help-inline').each(function(e){
+        var id = $(this).parents('.accordion-group').find('a').attr('href')
+        $(id).collapsy('show', id);
+        $('.form-actions.hide').show();
+      })
+
       var method_id = session_get('delivery_method_id')
       if (method_id != null){
         $('select#delivery_method').find('option[value='+method_id+']').attr('selected', true)
@@ -154,6 +167,7 @@
 
 .row
   = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
+    = f.error_notification
     fieldset#address_customer
       - if user_signed_in? and not current_user.userable.owner?
         .info.hide
@@ -179,27 +193,25 @@
     #accordion2.accordion
       .accordion-group
         .accordion-heading
-          a.accordion-toggle[data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"]
+          a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion2" href="#collapseOne"]
             |  1) Billing and Shipping Address
-        #collapseOne.accordion-body.in.collapse[style="height: 0px; "]
-          .row
-            .accordion-inner
-              .span12
-                .row
-                  .span6
-                    .address
-                      = f.input :billing_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
-                      = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
-                        = render("shared/address", addr: addr)
-                  .span6
-                    .address
-                      = f.input :shipping_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'shipping_address' } if user_signed_in?
-                      = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
-                        = render("shared/address", addr: addr)
-                .span2.offset0
-                  a{href='#' class='btn next btn-success btn-larger'} Next
-                br
-                br
+        #collapseOne.accordion-body.in.collapsy.hide[style="height: auto; "]
+          .accordion-inner
+            .span12
+              .row
+                .span6
+                  .address
+                    = f.input :billing_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
+                    = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
+                      = render("shared/address", addr: addr)
+                .span6
+                  .address
+                    = f.input :shipping_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'shipping_address' } if user_signed_in?
+                    = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
+                      = render("shared/address", addr: addr)
+              .span1.offset0
+                a{href='#' class='btn next btn-success btn-larger'} Next
+            .clearfix
 
 
           / .row
@@ -212,27 +224,25 @@
           /         | Level 2 of column
       .accordion-group
         .accordion-heading
-          a.accordion-toggle[data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo"]
+          a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion2" href="#collapseTwo"]
             |  2) Payment and Delivery Method
-        #collapseTwo.accordion-body.collapse[style="height: 0px; "]
-          .row
-            .accordion-inner
-              .span12
-                .row
-                  .span5
-                    fieldset#payment-method
-                      = f.simple_fields_for :invoice, f.object.invoice do |inv|
-                        = inv.input :payment_method, collection: current_store.payment_methods.active, :selected => f.object.invoice.try(:payment_method_id), :prompt => "select"
-                  .span4
-                    fieldset#delivery-method
-                      = f.simple_fields_for :delivery, f.object.delivery do |del|
-                        = del.input :delivery_method, collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :prompt => "select", :input_html => { id: 'delivery_method'}
-                  .span2
-                      a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
-                        i.icon-refresh
-                        | Calculate
-
-                  .clearfix
+        #collapseTwo.accordion-body.collapsy.hide[style="height: auto; "]
+          .accordion-inner
+            .span12
+              .row
+                .span5
+                  fieldset#payment-method
+                    = f.simple_fields_for :invoice, f.object.invoice do |inv|
+                      = inv.input :payment_method, collection: current_store.payment_methods.active, :selected => f.object.invoice.try(:payment_method_id), :prompt => "select"
+                .span4
+                  fieldset#delivery-method
+                    = f.simple_fields_for :delivery, f.object.delivery do |del|
+                      = del.input :delivery_method, collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :prompt => "select", :input_html => { id: 'delivery_method'}
+                .span2
+                    a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
+                      i.icon-refresh
+                      | Calculate
+            .clearfix
     .form-actions.hide
       .span2
         - if current_store.config.order_asset

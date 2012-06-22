@@ -7,14 +7,14 @@ p= link_to("New delivery Method", new_admin_delivery_method_path, :class=>'btn b
 table.table
   thead
     tr
-      th.minimal Active
+      th Active
       th Name
       th action
   tbody
     - @delivery_methods.each do |delivery|
       tr
         td
-          i(class='#{delivery.active}')
+          = button_status(delivery.active, '#')
         td= delivery.name
         / td= button_to("Destroy", admin_delivery_method_path(delivery), method: :delete, :class=>"btn-danger")
         td

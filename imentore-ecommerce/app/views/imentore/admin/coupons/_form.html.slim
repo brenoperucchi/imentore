@@ -6,7 +6,7 @@
   = f.input :value
   = f.input :limit_customer
   = f.input :limit_use
-  = f.input :due_at, as: :date
+  = f.input :due_at, as: :date, input_html: {:style=>"width:auto;"}
 
   .form-actions
     = f.button :submit, :class => 'btn-primary'

@@ -1,3 +1,91 @@
+- content_for :footer do
+  javascript:
+    $(function(){
+      $('.typeahead').typeahead()
+      function updateCategories(cat_ids){
+        $.ajax({
+          url: '#{{admin_product_path(@product)}}',
+          type: 'put',
+          data: {cat_ids:cat_ids},
+          dataType: 'json',
+          success: function(json) {
+          }
+        })
+      }
+
+      $("#tree3").dynatree({
+        initAjax: {
+          url: '#{{admin_categories_path}}',
+          data: {
+            product_id: '#{{@product.id}}',
+          }
+        },
+        checkbox: true,
+        selectMode: 2,
+        onSelect: function(select, node) {
+          // Get a list of all selected nodes, and convert to a key array:
+          var selKeys = $.map(node.tree.getSelectedNodes(), function(node){
+            return node.data.key;
+          });
+          $("#echoSelection3").text(selKeys.join(", "));
+
+          // Get a list of all selected TOP nodes
+          var selRootNodes = node.tree.getSelectedNodes(true);
+          // ... and convert to a key array:
+          var selRootKeys = $.map(selRootNodes, function(node){
+            return node.data.key;
+          });
+          $("#echoSelectionRootKeys3").text(selRootKeys.join(", "));
+          $("#echoSelectionRoots3").text(selRootNodes.join(", "));
+
+          updateCategories(selKeys)
+        },
+        onDblClick: function(node, event) {
+          node.toggleSelect();
+        },
+        onKeydown: function(node, event) {
+          if( event.which == 32 ) {
+            node.toggleSelect();
+            return false;
+          }
+        },
+        // The following options are only required, if we have more than one tree on one page:
+        //  initId: "treeData",
+        cookieId: "dynatree-Cb3",
+        idPrefix: "dynatree-Cb3-"
+      });
+      $("#btnToggleSelect").click(function(){
+        $("#tree2").dynatree("getRoot").visit(function(node){
+          node.toggleSelect();
+
+        });
+        return false;
+      });
+      $("#btnDeselectAll").click(function(){
+        $("#tree2").dynatree("getRoot").visit(function(node){
+          node.select(false);
+        });
+        return false;
+      });
+      $("#btnSelectAll").click(function(){
+        $("#tree2").dynatree("getRoot").visit(function(node){
+          node.select(true);
+        });
+        return false;
+      });
+      <!-- Start_Exclude: This block is not part of the sample code -->
+      $("#skinCombo")
+      .val(0) // set state to prevent caching
+      .change(function(){
+        var href = "../src/"
+          + $(this).val()
+          + "/ui.dynatree.css"
+          + "?reload=" + new Date().getTime();
+        $("#skinSheet").attr("href", href);
+      });
+      <!-- End_Exclude -->
+    });
+
 - content_for :breadcrumb do
   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
@@ -5,8 +93,35 @@
 
 .tab#product
   = simple_form_for([:admin, @product], :html => {:class => 'form-horizontal'}) do |f|
-    = f.error_notification
-    = f.input :name
-    = f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
+    .row
+      .span10
+        .row
+          .span7
+              = f.error_notification
+              = f.input :active
+              = f.input :name
+              = f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
+          .span4
+            h4 Categories
+            #tree3
+    legend
+      | Brand
+      '
+      small
+       | Select the Brand of Product
+    .row
+      .span10
+        = f.input :product_brand_name, label: 'Product Brand', input_html: {class: 'span5', 'data-provide'=>"typeahead", 'data-source'=>"#{brand_collection(current_store)}", value: f.object.try(:product_brand).try(:name), autocomplete:"off"}, placeholder: 'Choose a service Type...'
+    .row-fluid
+      .span10
+        = link_to('#modalNewProductBrand', class: :btn, 'data-toggle'=>'modal') do
+          i.icon-black.icon-plus
+          | New Brand
+
     .form-actions
-      = f.submit(:class => "btn-primary")
+      = f.submit(:class => "btn btn-primary")
+
+.modal#modalNewProductBrand.hide.fade.in
+  = render file: 'imentore/admin/product_brands/new.html.slim', product: @product
+
+.hide

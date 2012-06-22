@@ -51,12 +51,11 @@ html
 - content_for :footer do
   javascript:
     $(document).ready(function(){
-      if ( $('div.alert.alert-success').text().length > 1 ) {
-        $('div.alert.alert-success').slideDown('');
-      }
-      if ( $('div.alert.alert-error').text().length > 1 ) {
-        $('div.alert.alert-error').slideDown('');
-      }
+      $('div.alert').each(function(){
+        if ( $(this).text().length > 1 ) {
+         $(this).slideDown('slow')
+        }
+      })
       $('.close').bind('click',function(){
         $(this).parents('div.hide').first().slideUp('slow');
       })
@@ -92,16 +91,15 @@ body
             p.navbar-text.pull-right
               = link_to "Sign-in", new_client_session_path
   .container
-    section(id="gridSystem")
-      .notification
-        .div.alert.alert-error.hide
-          a(class="close" data-dismiss="alert" href="#")
-            = "x"
-          = flash[:alert]
-        .div.alert.alert-success.hide
-          a(class="close" data-dismiss="alert" href="#")
-            = "x"
-          = flash[:success]
-      = yield
+    .notification
+      .div.alert.alert-error.hide
+        a(class="close" data-dismiss="alert" href="#")
+          = "x"
+        = flash[:alert]
+      .div.alert.alert-success.hide
+        a(class="close" data-dismiss="alert" href="#")
+          = "x"
+        = flash[:success]
+    = yield
   .footer
     = yield :footer

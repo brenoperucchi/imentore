@@ -8,17 +8,18 @@ table.table
   thead
     tr
       th.minimal #
+      th Status
       th Data
       th Client
-      th Status
       th Action
   tbody
     - @orders.each do |order|
       tr
         td= order.id
+        td
+          = button_status(order.status, '#', 'placed', 'not_placed')
         td= order.created_at
         td= order.customer_email
-        td= order.status
         td
           = link_to(edit_admin_order_path(order), :class=>"btn btn-small") do
             i.icon-edit.icon-black

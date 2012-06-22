@@ -13,8 +13,15 @@ html
           .sidebar-nav {
             padding: 9px 0;
           }
+
+    .mini{
+      width:10%;
+    }
+    .super-mini{
+      width:5%!important;
+    }
     table tr th:first-child{
-      width: 30px;
+      width:95px;
     }
     form.simple_form.form-inline div.control-group {
       display: inline-block;
@@ -71,56 +78,7 @@ body
   .container-fluid
     .row-fluid
       .span2
-        - if user_signed_in?
-          .well.sidebar-nav
-            ul.nav.nav-list.dashboard.hide
-              li.nav-header
-                | Dashboard
-              li
-                a[href="#"]
-                  | Link
-
-            ul.nav.nav-list.report.hide
-              li.nav-header
-                | Report
-              li
-                a[href="#"]
-                  | Link
-
-            ul.nav.nav-list.managament.hide
-              li.nav-header
-                | Managament
-              li.action#orders
-                = link_to("Orders", admin_orders_path)
-              li.action#products
-                = link_to("Products", admin_products_path)
-              li.action#coupons
-                = link_to("Coupons", admin_coupons_path)
-
-            ul.nav.nav-list.configuration.hide
-              li.nav-header
-                | Configuration
-              li.action#general_settings
-                = link_to("General Settings", edit_admin_store_path)
-              li.action#virtual_settings
-                = link_to("Virtual Settings", admin_edit_settings_path(:virtual))
-
-              li.nav-header
-                | Others  (new)
-              li.action#themes
-                = link_to("Themes", admin_themes_path)
-              li.action#domains
-                = link_to("Domains", admin_domains_path)
-              li.action#send_emails
-                = link_to("Send Emails", admin_send_emails_path)
-
-              li.nav-header
-                | Methods
-              li.action#payment_method
-                = link_to("Payment Methods", admin_payment_methods_path)
-              li.action#delivery_method
-                = link_to("Delivery Methods", admin_delivery_methods_path)
-
+        = render 'layouts/admin/sidebar-nav'
       .span10
         = yield :breadcrumb
         .notification

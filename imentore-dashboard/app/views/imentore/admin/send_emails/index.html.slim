@@ -9,10 +9,10 @@ legend SendEmails
 /     | New SendEmail
 
 
-table.table
+table.table.table-striped
   thead
     tr
-      th.minimal Active
+      th.span1 Active
       th Name
       th subject
       th action
@@ -20,7 +20,7 @@ table.table
     - @send_emails.each do |send_email|
       tr
         td
-          i(class='#{send_email.active}')
+          = button_status(send_email.active, '#')
         td= send_email.name
         td= send_email.subject
         / td= button_to("Destroy", admin_send_email_path(send_email), method: :delete, :class=>"btn-danger")

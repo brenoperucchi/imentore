@@ -1,67 +1,77 @@
-- content_for :footer do
-  css:
-    .data-block{
-      // margin-bottom:18px;
-    }
 .row-fluid
-  .well
-    .span2
-      .row-fluid
+  .span3.well
+    .row-fluid
+      .span4
         .data-block
           h6.data-heading
             | Order ID
           h3
             | #
             = @order.id
-      hr
-      .row-fluid
+      .span5
+        .data-block
+          h6.data-heading
+            | Delivery Method
+          h3
+            = @order.delivery_method.name
+    hr
+    .row-fluid
+      .span4
         .data-block
           h6.data-heading
             | Order Amount
           h3
             = @order.total_amount
+      .span4
+        .data-block
+          h6.data-heading
+            | Invoice Method
+          h3
+            = @order.invoice_method.name
 
-    .span8
-      .row-fluid
-        .span4
-          .data-block
-            h6.data-heading
-              | Order Status
-            h3
-              = @order.status
-        .span4
-          .data-block
-            h6.data-heading
-              | Invoice Status
-            h3
-              = @order.invoice.status
-        .span4
-          .data-block
-            h6.data-heading
-              | Delivery Status
-            h3
-              = @order.delivery.status
-      hr
-      .row-fluid
-        .span4
-          .data-block
-            h6.data-heading
-              | Product Amount
-            h3
-              = @order.products_amount
-        .span4
-          .data-block
-            h6.data-heading
-              | Delivery Amount
-            h3
-              = @order.delivery_amount
-        .span4
-          .data-block
-            h6.data-heading
-              | Coupon Amount
-            h3
-              = @order.coupons_amount
-    .clearfix
+
+  .span9.well
+    .row-fluid
+      .span3
+        .data-block
+          h6.data-heading
+            | Order Status
+          h3
+            = @order.status
+      .span3
+        .data-block
+          h6.data-heading
+            | Invoice Status
+          h3
+            = @order.invoice.status
+      .span3
+        .data-block
+          h6.data-heading
+            | Delivery Status
+          h3
+            = @order.delivery.status
+
+    hr
+    .row-fluid
+      .span3
+        .data-block
+          h6.data-heading
+            | Product Amount
+          h3
+            = @order.products_amount
+      .span3
+        .data-block
+          h6.data-heading
+            | Coupon Amount
+          h3
+            = @order.coupons_amount
+      .span3
+        .data-block
+          h6.data-heading
+            | Delivery Amount
+          h3
+            = @order.delivery_amount
+  .clearfix
 
 .row-fluid
   .well.well-small

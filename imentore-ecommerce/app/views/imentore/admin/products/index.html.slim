@@ -9,16 +9,18 @@ p
     | New Product
 
 
-table.table.table-bordered.table-striped
+table.table.table-striped
   thead
     tr
-      th #
+      th.super-mini #
+      th.mini Status
       th Name
       th action
   tbody
     - @products.each do |product|
       tr
         td= product.id
+        td= button_status(product.active, edit_admin_product_path(product))
         td= link_to(product.name, edit_admin_product_path(product))
         td
           = link_to(edit_admin_product_path(product), class: 'btn btn-small') do

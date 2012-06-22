@@ -1,11 +1,11 @@
 = simple_form_for @customer do |f|
+  = f.input :gender, :collection => ['Woman', 'Male'],:as => :radio_buttons, :item_wrapper_class => 'inline'
+  = f.input :person_type, :collection => ["person", "company"] , :as => :radio_buttons, :item_wrapper_class => 'inline'
   = f.input :name
   = f.input :brand
   = f.input :irs_id
-  = f.input :birthdate
   = f.input :national_id
-  = f.input :gender
-  = f.input :person_type, :collection => ["person", "company"] , :as => :radio_buttons, :item_wrapper_class => 'inline'
+  = f.input :birthdate, input_html: {:style=>"width:auto;"}
   = f.simple_fields_for :user do |user|
       = user.input :email
       = user.input :password

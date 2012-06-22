@@ -12,7 +12,7 @@ p
 table.table
   thead
     tr
-      th.minimal Active
+      th.span1 Status
       th Name
       th code
       th limit / customer
@@ -23,7 +23,7 @@ table.table
     - @coupons.each do |coupon|
       tr
         td
-          i(class='#{coupon.active}')
+          = button_status(coupon.active, edit_admin_coupon_path(coupon))
         td= coupon.name
         td= coupon.code
         td= coupon.limit_customer

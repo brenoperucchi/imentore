@@ -7,14 +7,14 @@ p= link_to("New Payment Method", new_admin_payment_method_path, :class=>'btn btn
 table.table
   thead
     tr
-      th.minimal Active
+      th Active
       th Name
       th action
   tbody
     - @payment_methods.each do |payment|
       tr
         td
-          i(class='#{payment.active}')
+          = button_status(payment.active, '#')
         td= payment.handle
         td
           = link_to(edit_admin_payment_method_path(payment), class: 'btn') do
