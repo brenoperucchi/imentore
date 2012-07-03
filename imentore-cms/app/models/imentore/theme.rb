@@ -4,13 +4,11 @@ module Imentore
     has_many :templates
     has_many :assets
 
-    validates :name,  presence: true
-
     scope :default, where(default: true)
 
     def default_layout
-      layout_name = "layouts/#{name}".downcase
-      layout_name if templates.find_by_path(layout_name)
+      layout_name = templates.find_by_default(true).try(:path)
+      layout_name ||= templates.find_by_path('layouts/#{name}".downcase').try(:path)
     end
   end
 end

@@ -103,8 +103,8 @@ module Imentore
     has_many :orders
     has_many :payment_methods
     has_many :delivery_methods
-    has_many :themes
     has_many :assets, :through => :themes, :source => :assets
+    has_many :themes
     has_many :customers
     has_many :coupons
     has_many :coupons_orders
@@ -112,9 +112,14 @@ module Imentore
     has_many :categories
     has_many :product_brands
     has_many :pages
-    has_many :feedbacks
+    has_many :feedbacks, as: :feedbackable
+    has_many :notices
 
     accepts_nested_attributes_for :owner, :address
+
+    def theme
+      @theme ||= themes.find_by_active(true)
+    end
 
     def email_contact
       config.email_contact.present? ? config.email_contact : email

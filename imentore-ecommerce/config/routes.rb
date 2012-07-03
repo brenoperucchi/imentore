@@ -29,14 +29,17 @@ Imentore::Core::Engine.routes.draw do
       resources :categories, only: [:edit, :index, :update, :create, :destroy]
     end
 
-    resources :feedbacks, only: [:create, :new]
+    resources :stores, only: [:show] do
+      resources :feedbacks, only: [:create, :new]
+    end
+    resources :notices, only: [:show]
     resources :order_assets, only: [:new, :create, :destroy, :index]
     resources :products,  only: [:index, :show]
     resource  :cart,      only: [:show, :create, :update, :destroy, :calculate_shipping] do
       get 'calculate_shipping', on: :member
     end
 
-    match "pages/:page",                to: "pages#show",         as: "page"
+    match "pages/:page",                to: "pages#show",         as: "pages"
     match "categories/*categories",     to: "categories#index",   as: "categories"
     match "coupon",                     to: "coupons#add_coupon", as: "add_coupon"
     match "checkout",           to: "checkouts#new",      as: "checkout"

@@ -10,6 +10,7 @@ module Imentore
 
     has_many :categories_products
     has_many :categories, :through => :categories_products, :source => :category
+    has_many :feedbacks, as: :feedbackable
 
     scope :active, where(active: true)
 
@@ -21,9 +22,9 @@ module Imentore
     def all_images
       imgs = []
       variants.each do |variant|
-        imgs = variant.images.collect {|image| image}
+        imgs << variant.images.collect {|image| image}
       end
-      return imgs
+      return imgs.reject{|x| x.blank?}.first
     end
 
   end

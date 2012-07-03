@@ -2,7 +2,7 @@ module Imentore
   class Settings
     module Virtual
       def self.attributes
-        [:theme, :authenticate_to_buy, :store_zip_code, :order_asset, :email_contact, :site]
+        [:authenticate_to_buy, :store_zip_code, :order_asset, :email_contact, :site]
       end
 
       attr_accessor *attributes
@@ -12,10 +12,6 @@ module Imentore
         base.class_eval do
           validates :theme, presence: true
         end
-      end
-
-      def theme
-        @theme || :default
       end
 
       def authenticate_to_buy

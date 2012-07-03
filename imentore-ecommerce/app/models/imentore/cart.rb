@@ -5,7 +5,7 @@ module Imentore
   require_dependency "imentore/coupon"
 
   class Cart < ActiveRecord::Base
-    attr_accessor :delivery_method
+    # attr_accessor :delivery_method, :zip_code, :html
     serialize :items, Array
 
     has_many :coupons_orders
@@ -46,6 +46,15 @@ module Imentore
 
     def weight
       items.sum(&:weight)
+    end
+
+    def delivery_amount
+      return 0 if zip_code.nil? or delivery_method.nil?
+      items.sum{|i| i.delivery_calculate(zip_code, delivery_method).value}
+    end
+
+    def total_amount
+      amount + coupons_amount 
     end
 
   end
