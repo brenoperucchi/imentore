@@ -2,9 +2,8 @@ module Imentore
   module Admin
     class AssetsController < BaseController
       inherit_resources
-      belongs_to :theme
       actions :new, :create, :destroy, :index
-
+      belongs_to :theme
       respond_to :json, only: [:create, :index, :destroy]
 
       def index
@@ -17,6 +16,10 @@ module Imentore
             render json: [Imentore::AssetPresenter.new(@asset).to_json]
           }
         end
+      end
+
+      def destroy
+        destroy! { admin_theme_path(@theme) }
       end
 
       protected

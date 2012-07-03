@@ -24,8 +24,8 @@ module Imentore
     end
 
     def show
-      @store = current_store
-      @products = @store.products.map { |product| ProductDrop.new(product) }
+      store = current_store
+      @products = store.products.map { |product| ProductDrop.new(product) }
     end
   end
 end

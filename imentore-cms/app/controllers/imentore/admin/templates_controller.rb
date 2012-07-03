@@ -4,7 +4,6 @@ module Imentore
       inherit_resources
       belongs_to :theme, parent_class: Imentore::Theme
 
-
       def create
         create! { admin_theme_path(params[:theme_id]) }
       end

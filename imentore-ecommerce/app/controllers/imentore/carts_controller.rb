@@ -20,22 +20,34 @@ module Imentore
     end
 
     def update
-      params[:items].each do |item|
-        quantity = item[1][:quantity].to_i
-        return if quantity.blank?
-        product = current_store.products.find_by_id(item[1][:product_id])
-        variant = product.variants.find_by_id(item[1][:variant_id])
-        current_cart.renew(product, variant, quantity)
+      # current_cart.delivery_method = current_store.delivery_methods.find_by_id(params[:delivery_method])
+      # current_cart.zip_code = params[:zip_code]
+      # coupon = current_store.coupons.active.find_by_code(params[:coupon_code])
+
+      # Imentore::CouponsOrder.add(current_cart, coupon) if coupon.try(:check_valid?)
+      if params[:items].present?
+        params[:items].each do |item|
+          quantity = item[1][:quantity].to_i
+          return if quantity.blank?
+          product = current_store.products.find_by_id(item[1][:product_id])
+          variant = product.variants.find_by_id(item[1][:variant_id])
+          current_cart.renew(product, variant, quantity)
+        end
+        redirect_to cart_path
       end
-      redirect_to cart_path
     end
 
     def show
+      # current_cart.html = "<h2> html </h2>"
+      # current_cart.html = render :show, layout:'public'
+      # current_cart.zip_code = '2'
+      # @cart = Imentore::CartDrop.new(current_cart)
       respond_to do |wants|
         wants.json do
             render json: Imentore::CartPresenter.new(current_cart).to_json
         end
-        wants.html
+        wants.html {
+        }
       end
     end
 
@@ -72,16 +84,17 @@ module Imentore
       product = current_store.products.find(params[:item][:product_id])
       variant = product.variants.find(params[:item][:variant_id])
       quantity = params[:item][:quantity].to_i
+
       respond_to do |wants|
         wants.json do
-          begin
+          # begin
             if quantity > 0
               current_cart.add(product, variant, quantity)
             end
             render json: Imentore::CartPresenter.new(current_cart).to_json
-          rescue ActiveRecord::RecordNotFound
-            render json: Imentore::CartPresenter.new(current_cart).to_json
-          end
+          # rescue ActiveRecord::RecordNotFound
+            # render json: Imentore::CartPresenter.new(current_cart).to_json
+          # end
         end
         wants.html do
           if quantity > 0
@@ -91,5 +104,6 @@ module Imentore
         end
       end
     end
+
   end
 end

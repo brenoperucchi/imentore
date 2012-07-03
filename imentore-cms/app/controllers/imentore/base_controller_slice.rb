@@ -14,15 +14,19 @@ Imentore::BaseController.class_eval do
   end
 
   def theme_layout
-    "layouts/#{current_store.theme.name}"
+    if current_store && current_store.theme.default_layout
+      current_store.theme.default_layout
+     else
+      'public'
+    end
+
   end
 
   private
-
   def _process_options(options)
     return if options.key?(:text) || options.key?(:inline)
 
-    template_id = view_paths.find(options[:template], options[:prefixes])
+    template_id = view_paths.find(options[:template], options[:prefixes]) rescue nil
 
     if template_id
       template_id = template_id.identifier.split("-").first

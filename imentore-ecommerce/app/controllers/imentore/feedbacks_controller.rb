@@ -1,20 +1,18 @@
 module Imentore
   class FeedbacksController < BaseController
-    inherit_resources
-    actions :new, :create
 
     def create
-      create! { admin_feedbacks_path}
+      if params[:store_id]
+        feedback = current_store.feedbacks.new(params[:feedback])
+        feedback.store = current_store
+        if feedback.save
+          Imentore::SendEmailMailer.send_mail_mailer(feedback.email, current_store.email_contact, feedback.subject, feedback.question).deliver
+          redirect_to root_path
+        end
+      else
+        current_store.products.find(params[:product_id]).feedback.create(params[:feedback])
+      end
     end
 
-    def update
-      update! { admin_feedbacks_path}
-    end
-
-    protected
-
-    def begin_of_association_chain
-      current_store
-    end
   end
 end
