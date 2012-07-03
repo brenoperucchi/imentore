@@ -21,7 +21,11 @@ module Imentore
     # end
 
     def price
-      15
+      @variant.price
+    end
+
+    def options
+      @options = @variant.options
     end
 
     def product_code

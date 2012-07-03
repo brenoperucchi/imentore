@@ -10,16 +10,13 @@ module Imentore
       @cart = cart
     end
 
-    # def items
-    #   @cart.items
-    # end
+    def items
+      @items = @cart.items.map { |item| CartItemDrop.new(item) }
+    end
 
-    # def amount
-    #   @cart.amount
-    # end
-
-    # def method_missing(key, *args)
-    #   self.respond_to?(key) ? send(key) : @cart.send(key)
-    # end
+    def delivery_methods
+      @delivery_methods = @context.registers[:current_store].delivery_methods.active.map { |object| ObjectDrop.new(object) }
+    end
+    
   end
 end

@@ -10,7 +10,7 @@ module Imentore
       @image.id
     end
 
-    def url(size = "small")
+    def image(size = "small")
       @image.picture.url(size.to_sym)
     end
 

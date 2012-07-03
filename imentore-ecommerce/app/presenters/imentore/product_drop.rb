@@ -33,5 +33,13 @@ module Imentore
     def variants
       @product.variants
     end
+
+    def image
+      @product.variants.first.images.first.picture.url(:thumb)
+    end
+
+    def variant_id
+      @product.variants.first.id
+    end
   end
 end

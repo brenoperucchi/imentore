@@ -25,8 +25,8 @@ module Imentore
 
 
                    },
-        "cart_total" =>  "#{@cart.items.size} item(s) - #{@cart.amount}",
-        "total" => @cart.amount,
+        "total_items" =>  @cart.items.size,
+        "total_amount" => @cart.amount,
         "message" => {
                        "success" => "Product Added",
                        "warning" => 'Product not found'
