@@ -3,8 +3,12 @@
 
 legend Template #{@template.path}
 
-= simple_form_for(@template, url: admin_theme_template_path(@theme, @template)) do |f|
+= simple_form_for(@template, url: admin_theme_template_path(@theme, @template), html: {class: 'form-horizontal'}) do |f|
+  = f.error_notification
+  - if @template.kind == 'layout'
+    = f.input :default 
   = f.input :path
-  = f.input :layout
-  = f.input :body, :input_html=> {:style=> 'width:100%; height:300px;'}
+  - if @template.kind == 'template'
+    = f.input :layout, as: 'radio', collection: @theme.templates.layouts.collect{|x| x.path}
+  = f.input :body, :input_html=> {:style=> 'width:95%; height:300px;'}
   = f.button :submit

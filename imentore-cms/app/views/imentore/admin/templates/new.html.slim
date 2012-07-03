@@ -1,4 +1,8 @@
-= simple_form_for(@template, url: admin_theme_templates_path(@theme)) do |f|
+Legend New
+= simple_form_for(@template, url: admin_theme_templates_path(@theme), html: {class: 'form-horizontal'}) do |f|
+  = f.error_notification
+  = f.input :default
   = f.input :path
+  = f.input :kind, as: 'radio', :collection => types_templates
   = f.input :body
   = f.button :submit

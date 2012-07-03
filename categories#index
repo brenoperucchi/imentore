@@ -1,0 +1,174 @@
+  <!-- ********************** --> 
+  <!--     I N T R O          -->
+  <!-- ********************** --> 
+
+  <div id="intro">
+    <div id="intro_wrap">
+      <div class="container_12">
+        <div id="breadcrumbs" class="grid_12">
+          {% for ancestor in ancestors %}
+            <a href="{{ ancestor.url }}">{{ ancestor.name }} </a>
+            &gt;
+          {% endfor %}
+        </div>
+        <h1>{{ category.name }}</h1>
+      </div>
+    </div>
+  </div>
+  <!-- end of intro -->
+
+  
+  <!-- ********************** --> 
+  <!--      C O N T E N T     -->
+  <!-- ********************** --> 
+  <div id="content" class="container_12">
+
+    
+    <div id="category" class="grid_9">
+      <div class="s_subcategories s_grid_view s_listing clearfix">
+      {% for children in childrens %}
+        <div class="s_subcategory"> <a href="{{ children.url }}">{{ children.name }}</a> </div>
+      {% endfor %}
+<!--         <div class="s_subcategory"> <a href=""><img src="images/category_100x100.jpg" title="Home Audio" alt="Home Audio" style="margin-bottom: 3px;" /></a> <a href="">Home Audio</a> </div>
+        <div class="s_subcategory"> <a href=""><img src="images/category_100x100.jpg" title="Home Cinema" alt="Home Cinema" style="margin-bottom: 3px;" /></a> <a href="">Home Cinema</a> </div>
+        <div class="s_subcategory"> <a href=""><img src="images/category_100x100.jpg" title="Cell Phones" alt="Cell Phones" style="margin-bottom: 3px;" /></a> <a href="">Cell Phones</a> </div>
+        <div class="s_subcategory"> <a href=""><img src="images/category_100x100.jpg" title="MP3 Players" alt="MP3 Players" style="margin-bottom: 3px;" /></a> <a href="">MP3 Players</a> </div>
+        <div class="s_subcategory"> <a href=""><img src="images/category_100x100.jpg" title="Car-Audio" alt="Car-Audio" style="margin-bottom: 3px;" /></a> <a href="">Car-Audio</a> </div>
+ -->        <div class="clear"></div>
+      </div>
+      
+<!--       <div id="listing_options">
+        <div id="listing_sort" class="s_switcher">
+          <span class="s_selected">Default</span>
+          <ul class="s_options" style="display: none;">
+            <li><a href="">Name A - Z</a></li>
+            <li><a href="">Name Z - A</a></li>
+            <li><a href="">Price Low &gt; High</a></li>
+            <li><a href="">Price High &gt; Low</a></li>
+            <li><a href="">Rating Highest</a></li>
+            <li><a href="">Rating Lowest</a></li>
+            <li><a href="">Model A - Z</a></li>
+            <li><a href="">Model Z - A</a></li>
+          </ul>
+        </div>
+        <div id="view_mode" class="s_nav">
+          <ul class="clearfix">
+            <li id="view_grid"><a href="listing_2.html"><span class="s_icon"></span>Grid</a></li>
+            <li id="view_list" class="s_selected"><a href="listing_1.html"><span class="s_icon"></span>List</a></li>
+          </ul>
+        </div>
+      </div>
+ -->
+      <div class="clear"></div>
+
+      <div class="s_listing s_list_view clearfix">
+        {% for product in products %}
+        <div class="s_item clearfix">
+          <div class="grid_3 alpha"> <a class="s_thumb" href="{{ product.url }} "><img src="{{ product | product_image_url :'thumb' }}" title="{{ product.name }} " alt="{{ product.name }}" /></a> </div>
+          <div class="grid_6 omega">
+            <h3><a href="product.html">{{ product.name }}</a></h3>
+            <!-- <p class="s_model">Product 4</p> -->
+            <p class="s_price s_promo_price"><span class="s_old_price"><span class="s_currency s_before">£</span>{{ product.price }}
+            </span> <span class="s_currency s_before"></span>{{ product.price }}</p>{{ product.description }}</p>
+<!--             <a class="s_button_add_to_cart" href="product.html">
+              <span class="s_icon_16"><span class="s_icon"></span>Add to Cart</span>
+            </a>
+ -->            
+            <a class="s_button_add_to_cart">
+              <input id="quantity" name="quantity" type="hidden" value="1">
+              <input id="variant_id" name="variant_id" type="hidden" value="{{ product.variant_id }}">
+              <input id="product_id" name="product_id" type="hidden" value="{{ product.id }}">
+              <span class="s_icon_16"><span class="s_icon"></span>Adicionar ao carrinho
+            </span>
+
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="clear"></div>
+      </div>
+      
+<!--       <div class="pagination">
+        <div class="results">Showing 1 to 6 of 6 (1 Pages)</div>
+      </div>
+ -->      
+    </div>
+    
+    <div id="right_col" class="grid_3">
+      
+<!--       <div id="brands_module" class="s_box">
+        <h2>Brands</h2>
+        <select onchange="location = this.value">
+          <option> --- Please Select --- </option>
+          <option>Adidas</option>
+          <option>Apple</option>
+          <option>Armani</option>
+          <option>Balenciaga</option>
+          <option>Bvlgari</option>
+          <option>Canon</option>
+          <option>Christian Dior</option>
+          <option>Elisabeth Arden</option>
+          <option>Hewlett-Packard</option>
+          <option>HTC</option>
+          <option>Hugo Boss</option>
+          <option>Nike</option>
+          <option>Nikon</option>
+          <option>Palm</option>
+          <option>Panasonic</option>
+          <option>Reebok</option>
+          <option>Samsung</option>
+          <option>Sony</option>
+          <option>Swarovski</option>
+        </select>
+      </div>
+ -->      
+<!--       <div id="bestseller_side" class="s_box clearfix">
+        <h2>Bestsellers</h2>
+        <div class="s_item s_size_1 clearfix">
+          <a class="s_thumb" href="product.html"><img src="images/product_38x38.jpg" width="38" height="38" alt="iPhone 3GS 8GB" /></a>
+          <h3><a href="product.html">iPhone 3GS 8GB</a></h3>
+          <p><a href="product.html"><span class="s_main_color"><span class="s_currency s_before"></span>587.50</span></a></p>
+        </div>
+ -->        
+<!--         <div class="s_item s_size_1 clearfix">
+          <a class="s_thumb" href="product.html"><img src="images/product_38x38.jpg" width="38" height="38" alt="Sony VAIO" /></a>
+          <h3><a href="product.html">Sony VAIO</a></h3>
+          <p><a href="product.html"><span class="s_old"><span class="s_currency s_before">£</span>1,175.00</span> <span class="s_secondary_color"><span class="s_currency s_before">£</span>1,057.50</span></a></p>
+          <div class="s_rating_holder clearfix"><p class="s_rating s_rating_small s_rating_5 left"><span style="width: 100%;" class="s_percent"></span></p><span class="left">&nbsp;5/5</span></div>
+        </div>
+ -->  
+      </div>
+    
+      <div id="information_module" class="s_box">
+        <h2>Information</h2>
+        <ul class="s_list_1">
+          {% for page in pages %}
+          <li><a href="{{ page.url }} ">{{ page.name }} </a></li>
+          {% endfor %}
+        </ul>
+      </div>
+  
+<!--       <div id="featured_side" class="s_box clearfix">
+        <h2>Featured</h2>
+        <div class="s_item s_size_1 clearfix">
+          <a class="s_thumb" href="product.html"><img src="images/product_38x38.jpg" width="38" height="38" alt="White football trainers" /></a>
+          <h3><a href="product.html">White football trainers</a></h3>
+          <p><a href="product.html"><span class="s_main_color"><span class="s_currency s_before">£</span>117.50</span></a></p>
+        </div>
+        <div class="s_item s_size_1 clearfix">
+          <a class="s_thumb" href="product.html"><img src="images/product_38x38.jpg" width="38" height="38" alt="Hubo Boss Emotion" /></a>
+          <h3><a href="product.html">Hubo Boss Emotion</a></h3>
+          <p><a href="product.html"><span class="s_main_color"><span class="s_currency s_before">£</span>2,350.00</span></a></p>
+        </div>
+        <div class="s_item s_size_1 clearfix">
+          <a class="s_thumb" href="product.html"><img src="images/product_38x38.jpg" width="38" height="38" alt="Christian Dior J'adore" /></a>
+          <h3><a href="product.html">Christian Dior J'adore</a></h3>
+          <p><a href="product.html"><span class="s_main_color"><span class="s_currency s_before">£</span>328.99</span></a></p>
+        </div>
+      </div>
+ -->
+    </div>
+    
+    
+  </div>
+  <!-- end of content -->

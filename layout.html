@@ -1,0 +1,547 @@
+<html dir="ltr" lang="pt-br" xml:lang="pt-br" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>
+    Imentore Demonstração
+</title>
+<meta content="Imentore Demonstração" name="description">
+{{ '960.css' | theme_include }}
+{{ 'screen.css' | theme_include }}
+{{ 'color.css' | theme_include }}
+{{ 'prettyPhoto.css' | theme_include }}
+<!--[if lt IE 9]>
+<link href="/themes/layout_stores_model_2/orange/stylesheets/ie.css" media="screen" rel="Stylesheet" type="text/css"></link>
+<![endif]-->
+{{ 'jquery-1.7.1.min.js' | theme_include }}
+{{ 'jquery-ui-1.8.16.min.js' | theme_include }}
+{{ 'shoppica.js' | theme_include }}
+
+{{ content_for_header }}
+
+<body>
+    <div id="wrapper">
+        <div id="top">
+            <div id="wrapper">
+                <!-- ********************** -->
+                <!-- H E A D E R -->
+                <!-- ********************** -->
+                <div class="container_12" id="header">
+                    <div class="grid_12">
+                        <div id="site_logo">
+                            <a href="http://loja.imentore.com.br"><span class="logo" style="background:url({{ 'logo.png' | asset_url }}) no-repeat scroll 0 0;"></span></a>
+                        </div>
+                        <div class="s_nav" id="system_navigation">
+                            <p id="welcome_message">
+                                Seja bem vindo. Acesse <a href="/client">sua conta</a> ou <a href="/customers/new">criar um novo usuário</a>
+                            </p>
+                        </div>
+                        <div class="pages" id="system_navigation" style="top:2px">
+                            <ul class="s_list_1 clearfix">
+                                <li class="inline">
+                                    <a href="/">Inicio</a>
+                                </li>
+                                {% for page in pages %}
+                                    <li class="inline">
+                                        <a href={{ page.url }} target="_self">{{ page.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div id="site_search">
+                            <a href="javascript:;" id="show_search" title="Procurar"></a>
+                            <div class="clearfix" id="search_bar">
+                                <form action="/products/product_search" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="q/EDkW7jQ8s1LNc8vlvQu/gYN8GBoIqhswoZKjp1x5o="></div>
+                                    <input id="filter_keyword" name="search" onblur="if (this.value==''){this.value='Digite uma palavra'};" onfocus="if(this.value=='Digite uma palavra'){this.value=''};" tabindex="1" type="text" value="Digite uma palavra">
+                                    <button class="s_button_1 s_secondary_color_bgr">
+                                        <span class="s_text">Procurar</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="s_nav" id="categories">
+                            <ul>
+                                <li id="menu_home">
+                                    <a href="/">Home</a>
+                                </li>
+                                {% for category in categories %}
+                                <li>
+                                    <a href="{{ category.url }}" style="color: rgb(64, 174, 189); background-color: rgb(255, 255, 255); ">{{ category.name }} </a>
+                                        <div class="s_submenu">
+                                        <h3>Pode dentro da Categorias:{{ category.name }}</h3>
+                                            {% for children in category.children %}
+                                                <ul class="s_list_1 clearfix">
+                                                    <li>
+                                                        <a href={{ children.url }}>{{ children.name }}</a>
+                                                    </li>
+                                                </ul>
+                                            {% endfor %}
+                                        </div>
+                                    {% endfor %}
+                                </li>
+                        </ul>
+                    </div>
+                    <div class="s_nav" id="cart_menu">
+                        <a href="/cart">
+                            <span class="s_icon"></span>
+                            <small class="s_text">Meu carrinho</small>
+                            <span class="s_grand_total s_main_color">{{ current_cart.amount }} </span>
+                        </a>
+                        <div class="s_submenu s_cart_holder">
+                            <p class="s_mb_0">{{ current_cart.items.size }} items</p>
+                        </div>
+                    </div>
+                    <div class="s nav" id="live_support">
+                        <span>
+                            <a href="http://settings.messenger.live.com/Conversation/IMMe.aspx?invitee=8b741c9138baf2cf@apps.messenger.live.com" target="_blank">
+                                <img alt="Live_support" src="{{ 'live_support.png' || asset_url }}">
+                                <span class="s_text"></span>
+                            </a>
+                        </span>
+
+                    </div>
+                    <div id="innerFrame"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="notification">
+        <div class="ui-notify" id="notification-container">
+            <div class="ui-notify-message ui-notify-message-style">
+                <a class="ui-notify-cross ui-notify-close s_button_remove">x</a>
+                <!-- %h2.s_icon_24 -->
+                <!-- %span.s_icon.s_success_24> -->
+                <!-- / Product added to Cart! -->
+                <!-- .s_item.s_size_1.clearfix -->
+                <!-- / %a.s_thumb{:href => ""} -->
+                <!-- /   %img{:src => "http://shoppica.net/image/cache/data/cameras/panasonic_lumix_dmc_fz28-40x40.jpg"}/ -->
+                <!-- / %h3 -->
+                <!-- /   %a{:href => "http://shoppica.net/index.php?route=product/product&amp;product_id=95"} -->
+                <!-- /     %strong Panasonic Lumix -->
+                <!-- /   %br/ -->
+                <!-- /   added to -->
+                <!-- /   = succeed "!" do -->
+                <!-- /     %a{:href => "http://shoppica.net/index.php?route=checkout/cart"} shopping cart -->
+                <div class="notification alert">
+                </div>
+                <div class="notification notification-error">
+                </div>
+                <div class="notification success">
+                    <ul>
+<li class="float_left" id="notification_icon">
+<div class="s_icon s_success_24"></div>
+</li>
+<li class="float_right" id="notification_text">
+</li>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{ content_for_layout }}
+<div id="footer">
+    <!-- ********************** -->
+    <!-- S H O P   I N F O -->
+    <!-- ********************** -->
+    <div id="shop_info">
+        <div id="shop_info_wrap">
+            <div class="container_12" style="overflow:hidden">
+                <div class="grid_3" id="shop_description">
+                    <h2>
+                        Notícias
+                    </h2>
+
+                    {% for notice in notices %}
+                    <span class="conteudo_chamadas">
+                        <ul>
+                            <a href="{{ notice.url }}"><li>
+                                {{ notice.created_at}}
+                                -
+                                <strong>
+                                    {{ notice.name }} 
+                                </strong>
+                            </li>
+                            <li> {{ notice.description }} </li>
+                        </a></ul>
+                    </span>
+                    {% endfor %}
+
+                </div>
+                <div class="grid_3" id="shop_contacts">
+                    <h2>Contato</h2>
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody><tr>
+                            <td valign="middle">
+                                <span class="s_icon_32"><span class="s_icon s_phone_32"></span>
+                            </span>
+                        </td>
+                    </tr>
+                    <!-- %tr -->
+                    <!-- %td{:valign => "middle"} -->
+                    <!-- %span.s_icon_32 -->
+                    <!-- %span.s_icon.s_fax_32> -->
+                    <!-- 5234452 -->
+                    <!-- %br/ -->
+                    <tr>
+                        <td valign="middle">
+                            <span class="s_icon_32" style='font-size:12px;'><span class="s_icon s_mail_32"></span>{{ @store.email_contact }}
+                            <br>
+                            </span>
+                    </td>
+                </tr>
+                <!-- %tr -->
+                <!-- %td{:valign => "middle"} -->
+                <!-- %span.s_icon_32 -->
+                <!-- %span.s_icon.s_skype_32> -->
+                <!-- my_skype -->
+                <!-- %br/ -->
+            </tbody></table>
+        </div>
+        <div class="grid_3" id="twitter">
+            <h2>Twitter</h2>
+            <ul id="twitter_update_list">
+            </ul>
+            <script src="http://twitter.com/javascripts/blogger.js" type="text/javascript"></script>
+            <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/imentore.json?callback=twitterCallback2&amp;count=2"></script>
+        </div>
+        <div class="grid_3" id="facebook">
+            <h2>Facebook</h2>
+            <div class="s_widget_holder">
+                <br>
+                <br>
+                <br>
+                <!-- <div id="fb-root"></div> -->
+                <script src="http://connect.facebook.net/pt_BR/all.js"></script>
+                <!-- <script> -->
+                <!-- FB.init({ -->
+                <!-- appId  : '235482483167997', -->
+                <!-- status : true, -->
+                <!-- cookie : true, -->
+                <!-- xfbml  : true -->
+                <!-- }); -->
+                <!-- </script> -->
+                <!-- <script type="text/javascript" charset="utf-8"> -->
+                <!-- document.write('<fb:fan profileid="111188056908" stream="0" connections="6" logobar="0" width="220" css="http://svest.no-ip.org/test/opencart/catalog/view/theme/shoppica/stylesheet/facebook.css.php?300"></fb:fan>'); -->
+                <!-- </script> -->
+                <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) {return;}
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/pt_BR/all.js#appId=235482483167997&xfbml=1";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+                <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-send="false" data-width="200" data-show-faces="true"><span style="width: 225px; height: 63px; "><iframe id="f8f00c8dc" name="f1ecc8a3f8" scrolling="no" style="overflow: hidden; width: 225px; height: 63px; border: none; " title="Like this content on Facebook." class="fb_ltr " src="http://www.facebook.com/plugins/like.php?api_key=0c18007de6f00f7ecda8c040fb76cd90&amp;channel_url=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D8%23cb%3Df324a87d6%26origin%3Dhttp%253A%252F%252Flojateste.imentore.com.br%252Ffb89ac90%26domain%3Dlojateste.imentore.com.br%26relation%3Dparent.parent&amp;extended_social_context=false&amp;href=http%3A%2F%2Flojateste.imentore.com.br%2F&amp;layout=standard&amp;locale=en_US&amp;node_type=link&amp;sdk=joey&amp;send=false&amp;show_faces=true&amp;width=225"></iframe></span></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- end of shop info -->
+<!-- ********************** -->
+<!-- F O O T E R -->
+<!-- ********************** -->
+<div class="container_12" id="footer">
+    <div class="clearfix" id="footer_categories">
+<!--         <div class="grid_2">
+            <h2 style="margin-bottom:0px;">
+                <a href="/products?c=522" style="font-size:16px;line-height:20px;">Abrasivos</a>
+            </h2>
+            <ul class="s_list_1">
+                <li>
+                    <a href="/products?c=3814">Rebolos</a>
+                </li>
+                <li>
+                    <a href="/products?c=3816">Disco de Corte</a>
+                </li>
+                <li>
+                    <a href="/products?c=3817">Pedra Montada</a>
+                </li>
+                <li>
+                    <a href="/products?c=4651">New folder</a>
+                </li>
+            </ul>
+        </div>
+ -->    {% for category in categories %}
+        <div class="grid_2">
+            <h2 style="margin-bottom:0px;">
+                <a href="{{ category.url }}" style="font-size:16px;line-height:20px;">{{ category.name }} </a>
+            </h2>
+            <ul class="s_list_1">
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="right clearfix" id="payments">
+        <div class="rod-cartoes">
+            <ul class="inline">
+                <li class="inline">
+                    <img alt="Pagamento_visa" src="{{ 'pagamento_visa.gif' | asset_url }}">
+                </li>
+            </ul>
+            <ul class="inline">
+                <li class="inline">
+                    <img alt="Pagamento_master" src="{{ 'pagamento_master.gif' | asset_url }}">
+                </li>
+            </ul>
+            <ul class="inline">
+                <li class="inline">
+                    <img alt="Pagamento_american" src="{{ 'pagamento_american.gif' | asset_url }}">
+                </li>
+            </ul>
+            <ul class="inline">
+                <li class="inline">
+                    <img alt="Pagamento_aura" src="{{ 'pagamento_aura.gif'| asset_url }}">
+                </li>
+            </ul>
+            <ul class="inline">
+                <li class="inline">
+                    <img alt="Pagamento_diners" src="{{ 'pagamento_diners.gif' | asset_url }}">
+                </li>
+            </ul>
+            <ul class="inline">
+                <li class="inline">
+                    <img alt="Pagamento_hipercard" src="{{ 'pagamento_hipercard.gif' | asset_url }}">
+                </li>
+            </ul>
+            <br>
+            <ul class="inline">
+                <li class="inline">
+                    <img alt="Pagamento_boleto" src="{{ 'pagamento_boleto.gif' | asset_url }}">
+                </li>
+            </ul>
+            <ul class="inline">
+                <li class="inline">
+                    <img alt="Pagamento_banco_bb" src="{{ 'pagamento_banco_bb.gif' | asset_url }}">
+                </li>
+            </ul>
+            <ul class="inline">
+                <li class="inline">
+                    <img alt="Pagamento_banco_bradesco" src="{{ 'pagamento_banco_bradesco.gif' | asset_url }}">
+                </li>
+            </ul>
+            <ul class="inline">
+                <li class="inline">
+                    <img alt="Pagamento_banco_itau" src="{{ 'pagamento_banco_itau.gif' | asset_url }}">
+                </li>
+            </ul>
+            <div class="email-rodape">
+
+            </div>
+            <div id="imentore-footer">
+                <a href="http://www.imentore.com.br/">
+                    <span id="imentore_footer"></span>
+                </a>
+            </div>
+            <!-- rod-cartoes -->
+        </div>
+        <!-- rod-menu -->
+        <!-- rodape -->
+
+    </div>
+    <p id="copy">
+        © Copyright 2011
+        <a class="s_main_color" href="http://www.imentore.com.br">Imentore</a>
+        <!-- %br/ -->
+        <!-- %a.s_main_color{:href => "http://www.shoppica.net"} Shoppica theme -->
+        <!-- made by -->
+        <!-- %a{:href => "http://www.themeburn.com"} ThemeBurn.com -->
+    </p>
+    <!-- end of FOOTER -->
+</div>
+
+<!-- = theme_js "jquery/jquery.slides.js" -->
+{{ 'shoppica.products_slide.js' | theme_include }}
+{{ 'jquery.slides.js' | theme_include }}
+{{ 'add_to_cart.js' | theme_include }}
+<script type="text/javascript">
+  //<![CDATA[
+  $('#product_intro_info').children('div').first().css("display","block")
+  //]]>
+  </script>
+  <style type="text/css">
+  /*<![CDATA[*/
+  #site_logo span.logo {
+    display:block;
+    height:100px;
+  }
+  #site_logo {
+    display: block;
+    float: left;
+    width: 510px;
+    height: 100px;
+    margin: 20px 10px 10px 0;
+    text-indent: -1000em;
+  }
+  #live_support{
+    bottom: 22px;
+    height: 20px;
+    position: absolute;
+    right: 246px;
+    top: 100px;
+    z-index: 10;
+  }
+
+  #live_support a, #live_support img {
+    float:left;
+  }
+  #live_support span.s_text {
+    border-right: 1px solid #EEEEEE;
+    color: #333333;
+    float: left;
+    font-family: "Ubuntu Regular",sans-serif;
+    font-size: 14px!important;
+    font-weight: bold;
+    height: 20px;
+    letter-spacing: -1px;
+    line-height: 20px;
+    margin-right: 7px;
+    padding-right: 7px;
+  }
+  /*]]>*/
+  </style>
+  <style type="text/css">
+  /*<![CDATA[*/
+  #live_support span.s_text {
+    display:inline-block;
+    color: #black;
+    font-size: 18x;
+    font-weight: bold;
+    font-size:20px;
+    height: 14px;
+    letter-spacing: -1px;
+    line-height: 20px;
+    margin-right: 7px;
+    padding-right: 7px;
+    padding-bottom:10px;
+  }
+  /*]]>*/
+  </style>
+  <script type="text/javascript">
+  //<![CDATA[
+  function showpresence(presence) {
+    if (presence.status != "Offline"){
+        $('#live_support span.s_text').prepend("Online")
+    } else{
+        $('#live_support span.s_text').prepend("Offline")
+    }
+  }
+  //]]>
+  </script>
+  <script src="http://messenger.services.live.com/users/8b741c9138baf2cf@apps.messenger.live.com/presence/?cb=showpresence" type="text/javascript"></script>
+  <script type="text/javascript">
+  //<![CDATA[
+  $(document).ready(function(){  
+    $('a.s_button_remove').live('click',function(){
+        $(this).parents('div#notification').hide()
+    })
+  });
+  $(document).ready(function(){
+    jQuery.fn.showFlash = function() {     
+        $(this).fadeIn('slow')
+        $(this).delay(4000).fadeOut('slow');
+    }
+
+    $('div.notification').each(function(i){
+        if ($(this).find('li#notification_text').text().length > 15) {
+            $(this).parents("div#notification").showFlash();
+        }
+    })
+  })
+  //]]>
+  </script>
+  <style type="text/css">
+  /*<![CDATA[*/
+  .ui-notify {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    width: 300px;
+    z-index: 1000;
+  }
+
+  .ui-notify-message {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px 10px 20px 10px;
+    position: relative;
+    overflow:hidden;
+  }  
+  .ui-notify-message h2 {
+    font-size: 18px;
+    line-height: 18px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+  .s_icon_24 {
+    height: 24px;
+    margin-top: -16px;
+    width: 24px;
+  }
+  .s_icon_10, .s_icon_16, .s_icon_24, .s_icon_32 {
+    background-position: left center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+  .s_failure_24 {
+    background-color:#F12B63;
+    background-image: url("{{ 'i_server_msg_24.png' | asset_url }}");
+    background-position: 0 0 !important;
+    width:24px;
+    height:24px;
+  }    
+  .s_success_24 {
+    background-color:#4CB1CA;
+    background-image: url("{{ 'i_server_msg_24.png' | asset_url }}");
+    background-position: 0 -24px !important;
+    height:24px;
+    width:24px;
+  }    
+  .s_alert_24 {
+    background-color:gray;
+    background-image: url("{{ 'i_server_msg_24.png' | asset_url }}");
+    background-position: 0 -24px !important;
+    height:24px;
+    width:24px;
+  }    
+  #notification {
+    display:none;
+    / width:300px;
+    / position:absolute;
+  }
+
+  #notification_icon{
+
+  }
+
+  #notification_text{
+    padding-left:15px;
+    width:85%;
+  }    
+  .ui-notify-message .s_button_remove {
+    font-size: 1px;
+    right: 10px;
+    text-indent: -1000em;
+    top: 10px;
+  }
+
+  .s_button_remove {
+    background-color: #CCCCCC;
+    background-image: url("{{ 'button_remove_10.png' | asset_url }}");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    display: block;
+    height: 11px;
+    position: absolute;
+    width: 11px;
+  }
+  /*]]>*/
+  </style>
+
+</div>
+
+<div style="background-color: rgb(252, 247, 217); color: rgb(51, 51, 51); text-align: left; border: 1px solid rgb(204, 204, 204); box-shadow: rgba(0, 0, 0, 0.199219) 0px 2px 5px; padding: 5px; font-family: Arial, Helmet, Freesans, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; position: fixed; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; z-index: 2147483638; display: none; background-position: initial initial; background-repeat: initial initial; " class="transover-tooltip"></div></body></html>

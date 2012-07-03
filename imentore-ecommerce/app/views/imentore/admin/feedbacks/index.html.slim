@@ -6,7 +6,7 @@ legend Feedbacks
 table.table
   thead
     tr
-      th.minimal Status
+      th Status
       th Name
       th subject
       th About
@@ -15,7 +15,7 @@ table.table
     - @feedbacks.each do |feedback|
       tr
         td
-          = button_status(feedback.active, edit_admin_feedback_path(feedback))
+          = button_status(feedback.answer.present?, edit_admin_feedback_path(feedback), 'answer', 'not answer')
         td= feedback.name
         td= feedback.email
         td= feedback.subject

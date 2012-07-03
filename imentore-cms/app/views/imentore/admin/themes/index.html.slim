@@ -7,12 +7,22 @@ p= link_to("New Theme", new_admin_theme_path, :class=>'btn btn-small btn-primary
 table.table
   thead
     tr
-      th action
+      th active
       th name
-      th remove
+      th action
   tbody
     - @themes.each do |theme|
       tr
-        td= link_to("Edit", admin_theme_path(theme))
+        td= button_status(theme.active, admin_theme_path(theme))
         td= theme.name
-        td Remove
+        td
+          = link_to(admin_theme_path(theme), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            | Edit
+          '
+          = link_to(admin_theme_path(theme), method: :delete, :class=>"btn btn-danger") do
+            i.icon-white.icon-trash
+            '
+            | Remove
+

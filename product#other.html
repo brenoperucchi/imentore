@@ -1,0 +1,47 @@
+
+<!-- ********************** -->
+<!-- C O N T E N T -->
+<!-- ********************** -->
+<div class="container_12" id="content">
+	<div class="clear"></div>
+	<div class="grid_12" id="special_home">
+		<h2 class="s_title_1">
+			<span class="s_main_color">
+				Novos
+			</span>
+			Produtos
+		</h2>
+		<div class="clear"></div>
+		{% for product in products %}
+		<div class="s_listing s_grid_view clearfix">
+			<div class="s_item grid_2" style="opacity: 1; ">
+				<div class="s_item_image" style="min-height:150px">
+					<a href="{{ product.url }}"><img alt="{{ product.name }}" class="imgcenter" src="{{ product.image }}">
+					</a></div>
+					<h3>
+						<a href="{{ product.url }}">{{ product.name }} </a>
+					</h3>
+					<p class="s_model">
+
+					</p>
+					<p class="s_price">
+						<span class="price">
+							{{ product.price }}
+						</span>
+					</p>
+
+					<a class="s_button_add_to_cart">
+						<input id="quantity" name="quantity" type="hidden" value="1">
+						<input id="variant_id" name="variant_id" type="hidden" value="{{ product.variant_id }}">
+						<input id="product_id" name="product_id" type="hidden" value="{{ product.id }}">
+						<span class="s_icon_16"><span class="s_icon"></span>Adicionar ao carrinho
+					</span>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+
+</div>

@@ -1,4 +1,6 @@
-- content_for :footer do
+- content_for :header do
+  = stylesheet_link_tag    "cart"
+  = javascript_include_tag "cart"
   css:
     label.inline {
       display: inline-block;
@@ -6,8 +8,61 @@
       margin-bottom: 0;
       vertical-align: middle;
     }
+    .fileinput-button input {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      border: solid transparent;
+      border-width: 0 0 100px 200px;
+      opacity: 0;
+      filter: alpha(opacity=0);
+      -moz-transform: translate(-300px, 0) scale(4);
+      direction: ltr;
+      cursor: pointer;
+    }
   javascript:
     $(document).ready(function(){
+
+      function calculate_items(){
+        var total = 0
+        var sub_total = 0
+        var shipping = 0
+        var coupon = 0
+        sub_total = $('td#sub_total').text()
+        shipping = $('td#shipping_value').text()
+        coupon = $('td#coupon_value').text()
+        total = Number(sub_total) + Number(shipping) + Number(coupon)
+        $('td#total_amount h4').text(total)
+      }
+      function delivery_calculate(zip_code, method){
+        $.ajax({
+          url: '/cart/calculate_shipping',
+          type: 'get',
+          data: {zip_code:zip_code, method:method},
+          dataType: 'json',
+          success: function(json) {
+            $('td#shipping_value').html(json['value'])
+            calculate_items()
+          }
+        })
+      }
+      if ($('select#delivery_method').find('option:selected').val() != "") {
+        var zip_code = $('input#zip_code').val()
+        var method = $('select#delivery_method').find('option:selected').val()
+        delivery_calculate(zip_code,method)
+      }
+      $('div.alert').each(function(){
+        if ( $(this).text().length > 1 ) {
+         $(this).slideDown('slow')
+        }
+      })
+      $('.close').bind('click',function(){
+        $(this).parents('div.hide').first().slideUp('slow');
+      })
+      
+
+
       function session_get(key){
         var res;
         $.ajax({
@@ -93,10 +148,6 @@
       if (method_id != null){
         $('select#delivery_method').find('option[value='+method_id+']').attr('selected', true)
       }
-    })
-- content_for :footer do
-  javascript:
-    $(document).ready(function(){
       $('a#calculate_zip').click(function(e){
         var zip_code = $("input[id$='zip_code']").last().val();
         var method = $('select#delivery_method').find('option:selected').val()
@@ -110,181 +161,181 @@
       })
     })
 
-
-.row
-  table.table.table-striped.table-bordered.table-condensed
-    thead
-      tr
-        th product
-        th variant
-        th quantity
-        th price
-        th amount
-    tbody
-      - current_cart.items.each do |item|
+.container
+  .row
+    table.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th product
+          th variant
+          th quantity
+          th price
+          th amount
+      tbody
+        - current_cart.items.each do |item|
+          tr
+            td
+              = "#" + item.product.id.to_s
+              '
+              = item.product.name
+            td
+              - item.variant.options.each do |type|
+                = "#" + type.product_variant_id.to_s
+                '
+                = "#{type.option_type.name}: #{type.value}"
+                = " | "
+            td= item.quantity
+            td= item.price
+            td= item.amount
         tr
           td
-            = "#" + item.product.id.to_s
-            '
-            = item.product.name
           td
-            - item.variant.options.each do |type|
-              = "#" + type.product_variant_id.to_s
+          td(colspan='2' style='text-align:center;')
+            'Sub-Total
+          td#sub_total
+            = current_cart.amount
+        tr
+          td
+          td
+          td(colspan='2' style='text-align:center;')
+            | Shipping Value
+          td#shipping_value
+            | 0
+        tr
+          td
+          td
+          td(colspan='2' style='text-align:center;')
+            | Coupon Value
+          td#coupon_value
+            = current_cart.coupons_amount
+        tr
+          td
+          td
+          td(colspan='2' style='text-align:center;')
+            h3 TOTAL
+          td#total_amount
+            h4= @order.total_amount
+
+  .row
+    = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
+      = f.error_notification
+      fieldset#address_customer
+        - if user_signed_in? and not current_user.userable.owner?
+          .info.hide
+            label.hide#name
+              = current_user.userable.address.name
+            label.hide#street
+              = current_user.userable.address.street
+            label.hide#complement
+              = current_user.userable.address.complement
+            label.hide#city
+              = current_user.userable.address.city
+            label.hide#state
+              = current_user.userable.address.state
+            label.hide#country
+              = current_user.userable.address.country
+            label.hide#zip_code
+              = current_user.userable.address.zip_code
+            label.hide#phone
+              = current_user.userable.address.phone
+        - else
+          = f.input :customer_name
+          = f.input :customer_email
+      #accordion2.accordion
+        .accordion-group
+          .accordion-heading
+            a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion2" href="#collapseOne"]
+              |  1) Billing and Shipping Address
+          #collapseOne.accordion-body.in.collapsy.hide[style="height: auto; "]
+            .accordion-inner
+              .span12
+                .row
+                  .span6
+                    .address
+                      = f.input :billing_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
+                      = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
+                        = render("shared/address", addr: addr)
+                  .span6
+                    .address
+                      = f.input :shipping_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'shipping_address' } if user_signed_in?
+                      = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
+                        = render("shared/address", addr: addr)
+                .span1.offset0
+                  a{href='#' class='btn next btn-success btn-larger'} Next
+              .clearfix
+
+
+            / .row
+            /   .span12
+            /     | Level 1 of column
+            /     .accordion-inner
+            /       .span6
+            /         | Level 1 of column
+            /       .span6
+            /         | Level 2 of column
+        .accordion-group
+          .accordion-heading
+            a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion2" href="#collapseTwo"]
+              |  2) Payment and Delivery Method
+          #collapseTwo.accordion-body.collapsy.hide[style="height: auto; "]
+            .accordion-inner
+              .span12
+                .row
+                  .span5
+                    fieldset#payment-method
+                      = f.simple_fields_for :invoice, f.object.invoice do |inv|
+                        = inv.input :payment_method, collection: current_store.payment_methods.active, :selected => f.object.invoice.try(:payment_method_id), :prompt => "select"
+                  .span4
+                    fieldset#delivery-method
+                      = f.simple_fields_for :delivery, f.object.delivery do |del|
+                        = del.input :delivery_method, collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :prompt => "select", :input_html => { id: 'delivery_method'}
+                  .span2
+                      a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
+                        i.icon-refresh
+                        | Calculate
+              .clearfix
+      .form-actions.hide
+        .span2
+          - if current_store.config.order_asset
+            a(class="btn" data-toggle="modal" href="#orderAssets" class='btn btn-primary btn-large')
+              i.icon-file.icon-white
               '
-              = "#{type.option_type.name}: #{type.value}"
-              = " | "
-          td= item.quantity
-          td= item.price
-          td= item.amount
-      tr
-        td
-        td
-        td(colspan='2' style='text-align:center;')
-          'Sub-Total
-        td#sub_total
-          = current_cart.amount
-      tr
-        td
-        td
-        td(colspan='2' style='text-align:center;')
-          | Shipping Value
-        td#shipping_value
-          | 0
-      tr
-        td
-        td
-        td(colspan='2' style='text-align:center;')
-          | Coupon Value
-        td#coupon_value
-          = current_cart.coupons_amount
-      tr
-        td
-        td
-        td(colspan='2' style='text-align:center;')
-          h3 TOTAL
-        td#total_amount
-          h4= @order.total_amount
-
-.row
-  = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
-    = f.error_notification
-    fieldset#address_customer
-      - if user_signed_in? and not current_user.userable.owner?
-        .info.hide
-          label.hide#name
-            = current_user.userable.address.name
-          label.hide#street
-            = current_user.userable.address.street
-          label.hide#complement
-            = current_user.userable.address.complement
-          label.hide#city
-            = current_user.userable.address.city
-          label.hide#state
-            = current_user.userable.address.state
-          label.hide#country
-            = current_user.userable.address.country
-          label.hide#zip_code
-            = current_user.userable.address.zip_code
-          label.hide#phone
-            = current_user.userable.address.phone
-      - else
-        = f.input :customer_name
-        = f.input :customer_email
-    #accordion2.accordion
-      .accordion-group
-        .accordion-heading
-          a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion2" href="#collapseOne"]
-            |  1) Billing and Shipping Address
-        #collapseOne.accordion-body.in.collapsy.hide[style="height: auto; "]
-          .accordion-inner
-            .span12
-              .row
-                .span6
-                  .address
-                    = f.input :billing_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
-                    = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
-                      = render("shared/address", addr: addr)
-                .span6
-                  .address
-                    = f.input :shipping_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'shipping_address' } if user_signed_in?
-                    = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
-                      = render("shared/address", addr: addr)
-              .span1.offset0
-                a{href='#' class='btn next btn-success btn-larger'} Next
-            .clearfix
-
-
-          / .row
-          /   .span12
-          /     | Level 1 of column
-          /     .accordion-inner
-          /       .span6
-          /         | Level 1 of column
-          /       .span6
-          /         | Level 2 of column
-      .accordion-group
-        .accordion-heading
-          a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion2" href="#collapseTwo"]
-            |  2) Payment and Delivery Method
-        #collapseTwo.accordion-body.collapsy.hide[style="height: auto; "]
-          .accordion-inner
-            .span12
-              .row
-                .span5
-                  fieldset#payment-method
-                    = f.simple_fields_for :invoice, f.object.invoice do |inv|
-                      = inv.input :payment_method, collection: current_store.payment_methods.active, :selected => f.object.invoice.try(:payment_method_id), :prompt => "select"
-                .span4
-                  fieldset#delivery-method
-                    = f.simple_fields_for :delivery, f.object.delivery do |del|
-                      = del.input :delivery_method, collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :prompt => "select", :input_html => { id: 'delivery_method'}
-                .span2
-                    a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
-                      i.icon-refresh
-                      | Calculate
-            .clearfix
-    .form-actions.hide
-      .span2
-        - if current_store.config.order_asset
-          a(class="btn" data-toggle="modal" href="#orderAssets" class='btn btn-primary btn-large')
-            i.icon-file.icon-white
+              | Files
+        .span2.offset5
+          button(class='btn-primary btn-large btn-success')
+            i.icon-ok.icon-white
             '
-            | Files
-      .span2.offset5
-        button(class='btn-primary btn-large btn-success')
-          i.icon-ok.icon-white
-          '
-          | Finished
+            | Finished
 
 
-.modal.hide#orderAssets(style='width:840px')
-  .modal-header
-    button(type="button" class="close" data-dismiss="modal")
-     ' x
-    h3 Arquivos
-  .modal-body(style='height:400px;')
-    = form_for(@image, as: :asset, url: order_assets_path(:order_id => @order.id), html: { multipart: true }) do |f|
-      .row.fileupload-buttonbar
-        .span7
-          span.btn.btn-success.fileinput-button
-            i.icon-plus.icon-white
-            span Add files
-            = file_field_tag "asset[file]", multiple: true
+  .modal.hide#orderAssets(style='width:840px')
+    .modal-header
+      button(type="button" class="close" data-dismiss="modal")
+       ' x
+      h3 Arquivos
+    .modal-body(style='height:400px;')
+      = form_for(@image, as: :asset, url: order_assets_path(:order_id => @order.id), html: { multipart: true }) do |f|
+        .row.fileupload-buttonbar
+          .span6
+            span.btn.btn-success.fileinput-button
+              i.icon-plus.icon-white
+              span Add files
+              = file_field_tag "asset[file]", multiple: true
 
-          button.btn.btn-primary.start(type="submit")
-            i.icon-upload.icon-white
-            span Start upload
+            button.btn.btn-primary.start(type="submit")
+              i.icon-upload.icon-white
+              span Start upload
 
-        .span5
-          .progress.progress-success.progress-striped.active.fade
-            .bar(style="width:0%;")
+          .span4
+            .progress.progress-success.progress-striped.active.fade
+              .bar(style="width:0%;")
 
-      .fileupload-loading
+        .fileupload-loading
 
-      table.table.table-striped
-        tbody.files(data-toggle="modal-gallery" data-target="#modal-gallery")
+        table.table.table-striped
+          tbody.files(data-toggle="modal-gallery" data-target="#modal-gallery")
 
-    = render "imentore/admin/assets/jquery-file-upload-templates"
-  .modal-footer
-    a(href="#" class="btn" data-dismiss="modal")
-      | Close
+      = render "imentore/admin/assets/jquery-file-upload-templates"
+    .modal-footer
+      a(href="#" class="btn" data-dismiss="modal")
+        | Close

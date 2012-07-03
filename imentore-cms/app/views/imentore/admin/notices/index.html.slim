@@ -1,0 +1,34 @@
+legend Notices
+p
+  = link_to(new_admin_notice_path, :class=>'btn btn-primary') do
+    i.icon-white.icon-plus
+    '
+    | New notice
+
+
+table.table.table-striped
+  thead
+    tr
+      th.span1 Active
+      th Name
+      th Handle
+      th Created At
+      th Actions
+  tbody
+    - @notices.each do |notice|
+      tr
+        td
+          = button_status(notice.active, '#')
+        td= notice.name
+        td= notice.handle
+        td= notice.created_at
+        td
+          = link_to(edit_admin_notice_path(notice), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            | Edit
+          '
+          = link_to(admin_notice_path(notice), class: 'btn btn-danger', method: :delete) do
+            i.icon-white.icon-trash
+            '
+            | Remove

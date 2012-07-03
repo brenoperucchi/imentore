@@ -1,13 +1,14 @@
 - @feedback = current_store.feedbacks.new if @feedback.nil?
-= simple_form_for(@feedback, html: { multipart: true, class: 'form-horizontal' }) do |f|
+= simple_form_for(@feedback, url: store_feedbacks_path(current_store, @feedback), html: { multipart: true, class: 'form-horizontal' }) do |f|
   .modal-header
     button(type="button" class="close" data-dismiss="modal")
      ' x
     h3 FeedBack
-  .modal-body(style='height:265px;')
-    = f.input :name, input_html: {}, placeholder: 'Type new Product Brand'
-    = f.input :subject, input_html: {}, placeholder: 'Type new Product Brand'
-    = f.input :question, input_html: {class: 'input-xlarge'}, placeholder: 'Type new Product Brand'
+  .modal-body(style='height:200px;')
+    = f.input :name, input_html: {}, placeholder: 'Type your name'
+    = f.input :email, input_html: {}, placeholder: 'Type email'
+    = f.input :subject, input_html: {}, placeholder: 'Type subject'
+    = f.input :question, input_html: {class: 'input-xlarge'}, placeholder: 'Type description'
 
   .modal-footer
     a.btn[href='#' data-dismiss='modal']

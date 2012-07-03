@@ -1,0 +1,15 @@
+/*
+ *= require bootstrap
+ *= require bootstrap-responsive
+*/
+
+ul li {
+  list-style: none;
+}
+a{
+  color: #333;
+}
+input{
+  height:26px!important;
+  margin-bottom: 0px!important;
+}

@@ -5,7 +5,7 @@ html
   = stylesheet_link_tag    "client"
   = javascript_include_tag "client"
   = csrf_meta_tags
-  = yield :head
+  = yield :header
   css:
     body {
             padding-top: 60px;
@@ -22,6 +22,9 @@ html
       height: 16px;
       line-height: 16px;
       vertical-align: text-top;
+    }
+    textarea.text{
+      height:60px;
     }
 
 - content_for :footer do
@@ -71,7 +74,6 @@ html
     })
 
 body
-
   #feedback.hide.fade.in.modal
     = render template: 'imentore/feedbacks/new'
   .navbar.navbar-fixed-top

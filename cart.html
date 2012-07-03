@@ -1,0 +1,95 @@
+<!-- ********************** --> 
+<!--     I N T R O          -->
+<!-- ********************** --> 
+<div id="intro">
+  <div id="intro_wrap">
+    <div class="container_12">
+<!--       <div id="breadcrumbs" class="grid_12">
+        <a href="index.html">Home</a>
+         &gt; <a href="cart.html">Basket</a>
+      </div>
+    -->      <h1>Carrinho ({{ current_cart.weight }}kg)
+  </h1>
+</div>
+</div>
+</div>
+<!-- end of intro -->
+
+
+<!-- ********************** --> 
+<!--      C O N T E N T     --> 
+<!-- ********************** --> 
+<div id="content" class="container_12">
+
+  <div id="shopping_cart" class="grid_12">
+    <form accept-charset="UTF-8" action="/cart" method="put" id='cart'>
+      <table class="s_table_1" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <th width="65">Remover</th>
+          <th width="60">Imagem</th>
+          <th width="100">Nome</th>
+          <th width="200">Variação</th>
+          <th>Qtd</th>
+          <th>Preço Unit</th>
+          <th>Total</th>
+        </tr>
+
+        {% for item in current_cart.items %}
+        <tr class="odd">
+          <td valign="middle"><input type="checkbox" /></td>
+          <td valign="middle"><a href="{{ item.url }}"><img src="{{ 'bigger' | image_url :item }}" width="60" height="60" alt="{{ item.name }}" /></a></td>
+          <td valign="middle"><a href="{{ item.url }}"><strong>{{ item.name }}</strong> <br> </a></td>
+          <td valign="middle">{{ item.variant | variant_options_values }}</td>
+          <td valign="middle">
+            <input type="text" size="3" name='[items][{{forloop.index}}]quantity' value='{{ item.quantity }}'/>
+            <input id="_items_{{forloop.index}}product_id" name="[items][{{forloop.index}}]product_id" type="hidden" value="{{item.product.id}}">
+            <input id="_items_{{forloop.index}}variant_id" name="[items][{{forloop.index}}]variant_id" type="hidden" value="{{item.variant.id}}">
+          </td>
+          <td valign="middle">R$<span class="s_currency s_after">{{ item.price }}</span></td>
+          <td valign="middle">R$<span class="s_currency s_after">{{ item.amount }}</span></td>
+        </tr>
+        {% endfor %}
+      </tr>
+      <tr class="even">
+        <td valign="middle">&nbsp;</td>
+        <td valign="middle">&nbsp;</td>
+        <td valign="middle">&nbsp;</td>
+        <td valign="middle">Coupon:</td>
+        <td colspan='2' align="center" valign="middle"><input name="coupon_code" type="text" id="coupon_code" /></td>
+        <td valign="middle">&nbsp;</td>
+      </tr>
+      <tr class="even">
+        <td valign="middle">&nbsp;</td>
+        <td colspan='2' align="center" valign="middle">Método de Entrega:<select name="delivery_method">
+          {% for delivery in @current_cart.delivery_methods %}
+          <option value="{{ delivery.id }}">{{ delivery.name }}</option>
+          {% endfor %}
+        </select></td>
+        <td valign="middle">Cep:</td>
+        <td colspan="2" valign="middle"><input name="zip_code" type="text" id="zip_code" /></td>
+        <td valign="middle">&nbsp;</td
+      </tr>
+
+    </table>
+    <br />
+    <p class="s_total"><strong>Sub-Total:</strong> {{ current_cart.amount }} <span class="s_currency s_after"> </span></p>
+    <p class="s_total"><strong>Coupon R$:</strong> {{ current_cart.coupons_amount }}<span class="s_currency s_after"> </span></p>
+    <p class="s_total"><strong>Envio R$:</strong> {{ current_cart.delivery_amount }} <span class="s_currency s_after"> </span></p>
+    <p class="s_total s_secondary_color last"><strong>Total:</strong> {{ current_cart.total_amount }} <span class="s_currency s_after"> </span></p>
+
+    <div class="clear"></div>
+    <br />
+
+    <a class="s_button_1 s_ddd_bgr left"><span class="s_text">Continuar Compras</span></a>
+    <button class="s_button_1 s_main_color_bgr" type="submit"><span class="s_text">Concluir</span></button>
+    <a class="s_button_1 s_main_color_bgr" onclick="$('form#cart').submit();"> <span class="s_text">Atualizar</span></a>
+  </form>
+
+</div>
+
+<div class="clear"></div>
+<br />
+<br />
+
+</div>
+<!-- end of content --> 
