@@ -5,8 +5,11 @@ module LiquidFilter
   include Imentore::Core::Engine.routes.url_helpers
 
   def asset_url(name)
-    # name + " " + @context.registers[:controller].current_store.name
-    @context.registers[:current_store].assets.find_by_file(name).file_url
+    begin
+      @context.registers[:current_store].theme.assets.find_by_file(name).file_url
+    rescue StandardError
+      "File Not Found: #{name.to_s}"
+    end
   end
 
   def product_url(product)
@@ -24,14 +27,13 @@ module LiquidFilter
   end
 
   def image_url(size,obj)
-    obj.url(size.to_s)
+    obj.image(size.to_s)
   end
 
-  # def user_login_url(param)
-  #   # binding.pry
-  #   new_user_session_path
-  # end
-
+  def variant_options_values(variant)
+      names = variant.options.collect{|option| ["#{option.option_type.name}: #{option.value}"]}
+      names.join(' - ')
+  end
 
   def form_token(token)
     SecureRandom.base64(32)
@@ -39,7 +41,7 @@ module LiquidFilter
 
   def theme_include(name)
     begin
-      url = @context.registers[:current_store].assets.find_by_file(name).file_url
+      url = @context.registers[:current_store].theme.assets.find_by_file(name).file_url
       if name.include?(".js",)
         "#{content_tag("script", "", { "type" => "text/javascript", "src" => url })}\n"
       elsif name.include?(".css")

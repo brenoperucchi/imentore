@@ -19,6 +19,10 @@ module ApplicationHelper
     end
   end
 
+  def types_templates
+    ['layout', 'template']
+  end
+
   def states
     # encoding: utf-8
     { "Alagoas" => "AL", "Amapá" => "AP",
@@ -152,14 +156,9 @@ module ApplicationHelper
     end
   end
 
-  def teste(name)
-    "teste"
-  end
-
   def collection_product(variants)
-    test = variants.collect do |variant_drop|
+    ret = variants.collect do |variant_drop|
       Imentore::ProductVariant.find(variant_drop.id).options.collect{|option| [option.option_type.name, option.value ]}
-      # Imentore::ProductVariant.find(variant_drop.id).options.collect{|option| [option.option_type.name, option.option_type.id, option.product_variant_id, option.value ]}
     end
   end
 
