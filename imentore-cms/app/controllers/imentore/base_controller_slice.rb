@@ -16,10 +16,11 @@ Imentore::BaseController.class_eval do
   def theme_layout
     if current_store && current_store.theme.default_layout
       current_store.theme.default_layout
-     else
+    elsif current_store
       'public'
+    elsif current_store.nil?
+      'site'
     end
-
   end
 
   private

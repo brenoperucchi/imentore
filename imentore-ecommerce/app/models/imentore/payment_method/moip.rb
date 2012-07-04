@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'MoIP'
+require 'moip'
 
 module Imentore
   class PaymentMethod::Moip
