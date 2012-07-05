@@ -14,9 +14,11 @@ set :deploy_via, :remote_cache
 set :branch, "master"
 
  
-role :web, "216.224.180.236"                          # Your HTTP server, Apache/etc
-role :app, "216.224.180.236"                          # This may be the same as your `Web` server
-role :db,  "216.224.180.236", :primary => true # This is where Rails migrations will run
+role :web, "216.120.250.136"                          # Your HTTP server, Apache/etc
+role :app, "216.120.250.136"                          # This may be the same as your `Web` server
+role :db,  "216.120.250.136", :primary => true # This is where Rails migrations will run
+ssh_options[:keys] = "#{ENV['HOME']}/.ssh/216.120.250.136/imentore"
+ssh_options[:auth_methods] = %w(publickey)
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
