@@ -1,0 +1,94 @@
+﻿.primary_color, h1, h2, h3, h4, h5, h6, .box .box-heading, .welcome, #currency a b, #footer-top-outside, #footer-top-outside p,
+ .box-product .name a, #categories_footer ul li a, #footer-top-outside li,  #twitter_footer li a, .htabs a, .product-grid .name a, .product-list .name a, .checkout-heading,
+ .cart-info thead td
+{
+/* Main colour (headings) BLACK */
+color: #2d2d2d;
+}
+.primary_color_bg {
+/*BLACK */
+background-color: #2d2d2d;
+}
+
+.secondary_color, p, body, #header #search input,  .heading h4, #currency a, #footer ul li a, .cart_right a, .box-category > ul > li ul > li a, .product-list .wishlist a, .product-list .compare a,
+.product-list .price-tax
+{
+/* DARK GREY (secondary colour - text) */
+color:#808080;
+
+}
+.secondary_color_bg, #header #welcome a:hover, .register_welcome a, a.button:hover, a.button:hover span {
+/* DARK GREY*/
+background-color:#808080 ;
+
+}
+
+.third_color, a , .links a:hover, #twitter_footer li span a, #footer ul li a:hover{
+/*ORANGE */
+color: #de360f;
+
+}
+.third_color_bg, #menu > ul > li ul > li > a:hover {
+/*ORANGE */
+background-color: #de360f;
+
+}
+
+.fourth_color, a:hover, #twitter_footer li span a:hover, .product-info .description span {
+/* GREEN */
+color: #64a4a4;
+}
+.fourth_color_bg, #header #welcome a, register_welcome a:hover, a.button, a.button span {
+/* GREEN */
+background-color: #64a4a4 ;
+}
+
+.fifth_color {
+/* LIGHT GREY */
+color: #ececec;
+}
+
+.fifth_color_bg, #header #search input, .cart_spacer, #footer-top-outside {
+/* LIGHT GREY */
+background-color: #f6f6f6;
+}
+
+.sixth_color {
+/* DARKER ORANGE - FOR HOVER ON MENU */
+color: #c10b01;
+}
+
+.sixth_color_bg:hover, #menu > ul > li:hover {
+/* DARKER ORANGE - FOR HOVER ON MENU */
+background-color: #c10b01;
+}
+
+.sixth_color_border, #menu > ul > li > div, #cart .content {
+border-color: #c10b01;
+}
+
+body {
+	
+	background-color: #f3f3f3;
+	
+}
+
+/* PRICE */
+.box-product .price, .product-info .price, .product-grid .price, .product-list .price, .compare-info .price-new {
+	color:#de360f;
+	}
+.product-info .price-old, .product-grid .price-old, .product-list .price-old, .compare-info .price-old  {
+	
+	color:#2d2d2d;
+}
+.error{
+	
+	color:black;
+}
+a.button span,#header #welcome a,#header #welcome a:hover {
+color:white;
+}
+
+#menu > ul > li > a, #menu > ul > li > a:hover {
+	color:#ffffff;
+}

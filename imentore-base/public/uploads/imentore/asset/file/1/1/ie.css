@@ -1,0 +1,43 @@
+﻿
+#cart .content {
+	width:250px;
+	
+
+}
+#header-bottom{
+	
+	z-index:3000000;
+	line-height:20px;
+}
+#menu{
+	
+	z-index:200;
+}
+#cart .heading h4 {
+	
+	margin-right:5px;
+}
+#cart .content .name {
+	
+	width:100px;
+}
+.cart{
+	
+	table-layout:fixed;
+}
+#cart .cart .quantity {
+    width: 24px;
+}
+#cart .cart .name{
+    font-size:12px;
+	line-height:15px;
+	width:70px;
+}
+#cart .cart .total{
+
+	width:60px;
+}
+#cart .cart .image{
+
+	width:50px;
+}
