@@ -20,7 +20,7 @@ module Imentore
     end
 
     def check_store
-      unless @current_store
+      unless current_store
         redirect_to site_path
       end
       # unless current_store
