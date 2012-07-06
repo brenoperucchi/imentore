@@ -1,7 +1,7 @@
 default_run_options[:pty] = true
 set :application, "imentore"
 set :repository,  "git@github.com:bperucchi/imentore.git"
-set :applicationdir, "/home/imentore/app/current/imentore-base"
+set :applicationdir, "/home/imentore/app"
 
 set :scm, :git
 # set :scm_passphrase, "aszx12qw"  # The deploy user's password
