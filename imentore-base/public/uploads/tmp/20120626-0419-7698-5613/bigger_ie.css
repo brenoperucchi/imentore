@@ -1,0 +1,77 @@
+.s_item:hover {
+  padding: 0 !important;
+}
+.s_list_view .s_item:hover {
+  margin: 0;
+  padding: 20px 0 !important;
+  border-bottom-color: #ccc;
+}
+.s_grid_view .s_item:hover {
+  margin: 0 10px 16px 10px !important;
+}
+.s_list_view .s_item,
+.s_grid_view .s_item .s_rating,
+.s_list_view .s_item .s_rating .s_percent,
+.s_grid_view .s_item .s_rating .s_percent
+{
+	background-color: #fff !important;
+}
+.s_item:hover .s_price {
+  right: 0 !important;
+}
+.s_grid_view .s_item .s_button_add_to_cart {
+  display: block;
+}
+.container_12 .grid_2.s_item .s_price {
+	right: 0 !important;
+}
+.container_12 .grid_2.s_item:hover .s_price {
+  top: 67px;
+  right: 0 !important;
+}
+.container_12 .grid_3.s_item:hover .s_price {
+  top: 127px;
+}
+.container_16 .grid_3.s_item:hover .s_price {
+  top: 87px;
+}
+#categories .s_submenu h3 {
+  padding: 18px 0 13px 0;
+}
+.s_item.s_size_1:hover {
+  margin: 0 0 16px 0 !important;
+  padding: 0 !important;
+}
+.s_item.s_size_1 .s_rating_holder {
+  padding-left: 0;
+}
+#product .s_tabs_nav {
+  border-left: 1px solid #fff;
+}
+#shop_contacts td {
+  height: 32px;
+  padding-bottom: 20px;
+}
+.s_submenu,
+#search_bar
+{
+  margin-top: -1px;
+  border: 1px solid #ddd;
+}
+div.pp_content_container {
+  border: 1px solid #ccc;
+}
+.s_button_1 .s_text {
+  border: none;
+}
+.s_button_1.s_ddd_bgr .s_text {
+  border: none;
+}
+.s_button_1.s_ddd_bgr:hover .s_text {
+  border: none;
+}
+
+
+
+
+
