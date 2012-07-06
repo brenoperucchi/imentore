@@ -11,13 +11,19 @@ timeout 30
 
 # This is where we specify the socket.
 # We will point the upstream Nginx module to this socket later on
-listen "/home/imentore/app/current/imentore-base/tmp/sockets/unicorn.sock", :backlog => 64
+listen "/home/imentore/app/shared/tmp/unicorn.sock", :backlog => 64
+listen 8080, :tcp_nopush => true
+timeout 30
 
-pid "/home/imentore/app/current/imentore-base/tmp/pids/unicorn.pid"
+pid "/home/imentore/app/shared/pids/unicorn.pid"
 
 # Set the path of the log files inside the log folder of the testapp
-stderr_path "/home/imentore/app/current/imentore-base/log/unicorn.stderr.log"
-stdout_path "/home/imentore/app/current/imentore-base/log/unicorn.stdout.log"
+stderr_path "/home/imentore/app/shared/log/unicorn.stderr.log"
+stdout_path "/home/imentore/app/shared/log/unicorn.stdout.log"
+
+preload_app true
+GC.respond_to?(:copy_on_write_friendly=) and
+  GC.copy_on_write_friendly = true
 
 before_fork do |server, worker|
 # This option works in together with preload_app true setting
