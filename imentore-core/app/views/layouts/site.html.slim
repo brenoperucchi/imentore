@@ -21,13 +21,14 @@ html
       background-position:0 -64px!important;
     }
   meta content="text/html; charset=utf-8" http-equiv="Content-Type"
-  = yield :footer
+  = yield :header
 
-body#home
+body#home{style='padding-top:75px;'}
   .topbar(style='display:block')
     .header
       .container
-        a.brand href="/" title="Effortless vehicle &amp; fleet management" style='background:url(/images/site/imentore-logo-trans-208x128.png) no-repeat 0 0;height:44px; width:161px; border:0px; outline:none;'
+        .logo
+          a.brand href="/" title="Effortless vehicle &amp; fleet management" style='background:url(/images/site/imentore-logo-trans-208x128.png) no-repeat 0 0;height:44px; width:161px; border:0px; outline:none;'
         .span#slogan Gestão Empresarial e Comércio Eletrônico
         / h1.site-title
         /   a href="/" title="Online vehicle and fleet maintenance management"

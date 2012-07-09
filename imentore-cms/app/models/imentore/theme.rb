@@ -4,6 +4,7 @@ module Imentore
     has_many :templates
     has_many :assets
 
+    scope :theme_system, where(system: true)
     scope :default, where(default: true)
 
     def default_layout

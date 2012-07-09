@@ -22,6 +22,10 @@ module Imentore
         destroy! { admin_themes_path }
       end
 
+      def collection
+        @themes = begin_of_association_chain.themes.theme_system
+      end
+
       protected
 
       def uniqueness_active

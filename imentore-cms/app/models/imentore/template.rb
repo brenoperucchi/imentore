@@ -4,7 +4,7 @@ module Imentore
     scope :templates, where(kind: 'template')
     belongs_to :theme
 
-    validates :default, uniqueness: true, :if => Proc.new { |klass| klass.default and klass.kind == 'layout'}
+    validates :default, uniqueness: { scope: :theme_id }, :if => Proc.new { |klass| klass.default and klass.kind == 'layout'}
 
   end
 end

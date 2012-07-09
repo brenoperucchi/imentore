@@ -1,0 +1,77 @@
+@charset "utf-8";
+/* CSS Document */
+
+body.s_layout_fixed {
+	background-color: #fffbe5;
+	background-image: url(../images/texture_1.png);
+}
+.s_main_color, #twitter li span a, .s_item .s_button_add_to_cart, .s_box h2, .box .top {
+	color: #FF8800;
+}
+.s_main_color_bgr, #cart .s_icon, #shop_contacts .s_icon, .s_list_1 li, .s_item .s_button_add_to_cart .s_icon, #intro .s_button_prev, #intro .s_button_next, .buttons .button, #cart_menu .s_icon {
+	background-color: #F07000;
+}
+.s_secondary_color, a:hover, #categories > ul > li > a, #footer_categories h2, .pagination a, #view_mode .s_selected a {
+	color: #40aebd;
+}
+#content a:hover, #shop_info a:hover, #footer a:hover, #intro h1 a:hover, #intro h2 a:hover, #content a:hover, #shop_info a:hover, #footer a:hover, #breadcrumbs a:hover {
+	color: #FF8800 !important;
+}
+.s_secondary_color_bgr, #show_search, #view_mode .s_selected .s_icon, #view_mode a:hover .s_icon, #menu_home a:hover, .pagination a:hover, .s_item .s_button_add_to_cart:hover .s_icon, .s_cart_item .s_button_remove:hover {
+	background-color: #40AEBD;
+}
+#intro, #contact_form_icon {
+	background-color: #FFECC9;
+}
+#intro, #breadcrumbs a {
+	color: #574325;
+}
+#intro h1, #intro h1 *, #intro h2, #intro h2 * {
+	color: #F07000;
+ ~background-color: #def5d0;
+}
+#intro .s_rating {
+ ~background-color: #def5d0;
+}
+.s_price {
+	background-color: #F5C275;
+}
+.s_promo_price {
+	background-color: #40AEBD;
+}
+.s_price, .s_price .s_currency {
+	color: #4D3B17;
+}
+.s_promo_price, .s_old_price, .s_promo_price .s_currency {
+	color: #ffffff;
+}
+
+/*****************************************************/
+/******   S E L E C T I O N    ***********************/
+/*****************************************************/
+*::-moz-selection {
+ background-color: #F12B63;
+}
+*::-webkit-selection {
+ background-color: #F12B63;
+}
+*::selection {
+ background-color: #F12B63;
+}
+
+/*CHANGE*/
+#welcome_message {
+    color: #999999;
+    font-size: 11px;
+    margin-bottom: 9px;
+    text-align: right;
+}
+#welcome_message a:hover{
+  color:#4CB1CA!important;
+}
+#welcome_message a{
+    color: #FF8800;
+    font-size: 11px;
+    margin-bottom: 9px;
+    text-align: right;
+}

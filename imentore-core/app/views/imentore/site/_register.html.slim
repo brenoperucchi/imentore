@@ -1,0 +1,55 @@
+- content_for :header do
+  css:
+
+
+#login.container[style='padding-top:20px']
+  .row
+    .span12.offset2
+      .section.section-large[style='border:1px solid #CCC']
+        .section-header.well[style='padding-left:15px']
+          h3
+            | Crie a sua conta agora conosco!
+        .section-body[style='padding-left:15px']
+          h3 Create your free account.
+          p You can upgrade, downgrade or cancel your account at any time.
+          hr/
+          = simple_form_for @store, url: stores_path do |f|
+            = f.input :url
+            = f.simple_fields_for :owner do |owner|
+              = owner.simple_fields_for :user do |user|
+                = user.input :email
+                = user.input :password
+                = user.input :password_confirmation
+            = f.button :submit, class: 'btn-success'
+          / form#new_user.new_user accept-charset="UTF-8" action="/users" method="post"
+          /   div style="margin:0;padding:0;display:inline"
+          /     input name="utf8" type="hidden" value="✓"
+          /     input name="authenticity_token" type="hidden" value="XG1Lx0ja1mvMoamPCxlD2iX/B4bf3AiTJkN08L+TF8c="
+          /   label for="user_full_name"
+          /     | Full Name
+          /   input#user_full_name.span4 name="user[full_name]" size="30" type="text"
+          /   span.help-inline Required.
+          /   label for="user_email"
+          /   input#user_email.span4 name="user[email]" size="30" type="email" value=""
+          /   span.help-inline Required.
+          /   p.help-block Your activation email will be sent to this address.
+          /   label for="user_password"
+          /   input#user_password.span4 name="user[password]" size="30" type="password"
+          /   span.help-inline Required.
+          /   label for="account_name"
+          /   input#account_name.span4 name="account_name" type="text"
+          /   p.help-inline Optional.
+            .form-actions
+              .alert.alert-info
+                | By signing up, you accept Fleetio's
+                a href="http://www.fleetio.com/terms" target="_blank"
+                  | terms of use
+                | and
+                a href="http://www.fleetio.com/privacy" target="_blank"
+                  | privacy
+                  | policy
+              input.btn.btn-primary.btn-large data-disable-with="Just a moment..." name="commit" onclick="_gaq.push(['_trackEvent', 'accounts', 'signup']);" type="submit" value="Create an Account"
+            p.ar
+              i.icon-user
+              | Already have an account?
+              a href="https://secure.fleetio.com/login"

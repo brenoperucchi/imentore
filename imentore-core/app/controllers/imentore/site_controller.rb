@@ -11,7 +11,8 @@ module Imentore
     def show
     end
 
-    def set_page
+   def set_page
+      @store = Imentore::Store.new
       @page = params[:page]
     end
 

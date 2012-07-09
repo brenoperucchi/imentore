@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120629035025) do
+ActiveRecord::Schema.define(:version => 20120708225413) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -295,17 +295,18 @@ ActiveRecord::Schema.define(:version => 20120629035025) do
   create_table "imentore_templates", :force => true do |t|
     t.string   "path"
     t.text     "body"
-    t.boolean  "partial",    :default => false
+    t.boolean  "partial",      :default => false
     t.string   "layout"
-    t.string   "format",     :default => "text/html"
-    t.string   "locale",     :default => "en"
-    t.string   "handler",    :default => "liquid"
+    t.string   "format",       :default => "text/html"
+    t.string   "locale",       :default => "en"
+    t.string   "handler",      :default => "liquid"
     t.integer  "theme_id"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.text     "head"
     t.string   "kind"
-    t.boolean  "default",    :default => false
+    t.boolean  "default",      :default => false
+    t.text     "body_default"
   end
 
   create_table "imentore_themes", :force => true do |t|
@@ -313,6 +314,7 @@ ActiveRecord::Schema.define(:version => 20120629035025) do
     t.integer "store_id"
     t.boolean "default",  :default => false
     t.boolean "active",   :default => false
+    t.boolean "system",   :default => false
   end
 
   create_table "imentore_users", :force => true do |t|

@@ -12,9 +12,13 @@ module Imentore
       if request.domain.nil?
         @current_store = nil
       else        
+        host = request.host.split(".")
+        subdomain = host.first
+        host.delete_at(0)
+        domain = host.join('.')
         @current_store ||=
-          Store.joins(:domains).where("imentore_domains.name" => request.domain).first ||
-          (Store.find_by_url(request.subdomain) if request.domain.include?(Imentore.config.domain))
+          Store.joins(:domains).where("imentore_domains.name" => request.host).first ||
+          (Store.find_by_url(subdomain) if Imentore.config.domain.include?(domain))
       end
       @current_store
     end

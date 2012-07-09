@@ -4,7 +4,7 @@ module Imentore
 
   def defaults
     {
-      domain: "imentore.com"
+      domain: ["imentore.dev", "imentore.com","imentore.com.br"]
     }
   end
 
@@ -13,6 +13,6 @@ module Imentore
   end
 end
 
-if Rails.env.development?
-  Imentore.config.domain = "imentore.dev"
-end
+# if Rails.env.development?
+#   Imentore.config.domain = "imentore.dev"
+# end
