@@ -14,6 +14,10 @@ module Imentore
    def set_page
       @store = Imentore::Store.new
       @page = params[:page]
+      if @page == 'register'
+        @store.build_owner
+        @store.owner.build_user
+      end
     end
 
   end

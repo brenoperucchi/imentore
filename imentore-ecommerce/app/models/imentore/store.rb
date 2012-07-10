@@ -5,6 +5,7 @@ module Imentore
   class Store < ActiveRecord::Base
 
     serialize :config, Settings
+    after_create :create_templates
 
     #  include SentientStore
     # after_create :create_cashier, :create_cost_centers, :create_shippings, :create_store_emails
@@ -87,6 +88,8 @@ module Imentore
     DNS_LABEL_REGEX = /^[a-z][a-z0-9-]*[a-z0-9]$/i
     INVALID_DOMAINS = %w(www mail ftp)
 
+    validates :name, presence: true
+    validates :term, acceptance: true
     validates :brand,  presence: true
     validates :url,   presence: true,
                       uniqueness: true,
@@ -123,6 +126,26 @@ module Imentore
 
     def email_contact
       config.email_contact.present? ? config.email_contact : email
+    end
+
+    def create_templates
+      theme = self.themes.new(name: 'default', active: true, system:true)
+      layout = Imentore::Store.first.themes.first.templates.layouts.first.dup
+      layout.theme = theme
+      layout.save
+      Imentore::Store.first.themes.first.templates.templates.each do |template|
+        temp = template.dup
+        temp.theme = theme
+        temp.layout = 'layouts/default'
+        temp.save
+      end
+      self.themes.first.templates.first.update_attribute(:path, 'layouts/default')
+      Imentore::Store.first.themes.first.assets.each do |asset|
+        n_asset = Imentore::Asset.new
+        n_asset.file = asset.file
+        n_asset.theme = theme
+        n_asset.save
+      end
     end
 
     # http://www.ietf.org/rfc/rfc1035.txt

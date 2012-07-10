@@ -12,5 +12,6 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-#/tmp
+/tmp
 /tmp/cache/assets/*
+/public/uploads/*

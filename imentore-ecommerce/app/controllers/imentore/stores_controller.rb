@@ -17,7 +17,15 @@ module Imentore
       @store.owner.user.store = @store
       @store.owner.person_type = 'person'
       @store.owner.name = "Name"
-      create! { store_success_url }
+      respond_to do |wants|
+        wants.html {  
+          if @store.save
+            redirect_to "http://#{@store.url}.imentore.dev:3000"
+          else
+            render 'new'
+          end
+        }
+      end
     end
 
     def create_success
