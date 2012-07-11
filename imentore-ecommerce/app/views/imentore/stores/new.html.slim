@@ -1,4 +1,6 @@
 - content_for :header do
+  / = stylesheet_link_tag    "bootstrap"
+  / = javascript_include_tag  "jquery", "site/bootstrap-modal"
   css:
 
     / .form-horizontal .control-group {
@@ -179,13 +181,25 @@
                 = f.input :term, :wrapper => :inline_checkbox, :wrapper_tag => false, :as => :boolean, :label => false, :boolean_style => :inline
                 '
                 | Concordo com 
-                a href="http://www.fleetio.com/terms" target="_blank"
+                a[data-toggle="modal" href="#orderAssets"]
                   | termos
                 '
                 | usados
-              input.btn.btn-primary.btn-large data-disable-with="Aguarde um momento..." name="commit" onclick="_gaq.push(['_trackEvent', 'accounts', 'signup']);" type="submit" value="Create an Account"
+              = f.input :plan_id, :collection => [ ['Gratuito - R$0,00' ,1], ['Básico - R$19,00' ,2], ['Avançado - 39,00' ,3], ['Profissional - R$79,00', 4], ['Premium - R$149,00', 4] ], prompt: 'Selecione um Plano', input_html: { class: :span5, style:'margin-left:10px'} 
+              input.btn.btn-primary.btn-large data-disable-with="Aguarde um momento..." name="commit" onclick="_gaq.push(['_trackEvent', 'accounts', 'signup']);" type="submit" value="Crie sua Conta"
             / p.ar
             /   i.icon-user
             /   '
             /   | Já possui uma conta?
             /   a href="https://www.imentore.com.br/client"
+.modal.hide.fade#orderAssets(style='width:1000px;top:35%;left:35%;')
+  .modal-header
+    button(type="button" class="close" data-dismiss="modal")
+     ' x
+    h3 Termos do Contrato
+  .modal-body(style='max-height:600px;overflow-y:auto;')
+    = render 'imentore/site/term'
+
+  .modal-footer
+    a(href="#" class="btn" data-dismiss="modal")
+      | Close

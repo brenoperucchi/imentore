@@ -20,7 +20,11 @@ module Imentore
       respond_to do |wants|
         wants.html {  
           if @store.save
-            redirect_to "http://#{@store.url}.imentore.dev:3000"
+            if request.server_port == '3000' 
+              redirect_to "http://#{@store.url}.imentore.dev:3000" 
+            else
+              redirect_to "http://#{@store.url}.imentore.com.br"
+            end
           else
             render 'new'
           end

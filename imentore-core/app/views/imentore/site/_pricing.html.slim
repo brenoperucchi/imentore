@@ -4,17 +4,17 @@
       font-size:8px;
     }
 
-.hero.ac
+.hero.ac[style='padding-bottom:20px']
   .container
     h2 Venda na Internet de maneira fácil e segura!
-    h3 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    h3 Ativação automática e cancele quando quiser.
 .container.content
   .well
     ol.sequence
       li.first
-        h3 Super Fleet
+        h3 Premium
         h2
-          | $149
+          | R$149
           small 
             | /mês
         h6
@@ -26,9 +26,9 @@
           br
           | Ilimitado Usuários
       li
-        h3 Large Fleet
+        h3 Profissional
         h2
-          | $79
+          | R$79
           small 
             | /mês
         h6
@@ -40,9 +40,9 @@
           br/
           | Ilimitado Usuários
       li
-        h3 Medium Fleet
+        h3 Avançado
         h2
-          | $39
+          | R$39
           small 
             | /mês
         h6
@@ -53,9 +53,9 @@
           br/
           | Ilimitado Usuários
       li
-        h3 Small Fleet
+        h3 Básico
         h2
-          | $19
+          | R$19
           small 
             | /mês
         h6
@@ -68,9 +68,9 @@
           '
           | 3 Usuários
       li
-        h3 Grátis
+        h3 Gratuito
         h2
-          | $0
+          | R$0
           small 
             | /mês
         h6
@@ -86,60 +86,56 @@
       .span9
         .inner-well.ac
           p.ac
-            a.btn.huge.success href="https://secure.fleetio.com/register" style="width:50%" title="Register for Fleetio Fleet Management System"
+            a.btn.huge.success href=page_site_path('register') style="width:50%" title="Register for Fleetio Fleet Management System"
               strong
-                | Sign Up for Free →
+                | Assine Gratuitamente →
               small
-                | No credit card required
-          p.ac
-            | How much can you save?
-            a href="/roi" title="Fleet management software ROI calculator"
-              | Check out the ROI Calculator →
+                | Sem precisar de pagamento
+          / p.ac
+          /   | How much can you save?
+          /   a href="/roi" title="Fleet management software ROI calculator"
+          /     | Check out the ROI Calculator →
       .span6
         h4 All Plans Include:
         ul.pricing-includes
-          li Email support
-          li Secure (SSL) protection
-          li Ilimitado document storage
-          li Export your data anytime
+          li Edição do conteúdo HTML do layouts
+          li Fotos Ilimitados
+          li Integração com sistemas de Pagamento
+          li Exportar os seus dados **
         p style="font-size:12px"
           strong
-            | Larger plans are also available.
-          a href="mailto:billing@fleetio.com"
-          | for more info.
+            | Planos maiores disponível por consulta.
+          '
+          a href="mailto:atendimento@imentore.com.br"
+            | Contate-nos
+          '
+          | para maiores informações
   .row
     .span8
-      h4 Do I have to sign a long term contract?
+      h4 Posso mudar de plano a qualquer momento?
       p
-        | No. Fleetio is a pay-as-you-go fleet management system so you simply pay mês-to-mês.
-        | There are no long term contracts or commitments on your part.  If you cancel, you’ll be billed
-        | for the current mês, but you won’t be billed again. You can also export all of your data
-        | to a Microsoft Excel spreadsheet at any time.
-      h4 Are there any upfront fees?
+        | Sim. A qualquer momento você pode alterar o plano da sua conta acessando o menu do sistema e escolhendo o que melhor se adequar às suas necessidades.
+      h4 Contratos longos ou termo de fidelidade?
       p
-        | No. There are no upfront fees at all to begin using Fleetio. You can sign up now and begin
-        | using it today without even opening your wallet.
-      h4 What are my payment options?
+        | Não. O serviço é mensal e você paga apenas pelo próximo mês que usará. Se você cancelar sua conta não receberá mais cobranças. Para utilizar o serviço você só precisa estar de acordo com os nossos Termos de Serviço e Política de Privacidade.
+      h4 Taxas para cadastro ou cancelamento?
       p
-        | We accept Visa, MasterCard and Discover through our online payment system. If you would like
-        | to prepay for 12 mêss you can pay with an invoice. Please contact us at
-          a href="mailto:billing@fleetio.com"
+        | Não. Nenhuma taxa para cadastro ou cancelamento será cobrada.
     .span8
-      h4 Do you offer any discounts?
+      h4 Recebo reembolso ao cancelar no meio do mês?
       p
-        | You can prepay for 12 mêss and receive a 10% discount on your purchase. If you're a very large
-        | organization, we sometimes offer discounts on comprehensive bundles of products and services.
-        | We believe in giving back, so we have a special program for nonprofits and educational institutions.
-        | Please contact us at
-          a href="mailto:billing@fleetio.com"
-      h4 What web browsers work with Fleetio?
+        | Cada mensalidade é referente ao uso do próximo mês e caso você cancele sua conta no meio do período, não haverá reembolso, de acordo com nossos Termos de Serviço.
+      h4 Segurança e sigilo
       p
-        | We support Internet Explorer 7 and higher, Firefox 3 and higher, Safari 4 and higher,
-        | Chrome 4 and higher.
+        | Nossos servidores seguem os padrões de qualidade e segurança do mercado. Softwares de infra-estrutura são atualizados regularmente, aplicando atualizações de segurança. Backups são realizados diariamente. Todos os planos incluem encriptação SSL para dados críticos como senha e usuário. Também temos o compromisso de manter o sigilo de todos os seus dados armazenados.
       .well.ac
         h2
-          | Questions?
-          a href="mailto:hello@fleetio.com"
-          | or
-          a href="/faq" title="Frequently asked questions about Fleetio"
-            | read the FAQ →
+          | Dúvidas?
+          '
+          a href="mailto:atendimento@imentore.com.br"
+            | Contate-nos
+          '
+          / | ou
+          / '
+          / a href=page_site_path("faq") title="Dúvidas frequentes?"
+          /   | leia o Perguntas & Respostas →

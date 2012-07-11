@@ -22,7 +22,6 @@ html
     }
   meta content="text/html; charset=utf-8" http-equiv="Content-Type"
   = yield :header
-
 body#home{style='padding-top:75px;'}
   .topbar(style='display:block')
     .header
@@ -44,10 +43,7 @@ body#home{style='padding-top:75px;'}
             a href=page_site_path('pricing')
               | Preço &amp; Assine
           li
-            a href="/why"
-              | Porque Imentore?
-          li
-            a href="/about"
+             a href=page_site_path('about')
               | Sobre
           li
             a.btn.primary href="#" title="Versão beta"
@@ -65,39 +61,36 @@ body#home{style='padding-top:75px;'}
                   a href="/"
                     | Home
                 li
-                  a href="/tour"
-                    | Tour
+                  a href=page_site_path('tour')
+                    | Veja mais
                 li
-                  a href="/pricing"
-                    | Pricing
+                  a href=page_site_path('pricing')
+                    | Planos & Preços
             .span4
               h4 Mais
               ul.unstyled
                 li
-                  a href="http://blog.fleetio.com"
-                    | Blog
-                li
-                  a href="/roi"
-                    | Roi
+                  a href="https://www.facebook.com/imentore"
+                    | Facebook
             .span3
               h4 Empresa
               ul.unstyled
                 li
-                  a href="/about"
+                  a href=page_site_path('about')
                     | Sobre
                 li
-                  a href="/contact"
+                  a href=page_site_path('contact')
                     | Contato
-        .span6
-          h4
-            | Cadastre em nossa newsletter
-          p
-            | Saiba sobres as nossas novidades e dicas & outras coisas.
-          form#newsletter_list_form action="http://rarestep.us1.list-manage.com/subscribe/post?u=d4a006f9816053fb9b37816ea&amp;id=61cdd86e5c" method="post" name="mc-embedded-subscribe-form" target="_blank"
-            .clearfix
-              input.span4 name="EMAIL" placeholder="email address" type="email"
-              '
-              input.btn name="subscribe" type="submit" value="Subscribe"
+        / .span6
+        /   h4
+        /     | Cadastre em nossa newsletter
+        /   p
+        /     | Saiba sobres as nossas novidades e dicas & outras coisas.
+        /   form#newsletter_list_form action="http://rarestep.us1.list-manage.com/subscribe/post?u=d4a006f9816053fb9b37816ea&amp;id=61cdd86e5c" method="post" name="mc-embedded-subscribe-form" target="_blank"
+        /     .clearfix
+        /       input.span4 name="EMAIL" placeholder="email address" type="email"
+        /       '
+        /       input.btn name="subscribe" type="submit" value="Subscribe"
     #footer-floor
       .container
         .row
@@ -107,17 +100,24 @@ body#home{style='padding-top:75px;'}
             p
               | &copy; 2012
               '
-              a[href="http://www.rarestep.com" title="RareStep - Remarkable web-based software and websites in Birmingham, AL"]
+              a[href="http://www.imentore.com.br" title="Imentore Ltda"]
                 | Imentore
               '
               | All Rights Reserved.
               | &nbsp;
-              a href="/terms"
+              a href=page_site_path('term')
                 | Termos
-              | &nbsp;&&nbsp;
-              a href="/privacy"
-                | Privacidade
+              / | &nbsp;&&nbsp;
+              / a href="/privacy"
+              /   | Privacidade
           #elsewhere-msg.span3.ar
             h4 Fique em contato:
           #elsewhere-icons.span3
             a.twitter href="http://twitter.com/imentore"
+  javascript:
+    var uvOptions = {};
+    (function() {
+      var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+      uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/VI9HreXZC5OfCYBXzI4hdw.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+    })();
