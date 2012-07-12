@@ -25,7 +25,7 @@ module Imentore
 
     def check_store
       unless current_store
-        redirect_to site_path
+        render template: 'imentore/site/show'
       end
       # unless current_store
       #   render('shared/not_found', status: 404)

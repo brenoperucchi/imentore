@@ -10,7 +10,7 @@ set :scm, :git
 set :user, "imentore"  # The server's user for deploys
 set :use_sudo, false
 set :deploy_to, "/home/imentore/app"
-set :deploy_via, :remote_cache
+# set :deploy_via, :remote_cache
 set :branch, "master"
 
  
@@ -31,9 +31,25 @@ ssh_options[:auth_methods] = %w(publickey)
 # after "deploy", "deploy:bundle_gems"
 # after "deploy:bundle_gems", "deploy:restart"
 
-namespace :deploy do
+after "deploy", "deploy:config_files"
+
+namespace :deploy dodu -hls -
   task :bundle_gems do
     run "cd #{deploy_to}/current/imentore-base && bundle install"
+  end
+
+  task :config_files do
+    run "ln -s /home/imentore/app/shared/uploads /home/imentore/app/current/imentore-base/public/uploads"
+    run "ln -s /home/imentore/app/shared/pids /home/imentore/app/current/imentore-base/tmp/pids"
+    run "ln -s /home/imentore/app/shared/cache /home/imentore/app/current/imentore-base/tmp/cache"
+    run "ln -s /home/imentore/app/shared/log /home/imentore/app/current/imentore-base/log"
+    run "ln -s /home/imentore/app/shared /home/imentore/app/current/tmp"
+
+    run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/public/uploads"
+    run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/pids"
+    run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/cache"
+    run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/log"
+    run "chown -h imentore.imentore /home/imentore/app/current/tmp"
   end
   task :start do ; end
   task :stop do ; end
