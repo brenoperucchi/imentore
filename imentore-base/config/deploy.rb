@@ -10,7 +10,7 @@ set :scm, :git
 set :user, "imentore"  # The server's user for deploys
 set :use_sudo, false
 set :deploy_to, "/home/imentore/app"
-# set :deploy_via, :remote_cache
+set :deploy_via, :remote_cache
 set :branch, "master"
 
  
@@ -40,8 +40,9 @@ namespace :deploy do
   end
 
   task :config_files do
-    run "mkdir /home/imentore/app/current/imentore-base/tmp"
+    run "rm -rf /home/imentore/app/current/imentore-base/tmp"
     run "rm -rf /home/imentore/app/current/imentore-base/log"
+    run "mkdir /home/imentore/app/current/imentore-base/tmp"
     run "rm -rf /home/imentore/app/current/imentore-base/public/uploads"
     run "ln -s /home/imentore/app/shared/uploads /home/imentore/app/current/imentore-base/public/uploads"
     run "ln -s /home/imentore/app/shared/pids /home/imentore/app/current/imentore-base/tmp/pids"
@@ -54,10 +55,12 @@ namespace :deploy do
     run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/cache"
     run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/log"
     run "chown -h imentore.imentore /home/imentore/app/current/tmp"
+    run "cp -f /home/imentore/app/shared/database.yml /home/imentore/app/current/imentore-base/config/database.yml"
+    run "/etc/init.d/unicorn restart"
   end
   task :start do ; end
   task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "/etc/init.d/unicorn restart"
-  end
+  # task :restart, :roles => :app, :except => { :no_release => true } do
+  #   run "/etc/init.d/unicorn restart"
+  # end
 end

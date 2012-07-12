@@ -5,7 +5,7 @@ module Imentore
   class Store < ActiveRecord::Base
 
     serialize :config, Settings
-    after_create :create_templates
+    after_create :create_defaults
 
     #  include SentientStore
     # after_create :create_cashier, :create_cost_centers, :create_shippings, :create_store_emails
@@ -98,25 +98,25 @@ module Imentore
                       exclusion: { in: INVALID_DOMAINS }
     # validates :contract_term, acceptance: true
 
-    has_many :employees
-    has_one  :owner, class_name: 'Imentore::Employee', conditions: { department: 'owner' }
-    has_one  :address, class_name: 'Imentore::Address', as: 'addressable'
-    has_many :domains
-    has_many :products
-    has_many :orders
-    has_many :payment_methods
-    has_many :delivery_methods
+    has_many :employees, :dependent => :destroy
+    has_one  :owner, class_name: 'Imentore::Employee', conditions: { department: 'owner' }, :dependent => :destroy
+    has_one  :address, class_name: 'Imentore::Address', as: 'addressable', :dependent => :destroy
+    has_many :domains, :dependent => :destroy
+    has_many :products, :dependent => :destroy
+    has_many :orders, :dependent => :destroy
+    has_many :payment_methods, :dependent => :destroy
+    has_many :delivery_methods, :dependent => :destroy
     has_many :assets, :through => :themes, :source => :assets
-    has_many :themes
-    has_many :customers
-    has_many :coupons
-    has_many :coupons_orders
-    has_many :send_emails
-    has_many :categories
-    has_many :product_brands
-    has_many :pages
-    has_many :feedbacks, as: :feedbackable
-    has_many :notices
+    has_many :themes, :dependent => :destroy
+    has_many :customers, :dependent => :destroy
+    has_many :coupons, :dependent => :destroy
+    has_many :coupons_orders, :dependent => :destroy
+    has_many :send_emails, :dependent => :destroy
+    has_many :categories, :dependent => :destroy
+    has_many :product_brands, :dependent => :destroy
+    has_many :pages, :dependent => :destroy
+    has_many :feedbacks, as: :feedbackable, :dependent => :destroy
+    has_many :notices, :dependent => :destroy
 
     accepts_nested_attributes_for :owner, :address
 
@@ -128,7 +128,26 @@ module Imentore
       config.email_contact.present? ? config.email_contact : email
     end
 
-    def create_templates
+    def create_defaults
+      self.payment_methods.create(name: 'MoIP', handle: 'moip')
+      self.payment_methods.create(name: 'PagSeguro', handle: 'pag_seguro')
+      self.payment_methods.create(name: 'Pagamento Digital', handle: 'pagamento_digital')
+      self.payment_methods.create(name: 'Custom', handle: 'custom')
+
+      self.delivery_methods.create(name: 'SEDEX', handle: 'sedex', active: true)
+      # self.delivery_methods.create(name: 'SEDEX 10', handle: 'sedex_dez', active: true)
+      self.delivery_methods.create(name: 'SEDEX a Cobrar', handle: 'sedex_a_cobrar', active: true)
+      self.delivery_methods.create(name: 'Pac', handle: 'pac', active: true)
+      self.delivery_methods.create(name: 'Weight', handle: 'weight')
+      self.delivery_methods.create(name: 'Custom', handle: 'custom')
+
+      self.send_emails.each do |email|
+        e = email.dup
+        e.store = self
+        e.save
+      end
+
+
       theme = self.themes.new(name: 'default', active: true, system:true)
       layout = Imentore::Store.first.themes.first.templates.layouts.first.dup
       layout.theme = theme
