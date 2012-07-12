@@ -32,13 +32,17 @@ ssh_options[:auth_methods] = %w(publickey)
 # after "deploy:bundle_gems", "deploy:restart"
 
 after "deploy", "deploy:config_files"
+after "deploy", "deploy:restart"
 
-namespace :deploy dodu -hls -
+namespace :deploy do
   task :bundle_gems do
     run "cd #{deploy_to}/current/imentore-base && bundle install"
   end
 
   task :config_files do
+    run "mkdir /home/imentore/app/current/imentore-base/tmp"
+    run "rm -rf /home/imentore/app/current/imentore-base/log"
+    run "rm -rf /home/imentore/app/current/imentore-base/public/uploads"
     run "ln -s /home/imentore/app/shared/uploads /home/imentore/app/current/imentore-base/public/uploads"
     run "ln -s /home/imentore/app/shared/pids /home/imentore/app/current/imentore-base/tmp/pids"
     run "ln -s /home/imentore/app/shared/cache /home/imentore/app/current/imentore-base/tmp/cache"
@@ -54,6 +58,6 @@ namespace :deploy dodu -hls -
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{File.join(current_path,'tmp','restart.txt')}"
+    run "/etc/init.d/unicorn restart"
   end
 end
