@@ -1,33 +1,32 @@
 doctype html
 html
   head
-  title Sistema de Loja Virtual Ecommerce | Imentore
-  = stylesheet_link_tag    "site"
-  = javascript_include_tag "site"
-  = csrf_meta_tags
-  css:
-    .span#slogan{
-      font: .79em Lucida Grande, Arial, Helvetica, sans-serif;
-      width: 230px;
-      position: relative;
-      top: 49px;
-      left: -148px;
-      color:#666;
-    }
-    .topbar .brand{
-      margin-bottom:5px;
-    }
-    a.brand:hover{
-      background-position:0 -64px!important;
-    }
-  meta content="text/html; charset=utf-8" http-equiv="Content-Type"
-  = yield :header
+    = stylesheet_link_tag    "site"
+    = javascript_include_tag "site"
+    = csrf_meta_tags
+    meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+    css:
+      .span#slogan{
+        font: .79em Lucida Grande, Arial, Helvetica, sans-serif;
+        width: 230px;
+        position: relative;
+        top: 49px;
+        left: -148px;
+        color:#666;
+      }
+      .topbar .brand{
+        margin-bottom:5px;
+      }
+      a.brand:hover{
+        background-position:0 -64px!important;
+      }
+    = yield :header
 body#home{style='padding-top:75px;'}
   .topbar(style='display:block')
     .header
       .container
         .logo
-          a.brand href="/" title="Effortless vehicle &amp; fleet management" style='background:url(/images/site/imentore-logo-trans-208x128.png) no-repeat 0 0;height:44px; width:161px; border:0px; outline:none;'
+          a.brand href="/" title="Imentore Ecommerce - Loja Virtual" style='background:url(/images/site/imentore-logo-trans-208x128.png) no-repeat 0 0;height:44px; width:161px; border:0px; outline:none;'
         .span#slogan Gestão Empresarial e Comércio Eletrônico
         / h1.site-title
         /   a href="/" title="Online vehicle and fleet maintenance management"
@@ -79,8 +78,9 @@ body#home{style='padding-top:75px;'}
                   a href=page_site_path('about')
                     | Sobre
                 li
-                  a href=page_site_path('contact')
+                  a href="mailto:contato@imentore.com.br"
                     | Contato
+
         / .span6
         /   h4
         /     | Cadastre em nossa newsletter
@@ -96,7 +96,7 @@ body#home{style='padding-top:75px;'}
         .row
           .span10
             h3#phone
-              | atendimento@imentore.com.br
+              | contato@imentore.com.br
             p
               | &copy; 2012
               '
@@ -115,9 +115,11 @@ body#home{style='padding-top:75px;'}
           #elsewhere-icons.span3
             a.twitter href="http://twitter.com/imentore"
   javascript:
-    var uvOptions = {};
-    (function() {
-      var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-      uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/VI9HreXZC5OfCYBXzI4hdw.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-    })();
+    $(document).ready(function(){
+      var uvOptions = {};
+      (function() {
+        var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+        uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/VI9HreXZC5OfCYBXzI4hdw.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+      })();
+    })

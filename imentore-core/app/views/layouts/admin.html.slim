@@ -99,10 +99,12 @@ body
   .footer
     = javascript_include_tag "admin"
     = yield :footer
-  javascript:
-    var uvOptions = {};
-    (function() {
-      var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-      uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/VI9HreXZC5OfCYBXzI4hdw.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-    })();
+    javascript:
+      $(document).ready(function(){
+        var uvOptions = {};
+        (function() {
+          var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+          uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/VI9HreXZC5OfCYBXzI4hdw.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+        })();
+      })

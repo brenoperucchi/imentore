@@ -1,11 +1,10 @@
 module Imentore
   module Admin
     class ThemesController < Admin::BaseController
+      inherit_resources
 
       before_filter :uniqueness_active, only:[:update, :create]
 
-      inherit_resources
-      actions :all
 
       def create
         create! { admin_theme_path(@theme) }
@@ -22,9 +21,9 @@ module Imentore
         destroy! { admin_themes_path }
       end
 
-      def collection
-        @themes = begin_of_association_chain.themes.theme_system
-      end
+      # def collection
+      #   @themes = begin_of_association_chain.themes.theme_system
+      # end
 
       protected
 
