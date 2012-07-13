@@ -5,6 +5,11 @@ module Imentore
       belongs_to :theme, parent_class: Imentore::Theme
       before_filter :uniqueness_default, only:[:update, :create]
 
+      def new
+        @kind = params[:kind]
+        new!
+      end
+
       def create
         create! { admin_theme_path(params[:theme_id]) }
       end

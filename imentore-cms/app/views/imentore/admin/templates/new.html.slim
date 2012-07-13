@@ -1,8 +1,9 @@
 Legend New
 = simple_form_for(@template, url: admin_theme_templates_path(@theme), html: {class: 'form-horizontal'}) do |f|
   = f.error_notification
-  = f.input :default
   = f.input :path
-  = f.input :kind, as: 'radio', :collection => types_templates
+  - if @kind == 'template'
+    = f.input :layout, as: 'radio', collection: @theme.templates.layouts.collect{|x| x.path}
+  = f.input :kind, as: 'hidden', input_html: {value: @kind}
   = f.input :body
-  = f.button :submit
+  = f.button :submit, "Create #{@kind.capitalize}"

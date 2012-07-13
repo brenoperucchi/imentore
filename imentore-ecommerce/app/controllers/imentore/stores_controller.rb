@@ -32,9 +32,6 @@ module Imentore
       end
     end
 
-    def create_success
-    end
-
     def show
       store = current_store
       @products = store.products.active.map { |product| ProductDrop.new(product) }

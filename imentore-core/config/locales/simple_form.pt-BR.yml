@@ -1,15 +1,15 @@
-en:
+pt_BR:
   simple_form:
-    "yes": 'Yes'
-    "no": 'No'
+    "yes": 'Sim'
+    "no": 'não'
     required:
-      text: 'required'
+      text: 'Obrigatório'
       mark: '*'
       # You can uncomment the line below if you need to overwrite the whole required html.
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "Some errors were found, please take a look:"
+      default_message: "Foi encontrado algum erro, por favor verifque"
     # Labels and hints examples
     # labels:
     #   password: 'Password'
