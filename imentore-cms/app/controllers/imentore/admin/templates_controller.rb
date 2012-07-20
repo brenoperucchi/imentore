@@ -10,6 +10,11 @@ module Imentore
         new!
       end
 
+      def edit
+        @template = parent.templates.find(params[:id])
+        @kind = @template.kind
+      end
+
       def create
         create! { admin_theme_path(params[:theme_id]) }
       end

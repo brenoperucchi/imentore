@@ -1,4 +1,61 @@
 pt-BR:
+  authenticate_to_buy: Habilitar login-compra
+  # authenticate_to_buy: Cliente é obrigado é efetuar o login/cadastro para compra"
+  order_asset: Habilitar arquivos no pedido
+  email_contact: Email de contato usado pelo sistema
+  site: Endereço do site usado pelo sistema
+  store_zip_code: Cep
+
+
+  dashboard: Resumo da Loja
+  configuration: Configuração
+  configurations: Configuração
+  management: Gerenciamento
+  reports: Relatórios
+
+  profile: Sua Conta
+  sign_in: Acesse
+  sign_out: Sair
+  user: Usuário
+
+  general_settings: Gerais
+  virtual_settings: Loja
+
+  cms: Configuração de Layout
+  pages: Páginas da Loja
+  notices: Nóticias da Loja
+  themes: Temas da Loja
+  layouts: Layouts (esqueleto do html)
+  layout: Layout
+  template: Página
+  templates: Páginas (corpo do html)
+  assets: Arquivos
+
+  others: Outros
+  domains: Domínios
+  send_emails: Emails Enviados
+
+  methods: Métodos
+  payment_methods: Pagamentos
+  delivery_methods: Envios
+
+  create: Criar
+  update: Atualizar
+  path: Endereço
+  edit: Editar
+  remove: Remover
+  ofa: da
+  newa: Nova
+  newo: Novo
+  page: Página
+  page_title: Páginas da Loja Virtual
+  active: Ativo
+  disable: Desativado
+  name: Nome
+  handle: Url Amigável
+  created_at: Criado em
+  actions: Ações
+
   date:
     abbr_day_names:
     - Dom
@@ -98,6 +155,7 @@ pt-BR:
   errors: &errors
     format: ! '%{attribute} %{message}'
     messages:
+      'Some errors were found, please take a look': 'Existe algum error, por favor verifque'
       accepted: deve ser aceito
       blank: não pode ficar em branco
       confirmation: não está de acordo com a confirmação
@@ -128,6 +186,7 @@ pt-BR:
     select:
       prompt: Por favor selecione
     submit:
+      new: Novo %{model}
       create: Criar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
@@ -197,11 +256,55 @@ pt-BR:
       default: ! '%A, %d de %B de %Y, %H:%M h'
       long: ! '%A, %d de %B de %Y, %H:%M h'
       short: ! '%d/%m, %H:%M h'
+      short2: ! '%d/%m/%y, %H:%M h'
     pm: ''
-  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
-  activemodel:
-    errors:
-      <<: *errors
   activerecord:
+    models:
+      imentore/page:      
+        one: "Página"
+        other: "{{count}} Pagina"
+      imentore/notice: Nóticia
+      imentore/theme: Tema
+    attributes:
+      imentore/store:
+        name: Nome 
+        email: Email
+        brand: Marca
+        irs_id: Cpf/Cnpj
+      imentore/address:
+        name: Titulo do Endereço
+        street: Rua
+        complement: Complemento
+        city: Cidade
+        country: País
+        state: Estado
+        zip_code: Cep
+        phone: Telefone
+      imentore/page:
+        active: 'Ativo'
+        name: Nome
+        handle: Url Amigável 
+        html: Código Html
+        body: Conteúdo da Página
+      imentore/notices:
+        active: Ativo
+        name: Nome
+        handle: Url Amigável 
+        description: Conteúdo da Nóticia
+      imentore/theme:
+        active: Ativo
+      imentore/template:
+        path_layout: Endereço do layout
+        path_template: Endereço da página
+        body: Corpo do html
+      imentore/payment_method:
+        active: Ativo
+        name: Nome
+      errors:
+        <<: *errors
+  activemodel:
+    attributes:
+      page: Pagina
+      pages: Pagina
     errors:
       <<: *errors

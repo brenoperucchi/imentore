@@ -6,33 +6,32 @@
     })
 ul.nav.nav-tabs#myTab
   li.active
-    = link_to("Theme", "#theme")
+    = link_to(t('imentore/theme', scope: [:activerecord, :models]), "#theme")
   li
-    = link_to("Layouts", "#layouts")
+    = link_to(t(:layouts), "#layouts")
   li
-    = link_to("Templates", "#templates")
+    = link_to(t(:templates), "#templates")
   li
-    = link_to("Assets", "#assets")
+    = link_to(t(:assets), "#assets")
 
 .tab-content
   .tab-pane#theme.active
     - content_for :breadcrumb do
-      == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }, { @theme.name => ''} ])
+      == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => admin_themes_path},{@theme.name => admin_theme_path(@theme)}])
     = simple_form_for(@theme, url: admin_theme_path(@theme), html: {class: 'form-horizontal'}) do |f|
       = f.error_notification
       = f.input :active
       '
       / = f.label :active
-      .controls
-        = f.button :submit
+      = f.button :submit, class: 'btn btn-primary'
 
   .tab-pane#layouts
     table.table
       thead
         tr
           / th Default
-          th Path
-          th Action
+          th= t(:path)
+          th= t(:actions)
       tbody
         - @theme.templates.layouts.each do |template|
           tr
@@ -42,25 +41,25 @@ ul.nav.nav-tabs#myTab
               = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn') do
                 i.icon-black.icon-edit
                 '
-                | Edit
+                = t(:edit)
               '
               = link_to(admin_theme_template_path(@theme, template), method: :delete , class: 'btn btn-danger') do
                 i.icon-white.icon-remove
                 '
-                | Remove
+                = t(:remove)
     .controls
       = link_to(new_admin_theme_template_path(@theme, kind: :layout), :class=>'btn btn-primary') do
           i.icon-white.icon-plus
           '
-          | New
+          = t(:newo) + ' ' + t(:layout) 
 
   .tab-pane#templates
     table.table
       thead
         tr
-          th Path
-          th Layout
-          th Action
+          th= t(:path)
+          th= t(:layout)
+          th= t(:actions)
       tbody
         - @theme.templates.templates.each do |template|
           tr
@@ -70,17 +69,17 @@ ul.nav.nav-tabs#myTab
               = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn') do
                 i.icon-black.icon-edit
                 '
-                | Edit
+                = t(:edit)
               '
               = link_to(admin_theme_template_path(@theme, template), method: :delete , class: 'btn btn-danger') do
                 i.icon-white.icon-remove
                 '
-                | Remove
+                = t(:remove)
     .controls
       = link_to(new_admin_theme_template_path(@theme, kind: :template), :class=>'btn btn-primary') do
           i.icon-white.icon-plus
           '
-          | New
+          = t(:newo) + ' ' + t(:template) 
 
   .tab-pane#assets
     h3 Assets
@@ -89,9 +88,9 @@ ul.nav.nav-tabs#myTab
     table.table
       thead
         tr
-          th Name
-          th Path
-          th Action
+          th= t(:name)
+          th= t(:path)
+          th= t(:actions)
       tbody
         - @theme.assets.each do |asset|
           tr
@@ -101,5 +100,5 @@ ul.nav.nav-tabs#myTab
               = link_to(admin_theme_asset_path(@theme, asset), method: :delete, class: 'btn btn-danger') do
                 i.icon-white.icon-remove
                 '
-                | Remove
+                = t(:remove)
 

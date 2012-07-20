@@ -1,8 +1,8 @@
 module Imentore
   class Theme < ActiveRecord::Base
     belongs_to :store
-    has_many :templates
-    has_many :assets
+    has_many :templates, :dependent => :destroy
+    has_many :assets, :dependent => :destroy
 
     scope :theme_system, where(system: true)
     # scope :default, where(default: true)

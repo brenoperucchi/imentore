@@ -43,7 +43,7 @@
       });
     })
 
-legend New Page
+legend= t(:newa) + ' ' + t(:notices).downcase
 = simple_form_for([:admin, @notice], :html => {:class => 'form-horizontal'}) do |f|
   = f.error_notification
   = f.input :active, as: :boolean

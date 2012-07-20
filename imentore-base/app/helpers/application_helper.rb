@@ -2,19 +2,24 @@
 module ApplicationHelper
   include ActionView::Helpers
 
+  def time_zone(params = DateTime.now)
+    @object = params
+    @object.in_time_zone(current_store.config.time_zone)
+  end
+
   def button_status(status, url, msg_ok = nil, msg_err = nil)
-    msg_ok ||= 'Active'
-    msg_err ||= 'Disabled'
+    msg_ok ||= 'active'
+    msg_err ||= 'disable'
     case status
     when 'placed', true
       link_to(url, class: 'btn disabled btn-warning') do
         concat(content_tag(:i, '', :class=>'icon-white icon-ok'))
-        concat(' ' + msg_ok)
+        concat(' ' + I18n.t(msg_ok))
       end
     when 'pending', false
       link_to(url, class: 'btn disabled btn-danger') do
         concat(content_tag(:i, '', :class=>'icon-white icon-asterisk'))
-        concat(' ' + msg_err)
+        concat(' ' + I18n.t(msg_err))
       end
     end
   end

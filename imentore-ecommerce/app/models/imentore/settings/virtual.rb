@@ -2,7 +2,7 @@ module Imentore
   class Settings
     module Virtual
       def self.attributes
-        [:authenticate_to_buy, :store_zip_code, :order_asset, :email_contact, :site]
+        [:authenticate_to_buy, :store_zip_code, :order_asset, :email_contact, :site, :time_zone]
       end
 
       attr_accessor *attributes
@@ -28,6 +28,10 @@ module Imentore
 
       def order_asset
         @order_asset || false
+      end
+
+      def time_zone
+        @time_zone || 'Brasilia'
       end
 
     end

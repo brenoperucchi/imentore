@@ -2,11 +2,12 @@
   css:
     .radio, .checkbox {
       min-height: 0;
+      overflow: auto
     }
 
-legend virtual_store
-= f.input :authenticate_to_buy, :as => :boolean
-= f.input :order_asset, :as => :boolean
-= f.input :email_contact, :input_html => { :class => "span3" }
-= f.input :site, :input_html => { :class => "span3" }
-= f.input :store_zip_code, :input_html => { :class => "span3" }, :hint => "add your article title here"
+legend= t(:configurations) + ' ' + t(:ofa) + ' ' + t(:virtual_settings)
+= f.input :authenticate_to_buy, :as => :boolean, :label=> t(:authenticate_to_buy), hint: " Cliente é obrigado é efetuar o login/cadastro para compra"
+= f.input :order_asset, :as => :boolean, :label=> t(:order_asset)
+= f.input :email_contact, :input_html => { :class => "span3" }, :label=> t(:email_contact)
+= f.input :site, :input_html => { :class => "span3" }, :label=> t(:site)
+= f.input :store_zip_code, :input_html => { :class => "span3" }, :hint => "O Cep será usado pelo sistema", :label=> t(:store_zip_code)

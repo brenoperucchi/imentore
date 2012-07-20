@@ -1,19 +1,19 @@
-legend Pages
+legend= t(:page_title)
 p
   = link_to(new_admin_page_path, :class=>'btn btn-primary') do
     i.icon-white.icon-plus
     '
-    | New Page
+    = t('newa') + ' ' + t('page')
 
 
 table.table.table-striped
   thead
     tr
-      th.span1 Active
-      th Name
-      th Handle
-      th Created At
-      th Actions
+      th.span1= t(:active)
+      th= t(:name)
+      th= t(:handle)
+      th= t(:created_at)
+      th= t(:actions)
   tbody
     - @pages.each do |page|
       tr
@@ -21,14 +21,14 @@ table.table.table-striped
           = button_status(page.active, '#')
         td= page.name
         td= page.handle
-        td= page.created_at
+        td= l(time_zone(page.created_at), format: :short2)
         td
           = link_to(edit_admin_page_path(page), class: 'btn') do
             i.icon-black.icon-edit
             '
-            | Edit
+            = t(:dit)
           '
           = link_to(admin_page_path(page), class: 'btn btn-danger', method: :delete) do
             i.icon-white.icon-trash
             '
-            | Remove
+            = t(:remove)

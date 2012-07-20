@@ -17,10 +17,12 @@ module Imentore
       @store.owner.user.store = @store
       @store.owner.person_type = 'person'
       @store.owner.name = "Name"
+      @store.config.email_contact = @store.owner.user.email
       respond_to do |wants|
         wants.html {  
           if @store.save
-            if request.server_port == '3000' 
+            Imentore::SendEmailMailer.create_store(@store.owner.user.email, @store).deliver
+            if request.server_port == '3000'
               redirect_to "http://#{@store.url}.imentore.dev:3000" 
             else
               redirect_to "http://#{@store.url}.imentore.com.br"

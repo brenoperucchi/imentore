@@ -11,6 +11,8 @@
         - if user_signed_in?
           a(class="btn dropdown-toggle" data-toggle="dropdown" href="#")
             i(class="icon-user")
+            = t(:user)
+            ':
             '
             = current_user.userable.name
             '
@@ -18,17 +20,17 @@
           ul.dropdown-menu
             li
               a(href='#')
-                | Profile
+                = t(:profile)
             li.divider
             li
-              = link_to("Sign-out", destroy_admin_session_path, method: :delete)
+              = link_to(t(:sign_out), destroy_admin_session_path, method: :delete)
               / a(href=destroy_admin_session_path)
                 / | Sign-out
         - else
           a(class="btn dropdown-toggle" data-toggle="dropdown" href=new_admin_session_path)
             i(class="icon-user")
             '
-            | Sign-in
+            = t(:sign_in)
             '
             / span.caret
           / ul.dropdown-menu
@@ -48,16 +50,16 @@
             .tabbable
             li#dashboard
               a[href=admin_dashboard_path]
-                | Dashboard
+                = t(:dashboard)
             li#configuration
               a[]
-                | Configuration
+                = t(:configuration)
             li#managament
               a[]
-                | Management
+                = t(:management)
             li#reports
               a[]
-                | Reports
+                = t(:reports)
             / | Logged in as
             / a[]
             /   '

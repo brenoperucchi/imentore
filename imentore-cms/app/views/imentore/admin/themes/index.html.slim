@@ -1,15 +1,15 @@
-- content_for :breadcrumb do
-  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
 legend Themes
-p= link_to("New Theme", new_admin_theme_path, :class=>'btn btn-small btn-primary')
+p= link_to("New Theme", new_admin_theme_path, :class=>'btn btn-primary')
 
 table.table
   thead
     tr
-      th active
-      th name
-      th action
+      th.span1= t(:active)
+      th= t(:name)
+      th= t(:actions)
   tbody
     - @themes.each do |theme|
       tr
@@ -19,10 +19,10 @@ table.table
           = link_to(admin_theme_path(theme), class: 'btn') do
             i.icon-black.icon-edit
             '
-            | Edit
+            = t(:edit)
           '
           = link_to(admin_theme_path(theme), method: :delete, :class=>"btn btn-danger") do
             i.icon-white.icon-trash
             '
-            | Remove
+            = t(:remove)
 

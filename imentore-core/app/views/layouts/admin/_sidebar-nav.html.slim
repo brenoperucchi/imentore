@@ -2,62 +2,62 @@
   .well.sidebar-nav
     ul.nav.nav-list.dashboard.hide
       li.nav-header
-        | Dashboard
+        = t(:dashboard)
       li
         a[href="#"]
-          | Link
+          = t(:Link)
 
     ul.nav.nav-list.reports.hide
       li.nav-header
-        | Reports
+        = t(:reports)
       li.action#feedback
-        = link_to("Feedback", admin_feedbacks_path)
+        = link_to(t(:feedback), admin_feedbacks_path)
 
     ul.nav.nav-list.managament.hide
       li.nav-header
-        | Management
+        = t(:management)
       li.action#customers
-        = link_to("Customers", admin_customers_path)
+        = link_to(t(:customers), admin_customers_path)
       li.action#employees
-        = link_to("Users", admin_employees_path)
+        = link_to(t(:users), admin_employees_path)
       li.action#categories
-        = link_to("Categories", admin_categories_path)
+        = link_to(t(:categories), admin_categories_path)
       li.nav-header
-        | Ecommerce
+        = t(:ecommerce)
       li.action#orders
-        = link_to("Orders", admin_orders_path)
+        = link_to(t(:orders), admin_orders_path)
       li.action#products
-        = link_to("Products", admin_products_path)
+        = link_to(t(:products), admin_products_path)
       li.action#coupons
-        = link_to("Coupons", admin_coupons_path)
+        = link_to(t(:coupons), admin_coupons_path)
 
     ul.nav.nav-list.configuration.hide
       li.nav-header
-        | Configuration
+        = t(:configuration)
       li.action#general_settings
-        = link_to("General Settings", edit_admin_store_path)
+        = link_to(t(:general_settings), edit_admin_store_path)
       li.action#virtual_settings
-        = link_to("Virtual Settings", admin_edit_settings_path(:virtual))
+        = link_to(t(:virtual_settings), admin_edit_settings_path(:virtual))
 
       li.nav-header
-        | CMS
+        = t(:cms)
       li.action#pages
-        = link_to("Pages", admin_pages_path)
+        = link_to(t(:pages), admin_pages_path)
       li.action#notices
-        = link_to("Notices", admin_notices_path)
+        = link_to(t(:notices), admin_notices_path)
       li.action#themes
-        = link_to("Themes", admin_themes_path)
+        = link_to(t(:themes), admin_themes_path)
 
       li.nav-header
-        | Others
+        = t(:others)
       li.action#domains
-        = link_to("Domains", admin_domains_path)
+        = link_to(t(:domains), admin_domains_path)
       li.action#send_emails
-        = link_to("Send Emails", admin_send_emails_path)
+        = link_to(t(:send_emails), admin_send_emails_path)
 
       li.nav-header
-        | Methods
+        = t(:Methods)
       li.action#payment_method
-        = link_to("Payment Methods", admin_payment_methods_path)
+        = link_to(t(:payment_methods), admin_payment_methods_path)
       li.action#delivery_method
-        = link_to("Delivery Methods", admin_delivery_methods_path)
+        = link_to(t(:delivery_methods), admin_delivery_methods_path)
