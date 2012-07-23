@@ -20,16 +20,21 @@
         = link_to(t(:customers), admin_customers_path)
       li.action#employees
         = link_to(t(:users), admin_employees_path)
-      li.action#categories
-        = link_to(t(:categories), admin_categories_path)
+      li.action#pages
+        = link_to(t(:pages), admin_pages_path)
+      li.action#notices
+        = link_to(t(:notices), admin_notices_path)
       li.nav-header
-        = t(:ecommerce)
-      li.action#orders
-        = link_to(t(:orders), admin_orders_path)
+        = t(:store)
       li.action#products
         = link_to(t(:products), admin_products_path)
+      li.action#categories
+        = link_to(t(:categories), admin_categories_path)
+      li.action#orders
+        = link_to(t(:orders), admin_orders_path)
       li.action#coupons
         = link_to(t(:coupons), admin_coupons_path)
+
 
     ul.nav.nav-list.configuration.hide
       li.nav-header
@@ -41,10 +46,6 @@
 
       li.nav-header
         = t(:cms)
-      li.action#pages
-        = link_to(t(:pages), admin_pages_path)
-      li.action#notices
-        = link_to(t(:notices), admin_notices_path)
       li.action#themes
         = link_to(t(:themes), admin_themes_path)
 
@@ -56,7 +57,7 @@
         = link_to(t(:send_emails), admin_send_emails_path)
 
       li.nav-header
-        = t(:Methods)
+        = t(:methods)
       li.action#payment_method
         = link_to(t(:payment_methods), admin_payment_methods_path)
       li.action#delivery_method

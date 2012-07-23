@@ -78,12 +78,12 @@
     table.table.table-bordered.table-striped
         thead
           tr
-            th action
-            th product
-            th variant
-            th quantity
-            th price
-            th amount
+            th= t(:action)
+            th= t(:product)
+            th= t(:variant)
+            th= t(:quantity)
+            th= t(:price)
+            th= t(:amount)
         tbody
             - current_cart.items.each_with_index do |item, index|
               tr
@@ -91,7 +91,7 @@
                   = link_to(cart_path(:variant_id => item.variant.id, :product_id => item.product.id), method: :delete, :class=>"btn btn-danger btn-mini") do
                     i.icon-trash.icon-white
                     '
-                    ' Remove
+                    = t(:remove)
 
                 td
                   = "#" + item.product.id.to_s
@@ -114,7 +114,7 @@
               td
               td
               td(colspan='2' style='text-align:center;')
-                'Sub-Total
+                = t(:sub_total)
               td#sub_total
                 = current_cart.amount
             tr
@@ -122,7 +122,7 @@
               td
               td
               td(colspan='2' style='text-align:center;')
-                | Shipping Value
+                = t(:shipping_value)
               td#shipping_value
                 | 0
             tr
@@ -134,11 +134,11 @@
                   a(href='#' type='submit' class='btn btn-small' id='add_coupon')
                     i.icon-plus
                     '
-                    | Coupon
+                    = t(:coupon)
                 .span2#coupons
 
               td(colspan='2' style='text-align:center;')
-                | Coupon Value
+                = t(:coupon_value)
               td#coupon_value
                 = current_cart.coupons_amount
             tr
@@ -146,36 +146,38 @@
               td
               td
               td(colspan='2' style='text-align:center;')
-                h3 TOTAL
+                h3 Total
               td#total_amount
                 h4= current_cart.amount
   .row
     .span5.offset1
         .control-group
           label.control-label
-            | Delivery Methods
+            = t(:delivery_method)
           .controls
-            label.radio
+            label
               = select_tag 'delivery_method', options_from_collection_for_select(current_store.delivery_methods.active, "id", "name", :id => 'delivery_method')
     .span4.offset2
       .control-group
         label.control-label
-          | Zip Code
+          = t(:zip_code_to)
         .controls
           = text_field_tag "zip_code", nil, class: 'input-small'
           a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
             i.icon-refresh
-            | Calculate
+            = t(:calculate)
     .clearfix
     hr
     .span4.offset9
       .controls
         button(type='submit' class='btn btn-large' onclick="$('form#cart').submit();")
           i.icon-refresh
-          | Update
+          '
+          = t(:update)
         '
         = link_to(checkout_path, :class=>'btn btn-large btn-success') do
           i.icon-shopping-cart.icon-white
-          ' Checkout
+          '
+          = t(:checkout_cart)
     .clearfix
     hr

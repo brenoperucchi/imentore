@@ -1,4 +1,28 @@
 pt-BR:
+
+  action: Ações
+  product: Produtos
+  variant: Variação
+  quantity: Quantidade
+  price: Preço
+  amount: Total
+  coupon: Coupom
+  sub_total: Sub Total
+  shipping_value: Valor do Envio
+  coupon_value: Valor do Coupons
+  delivery_method: Método de Envio
+  payment_method: Método de Pagamento
+  zip_code_to: Cep Destino
+  calculate: Calcular
+  checkout_cart: Finalizar Carrinho
+  send_files: Enviar Arquivos
+  finished_order: Finalizar Pedido
+  start_upload: Iniciar envio
+  next: Próximo
+
+  billing_addresss_title: Endereço de compra e Envio
+  payment_delivery_title: Forma de Pagamento e Envio
+
   authenticate_to_buy: Habilitar login-compra
   # authenticate_to_buy: Cliente é obrigado é efetuar o login/cadastro para compra"
   order_asset: Habilitar arquivos no pedido
@@ -22,14 +46,21 @@ pt-BR:
   virtual_settings: Loja
 
   cms: Configuração de Layout
-  pages: Páginas da Loja
-  notices: Nóticias da Loja
-  themes: Temas da Loja
+  pages: Páginas
+  notices: Nóticias
+  themes: Temas
   layouts: Layouts (esqueleto do html)
   layout: Layout
   template: Página
   templates: Páginas (corpo do html)
   assets: Arquivos
+  store: Loja
+  customers: Clientes
+  users: Usuários
+  categories: Categorias
+  orders: Pedidos
+  products: Produtos
+  coupons: Cupons
 
   others: Outros
   domains: Domínios
@@ -265,6 +296,8 @@ pt-BR:
         other: "{{count}} Pagina"
       imentore/notice: Nóticia
       imentore/theme: Tema
+      imentore/delivery_method: Método de Envio
+      imentore/payment_method: Método de Pagamento
     attributes:
       imentore/store:
         name: Nome 
@@ -292,7 +325,10 @@ pt-BR:
         handle: Url Amigável 
         description: Conteúdo da Nóticia
       imentore/theme:
+        name: Nome
         active: Ativo
+      imentore/user:
+        password: Senha
       imentore/template:
         path_layout: Endereço do layout
         path_template: Endereço da página
@@ -300,6 +336,11 @@ pt-BR:
       imentore/payment_method:
         active: Ativo
         name: Nome
+      imentore/order:
+        billing_checkbox: Preencher com endereço do cliente
+        shipping_checkbox: Preencher com endereço do cliente
+        customer_name: Nome do Cliente
+        customer_email: Email do Cliente
       errors:
         <<: *errors
   activemodel:

@@ -21,7 +21,8 @@ module Imentore
       respond_to do |wants|
         wants.html {  
           if @store.save
-            Imentore::SendEmailMailer.create_store(@store.owner.user.email, @store).deliver
+            password = params[:store][:owner_attributes][:user_attributes][:password]
+            Imentore::SendEmailMailer.create_store(@store.owner.user.email, @store, password).deliver
             if request.server_port == '3000'
               redirect_to "http://#{@store.url}.imentore.dev:3000" 
             else

@@ -166,11 +166,11 @@
     table.table.table-striped.table-bordered.table-condensed
       thead
         tr
-          th product
-          th variant
-          th quantity
-          th price
-          th amount
+          th= t(:product)
+          th= t(:variant)
+          th= t(:quantity)
+          th= t(:price)
+          th= t(:amount)
       tbody
         - current_cart.items.each do |item|
           tr
@@ -191,28 +191,29 @@
           td
           td
           td(colspan='2' style='text-align:center;')
-            'Sub-Total
+            '
+            = t(:sub_total)
           td#sub_total
             = current_cart.amount
         tr
           td
           td
           td(colspan='2' style='text-align:center;')
-            | Shipping Value
+            = t(:shipping_value)
           td#shipping_value
             | 0
         tr
           td
           td
           td(colspan='2' style='text-align:center;')
-            | Coupon Value
+            = t(:coupon_value)
           td#coupon_value
             = current_cart.coupons_amount
         tr
           td
           td
           td(colspan='2' style='text-align:center;')
-            h3 TOTAL
+            h3= t(:total)
           td#total_amount
             h4= @order.total_amount
 
@@ -245,7 +246,7 @@
         .accordion-group
           .accordion-heading
             a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion2" href="#collapseOne"]
-              |  1) Billing and Shipping Address
+              = ' 1) ' + t(:billing_addresss_title)
           #collapseOne.accordion-body.in.collapsy.hide[style="height: auto; "]
             .accordion-inner
               .span12
@@ -261,7 +262,8 @@
                       = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
                         = render("shared/address", addr: addr)
                 .span1.offset0
-                  a{href='#' class='btn next btn-success btn-larger'} Next
+                  a{href='#' class='btn next btn-success btn-larger'}
+                    = t(:next)
               .clearfix
 
 
@@ -276,7 +278,7 @@
         .accordion-group
           .accordion-heading
             a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion2" href="#collapseTwo"]
-              |  2) Payment and Delivery Method
+              = '2) ' + t(:payment_delivery_title)
           #collapseTwo.accordion-body.collapsy.hide[style="height: auto; "]
             .accordion-inner
               .span12
@@ -284,15 +286,16 @@
                   .span5
                     fieldset#payment-method
                       = f.simple_fields_for :invoice, f.object.invoice do |inv|
-                        = inv.input :payment_method, collection: current_store.payment_methods.active, :selected => f.object.invoice.try(:payment_method_id), :prompt => "select"
+                        = inv.input :payment_method, label: t(:payment_method), collection: current_store.payment_methods.active, :selected => f.object.invoice.try(:payment_method_id), :prompt => t(:select)
                   .span4
                     fieldset#delivery-method
                       = f.simple_fields_for :delivery, f.object.delivery do |del|
-                        = del.input :delivery_method, collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :prompt => "select", :input_html => { id: 'delivery_method'}
+                        = del.input :delivery_method, label: t(:delivery_method), collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :prompt => "select", :input_html => { id: 'delivery_method'}
                   .span2
                       a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
                         i.icon-refresh
-                        | Calculate
+                        '
+                        = t(:calculate)
               .clearfix
       .form-actions.hide
         .span2
@@ -300,12 +303,12 @@
             a(class="btn" data-toggle="modal" href="#orderAssets" class='btn btn-primary btn-large')
               i.icon-file.icon-white
               '
-              | Files
+              = t(:send_files)
         .span2.offset5
           button(class='btn-primary btn-large btn-success')
             i.icon-ok.icon-white
             '
-            | Finished
+            = t(:finished_order)
 
 
   .modal.hide#orderAssets(style='width:840px')
@@ -319,12 +322,12 @@
           .span6
             span.btn.btn-success.fileinput-button
               i.icon-plus.icon-white
-              span Add files
+              span= t(:send_files)
               = file_field_tag "asset[file]", multiple: true
-
+            '
             button.btn.btn-primary.start(type="submit")
               i.icon-upload.icon-white
-              span Start upload
+              span= t(:start_upload)
 
           .span4
             .progress.progress-success.progress-striped.active.fade

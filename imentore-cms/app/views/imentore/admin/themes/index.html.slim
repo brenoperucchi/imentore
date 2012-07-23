@@ -1,8 +1,12 @@
 / - content_for :breadcrumb do
 /   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
-legend Themes
-p= link_to("New Theme", new_admin_theme_path, :class=>'btn btn-primary')
+legend= t(:themes)
+p= link_to(new_admin_theme_path, :class=>'btn btn-primary') do
+  i.icon-white.icon-plus
+  '
+= t(:newa) + ' ' + t(:themes).downcase
+
 
 table.table
   thead
