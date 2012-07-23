@@ -5,7 +5,7 @@ module Imentore
   class Store < ActiveRecord::Base
 
     serialize :config, Settings
-    after_create :create_defaults
+    # after_create :create_defaults
 
     #  include SentientStore
     # after_create :create_cashier, :create_cost_centers, :create_shippings, :create_store_emails

@@ -27,6 +27,7 @@ module Imentore
             else
               redirect_to "http://#{@store.url}.imentore.com.br"
             end
+            @store.create_defaults
           else
             render 'new'
           end

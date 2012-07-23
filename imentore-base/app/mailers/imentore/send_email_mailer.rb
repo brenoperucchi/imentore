@@ -6,7 +6,7 @@ module Imentore
     def create_store(to, store)
       @store = store
       subject = "Dados de Login Imentore - #{store.name}"
-      mail(from: 'bperucchi@gmail.com', to: to, subject: subject)
+      mail(from: 'atendimento@imentore.com.br', to: to, subject: subject)
     end
 
 
