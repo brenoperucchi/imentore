@@ -1,12 +1,12 @@
 - content_for :header do
-  = stylesheet_link_tag    "cart"
+  = stylesheet_link_tag "cart"
 
 .container
-  Legend New Customer 
+  Legend= t(:new_customer)
 
   = simple_form_for @customer, :html => {:class => 'form-horizontal'} do |f|
-    = f.input :person_type, :collection => ["person", "company"] , :as => :radio_buttons
-    = f.input :gender, :collection => ['Woman', 'Male'],:as => :radio_buttons
+    = f.input :person_type, :collection => [t(:person), t(:company)] , :as => :radio_buttons
+    = f.input :gender, :collection => [t(:woman), t(:male)],:as => :radio_buttons
     = f.input :name
     = f.input :brand
     = f.input :irs_id

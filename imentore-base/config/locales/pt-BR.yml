@@ -19,7 +19,22 @@ pt-BR:
   finished_order: Finalizar Pedido
   start_upload: Iniciar envio
   next: Próximo
+  addresses: Endereços
+  address: Endereço
+  shipping_address_diff: Igual ao endereço de cobrança
+  other_address: Outro endereço
+  select: Selecionar
+  select_state: Selecionar Estado
+  admin_sign_in_title: Acesse o Painel de Controle
+  new_customer: Novo Usuário
+  person: Física
+  company: Jurídica
+  woman: Feminino
+  male: Masculino
+  customer_sign_in: Login de Acesso
+  customer_sign_in_title: Acesso do Cliente
 
+  shipping_address: Endereço de Envio
   billing_addresss_title: Endereço de compra e Envio
   payment_delivery_title: Forma de Pagamento e Envio
 
@@ -296,6 +311,7 @@ pt-BR:
         other: "{{count}} Pagina"
       imentore/notice: Nóticia
       imentore/theme: Tema
+      imentore/customer: Cliente
       imentore/delivery_method: Método de Envio
       imentore/payment_method: Método de Pagamento
     attributes:
@@ -329,6 +345,7 @@ pt-BR:
         active: Ativo
       imentore/user:
         password: Senha
+        password_confirmation: Confirmação Senha
       imentore/template:
         path_layout: Endereço do layout
         path_template: Endereço da página
@@ -336,9 +353,17 @@ pt-BR:
       imentore/payment_method:
         active: Ativo
         name: Nome
+      imentore/customer:
+        person_type: Tipo de cliente
+        gender: Sexo
+        name: Nome
+        brand: Empresa
+        irs_id: CPF
+        birthdate: Data de Aniversário
+
       imentore/order:
-        billing_checkbox: Preencher com endereço do cliente
-        shipping_checkbox: Preencher com endereço do cliente
+        billing_checkbox: Endereço de Cobrança
+        shipping_checkbox: Endereço do Envio
         customer_name: Nome do Cliente
         customer_email: Email do Cliente
       errors:

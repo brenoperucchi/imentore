@@ -10,7 +10,6 @@ module Imentore
           resource.userable.owner? ? admin_dashboard_path : client_dashboard_path
         end
       end
-
     end
   end
 end

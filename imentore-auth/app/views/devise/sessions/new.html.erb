@@ -1,4 +1,4 @@
-<h2>Customer Sign in</h2>
+<h2><%= t(:customer_sign_in_title) %></h2>
 
 <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div class="inputs">
@@ -8,7 +8,7 @@
   </div>
 
   <div class="actions">
-    <%= f.button :submit, "Sign in" , :id=>"sign_in" %>
+    <%= f.button :submit, t(:customer_sign_in), :id=>"sign_in" %>
   </div>
 <% end %>
 

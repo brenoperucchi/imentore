@@ -43,10 +43,10 @@ body
               a[href="#"]
                 = current_user.userable.name
               '  and
-              = link_to("Logout", destroy_user_session_path, method: :delete)
+              = link_to(t(:logout), destroy_user_session_path, method: :delete)
           - else
             p.navbar-text.pull-right
-              = link_to "Sign-in", new_client_session_path
+              = link_to t(:sign_in), new_client_session_path
               / | Sign-in as
               / a[href="#"]
 
@@ -67,6 +67,4 @@ body
               /   a[href="#"]
               /     | Link
       .span10
-        p core/layouts/client
-        = debug flash
         = yield

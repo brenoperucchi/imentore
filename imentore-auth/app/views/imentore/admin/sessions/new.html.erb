@@ -1,4 +1,4 @@
-<h2>Admin Sign in</h2>
+<h2><%= t(:admin_sign_in_title) %></h2>
 
 <%= simple_form_for(resource, :as => resource_name, :url => admin_session_path) do |f| %>
   <div class="inputs">
@@ -8,6 +8,6 @@
   </div>
 
   <div class="actions">
-    <%= f.button :submit, "Sign in" %>
+    <%= f.button :submit, t(:sign_in) %>
   </div>
 <% end %>

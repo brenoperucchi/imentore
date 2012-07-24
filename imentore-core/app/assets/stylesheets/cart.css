@@ -9,7 +9,7 @@ ul li {
 a{
   color: #333;
 }
-input{
+input[type='text']{
   height:26px!important;
   margin-bottom: 0px!important;
 }

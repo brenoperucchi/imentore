@@ -21,6 +21,10 @@
       direction: ltr;
       cursor: pointer;
     }
+    .controls input.checkbox{
+      / height:27px;
+    }
+
   javascript:
     $(document).ready(function(){
 
@@ -47,7 +51,7 @@
           }
         })
       }
-      if ($('select#delivery_method').find('option:selected').val() != "") {
+      if ($('select#delivery_method').find('option:selected').val() != '') {
         var zip_code = $('input#zip_code').val()
         var method = $('select#delivery_method').find('option:selected').val()
         delivery_calculate(zip_code,method)
@@ -82,25 +86,67 @@
       }
 
       $('input.checkbox').click(function(){
-      var type = $(this).attr('id');
-          if ( $(this).is(':checked') == true ) {
-          $('#order_'+type+'_name').val($('label.hide#name').html());
-          $('#order_'+type+'_street').val($('label.hide#street').html());
-          $('#order_'+type+'_complement').val($('label.hide#complement').html());
-          $('#order_'+type+'_city').val($('label.hide#city').html());
-          // $('#order_'+type+'_state').val($('label.hide#state').html());
-          // $('#order_'+type+'_country').val($('label.hide#country').html());
-          $('#order_'+type+'_zip_code').val($('label.hide#zip_code').html());
-          $('#order_'+type+'_phone').val($('label.hide#phone').html());
+        // var type = $(this).attr('id');
+        var value = $(this).val();
+        if ( value != 'other' ) {
+          $('#order_billing_address_name').val($('#'+value).find('label.hide#name').html());
+          $('#order_billing_address_street').val($('#'+value).find('label.hide#street').html());
+          $('#order_billing_address_complement').val($('#'+value).find('label.hide#complement').html());
+          $('#order_billing_address_city').val($('#'+value).find('label.hide#city').html());
+          // $('#order_billing_address_state').val($('label.hide#state').html());
+          // $('#order_billing_address_country').val($('label.hide#country').html());
+          $('#order_billing_address_zip_code').val($('#'+value).find('label.hide#zip_code').html());
+          $('#order_billing_address_phone').val($('#'+value).find('label.hide#phone').html());
+          if ( $('input#shipping_address').is(':checked') ){
+            $('#order_shipping_address_name').val($('#'+value).find('label.hide#name').html());
+            $('#order_shipping_address_street').val($('#'+value).find('label.hide#street').html());
+            $('#order_shipping_address_complement').val($('#'+value).find('label.hide#complement').html());
+            $('#order_shipping_address_city').val($('#'+value).find('label.hide#city').html());
+            // $('#order_shipping_address_state').val($('label.hide#state').html());
+            // $('#order_shipping_address_country').val($('label.hide#country').html());
+            $('#order_shipping_address_zip_code').val($('#'+value).find('label.hide#zip_code').html());
+            $('#order_shipping_address_phone').val($('#'+value).find('label.hide#phone').html());            
+          }
         } else {
-          $('#order_'+type+'_name').val("");
-          $('#order_'+type+'_street').val("");
-          $('#order_'+type+'_complement').val("");
-          $('#order_'+type+'_city').val("");
-          // $('#order_'+type+'_state').val("");
-          // $('#order_'+type+'_country').val("");
-          $('#order_'+type+'_zip_code').val("");
-          $('#order_'+type+'_phone').val("");
+          $('#order_billing_address_name').val('');
+          $('#order_billing_address_street').val('');
+          $('#order_billing_address_complement').val('');
+          $('#order_billing_address_city').val('');
+          // $('#order_billing_address_state').val('');
+          // $('#order_billing_address_country').val('');
+          $('#order_billing_address_zip_code').val('');
+          $('#order_billing_address_phone').val('');
+          if ( $('input#shipping_address').val() == 'true' ){
+            $('#order_shipping_address_name').val('');
+            $('#order_shipping_address_street').val('');
+            $('#order_shipping_address_complement').val('');
+            $('#order_shipping_address_city').val('');
+            // $('#order_shipping_address_state').val('');
+            // $('#order_shipping_address_country').val('');
+            $('#order_shipping_address_zip_code').val('');
+            $('#order_shipping_address_phone').val('');
+          }
+        }
+      })
+      $('input#shipping_address').click(function(){
+        if ( !$(this).is(':checked')){
+          $('#order_shipping_address_name').val('');
+          $('#order_shipping_address_street').val('');
+          $('#order_shipping_address_complement').val('');
+          $('#order_shipping_address_city').val('');
+          // $('#order_shipping_address_state').val('');
+          // $('#order_shipping_address_country').val('');
+          $('#order_shipping_address_zip_code').val('');
+          $('#order_shipping_address_phone').val('');
+        }else{
+          $('#order_shipping_address_name').val($('#order_billing_address_name').val());
+          $('#order_shipping_address_street').val($('#order_billing_address_street').val());
+          $('#order_shipping_address_complement').val($('#order_billing_address_complement').val());
+          $('#order_shipping_address_city').val($('#order_billing_address_city').val());
+          // $('#order_shipping_address_state').val($('#order_billing_address_state').val());
+          // $('#order_shipping_address_country').val($('#order_billing_address_country').val());
+          $('#order_shipping_address_zip_code').val($('#order_billing_address_zip_code').val());
+          $('#order_shipping_address_phone').val($('#order_billing_address_phone').val());                    
         }
       })
       $.fn.collapsy = function(option, id) {
@@ -222,23 +268,24 @@
       = f.error_notification
       fieldset#address_customer
         - if user_signed_in? and not current_user.userable.owner?
-          .info.hide
-            label.hide#name
-              = current_user.userable.address.name
-            label.hide#street
-              = current_user.userable.address.street
-            label.hide#complement
-              = current_user.userable.address.complement
-            label.hide#city
-              = current_user.userable.address.city
-            label.hide#state
-              = current_user.userable.address.state
-            label.hide#country
-              = current_user.userable.address.country
-            label.hide#zip_code
-              = current_user.userable.address.zip_code
-            label.hide#phone
-              = current_user.userable.address.phone
+          - current_user.userable.addresses.each do |addr|
+            .info.hide.address[id=addr.name.to_underscore!]
+              label.hide#name
+                = addr.name
+              label.hide#street
+                = addr.street
+              label.hide#complement
+                = addr.complement
+              label.hide#city
+                = addr.city
+              label.hide#state
+                = addr.state
+              label.hide#country
+                = addr.country
+              label.hide#zip_code
+                = addr.zip_code
+              label.hide#phone
+                = addr.phone
         - else
           = f.input :customer_name
           = f.input :customer_email
@@ -252,13 +299,31 @@
               .span12
                 .row
                   .span6
+                    / .control-group
+                    /   label.control-label
+                    /     = t(:addresses)
+                    /   .controls
+                    /     label.radio
+                    /       - if user_signed_in? 
+                    /         - current_user.userable.addresses.each do |address|
+                    /           = radio_button_tag(:address, address.name, class: address.name.to_underscore!)
+                    /           = address.name
                     .address
-                      = f.input :billing_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
+                      = f.input :billing_checkbox, :as => :radio_buttons, collection: [[t(:other_address), 'other']] + current_user.userable.addresses.collect {|x| [x.name, x.name]} , input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
                       = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
                         = render("shared/address", addr: addr)
                   .span6
                     .address
-                      = f.input :shipping_checkbox, :as => :boolean, input_html: { :class=>'checkbox', id: 'shipping_address' } if user_signed_in?
+                      .control-group
+                        label.control-label
+                          = t(:shipping_address)
+                        .controls
+                          label.checkbox
+                            = check_box_tag 'shipping_address', true, checked: true
+                            '
+                            = t(:shipping_address_diff)
+                      / = f.input :shipping_checkbox, collection: ['Preencher endereço de envio diferente'], as: :check_boxes, input_html: { class: 'checkbox', id: 'shipping_address' } if user_signed_in?
+
                       = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
                         = render("shared/address", addr: addr)
                 .span1.offset0
@@ -290,7 +355,7 @@
                   .span4
                     fieldset#delivery-method
                       = f.simple_fields_for :delivery, f.object.delivery do |del|
-                        = del.input :delivery_method, label: t(:delivery_method), collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :prompt => "select", :input_html => { id: 'delivery_method'}
+                        = del.input :delivery_method, label: t(:delivery_method), collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :prompt => t(:select), :input_html => { id: 'delivery_method'}
                   .span2
                       a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
                         i.icon-refresh
@@ -341,4 +406,4 @@
       = render "imentore/admin/assets/jquery-file-upload-templates"
     .modal-footer
       a(href="#" class="btn" data-dismiss="modal")
-        | Close
+        | Close2
