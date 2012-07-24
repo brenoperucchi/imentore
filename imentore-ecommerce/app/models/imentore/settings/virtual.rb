@@ -9,9 +9,9 @@ module Imentore
 
       def self.included(base)
         base.register_attributes *attributes
-        base.class_eval do
-          validates :theme, presence: true
-        end
+        # base.class_eval do
+        #   validates :theme, presence: true
+        # end
       end
 
       def authenticate_to_buy

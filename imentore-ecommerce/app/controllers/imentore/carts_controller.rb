@@ -77,7 +77,7 @@ module Imentore
 
     def create
       if not params[:item][:variant_id].present?
-        flash[:alert] = "Need to select an variant"
+        flash[:alert] = t(:cart_need_variant)
         redirect_to product_path(current_store.products.find(params[:item][:product_id]))
         return false
       end

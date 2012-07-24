@@ -8,7 +8,7 @@ Imentore::Client::BaseController.class_eval do
 
   def authorize_client
     if(user_signed_in? && current_user.userable.owner?)
-      redirect_to(new_admin_session_url, alert: :permission_denied)
+      redirect_to(new_admin_session_url, alert: t(:permission_denied))
     elsif not(user_signed_in?)
       redirect_to(new_client_session_path)
     end

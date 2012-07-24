@@ -21,12 +21,10 @@
       direction: ltr;
       cursor: pointer;
     }
-    .controls input.checkbox{
-      / height:27px;
-    }
 
   javascript:
     $(document).ready(function(){
+
 
       function calculate_items(){
         var total = 0
@@ -56,8 +54,9 @@
         var method = $('select#delivery_method').find('option:selected').val()
         delivery_calculate(zip_code,method)
       }
+      // Javascript Notication - Alert/Success
       $('div.alert').each(function(){
-        if ( $(this).text().length > 1 ) {
+        if ( $(this).find('p').text().length > 1 ) {
          $(this).slideDown('slow')
         }
       })
@@ -209,6 +208,25 @@
 
 .container
   .row
+    .notification
+      div.alert.alert-block.hide
+        a[class="close" data-dismiss="alert" href="#"]
+          = "x"
+        h4[class="alert-heading"]
+          = t(:warning)
+        p
+          = flash[:alert]
+      div.alert.alert-success.hide
+        a[class="close" data-dismiss="alert" href="#"]
+          = "x"
+        h4[class="alert-heading"]
+          = t(:success)
+        p
+          = flash[:success]
+
+
+.container
+  .row
     table.table.table-striped.table-bordered.table-condensed
       thead
         tr
@@ -309,7 +327,8 @@
                     /           = radio_button_tag(:address, address.name, class: address.name.to_underscore!)
                     /           = address.name
                     .address
-                      = f.input :billing_checkbox, :as => :radio_buttons, collection: [[t(:other_address), 'other']] + current_user.userable.addresses.collect {|x| [x.name, x.name]} , input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
+                      - if user_signed_in? and not current_user.userable.owner?
+                        = f.input :billing_checkbox, :as => :radio_buttons, collection: [[t(:other_address), 'other']] + current_user.userable.addresses.collect {|x| [x.name, x.name]} , input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
                       = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
                         = render("shared/address", addr: addr)
                   .span6
@@ -319,7 +338,7 @@
                           = t(:shipping_address)
                         .controls
                           label.checkbox
-                            = check_box_tag 'shipping_address', true, checked: true
+                            = check_box_tag 'shipping_address', true
                             '
                             = t(:shipping_address_diff)
                       / = f.input :shipping_checkbox, collection: ['Preencher endereço de envio diferente'], as: :check_boxes, input_html: { class: 'checkbox', id: 'shipping_address' } if user_signed_in?

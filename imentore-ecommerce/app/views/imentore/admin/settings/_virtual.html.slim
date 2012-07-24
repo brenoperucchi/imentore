@@ -6,7 +6,7 @@
     }
 
 legend= t(:configurations) + ' ' + t(:ofa) + ' ' + t(:virtual_settings)
-= f.input :authenticate_to_buy, :as => :boolean, :label=> t(:authenticate_to_buy), hint: " Cliente é obrigado é efetuar o login/cadastro para compra"
+= f.input :authenticate_to_buy, :as => :boolean, :label=> t(:authenticate_to_buy), hint: t(:hint_authenticate_to_buy) 
 = f.input :order_asset, :as => :boolean, :label=> t(:order_asset)
 = f.input :email_contact, :input_html => { :class => "span3" }, :label=> t(:email_contact)
 = f.input :site, :input_html => { :class => "span3" }, :label=> t(:site)

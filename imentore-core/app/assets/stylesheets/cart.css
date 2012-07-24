@@ -9,7 +9,7 @@ ul li {
 a{
   color: #333;
 }
-input[type='text']{
+input[type='text'], input[type='email'], input[type='tel']{
   height:26px!important;
   margin-bottom: 0px!important;
 }

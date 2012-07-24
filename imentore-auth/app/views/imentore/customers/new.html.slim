@@ -5,14 +5,25 @@
   Legend= t(:new_customer)
 
   = simple_form_for @customer, :html => {:class => 'form-horizontal'} do |f|
-    = f.input :person_type, :collection => [t(:person), t(:company)] , :as => :radio_buttons
-    = f.input :gender, :collection => [t(:woman), t(:male)],:as => :radio_buttons
-    = f.input :name
-    = f.input :brand
-    = f.input :irs_id
-    = f.input :birthdate, input_html: {:style=>"width:auto;"}
-    = f.simple_fields_for :user do |user|
-        = user.input :email
-        = user.input :password
-        = user.input :password_confirmation
+    .row
+      .span12
+        .row
+          .span6
+            = f.input :person_type, :collection => [[t(:person), 'person'], [t(:company), 'company']] , :as => :radio_buttons
+            = f.input :gender, :collection => [t(:woman), t(:male)],:as => :radio_buttons
+            = f.input :name
+            = f.input :brand
+            = f.input :irs_id
+            = f.input :birthdate, input_html: {:style=>"width:auto;"}
+            = f.simple_fields_for :user do |user|
+                = user.input :email
+                = user.input :password
+                = user.input :password_confirmation
+          .span6
+            / = binding.pry
+            - f.object.addresses.build if f.object.addresses.blank? 
+            = f.simple_fields_for :addresses do |addr|
+              = render("shared/address", addr: addr)
+
+
     = f.button :submit

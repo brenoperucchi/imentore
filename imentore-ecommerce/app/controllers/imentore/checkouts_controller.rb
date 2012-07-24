@@ -8,7 +8,7 @@ module Imentore
     end
 
     def authenticate_to_buy!
-      authenticate_user! if current_store.config.authenticate_to_buy
+      authenticate_user! unless current_store.config.authenticate_to_buy
     end
 
     def new
@@ -23,7 +23,7 @@ module Imentore
       elsif request.put?
         @order.items = current_cart.items
         unless CheckoutService.place_coupons(@order, current_cart, current_store)
-          flash[:alert] =  "Coupon not valid"
+          flash[:alert] = t(:coupon_not_valid)
           render :new and return false
         end
         CheckoutService.place_order(@order, params)

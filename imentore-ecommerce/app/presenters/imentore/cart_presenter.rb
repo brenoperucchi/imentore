@@ -28,8 +28,8 @@ module Imentore
         "total_items" =>  @cart.items.size,
         "total_amount" => @cart.amount,
         "message" => {
-                       "success" => "Product Added",
-                       "warning" => 'Product not found'
+                       "success" => I18n.t(:product_added),
+                       "warning" => I18n.t(:product_not_added)
                      }
                  }
     end

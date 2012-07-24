@@ -71,8 +71,8 @@
   .row
     .span4
       - if current_cart.empty?
-        h1 Your cart is empty.
-  legend cart
+        h1= t(:cart_empty)
+  legend= t(:cart)
 
   = form_tag(cart_path, method: 'put', id:'cart') do
     table.table.table-bordered.table-striped
