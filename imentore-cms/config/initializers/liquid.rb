@@ -19,7 +19,7 @@ class LiquidView
 
   def render(template, local_assigns = {})
     @view.controller.headers["Content-Type"] ||= 'text/html; charset=utf-8'
-    @view.controller.headers["X-CSRF-Token"] ||= @view.controller.session['_csrf_token']
+    # @view.controller.headers["X-CSRF-Token"] ||= @view.controller.session['_csrf_token']
     assigns = @view.assigns
 
     if @view.content_for?(:layout)

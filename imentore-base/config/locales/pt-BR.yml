@@ -42,6 +42,7 @@ pt-BR:
   warning: Aviso
   success: Sucesso
   coupon_not_valid: Coupom nao é válido
+  hosting: Hospedagem
 
   shipping_address: Endereço de Envio
   billing_addresss_title: Endereço de compra e Envio
@@ -89,6 +90,7 @@ pt-BR:
 
   others: Outros
   domains: Domínios
+  domain_create: Criar Domínio
   send_emails: Emails Enviados
 
   methods: Métodos
@@ -363,6 +365,9 @@ pt-BR:
       imentore/payment_method:
         active: Ativo
         name: Nome
+      imentore/domain:
+        name: Nome
+        hosting: Hospedagem
       imentore/customer:
         person_type: Tipo de cliente
         gender: Sexo
