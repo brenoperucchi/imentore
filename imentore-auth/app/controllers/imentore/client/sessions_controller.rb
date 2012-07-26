@@ -3,6 +3,11 @@ module Imentore
     class SessionsController < Devise::SessionsController
       layout "client"
 
+      def create
+        params[:user].merge!(store_id: current_store.id.to_s)
+        super
+      end
+
       def after_sign_in_path_for(resource)
         if session[:user_return_to] and session[:user_return_to].include?('checkout')
           checkout_path

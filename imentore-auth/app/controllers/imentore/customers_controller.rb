@@ -27,10 +27,13 @@ module Imentore
     end
 
     def create
+      @customer = Imentore::Customer.new(params[:customer])
+      @customer.store = current_store
+      @customer.user.store = current_store
+      require 'pry'; binding.pry
       create! do |success, failure|
-        # binding.pry
         success.html do
-          flash[:success] = "created customer"
+          flash[:success] = t(:created)
           redirect_to new_user_session_path
         end
         failure.html do

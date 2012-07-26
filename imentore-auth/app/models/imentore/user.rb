@@ -1,6 +1,42 @@
 module Imentore
   class User < ActiveRecord::Base
-    devise :database_authenticatable, :validatable
+
+    devise :database_authenticatable#, :validatable
+
+    validates_uniqueness_of    :email,     :case_sensitive => false, :allow_blank => true, scope: [:email, :store_id], :if => :email_changed?
+    validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?
+    validates_presence_of   :password, :on=>:create
+    validates_confirmation_of   :password, :on=>:create
+    validates_length_of :password, :within => Devise.password_length, :allow_blank => true
+
+    belongs_to :store
+    belongs_to :userable, polymorphic: true
+
+    def self.find_first_by_auth_conditions(warden_conditions)
+      conditions = warden_conditions.dup
+      store_id = conditions.delete(:store_id)
+        # where(conditions).where(["lower(store_id) = :value OR lower(store_id) = :value", { :value => store_id.downcase }]).first
+        # where(conditions).joins('JOIN imentore_employees ON imentore_users.userable_id = imentore_employees.id').first
+        # where(conditions).joins('JOIN imentore_customers ON imentore_users.userable_id = imentore_customers.id').where('imentore_customers.store_id = :value', {:value => store_id }).first
+        where(conditions).where('imentore_users.store_id = :value', {:value => store_id }).first
+      # else
+        # where(conditions).first
+      # end
+    end
+
+    # def self.find_for_database_authentication(warden_conditions)
+    #   require 'pry'; binding.pry
+    #   # conditions = warden_conditions.dup
+    #   # login = conditions.delete(:login)
+    #   # account_id = conditions.delete(:account_id)
+    #   # where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).where("account_id = ?", account_id).first
+    # end 
+
+
+    # Imentore::User.find(:all, :limit => 10, 
+    #   :joins => "JOIN 'imentore_employees' ON imentore_employees.id = imentore_users.userable_id",
+    #   :conditions => "imentore_users.email = 'cliente@myshop.com'")
+
     #   include SentientUser
     #
     #   # Soft delete.
@@ -39,9 +75,10 @@ module Imentore
     #     # devise :database_authenticatable, :recoverable, :rememberable, :trackable, :activatable, :validatable
     #   # end
 
-    belongs_to :store
-    belongs_to :userable, polymorphic: true
-
+    # def store_id
+    #   require 'pry'; binding.pry
+    #   false
+    # end
     #
     #   def password_required?
     #     # Rails.logger.debug { "aqui" }

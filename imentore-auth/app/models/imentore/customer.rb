@@ -7,12 +7,11 @@ module Imentore
     has_many    :addresses,  as: 'addressable'
 
     # validates :department, presence: true
+    accepts_nested_attributes_for :user, :addresses
 
     def address
       addresses.first
     end
-
-    accepts_nested_attributes_for :user, :addresses
 
     def owner?
       department == "owner"

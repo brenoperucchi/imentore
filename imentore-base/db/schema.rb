@@ -331,11 +331,11 @@ ActiveRecord::Schema.define(:version => 20120708225413) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.integer  "store_id"
     t.integer  "userable_id"
     t.string   "userable_type"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "store_id"
   end
 
 end

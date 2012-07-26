@@ -13,6 +13,19 @@ html
           .sidebar-nav {
             padding: 9px 0;
           }
+  javascript:
+    $(document).ready(function(){
+      if ( $('div.alert.alert-success.hide').text().length > 1 ) {
+        $('div.alert.alert-success.hide').slideDown('');
+      }
+      if ( $('div.alert.alert-error.hide').text().length > 1 ) {
+        $('div.alert.alert-error.hide').slideDown('');
+      }
+      $('.close').bind('click',function(){
+        $(this).parents('div.hide').first().slideUp('slow');
+      })
+    })
+
 
 body
   .navbar.navbar-fixed-top
@@ -67,4 +80,13 @@ body
               /   a[href="#"]
               /     | Link
       .span10
+        .notification
+          .div.alert.alert-error.hide
+            a(class="close" data-dismiss="alert" href="#")
+              = "x"
+            = flash[:alert]
+          .div.alert.alert-success.hide
+            a(class="close" data-dismiss="alert" href="#")
+              = "x"
+            = flash[:success]
         = yield
