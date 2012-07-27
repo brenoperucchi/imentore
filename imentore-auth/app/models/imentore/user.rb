@@ -1,7 +1,7 @@
 module Imentore
   class User < ActiveRecord::Base
 
-    devise :database_authenticatable#, :validatable
+    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable
 
     validates_uniqueness_of    :email,     :case_sensitive => false, :allow_blank => true, scope: [:email, :store_id], :if => :email_changed?
     validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?

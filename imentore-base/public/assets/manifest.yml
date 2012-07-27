@@ -1,6 +1,133 @@
 ---
 !binary "bG9hZGluZy5naWY=": loading-89e53980951de2ee6f1bbc7390f8662a.gif
 !binary "cmFpbHMucG5n": rails-be8732dac73d845ac5b142c8fb5f9fb0.png
+!binary "c2l0ZS9hc3Npc3RhbnQtdGl0bGUtYmcucG5n": site/assistant-title-bg-710b53365afd24e51886412de7dc9388.png
+!binary "c2l0ZS9iaWctcXVvdGUtYmcucG5n": site/big-quote-bg-06873e6268a92df6773cb29db2ad28b8.png
+!binary "c2l0ZS9ib3JkZXIucG5n": site/border-4517dd96800f1db66bad7292c9ac3022.png
+!binary "c2l0ZS9jb250cm9scy5wbmc=": site/controls-a742c50684f7e20c1e53d2f440740b1d.png
+!binary "c2l0ZS9ldmVyeXRoaW5nLWluLWZsZWV0aW8ucG5n": site/everything-in-fleetio-574e3d7fc91003d40f0d752e78330e89.png
+? !binary |-
+  c2l0ZS9mbGVldGlvLWxvZ28tZHJrLWNscmFycm93LXRyYW5zLTExMXgyOC5w
+  bmc=
+: site/fleetio-logo-drk-clrarrow-trans-111x28-e5a51dae5749c47ade0a1e1cc820d800.png
+!binary "c2l0ZS9mbGVldGlvLXNjcmVlbnNob3RzLmpwZw==": site/fleetio-screenshots-0c5a9f5598dca0cfa87d655dadc3ab98.jpg
+!binary "c2l0ZS9mb290ZXItaWNvbnMtc3ByaXRlLnBuZw==": site/footer-icons-sprite-09845c34e51f8b143682c7de672fc08a.png
+!binary "c2l0ZS9mcmVlLnBuZw==": site/free-6bd88935770703c77682f6658fbf2ceb.png
+!binary "c2l0ZS9ob21lLWljb25zLXNwcml0ZS5wbmc=": site/home-icons-sprite-25c29c0a28b4253dc689a5d354fd9a56.png
+!binary "c2l0ZS9pY29ucy9hbGFybS5wbmc=": site/icons/alarm-e28019320a4ae6d59cf0128905c82fa7.png
+!binary "c2l0ZS9pY29ucy9mdWVsLnBuZw==": site/icons/fuel-4fbde0219f31830e86400ac5a79f4abc.png
+!binary "c2l0ZS9pY29ucy9oZWxwLnBuZw==": site/icons/help-9f8604af4d8e8586dea996026e9683d7.png
+!binary "c2l0ZS9pY29ucy9vbmxpbmUtZmxlZXQtbWFuYWdlbWVudC5wbmc=": site/icons/online-fleet-management-97c5645dd6f0f832e50b1116fb57562f.png
+!binary "c2l0ZS9pY29ucy91c2Vycy5wbmc=": site/icons/users-38a71f5ed92d7f0f5c65bd2de4697b1a.png
+!binary "c2l0ZS9pY29ucy93cmVuY2gucG5n": site/icons/wrench-24a199eb7f76f0ee622c4e8987c50598.png
+!binary "c2l0ZS9pZTYvYm9yZGVyQm90dG9tQ2VudGVyLnBuZw==": site/ie6/borderBottomCenter-5d472922bd29c8440c8a30be81b24ee6.png
+!binary "c2l0ZS9pZTYvYm9yZGVyQm90dG9tTGVmdC5wbmc=": site/ie6/borderBottomLeft-a3e3a3768e5a4c43134ec4705ae41664.png
+!binary "c2l0ZS9pZTYvYm9yZGVyQm90dG9tUmlnaHQucG5n": site/ie6/borderBottomRight-e2368650aa856d8a14c38b9274d0357d.png
+!binary "c2l0ZS9pZTYvYm9yZGVyTWlkZGxlTGVmdC5wbmc=": site/ie6/borderMiddleLeft-95b1fa180ba4be0c97a7b582c6c5b0f3.png
+!binary "c2l0ZS9pZTYvYm9yZGVyTWlkZGxlUmlnaHQucG5n": site/ie6/borderMiddleRight-75784434a0ac447d4997b10d4a31105a.png
+!binary "c2l0ZS9pZTYvYm9yZGVyVG9wQ2VudGVyLnBuZw==": site/ie6/borderTopCenter-9cd971629a215e727aa0f7113e19d846.png
+!binary "c2l0ZS9pZTYvYm9yZGVyVG9wTGVmdC5wbmc=": site/ie6/borderTopLeft-0cceb9fc16bf159282c33f5f1c2bf983.png
+!binary "c2l0ZS9pZTYvYm9yZGVyVG9wUmlnaHQucG5n": site/ie6/borderTopRight-9a411844070f4c0fb547cd5692c7154f.png
+!binary "c2l0ZS9pbWVudG9yZS1sb2dvLXRyYW5zLTIwOHgxMjgucG5n": site/imentore-logo-trans-208x128-8a1d4b097ce5df1c2b691f55fabfb831.png
+!binary "c2l0ZS9sb2FkaW5nLmdpZg==": site/loading-ec4bc3b8504086f9713f325e4151b290.gif
+!binary "c2l0ZS9sb2FkaW5nX2JhY2tncm91bmQucG5n": site/loading_background-addf4f8fe4298c800109407c14a6cdcf.png
+!binary "c2l0ZS9wb2ludGVyLnBuZw==": site/pointer-562d666a99fb326e8de09c4f394af200.png
+!binary "c2l0ZS9yZXBvcnRzLXZpZGVvLXRodW1iLnBuZw==": site/reports-video-thumb-2859d5be72ab81ca738900c155e4016a.png
+!binary "c2l0ZS9yb2ktaGVhZGVyLWJnLXNwcml0ZS5wbmc=": site/roi-header-bg-sprite-b780d8a3cfc3604dce3d6a263d189665.png
+!binary "c2l0ZS9yb2ktcXVlc3Rpb24ucG5n": site/roi-question-e274538d12ddd9419b07f62a6cec72d8.png
+!binary "c2l0ZS9yb2ktdGl0bGUtYmcucG5n": site/roi-title-bg-83b7a6fdd0ae7090b175110edde90999.png
+!binary "c2l0ZS90ZWxhLWF1dG9tYXRpemFjYW8ucG5n": site/tela-automatizacao-51bc741905ea131ef94a34ddcefef978.png
+!binary "c2l0ZS90ZWxhLWRlY2lzb2VzLnBuZw==": site/tela-decisoes-8f7940c17eeec613e0e7636d6031ffbf.png
+!binary "c2l0ZS90ZWxhLXJhc3RyZWFtZW50by5wbmc=": site/tela-rastreamento-3cee01656ed4cab13fe760e67716038b.png
+!binary "c2l0ZS90b255LWhlYWRzaG90LnBuZw==": site/tony-headshot-3130dc270ed2de3987ad28a72dff2dd6.png
+!binary "c2l0ZS90b3VyL2RvY3VtZW50cy1mdWxsLnBuZw==": site/tour/documents-full-fc789a72123f74cef855d3c9692f077a.png
+!binary "c2l0ZS90b3VyL2RvY3VtZW50cy10aHVtYi5wbmc=": site/tour/documents-thumb-1f81b57cd65a8339de2af7c7117b83e4.png
+!binary "c2l0ZS90b3VyL2ZsZWV0aW8tbWFjLnBuZw==": site/tour/fleetio-mac-c717e95ea30e9e86846cc2eb55ca5842.png
+!binary "c2l0ZS90b3VyL2Z1ZWwtbWFuYWdlbWVudC1mdWxsLnBuZw==": site/tour/fuel-management-full-c5b3aaf7951c0e1fddd94aa5dc8d7c8f.png
+!binary "c2l0ZS90b3VyL2Z1ZWwtbWFuYWdlbWVudC10aHVtYi5wbmc=": site/tour/fuel-management-thumb-e0fd0133bd775af9592ed92922eb8743.png
+!binary "c2l0ZS90b3VyL2ljb25zL2FsYXJtLnBuZw==": site/tour/icons/alarm-e28019320a4ae6d59cf0128905c82fa7.png
+!binary "c2l0ZS90b3VyL2ljb25zL2Nsb3VkLnBuZw==": site/tour/icons/cloud-77c932dac765ebc84a4cbb5b417e8ab6.png
+!binary "c2l0ZS90b3VyL2ljb25zL2Z1ZWwucG5n": site/tour/icons/fuel-4fbde0219f31830e86400ac5a79f4abc.png
+!binary "c2l0ZS90b3VyL2ljb25zL2hlbHAucG5n": site/tour/icons/help-9f8604af4d8e8586dea996026e9683d7.png
+!binary "c2l0ZS90b3VyL2ljb25zL3VzZXJzLnBuZw==": site/tour/icons/users-38a71f5ed92d7f0f5c65bd2de4697b1a.png
+!binary "c2l0ZS90b3VyL2ljb25zL3dyZW5jaC5wbmc=": site/tour/icons/wrench-24a199eb7f76f0ee622c4e8987c50598.png
+!binary "c2l0ZS90b3VyL21haW50ZW5hbmNlLW1hbmFnZW1lbnQtZnVsbC5wbmc=": site/tour/maintenance-management-full-c27c9939aea60cdf124ef7e730e0fde8.png
+!binary "c2l0ZS90b3VyL21haW50ZW5hbmNlLW1hbmFnZW1lbnQtdGh1bWIucG5n": site/tour/maintenance-management-thumb-658fa85db18ab7a5dc191d17b3602c33.png
+!binary "c2l0ZS90b3VyL29ubGluZS1mbGVldC1tYW5hZ2VtZW50LnBuZw==": site/tour/online-fleet-management-97c5645dd6f0f832e50b1116fb57562f.png
+!binary "c2l0ZS90b3VyL3JlbWluZGVycy1mdWxsLnBuZw==": site/tour/reminders-full-d2b6c8fd15ba862540579ae67ca7fe37.png
+!binary "c2l0ZS90b3VyL3JlbWluZGVycy10aHVtYi5wbmc=": site/tour/reminders-thumb-956b4bb5c7a68e09b56f9b788f8ac021.png
+!binary "c2l0ZS90b3VyL3N1cHBvcnQucG5n": site/tour/support-ec1780f9f9ec1fae4a345bd6f1861ad4.png
+!binary "c2l0ZS90b3VyL3VzZXJzLWZ1bGwucG5n": site/tour/users-full-19b8594c15356edccbf227bf6e1b0507.png
+!binary "c2l0ZS90b3VyL3VzZXJzLXRodW1iLnBuZw==": site/tour/users-thumb-5b8ad65f887dad73f62f62dc195a6b1b.png
+!binary "c2l0ZS91aS1iZ19mbGF0XzBfYWFhYWFhXzQweDEwMC5wbmc=": site/ui-bg_flat_0_aaaaaa_40x100-a1eb3e0764573ed4b261ca742ed96ac3.png
+!binary "c2l0ZS91aS1iZ19mbGF0Xzc1X2ZmZmZmZl80MHgxMDAucG5n": site/ui-bg_flat_75_ffffff_40x100-841636c8f8d33987bb8d2f31e8ef92ca.png
+!binary "c2l0ZS91aS1iZ19nbGFzc181NV9mYmY5ZWVfMXg0MDAucG5n": site/ui-bg_glass_55_fbf9ee_1x400-bbb04adbe79f471d8c88a2bc691231b6.png
+!binary "c2l0ZS91aS1iZ19nbGFzc182NV9mZmZmZmZfMXg0MDAucG5n": site/ui-bg_glass_65_ffffff_1x400-a30aa544902182c133dbb46ac40a08d2.png
+!binary "c2l0ZS91aS1iZ19nbGFzc183NV9kYWRhZGFfMXg0MDAucG5n": site/ui-bg_glass_75_dadada_1x400-38ed9f33e066d6bee977c567d4b03650.png
+!binary "c2l0ZS91aS1iZ19nbGFzc183NV9lNmU2ZTZfMXg0MDAucG5n": site/ui-bg_glass_75_e6e6e6_1x400-3e20bce1b7b2f5dd47ca6ac361805162.png
+!binary "c2l0ZS91aS1iZ19nbGFzc185NV9mZWYxZWNfMXg0MDAucG5n": site/ui-bg_glass_95_fef1ec_1x400-c723e9a2b50006c6054836a10b76bb84.png
+!binary "c2l0ZS91aS1iZ19oaWdobGlnaHQtc29mdF83NV9jY2NjY2NfMXgxMDAucG5n": site/ui-bg_highlight-soft_75_cccccc_1x100-081f36ef02c9233c6db45d2d566fbecd.png
+!binary "c2l0ZS91aS1pY29uc18yMjIyMjJfMjU2eDI0MC5wbmc=": site/ui-icons_222222_256x240-4ffd13be9750b79d62db5d2f9670150c.png
+!binary "c2l0ZS91aS1pY29uc18yZTgzZmZfMjU2eDI0MC5wbmc=": site/ui-icons_2e83ff_256x240-94086d0ce953eb0887ab1b8140903af9.png
+!binary "c2l0ZS91aS1pY29uc180NTQ1NDVfMjU2eDI0MC5wbmc=": site/ui-icons_454545_256x240-db2a5b254322e84a22f467b70714c5e8.png
+!binary "c2l0ZS91aS1pY29uc184ODg4ODhfMjU2eDI0MC5wbmc=": site/ui-icons_888888_256x240-6dd8599dbdeb6e2103570075622a8bd1.png
+!binary "c2l0ZS91aS1pY29uc19jZDBhMGFfMjU2eDI0MC5wbmc=": site/ui-icons_cd0a0a_256x240-8b44e266bdc1f57f1393579591f89222.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtZW50
+  cnktZm9ybS10aHVtYi5wbmc=
+: site/vehicle-maintenance-software/service-entry-form-thumb-ab03e69b5d73cf0d145c04694fa1560a.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtZW50
+  cnktZm9ybS5wbmc=
+: site/vehicle-maintenance-software/service-entry-form-df620c53b2224b1248d9f0eb6a066df5.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtZW50
+  cnktbGlzdC10aHVtYi5wbmc=
+: site/vehicle-maintenance-software/service-entry-list-thumb-7ef886106305d15f524b9a0d7ab7a2f4.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtZW50
+  cnktbGlzdC5wbmc=
+: site/vehicle-maintenance-software/service-entry-list-57e7424727594d49b7f0c599c536103a.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtZW50
+  cnktdmlldy10aHVtYi5wbmc=
+: site/vehicle-maintenance-software/service-entry-view-thumb-f2c1f1419d71e0aa9cd604aeb678ce2a.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtZW50
+  cnktdmlldy5wbmc=
+: site/vehicle-maintenance-software/service-entry-view-785faa947a2e1c56a0b2e301b0b6be24.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtcmVt
+  aW5kZXItZW1haWwtdGh1bWIucG5n
+: site/vehicle-maintenance-software/service-reminder-email-thumb-6e1f1f44b748889e9adfa3f39752cba7.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtcmVt
+  aW5kZXItZW1haWwucG5n
+: site/vehicle-maintenance-software/service-reminder-email-b3946c67c2da4342a6c0bc141b4f5928.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtcmVt
+  aW5kZXItZm9ybS10aHVtYi5wbmc=
+: site/vehicle-maintenance-software/service-reminder-form-thumb-5c6ec2843e769b405fabbb6789119588.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtcmVt
+  aW5kZXItZm9ybS5wbmc=
+: site/vehicle-maintenance-software/service-reminder-form-40daac6a830491c16bde648179a8dae5.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtcmVt
+  aW5kZXJzLWRhc2hib2FyZC10aHVtYi5wbmc=
+: site/vehicle-maintenance-software/service-reminders-dashboard-thumb-9f4ba83e724cea1c29e5fdddbd0139a1.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtcmVt
+  aW5kZXJzLWRhc2hib2FyZC5wbmc=
+: site/vehicle-maintenance-software/service-reminders-dashboard-c99725ae4e0566cde43e4ab8df1654a7.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtcmVt
+  aW5kZXJzLWxpc3QtdGh1bWIucG5n
+: site/vehicle-maintenance-software/service-reminders-list-thumb-eeff68b963c7339ad1cba1af793f8010.png
+? !binary |-
+  c2l0ZS92ZWhpY2xlLW1haW50ZW5hbmNlLXNvZnR3YXJlL3NlcnZpY2UtcmVt
+  aW5kZXJzLWxpc3QucG5n
+: site/vehicle-maintenance-software/service-reminders-list-ba5ada187f3dde365a4fed21404fce40.png
 !binary "d3ltZWRpdG9yL2lmcmFtZS9kZWZhdWx0L2xibC1hcnRpY2xlLnBuZw==": wymeditor/iframe/default/lbl-article-da6db28a0e6103bb18cf75f3da6e4eef.png
 !binary "d3ltZWRpdG9yL2lmcmFtZS9kZWZhdWx0L2xibC1hc2lkZS5wbmc=": wymeditor/iframe/default/lbl-aside-61ce77c06f7fb16371ef48c6db701ecb.png
 !binary "d3ltZWRpdG9yL2lmcmFtZS9kZWZhdWx0L2xibC1ibG9ja3F1b3RlLnBuZw==": wymeditor/iframe/default/lbl-blockquote-7be82c3a0e8978f0620597150d1650ed.png

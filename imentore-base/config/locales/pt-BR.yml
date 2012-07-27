@@ -43,6 +43,7 @@ pt-BR:
   success: Sucesso
   coupon_not_valid: Coupom nao é válido
   hosting: Hospedagem
+  created_customer: Conta criada
 
   shipping_address: Endereço de Envio
   billing_addresss_title: Endereço de compra e Envio
@@ -65,6 +66,8 @@ pt-BR:
   profile: Sua Conta
   sign_in: Acesse
   sign_out: Sair
+  sign_up: Novo registro
+  forgot_password: Esqueci minha senha
   user: Usuário
 
   general_settings: Gerais
@@ -358,6 +361,7 @@ pt-BR:
       imentore/user:
         password: Senha
         password_confirmation: Confirmação Senha
+        remember_me: Lembrar senha
       imentore/template:
         path_layout: Endereço do layout
         path_template: Endereço da página

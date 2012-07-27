@@ -16,4 +16,5 @@
 /log
 /tmp
 /tmp/cache/assets/*
-/public/uploads/*
+/public/uploads/imentore/
+/public/uploads/tmp/
