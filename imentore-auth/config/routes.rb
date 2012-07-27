@@ -3,7 +3,9 @@ Imentore::Core::Engine.routes.draw do
     devise_for :users,
       class_name: 'Imentore::User',
       path_names: {sign_in: 'login', sign_out: 'logout'},
-      controllers:  {:sessions => "imentore/client/sessions"}
+      controllers:  {:sessions => "imentore/client/sessions",
+                     :passwords => "imentore/client/passwords"
+                    }
       # path: => 'client'
 
   devise_scope :user do

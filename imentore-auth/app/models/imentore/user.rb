@@ -1,7 +1,7 @@
 module Imentore
   class User < ActiveRecord::Base
 
-    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable
+    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :authentication_keys => [:email, :store_id]
 
     validates_uniqueness_of    :email,     :case_sensitive => false, :allow_blank => true, scope: [:email, :store_id], :if => :email_changed?
     validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?
@@ -12,7 +12,14 @@ module Imentore
     belongs_to :store
     belongs_to :userable, polymorphic: true
 
+    def self.send_reset_password_instructions(attributes={})
+      recoverable = find_or_initialize_with_errors(authentication_keys, attributes, :not_found)
+      recoverable.send_reset_password_instructions if recoverable.persisted?
+      recoverable
+    end
+
     def self.find_first_by_auth_conditions(warden_conditions)
+      require 'pry'; binding.pry
       conditions = warden_conditions.dup
       store_id = conditions.delete(:store_id)
         # where(conditions).where(["lower(store_id) = :value OR lower(store_id) = :value", { :value => store_id.downcase }]).first
@@ -23,6 +30,13 @@ module Imentore
         # where(conditions).first
       # end
     end
+
+    # def self.find_for_database_authentication(warden_conditions)
+    #   require 'pry'; binding.pry
+    #   conditions = warden_conditions.dup
+    #   store_id = conditions.delete(:store_id)
+    #   where(conditions).where(["imentore_users.store_id = :value", { :value => store_id.strip.downcase }]).first
+    # end
 
     # def self.find_for_database_authentication(warden_conditions)
     #   require 'pry'; binding.pry

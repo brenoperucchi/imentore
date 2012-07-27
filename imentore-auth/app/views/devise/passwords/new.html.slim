@@ -1,0 +1,11 @@
+h2= t(:forgot_password)
+
+= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| 
+  = f.error_notification 
+  div[class="inputs"]
+    = f.input :email, :required => true 
+    = f.input :store_id, as: :hidden, input_html: {value: current_store.id }
+  div[class="actions"]
+    = f.button :submit, t(:send_reset_password_instructions) 
+
+= render "links" 

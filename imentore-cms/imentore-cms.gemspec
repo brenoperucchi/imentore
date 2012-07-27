@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "mini_magick",         "~> 3.4"
   s.add_dependency "liquid",              "~> 2.3.0"
   s.add_dependency "inherited_resources", "~> 1.3.0"
-  s.add_dependency "devise",              "~> 2.0.4"
+  s.add_dependency "devise",              "~> 2.1.2"
   s.add_dependency "simple_form",         "~> 2.0.1"
   s.add_dependency "slim",                "~> 1.2.1"
   s.add_dependency "country_select",      "~> 0.0.1"

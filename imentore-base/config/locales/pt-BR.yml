@@ -68,6 +68,7 @@ pt-BR:
   sign_out: Sair
   sign_up: Novo registro
   forgot_password: Esqueci minha senha
+  send_reset_password_instructions: Reenvie a minha instrução de nova senha
   user: Usuário
 
   general_settings: Gerais

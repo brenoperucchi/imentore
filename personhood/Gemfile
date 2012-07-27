@@ -6,11 +6,11 @@ source "http://rubygems.org"
 gemspec
 
 # jquery-rails is used by the dummy application
-gem "jquery-rails"
+gem "jquery-rails", '2.0.2'
 
-gem "guard-rspec"
-gem "rspec-rails"
-gem "shoulda-matchers"
+# gem "guard-rspec"
+# gem "rspec-rails"
+# gem "shoulda-matchers"
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
