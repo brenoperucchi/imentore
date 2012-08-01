@@ -1,15 +1,15 @@
-- content_for :breadcrumb do
-  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
-legend Payment methods
-p= link_to("New Payment Method", new_admin_payment_method_path, :class=>'btn btn-primary')
+legend= t(:payment_methods)
+p= link_to(t(:payment_method_new), new_admin_payment_method_path, :class=>'btn btn-primary')
 
 table.table.table-striped
   thead
     tr
-      th Active
-      th Name
-      th action
+      th.minimal= t(:active)
+      th= t(:name)
+      th= t(:action)
   tbody
     - @payment_methods.each do |payment|
       tr
@@ -20,10 +20,10 @@ table.table.table-striped
           = link_to(edit_admin_payment_method_path(payment), class: 'btn') do
             i.icon-black.icon-edit
             '
-            | Edit
+            = t(:edit)
           '
           - if payment.handle == "custom"
             = link_to(admin_payment_method_path(payment), method: :delete, :class=>"btn btn-danger") do
               i.icon-white.icon-remove
               '
-              | Remove
+              = t(:remove)

@@ -13,18 +13,18 @@
 = f.input :name
 = f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
 = f.simple_fields_for :options do |fo|
-  = fo.input :fixed_rate, input_html: { value: @delivery_method.options["fixed_rate"] }
-  = fo.input :percent_rate, input_html: { value: @delivery_method.options["percent_rate"] }
+  = fo.input :fixed_rate, label: t(:fixed_rate), input_html: { value: @delivery_method.options["fixed_rate"] }
+  = fo.input :percent_rate, label: t(:percent_rate), input_html: { value: @delivery_method.options["percent_rate"] }
 
-legend Values weight
+legend= t(:weight_values)
 table.table
   thead
     tr
       th.minimal #
-      th Initial (gr)
-      th Final (gr)
-      th Value ($)
-      th Action
+      th= t(:initial_weight)
+      th= t(:final_weight)
+      th= t(:value_weight)
+      th= t(:action)
   tbody
     - resource.options[:weight].each_with_index do |option, index|
       tr
@@ -37,7 +37,7 @@ table.table
           a.btn.btn-small.btn-danger(href='#' id='remove_line')
             i.icon-trash.icon-white
             '
-            ' Remove
+            = t(:remove)
 
 #new_line.hide
   table
@@ -50,9 +50,10 @@ table.table
         a.btn.btn-small.btn-danger(href='#' id='remove_line')
           i.icon-trash.icon-white
           '
-          ' Remove
+          = t(:remove)
 
 .clear
 a.btn.btn-small(href='#' id='new_line')
   i.icon-plus
-  'New Line
+  '
+  = t(:new_row)

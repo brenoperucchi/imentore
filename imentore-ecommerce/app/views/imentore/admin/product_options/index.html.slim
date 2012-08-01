@@ -1,5 +1,6 @@
 - content_for :breadcrumb do
-  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+  == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:manegament) => '' }, { 'Products' => url_for(:controller => :products) }, { @product.name => '' }, { t(:options) => url_for(:controller => :product_options, product_id: @product.id ) } ])
+
 
 / legend Options
 / p= link_to("New Theme", new_admin_theme_path, :class=>'btn btn-small btn-primary')
@@ -9,24 +10,29 @@
   table.table
     thead
       tr
-        th name
-        th handle
-        th action
+        th= t(:name)
+        th= t(:handle)
+        th= t(:actions)
     tbody
       - @options.each do |option_type|
         tr
           td= option_type.name
           td= option_type.handle
           td
-            = link_to("Edit", edit_admin_product_option_path(@product, option_type))
+            = link_to(edit_admin_product_option_path(@product, option_type), class: 'btn btn-small') do
+              i.icon-black.icon-edit
+              '
+              = t(:edit)
             '
-            '|
-            '
-            = link_to("Delete", admin_product_option_path(@product, option_type), method: "delete")
+            = link_to(admin_product_option_path(@product, option_type), method: "delete", class: 'btn btn-small btn-danger') do
+              i.icon-white.icon-trash
+              '
+              = t(:remove)
+
 
 - @option = @product.options.build if @option.nil?
 = simple_form_for @option, as: "option", :html=> {:class =>"well form-inline"}, url: admin_product_options_path(@product) do |f|
   = f.error_notification
-  = f.input :name, :placeholder => "Enter Option Name", input_html: {:class =>  "inline"}, :label => false
-  = f.input :handle, placeholder: "Enter Handle Name", input_html: {:class =>  "inline"}, :label => false
+  = f.input :name, :placeholder => t(:option_name), input_html: {:class =>  "inline"}, :label => false
+  = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, :label => false
   = f.button :submit

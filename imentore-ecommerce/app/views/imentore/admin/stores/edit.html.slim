@@ -13,6 +13,6 @@ legend.page-title= t(:configurations) + ' ' + t(:general_settings)
           = f.simple_fields_for :address do |addr|
             = render("shared/address", addr: addr)
   .form-actions
-    = f.button :submit, :class=> 'btn btn-primary'
-    = " "
-    = button_tag "Cancel", class: "btn"
+    = f.button :submit, t(:store_update), :class=> 'btn btn-primary'
+    / = " "
+    / = button_tag "Cancel", class: "btn"

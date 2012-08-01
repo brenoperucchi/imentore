@@ -8,8 +8,8 @@
 
 ul.nav.nav-tabs
   li#product
-    = link_to("Product", edit_admin_product_path(@product))
+    = link_to(t(:product), edit_admin_product_path(@product))
   li#variants
-    = link_to("Variants", admin_product_variants_path(@product))
+    = link_to(t(:variants), admin_product_variants_path(@product))
   li#options
-    = link_to("Options", admin_product_options_path(@product))
+    = link_to(t(:options), admin_product_options_path(@product))

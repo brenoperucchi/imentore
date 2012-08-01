@@ -1,6 +1,6 @@
 = simple_form_for(resource, url: admin_update_settings_path, method: 'put', :html=> { :class=>'form-horizontal' } ) do |f|
   = render(@group, f: f)
   .form-actions
-    = f.button :submit, :class=> 'btn btn-primary'
-    = " "
-    = button_tag "Cancel", class: "btn"
+    = f.button :submit, t("store_#{@group.downcase}_update"), :class=> 'btn btn-primary'
+    / = " "
+    / = button_tag "Cancel", class: "btn"

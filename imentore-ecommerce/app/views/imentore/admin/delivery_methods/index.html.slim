@@ -1,15 +1,12 @@
-- content_for :breadcrumb do
-  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
-
-legend Delivery methods
-p= link_to("New delivery Method", new_admin_delivery_method_path, :class=>'btn btn-primary')
+legend= t(:delivery_methods)
+p= link_to(t(:delivery_method_new), new_admin_delivery_method_path, :class=>'btn btn-primary')
 
 table.table
   thead
     tr
-      th Active
-      th Name
-      th action
+      th= t(:active)
+      th= t(:name)
+      th= t(:actions)
   tbody
     - @delivery_methods.each do |delivery|
       tr
@@ -21,10 +18,10 @@ table.table
           = link_to(edit_admin_delivery_method_path(delivery), class: 'btn') do
             i.icon-black.icon-edit
             '
-            | Edit
+            = t(:edit)
           '
           - if delivery.handle == "custom"
             = link_to(admin_delivery_method_path(delivery), method: :delete, :class=>"btn btn-danger") do
               i.icon-white.icon-trash
               '
-              | Remove
+              = t(:remove)

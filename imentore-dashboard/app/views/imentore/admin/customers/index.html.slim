@@ -1,4 +1,4 @@
-legend Customers
+legend= t(:customers)
 / p
 /   = link_to(new_admin_customer_path, :class=>'btn btn-primary') do
 /     i.icon-white.icon-plus
@@ -9,11 +9,11 @@ legend Customers
 table.table.table-striped
   thead
     tr
-      th.span1 Active
-      th Name
-      th Email
-      th Created At
-      th Actions
+      th.span1= t(:active)
+      th= t(:name)
+      th= t(:email)
+      th= t(:created_at)
+      th= t(:actions)
   tbody
     - @customers.each do |customer|
       tr
@@ -21,14 +21,14 @@ table.table.table-striped
           = button_status(customer.active, '#')
         td= customer.name
         td= customer.user.email
-        td= customer.created_at
+        td= l(time_zone(customer.created_at), format: :short2)
         td
           = link_to(edit_admin_customer_path(customer), class: 'btn') do
             i.icon-black.icon-edit
             '
-            | Edit
+            = t(:edit)
           '
           = link_to(admin_customer_path(customer), class: 'btn btn-danger', method: :delete) do
             i.icon-white.icon-trash
             '
-            | Remove
+            = t(:remove)

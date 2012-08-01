@@ -4,14 +4,14 @@
       .span4
         .data-block
           h6.data-heading
-            | Order ID
+            = t(:order_id)
           h3
             | #
             = @order.id
       .span5
         .data-block
           h6.data-heading
-            | Delivery Method
+            = t(:delivery_method)
           h3
             = @order.delivery_method.name
     hr
@@ -19,13 +19,13 @@
       .span4
         .data-block
           h6.data-heading
-            | Order Amount
+            = t(:order_amount)
           h3
             = @order.total_amount
       .span4
         .data-block
           h6.data-heading
-            | Invoice Method
+            = t(:invoice_method)
           h3
             = @order.invoice_method.name
 
@@ -35,19 +35,19 @@
       .span3
         .data-block
           h6.data-heading
-            | Order Status
+            = t(:order_status)
           h3
             = @order.status
       .span3
         .data-block
           h6.data-heading
-            | Invoice Status
+            = t(:invoice_status)
           h3
             = @order.invoice.status
       .span3
         .data-block
           h6.data-heading
-            | Delivery Status
+            = t(:delivery_status)
           h3
             = @order.delivery.status
 
@@ -56,19 +56,19 @@
       .span3
         .data-block
           h6.data-heading
-            | Product Amount
+            = t(:product_amount)
           h3
             = @order.products_amount
       .span3
         .data-block
           h6.data-heading
-            | Coupon Amount
+            = t(:coupon_amount)
           h3
             = @order.coupons_amount
       .span3
         .data-block
           h6.data-heading
-            | Delivery Amount
+            = t(:delivery_amount)
           h3
             = @order.delivery_amount
   .clearfix
@@ -80,24 +80,24 @@
         = link_to(confirm_invoice_admin_order_path(@order), class: 'btn') do
           i.icon-black.icon-ok
           '
-          | Confirm Payment
+          = t(:payment_confirm)
         = link_to(confirm_delivery_admin_order_path(@order), class: 'btn') do
           i.icon-black.icon-envelope
           '
-          | Confirm Delivery
+          = t(:delivery_confirm)
 
-h4 Products
+h4= t(:products)
 .row-fluid
   .span12
     table.table.table-striped
       thead
         tr
           th.minimal #
-          th Product Name
-          th Variants
-          th Qtd
-          th Amount
-          th Action
+          th= t(:name)
+          th= t(:variants)
+          th= t(:qtd)
+          th= t(:amount)
+          th= t(:actions)
       tbody
         - @order.items.each do |item|
           tr
@@ -114,21 +114,21 @@ h4 Products
     ul.nav.nav-tabs#myTab
       li.active
         a[href='#tab1' data-toggle='tab']
-          | Customer Info
+          = t(:customer_info)
       li
         a[href='#tab2' data-toggle='tab']
-          | Invoice Info
+          = t(:invoice_info)
       li
         a[href='#tab2' data-toggle='tab']
-          | Log Info
+          = t(:log_info)
     .tab-content
       .tab-pane.active#tab1
         table.table.table-striped
           tbody
             tr
-              th Name:
+              th= t(:name)
               td= @order.customer_name
-              th Email:
+              th= t(:email)
               td= @order.customer_email
       .tab-pane#tab2
         p I'm in Section 2.

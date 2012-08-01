@@ -1,24 +1,24 @@
 / - content_for :breadcrumb do
 /   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
-legend Coupons
+legend= t(:coupons)
 p
   = link_to(new_admin_coupon_path, :class=>'btn btn-primary') do
     i.icon-white.icon-plus
     '
-    | New Coupon
+    = t(:coupon_new)
 
 
 table.table
   thead
     tr
-      th.span1 Status
-      th Name
-      th code
-      th limit / customer
-      th limit / use
-      th value
-      th action
+      th= t(:status)
+      th= t(:name)
+      th= t(:code)
+      th= t(:limit_customer)
+      th= t(:limit_use)
+      th= t(:value)
+      th= t(:actions)
   tbody
     - @coupons.each do |coupon|
       tr

@@ -1,5 +1,5 @@
 = f.input :name
 = f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
 = f.simple_fields_for :options do |fo|
-  = fo.input :fixed_rate, input_html: { value: @delivery_method.options["fixed_rate"] }
-  = fo.input :percent_rate, input_html: { value: @delivery_method.options["percent_rate"] }
+  = fo.input :fixed_rate, label: t(:fixed_rate), input_html: { value: @delivery_method.options["fixed_rate"] }
+  = fo.input :percent_rate, label: t(:percent_rate), input_html: { value: @delivery_method.options["percent_rate"] }

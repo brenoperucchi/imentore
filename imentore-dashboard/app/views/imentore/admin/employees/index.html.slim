@@ -1,34 +1,34 @@
-legend Users
-/ p
-/   = link_to(new_admin_employee_path, :class=>'btn btn-primary') do
-/     i.icon-white.icon-plus
-/     '
-/     | New SendEmail
+legend= t(:users)
+p
+  = link_to(new_admin_employee_path, :class=>'btn btn-primary') do
+    i.icon-white.icon-plus
+    '
+    = t(:employee_new)
 
 
 table.table.table-striped
   thead
     tr
-      th.span1 Active
-      th Name
-      th Email
-      th Created At
-      th Actions
+      / th.span1= t(:active)
+      th= t(:name)
+      th= t(:email)
+      th= t(:created_at)
+      th= t(:actions)
   tbody
     - @employees.each do |employee|
       tr
-        td
-          / = button_status(employee.active, '#')
+        / td
+        /   = button_status(employee.active, '#')
         td= employee.name
         td= employee.user.email
-        td= employee.created_at
+        td= l(time_zone(employee.created_at), format: :short2)
         td
           = link_to(edit_admin_employee_path(employee), class: 'btn') do
             i.icon-black.icon-edit
             '
-            | Edit
+            = t(:edit)
           '
           = link_to(admin_employee_path(employee), class: 'btn btn-danger', method: :delete) do
             i.icon-white.icon-trash
             '
-            | Remove
+            = t(:remove)

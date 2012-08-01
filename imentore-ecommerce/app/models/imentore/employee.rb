@@ -3,10 +3,12 @@ module Imentore
     include Personhood
 
     belongs_to  :store
-    has_one     :user, as: 'userable'
+    has_one     :user,       as: 'userable'
     has_many    :addresses,  as: 'addressable'
 
     validates :department, presence: true
+
+    accepts_nested_attributes_for :user, :addresses
 
     def address
       addresses.first

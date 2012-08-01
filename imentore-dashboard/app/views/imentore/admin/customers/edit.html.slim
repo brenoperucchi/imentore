@@ -1,4 +1,4 @@
-legend.page-title Customer Edit
+legend.page-title= t(:customer_edit)
 
 = simple_form_for([:admin, @customer], :html=> { :class=> 'form-horizontal' }) do |f|
   .row
@@ -18,4 +18,4 @@ legend.page-title Customer Edit
   .form-actions
     = f.button :submit, :class=> 'btn btn-primary'
     = " "
-    = button_tag "Cancel", class: "btn"
+    = submit_tag t(:cancel), :type => :reset, :class => "btn btn-danger"

@@ -87,7 +87,7 @@
     });
 
 - content_for :breadcrumb do
-  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+  == breadcrumb([{ 'Home' => admin_dashboard_path }, { t(:manegament) => '' }, { 'Products' => url_for(:controller => :products) }])
 
 = render "imentore/admin/products/top"
 
@@ -105,18 +105,19 @@
             h4 Categories
             #tree3
     legend
-      | Brand
+      = t(:brand)
       '
       small
-       | Select the Brand of Product
+       = t(:product_brand)
     .row
       .span10
-        = f.input :product_brand_name, label: 'Product Brand', input_html: {class: 'span5', 'data-provide'=>"typeahead", 'data-source'=>"#{brand_collection(current_store)}", value: f.object.try(:product_brand).try(:name), autocomplete:"off"}, placeholder: 'Choose a service Type...'
+        = f.input :product_brand_name, input_html: {class: 'span5', 'data-provide'=>"typeahead", 'data-source'=>"#{brand_collection(current_store)}", value: f.object.try(:product_brand).try(:name), autocomplete:"off"}, placeholder: t(:product_brand_select) + '...'
     .row-fluid
       .span10
         = link_to('#product-brand', class: :btn, 'data-toggle'=>'modal') do
           i.icon-black.icon-plus
-          | New Brand
+          '
+          = t(:product_brand_new)
 
     .form-actions
       = f.submit(:class => "btn btn-primary")

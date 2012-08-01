@@ -35,7 +35,8 @@
     }
 
 - content_for :breadcrumb do
-  == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+  == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:manegament) => '' }, { 'Products' => url_for(:controller => :products) }, { @product.name => '' }, { t(:variants) => url_for(:controller => :product_variants, product_id: @product.id ) } ])
+
 
 = render "imentore/admin/products/top"
 
@@ -47,10 +48,10 @@
         th sku
         - @product.options.each do |op|
           th= "options: " + op.name
-        th price
-        th quantity
-        th weight
-        th Action
+        th= t(:price)
+        th= t(:quantity)
+        th= t(:weight)
+        th= t(:actions)
     tbody
       - @product.variants.each do |variant|
         - unless variant.id.nil?
@@ -69,11 +70,11 @@
             td.change#weight= variant.weight
             td
               a(href='#' id='update_item')
-                = "Edit"
+                = t(:edit)
               '
               '|
               '
-              = link_to("Images", new_admin_product_variant_image_path(@product, variant))
+              = link_to(t(:images), new_admin_product_variant_image_path(@product, variant))
 
 #update.hide
   = simple_form_for @variant_update, as: "variant", url: admin_product_variant_path(@product, @variant_update), :html => {:class => 'form-horizontal', method: :put} do |f|
@@ -90,7 +91,7 @@
 
 .new
   #action
-    = text_field_tag "new_variant", 'New Variant', :class=>'btn btn-primary', :type=> "submit"
+    = text_field_tag "new_variant", t(:variant_new), :class=>'btn btn-primary', :type=> "submit"
   #form.hide
     = simple_form_for @variant, as: "variant", url: admin_product_variants_path(@product), :html => {:class => 'form-horizontal'}, input_html: { method: :post } do |f|
       = f.error_notification

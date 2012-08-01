@@ -26,24 +26,24 @@
 
     })
 
-legend List Categories
+legend= t(:categories)
 
 = categories_table(@categories)
 
 hr
 .div.hide#edit
-  h3 Edit Categories
+  h3= t(:category_edit)
   = simple_form_for([:admin, @category], :html=> {:class =>"well form-inline", id: 'edit', method: 'put'}) do |f|
     = f.error_notification
-    = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => "Select Parent", input_html: {:class =>  "inline"}, :label => false, :disabled => true
+    = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => t(:select_parent), input_html: {:class =>  "inline"}, :label => false, :disabled => true
     = f.input :name, :placeholder => "Enter Option Name", input_html: {:class =>  "inline"}, :label => false
     = f.input :handle, placeholder: "Enter Handle Name", input_html: {:class =>  "inline"}, :label => false
-    = f.button :submit, "Update Category"
+    = f.button :submit, t(:category_update)
 
-h3 Create Categories
+h3= t(:category_create)
 = simple_form_for([:admin, @category], :html=> {:class =>"well form-inline"})do |f|
   = f.error_notification
-  = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => "Select Parent", input_html: {:class =>  "inline"}, :label => false
-  = f.input :name, :placeholder => "Enter Option Name", input_html: {:class =>  "inline"}, :label => false
-  = f.input :handle, placeholder: "Enter Handle Name", input_html: {:class =>  "inline"}, :label => false
+  = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => t(:select_parent), input_html: {:class =>  "inline"}, :label => false
+  = f.input :name, :placeholder => t(:option_name), input_html: {:class =>  "inline"}, :label => false
+  = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, :label => false
   = f.button :submit
