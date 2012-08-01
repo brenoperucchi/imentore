@@ -1,6 +1,45 @@
 pt-BR:
 
-  action: Ações
+  variants: Variações
+  options: Opções
+
+  order_placed: Pedido criado
+  invoice_paid: Cobrança paga
+  delivery_sent: Encomenda enviada
+  customer_create: Cliente criado
+  select_parent: Selecionar parentesco
+
+  order_id: '#ID'
+  order_amount: Valor Pedido
+  order_status: Status Pedido
+  product_amount: Valor Produto
+  invoice_status: Status Cobrança
+  delivery_status: Status Envio
+  delivery_amount: Valor Envio
+  coupon_amount: Valor Coupom
+  invoice_method: Método de cobrança
+  delivery_confirm: Confirmação Envio
+  payment_confirm: Confirmação Pagamento
+
+  customer_info: Info Cliente
+  invoice_info: Info Pagamento
+  log_info: Avisos do Pedido
+
+  coupon_new: Novo Cupom 
+  store_update: Atualizar Gerais
+  store_virtual_update: Atualizar Loja
+
+
+  status: Condição
+  code: Código
+  limit_customer: Limite/Cliente
+  limit_use: Limite/Uso
+  value: Valor
+  placed: Ativo
+  not_placed: Desativado
+  level: Nível
+  subject: Assunto
+  action: Ação
   product: Produtos
   variant: Variação
   quantity: Quantidade
@@ -26,7 +65,12 @@ pt-BR:
   select: Selecionar
   select_state: Selecionar Estado
   admin_sign_in_title: Acesse o Painel de Controle
-  new_customer: Novo Usuário
+  new_customer: Novo Cliente
+  employee_new: Novo Usuário
+  customer_edit: Editar cliente
+  product_index: Listagem de Produtos
+  product_new: Novo produto
+  user_edit: Editar cliente
   person: Física
   company: Jurídica
   woman: Feminino
@@ -44,13 +88,21 @@ pt-BR:
   coupon_not_valid: Coupom nao é válido
   hosting: Hospedagem
   created_customer: Conta criada
+  brand: Marca
+  product_brand_select: Digite um nome da sua marca
+  product_brand: Marca do Produto
+  product_brand_new: Nova marca
+  variant_new: Nova variação
 
   shipping_address: Endereço de Envio
   billing_addresss_title: Endereço de compra e Envio
   payment_delivery_title: Forma de Pagamento e Envio
 
+  domain_name_hint: Digite o nome do seu domínio.
+
   authenticate_to_buy: Habilitar compra sem cadastro
   hint_authenticate_to_buy: Cliente poderá comprar sem precisar efetuar o cadastro na loja (compra por impulso)
+  hint_store_zip_code: O Cep será usado pelo sistema
   order_asset: Habilitar arquivos no pedido
   email_contact: Email de contato usado pelo sistema
   site: Endereço do site usado pelo sistema
@@ -63,6 +115,7 @@ pt-BR:
   management: Gerenciamento
   reports: Relatórios
 
+  home: Inicio
   profile: Sua Conta
   sign_in: Acesse
   sign_out: Sair
@@ -74,6 +127,12 @@ pt-BR:
   general_settings: Gerais
   virtual_settings: Loja
 
+  images: Imagens
+  weight_values: Envio por peso
+  initial_weight: Peso inicial (gr)
+  final_weight: Peso final (gr)
+  value_weight: Custo do peso
+  new_row: Nova linha 
   cms: Configuração de Layout
   pages: Páginas
   notices: Nóticias
@@ -88,6 +147,8 @@ pt-BR:
   customers: Clientes
   users: Usuários
   categories: Categorias
+  category_create: Criar Categoria
+  category_update: Atualizar Categoria
   orders: Pedidos
   products: Produtos
   coupons: Cupons
@@ -95,16 +156,26 @@ pt-BR:
   others: Outros
   domains: Domínios
   domain_create: Criar Domínio
-  send_emails: Emails Enviados
+  send_emails: E-mails Enviados
 
   methods: Métodos
+  categories_index: Categorias s
   payment_methods: Pagamentos
   delivery_methods: Envios
+  delivery_method_new: Novo Envio  
+  payment_method_new: Nova Forma de Pagamento
+  token: 'Chave de acesso (token):'
+  client_id: 'Login de acesso (login):'
+  fixed_rate: Taxa Fixa
+  percent_rate: Taxa Percentual
+  option_name: Nome da opção da variação
+  option_handle: Entre Url Amigável
 
   create: Criar
   update: Atualizar
   path: Endereço
   edit: Editar
+  cancel: Cancelar
   remove: Remover
   ofa: da
   newa: Nova
@@ -115,8 +186,10 @@ pt-BR:
   disable: Desativado
   name: Nome
   handle: Url Amigável
+  ordering: Ordenação
   created_at: Criado em
   actions: Ações
+  weight: Peso
 
   date:
     abbr_day_names:
@@ -330,6 +403,12 @@ pt-BR:
       imentore/customer: Cliente
       imentore/delivery_method: Método de Envio
       imentore/payment_method: Método de Pagamento
+      imentore/domain: Domínio
+      imentore/send_email: E-mail Enviado
+      imentore/product: Produto
+      imentore/option_type: Opção
+      imentore/category: Categoria
+      imentore/coupon: Coupom
     attributes:
       imentore/store:
         name: Nome 
@@ -351,7 +430,7 @@ pt-BR:
         handle: Url Amigável 
         html: Código Html
         body: Conteúdo da Página
-      imentore/notices:
+      imentore/notice:
         active: Ativo
         name: Nome
         handle: Url Amigável 
@@ -370,6 +449,11 @@ pt-BR:
       imentore/payment_method:
         active: Ativo
         name: Nome
+        description: Descrição        
+      imentore/delivery_method:
+        active: Ativo
+        name: Nome
+        description: Descrição
       imentore/domain:
         name: Nome
         hosting: Hospedagem
@@ -380,12 +464,48 @@ pt-BR:
         brand: Empresa
         irs_id: CPF
         birthdate: Data de Aniversário
-
+        national_id: RG
+      imentore/employee:
+        person_type: Tipo de cliente
+        gender: Sexo
+        name: Nome
+        brand: Empresa
+        irs_id: CPF
+        birthdate: Data de Aniversário
+        national_id: RG
       imentore/order:
         billing_checkbox: Endereço de Cobrança
         shipping_checkbox: Endereço do Envio
         customer_name: Nome do Cliente
         customer_email: Email do Cliente
+      imentore/send_email:
+        active: Ativo
+        name: 'Quando será enviado:'
+        subject: Assunto do e-mail
+        action: Ação
+        body: Conteúdo do e-mail
+      imentore/variant:
+        sku: Sku
+        price: Preço
+        quantity: Quantidade
+        value: Valor
+      imentore/option_type:
+        name: Nome
+        handle: Url Amigável 
+      imentore/product:
+        active: Ativo
+        name: Nome
+        description: Descrição 
+        product_brand_name: Marca do produto
+      imentore/coupon:
+        active: Ativo
+        name: Nome
+        code: Código
+        value: valor
+        limit_customer: Limite/Cliente
+        limit_use: Limite/Uso
+        due_at: Data Vencimento
+
       errors:
         <<: *errors
   activemodel:

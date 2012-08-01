@@ -21,12 +21,12 @@ module CategoriesHelper
         concat(content_tag(:td) do
           concat(content_tag(:a, 'Edit', :href=>edit_admin_category_path(descendant), :class=>'btn', id: 'edit_category', :category_id =>descendant.id, parent_id: descendant.parent_id) do
             concat(content_tag(:i,'',:class=> 'icon-black icon-edit'))
-            concat(" Edit")
+            concat(' ' + I18n.t(:edit))
           end)
           concat(" ")
           concat(content_tag(:a, 'Destroy', :href=>admin_category_path(descendant), 'data-method'=>'delete', :class=>'btn btn-danger' ) do
             concat(content_tag(:i,'',:class=> 'icon-white icon-trash'))
-            concat(" Remove")
+            concat(' ' + I18n.t(:remove))
           end)
         end)
 
@@ -41,12 +41,12 @@ module CategoriesHelper
     content_tag(:table, class: 'table table-stripped table-condensed') do
       concat(content_tag(:thead) do
         content_tag(:tr) do
-          concat(content_tag(:th, 'Nivel'))
-          concat(content_tag(:th, 'Name', :style=>"width:40px;"))
-          concat(content_tag(:th, 'Handle'))
-          concat(content_tag(:th, 'Products'))
-          concat(content_tag(:th, 'Ordering'))
-          concat(content_tag(:th, 'Action'))
+          concat(content_tag(:th, I18n.t(:level)))
+          concat(content_tag(:th, I18n.t(:name, :style=>"width:40px;")))
+          concat(content_tag(:th, I18n.t(:handle)))
+          concat(content_tag(:th, I18n.t(:products)))
+          concat(content_tag(:th, I18n.t(:ordering)))
+          concat(content_tag(:th, I18n.t(:actions)))
         end
       end)
       concat(content_tag(:tbody) do
@@ -62,12 +62,12 @@ module CategoriesHelper
             concat(content_tag(:td) do
               concat(content_tag(:a, 'Edit', :href=>edit_admin_category_path(category), :class=>'btn', id: 'edit_category', :category_id =>category.id, parent_id: category.parent_id) do
                 concat(content_tag(:i,'',:class=> 'icon-black icon-edit'))
-                concat(" Edit")
+                concat(' ' + I18n.t(:edit))
               end)
               concat(" ")
               concat(content_tag(:a, 'Destroy', :href=>admin_category_path(category), 'data-method'=> 'delete', :class=>'btn btn-danger' ) do
                 concat(content_tag(:i,'',:class=> 'icon-white icon-trash'))
-                concat(" Remove")
+                concat(' ' + I18n.t(:remove))
               end)
             end)
             categories_descendants(category.children)

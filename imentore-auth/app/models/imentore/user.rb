@@ -12,14 +12,7 @@ module Imentore
     belongs_to :store
     belongs_to :userable, polymorphic: true
 
-    def self.send_reset_password_instructions(attributes={})
-      recoverable = find_or_initialize_with_errors(authentication_keys, attributes, :not_found)
-      recoverable.send_reset_password_instructions if recoverable.persisted?
-      recoverable
-    end
-
-    def self.find_first_by_auth_conditions(warden_conditions)
-      require 'pry'; binding.pry
+    def self.find_first_by_auth_conditions(warden_conditions)   
       conditions = warden_conditions.dup
       store_id = conditions.delete(:store_id)
         # where(conditions).where(["lower(store_id) = :value OR lower(store_id) = :value", { :value => store_id.downcase }]).first
