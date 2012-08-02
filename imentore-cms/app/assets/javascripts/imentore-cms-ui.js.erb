@@ -8,38 +8,41 @@ $(document).ready(function(){
     };
   }
 
-  function session_save(key,value) {
-    $.ajax({
-      url: '/client/key_session',
-      type: 'post',
-      data: {key:key, value:value},
-      dataType: 'json',
-      success: function(json) {}
-    })
-  }
+  // function session_save(key,value) {
+    // $.session.set(key, value);
+  //   $.ajax({
+  //     url: '/client/key_session',
+  //     type: 'post',
+  //     data: {key:key, value:value},
+  //     dataType: 'json',
+  //     success: function(json) {}
+  //   })
+  // }
 
-  function session_get(key){
-    var res;
-    $.ajax({
-      url: '/client/key_session',
-      type: 'get',
-      data: {key:key},
-      dataType: 'json',
-      async:false,
-      success: function(json) {
-         res = json
-      },
-      error: function(json) {
-        res = false
-      }
-    });
-    return res
-  }
+  // function session_get(key){
+    // res = $.session.get(key);
+    // return res
+  //   var res;
+  //   $.ajax({
+  //     url: '/client/key_session',
+  //     type: 'get',
+  //     data: {key:key},
+  //     dataType: 'json',
+  //     async:false,
+  //     success: function(json) {
+  //        res = json
+  //     },
+  //     error: function(json) {
+  //       res = false
+  //     }
+  //   });
+  //   return res
+  // }
 
   $('div.sidebar-nav ul.nav-list').find('li.action').click(function(e){
     e.preventDefault();
     var value = $(this).attr('id')
-    session_save(key_bar,value)
+    $.session.set(key_bar, value);
     $('div.sidebar-nav ul.nav-list').find('li.active.action').attr('class','');
     $(this).attr('class','active action')
     var url = $(this).find('a').attr('href')
@@ -48,18 +51,18 @@ $(document).ready(function(){
     }, 400);
   })
 
-  if (session_get('key_nav') != false){
-    var json = session_get('key_nav')
-    $('div.navbar ul.nav').find('li#'+json[key_nav]).attr('class','active')
+  var key = $.session.get('key_nav');
+  if (key != 'undefined'){
+    $('div.navbar ul.nav').find('li#'+key).attr('class','active')
     $('ul.nav.nav-list').each(function(){
       $(this).slideUp("slow")
     })
-    $('ul.nav.nav-list.'+json[key_nav]).slideDown('slow')
+    $('ul.nav.nav-list.'+key).slideDown('slow')
   }
 
-  if (session_get('key_bar') != false){
-    var json = session_get('key_bar')
-    $('div.sidebar-nav ul.nav-list').find('li#'+json[key_bar]).attr('class','active action')
+  var key = $.session.get('key_bar');
+  if (key != 'undefined'){
+    $('div.sidebar-nav ul.nav-list').find('li#'+key).attr('class','active action')
   }
 
 
@@ -76,7 +79,7 @@ $(document).ready(function(){
       })
       $('ul.nav.nav-list.'+value).slideDown('slow')
       // e.preventDefault();
-      session_save(key_nav,value)
+      $.session.set(key_nav, value);
       if ($(this).find('a').attr('href') != undefined){
         var url = $(this).find('a').attr('href')
         window.setTimeout(function() {

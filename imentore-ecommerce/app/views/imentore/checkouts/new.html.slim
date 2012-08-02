@@ -64,26 +64,6 @@
         $(this).parents('div.hide').first().slideUp('slow');
       })
       
-
-
-      function session_get(key){
-        var res;
-        $.ajax({
-          url: '/client/key_session',
-          type: 'get',
-          data: {key:key},
-          dataType: 'json',
-          async:false,
-          success: function(json) {
-             res = json
-          },
-          error: function(json) {
-            res = false
-          }
-        });
-        return res[key]
-      }
-
       $('input.checkbox').click(function(){
         // var type = $(this).attr('id');
         var value = $(this).val();
@@ -188,10 +168,10 @@
         $(id).collapsy('show', id);
         $('.form-actions.hide').show();
       })
-
-      var method_id = session_get('delivery_method_id')
-      if (method_id != null){
-        $('select#delivery_method').find('option[value='+method_id+']').attr('selected', true)
+      
+      var key = $.session.get('delivery_method_id');
+      if (key != null){
+        $('select#delivery_method').find('option[value='+key+']').attr('selected', true)
       }
       $('a#calculate_zip').click(function(e){
         var zip_code = $("input[id$='zip_code']").last().val();

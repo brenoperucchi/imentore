@@ -16,6 +16,7 @@
         $('td#total_amount h4').text(total)
       }
       function delivery_calculate(zip_code, method){
+        var key = $.session.set('delivery_method_id', method);
         $.ajax({
           url: '/cart/calculate_shipping',
           type: 'get',

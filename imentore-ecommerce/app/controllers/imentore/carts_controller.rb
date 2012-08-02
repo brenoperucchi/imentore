@@ -8,7 +8,6 @@ module Imentore
       zip = params[:zip_code]
         method = current_store.delivery_methods.find_by_id(params[:method])
       unless method.nil?
-        session[:delivery_method_id] = method.id
         respond_to do |wants|
           wants.json do
             render json: Imentore::DeliveryHandle.calculate_items(current_cart.items, zip, method).to_json
