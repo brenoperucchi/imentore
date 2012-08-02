@@ -13,7 +13,7 @@
           h6.data-heading
             = t(:delivery_method)
           h3
-            = @order.delivery_method.name
+            = @order.delivery_method.try(:name)
     hr
     .row-fluid
       .span4
@@ -27,7 +27,7 @@
           h6.data-heading
             = t(:invoice_method)
           h3
-            = @order.invoice_method.name
+            = @order.invoice_method.try(:name)
 
 
   .span9.well
@@ -43,13 +43,13 @@
           h6.data-heading
             = t(:invoice_status)
           h3
-            = @order.invoice.status
+            = @order.invoice.try(:status)
       .span3
         .data-block
           h6.data-heading
             = t(:delivery_status)
           h3
-            = @order.delivery.status
+            = @order.delivery.try(:status)
 
     hr
     .row-fluid

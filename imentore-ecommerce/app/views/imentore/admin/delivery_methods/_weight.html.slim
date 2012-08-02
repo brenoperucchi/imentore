@@ -26,18 +26,19 @@ table.table
       th= t(:value_weight)
       th= t(:action)
   tbody
-    - resource.options[:weight].each_with_index do |option, index|
-      tr
-        td
-          h3= index + 1
-        td= text_field_tag("[delivery_method][options][weight][][initial]", option[:initial], :alt=>'weight', :id=>"weight_initial")
-        td= text_field_tag("[delivery_method][options][weight][][final]", option[:final], :alt=>'weight', :id=>"weight_final")
-        td= text_field_tag("[delivery_method][options][weight][][value]", option[:value], :alt=>'weight', :id=>"weight_value")
-        td
-          a.btn.btn-small.btn-danger(href='#' id='remove_line')
-            i.icon-trash.icon-white
-            '
-            = t(:remove)
+    - if resource.options[:weight]
+      - resource.options[:weight].each_with_index do |option, index|
+        tr
+          td
+            h3= index + 1
+          td= text_field_tag("[delivery_method][options][weight][][initial]", option[:initial], :alt=>'weight', :id=>"weight_initial")
+          td= text_field_tag("[delivery_method][options][weight][][final]", option[:final], :alt=>'weight', :id=>"weight_final")
+          td= text_field_tag("[delivery_method][options][weight][][value]", option[:value], :alt=>'weight', :id=>"weight_value")
+          td
+            a.btn.btn-small.btn-danger(href='#' id='remove_line')
+              i.icon-trash.icon-white
+              '
+              = t(:remove)
 
 #new_line.hide
   table
