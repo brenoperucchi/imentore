@@ -6,6 +6,7 @@ gem 'execjs'
 gem 'therubyracer'
 # gem 'rb-readline'
 
+gem 'tinymce-rails'
 gem 'sqlite3'
 gem 'mysql2'
 gem 'devise', '2.1.2'
