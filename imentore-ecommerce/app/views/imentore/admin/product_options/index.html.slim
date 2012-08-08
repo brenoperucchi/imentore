@@ -33,6 +33,6 @@
 - @option = @product.options.build if @option.nil?
 = simple_form_for @option, as: "option", :html=> {:class =>"well form-inline"}, url: admin_product_options_path(@product) do |f|
   = f.error_notification
-  = f.input :name, :placeholder => t(:option_name), input_html: {:class =>  "inline"}, :label => false
-  = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, :label => false
+  = f.input :name, :placeholder => t(:variant_option_name), input_html: {:class =>  "inline"}, :label => false
+  / = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, :label => false
   = f.button :submit

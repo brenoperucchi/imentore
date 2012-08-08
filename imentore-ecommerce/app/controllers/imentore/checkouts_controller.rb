@@ -2,6 +2,14 @@ module Imentore
   class CheckoutsController < BaseController
     include PagamentoDigital::Helper
     before_filter :authenticate_to_buy!, only: [:new, :confirm, :complete]
+    before_filter :check_cart, only:[:new]
+
+    def check_cart
+      if current_cart.total_amount == 0 or current_cart.items.size == 0
+        redirect_to cart_path
+        flash[:alert] = t(:cart_not_valid)
+      end
+    end
 
     def customer_only
       redirect_to(cart_path, alert: :admin_denied) if user_signed_in? and current_user.userable.owner?
@@ -22,10 +30,6 @@ module Imentore
         render :new
       elsif request.put?
         @order.items = current_cart.items
-        unless CheckoutService.place_coupons(@order, current_cart, current_store)
-          flash[:alert] = t(:coupon_not_valid)
-          render :new and return false
-        end
         CheckoutService.place_order(@order, params)
 
         if user_signed_in? and not current_user.userable.owner?
@@ -43,6 +47,10 @@ module Imentore
 
           @order.billing_checkbox = params[:order][:billing_checkbox] if params[:order][:billing_checkbox]
           @order.shipping_checkbox = params[:order][:shipping_checkbox] if params[:order][:shipping_checkbox]
+          unless CheckoutService.place_coupons(@order, current_cart, current_store)
+            flash[:alert] = t(:coupon_not_valid)
+            render :new and return false
+          end
           if @order.save
             @order.place
           end
@@ -66,19 +74,27 @@ module Imentore
       begin
         @order = current_order
         @invoice = current_order.invoice
-        if @invoice.payment_method.name == "pagamento_digital"
-          response = @invoice.prepare
-          pagamento_digital_form(response)
-        else
-          response = @invoice.prepare
-          redirect_to response['redirect_to'] if response['redirect_to'].present?
-          render 'charge' if response['render']
-        end
+        @prepare = @invoice.prepare
+        send("#{@invoice.payment_method.name}")
       rescue Exception => msg
-        flash[:alert] =  "Information wrongs"
+        flash[:alert] = t(:checkout_charge_problem)
         @order = current_order
         render :new
       end
+    end
+
+    def moip
+      redirect_to @prepare['redirect_to'] if @prepare['redirect_to'].present?
+    end
+
+    def pagamento_digital
+      @prepare = @invoice.prepare
+      pagamento_digital_form(@prepare)      
+    end
+
+
+    def pag_seguro
+      redirect_to @prepare['redirect_to'] if @prepare['redirect_to'].present?
     end
 
     def complete

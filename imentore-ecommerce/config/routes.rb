@@ -39,6 +39,7 @@ Imentore::Core::Engine.routes.draw do
       get 'calculate_shipping', on: :member
     end
 
+    match "product/:handle",           to: "products#handle",      as: 'product_handle'
     match "pages/:page",                to: "pages#show",         as: "pages"
     match "categories/*categories",     to: "categories#index",   as: "categories"
     match "coupon",                     to: "coupons#add_coupon", as: "add_coupon"

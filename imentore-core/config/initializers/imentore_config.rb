@@ -10,6 +10,15 @@ class String
     str.tr!("-", "_")
     str.downcase
   end
+  def to_underscore
+    str = self
+    str = str.gsub(/::/, '/')
+    str = str.gsub(' ', '_')
+    str = str.gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2')
+    str = str.gsub(/([a-z\d])([A-Z])/,'\1_\2')
+    str = str.tr("-", "_")
+    str.downcase
+  end
 end
 
 module Imentore

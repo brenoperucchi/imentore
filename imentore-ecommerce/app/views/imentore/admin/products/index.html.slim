@@ -15,6 +15,7 @@ table.table.table-striped
       th.super-mini #
       th= t(:status)
       th= t(:name)
+      th= t(:handle)
       th= t(:action)
   tbody
     - @products.each do |product|
@@ -22,6 +23,7 @@ table.table.table-striped
         td= product.id
         td= button_status(product.active, edit_admin_product_path(product))
         td= link_to(product.name, edit_admin_product_path(product))
+        td= product.handle
         td
           = link_to(edit_admin_product_path(product), class: 'btn btn-small') do
             i.icon-black.icon-edit

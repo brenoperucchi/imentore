@@ -65,10 +65,36 @@
         add_coupon(code);
         e.preventDefault();
       })
-    })
+      // Javascript Notication - Alert/Success
+      $('div.alert').each(function(){
+        if ( $(this).find('p').text().length > 1 ) {
+         $(this).slideDown('slow')
+        }
+      })
+      $('.close').bind('click',function(){
+        $(this).parents('div.hide').first().slideUp('slow');
+      })
 
+    })    
 
 .container
+  .row
+    .notification
+      div.alert.alert-block.hide
+        a[class="close" data-dismiss="alert" href="#"]
+          = "x"
+        h4[class="alert-heading"]
+          = t(:warning)
+        p
+          = flash[:alert]
+      div.alert.alert-success.hide
+        a[class="close" data-dismiss="alert" href="#"]
+          = "x"
+        h4[class="alert-heading"]
+          = t(:success)
+        p
+          = flash[:success]
+
   .row
     .span4
       - if current_cart.empty?

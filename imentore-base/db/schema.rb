@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120708225413) do
+ActiveRecord::Schema.define(:version => 20120805150916) do
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(:version => 20120708225413) do
     t.datetime "updated_at",                          :null => false
     t.boolean  "active",           :default => false
     t.integer  "product_brand_id"
+    t.string   "handle"
   end
 
   create_table "imentore_send_emails", :force => true do |t|

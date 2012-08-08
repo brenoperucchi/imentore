@@ -100,6 +100,7 @@
               = f.error_notification
               = f.input :active
               = f.input :name
+              = f.input :handle
               = f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
           .span4
             h4 Categories
@@ -123,6 +124,6 @@
       = f.submit(:class => "btn btn-primary")
 
 #product-brand.modal.hide.fade.in
-  = render file: 'imentore/admin/product_brands/new.html.slim', product: @product
+  = render file: 'imentore/admin/product_brands/new', product: @product
 
 .hide

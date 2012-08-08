@@ -27,6 +27,7 @@ module Imentore
             if @category.save
               redirect_to admin_categories_path
             else
+              @categories = collection
               render :index
             end
           end
@@ -34,8 +35,11 @@ module Imentore
       end
 
       def update
-        update! {
-          admin_categories_path }
+        update! { admin_categories_path }
+      end
+
+      def destroy
+        destroy! { admin_categories_path }
       end
 
       protected

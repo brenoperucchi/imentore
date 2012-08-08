@@ -15,7 +15,7 @@ module Imentore
     end
 
     def url
-      product_path(@product)
+      product_handle_path(@product.handle)
     end
 
     def price

@@ -14,9 +14,25 @@ module Imentore
 
     scope :active, where(active: true)
 
-    validates :name, :description, :store, presence: true
+    validates :name, :handle, :description, :store, presence: true
+    validates :handle, uniqueness: { scope: "id" }
+    validates :handle, format: { with: /[a-z]+[-a-z]+[a-z]+/ }
 
     accepts_nested_attributes_for :variants
+
+    def handle
+      return if read_attribute(:name).nil?
+      if read_attribute(:handle).nil? 
+        update_attribute(:handle, name.to_underscore)
+        self.handle 
+      else 
+        read_attribute(:handle)
+      end
+    end
+
+    def handle=(param)
+      write_attribute(:handle, param.to_underscore!)
+    end
 
 
     def all_images

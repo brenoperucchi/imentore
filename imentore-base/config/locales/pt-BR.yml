@@ -28,7 +28,9 @@ pt-BR:
   coupon_new: Novo Cupom 
   store_update: Atualizar Gerais
   store_virtual_update: Atualizar Loja
-
+  category_create: Criar Categoria
+  category_update: Atualizar Categoria
+  product_updated: Produto Atualizado
 
   status: Condição
   code: Código
@@ -86,6 +88,8 @@ pt-BR:
   warning: Aviso
   success: Sucesso
   coupon_not_valid: Coupom nao é válido
+  cart_not_valid: Carrinho inválido
+  checkout_charge_problem: Problema no método de pagamento
   hosting: Hospedagem
   created_customer: Conta criada
   brand: Marca
@@ -147,8 +151,6 @@ pt-BR:
   customers: Clientes
   users: Usuários
   categories: Categorias
-  category_create: Criar Categoria
-  category_update: Atualizar Categoria
   orders: Pedidos
   products: Produtos
   coupons: Cupons
@@ -168,8 +170,9 @@ pt-BR:
   client_id: 'Login de acesso (login):'
   fixed_rate: Taxa Fixa
   percent_rate: Taxa Percentual
-  option_name: Nome da opção da variação
-  option_handle: Entre Url Amigável
+  variant_option_name: Nome Variação
+  category_option_name: Nome Categoria
+  option_handle: Nome Url Amigável
 
   create: Criar
   update: Atualizar
@@ -495,6 +498,7 @@ pt-BR:
       imentore/product:
         active: Ativo
         name: Nome
+        handle: Url Amigável 
         description: Descrição 
         product_brand_name: Marca do produto
       imentore/coupon:
