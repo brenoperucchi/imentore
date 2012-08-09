@@ -1,5 +1,5 @@
 / - content_for :breadcrumb do
-  / == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+  / == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
 / = binding.pry
 legend Address

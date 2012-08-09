@@ -87,6 +87,7 @@ pt-BR:
   cart: Carrinho
   warning: Aviso
   success: Sucesso
+  default: Padrão
   coupon_not_valid: Coupom nao é válido
   cart_not_valid: Carrinho inválido
   checkout_charge_problem: Problema no método de pagamento
@@ -409,6 +410,7 @@ pt-BR:
       imentore/domain: Domínio
       imentore/send_email: E-mail Enviado
       imentore/product: Produto
+      imentore/product_variant: Variação
       imentore/option_type: Opção
       imentore/category: Categoria
       imentore/coupon: Coupom
@@ -495,6 +497,11 @@ pt-BR:
       imentore/option_type:
         name: Nome
         handle: Url Amigável 
+      imentore/product_variant:
+        sku: Sku
+        price: Preço
+        quantity: Quantidade
+        weight: Peso
       imentore/product:
         active: Ativo
         name: Nome

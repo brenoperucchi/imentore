@@ -30,6 +30,7 @@ module SqlTemplate
           updated_at:   template.updated_at,
           virtual_path: template.path
         }
+        SqlTemplate::Resolver.instance.clear_cache
         templates << ActionView::Template.new(template.body, template_id, handler, details)
         # http://stackoverflow.com/a/6358022
       end

@@ -18,7 +18,7 @@ module Imentore
 
       def create
         create! do
-          default_option = @product.options.create(name: "Model", handle: "model")
+          default_option = @product.options.create(name: t(:default), handle: t(:default).to_underscore)
           variant = @product.variants.first
           variant.options.create(option_type: default_option, value: "default")
           admin_products_path

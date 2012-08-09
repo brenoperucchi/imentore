@@ -1,5 +1,5 @@
 / - content_for :breadcrumb do
-/   == breadcrumb([{ 'Home' => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+/   == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
 legend= t(:payment_methods)
 p= link_to(t(:payment_method_new), new_admin_payment_method_path, :class=>'btn btn-primary')
