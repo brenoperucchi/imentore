@@ -3,12 +3,12 @@
     .span7
       span.btn.btn-success.fileinput-button
         i.icon-plus.icon-white
-        span Add files
+        span= t(:send_files)
         = file_field_tag "asset[file]", multiple: true
 
       button.btn.btn-primary.start(type="submit")
         i.icon-upload.icon-white
-        span Start upload
+        span= t(:start_upload)
 
     .span5
       .progress.progress-success.progress-striped.active.fade

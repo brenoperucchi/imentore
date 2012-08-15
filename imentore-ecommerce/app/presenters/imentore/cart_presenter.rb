@@ -19,7 +19,7 @@ module Imentore
                                       "quantity" => item.quantity,
                                       "value" => item.amount,
                                       "variant_id" => variant.id,
-                                      "thumbnail_url" => variant.images.first.picture.url(:super_thumb)
+                                      "thumbnail_url" => variant.images.blank? ? nil : variant.images.first.picture.url(:super_thumb) 
                                     }
                                   end
 
