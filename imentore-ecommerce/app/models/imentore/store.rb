@@ -117,8 +117,13 @@ module Imentore
     has_many :pages, :dependent => :destroy
     has_many :feedbacks, as: :feedbackable, :dependent => :destroy
     has_many :notices, :dependent => :destroy
+    has_many :invoices, through: :orders
 
     accepts_nested_attributes_for :owner, :address
+
+    def url_site
+      "#{url}.imentore.com.br"
+    end
 
     def theme
       @theme ||= themes.find_by_active(true)

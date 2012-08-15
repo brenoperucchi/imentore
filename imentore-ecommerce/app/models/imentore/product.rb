@@ -38,9 +38,9 @@ module Imentore
     def all_images
       imgs = []
       variants.each do |variant|
-        imgs << variant.images.collect {|image| image}
+        imgs << variant.images.map {|image| image}
       end
-      return imgs.reject{|x| x.blank?}.first
+      imgs.reject{|x| x.blank?}.flatten
     end
 
   end

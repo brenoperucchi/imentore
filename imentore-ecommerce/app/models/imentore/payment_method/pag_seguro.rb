@@ -22,6 +22,7 @@ module Imentore
               :zip_code => order.billing_address.zip_code,
               :shippingId => "3",
               :currency => "BRL",
+              :redirectURL =>  "http://app.imentore.com.br/return_pg/#{order.invoice.id}",
             }
       ret
     end
@@ -37,6 +38,10 @@ module Imentore
                 }
       end
       ret
+    end
+
+    def notification_rpc(notification_code)
+      response = PagSeguro.notification_rpc(@options.merge(notification_code))
     end
 
     def checkout(order = nil)

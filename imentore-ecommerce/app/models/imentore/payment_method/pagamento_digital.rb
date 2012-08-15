@@ -32,7 +32,10 @@ module Imentore
                'id_pedido' => order.invoice.id,
                'email_loja' => order.invoice_method.options['client_id'],
                'tipo_integraca' => 'PAD',
-               'frete' => order.delivery_calculate(order.zip_code, order.delivery_method).value
+               'frete' => order.delivery_calculate(order.zip_code, order.delivery_method).value,
+               'url_retorno' =>  "http://app.imentore.com.br/return_pd/#{order.invoice.id}",
+               'url_aviso' =>  "http://app.imentore.com.br/sync_pd/#{order.invoice.id}",
+               'redirect' => 'true',
              }
       products = {}
       order.items.each_with_index do |item, index|
@@ -44,8 +47,8 @@ module Imentore
                     "produto_valor_#{index}" => item.price.to_f,
 
                  }
-      end
       products = products.merge(@product)
+      end
       main.merge(products)
     end
 

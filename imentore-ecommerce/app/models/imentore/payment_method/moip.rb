@@ -44,8 +44,8 @@ module Imentore
       if invoice.provider_id.nil?
         MoIP.setup do |config|
           config.uri = 'https://desenvolvedor.moip.com.br/sandbox'
-          config.token = 'Y2SQPDY4UVGUVJ9VPH1HHLDEOLTOKSYR'
-          config.key = 'N3X5MADINQOXPSW6XBTQKJYUSFI88RNNDGK1C14N'
+          config.key = invoice.payment_method.options['client_id'] 
+          config.token = invoice.payment_method.options['token']
         end
         response = MoIP::Client.checkout(attributes(order))
         invoice.update_attribute(:provider_id, response['Token'])
