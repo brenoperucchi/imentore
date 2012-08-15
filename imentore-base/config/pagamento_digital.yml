@@ -1,5 +1,5 @@
 development: &development
-  developer: true
+  developer: false
   base: "http://localhost:3000"
   return_to: "/pedido/efetuado"
   email: user@example.com

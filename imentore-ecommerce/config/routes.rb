@@ -39,13 +39,17 @@ Imentore::Core::Engine.routes.draw do
       get 'calculate_shipping', on: :member
     end
 
-    match "product/:handle",           to: "products#handle",      as: 'product_handle'
-    match "pages/:page",                to: "pages#show",         as: "pages"
-    match "categories/*categories",     to: "categories#index",   as: "categories"
-    match "coupon",                     to: "coupons#add_coupon", as: "add_coupon"
+    match "product/:handle",            to: "products#handle",      as: 'product_handle'
+    match "pages/:page",                to: "pages#show",           as: "pages"
+    match "categories/*categories",     to: "categories#index",     as: "categories"
+    match "coupon",                     to: "coupons#add_coupon",   as: "add_coupon"
     match "checkout",           to: "checkouts#new",      as: "checkout"
     match "checkout/confirm",   to: "checkouts#confirm",  via: "get",   as: "confirm_checkout"
     match "checkout/confirm",   to: "checkouts#confirm",  via: "put",   as: "confirm_checkout"
     match "checkout/charge",    to: "checkouts#charge",   as: "charge_checkout"
     match "checkout/complete",  to: "checkouts#complete", as: "complete_checkout"
+    match "return_pd/:invoice_id",  to: "checkouts#return_pd", as: 'return_pd'
+    match "return_pg/:invoice_id",  to: "checkouts#return_pg", as: 'return_pg'
+    match "sync_pd/:invoice_id",    to: "checkouts#sync_pd",   as: 'sync_pd'
+    match "sync_pg/:store_id",      to: "checkouts#sync_pg",   as: 'sync_pg'
 end
