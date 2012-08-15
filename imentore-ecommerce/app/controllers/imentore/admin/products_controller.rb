@@ -28,10 +28,10 @@ module Imentore
       def update
         @product = current_store.products.find_by_id(params[:id])
         @product.attributes = params[:product]
-        @product.product_brand = current_store.product_brands.find_by_name(params[:product][:product_brand_name])
-        @product_brand = @product.product_brand
         update! do |success, failure|
           success.html do
+            @product.product_brand = current_store.product_brands.find_by_name(params[:product][:product_brand_name])
+            @product_brand = @product.product_brand
             @product.save
             flash[:success] = t(:product_updated)
             redirect_to edit_admin_product_path(@product)
@@ -42,6 +42,8 @@ module Imentore
             render :edit
           end
           failure.html do
+            @product.product_brand = current_store.product_brands.find_by_name(params[:product][:product_brand_name])
+            @product_brand = @product.product_brand
             render :update
           end
         end
