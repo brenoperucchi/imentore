@@ -1,3 +1,6 @@
+- content_for :breadcrumb do
+  == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:management) => '' }, { t(:products) => url_for(:controller => :products) }, { @product.name => '' }, { t(:options) => url_for(:controller => :product_options, product_id: @product.id ) }, { @option.name => "" } ])
+
 = simple_form_for @option, as: "option", url: admin_product_option_path(@product, @option) do |f|
   = f.error_notification
   = f.input :name

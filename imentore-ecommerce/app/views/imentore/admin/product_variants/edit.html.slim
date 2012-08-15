@@ -1,7 +1,11 @@
+- content_for :breadcrumb do
+  == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:management) => '' }, { t(:products) => url_for(:controller => :products) }, { @product.name => '' }, { t(:variants) => url_for(:controller => :product_variants, product_id: @product.id ) } ])
+
 = simple_form_for @variant, as: "variant", url: admin_product_variant_path(@product, @variant) do |f|
   = f.input :sku
-  = f.input :price
   = f.input :quantity
+  = f.input :price
+  = f.text_field :price
   = f.simple_fields_for :options do |of|
     = of.input :value, label: of.object.option_type.name
   = f.button :submit

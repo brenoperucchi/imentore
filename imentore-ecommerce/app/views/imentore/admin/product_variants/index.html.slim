@@ -47,10 +47,10 @@
         th.minimal #
         th sku
         - @product.options.each do |op|
-          th= "options: " + op.name
-        th= t(:price)
+          th= t(:option).downcase + ": " + op.name
         th= t(:quantity)
         th= t(:weight)
+        th= t(:price)
         th= t(:actions)
     tbody
       - @product.variants.each do |variant|
@@ -65,9 +65,9 @@
             - variant.options.each_with_index do |ov, index|
               td.change(id=ov.option_type.name)= ov.value
               = hidden_field_tag(:option_value_id, ov.id, :class=>'change', :id =>'option_value_id')
-            td.change#price= variant.price
             td.change#quantity= variant.quantity
             td.change#weight= variant.weight
+            td.change#price= variant.price
             td
               a(href='#' id='update_item')
                 = t(:edit)
@@ -83,9 +83,9 @@
     .values
       = f.simple_fields_for :options do |of|
         = of.input :value, label: of.object.option_type.name, input_html: { :class => 'change', :id => of.object.option_type.name}
-    = f.input :price, input_html: { :class => 'change', :id => 'price'}
     = f.input :quantity, input_html: { :class => 'change', :id => 'quantity'}
     = f.input :weight, input_html: { :class => 'change', :id => 'weight'}
+    = f.input :price, input_html: { :class => 'change', :id => 'price'}
     .form-actions
       = f.button :submit, :class => "btn-primary"
 
@@ -99,8 +99,8 @@
       = f.simple_fields_for :options do |of|
         = of.input :option_type_id, as: :hidden, input_html: { :value => of.object.option_type_id }
         = of.input :value, label: of.object.option_type.name
-      = f.input :price
       = f.input :quantity
       = f.input :weight
+      = f.input :price
       .form-actions
         = f.button :submit, :class => "btn-primary"

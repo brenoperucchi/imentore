@@ -1,14 +1,14 @@
 / - content_for :breadcrumb do
 /   == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
-legend Orders
+legend= t(:orders)
 / p= link_to("New delivery Method", new_admin_delivery_method_path, :class=>'btn btn-primary')
 
 table.table
   thead
     tr
-      th.minimal #
-      th= t(:status)
+      th.super-mini #
+      th.mini= t(:status)
       th= t(:data)
       th= t(:client)
       th= t(:actions)

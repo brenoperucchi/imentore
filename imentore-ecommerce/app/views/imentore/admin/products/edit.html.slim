@@ -87,7 +87,7 @@
     });
 
 - content_for :breadcrumb do
-  == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:management) => '' }, { t(:products) => url_for(:controller => :products) }])
+  == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:management) => '' }, { t(:products) => url_for(:controller => :products) }, { @product.name => '' }])
 
 = render "imentore/admin/products/top"
 
