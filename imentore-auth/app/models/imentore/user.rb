@@ -32,7 +32,6 @@ module Imentore
     # end
 
     # def self.find_for_database_authentication(warden_conditions)
-    #   require 'pry'; binding.pry
     #   # conditions = warden_conditions.dup
     #   # login = conditions.delete(:login)
     #   # account_id = conditions.delete(:account_id)
@@ -83,7 +82,6 @@ module Imentore
     #   # end
 
     # def store_id
-    #   require 'pry'; binding.pry
     #   false
     # end
     #

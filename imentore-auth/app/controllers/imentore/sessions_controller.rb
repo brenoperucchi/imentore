@@ -4,7 +4,6 @@
 
 
 #     # def new
-#       # binding.pry
 #       # render '/Users/breno/app/imentore/imentore-auth/app/views/devise/sessions/new', :format =>[:html]
 #     # end
 

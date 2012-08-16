@@ -102,7 +102,6 @@ module CategoriesHelper
       #     if category.has_children?
       #       self.children = true
       #       categories_table(category.children)
-      #       binding.pry
       #     end
       #   end
       # end

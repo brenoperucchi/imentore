@@ -48,8 +48,10 @@ Imentore::Core::Engine.routes.draw do
     match "checkout/confirm",   to: "checkouts#confirm",  via: "put",   as: "confirm_checkout"
     match "checkout/charge",    to: "checkouts#charge",   as: "charge_checkout"
     match "checkout/complete",  to: "checkouts#complete", as: "complete_checkout"
+    match "return_mp/:invoice_id",  to: "checkouts#return_mp", as: 'return_mp'
     match "return_pd/:invoice_id",  to: "checkouts#return_pd", as: 'return_pd'
     match "return_pg/:invoice_id",  to: "checkouts#return_pg", as: 'return_pg'
     match "sync_pd/:invoice_id",    to: "checkouts#sync_pd",   as: 'sync_pd'
     match "sync_pg/:store_id",      to: "checkouts#sync_pg",   as: 'sync_pg'
+    match "sync_mp/:store_id",      to: "checkouts#sync_mp",   as: 'sync_mp'
 end
