@@ -43,7 +43,7 @@ module Imentore
       invoice = order.invoice
       if invoice.provider_id.nil?
         MoIP.setup do |config|
-          config.uri = 'https://desenvolvedor.moip.com.br/sandbox'
+          config.uri = 'https://www.moip.com.br/'
           config.key = invoice.payment_method.options['client_id'] 
           config.token = invoice.payment_method.options['token']
         end

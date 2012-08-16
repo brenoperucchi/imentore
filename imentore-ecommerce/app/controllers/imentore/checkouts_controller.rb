@@ -3,8 +3,8 @@ module Imentore
     include PagamentoDigital::Helper
     before_filter :authenticate_to_buy!, only: [:new, :confirm, :complete]
     before_filter :check_cart, only:[:new]
-    skip_before_filter :verify_authenticity_token, only: [:return_pd, :sync_pd, :sync_pg]
-    skip_before_filter :check_store, only: [:return_pd, :sync_pd, :return_pg, :sync_pg]
+    skip_before_filter :verify_authenticity_token, only: [:return_pd, :sync_pd, :sync_pg, :sync_mp]
+    skip_before_filter :check_store, only: [:return_pd, :sync_pd, :return_pg, :sync_pg, :sync_mp]
 
     def check_cart
       if current_cart.total_amount == 0 or current_cart.items.size == 0
@@ -100,12 +100,23 @@ module Imentore
     def complete
     end
 
+
+    def sync_mp
+      current_store = Imentore::Store.find(params[:store_id])
+      invoice = current_store.invoices.find_by_id(params[:id_transacao])
+      case params['status_pagamento']
+      when "4", "1"
+        invoice.confirm
+      end
+      render nothing: true
+    end
+
     def sync_pg
       current_store = Imentore::Store.find(params[:store_id])
       notification_code = {notificationCode: params[:notificationCode]}
       pagseguro = Imentore::Store.first.payment_methods.find_by_handle('pag_seguro')
       provider_class = "Imentore::PaymentMethod::PagSeguro".constantize.new(pagseguro.options)
-      response = provider_class.notification_rpc(notification_code)current_store
+      response = provider_class.notification_rpc(notification_code)
       invoice = current_store.invoices.find(response['transaction']['reference'])
       case response['transaction']['status']
       when '3','4'
@@ -121,6 +132,10 @@ module Imentore
       invoice.confirm if notificacao.status == :concluida
     end
 
+    def return_mp
+      render nothing: true      
+    end
+    
     def return_pg
       invoice = Imentore::Invoice.find(params[:invoice_id])
       current_store = invoice.order.store
