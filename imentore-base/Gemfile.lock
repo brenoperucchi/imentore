@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/bperucchi/moip-ruby.git
+  revision: 69ea8ce20037dde7bdc8b06360aea80e04354143
+  specs:
+    moip-ruby (0.1.2)
+      activesupport (>= 3.2.3)
+      httparty (~> 0.8.3)
+      nokogiri (~> 1.5.2)
+      rspec (~> 2.1.0)
+
+GIT
   remote: git://github.com/bperucchi/pagamento_digital.git
   revision: 4cd251b0bdcb237b383fe656c77aa2835edd3848
   specs:
@@ -12,19 +22,16 @@ GIT
       httparty (>= 0.7.8)
 
 GIT
-  remote: git://github.com/wicz/plesk-ruby.git
-  revision: 837029b876726c95ceb9d5392c54491bd8f651f0
+  remote: git://github.com/bperucchi/ruby-plesk.git
+  revision: b55988c3d55871f30fbdfa704249878e690fef46
   specs:
-    plesk-ruby (0.0.1)
+    ruby-plesk (0.0.1)
 
 PATH
-  remote: ../../moip-ruby
+  remote: ../imentore-admin
   specs:
-    moip-ruby (0.1.2)
-      activesupport (>= 3.2.3)
-      httparty (~> 0.8.3)
-      nokogiri (~> 1.5.2)
-      rspec (~> 2.1.0)
+    imentore-admin (0.0.1)
+      rails (~> 3.2.3)
 
 PATH
   remote: ../imentore-auth
@@ -266,6 +273,7 @@ DEPENDENCIES
   devise-encryptable
   execjs
   i18n_alchemy
+  imentore-admin!
   imentore-auth!
   imentore-cms!
   imentore-core!
@@ -275,16 +283,16 @@ DEPENDENCIES
   jquery-rails (= 2.0.2)
   liquid (= 2.3.0)
   mini_magick (= 3.4)
-  moip-ruby!
+  moip-ruby (= 0.1.2)!
   mysql2
   pag_seguro (= 0.1.16)!
   pagamento_digital!
   personhood!
-  plesk-ruby!
   pry (= 0.9.8.2)
   pry-nav (= 0.1.0)
   pry-stack_explorer (= 0.4.1)
   rails (= 3.2.3)
+  ruby-plesk!
   sass-rails (~> 3.2.5)
   simple_form (= 2.0.1)
   slim (= 1.2.1)

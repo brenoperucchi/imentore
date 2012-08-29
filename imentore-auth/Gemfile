@@ -17,7 +17,7 @@ gem 'imentore-core', path: '../imentore-core'
 gem 'imentore-ecommerce', path: '../imentore-ecommerce'
 gem 'imentore-dashboard', path: '../imentore-dashboard'
 gem 'imentore-cms',  path: '../imentore-cms'
-gem "plesk-ruby",         git:  "git://github.com/wicz/plesk-ruby.git"
+gem "ruby-plesk",         git:  "git://github.com/bperucchi/ruby-plesk.git"
 
 group :test, :development do
   gem 'guard-rspec', "0.6.0"
