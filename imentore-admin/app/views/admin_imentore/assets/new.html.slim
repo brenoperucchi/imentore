@@ -1,0 +1,24 @@
+= form_for Imentore::Asset.new, url: admin_imentore_theme_assets_path(@theme), html: { multipart: true } do |f|
+  .row.fileupload-buttonbar
+    .span7
+      span.btn.btn-success.fileinput-button
+        i.icon-plus.icon-white
+        span= t(:send_files)
+        / = file_field_tag "asset[file]", multiple: true
+        / = f.file_field :file, multiple: true
+        = file_field_tag "asset[file]", multiple: true
+
+      button.btn.btn-primary.start(type="submit")
+        i.icon-upload.icon-white
+        span= t(:start_upload)
+
+    .span5
+      .progress.progress-success.progress-striped.active.fade
+        .bar(style="width:0%;")
+
+  .fileupload-loading
+
+  table.table.table-striped
+    tbody.files(data-toggle="modal-gallery" data-target="#modal-gallery")
+
+= render "jquery-file-upload-admin-imentore.html"

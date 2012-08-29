@@ -1,0 +1,8 @@
+p = @project.name
+
+
+p = 'Proposes'
+ul
+  - @project.proposes.each do |propose|
+    li= propose.description
+    li= propose.value

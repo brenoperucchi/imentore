@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+  title ImentoreBase
+  = stylesheet_link_tag    "application"
+  = javascript_include_tag "application"
+  = csrf_meta_tags
+  = yield :header
+
+body
+  .content
+    p core/views/layouts/deal
+
+    = link_to(:logout, destroy_deal_admin_session_path, method: "delete") if dealer_signed_in?
+
+    = flash[:success]
+
+    = debug flash
+
+    = yield
+
+  .footer
+    = yield :footer

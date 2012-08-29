@@ -1,0 +1,20 @@
+p Listing Talents
+ul
+  - @talents.each do |talent|
+    li= talent.name
+
+= link_to("Create Talent", new_deal_dealer_path)
+
+
+p listing projects
+
+ul
+  - @projects.each do |project|
+    li= project.name
+    li= link_to("Made propose", new_deal_project_propose_path(project))
+
+= link_to("Create Project", new_deal_project_path)
+    / - @theme.templates.each do |template|
+    /   li
+    /     = link_to(template.path, edit_admin_theme_template_path(@theme, template))
+    /     = button_to("Destroy", admin_theme_template_path(@theme, template), method: :delete)

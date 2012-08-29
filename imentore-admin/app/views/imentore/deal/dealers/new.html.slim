@@ -1,0 +1,14 @@
+p= 'Create User'
+= simple_form_for(@dealer, url: deal_dealer_path) do |f|
+  = f.input :email
+  = f.input :password
+  = f.input :password_confirmation
+  br
+  p= 'Create Talent'
+  = f.simple_fields_for :talents do |talent|
+    = talent.input :name
+    = talent.input :kind
+    = talent.input :experience
+    = talent.input :resume
+    = talent.input :description
+  = f.button :submit
