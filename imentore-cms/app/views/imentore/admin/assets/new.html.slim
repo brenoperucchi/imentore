@@ -1,4 +1,4 @@
-= form_for([:admin, @theme, @asset], html: { multipart: true }) do |f|
+= form_for Imentore::Asset.new, url: admin_theme_assets_path(@theme), html: { multipart: true } do |f|
   .row.fileupload-buttonbar
     .span7
       span.btn.btn-success.fileinput-button

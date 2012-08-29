@@ -25,8 +25,9 @@ table.table
             '
             = t(:edit)
           '
-          = link_to(admin_theme_path(theme), method: :delete, :class=>"btn btn-danger") do
-            i.icon-white.icon-trash
-            '
-            = t(:remove)
+          - if theme.admin_imentore_theme_id.nil?
+            = link_to(admin_theme_path(theme), method: :delete, :class=>"btn btn-danger") do
+              i.icon-white.icon-trash
+              '
+              = t(:remove)
 
