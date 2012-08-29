@@ -2,6 +2,10 @@ module Imentore
   class ProductDrop < Liquid::Drop
     include Imentore::Core::Engine.routes.url_helpers
 
+    def before_method(method)
+      self.respond_to?(method) ? send(method) : @product.send(method)
+    end
+
     def initialize(product)
       @product = product
     end

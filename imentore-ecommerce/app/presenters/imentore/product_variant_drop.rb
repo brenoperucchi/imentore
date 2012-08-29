@@ -2,23 +2,17 @@ module Imentore
   class ProductVariantDrop < Liquid::Drop
     include Imentore::Core::Engine.routes.url_helpers
 
-    # def before_method(method)
-    #   binding.pry
-    #  end
+    def before_method(method)
+      self.respond_to?(method) ? send(method) : @variant.send(method)
+    end
 
     def initialize(variant)
-      # binding.pry
       @variant = variant
     end
 
     def id
       @variant.id
     end
-
-    # def url
-    #   product_path(@product)
-    #   # binding.pry
-    # end
 
     def price
       @variant.price
