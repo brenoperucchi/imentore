@@ -1,10 +1,10 @@
 module Imentore
   class CheckoutsController < BaseController
     include PagamentoDigital::Helper
-    before_filter :authenticate_to_buy!, only: [:new, :confirm, :complete]
+    before_filter :authenticate_to_buy!, only: [:new, :confirm]
     before_filter :check_cart, only:[:new]
-    skip_before_filter :verify_authenticity_token, only: [:return_pd, :sync_pd, :sync_pg, :sync_mp]
-    skip_before_filter :check_store, only: [:return_pd, :sync_pd, :return_pg, :sync_pg, :sync_mp]
+    skip_before_filter :verify_authenticity_token, :check_store, only: [:return_mp, :return_pd, :sync_pd, :return_pg, :sync_pg,
+                                                                         :sync_mp, :complete]
 
     def check_cart
       if current_cart.total_amount == 0 or current_cart.items.size == 0
@@ -98,12 +98,16 @@ module Imentore
     end
 
     def complete
+      @current_order = Imentore::Order.find_by_id(params[:order_id])
+      @items = @current_order.items.map { |item| CartItemDrop.new(item) }      
+      @order = OrderDrop.new(@current_order)
     end
 
 
     def sync_mp
       current_store = Imentore::Store.find(params[:store_id])
       invoice = current_store.invoices.find_by_id(params[:id_transacao])
+      render nothing: true and return if invoice.nil?
       case params['status_pagamento']
       when "4", "1"
         invoice.confirm
@@ -117,7 +121,8 @@ module Imentore
       pagseguro = Imentore::Store.first.payment_methods.find_by_handle('pag_seguro')
       provider_class = "Imentore::PaymentMethod::PagSeguro".constantize.new(pagseguro.options)
       response = provider_class.notification_rpc(notification_code)
-      invoice = current_store.invoices.find(response['transaction']['reference'])
+      invoice = current_store.invoices.find_by_id(response['transaction']['reference'])
+      render nothing: true and return if invoice.nil? or not invoice.payment_method.pag_seguro?
       case response['transaction']['status']
       when '3','4'
         invoice.confirm
@@ -127,27 +132,32 @@ module Imentore
     end
 
     def sync_pd
-      invoice = Imentore::Invoice.find(params[:invoice_id])
+      invoice = Imentore::Invoice.find_by_id(params[:invoice_id])
+      render nothing: true and return if invoice.nil? or not invoice.payment_method.pagamento_digital?
       notificacao = PagamentoDigital::Notificacao.new(params, invoice.payment_method.options['token'])
       invoice.confirm if notificacao.status == :concluida
+      render nothing: true
     end
 
     def return_mp
       render nothing: true      
     end
-    
+
     def return_pg
       invoice = Imentore::Invoice.find(params[:invoice_id])
+      @current_order = invoice.order
       current_store = invoice.order.store
-      redirect_to complete_checkout_url(host: current_store.url_site)
+      redirect_to complete_checkout_url(host: current_store.url_site, order_id: @current_order.id)
     end
 
     def return_pd
       invoice = Imentore::Invoice.find(params[:invoice_id])
+      @current_order = invoice.order
       current_store = invoice.order.store
       notificacao = PagamentoDigital::Notificacao.new(params, invoice.payment_method.options['token'])
       invoice.confirm if notificacao.status == :concluida
-      redirect_to complete_checkout_url(host: current_store.url_site)
+      # redirect_to complete_checkout_path
+      redirect_to complete_checkout_url(host: current_store.url_site, order_id: @current_order.id)
     end
 
     protected
