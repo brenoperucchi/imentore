@@ -1,7 +1,13 @@
+require 'enumerate_it'
 module Imentore
+
   class PaymentMethod < ActiveRecord::Base
+    include EnumerateIt
+
     belongs_to :store
     serialize :options, Hash
+
+    associate_values :handle, associate = [:pagamento_digital, :moip, :cielo, :moip, :pag_seguro]
 
     scope :active, where(active: true)
 

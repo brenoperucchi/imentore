@@ -6,5 +6,10 @@ module Imentore
 
     accepts_nested_attributes_for :options
     validates :price, :quantity, presence: true
+
+    def options_name
+      options.collect{|option| option.option_type.name + ":" + option.value}.join(' / ')
+    end
+
   end
 end

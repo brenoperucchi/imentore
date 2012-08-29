@@ -152,24 +152,42 @@ module Imentore
         e.save
       end
 
+      AdminImentore::Theme.all.each do |admin_theme|
+        theme = Imentore::Theme.create(name: admin_theme.name, admin_imentore_theme_id: admin_theme.id, store: self, system: true)
+        admin_theme.templates.each do |ad_t|
+          template = theme.templates.new
+          template.path = ad_t.path
+          template.layout = ad_t.layout
+          template.kind = ad_t.kind
+          template.body = ad_t.body
+          template.body_default = ad_t.body
+          template.admin_imentore_template_id = ad_t.id
+          template.save
+        end
+        self.themes.first.update_attribute(:active, true)
+        admin_theme.assets.each do |admin_asset|
+          asset = theme.assets.create(file: admin_asset.file)
+        end
 
-      theme = self.themes.new(name: 'default', active: true, system:true)
-      layout = Imentore::Store.first.themes.first.templates.layouts.first.dup
-      layout.theme = theme
-      layout.save
-      Imentore::Store.first.themes.first.templates.templates.each do |template|
-        temp = template.dup
-        temp.theme = theme
-        temp.layout = 'layouts/default'
-        temp.save
       end
-      self.themes.first.templates.first.update_attribute(:path, 'layouts/default')
-      Imentore::Store.first.themes.first.assets.each do |asset|
-        n_asset = Imentore::Asset.new
-        n_asset.file = asset.file
-        n_asset.theme = theme
-        n_asset.save
-      end
+
+      # theme = self.themes.new(name: 'default', active: true, system:true)
+      # layout = Imentore::Store.first.themes.first.templates.layouts.first.dup
+      # layout.theme = theme
+      # layout.save
+      # Imentore::Store.first.themes.first.templates.templates.each do |template|
+      #   temp = template.dup
+      #   temp.theme = theme
+      #   temp.layout = 'layouts/default'
+      #   temp.save
+      # end
+      # self.themes.first.templates.first.update_attribute(:path, 'layouts/default')
+      # Imentore::Store.first.themes.first.assets.each do |asset|
+      #   n_asset = Imentore::Asset.new
+      #   n_asset.file = asset.file
+      #   n_asset.theme = theme
+      #   n_asset.save
+      # end
     end
 
     # http://www.ietf.org/rfc/rfc1035.txt
