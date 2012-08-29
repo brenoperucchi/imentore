@@ -1,7 +1,7 @@
 module AdminImentore
   class ThemesController < AdminImentore::BaseController
-    # inherit_resources
-    # defaults :resource_class => AdminImentore::Theme, :collection_name => 'themes', :instance_name => 'theme'
+    inherit_resources
+    defaults :resource_class => AdminImentore::Theme, :collection_name => 'themes', :instance_name => 'theme'
     def index
       @themes = AdminImentore::Theme.all
     end

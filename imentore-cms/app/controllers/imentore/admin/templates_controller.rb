@@ -3,7 +3,7 @@ module Imentore
     class TemplatesController < Admin::BaseController
       inherit_resources
       belongs_to :theme, parent_class: Imentore::Theme
-      # before_filter :uniqueness_default, only:[:update, :create]
+      before_filter :uniqueness_default, only:[:update, :create]
 
       def new
         @kind = params[:kind]
@@ -28,19 +28,20 @@ module Imentore
       end
 
       def view_default
-        @template = parent.templates.find(params[:id])
+        template = parent.templates.find(params[:id])
+        @template = template.admin_template
         @kind = @template.kind
       end
 
 
       protected
 
-      # def uniqueness_default
-      #   @theme = current_store.themes.find(params[:theme_id])
-      #   if params[:template][:default] == '1'
-      #     @theme.templates.find_by_default_and_kind(true,'layout').update_attribute(:default, false) if @theme.templates.find_by_default_and_kind(true,'layout')
-      #   end
-      # end
+      def uniqueness_default
+        @theme = current_store.themes.find(params[:theme_id])
+        if params[:template][:default] == '1'
+          @theme.templates.find_by_default_and_kind(true,'layout').update_attribute(:default, false) if @theme.templates.find_by_default_and_kind(true,'layout')
+        end
+      end
 
     end
   end

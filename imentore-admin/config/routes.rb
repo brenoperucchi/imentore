@@ -1,7 +1,9 @@
 AdminImentore::Admin::Engine.routes.draw do
     namespace :admin_imentore do
       root to: "dashboard#index", as: 'dashboard'
-
+      resources :send_emails do
+        get 'install_stores', 'update_stores', :on => :member
+      end
       resources :themes do
         get 'install_stores', :on => :member
 

@@ -173,8 +173,10 @@ body
             ul.nav.nav-list.configuration.hide
               li.nav-header
                 = t(:configuration)
-              li.action#general_settings
+              li.action#themes
                 = link_to(t(:theme), admin_imentore_themes_path)
+              li.action#send_emails
+                = link_to(t(:send_emails), admin_imentore_send_emails_path)
 
             ul.nav.nav-list.management.hide
       .span10

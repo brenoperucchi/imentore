@@ -5,8 +5,8 @@ legend #{@template.kind.capitalize} #{@template.path}
 
 = simple_form_for(@template, url: admin_theme_template_path(@theme, @template), html: {class: 'form-horizontal'}) do |f|
   = f.error_notification
-  / - if @template.kind == 'layout'
-  /   = f.input :default 
+  - if @template.kind == 'layout'
+    = f.input :default 
   = f.input :path, label: t("path_#{@kind.downcase}", scope: [:activerecord, :attributes, 'imentore/template'])
   - if @template.kind == 'template'
     = f.input :layout, as: 'radio', collection: @theme.templates.layouts.collect{|x| x.path}

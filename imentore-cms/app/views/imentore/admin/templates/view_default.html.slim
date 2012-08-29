@@ -7,5 +7,5 @@ legend #{@template.kind.capitalize} #{@template.path}
   = f.input :path, label: t("path_#{@kind.downcase}", scope: [:activerecord, :attributes, 'imentore/template'])
   - if @template.kind == 'template'
     = f.input :layout, as: 'radio', collection: @theme.templates.layouts.collect{|x| x.path}
-  = f.input :body_default, :input_html=> {:style=> 'width:95%; height:300px;'}
+  = f.input :body, :input_html=> {:style=> 'width:95%; height:300px;'}
   = link_to_function "Back", "history.back()"

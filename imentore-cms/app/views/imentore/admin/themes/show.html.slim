@@ -29,16 +29,16 @@ ul.nav.nav-tabs#myTab
     table.table
       thead
         tr
-          / th Default
+          th= t(:default)
           th= t(:path)
           th= t(:default_updated_at)
           th= t(:actions)
       tbody
         - @theme.templates.layouts.each do |template|
           tr
-            / td= button_status(template.default, edit_admin_theme_template_path(@theme, template), 'true', 'false')
+            td= button_status(template.default, edit_admin_theme_template_path(@theme, template))
             td= link_to(template.path, edit_admin_theme_template_path(@theme, template)) + " "
-            td= l(time_zone(template.body_default_updated_at)) unless template.body_default_updated_at.nil?
+            td= l(time_zone(template.admin_template.updated_at)) unless template.admin_template.nil?
             td
               = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn') do
                 i.icon-black.icon-edit
@@ -75,7 +75,7 @@ ul.nav.nav-tabs#myTab
           tr
             td= link_to(template.path, edit_admin_theme_template_path(@theme, template)) + " "
             td= template.layout
-            td= l(time_zone(template.body_default_updated_at)) unless template.body_default_updated_at.nil?
+            td= l(time_zone(template.admin_template.updated_at)) unless template.admin_template.nil?
             td
               = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn') do
                 i.icon-black.icon-edit

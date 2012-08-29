@@ -1,5 +1,8 @@
 pt-BR:
 
+  # user_for
+  'computer, clothing': 'Computadores, Roupas'
+
   variants: Variações
   options: Opções
   option: Opção
@@ -33,6 +36,8 @@ pt-BR:
   category_update: Atualizar Categoria
   product_updated: Produto Atualizado
 
+  view_default: Mostrar o Padrão
+  default_updated_at: Atualização do sistema
   status: Condição
   code: Código
   limit_customer: Limite/Cliente
@@ -444,14 +449,17 @@ pt-BR:
       imentore/theme:
         name: Nome
         active: Ativo
+        default: Padrão
       imentore/user:
         password: Senha
         password_confirmation: Confirmação Senha
         remember_me: Lembrar senha
       imentore/template:
+        default: Padrão
         path_layout: Endereço do layout
         path_template: Endereço da página
         body: Corpo do html
+        default_updated_at: Atualização pelo sistema
       imentore/payment_method:
         active: Ativo
         name: Nome

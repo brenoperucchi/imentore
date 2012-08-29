@@ -11,13 +11,17 @@ p= link_to(new_admin_theme_path, :class=>'btn btn-primary') do
 table.table
   thead
     tr
-      th.span1= t(:active)
+      th= t(:active)
       th= t(:name)
       th= t(:actions)
   tbody
     - @themes.each do |theme|
       tr
-        td= button_status(theme.active, admin_theme_path(theme))
+        td
+          = button_status(theme.active, admin_theme_path(theme))
+          - unless theme.admin_theme.nil?
+            br
+              = t(theme.admin_theme.used_for)
         td= theme.name
         td
           = link_to(admin_theme_path(theme), class: 'btn') do
