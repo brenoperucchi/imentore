@@ -14,6 +14,10 @@ module Imentore
       @product.name
     end
 
+    def brand_name
+      @product.product_brand.name
+    end
+
     def id
       @product.id
     end
@@ -35,7 +39,7 @@ module Imentore
     end
 
     def variants
-      @product.variants
+      @product.variants.collect {|variant| ObjectDrop.new(variant)}
     end
 
     def image
@@ -44,6 +48,11 @@ module Imentore
 
     def variant_id
       @product.variants.first.id
+    end
+
+    def stock_available?
+      attr = @product.stock_available? ? "available" : "unavailable"
+      I18n.t(attr)
     end
   end
 end

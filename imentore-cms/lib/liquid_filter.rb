@@ -23,7 +23,8 @@ module LiquidFilter
   end
 
   def product_image_url(product, size)
-    product.variants.first.images.first.picture.url(size.to_sym).to_s
+    @product = Imentore::Product.find_by_id(product.id)
+    @product.variants.first.images.first.picture.url(size.to_sym).to_s
   end
 
   def image_url(size,obj)

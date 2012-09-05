@@ -13,6 +13,7 @@ module Imentore
     has_many :feedbacks, as: :feedbackable
 
     scope :active, where(active: true)
+    scope :product_search, lambda { |search| { :conditions => ["name like ?", "%#{search}%"] } }
 
     validates :name, :handle, :description, :store, presence: true
     validates :handle, uniqueness: { scope: "id" }
@@ -41,6 +42,13 @@ module Imentore
         imgs << variant.images.map {|image| image}
       end
       imgs.reject{|x| x.blank?}.flatten
+    end
+
+    def stock_available?
+      variants.each do |v| 
+        return true if v.quantity > 0 
+      end
+      return false
     end
 
   end

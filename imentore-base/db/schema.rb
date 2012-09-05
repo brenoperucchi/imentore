@@ -11,7 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120805150916) do
+ActiveRecord::Schema.define(:version => 20120831034804) do
+
+  create_table "admin_imentore_assets", :force => true do |t|
+    t.string   "file"
+    t.integer  "theme_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "admin_imentore_send_emails", :force => true do |t|
+    t.boolean  "active"
+    t.string   "name"
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "admin_imentore_templates", :force => true do |t|
+    t.string   "layout"
+    t.string   "path"
+    t.string   "kind"
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "theme_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "admin_imentore_themes", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.boolean  "active"
+    t.string   "used_for"
+  end
 
   create_table "imentore_addresses", :force => true do |t|
     t.string  "name"
@@ -41,9 +78,10 @@ ActiveRecord::Schema.define(:version => 20120805150916) do
     t.string   "name"
     t.string   "handle"
     t.integer  "store_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "ancestry"
+    t.integer  "ancestry_depth", :default => 0
   end
 
   add_index "imentore_categories", ["ancestry"], :name => "index_imentore_categories_on_ancestry"
@@ -85,9 +123,18 @@ ActiveRecord::Schema.define(:version => 20120805150916) do
     t.string   "person_type"
     t.integer  "store_id"
     t.string   "department"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "active",      :default => true
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "imentore_default_templates", :force => true do |t|
+    t.string   "layout_name"
+    t.string   "body"
+    t.string   "path"
+    t.integer  "user_id"
+    t.integer  "template_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "imentore_deliveries", :force => true do |t|
@@ -114,6 +161,7 @@ ActiveRecord::Schema.define(:version => 20120805150916) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "hosting",    :default => false
     t.text     "emails"
+    t.integer  "plesk_id"
   end
 
   create_table "imentore_employees", :force => true do |t|
@@ -296,26 +344,27 @@ ActiveRecord::Schema.define(:version => 20120805150916) do
   create_table "imentore_templates", :force => true do |t|
     t.string   "path"
     t.text     "body"
-    t.boolean  "partial",      :default => false
+    t.boolean  "partial",                    :default => false
     t.string   "layout"
-    t.string   "format",       :default => "text/html"
-    t.string   "locale",       :default => "en"
-    t.string   "handler",      :default => "liquid"
+    t.string   "format",                     :default => "text/html"
+    t.string   "locale",                     :default => "en"
+    t.string   "handler",                    :default => "liquid"
     t.integer  "theme_id"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.text     "head"
     t.string   "kind"
-    t.boolean  "default",      :default => false
-    t.text     "body_default"
+    t.boolean  "default"
+    t.integer  "admin_imentore_template_id"
   end
 
   create_table "imentore_themes", :force => true do |t|
     t.string  "name"
     t.integer "store_id"
-    t.boolean "default",  :default => false
-    t.boolean "active",   :default => false
-    t.boolean "system",   :default => false
+    t.boolean "default",                 :default => false
+    t.boolean "active",                  :default => false
+    t.boolean "system",                  :default => false
+    t.integer "admin_imentore_theme_id"
   end
 
   create_table "imentore_users", :force => true do |t|

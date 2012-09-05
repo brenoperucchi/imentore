@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails",               "~> 3.2.3"
   s.add_dependency "carrierwave",         "~> 0.6.1"
   s.add_dependency "mini_magick",         "~> 3.4"
-  s.add_dependency "liquid",              "~> 2.3.0"
+  s.add_dependency "liquid",              "~> 2.4.1"
   s.add_dependency "inherited_resources", "~> 1.3.0"
   s.add_dependency "devise",              "~> 2.1.2"
   s.add_dependency "simple_form",         "~> 2.0.1"

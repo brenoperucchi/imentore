@@ -40,6 +40,7 @@ Imentore::Core::Engine.routes.draw do
     end
 
     match "product/:handle",            to: "products#handle",      as: 'product_handle'
+    match "product_search/:name",       to: "products#search",      as: 'product_search'
     match "pages/:page",                to: "pages#show",           as: "pages"
     match "categories/*categories",     to: "categories#index",     as: "categories"
     match "coupon",                     to: "coupons#add_coupon",   as: "add_coupon"

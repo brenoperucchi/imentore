@@ -10,7 +10,7 @@ gem "devise", "2.1.2"
 gem "simple_form", "2.0.1"
 gem 'slim', '1.2.1'
 gem "country_select", "0.0.1"
-gem "liquid", "2.3.0"
+gem "liquid", "2.4.1"
 gem "correios-frete", "1.6.1"
 
 gem "imentore-core",      path: "../imentore-core"

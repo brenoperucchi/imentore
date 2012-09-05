@@ -18,5 +18,11 @@ module Imentore
       @images = product.all_images.map { |image| ImageDrop.new(image)}
     end
 
+    def search
+      @product_search = Imentore::ProductSearchDrop.new(params[:name]) if params[:name].present?
+      @products = current_store.products.product_search(params[:name]).map {|p| Imentore::ProductDrop.new(p)}
+      @products ||= []
+    end
+
   end
 end

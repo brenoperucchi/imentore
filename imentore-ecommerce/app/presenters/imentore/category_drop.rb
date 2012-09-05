@@ -2,6 +2,10 @@ module Imentore
   class CategoryDrop < Liquid::Drop
     include Imentore::Core::Engine.routes.url_helpers
 
+    def before_method(method)
+      self.respond_to?(method) ? send(method) : @object.send(method)
+    end
+
     def initialize(category)
       @category = category
     end
@@ -18,8 +22,24 @@ module Imentore
       category_path(@category)
     end
 
+    def products_count
+      @category.products.size
+    end
+
+    def products
+      @category.products
+    end
+
+    def childrens(param)
+      binding.pry
+    end
+
     def children
       children = @category.children.collect{|category| CategoryDrop.new(category)}
+    end
+
+    def ancestors
+      @ancestors = @category.ancestors.collect{|ancestor| CategoryDrop.new(ancestor)}
     end
 
     protected

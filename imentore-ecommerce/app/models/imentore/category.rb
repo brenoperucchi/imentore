@@ -1,6 +1,6 @@
 module Imentore
   class Category < ActiveRecord::Base
-    has_ancestry
+    has_ancestry :cache_depth =>true
 
     validates :handle, uniqueness: { scope: "store_id" }
     validates :name, presence: true
