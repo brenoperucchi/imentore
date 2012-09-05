@@ -15,7 +15,7 @@ module AdminImentore
     end
 
     def create
-      @theme = AdminImentore::Theme.new(params[:theme])
+      @theme = AdminImentore::Theme.new(params[:admin_imentore_theme])
       if @theme.save
         redirect_to admin_imentore_themes_path
       else 

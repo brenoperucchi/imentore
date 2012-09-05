@@ -8,7 +8,6 @@ module Imentore
 
       def new
         @user_deal = Imentore::Dealer.new
-        # binding.pry
         new!
       end
 

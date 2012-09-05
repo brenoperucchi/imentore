@@ -25,7 +25,6 @@ module Imentore
     end
 
     # def self.find_for_database_authentication(warden_conditions)
-    #   require 'pry'; binding.pry
     #   conditions = warden_conditions.dup
     #   store_id = conditions.delete(:store_id)
     #   where(conditions).where(["imentore_users.store_id = :value", { :value => store_id.strip.downcase }]).first

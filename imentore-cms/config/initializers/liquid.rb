@@ -3,7 +3,6 @@ require 'liquid_filter'
 
 # Liquid::Template.class_eval do
 #   def register_filter(mod)
-#     # binding.pry
 #     Strainer.global_filter(mod)
 #   end
 # end

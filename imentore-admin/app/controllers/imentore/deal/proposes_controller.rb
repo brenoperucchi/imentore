@@ -8,7 +8,6 @@ module Imentore
 
 
       def create
-        # binding.pry
         create! { deal_project_path(parent) }
       end
 

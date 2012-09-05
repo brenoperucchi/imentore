@@ -14,7 +14,6 @@ module Imentore
       #     if request.post?
       #       respond_to do |wants|
       #         wants.json do
-      #         # binding.pry
       #         session[params[:key]] = params[:value].to_s
       #         render :status => 200, :json => {'success' => 'ok'}
       #         end

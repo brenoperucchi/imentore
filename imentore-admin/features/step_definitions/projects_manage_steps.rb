@@ -9,7 +9,6 @@ end
 Given /^I am create a project$/ do
   visit new_deal_project_path
   # click_link "Create Project"
-  # binding.pry
   fill_in("project_name", with: "Name of Project")
   fill_in("project_description", with: "description Project")
   fill_in("project_budget", with: "1000")
