@@ -30,21 +30,34 @@ module AdminImentore
       end
     end
 
-    def install_store(store)
-      if store.themes.find_by_name(self.name).nil?
-        theme = Imentore::Theme.create(name: self.name, admin_imentore_theme_id: self.id, store: store, system: true)
-        self.templates.each do |ad_t|
-          template = theme.templates.new
-          template.path = ad_t.path
-          template.layout = ad_t.layout
-          template.kind = ad_t.kind
-          template.default = true if template.kind == "layout"
-          template.body = ad_t.body
-          template.admin_imentore_template_id = ad_t.id
-          template.save
+    def update_stores
+      self.templates.each do |admin_template|
+        admin_template.stores_templates.each do |store_template|
+          store_template.update_attribute(:body, admin_template.body)
         end
-        self.assets.each do |admin_asset|
-          asset = theme.assets.create(file: admin_asset.file)
+      end
+    end
+
+    def install_store(store)
+      begin
+        if store.themes.find_by_name(self.name).nil?
+          theme = Imentore::Theme.create(name: self.name, admin_imentore_theme_id: self.id, store: store, system: true)
+          self.templates.each do |ad_t|
+            template = theme.templates.new
+            template.path = ad_t.path
+            template.layout = ad_t.layout
+            template.kind = ad_t.kind
+            template.default = true if template.kind == "layout"
+            template.body = ad_t.body
+            template.admin_imentore_template_id = ad_t.id
+            template.save
+          end
+          self.assets.each do |admin_asset|
+            asset = theme.assets.create(file: admin_asset.file)
+          end
+        return
+          Rails.logger.debug { "store =>#{store.id}" }
+          Rails.logger.debug { "theme =>#{self.id}" }
         end
       end
     end

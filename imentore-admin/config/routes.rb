@@ -6,6 +6,7 @@ AdminImentore::Admin::Engine.routes.draw do
       end
       resources :themes do
         get 'install_stores', :on => :member
+        get 'update_stores', :on => :member
 
         resources :assets
         resources :templates do
