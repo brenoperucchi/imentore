@@ -1,13 +1,33 @@
 module Imentore
   class User < ActiveRecord::Base
 
+    attr_accessor :password_required
+
     devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :authentication_keys => [:email, :store_id]
+
+    alias :devise_valid_password? :valid_password?
+
+    def valid_password?(password)
+      begin
+        devise_valid_password?(password)
+      rescue BCrypt::Errors::InvalidHash
+        salt = password_salt
+        digest = nil
+        10.times { digest = ::Digest::SHA1.hexdigest('--' << [salt, digest, password, nil].flatten.join('--') << '--') }
+        digest
+        return false unless digest == encrypted_password
+        logger.info "User #{email} is using the old password hashing method, updating attribute."
+        self.password = password
+        self.save
+        true
+      end
+    end
 
     validates_uniqueness_of    :email,     :case_sensitive => false, :allow_blank => true, scope: [:email, :store_id], :if => :email_changed?
     validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?
-    validates_presence_of   :password, :on=>:create
-    validates_confirmation_of   :password, :on=>:create
-    validates_length_of :password, :within => Devise.password_length, :allow_blank => true
+    validates_presence_of   :password, :on=>:create, :if => :password_required
+    validates_confirmation_of   :password, :on=>:create, :if => :password_required
+    validates_length_of :password, :within => Devise.password_length, :allow_blank => true, :if => :password_required
 
     belongs_to :store
     belongs_to :userable, polymorphic: true
@@ -15,13 +35,7 @@ module Imentore
     def self.find_first_by_auth_conditions(warden_conditions)   
       conditions = warden_conditions.dup
       store_id = conditions.delete(:store_id)
-        # where(conditions).where(["lower(store_id) = :value OR lower(store_id) = :value", { :value => store_id.downcase }]).first
-        # where(conditions).joins('JOIN imentore_employees ON imentore_users.userable_id = imentore_employees.id').first
-        # where(conditions).joins('JOIN imentore_customers ON imentore_users.userable_id = imentore_customers.id').where('imentore_customers.store_id = :value', {:value => store_id }).first
         where(conditions).where('imentore_users.store_id = :value', {:value => store_id }).first
-      # else
-        # where(conditions).first
-      # end
     end
 
     # def self.find_for_database_authentication(warden_conditions)
@@ -84,7 +98,7 @@ module Imentore
     #   false
     # end
     #
-    #   def password_required?
+    #   def password_required
     #     # Rails.logger.debug { "aqui" }
     #     # Rails.logger.debug { "authen=>#{self.authenticatable}" }
     #     # Rails.logger.debug { "authen=>#{authenticatable}" }

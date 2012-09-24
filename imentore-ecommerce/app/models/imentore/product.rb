@@ -3,19 +3,19 @@ module Imentore
 
     attr_accessor :product_brand_name
 
-    has_many    :options,   class_name: "::Imentore::OptionType"
-    has_many    :variants,  class_name: "::Imentore::ProductVariant"
+    has_many    :options,   class_name: "::Imentore::OptionType", dependent: :destroy
+    has_many    :variants,  class_name: "::Imentore::ProductVariant", dependent: :destroy
     belongs_to  :store
     belongs_to  :product_brand
 
-    has_many :categories_products
+    has_many :categories_products, dependent: :destroy
     has_many :categories, :through => :categories_products, :source => :category
-    has_many :feedbacks, as: :feedbackable
+    has_many :feedbacks, as: :feedbackable, dependent: :destroy
 
     scope :active, where(active: true)
     scope :product_search, lambda { |search| { :conditions => ["name like ?", "%#{search}%"] } }
 
-    validates :name, :handle, :description, :store, presence: true
+    validates :name, :handle, :store, presence: true
     validates :handle, uniqueness: { scope: "id" }
     validates :handle, format: { with: /[a-z]+[-a-z]+[a-z]+/ }
 
