@@ -1,6 +1,6 @@
 #!/bin/env ruby
 # encoding: utf-8
-
+## http://jalada.co.uk/2011/12/07/solving-latin1-and-utf8-errors-for-good-in-ruby.html
 module AdminImentore
   class Store
 
@@ -17,7 +17,7 @@ module AdminImentore
     end
 
     def self.install_stores
-        Old::Store.active[0..0].each do |store|
+        Old::Store.active[1..-1].each do |store|
           new_store = Imentore::Store.new
           new_store.name = fix_utf8(store.name)
           new_store.brand = fix_utf8(store.brand)
@@ -32,7 +32,11 @@ module AdminImentore
           new_store.actived_at = store.actived_at
           new_store.config = Imentore::Settings.new
           unless new_store.save
-            binding.pry
+            puts "----------------------"
+            puts store.id
+            puts store.errors
+            puts "----------------------"
+            return 
           end
           new_store.create_defaults
 
