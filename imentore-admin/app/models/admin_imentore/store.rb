@@ -164,6 +164,16 @@ module AdminImentore
             unless new_product.save
               binding.pry
             end
+
+            product.categories.each do |category|
+              c = new_store.categories.find_by_name(fix_utf8(category.title))
+              unless c.nil?
+                c = c.categories_products.new
+                c.product_id = new_product.id
+                c.save
+              end
+            end
+
             product.variants.each do |variant|
               default_option = new_product.options.create(name: variant.name, handle: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
               new_variant = new_product.variants.new

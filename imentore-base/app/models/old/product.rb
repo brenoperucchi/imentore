@@ -9,6 +9,9 @@ module Old
 
     scope :not_deleted, where(deleted_at: nil)
 
+    has_many :categories_products
+    has_many :categories, :through => :categories_products, :source => :category
+
     has_many :variants,
       :class_name => Old::ProductVariant,
       :dependent => :destroy
