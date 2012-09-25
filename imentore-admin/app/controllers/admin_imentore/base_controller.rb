@@ -1,7 +1,9 @@
 module AdminImentore
   class BaseController < ::ApplicationController
     include AdminImentore::Admin::Engine.routes.url_helpers
+
     layout "admin_imentore"
+    skip_before_filter :check_store
     before_filter :authorize_admin
 
     def authorize_admin

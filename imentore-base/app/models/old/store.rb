@@ -4,8 +4,12 @@ module Old
     def self.table_name
       "stores"
     end
+    
+    has_many :categories, :dependent => :destroy
 
     has_many :pages
+
+    has_many :notices
 
     has_many :products, :dependent => :destroy
 
@@ -35,6 +39,6 @@ module Old
      :username => 'go2b',
      :password => '123123'
      )
-     
+
   end
 end

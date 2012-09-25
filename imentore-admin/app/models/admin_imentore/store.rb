@@ -16,12 +16,19 @@ module AdminImentore
           .force_encoding("utf-8")
     end
 
+    def self.category_create(new_category, category)
+      category.children.each do |children|
+        new_category = new_category.children.create(name: fix_utf8(children.title), handle: ActiveSupport::Inflector.transliterate(fix_utf8(children.title)).to_underscore)
+        category_create(new_category, children)
+      end
+    end
+
     def self.install_stores
-        Old::Store.active[1..-1].each do |store|
+        Old::Store.active[0..0].each do |store|
           new_store = Imentore::Store.new
-          new_store.name = fix_utf8(store.name)
-          new_store.brand = fix_utf8(store.brand)
-          new_store.brand ||= fix_utf8(store.name)
+          new_store.name = fix_utf8(store.name) 
+          new_store.brand = fix_utf8(store.brand) unless store.brand.blank?
+          new_store.brand ||= fix_utf8(store.name) 
           new_store.url = store.url
           new_store.irs_id = store.irs_id
           new_store.plan_id = store.plan_id
@@ -34,11 +41,40 @@ module AdminImentore
           unless new_store.save
             puts "----------------------"
             puts store.id
-            puts store.errors
+            puts store.errors.full_messages
+            binding.pry
             puts "----------------------"
             return 
           end
           new_store.create_defaults
+
+          store.pages.each do |page|
+            unless page.path == "home"
+              new_page = new_store.pages.new
+              new_page.name = page.path
+              new_page.handle = page.path
+              new_page.body = page.body
+              new_page.html = page.html
+              new_page.active = page.active
+              new_page.created_at = page.created_at
+              new_page.save
+            end
+          end
+
+          store.categories.each do |category|
+            new_category = new_store.categories.create(name: fix_utf8(category.title), handle: ActiveSupport::Inflector.transliterate(fix_utf8(category.title)).to_underscore)
+            category_create(new_category, category)
+          end
+
+          store.notices.each do |page|
+            new_page = new_store.notices.new
+            new_page.active = page.active
+            new_page.name = fix_utf8(page.title)
+            new_page.handle = ActiveSupport::Inflector.transliterate(fix_utf8(page.title)).to_underscore
+            new_page.description = fix_utf8(page.description)
+            new_page.created_at = page.created_at
+          end
+
 
           store.customers.each do |customer|
             unless customer.encrypted_password.nil?
@@ -60,7 +96,7 @@ module AdminImentore
                                        created_at: customer.created_at, store_id: new_store.id, password_required: false, 
                                        password_salt: customer.password_salt)
               unless user.save
-                binding.pry
+                new_customer.destroy
               end
             end
           end
@@ -79,7 +115,7 @@ module AdminImentore
               new_employee.active = employee.active
               new_employee.created_at = employee.created_at
               unless new_employee.save
-                binding.pry
+                new_employee.destroy
               end
               user = new_employee.build_user(email: employee.email, encrypted_password: employee.encrypted_password, 
                                        sign_in_count: employee.sign_in_count, current_sign_in_at: employee.current_sign_in_at,
@@ -87,7 +123,7 @@ module AdminImentore
                                        created_at: employee.created_at, store_id: new_store.id, password_required: false,
                                        password_salt: employee.password_salt)
               unless user.save
-                binding.pry
+                new_employee.destroy
               end
             end
           end
@@ -112,7 +148,7 @@ module AdminImentore
                                    created_at: employee.created_at, store_id: new_store.id, password_required: false,
                                    password_salt: employee.password_salt)
           unless user.save
-            binding.pry
+            new_employee.destroy
           end
 
 
@@ -122,7 +158,7 @@ module AdminImentore
             new_product.name = fix_utf8(product.name)
             new_product.description = fix_utf8(product.description)
             new_product.active = product.sellable
-            new_product.handle = ActiveSupport::Inflector.transliterate(product.name).to_underscore
+            new_product.handle = ActiveSupport::Inflector.transliterate(fix_utf8(product.name)).to_underscore
             new_product.store_id = new_store.id
             new_product.save
             unless new_product.save

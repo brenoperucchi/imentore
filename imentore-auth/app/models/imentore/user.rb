@@ -35,7 +35,11 @@ module Imentore
     def self.find_first_by_auth_conditions(warden_conditions)   
       conditions = warden_conditions.dup
       store_id = conditions.delete(:store_id)
+      if conditions[:email] == "admin@imentore.com.br"
+        where(conditions).first
+      else
         where(conditions).where('imentore_users.store_id = :value', {:value => store_id }).first
+      end
     end
 
     # def self.find_for_database_authentication(warden_conditions)
