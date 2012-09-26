@@ -24,7 +24,7 @@ module AdminImentore
     end
 
     def self.install_stores
-        Old::Store.active[0..0].each do |store|
+        Old::Store.active[1..-1].each do |store|
           new_store = Imentore::Store.new
           new_store.name = fix_utf8(store.name) 
           new_store.brand = fix_utf8(store.brand) unless store.brand.blank?
@@ -186,9 +186,13 @@ module AdminImentore
               @new_variant.options.create(option_type: default_option, value: "padrão")
             end
             product.images.each do |image|
-              new_image = @new_variant.images.new
-              new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
-              new_image.save
+              begin
+                new_image = @new_variant.images.new
+                new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
+                new_image.save
+              rescue 
+                next
+              end
             end
           end
         end
