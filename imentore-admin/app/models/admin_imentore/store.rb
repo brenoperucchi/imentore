@@ -16,15 +16,22 @@ module AdminImentore
           .force_encoding("utf-8")
     end
 
-    def self.category_create(new_category, category)
+    def self.category_create(new_category, category, store)
       category.children.each do |children|
-        new_category = new_category.children.create(name: fix_utf8(children.title), handle: ActiveSupport::Inflector.transliterate(fix_utf8(children.title)).to_underscore)
-        category_create(new_category, children)
+        category_1 = new_category.children.new(name: fix_utf8(children.title), handle: ActiveSupport::Inflector.transliterate(fix_utf8(children.title)).to_underscore, store_id: store.id)
+        unless category_1.save
+          category_1.handle = category_1.handle + "_#{rand(10)}"
+          category_1.save
+        end
+        if children.has_children?
+          category_create(category_1, children)
+        end
       end
     end
 
     def self.install_stores
-        Old::Store.active[1..-1].each do |store|
+        # Old::Store.active[1..-1].each do |store|
+          store = Old::Store.find(458)
           new_store = Imentore::Store.new
           new_store.name = fix_utf8(store.name) 
           new_store.brand = fix_utf8(store.brand) unless store.brand.blank?
@@ -46,6 +53,17 @@ module AdminImentore
             puts "----------------------"
             return 
           end
+
+          store.categories.roots.each do |category|
+            new_category = new_store.categories.new(name: fix_utf8(category.title), handle: ActiveSupport::Inflector.transliterate(fix_utf8(category.title)).to_underscore)
+            unless new_category.save
+              new_category.handle = new_category.handle + "_#{rand(10)}"
+              new_category.save
+              new_category.store_id = new_store.id
+            end
+            category_create(new_category, category, new_store)
+          end
+
           new_store.create_defaults
 
           store.pages.each do |page|
@@ -61,10 +79,6 @@ module AdminImentore
             end
           end
 
-          store.categories.each do |category|
-            new_category = new_store.categories.create(name: fix_utf8(category.title), handle: ActiveSupport::Inflector.transliterate(fix_utf8(category.title)).to_underscore)
-            category_create(new_category, category)
-          end
 
           store.notices.each do |page|
             new_page = new_store.notices.new
@@ -195,7 +209,7 @@ module AdminImentore
               end
             end
           end
-        end
+        # end
     end
 
     end

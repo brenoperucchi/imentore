@@ -16,7 +16,7 @@ module Imentore
     scope :product_search, lambda { |search| { :conditions => ["name like ?", "%#{search}%"] } }
 
     validates :name, :handle, :store, presence: true
-    validates :handle, uniqueness: { scope: "id" }
+    validates :handle, uniqueness: { scope: :store_id }
     validates :handle, format: { with: /[a-z]+[-a-z]+[a-z]+/ }
 
     accepts_nested_attributes_for :variants

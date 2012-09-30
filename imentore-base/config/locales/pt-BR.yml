@@ -66,6 +66,7 @@ pt-BR:
   finished_order: Finalizar Pedido
   start_upload: Iniciar envio
   next: Próximo
+  previous: Anterior
   addresses: Endereços
   address: Endereço
   shipping_address_diff: Igual ao endereço de cobrança

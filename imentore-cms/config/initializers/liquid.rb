@@ -1,3 +1,7 @@
+Dir.glob(File.join(Rails.root, '/../imentore-cms/lib/liquid/*.rb')).each do |path|
+require path
+end
+
 # http://www.royvandermeij.com/blog/2011/09/21/create-a-liquid-handler-for-rails-3-dot-1/
 require 'liquid_filter'
 
@@ -46,8 +50,9 @@ class LiquidView
               else
                 [controller._helpers]
               end
-
+    # Liquid::Template.register_tag("paginate", Paginate)
     # liquid = Liquid::Template.parse(template)
+
     liquid = Liquid::Template.new
     t = liquid.parse(template)
     t.class.register_filter(LiquidFilter)
@@ -58,8 +63,6 @@ class LiquidView
     false
   end
 end
-
-
 
 ActionView::Template.register_template_handler(:liquid, LiquidView)
 
