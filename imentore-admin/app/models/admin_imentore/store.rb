@@ -30,8 +30,7 @@ module AdminImentore
     end
 
     def self.install_stores
-        # Old::Store.active[1..-1].each do |store|
-          store = Old::Store.find(458)
+        Old::Store.active[0..-1].each do |store|
           new_store = Imentore::Store.new
           new_store.name = fix_utf8(store.name) 
           new_store.brand = fix_utf8(store.brand) unless store.brand.blank?
@@ -209,7 +208,7 @@ module AdminImentore
               end
             end
           end
-        # end
+        end
     end
 
     end
