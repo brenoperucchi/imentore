@@ -9,6 +9,16 @@ class String
     str.gsub!(/([a-z\d])([A-Z])/,'\1_\2')
     str.tr!("-", "_")
     str.tr!("/", "_")
+    str.tr!("'", "_")
+    str.tr!("`", "_")
+    str.tr!(".", "_")
+    str.tr!(",", "_")
+    str.tr!("[", "_")
+    str.tr!("]", "_")
+    str.tr!("(", "_")
+    str.tr!(")", "_")
+    str = str.gsub("___", "_")
+    str = str.gsub("__", "_")
     str.downcase
   end
   def to_underscore
@@ -19,6 +29,16 @@ class String
     str = str.gsub(/([a-z\d])([A-Z])/,'\1_\2')
     str = str.tr("-", "_")
     str = str.tr("/", "_")
+    str = str.tr("'", "_")
+    str = str.tr("`", "_")
+    str = str.tr(".", "_")
+    str = str.tr(",", "_")
+    str = str.tr("[", "_")
+    str = str.tr("]", "_")
+    str = str.tr("(", "_")
+    str = str.tr(")", "_")
+    str = str.gsub("___", "_")
+    str = str.gsub("__", "_")
     str.downcase
   end
 end

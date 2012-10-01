@@ -35,6 +35,10 @@ pt-BR:
   category_create: Criar Categoria
   category_update: Atualizar Categoria
   product_updated: Produto Atualizado
+  object_created: Registro criado
+  object_updated: Registro atualizado
+  object_destroy: Registro removido
+  object_failure: Registro com problema
 
   view_default: Mostrar o Padrão
   default_updated_at: Atualização do sistema

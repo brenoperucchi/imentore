@@ -9,8 +9,7 @@ gem 'therubyracer'
 gem 'i18n_alchemy'
 gem 'tinymce-rails'
 gem 'sqlite3'
-# gem 'mysql'
-# gem 'activerecord-mysql2-adapter'
+
 gem 'mysql2'
 
 gem 'will_paginate', '3.0.3'
