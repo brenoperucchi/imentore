@@ -3,6 +3,12 @@ module Imentore
     class EmployeesController < BaseController
       inherit_resources
 
+      def new
+        @employee = build_resource
+        @employee.build_user
+        new!
+      end
+
       def edit
         @employee = current_store.employees.find(params[:id])
         (@employee.addresses = [@employee.addresses.new]) if @employee.addresses.blank?
@@ -15,6 +21,23 @@ module Imentore
 
       def destroy
         destroy! { admin_employees_path }
+      end
+
+      def create
+        @employee = current_store.employees.new(params[:employee])
+        @employee.user.store = current_store
+        @employee.department = "admin"
+        create! do |success, failure|
+          success.html do
+            flash[:success] = t(:object_created)
+            redirect_to admin_employees_path
+          end
+          failure.html do
+            flash[:alert] = t(:object_failure)
+            render :new
+          end
+        end
+
       end
 
       protected

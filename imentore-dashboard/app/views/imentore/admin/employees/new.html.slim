@@ -1,4 +1,4 @@
-legend.page-title= t(:user_edit)
+legend.page-title= t(:newo) + ' ' + t(:user)
 
 = simple_form_for([:admin, @employee], :html=> { :class=> 'form-horizontal' }) do |f|
   .row
@@ -6,6 +6,7 @@ legend.page-title= t(:user_edit)
       .row
         .span4
           = f.input :active
+          = f.input :person_type, as: 'radio_buttons', collection: [[t(:person), 'person'], [t(:company), 'company' ]]
           = f.input :name
           = f.input :brand
           = f.input :irs_id
