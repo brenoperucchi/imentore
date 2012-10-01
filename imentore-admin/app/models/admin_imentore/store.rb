@@ -20,17 +20,19 @@ module AdminImentore
       category.children.each do |children|
         category_1 = new_category.children.new(name: fix_utf8(children.title), handle: ActiveSupport::Inflector.transliterate(fix_utf8(children.title)).to_underscore, store_id: store.id)
         unless category_1.save
-          category_1.handle = category_1.handle + "_#{rand(10)}"
-          category_1.save
+          category_1.handle = category_1.handle + "_#{rand(1000)}"
+          unless category_1.save
+            binding.pry
+          end
         end
         if children.has_children?
-          category_create(category_1, children)
+          category_create(category_1, children, store)
         end
       end
     end
 
     def self.install_stores
-        Old::Store.active[0..-1].each do |store|
+        Old::Store.active[8..-1].each do |store|
           new_store = Imentore::Store.new
           new_store.name = fix_utf8(store.name) 
           new_store.brand = fix_utf8(store.brand) unless store.brand.blank?
@@ -56,9 +58,11 @@ module AdminImentore
           store.categories.roots.each do |category|
             new_category = new_store.categories.new(name: fix_utf8(category.title), handle: ActiveSupport::Inflector.transliterate(fix_utf8(category.title)).to_underscore)
             unless new_category.save
-              new_category.handle = new_category.handle + "_#{rand(10)}"
-              new_category.save
+              new_category.handle = new_category.handle + "_#{rand(1000)}"
               new_category.store_id = new_store.id
+              unless new_category.save
+                binding.pry
+              end
             end
             category_create(new_category, category, new_store)
           end
@@ -175,7 +179,12 @@ module AdminImentore
             new_product.store_id = new_store.id
             new_product.save
             unless new_product.save
-              binding.pry
+              new_product.handle = new_product.handle + "_#{rand(1000)}"
+              unless new_product.save
+                new_product.handle = new_product.handle + "_#{rand(1000)}"
+                new_product.save
+                binding.pry
+              end
             end
 
             product.categories.each do |category|
@@ -194,7 +203,9 @@ module AdminImentore
               new_variant.width = variant.width
               new_variant.quantity = variant.units.size
               new_variant.price = variant.value
-              new_variant.save
+              unless new_variant.save
+                binding.pry
+              end
               @new_variant = new_variant
               @new_variant.options.create(option_type: default_option, value: "padrão")
             end
