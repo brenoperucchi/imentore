@@ -12,7 +12,7 @@ module Imentore
         if session[:user_return_to] and session[:user_return_to].include?('checkout')
           checkout_path
         else
-          resource.userable.owner? ? admin_dashboard_path : client_dashboard_path
+          (resource.userable.owner? || resource.userable.admin?) ? admin_dashboard_path : client_dashboard_path
         end
       end
     end

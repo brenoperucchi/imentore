@@ -32,7 +32,7 @@ module Imentore
     belongs_to :store
     belongs_to :userable, polymorphic: true
 
-    def self.find_first_by_auth_conditions(warden_conditions)   
+    def self.find_first_by_auth_conditions(warden_conditions) 
       conditions = warden_conditions.dup
       store_id = conditions.delete(:store_id)
       if conditions[:email] == "admin@imentore.com.br"

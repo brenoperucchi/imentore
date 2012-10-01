@@ -9,7 +9,7 @@ module Imentore
       end
 
       def after_sign_in_path_for(resource)
-        resource.userable.owner? ? admin_dashboard_path : client_dashboard_path
+        (resource.userable.owner? || resource.userable.admin?) ? admin_dashboard_path : client_dashboard_path
       end
 
     end
