@@ -77,7 +77,7 @@ module Imentore
         @order = current_order
         @invoice = current_order.invoice
         @prepare = @invoice.prepare
-        send("#{@invoice.payment_method.name}")
+        send("#{@invoice.payment_method.name}".underscore)
       rescue Exception => msg
         flash[:alert] = t(:checkout_charge_problem)
         @order = current_order
