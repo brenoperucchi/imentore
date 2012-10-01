@@ -13,9 +13,5 @@ module Imentore
       addresses.first
     end
 
-    def owner?
-      department == "owner"
-    end
-
   end
 end

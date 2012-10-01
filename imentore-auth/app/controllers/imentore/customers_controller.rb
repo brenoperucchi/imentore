@@ -22,8 +22,6 @@ module Imentore
     def new
       @customer = build_resource
       @customer.build_user
-      # @customer = Imentore::Customer.new
-      # @customer.build_user
     end
 
     def create

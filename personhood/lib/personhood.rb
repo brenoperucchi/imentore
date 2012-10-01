@@ -4,6 +4,14 @@ require_relative 'personhood/schema'
 
 module Personhood
 
+  def owner?
+    department == "owner"
+  end
+
+  def admin?
+    department == "admin"
+  end
+
   def person?
     person_type == "person"
   end

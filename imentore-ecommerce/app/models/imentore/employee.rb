@@ -16,8 +16,5 @@ module Imentore
 
     accepts_nested_attributes_for :user
 
-    def owner?
-      department == "owner"
-    end
   end
 end
