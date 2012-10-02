@@ -9,7 +9,8 @@ module Imentore
 
     def calculate(item)
       @klass = @delivery.provider
-      @klass.calculate(item, zip_code, item.store.config.store_zip_code, item.amount, item.weight)
+      weight = item.weight.nil? ? 0 : item.weight
+      @klass.calculate(item, zip_code, item.store.config.store_zip_code, item.amount, weight)
     end
 
   end
