@@ -1,6 +1,7 @@
 - content_for :header do
   = stylesheet_link_tag    "cart"
   = javascript_include_tag "cart"
+  = csrf_meta_tags
 
   javascript:
     $(document).ready(function(){
@@ -23,8 +24,11 @@
           data: {zip_code:zip_code, method:method},
           dataType: 'json',
           success: function(json) {
-            $('td#shipping_value').html(json['value'])
-            calculate_items()
+            $('td#shipping_value').html(json['total_delivery'])
+            $('td#coupon_value').html(json['total_coupon'])
+            $('td#total_amount').html(json['total_amount'])
+
+            //calculate_items()
           }
         })
       }
@@ -134,8 +138,8 @@
                   = text_field_tag "[items][#{index}]quantity", item.quantity, :class => "input-mini"
                   = hidden_field_tag "[items][#{index}]product_id", item.product.id
                   = hidden_field_tag "[items][#{index}]variant_id", item.variant.id
-                td= item.price
-                td= item.amount
+                td= number_with_price(item.price)
+                td= number_with_price(item.amount)
             tr
               td
               td
@@ -143,7 +147,7 @@
               td(colspan='2' style='text-align:center;')
                 = t(:sub_total)
               td#sub_total
-                = current_cart.amount
+                = number_with_price(current_cart.amount)
             tr
               td
               td
@@ -167,7 +171,7 @@
               td(colspan='2' style='text-align:center;')
                 = t(:coupon_value)
               td#coupon_value
-                = current_cart.coupons_amount
+                = number_with_price(current_cart.coupons_amount)
             tr
               td
               td
@@ -175,7 +179,7 @@
               td(colspan='2' style='text-align:center;')
                 h3 Total
               td#total_amount
-                h4= current_cart.amount
+                h4= number_with_price(current_cart.amount)
   .row
     .span5.offset1
         .control-group

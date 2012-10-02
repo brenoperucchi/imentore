@@ -5,12 +5,16 @@ module Imentore
     respond_to :json, only: [:create, :index, :destroy, :show, :calculate_shipping]
 
     def calculate_shipping
-      zip = params[:zip_code]
-        method = current_store.delivery_methods.find_by_id(params[:method])
+      zip_code = params[:zip_code]
+      method = current_store.delivery_methods.find_by_id(params[:method])
       unless method.nil?
         respond_to do |wants|
           wants.json do
-            render json: Imentore::DeliveryHandle.calculate_items(current_cart.items, zip, method).to_json
+            delivery_amount = Imentore::DeliveryHandle.calculate_items(current_cart.items,zip_code, method).to_json['value']
+            render json: { 'total_delivery' => number_with_price(delivery_amount),
+                           'total_coupon' => number_with_price(current_cart.coupons_amount),
+                           'total_amount' => number_with_price(current_cart.total_amount +  delivery_amount)
+                         }
           end
         end
       else
@@ -19,11 +23,6 @@ module Imentore
     end
 
     def update
-      # current_cart.delivery_method = current_store.delivery_methods.find_by_id(params[:delivery_method])
-      # current_cart.zip_code = params[:zip_code]
-      # coupon = current_store.coupons.active.find_by_code(params[:coupon_code])
-
-      # Imentore::CouponsOrder.add(current_cart, coupon) if coupon.try(:check_valid?)
       if params[:items].present?
         params[:items].each do |item|
           quantity = item[1][:quantity].to_i
@@ -37,10 +36,6 @@ module Imentore
     end
 
     def show
-      # current_cart.html = "<h2> html </h2>"
-      # current_cart.html = render :show, layout:'public'
-      # current_cart.zip_code = '2'
-      # @cart = Imentore::CartDrop.new(current_cart)
       respond_to do |wants|
         wants.json do
             render json: Imentore::CartPresenter.new(current_cart).to_json

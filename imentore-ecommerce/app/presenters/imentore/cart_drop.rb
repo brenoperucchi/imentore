@@ -14,6 +14,10 @@ module Imentore
       @items = @cart.items.map { |item| CartItemDrop.new(item) }
     end
 
+    def amount
+      number_with_price(@cart.amount)
+    end
+
     def delivery_methods
       @delivery_methods = @context.registers[:current_store].delivery_methods.active.map { |object| ObjectDrop.new(object) }
     end

@@ -66,8 +66,8 @@
               td.change(id=ov.option_type.name)= ov.value
               = hidden_field_tag(:option_value_id, ov.id, :class=>'change', :id =>'option_value_id')
             td.change#quantity= variant.quantity
-            td.change#weight= variant.weight
-            td.change#price= variant.price
+            td.change#weight= number_with_precision(variant.weight)
+            td.change#price= number_with_price(variant.price)
             td
               a(href='#' id='update_item')
                 = t(:edit)

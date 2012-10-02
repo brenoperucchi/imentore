@@ -44,13 +44,14 @@
           data: {zip_code:zip_code, method:method},
           dataType: 'json',
           success: function(json) {
-            $('td#shipping_value').html(json['value'])
-            calculate_items()
+            $('td#shipping_value').html(json['total_delivery'])
+            $('td#coupon_value').html(json['total_coupon'])
+            $('td#total_amount').html(json['total_amount'])
           }
         })
       }
       if ($('select#delivery_method').find('option:selected').val() != '') {
-        var zip_code = $('input#zip_code').val()
+        var zip_code = $("input[id$='zip_code']").last().val();
         var method = $('select#delivery_method').find('option:selected').val()
         delivery_calculate(zip_code,method)
       }
@@ -229,8 +230,8 @@
                 = "#{type.option_type.name}: #{type.value}"
                 = " | "
             td= item.quantity
-            td= item.price
-            td= item.amount
+            td= number_with_price(item.price)
+            td= number_with_price(item.amount)
         tr
           td
           td
@@ -238,7 +239,7 @@
             '
             = t(:sub_total)
           td#sub_total
-            = current_cart.amount
+            = number_with_price(current_cart.amount)
         tr
           td
           td
@@ -252,14 +253,14 @@
           td(colspan='2' style='text-align:center;')
             = t(:coupon_value)
           td#coupon_value
-            = current_cart.coupons_amount
+            = number_with_price(current_cart.coupons_amount)
         tr
           td
           td
           td(colspan='2' style='text-align:center;')
             h3= t(:total)
           td#total_amount
-            h4= @order.total_amount
+            h4= number_with_price(@order.total_amount)
 
   .row
     = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
@@ -285,7 +286,7 @@
               label.hide#phone
                 = addr.phone
         - else
-          = f.input :customer_name
+          = f.input :customer_name, hint: "nome e sobrenome do cliente"
           = f.input :customer_email
       #accordion2.accordion
         .accordion-group
