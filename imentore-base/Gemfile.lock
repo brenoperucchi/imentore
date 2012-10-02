@@ -143,6 +143,8 @@ GEM
       nokogiri (~> 1.5)
       sax-machine (~> 0.1)
     country_select (0.0.1)
+    delocalize (0.3.1)
+      rails (>= 3.0)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -282,6 +284,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   correios-frete (= 1.6.1)
   country_select (= 0.0.1)
+  delocalize (= 0.3.1)
   devise (= 2.1.2)
   devise-encryptable
   execjs

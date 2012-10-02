@@ -394,8 +394,13 @@ pt-BR:
     percentage:
       format:
         delimiter: .
+    price:
+      format:
+        precision: 2
+        delimiter: .
     precision:
       format:
+        precision: 3
         delimiter: .
   support:
     array:
