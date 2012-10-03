@@ -178,8 +178,13 @@ pt-BR:
   delivery_methods: Envios
   delivery_method_new: Novo Envio  
   payment_method_new: Nova Forma de Pagamento
+  moip_token: 'Token de acesso :'
+  moip_client_id: 'Chave de acesso :'
   token: 'Chave de acesso (token):'
   client_id: 'Login de acesso (login):'
+  default_prompt: Selecione uma opção
+  accept_cart_zero: Permite Valor Zero
+  accept_cart_zero_hint: Permite valor do envio no carrinho igual zero
   fixed_rate: Taxa Fixa
   percent_rate: Taxa Percentual
   variant_option_name: Nome Variação
