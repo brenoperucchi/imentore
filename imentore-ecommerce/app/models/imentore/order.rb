@@ -86,7 +86,7 @@ module Imentore
     end
 
     def delivery_calculate(zip_code, method)
-      Imentore::DeliveryHandle.calculate_items(self.items, zip_code, delivery.delivery_method)
+      Imentore::DeliveryHandle.calculate_items(self.items, zip_code, method)
     end
 
     def invoice_method
@@ -110,7 +110,16 @@ module Imentore
     end
 
     def deliverable?
-      items.map(&:deliverable?).inject(true, :&)
+      delivery = delivery_calculate(zip_code, delivery_method)
+      unless items.map(&:deliverable?).inject(true, :&)
+        self.errors.add(:base, :not_delivery)
+        return false
+      end
+      unless delivery.error == "0"
+        self.errors.add(:base, delivery.error_msg)
+        return false
+      end
+      true
     end
 
 

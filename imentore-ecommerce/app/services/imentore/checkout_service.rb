@@ -27,12 +27,15 @@ module Imentore
     end
 
     def place_order(order, params = {})
+      order.billing_address = Imentore::Address.new(params[:order][:billing_address]) if params[:order][:billing_address].present?
+      order.shipping_address = Imentore::Address.new(params[:order][:shipping_address]) if params[:order][:shipping_address].present?
+
       store = order.store
-      if order.deliverable?
+      # if order.deliverable?
         delivery = order.delivery || order.build_delivery
         delivery.attributes = { address: order.shipping_address, delivery_method_id: params[:order][:delivery][:delivery_method] }
         delivery.save
-      end
+      # end
 
       if order.chargeable?
         # delivery.changed.include? "delivery_method_id"
@@ -40,7 +43,7 @@ module Imentore
         invoice.attributes = { amount: order.total_amount, payment_method_id: params[:order][:invoice][:payment_method] }
         invoice.save
       end
-      order.save(:validate => false)
+      order.save(:validate => false) and order.deliverable?
     end
   end
 end

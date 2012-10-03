@@ -32,7 +32,10 @@ module Imentore
         render :new
       elsif request.put?
         @order.items = current_cart.items
-        CheckoutService.place_order(@order, params)
+        unless CheckoutService.place_order(@order, params)
+          flash[:alert] = @order.errors.full_messages
+          render :new and return false
+        end
 
         if user_signed_in? and not current_user.userable.owner?
           @order.customer_name = current_user.userable.name
@@ -43,9 +46,8 @@ module Imentore
           @order.customer_email = params[:order][:customer_email]
         end
         if params[:order].present?
-
-          @order.billing_address = Imentore::Address.new(params[:order][:billing_address]) if params[:order][:billing_address].present?
-          @order.shipping_address = Imentore::Address.new(params[:order][:shipping_address]) if params[:order][:shipping_address].present?
+          # @order.billing_address = Imentore::Address.new(params[:order][:billing_address]) if params[:order][:billing_address].present?
+          # @order.shipping_address = Imentore::Address.new(params[:order][:shipping_address]) if params[:order][:shipping_address].present?
 
           @order.billing_checkbox = params[:order][:billing_checkbox] if params[:order][:billing_checkbox]
           @order.shipping_checkbox = params[:order][:shipping_checkbox] if params[:order][:shipping_checkbox]
@@ -77,14 +79,14 @@ module Imentore
         @order = current_order
         @invoice = current_order.invoice
         @prepare = @invoice.prepare
-        send("#{@invoice.payment_method.name}".underscore)
+        send("#{@invoice.payment_method.name}".to_underscore)
       rescue Exception => msg
         flash[:alert] = t(:checkout_charge_problem)
         @order = current_order
         render :new
       end
     end
-    def moip
+    def mo_ip
       redirect_to @prepare['redirect_to'] if @prepare['redirect_to'].present?
     end
 
