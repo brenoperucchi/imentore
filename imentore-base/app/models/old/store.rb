@@ -7,6 +7,8 @@ module Old
     
     has_many :categories, :dependent => :destroy
 
+    has_many :users, :dependent => :destroy
+
     has_many :pages
 
     has_many :notices

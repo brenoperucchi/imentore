@@ -16,6 +16,37 @@ module AdminImentore
           .force_encoding("utf-8")
     end
 
+    def install_stores_admin
+      Imentore::Store.all.each do |imentore_store|
+        store = Old::Store.find_by_url(imentore_store.url) 
+        next if store.nil?
+        employee = store.users.find_by_role('admin')
+        new_employee = imentore_store.employees.new 
+        new_employee.name = fix_utf8(employee.name)
+        new_employee.brand = fix_utf8(employee.name) if employee.type == "Person"
+        new_employee.irs_id = employee.irs_id 
+        new_employee.national_id = employee.national_id
+        new_employee.birthdate = employee.birthdate
+        new_employee.gender = employee.gender
+        new_employee.person_type = employee.type == 'Person' ? 'person' : 'company'
+        new_employee.department = "owner"
+        new_employee.store_id = imentore_store.id
+        new_employee.active = employee.active
+        new_employee.created_at = employee.created_at
+        unless new_employee.save
+          new_employee.destroy
+        end
+        user = new_employee.build_user(email: employee.email, encrypted_password: employee.encrypted_password, 
+                                 sign_in_count: employee.sign_in_count, current_sign_in_at: employee.current_sign_in_at,
+                                 last_sign_in_ip: employee.last_sign_in_ip, confirmed_at: employee.confirmed_at, 
+                                 created_at: employee.created_at, store_id: imentore_store.id, password_required: false,
+                                 password_salt: employee.password_salt)
+        unless user.save
+          new_employee.destroy
+        end
+      end
+    end
+
     def self.category_create(new_category, category, store)
       category.children.each do |children|
         category_1 = new_category.children.new(name: fix_utf8(children.title), handle: ActiveSupport::Inflector.transliterate(fix_utf8(children.title)).to_underscore, store_id: store.id)
