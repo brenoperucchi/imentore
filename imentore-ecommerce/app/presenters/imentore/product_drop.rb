@@ -27,7 +27,7 @@ module Imentore
     end
 
     def price
-      @product.variants.first.price
+      number_with_price(@product.variants.first.price)
     end
 
     def product_code
