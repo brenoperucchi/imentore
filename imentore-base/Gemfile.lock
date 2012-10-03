@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: git://github.com/bperucchi/pagseguro.git
-  revision: 26099615826cb4f21f352123d240bb05fb7e55fb
+  revision: 85746d72ee6addf668ab85fad335b08a1b437b38
   specs:
     pag_seguro (0.1.16)
       httparty (>= 0.7.8)
@@ -241,7 +241,7 @@ GEM
       tilt (~> 1.3)
     sax-machine (0.1.0)
       nokogiri (> 0.0.0)
-    simple_form (2.0.1)
+    simple_form (2.0.3)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     slim (1.2.1)
@@ -311,7 +311,7 @@ DEPENDENCIES
   rails (= 3.2.8)
   ruby-plesk!
   sass-rails (~> 3.2.5)
-  simple_form (= 2.0.1)
+  simple_form (= 2.0.3)
   slim (= 1.2.1)
   sqlite3
   state_machine (= 1.1.2)
