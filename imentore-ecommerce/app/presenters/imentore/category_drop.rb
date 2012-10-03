@@ -30,10 +30,6 @@ module Imentore
       @category.products
     end
 
-    def childrens(param)
-      binding.pry
-    end
-
     def children
       children = @category.children.collect{|category| CategoryDrop.new(category)}
     end
