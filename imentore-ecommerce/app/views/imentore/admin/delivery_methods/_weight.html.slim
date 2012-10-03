@@ -13,6 +13,7 @@
 = f.input :name
 = f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
 = f.simple_fields_for :options do |fo|
+  / = fo.input :accept_cart_zero, label: t(:accept_cart_zero), as: :select, collection: [[t(:yes), 1,],[t(:no), 0]], prompt: t(:default_prompt), hint: t(:accept_cart_zero_hint), selected: @delivery_method.options["accept_cart_zero"]
   = fo.input :fixed_rate, label: t(:fixed_rate), input_html: { value: @delivery_method.options["fixed_rate"] }
   = fo.input :percent_rate, label: t(:percent_rate), input_html: { value: @delivery_method.options["percent_rate"] }
 

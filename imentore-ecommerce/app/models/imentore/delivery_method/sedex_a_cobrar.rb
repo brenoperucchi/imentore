@@ -11,7 +11,10 @@ module Imentore
                                               :valor_declarado => amount
 
       service = frete.calcular :sedex_a_cobrar
-      (service.valor + value(amount, weight)).round(2)
+      value = (service.valor + value(amount, weight)).round(2)
+      error = service.erro
+      error_msg = service.msg_erro
+      return value, error, error_msg
     end
 
     def self.name
