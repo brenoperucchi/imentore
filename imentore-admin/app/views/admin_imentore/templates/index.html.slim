@@ -27,8 +27,11 @@ table.table
           '
           = link_to(update_stores_admin_imentore_theme_template_path(@theme,template), class: 'btn') do
             i.icon-black.icon-edit
-            ' Updates Stores Template
+            ' Updates Template Stores
           '
+          = link_to(install_stores_admin_imentore_theme_template_path(@theme,template), class: 'btn') do
+            i.icon-black.icon-edit
+            ' Install Template Stores
           / = link_to(admin_template_path(template), method: :delete, :class=>"btn btn-danger") do
           /   i.icon-white.icon-trash
           /   '

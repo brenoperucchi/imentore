@@ -16,7 +16,7 @@ module AdminImentore
           .force_encoding("utf-8")
     end
 
-    def install_stores_admin
+    def self.install_stores_admin
       Imentore::Store.all.each do |imentore_store|
         store = Old::Store.find_by_url(imentore_store.url) 
         next if store.nil?
