@@ -10,7 +10,7 @@ module Imentore
       unless method.nil?
         respond_to do |wants|
           wants.json do
-            delivery_amount = Imentore::DeliveryHandle.calculate_items(current_cart.items,zip_code, method).to_json['value']
+            delivery_amount = Imentore::DeliveryHandle.calculate_items(current_cart.items,zip_code, method).value
             render json: { 'total_delivery' => number_with_price(delivery_amount),
                            'total_coupon' => number_with_price(current_cart.coupons_amount),
                            'total_amount' => number_with_price(current_cart.total_amount +  delivery_amount)
