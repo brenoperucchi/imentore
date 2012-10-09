@@ -173,6 +173,8 @@ body
             ul.nav.nav-list.configuration.hide
               li.nav-header
                 = t(:configuration)
+              li.action#stores
+                = link_to(t(:stores), admin_imentore_stores_path)
               li.action#themes
                 = link_to(t(:theme), admin_imentore_themes_path)
               li.action#send_emails
@@ -196,6 +198,5 @@ body
       p
         | © Imentore 2012
 
-  .footer
-    
+  .footer   
     = yield :footer

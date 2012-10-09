@@ -42,5 +42,9 @@ module Old
      :password => '123123'
      )
 
+     def active?
+       state == "actived"
+     end
+
   end
 end
