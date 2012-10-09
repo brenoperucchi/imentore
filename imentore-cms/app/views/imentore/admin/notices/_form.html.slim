@@ -4,7 +4,7 @@ legend= t(:newa) + ' ' + t(:notices).downcase
   = f.input :active, as: :boolean
   = f.input :name
   = f.input :handle
-  = f.input :description, input_html: {style:'height:100px;', class: 'tinymce'}
+  = f.input :body, input_html: {style:'height:100px;', class: 'tinymce'}
   = tinymce
 
   .form-actions
