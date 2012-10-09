@@ -22,10 +22,10 @@ module Imentore
     accepts_nested_attributes_for :variants
 
     def handle
-      return if read_attribute(:name).nil?
-      if read_attribute(:handle).nil? 
-        update_attribute(:handle, name.to_underscore)
-        self.handle 
+      return if read_attribute(:name).blank?
+      if read_attribute(:handle).blank? 
+        self.handle = name.to_underscore
+        read_attribute(:handle)
       else 
         read_attribute(:handle)
       end
