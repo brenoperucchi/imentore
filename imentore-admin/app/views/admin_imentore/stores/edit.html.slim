@@ -1,0 +1,20 @@
+legend.page-title= t(:configurations) + ' ' + t(:general_settings)
+
+= simple_form_for(@store, url: admin_imentore_store_path, :html=> { :class=> 'form-horizontal' }) do |f|
+  .row
+    .span12
+      .row
+        .span4
+          = f.input :name
+          = f.input :email
+          = f.input :brand
+          = f.input :irs_id
+          = f.input :url
+          = f.input :state
+        .span4
+          = f.simple_fields_for :address do |addr|
+            = render("shared/address", addr: addr)
+  .form-actions
+    = f.button :submit, t(:store_update), :class=> 'btn btn-primary'
+    / = " "
+    / = button_tag "Cancel", class: "btn"

@@ -32,7 +32,6 @@ Imentore::Core::Engine.routes.draw do
     resources :stores, only: [:show] do
       resources :feedbacks, only: [:create, :new]
     end
-    resources :notices, only: [:show]
     resources :order_assets, only: [:new, :create, :destroy, :index]
     resources :products,  only: [:index, :show]
     resource  :cart,      only: [:show, :create, :update, :destroy, :calculate_shipping] do
@@ -41,6 +40,7 @@ Imentore::Core::Engine.routes.draw do
 
     match "product/:handle",            to: "products#handle",      as: 'product_handle'
     match "product_search/:name",       to: "products#search",      as: 'product_search'
+    match "notices/:handle",            to: "notices#show",         as: "notices"
     match "pages/:page",                to: "pages#show",           as: "pages"
     match "categories/*categories",     to: "categories#index",     as: "categories"
     match "coupon",                     to: "coupons#add_coupon",   as: "add_coupon"

@@ -121,6 +121,10 @@ module Imentore
 
     accepts_nested_attributes_for :owner, :address
 
+    def active?
+      state == "actived"
+    end
+
     def url_site
       "#{url}.imentore.com.br"
     end

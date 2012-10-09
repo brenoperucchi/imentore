@@ -1,0 +1,61 @@
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :stores) }, { 'stores' => url_for(:controller => :stores) }])
+
+- content_for :footer do
+  javascript:
+    $('#myTab a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    })
+
+ul.nav.nav-tabs#myTab
+  li.active
+    a[href="#store"]
+      | stores
+  li
+    a[href="#oldstores"]
+      | old_stores
+
+.tab-content
+  .tab-pane#store.active
+    legend= t(:stores)
+
+    table.table
+      thead
+        tr
+          th= t(:active)
+          th= t(:name)
+          th= t(:url)
+          th= t(:actions)
+      tbody
+        - @stores.each do |store|
+          tr
+            td= button_status(store.active?, '#')
+            td= store.name[0..20]
+            td= store.url
+            td
+              = link_to(edit_admin_imentore_store_path(store), class: 'btn') do
+                i.icon-black.icon-edit
+                '
+                = t(:edit)
+  .tab-pane#oldstores
+    legend= t(:old_stores)
+
+    table.table
+      thead
+        tr
+          th= t(:active)
+          th= t(:name)
+          th= t(:url)
+          th= t(:actions)
+      tbody
+        - @old_stores.each do |store|
+          tr
+            td= button_status(store.active?, '#')
+            td= store.name[0..20]
+            td= store.url
+            td
+              = link_to(install_store_admin_imentore_store_path(store), :class=>"btn btn-danger") do
+                i.icon-white.icon-trash
+                ' install store
+
