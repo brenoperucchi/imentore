@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009205522) do
+ActiveRecord::Schema.define(:version => 20121010223905) do
 
   create_table "admin_imentore_assets", :force => true do |t|
     t.string   "file"
@@ -326,6 +326,7 @@ ActiveRecord::Schema.define(:version => 20121009205522) do
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
     t.text     "config"
+    t.integer  "old_store_id"
   end
 
   create_table "imentore_templates", :force => true do |t|

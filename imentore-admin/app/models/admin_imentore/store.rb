@@ -28,6 +28,70 @@ module AdminImentore
       end
     end
 
+
+    def self.reinstall_products
+      Imentore::Store.active.each do |new_store|
+        store = Old::Store.find_by_url(new_store.url)
+        next if store.nil?
+        new_store.update_attribute(:old_store_id, store.id)
+        new_store.products.destroy_all
+        store.products.not_deleted.each do |product|
+          new_product = new_store.products.new
+          new_product.name = fix_utf8(product.name)
+          new_product.description = fix_utf8(product.description)
+          new_product.active = product.sellable
+          new_product.handle = ActiveSupport::Inflector.transliterate(fix_utf8(product.name)).to_underscore
+          new_product.save
+          unless new_product.save
+            new_product.handle = new_product.handle + "_#{rand(1000)}"
+            unless new_product.save
+              new_product.handle = new_product.handle + "_#{rand(1000)}"
+              new_product.save
+              binding.pry
+            end
+          end
+
+          product.categories.each do |category|
+            c = new_store.categories.find_by_name(fix_utf8(category.title))
+            unless c.nil?
+              c = c.categories_products.new
+              c.product_id = new_product.id
+              c.save
+            end
+          end
+
+          default_option = new_product.options.create(name: I18n.t(:variant), handle:'variant')
+
+          product.variants.each do |variant|
+            new_variant = new_product.variants.new
+            new_variant.height = variant.height
+            new_variant.width = variant.width
+            new_variant.quantity = variant.units.size
+            new_variant.price = variant.value
+            unless new_variant.save
+              binding.pry
+            end
+            new_variant.options.create(option_type: default_option, value: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
+          end
+
+
+
+
+          unless Rails.env == "development"
+            product.images.each do |image|
+              begin
+                new_image = @new_variant.images.new
+                new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
+                new_image.save
+              rescue 
+                next
+              end
+            end
+          end        
+        end
+      end      
+    end
+
     def self.install_store_admin(store, new_store)
       return if store.nil?
       employee = store.users.find_by_role('admin')
@@ -127,7 +191,7 @@ module AdminImentore
         new_page.active = page.active
         new_page.name = fix_utf8(page.title)
         new_page.handle = ActiveSupport::Inflector.transliterate(fix_utf8(page.title)).to_underscore
-        new_page.description = fix_utf8(page.description)
+        new_page.body = fix_utf8(page.description)
         new_page.created_at = page.created_at
       end
 
@@ -238,8 +302,9 @@ module AdminImentore
           end
         end
 
+        default_option = new_product.options.create(name: I18n.t(:variant), handle:'variant')
+
         product.variants.each do |variant|
-          default_option = new_product.options.create(name: variant.name, handle: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
           new_variant = new_product.variants.new
           new_variant.height = variant.height
           new_variant.width = variant.width
@@ -248,9 +313,11 @@ module AdminImentore
           unless new_variant.save
             binding.pry
           end
-          @new_variant = new_variant
-          @new_variant.options.create(option_type: default_option, value: "padrão")
+          new_variant.options.create(option_type: default_option, value: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
         end
+
+
+
 
         unless Rails.env == "development"
           product.images.each do |image|
@@ -262,10 +329,9 @@ module AdminImentore
               next
             end
           end
-        end
-        
+        end        
       end
-    end
 
     end
+  end
 end

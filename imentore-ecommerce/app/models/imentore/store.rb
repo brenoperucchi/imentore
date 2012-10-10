@@ -4,86 +4,9 @@ require 'imentore'
 module Imentore
   class Store < ActiveRecord::Base
 
+    scope :active, where(state: "actived")
+
     serialize :config, Settings
-    # after_create :create_defaults
-
-    #  include SentientStore
-    # after_create :create_cashier, :create_cost_centers, :create_shippings, :create_store_emails
-
-    # serialize :settings, Settings
-    # belongs_to :plan, :class_name => "StorePlan", :foreign_key => "plan_id"
-    # belongs_to :user_agent
-    # has_many :coupons
-    # has_many :emails_store, :class_name=> "Email", :foreign_key => "store_id"
-    # has_many :emails, :as => :emailable
-    # has_many :store_invoices, :as => :invoiceable, :dependent => :destroy
-    # has_many :adverts, :dependent => :destroy
-    # has_many :lists, :class_name => "WishList", :foreign_key => "store_id", :dependent => :destroy
-    # has_many :notices, :class_name => "StoreNotice", :foreign_key =>"store_id", :dependent => :destroy
-    # has_many :pages
-    # # do
-    # # Imentore.app.pages.each do |name|
-    # #   define_method name do |*args|
-    # #     proxy_owner.pages.find(:first, :conditions=>{:path=>name, :active=>true}).body
-    # #   end
-    # # end
-    # #  end
-    # has_one :address, :as => :addressable
-    # has_many :person, :class_name => "Person"
-    # has_many :payments, :dependent => :destroy
-    # has_many :themes, :class_name => "StoreTheme", :foreign_key => "store_id"
-    # has_many :images, :as => :imageable, :dependent => :destroy
-    # has_many :store_emails, :class_name => "StoreEmail", :foreign_key => "store_id", :dependent => :destroy
-    # has_many :services, :class_name => "StoreService", :foreign_key => "store_id", :dependent => :destroy
-    # has_many :sas, :class_name => "Survey", :foreign_key => "store_id", :dependent => :destroy
-    # has_many :statistics, :dependent => :destroy
-    # has_many :surveys, :class_name => "Survey", :dependent => :destroy
-    # has_many :carts, :dependent => :destroy
-    # has_many :logs, :dependent => :destroy
-    # has_many :users, :dependent => :destroy
-    # has_many :urls, :dependent => :destroy
-    # has_many :business_plans, :dependent => :destroy
-    # has_many :shippings, :dependent => :destroy
-    # has_many :products, :dependent => :destroy
-    # has_many :variants, :through => :products
-    # has_many :orders, :dependent => :destroy
-    # has_many :invoices, :through => :orders, :conditions => {:type => "Invoice"}, :class_name => "LedgerItem"
-    # has_many :shipments, :through => :orders
-    # has_many :categories, :dependent => :destroy
-    # has_many :customers, :conditions => "role = 'customer'", :class_name => "User"
-    # has_many :employees, :class_name => "User", :conditions => "role = 'employee'"
-    # has_many :suppliers, :class_name => "User", :conditions => "role = 'supplier'"
-    # has_many :dealers, :class_name => "User", :conditions => "role = 'dealer'"
-    # has_many :ledger_items, :dependent => :destroy
-    # has_many :billings, :class_name => "LedgerItem", :conditions => "type = 'Credit' OR type = 'Debit'"
-    # has_many :cost_centers, :dependent => :destroy
-    # has_many :ledgers, :dependent => :destroy
-    # has_one :cashier, :class_name => "Ledger", :conditions => { :ro => true }
-    # has_many :balances, :dependent => :destroy #:through => :ledgers
-    # has_many :rmas, :through => :orders
-    # has_many :credits do
-    #   Imentore.configuration.cost_centers.each do |name|
-    #     define_method name do |*args|
-    #       options = args.extract_options!
-    #       conditions_sql = ["cost_center_id IN (?)",proxy_owner.cost_centers.send(name).first.subtree_ids]
-    #       options[:conditions] = proxy_owner.class.merge_conditions(options[:conditions], conditions_sql)
-    #       all(options)
-    #     end
-    #   end
-    # end
-    # has_many :debits do
-    #   Imentore.configuration.cost_centers.each do |name|
-    #     define_method name do |*args|
-    #       options = args.extract_options!
-    #       conditions_sql = ["cost_center_id IN (?)",proxy_owner.cost_centers.send(name).first.subtree_ids]
-    #       options[:conditions] = proxy_owner.class.merge_conditions(options[:conditions], conditions_sql)
-    #       all(options)
-    #     end
-    #   end
-    # end
-    #
-    # accepts_nested_attributes_for :address
-    # accepts_nested_attributes_for :person
 
     DNS_LABEL_REGEX = /^[a-z][a-z0-9-]*[a-z0-9]$/i
     INVALID_DOMAINS = %w(www mail ftp)
