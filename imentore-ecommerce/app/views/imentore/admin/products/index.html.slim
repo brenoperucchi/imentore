@@ -14,6 +14,7 @@ table.table.table-striped
     tr
       th.super-mini #
       th= t(:status)
+      th= t(:data)
       th= t(:name)
       th= t(:handle)
       th= t(:action)
@@ -22,6 +23,7 @@ table.table.table-striped
       tr
         td= product.id
         td= button_status(product.active, edit_admin_product_path(product))
+        td= l(time_zone(product.created_at), format: :short2)
         td= link_to(product.name, edit_admin_product_path(product))
         td= product.handle
         td

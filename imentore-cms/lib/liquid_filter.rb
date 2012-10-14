@@ -24,6 +24,7 @@ module LiquidFilter
 
   def product_image_url(product, size)
     @product = Imentore::Product.find_by_id(product.id)
+    return if @product.variants.first.images.blank?
     @product.variants.first.images.first.picture.url(size.to_sym).to_s
   end
 
@@ -72,4 +73,5 @@ module LiquidFilter
     html << %(<span class="next">#{link_to(paginate['next']['title'], paginate['next']['url'])}</span>) if paginate['next']
     html.join(' ')
   end
+
 end

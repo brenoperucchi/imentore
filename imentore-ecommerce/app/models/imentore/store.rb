@@ -1,6 +1,7 @@
 #require 'sentient_store'
 require 'imentore'
 
+
 module Imentore
   class Store < ActiveRecord::Base
 
@@ -20,6 +21,8 @@ module Imentore
                       length: { maximum: 63 },
                       exclusion: { in: INVALID_DOMAINS }
     # validates :contract_term, acceptance: true
+
+    belongs_to :old_store, :class_name => Old::Store, :foreign_key => "old_store_id"
 
     has_many :employees, :dependent => :destroy
     has_one  :owner, class_name: 'Imentore::Employee', conditions: { department: 'owner' }, :dependent => :destroy

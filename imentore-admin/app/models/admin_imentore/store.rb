@@ -31,66 +31,71 @@ module AdminImentore
 
     def self.reinstall_products
       Imentore::Store.active.each do |new_store|
-        store = Old::Store.find_by_url(new_store.url)
         next if store.nil?
-        new_store.update_attribute(:old_store_id, store.id)
-        new_store.products.destroy_all
-        store.products.not_deleted.each do |product|
-          new_product = new_store.products.new
-          new_product.name = fix_utf8(product.name)
-          new_product.description = fix_utf8(product.description)
-          new_product.active = product.sellable
-          new_product.handle = ActiveSupport::Inflector.transliterate(fix_utf8(product.name)).to_underscore
-          new_product.save
+        reinstall_store_products(new_store)
+      end
+    end
+
+    def self.reinstall_store_products(new_store)
+      store = new_store.old_store
+      return if store.nil?
+      new_store.update_attribute(:old_store_id, store.id)
+      new_store.products.destroy_all
+      store.products.not_deleted.each do |product|
+        new_product = new_store.products.new
+        new_product.name = fix_utf8(product.name)
+        new_product.description = fix_utf8(product.description)
+        new_product.active = product.sellable
+        new_product.handle = ActiveSupport::Inflector.transliterate(fix_utf8(product.name)).to_underscore
+        new_product.created_at = product.created_at
+        new_product.save
+        unless new_product.save
+          new_product.handle = new_product.handle + "_#{rand(100)}"
           unless new_product.save
             new_product.handle = new_product.handle + "_#{rand(1000)}"
             unless new_product.save
-              new_product.handle = new_product.handle + "_#{rand(1000)}"
+              new_product.handle = new_product.handle[0..10]
               new_product.save
-              binding.pry
             end
           end
-
-          product.categories.each do |category|
-            c = new_store.categories.find_by_name(fix_utf8(category.title))
-            unless c.nil?
-              c = c.categories_products.new
-              c.product_id = new_product.id
-              c.save
-            end
-          end
-
-          default_option = new_product.options.create(name: I18n.t(:variant), handle:'variant')
-
-          product.variants.each do |variant|
-            new_variant = new_product.variants.new
-            new_variant.height = variant.height
-            new_variant.width = variant.width
-            new_variant.quantity = variant.units.size
-            new_variant.price = variant.value
-            unless new_variant.save
-              binding.pry
-            end
-            new_variant.options.create(option_type: default_option, value: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
-          end
-
-
-
-
-          unless Rails.env == "development"
-            product.images.each do |image|
-              begin
-                new_image = @new_variant.images.new
-                new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
-                new_image.save
-              rescue 
-                next
-              end
-            end
-          end        
         end
-      end      
-    end
+
+        product.categories.each do |category|
+          c = new_store.categories.find_by_name(fix_utf8(category.title))
+          unless c.nil?
+            c = c.categories_products.new
+            c.product_id = new_product.id
+            c.save
+          end
+        end
+
+        default_option = new_product.options.create(name: I18n.t(:variant), handle:'variant')
+
+        product.variants.each do |variant|
+          new_variant = new_product.variants.new
+          new_variant.height = variant.height
+          new_variant.width = variant.width
+          new_variant.quantity = variant.units.size
+          new_variant.price = variant.value
+          unless new_variant.save
+            binding.pry
+          end
+          new_variant.options.create(option_type: default_option, value: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
+        end
+        unless Rails.env = "development"
+          product.images.each do |image|
+            begin
+              new_image = new_product.variants.first.images.new
+              new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
+              new_image.save
+            rescue 
+              next
+            end
+          end
+        end
+
+      end
+    end      
 
     def self.install_store_admin(store, new_store)
       return if store.nil?

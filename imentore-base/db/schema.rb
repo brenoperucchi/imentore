@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121010223905) do
+ActiveRecord::Schema.define(:version => 20121011184404) do
 
   create_table "admin_imentore_assets", :force => true do |t|
     t.string   "file"
@@ -287,13 +287,15 @@ ActiveRecord::Schema.define(:version => 20121010223905) do
   end
 
   create_table "imentore_products", :force => true do |t|
-    t.string  "name"
-    t.text    "description"
-    t.string  "permalink"
-    t.integer "store_id"
-    t.boolean "active",           :default => false
-    t.integer "product_brand_id"
-    t.string  "handle"
+    t.string   "name"
+    t.text     "description"
+    t.string   "permalink"
+    t.integer  "store_id"
+    t.boolean  "active",           :default => false
+    t.integer  "product_brand_id"
+    t.string   "handle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imentore_send_emails", :force => true do |t|

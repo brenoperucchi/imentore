@@ -33,6 +33,7 @@ class Paginate < ::Liquid::Block
         :include  => [:images, :master],
         :page       => params[:page],
         :per_page   => @per_page })
+      
       context[@collection_name] = pagination  
 
       page_count, current_page = pagination.total_pages, pagination.current_page

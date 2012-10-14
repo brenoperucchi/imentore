@@ -23,6 +23,7 @@ ul.nav.nav-tabs#myTab
     table.table
       thead
         tr
+          th= t(:id)
           th= t(:active)
           th= t(:name)
           th= t(:url)
@@ -30,6 +31,7 @@ ul.nav.nav-tabs#myTab
       tbody
         - @stores.each do |store|
           tr
+            td= store.id
             td= button_status(store.active?, '#')
             td= store.name[0..20]
             td= store.url
@@ -49,6 +51,7 @@ ul.nav.nav-tabs#myTab
     table.table
       thead
         tr
+          th= t(:id)
           th= t(:active)
           th= t(:name)
           th= t(:url)
@@ -56,6 +59,7 @@ ul.nav.nav-tabs#myTab
       tbody
         - @old_stores.each do |store|
           tr
+            td= store.id
             td= button_status(store.active?, '#')
             td= store.name[0..20]
             td= store.url
