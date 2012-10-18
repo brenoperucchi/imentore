@@ -5,6 +5,10 @@ module Imentore
       custom_actions :resource => :confirm_invoice
       # actions :index, :new, :create, :edit, :update
 
+      def index
+        @orders = current_store.orders.paginate(:page => params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      end
+
       def confirm_invoice
         @order = current_store.orders.find(params[:id])
         @order.invoice.confirm

@@ -9,10 +9,10 @@ legend= t(:customers)
 table.table.table-striped
   thead
     tr
-      th.span1= t(:active)
-      th= t(:name)
-      th= t(:email)
-      th= t(:created_at)
+      th.span1= sortable "active"
+      th= sortable "name"
+      th= sortable "email"
+      th= sortable "created_at"
       th= t(:actions)
   tbody
     - @customers.each do |customer|
@@ -32,3 +32,4 @@ table.table.table-striped
             i.icon-white.icon-trash
             '
             = t(:remove)
+= will_paginate @customers, :renderer => BootstrapPagination::Rails

@@ -12,10 +12,10 @@ p
 table.table.table-striped
   thead
     tr
-      th.super-mini #
-      th= t(:status)
-      th= t(:data)
-      th= t(:name)
+      th.super-mini= sortable "id"
+      th= sortable "active"
+      th= sortable "created_at"
+      th= sortable "name"
       th= t(:handle)
       th= t(:action)
   tbody
@@ -40,4 +40,5 @@ table.table.table-striped
           = link_to(admin_product_options_path(product), :class=>"btn btn-small") do
             i.icon-black.icon-plus
             '
-            = t(:options)
+            = t(:options)            
+= will_paginate @products, :renderer => BootstrapPagination::Rails

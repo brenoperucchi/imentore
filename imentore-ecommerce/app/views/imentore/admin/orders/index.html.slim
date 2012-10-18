@@ -7,10 +7,10 @@ legend= t(:orders)
 table.table
   thead
     tr
-      th.super-mini #
-      th.mini= t(:status)
-      th= t(:data)
-      th= t(:client)
+      th.super-mini= sortable "id"
+      th.mini= sortable "status"
+      th= sortable "created_at"
+      th= sortable "customer_email"
       th= t(:actions)
   tbody
     - @orders.each do |order|
@@ -32,3 +32,4 @@ table.table
             i.icon-trash.icon-white
             '
             = t(:remove)
+= will_paginate @orders, :renderer => BootstrapPagination::Rails

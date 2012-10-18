@@ -26,6 +26,10 @@ module Imentore
         end
       end
 
+      def destroy
+        destroy! { admin_payment_methods_path }
+      end
+
       protected
 
       def begin_of_association_chain

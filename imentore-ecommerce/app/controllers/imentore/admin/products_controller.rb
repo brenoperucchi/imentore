@@ -5,6 +5,10 @@ module Imentore
       actions :index, :new, :create, :edit, :update
       respond_to :json, only: :update
 
+      def index
+        @products = current_store.products.paginate(:page => params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      end
+
       def new
         @product = build_resource
         @product.variants.build

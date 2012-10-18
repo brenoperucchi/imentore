@@ -2,6 +2,25 @@
 module ApplicationHelper
   include ActionView::Helpers
 
+  def sortable(column, title = nil)
+    title ||= column.downcase
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    unless column == sort_column
+      link_to I18n.t(title), {:sort => column, :direction => direction}, {:class => ""}
+    else
+      css_class = if sort_direction == "asc" 
+                    "icon-black icon-arrow-down"
+                  else
+                    "icon-black icon-arrow-up"
+                  end
+      link_to :sort => column, :direction => direction do
+        concat(content_tag(:i, '', :class=>css_class))
+        concat(' ' + I18n.t(title))
+      end
+    end
+
+  end
+
   def time_zone(params = DateTime.now)
     @object = params
     @object.in_time_zone(current_store.config.time_zone)
@@ -166,6 +185,5 @@ module ApplicationHelper
       Imentore::ProductVariant.find(variant_drop.id).options.collect{|option| [option.option_type.name, option.value ]}
     end
   end
-
 
 end

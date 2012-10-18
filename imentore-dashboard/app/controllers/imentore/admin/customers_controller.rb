@@ -3,6 +3,10 @@ module Imentore
     class CustomersController < BaseController
       inherit_resources
 
+      def index
+        @customers = current_store.customers.paginate(:page => params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      end
+
       def edit
         @customer = current_store.customers.find(params[:id])
         (@customer.addresses = [@customer.addresses.new]) if @customer.addresses.blank?

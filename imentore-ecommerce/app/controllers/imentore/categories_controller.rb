@@ -17,18 +17,19 @@ module Imentore
     private
     
     def sort_column
-      case params[:order]
+      case params[:sort]
       when nil
         'id'
-      when "created_at"
+      when "recent"
         "created_at desc"
+      when "name_a_z"
+        "name asc"
+      when "name_z_a"
+        "name desc"
+      when "price_low"
+        "name desc"
       end
-      # @products.column_names.include?(params[:sort]) ? params[:sort] : "name"
     end
     
-    # def sort_direction
-    #   %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-    # end
-
   end
 end
