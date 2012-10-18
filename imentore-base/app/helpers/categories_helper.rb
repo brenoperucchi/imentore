@@ -15,9 +15,9 @@ module CategoriesHelper
         end)
         concat(content_tag(:td, descendant.handle, id: 'handle'))
         concat(content_tag(:td, descendant.products.size))
-        concat(content_tag(:td) do
-          concat(tag(:input, :name=>"ordering", :class=> 'span1'))
-        end)
+        # concat(content_tag(:td) do
+        #   concat(tag(:input, :name=>"ordering", :class=> 'span1'))
+        # end)
         concat(content_tag(:td) do
           concat(content_tag(:a, 'Edit', :href=>edit_admin_category_path(descendant), :class=>'btn', id: 'edit_category', :category_id =>descendant.id, parent_id: descendant.parent_id) do
             concat(content_tag(:i,'',:class=> 'icon-black icon-edit'))
@@ -45,7 +45,7 @@ module CategoriesHelper
           concat(content_tag(:th, I18n.t(:name, :style=>"width:40px;")))
           concat(content_tag(:th, I18n.t(:handle)))
           concat(content_tag(:th, I18n.t(:products)))
-          concat(content_tag(:th, I18n.t(:ordering)))
+          # concat(content_tag(:th, I18n.t(:ordering)))
           concat(content_tag(:th, I18n.t(:actions)))
         end
       end)
@@ -58,7 +58,7 @@ module CategoriesHelper
             end)
             concat(content_tag(:td, category.handle, id: 'handle'))
             concat(content_tag(:td, category.products.size))
-            concat(content_tag(:td))
+            # concat(content_tag(:td))
             concat(content_tag(:td) do
               concat(content_tag(:a, 'Edit', :href=>edit_admin_category_path(category), :class=>'btn', id: 'edit_category', :category_id =>category.id, parent_id: category.parent_id) do
                 concat(content_tag(:i,'',:class=> 'icon-black icon-edit'))

@@ -21,6 +21,10 @@ module Imentore
 
     accepts_nested_attributes_for :variants
 
+    def low_price
+      
+    end
+
     def handle
       return if read_attribute(:name).blank?
       if read_attribute(:handle).blank? 

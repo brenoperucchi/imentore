@@ -20,7 +20,7 @@ Imentore::Core::Engine.routes.draw do
           resources :images, only: [:new, :create, :destroy, :index], to: 'images'
         end
       end
-      resources :payment_methods,   only: [:index, :edit, :update, :new, :create], path: "payment-methods"
+      resources :payment_methods, path: "payment-methods"
       resources :delivery_methods,  except: [:show], path: "delivery-methods"
       resources :orders,  only: [:index, :edit, :destroy] do
         get 'confirm_invoice', 'confirm_delivery', :on => :member

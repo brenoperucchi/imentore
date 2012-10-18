@@ -100,8 +100,8 @@ body
       p
         | © Imentore 2012
 
-  .footer
-    
+
+  .footer  
     = yield :footer
     / UserVoice JavaScript
     javascript:
@@ -113,3 +113,26 @@ body
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
         })();
       })
+.extra
+  .modal.fade#delete-confirm
+    .modal-header
+      a.close[data-dismiss='modal']
+        | x
+      h3= I18n.t(:delete_this_thing)
+    .modal-body
+      p= I18n.t(:delete_be_certain)
+    .modal-footer
+      = link_to t(:destroy), 'pony', method: :delete, :class => 'btn btn-danger' 
+      a[href="#" data-dismiss="modal" class="btn"]
+        = t(:cancel)
+  javascript:
+    $('#delete-confirm').on('show', function() {
+     var $submit = $(this).find('.btn-danger'),
+     href = $submit.attr('href');
+    $submit.attr('href', href.replace('pony', $(this).data('href')));
+    });
+
+    $('.delete-confirm').click(function(e) {
+      e.preventDefault();
+      $('#delete-confirm').data('href', $(this).attr('href')).modal('show');
+    });

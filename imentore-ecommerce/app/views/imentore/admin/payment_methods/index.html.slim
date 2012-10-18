@@ -1,6 +1,3 @@
-/ - content_for :breadcrumb do
-/   == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
-
 legend= t(:payment_methods)
 p= link_to(t(:payment_method_new), new_admin_payment_method_path, :class=>'btn btn-primary')
 
@@ -23,7 +20,7 @@ table.table.table-striped
             = t(:edit)
           '
           - if payment.handle == "custom"
-            = link_to(admin_payment_method_path(payment), method: :delete, :class=>"btn btn-danger") do
+            = link_to(admin_payment_method_path(payment), class: "btn btn-danger delete-confirm") do
               i.icon-white.icon-remove
               '
               = t(:remove)
