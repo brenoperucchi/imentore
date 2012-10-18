@@ -1,23 +1,6 @@
 module Imentore
   class CustomersController < BaseController
     inherit_resources
-    # nested_belongs_to :user
-    # belongs_to :user
-    # actions :new, :create, :destroy, :index
-
-    # respond_to :json, only: [:create, :index, :destroy]
-
-    # def index
-    #   respond_with(collection.map { |Customer| Imentore::CustomerPresenter.new(Customer).to_json })
-    # end
-
-    # def create
-    #   create! do |success, failure|
-    #     success.json {
-    #       render json: [Imentore::CustomerPresenter.new(@Customer).to_json]
-    #     }
-    #   end
-    # end
 
     def new
       @customer = build_resource
@@ -40,8 +23,7 @@ module Imentore
       end
     end
 
-
-    # protected
+    protected
 
     def begin_of_association_chain
       current_store

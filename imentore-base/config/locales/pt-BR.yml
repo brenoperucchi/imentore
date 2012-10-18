@@ -1,4 +1,17 @@
 pt-BR:
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "Próximo &#8594;"
+    page_gap: "&hellip;"
+
+  id: "#"
+  created_at: Data
+  customer_email: E-mail Cliente
+  delete_this_thing: Você deseja remover ?
+  delete_be_certain: Tenha certeza
+  destroy: Remover
+  previous: Anterior
+  email: E-mail
 
   # user_for
   'computer, clothing': 'Computadores, Roupas'
