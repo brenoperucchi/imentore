@@ -28,16 +28,16 @@ class LiquidView
     if @view.content_for?(:layout)
       assigns["content_for_layout"] = @view.content_for(:layout)
       assigns["content_for_header"] = @view.content_for(:header)
-      assigns["_csrf_token"] = @view.controller.session['_csrf_token']
     end
+    assigns["_csrf_token"] = @view.controller.session['_csrf_token']
     assigns.merge!(local_assigns.stringify_keys)
 
 
     #Assigns Permanent
     store = @view.current_store
     assigns["store"] = @store = Imentore::StoreDrop.new(store)
-    assigns["pages"] = store.pages.map { |page| Imentore::PageDrop.new(page) }
-    assigns["notices"] = store.notices.map { |notice| Imentore::NoticeDrop.new(notice) }
+    assigns["pages"] = store.pages.active.map { |page| Imentore::PageDrop.new(page) }
+    assigns["notices"] = store.notices.active.map { |notice| Imentore::NoticeDrop.new(notice) }
     assigns["categories"] = store.categories.roots.map { |category| Imentore::CategoryDrop.new(category) }
 
 

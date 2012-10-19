@@ -38,6 +38,7 @@ Imentore::Core::Engine.routes.draw do
       get 'calculate_shipping', on: :member
     end
 
+    match "contact",                    to: "stores#contact",       as: "store_contact"
     match "product/:handle",            to: "products#handle",      as: 'product_handle'
     match "product_search/:name",       to: "products#search",      as: 'product_search'
     match "notices/:handle",            to: "notices#show",         as: "notices"

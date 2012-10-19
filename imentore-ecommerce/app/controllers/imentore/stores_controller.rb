@@ -4,6 +4,10 @@ module Imentore
 
     skip_before_filter :check_store, only: [:new, :create, :create_success]
 
+    def contact
+      
+    end
+
     def new
       @store = Store.new
       @store.build_owner
