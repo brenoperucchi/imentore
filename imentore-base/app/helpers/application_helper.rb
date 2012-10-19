@@ -23,6 +23,7 @@ module ApplicationHelper
 
   def time_zone(params = DateTime.now)
     @object = params
+    return DateTime.now if @object.nil?
     @object.in_time_zone(current_store.config.time_zone)
   end
 
