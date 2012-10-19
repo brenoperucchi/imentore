@@ -4,7 +4,7 @@ module Imentore
 
     validates :handle, uniqueness: { scope: "store_id" }
     validates :name, presence: true
-    validates :handle, format: { with: /^[-A-Za-z\d_]+$/ }
+    # validates :handle, format: { with: /^[-A-Za-z\d_]+$/ }
 
     has_many :categories_products
     has_many :products, :through => :categories_products, :source => :product

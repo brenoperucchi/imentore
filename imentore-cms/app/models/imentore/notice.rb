@@ -1,8 +1,11 @@
 module Imentore
   class Notice < ActiveRecord::Base
-    scope :active, where(active: true)
+    belongs_to :store
+
+    validates :name, presence: true
     validates :handle, uniqueness: { scope: :store_id }
-    validates :handle, format: { with: /^[-A-Za-z\d_]+$/ }
+    # validates :handle, format: { with: /^[-A-Za-z\d_]+$/ }
+    scope :active, where(active: true)
 
     def handle
       return if read_attribute(:name).blank?

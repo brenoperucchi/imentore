@@ -21,11 +21,16 @@ module Imentore
       end
 
       def create
-        create! do
-          default_option = @product.options.create(name: t(:default), handle: t(:default).to_underscore)
-          variant = @product.variants.first
-          variant.options.create(option_type: default_option, value: "default")
-          admin_products_path
+        create! do |success, failure|
+          success.html do
+            default_option = @product.options.create(name: t(:default), handle: t(:default).to_underscore)
+            variant = @product.variants.first
+            variant.options.create(option_type: default_option, value: "default")
+            redirect_to admin_products_path
+          end
+          failure.html do
+            render :new
+          end
         end
       end
 

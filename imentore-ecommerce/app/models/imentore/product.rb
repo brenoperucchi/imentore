@@ -17,7 +17,7 @@ module Imentore
 
     validates :name, :handle, :store, presence: true
     validates :handle, uniqueness: { scope: :store_id }
-    validates :handle, format: { with: /^[-A-Za-z\d_]+$/ }
+    # validates :handle, format: { with: /^[-A-Za-z\d_]+$/ }
 
     accepts_nested_attributes_for :variants
 
