@@ -1,0 +1,26 @@
+/ - content_for :footer do
+/   javascript:
+/     $('#myTab a').click(function (e) {
+/       e.preventDefault();
+/       $(this).tab('show');
+/     })
+- content_for :footer do
+  javascript:
+    $(document).ready(function(){
+      $('ul.nav.nav-tabs li.active').attr('class','');
+      var id = $('div.tab').attr('id');
+      $('ul.nav.nav-tabs li#'+id).attr('class','active');
+    })
+
+- content_for :breadcrumb do
+  == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => admin_themes_path},{@theme.name => admin_theme_path(@theme)}])
+
+ul.nav.nav-tabs#myTab
+  li#theme
+    = link_to(t('imentore/theme', scope: [:activerecord, :models]), admin_theme_path(@theme))
+  li#layouts
+    = link_to(t(:layouts), layouts_admin_theme_templates_path(@theme))
+  li#templates
+    = link_to(t(:templates), admin_theme_templates_path(@theme))
+  li#assets
+    = link_to(t(:assets), admin_theme_assets_path(@theme))

@@ -4,6 +4,7 @@ module Imentore
       inherit_resources
       belongs_to :theme, parent_class: Imentore::Theme
       before_filter :uniqueness_default, only:[:update, :create]
+      custom_actions :collection => :layouts
 
       def new
         @kind = params[:kind]

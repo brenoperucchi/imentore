@@ -1,0 +1,38 @@
+=  render "imentore/admin/themes/top"
+
+.tab#layouts
+  table.table
+    thead
+      tr
+        th= t(:default)
+        th= t(:name)
+        th= t(:default_updated_at)
+        th= t(:actions)
+    tbody
+      - @theme.templates.layouts.each do |template|
+        tr
+          td= button_status(template.default, edit_admin_theme_template_path(@theme, template))
+          td= link_to(template.path, edit_admin_theme_template_path(@theme, template)) + " "
+          td= l(time_zone(template.admin_template.updated_at)) unless template.admin_template.nil?
+          td
+            = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn') do
+              i.icon-black.icon-edit
+              '
+              = t(:edit)
+            '
+            - unless template.admin_template.nil?
+              = link_to(view_default_admin_theme_template_path(@theme, template), class: 'btn') do
+                i.icon-black.icon-edit
+                '
+                = t(:view_default)
+              '
+            - if template.admin_template.nil?
+              = link_to(admin_theme_template_path(@theme, template), method: :delete , class: 'btn btn-danger') do
+                i.icon-white.icon-remove
+                '
+                = t(:remove)
+  .controls
+    = link_to(new_admin_theme_template_path(@theme, kind: :layout), :class=>'btn btn-primary') do
+        i.icon-white.icon-plus
+        '
+        = t(:newo) + ' ' + t(:layout) 

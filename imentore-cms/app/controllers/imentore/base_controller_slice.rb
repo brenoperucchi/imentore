@@ -32,9 +32,8 @@ Imentore::BaseController.class_eval do
     if template_id
       template_id = template_id.identifier.split("-").first
       template = Imentore::Template.find(template_id)
-
       if template && template.layout.present?
-        options[:layout] = template.layout
+        options[:layout] = "layouts/#{template.layout.path}"
       end
     end
   end

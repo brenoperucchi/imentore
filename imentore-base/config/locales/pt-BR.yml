@@ -53,7 +53,7 @@ pt-BR:
   object_destroy: Registro removido
   object_failure: Registro com problema
 
-  view_default: Mostrar o Padrão
+  view_default: Mostrar padrão
   default_updated_at: Atualização do sistema
   status: Condição
   code: Código
@@ -487,7 +487,7 @@ pt-BR:
         remember_me: Lembrar senha
       imentore/template:
         default: Padrão
-        path_layout: Endereço do layout
+        path_layout: Nome do layout
         path_template: Endereço da página
         body: Corpo do html
         default_updated_at: Atualização pelo sistema

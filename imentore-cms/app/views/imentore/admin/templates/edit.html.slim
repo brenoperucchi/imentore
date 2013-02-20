@@ -9,6 +9,6 @@ legend #{@template.kind.capitalize} #{@template.path}
     = f.input :default 
   = f.input :path, label: t("path_#{@kind.downcase}", scope: [:activerecord, :attributes, 'imentore/template'])
   - if @template.kind == 'template'
-    = f.input :layout, as: 'radio_buttons', collection: @theme.templates.layouts.collect{|x| x.path}
+    = f.input :layout_id, as: 'radio_buttons', collection: @theme.templates.layouts.collect{|x| [x.path, x.id]}
   = f.input :body, :input_html=> {:style=> 'width:95%; height:300px;'}
   = f.button :submit, "#{t(:update)} #{@kind.capitalize}", class: 'btn btn-primary'

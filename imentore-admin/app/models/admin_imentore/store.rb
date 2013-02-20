@@ -41,7 +41,7 @@ module AdminImentore
       return if store.nil?
       new_store.update_attribute(:old_store_id, store.id)
       new_store.products.destroy_all
-      store.products.not_deleted.each do |product|
+      store.products.not_deleted.take(5).each do |product|
         new_product = new_store.products.new
         new_product.name = fix_utf8(product.name)
         new_product.description = fix_utf8(product.description)

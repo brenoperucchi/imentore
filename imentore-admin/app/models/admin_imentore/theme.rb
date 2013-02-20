@@ -45,12 +45,18 @@ module AdminImentore
           self.templates.each do |ad_t|
             template = theme.templates.new
             template.path = ad_t.path
-            template.layout = ad_t.layout
+            # template.layout = ad_t.layout
             template.kind = ad_t.kind
             template.default = true if template.kind == "layout"
             template.body = ad_t.body
             template.admin_imentore_template_id = ad_t.id
-            template.save
+            if template.save
+              if template.kind  == "layout"
+                @id = template.id
+              else
+                template.update_attribute(:layout_id, @id)
+              end
+            end
           end
           self.assets.each do |admin_asset|
             asset = theme.assets.create(file: admin_asset.file)

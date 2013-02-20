@@ -18,6 +18,7 @@ module SqlTemplate
       template_path = build_path(name, prefix, partial)
       template      = find_by_request_path unless template_path.include?("layouts/")
       template      ||= find_by_template_path(template_path)
+      template
 
       if template
         handler = ActionView::Template.handler_for_extension(template.handler)
@@ -34,7 +35,6 @@ module SqlTemplate
         templates << ActionView::Template.new(template.body, template_id, handler, details)
         # http://stackoverflow.com/a/6358022
       end
-
       templates
     end
 
@@ -45,7 +45,7 @@ module SqlTemplate
     end
 
     def find_by_template_path(path)
-      current_store.theme.templates.find_by_path(path)
+      current_store.theme.templates.find_by_path(path.gsub('layouts/',''))
     end
   end
 end
