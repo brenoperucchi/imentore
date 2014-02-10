@@ -154,6 +154,7 @@ module AdminImentore
       new_store.disabled_at = store.disabled_at
       new_store.actived_at = store.actived_at
       new_store.config = Imentore::Settings.new
+      new_store.old_store_id = store.id
       unless new_store.save
         puts "----------------------"
         puts store.id
