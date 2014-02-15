@@ -1,3 +1,4 @@
+
 - content_for :header do
   = stylesheet_link_tag    "cart"
   = javascript_include_tag "cart"
@@ -23,10 +24,20 @@
           type: 'get',
           data: {zip_code:zip_code, method:method},
           dataType: 'json',
+          beforeSend: function() {
+            $('span#loading').html('<img src="images/site/loading.gif" />'); 
+          },
+          error: function() {
+            $('span#loading').html('Error'); 
+          },
           success: function(json) {
             $('td#shipping_value').html(json['total_delivery'])
             $('td#coupon_value').html(json['total_coupon'])
             $('td#total_amount').html(json['total_amount'])
+            
+          },
+          complete: function() {  
+            $('span#loading').html("");           
           }
         })
       }
@@ -87,6 +98,8 @@
           = "x"
         h4[class="alert-heading"]
           = t(:warning)
+        - if current_cart.empty?
+          p= t(:cart_empty)
         p
           = flash[:alert]
       div.alert.alert-success.hide
@@ -96,11 +109,6 @@
           = t(:success)
         p
           = flash[:success]
-
-  .row
-    .span4
-      - if current_cart.empty?
-        h1= t(:cart_empty)
   legend= t(:cart)
 
   = form_tag(cart_path, method: 'put', id:'cart') do
@@ -140,23 +148,31 @@
                 td= number_with_price(item.amount)
             tr
               td
+                | &nbsp
               td
+                | &nbsp
               td
+                | &nbsp
               td(colspan='2' style='text-align:center;')
                 = t(:sub_total)
               td#sub_total
                 = number_with_price(current_cart.amount)
             tr
               td
+                | &nbsp
               td
+                | &nbsp
               td
+                | &nbsp
               td(colspan='2' style='text-align:center;')
                 = t(:shipping_value)
               td#shipping_value
                 | 0
             tr
               td
+                | &nbsp
               td
+                | &nbsp
               td
                 .span3
                   = text_field_tag "coupon_code", nil, class: 'input-small', style: "margin-bottom:0px;"
@@ -172,8 +188,11 @@
                 = number_with_price(current_cart.coupons_amount)
             tr
               td
+                | &nbsp
               td
+                | &nbsp
               td
+                | &nbsp
               td(colspan='2' style='text-align:center;')
                 h3 Total
               td#total_amount
@@ -195,6 +214,7 @@
           a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
             i.icon-refresh
             = t(:calculate)
+          span#loading
     .clearfix
     hr
     .span4.offset9
@@ -202,7 +222,7 @@
         button(type='submit' class='btn btn-large' onclick="$('form#cart').submit();")
           i.icon-refresh
           '
-          = t(:update)
+          = t(:update_cart)
         '
         = link_to(checkout_path, :class=>'btn btn-large btn-success') do
           i.icon-shopping-cart.icon-white

@@ -4,6 +4,7 @@ module Imentore
 
     def new
       @customer = build_resource
+      @customer.person_type = 'person'
       @customer.build_user
     end
 
@@ -14,10 +15,10 @@ module Imentore
       create! do |success, failure|
         success.html do
           flash[:success] = t(:created_customer)
-          redirect_to new_user_session_path
+          sign_in(@customer.user)
+          redirect_to session["user_return_to"]
         end
         failure.html do
-          flash[:alert] = @customer.errors.full_messages
           render :new
         end
       end

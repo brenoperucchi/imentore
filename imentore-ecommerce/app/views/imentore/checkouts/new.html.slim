@@ -43,10 +43,16 @@
           type: 'get',
           data: {zip_code:zip_code, method:method},
           dataType: 'json',
+          beforeSend: function() {
+            $('span#loading').html('<img src="images/site/loading.gif" />');
+          },
           success: function(json) {
             $('td#shipping_value').html(json['total_delivery'])
             $('td#coupon_value').html(json['total_coupon'])
             $('td#total_amount').html(json['total_amount'])
+          },
+          complete: function() {
+            $('span#loading').html('');
           }
         })
       }
@@ -129,6 +135,7 @@
           $('#order_shipping_address_phone').val($('#order_billing_address_phone').val());                    
         }
       })
+      $('input#billing_address.checkbox').first().trigger('click')
       $.fn.collapsy = function(option, id) {
         var self = $(this).attr('href');
         if (self == undefined){
@@ -233,30 +240,30 @@
             td= number_with_price(item.price)
             td= number_with_price(item.amount)
         tr
-          td
-          td
+          td &nbsp
+          td &nbsp
           td(colspan='2' style='text-align:center;')
             '
             = t(:sub_total)
           td#sub_total
             = number_with_price(current_cart.amount)
         tr
-          td
-          td
+          td &nbsp
+          td &nbsp
           td(colspan='2' style='text-align:center;')
             = t(:shipping_value)
           td#shipping_value
             | 0
         tr
-          td
-          td
+          td &nbsp
+          td &nbsp
           td(colspan='2' style='text-align:center;')
             = t(:coupon_value)
           td#coupon_value
             = number_with_price(current_cart.coupons_amount)
         tr
-          td
-          td
+          td &nbsp
+          td &nbsp
           td(colspan='2' style='text-align:center;')
             h3= t(:total)
           td#total_amount
@@ -309,7 +316,7 @@
                     /           = address.name
                     .address
                       - if user_signed_in? and not current_user.userable.owner?
-                        = f.input :billing_checkbox, :as => :radio_buttons, collection: [[t(:other_address), 'other']] + current_user.userable.addresses.collect {|x| [x.name, x.name]} , input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
+                        = f.input :billing_checkbox, :as => :radio_buttons, collection: addresses_checkout_helper , input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
                       = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
                         = render("shared/address", addr: addr)
                   .span6
@@ -357,10 +364,12 @@
                       = f.simple_fields_for :delivery, f.object.delivery do |del|
                         = del.input :delivery_method, label: t(:delivery_method), collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :prompt => t(:select), :input_html => { id: 'delivery_method'}
                   .span2
-                      a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
-                        i.icon-refresh
-                        '
-                        = t(:calculate)
+                    a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
+                      i.icon-refresh
+                      '
+                      = t(:calculate)
+                    span#loading
+
               .clearfix
       .form-actions.hide
         .span2

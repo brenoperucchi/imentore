@@ -33,7 +33,7 @@ pt-BR:
   invoice_status: Status Cobrança
   delivery_status: Status Envio
   delivery_amount: Valor Envio
-  coupon_amount: Valor Coupom
+  coupon_amount: Valor Cupom
   invoice_method: Método de cobrança
   delivery_confirm: Confirmação Envio
   payment_confirm: Confirmação Pagamento
@@ -71,10 +71,10 @@ pt-BR:
   quantity: Quantidade
   price: Preço
   amount: Total
-  coupon: Coupom
+  coupon: Cupom
   sub_total: Sub Total
   shipping_value: Valor do Envio
-  coupon_value: Valor do Coupons
+  coupon_value: Valor do Cupons
   delivery_method: Método de Envio
   payment_method: Método de Pagamento
   zip_code_to: Cep Destino
@@ -108,12 +108,13 @@ pt-BR:
   cart_need_variant: Você deve selecionar uma variação
   product_added: Produto Adicionado
   product_not_added: Produto não adicionado
+  cart_update: Carrinho atualizado
   cart_empty: Carrinho vazio
   cart: Carrinho
   warning: Aviso
   success: Sucesso
   default: Padrão
-  coupon_not_valid: Coupom nao é válido
+  coupon_not_valid: Cupom nao é válido
   cart_not_valid: Carrinho inválido
   checkout_charge_problem: Problema no método de pagamento
   hosting: Hospedagem
@@ -123,6 +124,7 @@ pt-BR:
   product_brand: Marca do Produto
   product_brand_new: Nova marca
   variant_new: Nova variação
+  update_cart: Atualizar Carrinho
 
   shipping_address: Endereço de Envio
   billing_addresss_title: Endereço de compra e Envio
@@ -325,6 +327,8 @@ pt-BR:
       year: Ano
   errors: &errors
     format: ! '%{attribute} %{message}'
+    messages_custom:
+      full_name_required: "Nome deve ser completo"
     messages:
       'Some errors were found, please take a look': 'Existe algum error, por favor verifque'
       accepted: deve ser aceito
@@ -450,7 +454,7 @@ pt-BR:
       imentore/product_variant: Variação
       imentore/option_type: Opção
       imentore/category: Categoria
-      imentore/coupon: Coupom
+      imentore/coupon: Cupom
     attributes:
       imentore/store:
         name: Nome 
@@ -507,7 +511,7 @@ pt-BR:
         gender: Sexo
         name: Nome
         brand: Empresa
-        irs_id: CPF
+        irs_id: CPF/CNPJ
         birthdate: Data de Aniversário
         national_id: RG
       imentore/employee:
@@ -515,7 +519,7 @@ pt-BR:
         gender: Sexo
         name: Nome
         brand: Empresa
-        irs_id: CPF
+        irs_id: CPF/CNPJ
         birthdate: Data de Aniversário
         national_id: RG
       imentore/order:

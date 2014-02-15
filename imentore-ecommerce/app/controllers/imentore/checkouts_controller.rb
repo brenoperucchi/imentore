@@ -3,6 +3,7 @@ module Imentore
     include PagamentoDigital::Helper
     before_filter :authenticate_to_buy!, only: [:new, :confirm]
     before_filter :check_cart, only:[:new]
+    skip_before_filter :authorize_client, except: [:new]
     skip_before_filter :verify_authenticity_token, :check_store, only: [:return_mp, :return_pd, :sync_pd, :return_pg, :sync_pg,
                                                                          :sync_mp, :complete]
 
@@ -14,7 +15,8 @@ module Imentore
     end
 
     def customer_only
-      redirect_to(cart_path, alert: :admin_denied) if user_signed_in? and current_user.userable.owner?
+      # redirect_to(cart_path, alert: :admin_denied) if user_signed_in? and current_user.userable.owner?
+      # binding.pry
     end
 
     def authenticate_to_buy!

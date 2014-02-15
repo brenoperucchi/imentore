@@ -4,7 +4,6 @@ module Imentore
 
     def initialize(asset)
       @asset = asset
-      # binding.pry
     end
 
     def to_json

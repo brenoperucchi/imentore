@@ -3,6 +3,7 @@ module Imentore
     class SessionsController < Devise::SessionsController
       layout "client"
 
+      # algo a respeito sobre o login da loja com o ID do Store
       def create
         params[:user].merge!(store_id: current_store.id.to_s)
         super

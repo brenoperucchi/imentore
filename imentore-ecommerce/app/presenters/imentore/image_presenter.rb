@@ -4,7 +4,6 @@ module Imentore
 
     def initialize(image)
       @image = image
-      # binding.pry
     end
 
     def to_json

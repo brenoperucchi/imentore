@@ -1,0 +1,27 @@
+h2
+  | Sign up
+/ = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+= simple_form_for(@customer, :url => user_registration_path(@customer)) do |f|
+  = f.error_notification
+  .row
+    .span12
+      .row
+        .span3
+          = f.input :name
+          = f.input :brand
+          = f.input :irs_id
+          = f.input :national_id
+          - f.object.build_user if f.object.user.blank? 
+          = f.simple_fields_for :user do |f|
+            = f.input :email, :required => true, :autofocus => true
+            = f.input :password, :required => true
+            = f.input :password_confirmation, :required => true
+        .span4
+          - f.object.addresses.build if f.object.addresses.blank? 
+          = f.simple_fields_for :addresses do |addr|
+            = render "shared/address", addr: addr
+ 
+  .actions
+    = f.button :submit, "Sign up"
+
+= render "links"

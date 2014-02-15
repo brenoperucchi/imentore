@@ -23,11 +23,16 @@ module Imentore
       end
     end
 
-    validates_uniqueness_of    :email,     :case_sensitive => false, :allow_blank => true, scope: [:email, :store_id], :if => :email_changed?
-    validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?
-    validates_presence_of   :password, :on=>:create, :if => :password_required
-    validates_confirmation_of   :password, :on=>:create, :if => :password_required
-    validates_length_of :password, :within => Devise.password_length, :allow_blank => true, :if => :password_required
+    # validates_uniqueness_of    :email,     :case_sensitive => false, :allow_blank => true, scope: [:email, :store_id], :if => :email_changed?
+    # validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?
+    # validates_presence_of   :password, :on=>:create, :if => :password_required
+    # validates_confirmation_of   :password, :on=>:create, :if => :password_required
+    # validates_length_of :password, :within => Devise.password_length, :allow_blank => true, :if => :password_required
+    
+    validates :email, uniqueness: { :case_sensitive => false, :allow_blank => true, scope: [:email, :store_id] }, :if => :email_changed?    
+    validates :password, :email, presence: true
+    validates :password, confirmation: true
+
 
     belongs_to :store
     belongs_to :userable, polymorphic: true

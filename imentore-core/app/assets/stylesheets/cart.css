@@ -13,3 +13,10 @@ input[type='text'], input[type='email'], input[type='tel']{
   height:26px!important;
   margin-bottom: 0px!important;
 }
+span{
+  display: inline-block;
+  vertical-align: middle;
+}
+.alert{
+   margin-top:30px;
+}

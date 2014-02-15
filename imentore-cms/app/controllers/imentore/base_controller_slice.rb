@@ -25,6 +25,10 @@ Imentore::BaseController.class_eval do
 
   private
   def _process_options(options)
+    status, content_type, location = options.values_at(:status, :content_type, :location)
+    self.status = status if status
+    self.content_type = content_type if content_type
+    self.headers["Location"] = url_for(location) if location
     return if options.key?(:text) || options.key?(:inline)
 
     template_id = view_paths.find(options[:template], options[:prefixes]) rescue nil

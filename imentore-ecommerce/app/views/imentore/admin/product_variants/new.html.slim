@@ -2,7 +2,6 @@
   = f.error_notification
   = f.input :sku, input_html: { :class => 'change', :id => 'sku'}
   = f.simple_fields_for :options,  @variant.options do |of|
-    - binding.pry
     = of.input :option_type_id, as: :hidden, input_html: { :value => of.object.option_type_id }
     = of.input :value, label: of.object.option_type.name, input_html: { :class => 'change', :id => of.object.option_type.name}
   = f.input :price, input_html: { :class => 'change', :id => 'price'}
@@ -10,4 +9,3 @@
   = f.input :weight, input_html: { :class => 'change', :id => 'weight'}
   .form-actions
     = f.button :submit, :class => "btn-primary"
-

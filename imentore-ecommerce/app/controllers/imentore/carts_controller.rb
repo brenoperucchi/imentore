@@ -29,10 +29,11 @@ module Imentore
           return if quantity.blank?
           product = current_store.products.find_by_id(item[1][:product_id])
           variant = product.variants.find_by_id(item[1][:variant_id])
-          current_cart.renew(product, variant, quantity)
+          flash[:success] = t(:cart_update) if current_cart.renew(product, variant, quantity)
         end
-        redirect_to cart_path
       end
+      redirect_to cart_path
+
     end
 
     def show
@@ -81,14 +82,15 @@ module Imentore
 
       respond_to do |wants|
         wants.json do
-          # begin
-            if quantity > 0
-              current_cart.add(product, variant, quantity)
+          begin
+            if quantity > 0 and current_cart.add(product, variant, quantity)
+                render json: Imentore::CartPresenter.new(current_cart).to_json
+            else
+                render :json => { "message" => {"alert" => t(:product_not_added) }}, status: 400
             end
-            render json: Imentore::CartPresenter.new(current_cart).to_json
-          # rescue ActiveRecord::RecordNotFound
-            # render json: Imentore::CartPresenter.new(current_cart).to_json
-          # end
+          rescue ActiveRecord::RecordNotFound
+            render :json => { "message" => {"alert" => t(:product_not_added) }}, status: 422
+          end
         end
         wants.html do
           if quantity > 0

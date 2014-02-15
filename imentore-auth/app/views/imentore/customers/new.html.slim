@@ -9,7 +9,8 @@
       .span12
         .row
           .span6
-            = f.input :person_type, :collection => [[t(:person), 'person'], [t(:company), 'company']] , :as => :radio_buttons
+            = f.input :person_type, :collection => [[t(:person), 'person'], [t(:company), 'company']] , :as => :radio_buttons, 
+              checked: f.object.person_type
             = f.input :gender, :collection => [t(:woman), t(:male)],:as => :radio_buttons
             = f.input :name
             = f.input :brand

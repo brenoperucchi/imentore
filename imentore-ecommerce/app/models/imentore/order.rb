@@ -11,7 +11,6 @@ module Imentore
   #   def [](key, *args)
   #         var_name = "@#{key}"
   #         self.instance_variable_set(var_name, args)
-  #         binding.pry
   #       # end
   #     # base.register_attributes *attributes
   #     # base.class_eval do

@@ -325,17 +325,19 @@ module AdminImentore
 
 
 
-        unless Rails.env == "development"
+        # unless Rails.env == "development"
+          # binding.pry
           product.images.each do |image|
-            begin
-              new_image = @new_variant.images.new
+            # begin
+              new_image = new_product.variants.first.images.new
               new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
               new_image.save
-            rescue 
-              next
-            end
+            # rescue 
+              # next
+            # end
           end
-        end        
+        # end        
+
       end
 
     end

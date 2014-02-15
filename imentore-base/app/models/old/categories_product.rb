@@ -8,8 +8,8 @@ module Old
     self.abstract_class = true
       establish_connection(
        :adapter  => 'mysql2',
-       :database => 'imentore_go2b',
-       :host     => 'host.imentore.com.br',
+       :database => 'go2b_production',
+       :host     => 'localhost',
        :username => 'go2b',
        :password => '123123'
     )

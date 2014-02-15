@@ -51,11 +51,11 @@ body
             /     | Reports
           - if user_signed_in?
             p.navbar-text.pull-right
-              | Logged in as
+              | Você está conectado como
               '
               a[href="#"]
                 = current_user.userable.name
-              '  and
+              '  e 
               = link_to(t(:logout), destroy_user_session_path, method: :delete)
           - else
             p.navbar-text.pull-right
@@ -70,12 +70,8 @@ body
           .well.sidebar-nav
             ul.nav.nav-list
               li.nav-header
-                | Sidebar
-              li
-                = link_to("My Cart", cart_path)
-              li
-                = link_to("Login", new_user_session_path)
-              li= link_to("Address", client_address_path)
+              li= link_to(t(:cart), cart_path)
+              li= link_to(t(:address), client_address_path)
               / li
               /   a[href="#"]
               /     | Link
