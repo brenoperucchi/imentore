@@ -1,66 +1,81 @@
-default_run_options[:pty] = true
-set :application, "imentore"
-set :repository,  "git@github.com:bperucchi/imentore.git"
-set :applicationdir, "/home/imentore/app/current/imentore-base"
+# config valid only for Capistrano 3.1
+lock '3.1.0'
 
-set :scm, :git
-# set :scm_passphrase, "aszx12qw"  # The deploy user's password
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :application, 'imentore'
+set :repo_url, 'git@github.com:bperucchi/imentore.git'
 
-set :user, "imentore"  # The server's user for deploys
-set :use_sudo, false
-set :deploy_to, "/home/imentore/app"
-set :deploy_via, :remote_cache
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 set :branch, "master"
 
- 
-role :web, "216.120.250.136"                          # Your HTTP server, Apache/etc
-role :app, "216.120.250.136"                          # This may be the same as your `Web` server
-role :db,  "216.120.250.136", :primary => true # This is where Rails migrations will run
-ssh_options[:keys] = "#{ENV['HOME']}/.ssh/216.120.250.136/imentore"
-ssh_options[:auth_methods] = %w(publickey)
+# Default deploy_to directory is /var/www/my_app
+set :deploy_to, '/home/imentore/app'
 
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
+# Default value for :scm is :git
+set :scm, :git
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+# Default value for :format is :pretty
+# set :format, :pretty
 
-# If you are using Passenger mod_rails uncomment this:
+# Default value for :log_level is :debug
+set :log_level, :debug
 
-# after "deploy", "deploy:bundle_gems"
-# after "deploy:bundle_gems", "deploy:restart"
+# Default value for :pty is false
+set :pty, true
 
-after "deploy", "deploy:config_files"
-after "deploy", "deploy:restart"
+# Default value for :linked_files is []
+# set :linked_files, %w{config/database.yml}
+
+# Default value for linked_dirs is []
+# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
 
 namespace :deploy do
-  task :bundle_gems do
-    run "cd #{deploy_to}/current/imentore-base && bundle install"
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      # execute :touch, release_path.join('tmp/restart.txt')
+      run "/etc/init.d/unicorn restart"
+    end
   end
 
-  task :config_files do
-    run "rm -rf /home/imentore/app/current/imentore-base/tmp"
-    run "rm -rf /home/imentore/app/current/imentore-base/log"
-    run "mkdir /home/imentore/app/current/imentore-base/tmp"
-    run "rm -rf /home/imentore/app/current/imentore-base/public/uploads"
-    run "ln -s /home/imentore/app/shared/uploads /home/imentore/app/current/imentore-base/public/uploads"
-    run "ln -s /home/imentore/app/shared/pids /home/imentore/app/current/imentore-base/tmp/pids"
-    run "ln -s /home/imentore/app/shared/cache /home/imentore/app/current/imentore-base/tmp/cache"
-    run "ln -s /home/imentore/app/shared/log /home/imentore/app/current/imentore-base/log"
-    run "ln -s /home/imentore/app/shared /home/imentore/app/current/tmp"
+  after :restart, :app_config_files do
+    on roles(:app), in: :sequence, wait: 5 do
+      run "rm -rf /home/imentore/app/current/imentore-base/tmp"
+      run "rm -rf /home/imentore/app/current/imentore-base/log"
+      run "mkdir /home/imentore/app/current/imentore-base/tmp"
+      run "rm -rf /home/imentore/app/current/imentore-base/public/uploads"
+      run "ln -s /home/imentore/app/shared/uploads /home/imentore/app/current/imentore-base/public/uploads"
+      run "ln -s /home/imentore/app/shared/pids /home/imentore/app/current/imentore-base/tmp/pids"
+      run "ln -s /home/imentore/app/shared/cache /home/imentore/app/current/imentore-base/tmp/cache"
+      run "ln -s /home/imentore/app/shared/log /home/imentore/app/current/imentore-base/log"
+      run "ln -s /home/imentore/app/shared /home/imentore/app/current/tmp"
 
-    run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/public/uploads"
-    run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/pids"
-    run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/cache"
-    run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/log"
-    run "chown -h imentore.imentore /home/imentore/app/current/tmp"
-    run "cp -f /home/imentore/app/shared/database.yml /home/imentore/app/current/imentore-base/config/database.yml"
-    run "/etc/init.d/unicorn restart"
+      run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/public/uploads"
+      run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/pids"
+      run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/cache"
+      run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/log"
+      run "chown -h imentore.imentore /home/imentore/app/current/tmp"
+      run "cp -f /home/imentore/app/shared/database.yml /home/imentore/app/current/imentore-base/config/database.yml"
+    end
+  end  
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
   end
-  task :start do ; end
-  task :stop do ; end
-  # task :restart, :roles => :app, :except => { :no_release => true } do
-  #   run "/etc/init.d/unicorn restart"
-  # end
+
 end

@@ -18,18 +18,14 @@ test:
   pool: 5
   timeout: 5000
 
-# production:
-#   adapter: sqlite3
-#   database: db/development.sqlite3
-#   pool: 5
-#   timeout: 5000
-
-#   adapter: mysql2
-#   database: imentore
-#   pool: 5
-#   timeout: 5000
-#   username: imentore
-#   password: app0p..az
+production:
+  adapter: mysql2
+  database: imentore
+  pool: 5
+  timeout: 5000
+  username: imentore
+  password: app0p..az
+  
 development:
  adapter: mysql2
  database: imentore
