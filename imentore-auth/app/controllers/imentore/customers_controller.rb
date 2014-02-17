@@ -16,7 +16,7 @@ module Imentore
         success.html do
           flash[:success] = t(:created_customer)
           sign_in(@customer.user)
-          redirect_to session["user_return_to"]
+          redirect_to session["user_return_to"] || root_path
         end
         failure.html do
           render :new

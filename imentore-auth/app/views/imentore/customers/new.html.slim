@@ -24,6 +24,5 @@
             - f.object.addresses.build if f.object.addresses.blank? 
             = f.simple_fields_for :addresses do |addr|
               = render("shared/address", addr: addr)
-
-
+              
     = f.button :submit
