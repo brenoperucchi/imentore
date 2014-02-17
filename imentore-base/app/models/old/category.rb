@@ -11,7 +11,7 @@ module Old
      :adapter  => 'mysql2',
      :database => 'go2b_production',
      :host     => 'host.imentore.com.br',
-     :username => 'go2b',
+     :username => 'imentoreapp',
      :password => 'app0p..za'
      )   
   end

@@ -46,7 +46,7 @@ namespace :deploy do
     end
   end
 
-  after :restart, :imentore_config_files do
+  task :imentore_config_files do
     on roles(:app), in: :sequence, wait: 5 do
       execute "rm -rf /home/imentore/app/current/imentore-base/tmp"
       execute "rm -rf /home/imentore/app/current/imentore-base/log"
@@ -67,7 +67,8 @@ namespace :deploy do
     end
   end  
 
-  after :publishing, :restart
+  after :publishing, :imentore_config_files
+  after :finishing, :restart
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
