@@ -18,6 +18,10 @@ table.table
       tr
         td= theme.name
         td
+          = link_to(reinstall_templates_admin_imentore_theme_path(theme), class: 'btn btn-danger') do
+            i.icon-black.icon-edit
+            ' Reinstall Templates on Store            
+          '
           = link_to(install_stores_admin_imentore_theme_path(theme), class: 'btn') do
             i.icon-black.icon-edit
             ' Install Theme

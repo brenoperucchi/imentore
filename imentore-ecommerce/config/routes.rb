@@ -1,5 +1,5 @@
 Imentore::Core::Engine.routes.draw do
-    match "store/success", to: "stores#create_success"
+
     resources :stores, only: [:new, :create]
 
     root to: "stores#show"
@@ -37,7 +37,8 @@ Imentore::Core::Engine.routes.draw do
     resource  :cart,      only: [:show, :create, :update, :destroy, :calculate_shipping] do
       get 'calculate_shipping', on: :member
     end
-
+    
+    match "store/success",              to: "stores#create_success"
     match "contact",                    to: "stores#contact",       as: "store_contact"
     match "product/:handle",            to: "products#handle",      as: 'product_handle'
     match "product_search/:name",       to: "products#search",      as: 'product_search'

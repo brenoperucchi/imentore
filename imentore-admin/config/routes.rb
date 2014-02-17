@@ -8,6 +8,7 @@ AdminImentore::Admin::Engine.routes.draw do
       resources :themes do
         get 'install_stores', :on => :member
         get 'update_stores', :on => :member
+        get 'reinstall_templates', :on => :member
         resources :assets
         resources :templates do
           get 'update_stores', :on => :member

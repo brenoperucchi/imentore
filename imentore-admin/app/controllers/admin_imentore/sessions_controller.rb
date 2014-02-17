@@ -12,6 +12,10 @@
         super
       end
 
+      def after_sign_out_path_for(resource)
+        new_admin_imentore_session_path
+      end
+
       def after_sign_in_path_for(resource)
         if user_signed_in? and resource.email == "admin@imentore.com.br"
           admin_imentore_dashboard_path

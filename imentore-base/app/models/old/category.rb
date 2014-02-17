@@ -10,9 +10,9 @@ module Old
      establish_connection(
      :adapter  => 'mysql2',
      :database => 'go2b_production',
-     :host     => 'localhost',
+     :host     => 'host.imentore.com.br',
      :username => 'go2b',
-     :password => '123123'
+     :password => 'app0p..za'
      )   
   end
 end

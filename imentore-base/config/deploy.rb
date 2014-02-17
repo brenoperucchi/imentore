@@ -42,28 +42,28 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
-      run "/etc/init.d/unicorn restart"
+      execute "/etc/init.d/unicorn restart"
     end
   end
 
-  after :restart, :app_config_files do
+  after :restart, :imentore_config_files do
     on roles(:app), in: :sequence, wait: 5 do
-      run "rm -rf /home/imentore/app/current/imentore-base/tmp"
-      run "rm -rf /home/imentore/app/current/imentore-base/log"
-      run "mkdir /home/imentore/app/current/imentore-base/tmp"
-      run "rm -rf /home/imentore/app/current/imentore-base/public/uploads"
-      run "ln -s /home/imentore/app/shared/uploads /home/imentore/app/current/imentore-base/public/uploads"
-      run "ln -s /home/imentore/app/shared/pids /home/imentore/app/current/imentore-base/tmp/pids"
-      run "ln -s /home/imentore/app/shared/cache /home/imentore/app/current/imentore-base/tmp/cache"
-      run "ln -s /home/imentore/app/shared/log /home/imentore/app/current/imentore-base/log"
-      run "ln -s /home/imentore/app/shared /home/imentore/app/current/tmp"
+      execute "rm -rf /home/imentore/app/current/imentore-base/tmp"
+      execute "rm -rf /home/imentore/app/current/imentore-base/log"
+      execute "mkdir /home/imentore/app/current/imentore-base/tmp"
+      execute "rm -rf /home/imentore/app/current/imentore-base/public/uploads"
+      execute "ln -s /home/imentore/app/shared/uploads /home/imentore/app/current/imentore-base/public/uploads"
+      execute "ln -s /home/imentore/app/shared/pids /home/imentore/app/current/imentore-base/tmp/pids"
+      execute "ln -s /home/imentore/app/shared/cache /home/imentore/app/current/imentore-base/tmp/cache"
+      execute "ln -s /home/imentore/app/shared/log /home/imentore/app/current/imentore-base/log"
+      execute "ln -s /home/imentore/app/shared /home/imentore/app/current/tmp"
 
-      run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/public/uploads"
-      run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/pids"
-      run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/cache"
-      run "chown -h imentore.imentore /home/imentore/app/current/imentore-base/log"
-      run "chown -h imentore.imentore /home/imentore/app/current/tmp"
-      run "cp -f /home/imentore/app/shared/database.yml /home/imentore/app/current/imentore-base/config/database.yml"
+      execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/public/uploads"
+      execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/pids"
+      execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/cache"
+      execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/log"
+      execute "chown -h imentore.imentore /home/imentore/app/current/tmp"
+      execute "cp -f /home/imentore/app/shared/database.yml /home/imentore/app/current/imentore-base/config/database.yml"
     end
   end  
 

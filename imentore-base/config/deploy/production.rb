@@ -16,6 +16,9 @@ role :db,  %w{imentore@app.imentore.com.br}
 # extended properties on the server.
 server 'app.imentore.com.br', user: 'imentore', roles: %w{web app}
 
+set :ssh_options, { :forward_agent => true, :keys => "#{ENV['HOME']}/.ssh/app.imentore.com.br/imentore" }
+set :use_sudo, false
+
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
 # you can see them in [net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start)

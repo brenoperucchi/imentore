@@ -23,6 +23,13 @@ module AdminImentore
       end
     end
 
+    def reinstall_templates
+      admin_theme = AdminImentore::Theme.find(params[:id])
+      admin_theme.reinstall_templates
+      flash[:success] = "Successfully created..."
+      redirect_to admin_imentore_themes_path      
+    end
+
     def update_stores
       admin_theme = AdminImentore::Theme.find(params[:id])
       admin_theme.update_stores

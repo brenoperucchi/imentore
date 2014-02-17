@@ -325,8 +325,8 @@ module AdminImentore
 
 
 
-        # unless Rails.env == "development"
-          # binding.pry
+        unless Rails.env == "development"
+          binding.pry
           product.images.each do |image|
             # begin
               new_image = new_product.variants.first.images.new
@@ -336,7 +336,7 @@ module AdminImentore
               # next
             # end
           end
-        # end        
+        end        
 
       end
 
