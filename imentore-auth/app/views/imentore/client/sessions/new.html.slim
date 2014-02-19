@@ -1,11 +1,20 @@
-h2
-  = t(:admin_sign_in_title)
-= simple_form_for(resource, :as => resource_name, :url => user_session_path) do |f|
-  .inputs
-    = f.input :email, :required => false, :autofocus => true
-    = f.input :password, :required => false
-    = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-  .actions
-    = f.button :submit, t(:sign_in)
+- content_for :header do
+  = stylesheet_link_tag "cart"
 
-= render "links"
+.container
+  Legend
+    = t(:admin_sign_in_title)
+
+  = simple_form_for(resource, :as => resource_name, :url => user_session_path) do |f|
+    .row
+      .span12
+        .row
+          .span6
+            .inputs
+              = f.input :email, :required => false, :autofocus => true
+              = f.input :password, :required => false
+              = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+            .actions
+              = f.button :submit, t(:sign_in)
+
+  = render "links"

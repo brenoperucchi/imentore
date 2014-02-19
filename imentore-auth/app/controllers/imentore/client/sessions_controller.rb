@@ -1,7 +1,7 @@
 module Imentore
   module Client
     class SessionsController < Devise::SessionsController
-      layout "client"
+      # layout "client"
 
       # algo a respeito sobre o login da loja com o ID do Store
       def create

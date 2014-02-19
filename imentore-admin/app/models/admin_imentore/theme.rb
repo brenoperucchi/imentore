@@ -68,13 +68,13 @@ module AdminImentore
       begin
         if store.themes.find_by_name(self.name).nil?
           theme = Imentore::Theme.create(name: self.name, admin_imentore_theme_id: self.id, store: store, system: true)
-          self.templates.each do |template|
+          self.templates.each do |ad_t|
             template = theme.templates.new
             template.path = ad_t.path
             # template.layout = ad_t.layout
             template.kind = ad_t.kind
             template.layout_id = ad_t.layout
-            template.default = true if template.kind == "layout"
+            template.default = true if ad_t.kind == "layout"
             template.body = ad_t.body
             template.admin_imentore_template_id = ad_t.id
             if template.save
