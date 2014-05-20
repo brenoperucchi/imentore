@@ -45,6 +45,14 @@ ul.nav.nav-tabs#myTab
                 i.icon-white.icon-edit
                 '
                 = t(:destroy)
+              .btn-group
+                a.btn.dropdown-toggle[data-toggle='dropdown' href='#']
+                  | Action
+                  span.caret
+                ul.dropdown-menu
+                  - store.themes.each do |theme|
+                    li
+                      = link_to "Reinstall Theme", reinstall_theme_admin_imentore_stores_path(theme.id)
   .tab-pane#oldstores
     legend= t(:old_stores)
 

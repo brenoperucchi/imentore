@@ -64,38 +64,49 @@ module AdminImentore
       end
     end
 
+    def reinstall(store, theme)
+      theme.destroy
+      install_store_method(store)
+    end
+
     def install_store(store)
       begin
         if store.themes.find_by_name(self.name).nil?
-          theme = Imentore::Theme.create(name: self.name, admin_imentore_theme_id: self.id, store: store, system: true)
-          self.templates.each do |ad_t|
-            template = theme.templates.new
-            template.path = ad_t.path
-            # template.layout = ad_t.layout
-            template.kind = ad_t.kind
-            template.layout_id = ad_t.layout
-            template.default = true if ad_t.kind == "layout"
-            template.body = ad_t.body
-            template.admin_imentore_template_id = ad_t.id
-            if template.save
-              if template.kind  == "layout"
-                @id = template.id
-              else
-                template.update_attribute(:layout_id, @id)
-              end
-            end
-            theme.templates.each do |template|
-              template.layout_id = theme.templates.layouts.first.id if template.kind == "template"
-            end
-          end
-          self.assets.each do |admin_asset|
-            asset = theme.assets.create(file: admin_asset.file)
-          end
-        return
+          install_store_method(store)
+        end
+      return
           Rails.logger.debug { "store =>#{store.id}" }
           Rails.logger.debug { "theme =>#{self.id}" }
+      end
+    end
+
+    private 
+
+    def install_store_method(store)
+      theme = Imentore::Theme.create(name: self.name, admin_imentore_theme_id: self.id, store: store, system: true)
+      self.templates.each do |ad_t|
+        template = theme.templates.new
+        template.path = ad_t.path
+        # template.layout = ad_t.layout
+        template.kind = ad_t.kind
+        template.layout_id = ad_t.layout
+        template.default = true if ad_t.kind == "layout"
+        template.body = ad_t.body
+        template.admin_imentore_template_id = ad_t.id
+        if template.save
+          if template.kind  == "layout"
+            @id = template.id
+          else
+            template.update_attribute(:layout_id, @id)
+          end
+        end
+        theme.templates.each do |template|
+          template.layout_id = theme.templates.layouts.first.id if template.kind == "template"
         end
       end
+      self.assets.each do |admin_asset|
+        asset = theme.assets.create(file: admin_asset.file)
+      end      
     end
 
   end

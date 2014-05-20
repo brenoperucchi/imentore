@@ -19,6 +19,18 @@ module AdminImentore
       end
     end
 
+    def reinstall_theme
+      theme = Imentore::Theme.find(params(:id))
+      admin_theme = theme.admin_theme
+      if admin_theme.reinstall(current_store, theme)
+        flash[:notice] = "Successfully"
+        redirect_to admin_imentore_stores_path
+      else
+        flash[:alert] = "Failure"
+        redirect_to admin_imentore_stores_path
+      end
+    end
+
     def update
       update! { admin_imentore_stores_path }
     end

@@ -44,7 +44,7 @@
           data: {zip_code:zip_code, method:method},
           dataType: 'json',
           beforeSend: function() {
-            $('span#loading').html('<img src="images/site/loading.gif" />');
+            $('span#loading').html('<img src="/images/site/loading.gif" />');
           },
           success: function(json) {
             $('td#shipping_value').html(json['total_delivery'])
@@ -165,10 +165,13 @@
         $(this).collapsy('toggle')
         e.preventDefault();
       })
-      $('a.next').click(function(e){
+      $('#collapseOne a.next').click(function(e){
         $('#collapseOne').collapsy('hide', '#collapseOne');
         $('#collapseTwo').collapsy('show', '#collapseTwo');
-        $('.form-actions.hide').slideDown('slow');
+      });
+      $('#collapseTwo a.next').click(function(e){ 
+        $('#collapseTwo').collapsy('hide', '#collapseTwo');
+        $('#collapseThree').collapsy('show', '#collapseThree');
         e.preventDefault();
       })
       $('span.help-inline').each(function(e){
@@ -177,10 +180,10 @@
         $('.form-actions.hide').show();
       })
       
-      var key = $.session.get('delivery_method_id');
-      if (key != null){
-        $('select#delivery_method').find('option[value='+key+']').attr('selected', true)
-      }
+      //var key = $.session.get('delivery_method_id');
+      //if (key != null){
+      //  $('select#delivery_method').find('option[value='+key+']').attr('selected', true)
+      //}
       $('a#calculate_zip').click(function(e){
         var zip_code = $("input[id$='zip_code']").last().val();
         var method = $('select#delivery_method').find('option:selected').val()
@@ -272,9 +275,9 @@
   .row
     = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
       = f.error_notification
-      fieldset#address_customer
-        - if user_signed_in? and not current_user.userable.owner?
-          - current_user.userable.addresses.each do |addr|
+      #accordion1.accordion
+        fieldset#address_customer
+          - current_user.try(:userable).try(:addresses).try(:each) do |addr|
             .info.hide.address[id=addr.name.to_underscore!]
               label.hide#name
                 = addr.name
@@ -292,15 +295,27 @@
                 = addr.zip_code
               label.hide#phone
                 = addr.phone
-        - else
-          = f.input :customer_name, hint: "nome e sobrenome do cliente"
-          = f.input :customer_email
-      #accordion2.accordion
+          .accordion-group
+            .accordion-heading
+              a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion1" href="#collapseOne"]
+                = ' 1) ' + t(:name) + ' / '+ t(:email)
+            #collapseOne.accordion-body.in.collapsy[style="height: auto; "]
+              .accordion-inner
+                .span12
+                  .row
+                    .span6
+                      = f.input :customer_name, hint: "* nome completo", input_html: { value: current_user.try(:userable).try(:name) }
+
+                      = f.input :customer_email, input_html: { value: current_user.try(:email) }
+                  .span1.offset0
+                    a{href='#' class='btn next btn-success btn-larger'}
+                      = t(:next)
+                .clearfix
         .accordion-group
           .accordion-heading
-            a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion2" href="#collapseOne"]
-              = ' 1) ' + t(:billing_addresss_title)
-          #collapseOne.accordion-body.in.collapsy.hide[style="height: auto; "]
+            a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion1" href="#collapseTwo"]
+              = ' 2) ' + t(:billing_addresss_title)
+          #collapseTwo.accordion-body.in.collapsy.hide[style="height: auto; "]
             .accordion-inner
               .span12
                 .row
@@ -349,9 +364,9 @@
             /         | Level 2 of column
         .accordion-group
           .accordion-heading
-            a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion2" href="#collapseTwo"]
-              = '2) ' + t(:payment_delivery_title)
-          #collapseTwo.accordion-body.collapsy.hide[style="height: auto; "]
+            a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion1" href="#collapseThree"]
+              = '3) ' + t(:payment_delivery_title)
+          #collapseThree.accordion-body.collapsy.hide[style="height: auto; "]
             .accordion-inner
               .span12
                 .row
@@ -362,7 +377,7 @@
                   .span4
                     fieldset#delivery-method
                       = f.simple_fields_for :delivery, f.object.delivery do |del|
-                        = del.input :delivery_method, label: t(:delivery_method), collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :prompt => t(:select), :input_html => { id: 'delivery_method'}
+                        = del.input :delivery_method, label: t(:delivery_method), collection: current_store.delivery_methods.active, :selected => f.object.delivery.try(:delivery_method_id), :input_html => { id: 'delivery_method'}, :prompt => t(:select)
                   .span2
                     a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
                       i.icon-refresh
@@ -371,7 +386,7 @@
                     span#loading
 
               .clearfix
-      .form-actions.hide
+      .form-actions
         .span2
           - if current_store.config.order_asset
             a(class="btn" data-toggle="modal" href="#orderAssets" class='btn btn-primary btn-large')

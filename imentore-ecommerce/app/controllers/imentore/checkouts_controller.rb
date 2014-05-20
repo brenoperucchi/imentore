@@ -34,10 +34,11 @@ module Imentore
         render :new
       elsif request.put?
         @order.items = current_cart.items
-        unless CheckoutService.place_order(@order, params)
-          flash[:alert] = @order.errors.full_messages
-          render :new and return false
-        end
+        CheckoutService.place_order(@order, params)
+          # if CheckoutService.place_order(@order, params)
+          # flash[:alert] = @order.errors.full_messages
+          # render :new and return false
+          # end
 
         if user_signed_in? and not current_user.userable.owner?
           @order.customer_name = current_user.userable.name
@@ -61,12 +62,18 @@ module Imentore
             @order.place
           end
         end
-        if not @order.valid?
+        binding.pry
+        if not @order.valid? and @order.deliverable? and @order.chargeable?
           render :new
-        elsif @order.chargeable? and @order.valid?
-          redirect_to charge_checkout_path
+          flash[:alert] = @order.errors.full_messages
+        # unless 
+          # render :new
+        # elsif @order.chargeable? and @order.valid?
+          # redirect_to charge_checkout_path
         else
-          render :new
+          charge
+          # binding.pry
+          # render :new
         end
       end
       # if @order.chargeable? and @order.valid?
@@ -84,7 +91,7 @@ module Imentore
         send("#{@invoice.payment_method.name}".to_underscore)
       rescue Exception => msg
         flash[:alert] = t(:checkout_charge_problem)
-        @order = current_order
+        # @order = current_order
         render :new
       end
     end

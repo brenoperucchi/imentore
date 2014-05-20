@@ -1,4 +1,6 @@
 ImentoreBase::Application.configure do
+  I18n.enforce_available_locales = false
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on

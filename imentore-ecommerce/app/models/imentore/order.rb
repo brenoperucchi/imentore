@@ -55,7 +55,10 @@ module Imentore
     validates :customer_name, :customer_email, presence: true, :on => :update
 
     def valid_addresses
-      errors.add(:base, "err") unless (billing_address.valid? && shipping_address.valid?)
+      valid_billing = billing_address.valid? 
+      valid_address = shipping_address.valid? 
+      errors.add(:base, "err") unless valid_address && valid_billing
+      valid_billing && valid_address
     end
 
     def update_status
@@ -109,6 +112,18 @@ module Imentore
     end
 
     def deliverable?
+      # validation = items.each{|i| break if i.variant.quantity > 0}.nil?
+      # self.errors.add(:base, :not_delivery) if validation
+      # validation
+      if items.each{|i| break if i.variant.quantity > 0}.nil?
+        true
+      else
+        self.errors.add(:base, :not_delivery)
+        false
+      end
+    end
+
+    def shipment_calculate
       delivery = delivery_calculate(zip_code, delivery_method)
       unless items.map(&:deliverable?).inject(true, :&)
         self.errors.add(:base, :not_delivery)
@@ -118,7 +133,7 @@ module Imentore
         self.errors.add(:base, delivery.error_msg)
         return false
       end
-      true
+      true      
     end
 
 

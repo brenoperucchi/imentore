@@ -55,8 +55,13 @@ body
               '
               a[href="#"]
                 = current_user.userable.name
-              '  e 
+              '  Ou
+              ' 
               = link_to(t(:logout), destroy_user_session_path, method: :delete)
+              ' 
+              | Ou
+              '
+              = link_to('Back to STORE', root_path)
           - else
             p.navbar-text.pull-right
               = link_to t(:sign_in), new_client_session_path

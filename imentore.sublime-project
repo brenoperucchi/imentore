@@ -1,0 +1,12 @@
+{
+	"folders":
+	[
+		{
+      "folder_exclude_patterns": ["tmp", "public/system","public/data", "script", "test", "spec", "features", "dummy"],
+			"path": "/Users/breno/app/imentore",
+      "file_exclude_patterns": ["*.ru", "RakeFile", ".log", "Notes", "go2b.tmproj", "*.sublime*", "README.*", "MIT-LICENSE", "*.gemspec", 
+                                 "*.lock", ".gitkeep"]
+		}
+	]
+}
+
