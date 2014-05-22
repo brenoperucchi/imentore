@@ -13,7 +13,7 @@ module AdminImentore
                     "\u0090" => "\x90".force_encoding("cp1252"),
                     "\u009D" => "\x9D".force_encoding("cp1252")
                   })
-          .force_encoding("utf-8")
+          ..encode("cp1252").force_encoding("utf-8")
     end
 
     def self.install_store(store)
@@ -41,7 +41,7 @@ module AdminImentore
       return if store.nil?
       new_store.update_attribute(:old_store_id, store.id)
       new_store.products.destroy_all
-      store.products.not_deleted.take(5).each do |product|
+      store.products.not_deleted.sellable.each do |product|
         new_product = new_store.products.new
         new_product.name = fix_utf8(product.name)
         new_product.description = fix_utf8(product.description)
@@ -82,7 +82,7 @@ module AdminImentore
           end
           new_variant.options.create(option_type: default_option, value: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
         end
-        unless Rails.env = "development"
+        # unless Rails.env = "development"
           product.images.each do |image|
             begin
               new_image = new_product.variants.first.images.new
@@ -92,7 +92,7 @@ module AdminImentore
               next
             end
           end
-        end
+        # end
 
       end
     end      
@@ -327,13 +327,13 @@ module AdminImentore
 
         unless Rails.env == "development"
           product.images.each do |image|
-            begin
+            # begin
               new_image = new_product.variants.first.images.new
               new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
               new_image.save
-            rescue OpenURI::HTTPError
-              next
-            end
+            # rescue OpenURI::HTTPError
+              # next
+            # end
           end
         end        
 
