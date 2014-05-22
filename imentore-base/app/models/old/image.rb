@@ -16,7 +16,6 @@ module Old
     self.abstract_class = true
      establish_connection(
      :adapter  => 'mysql2',
-     :encoding => 'latin1',
      :database => 'go2b_production',
      :host     => 'app.imentore.com.br',
      :username => 'go2b',
