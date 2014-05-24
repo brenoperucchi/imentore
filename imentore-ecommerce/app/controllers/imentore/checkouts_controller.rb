@@ -16,7 +16,6 @@ module Imentore
 
     def customer_only
       # redirect_to(cart_path, alert: :admin_denied) if user_signed_in? and current_user.userable.owner?
-      # binding.pry
     end
 
     def authenticate_to_buy!
@@ -62,7 +61,6 @@ module Imentore
             @order.place
           end
         end
-        binding.pry
         if not @order.valid? and @order.deliverable? and @order.chargeable?
           render :new
           flash[:alert] = @order.errors.full_messages
@@ -72,7 +70,6 @@ module Imentore
           # redirect_to charge_checkout_path
         else
           charge
-          # binding.pry
           # render :new
         end
       end

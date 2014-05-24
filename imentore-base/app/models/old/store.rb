@@ -31,14 +31,18 @@ module Old
       :class_name => Old::User,
       :conditions => "role = 'dealer'"
 
+    has_many :orders,
+      :class_name => Old::Order
+      # :conditions => "role = 'dealer'"
+
     scope :active, where(state: 'actived')
 
     self.abstract_class = true
      establish_connection(
      :adapter  => 'mysql2',
      :database => 'go2b_production',
-     :host     => 'app.imentore.com.br',
-     :username => 'go2b',
+     :host     => 'localhost',
+     :username => 'imentoreapp',
      :password => 'app0p..za'
      )
 

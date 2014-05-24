@@ -1,4 +1,4 @@
-worker_processes 1
+worker_processes 2
 working_directory "/home/imentore/app/current/imentore-base"
 
 # This loads the application in the master process before forking
@@ -9,7 +9,7 @@ preload_app true
 
 # This is where we specify the socket.
 # We will point the upstream Nginx module to this socket later on
-# listen "/home/imentore/app/shared/tmp/unicorn.sock", :backlog => 64
+listen "/home/imentore/app/shared/tmp/unicorn.sock", :backlog => 64
 listen 8080, :tcp_nopush => true
 timeout 360
 

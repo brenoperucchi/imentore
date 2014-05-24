@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121011184404) do
+ActiveRecord::Schema.define(:version => 20140524073119) do
 
   create_table "admin_imentore_assets", :force => true do |t|
     t.string   "file"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20121011184404) do
     t.string  "tracking_code"
     t.string  "status"
     t.integer "delivery_method_id"
+    t.float   "amount"
   end
 
   create_table "imentore_delivery_methods", :force => true do |t|
@@ -313,7 +314,6 @@ ActiveRecord::Schema.define(:version => 20121011184404) do
     t.string   "brand"
     t.string   "url"
     t.string   "irs_id"
-    t.boolean  "active",                :default => false
     t.text     "settings"
     t.string   "national_id"
     t.string   "date_initial_business"
@@ -345,6 +345,7 @@ ActiveRecord::Schema.define(:version => 20121011184404) do
     t.string   "kind"
     t.boolean  "default",                    :default => false
     t.integer  "admin_imentore_template_id"
+    t.integer  "layout_id"
   end
 
   create_table "imentore_themes", :force => true do |t|

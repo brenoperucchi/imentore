@@ -29,14 +29,14 @@ module AdminImentore
     end
 
 
-    def self.reinstall_products
+    def self.products_reinstall
       Imentore::Store.active.each do |new_store|
         next if store.nil?
-        reinstall_store_products(new_store)
+        products_reinstall_store(new_store)
       end
     end
 
-    def self.reinstall_store_products(new_store)
+    def self.products_reinstall_store(new_store)
       store = new_store.old_store
       return if store.nil?
       new_store.update_attribute(:old_store_id, store.id)
@@ -92,10 +92,69 @@ module AdminImentore
               next
             end
           end
-        
-
       end
     end      
+
+    def self.orders_install(store, old_store)
+        old_store.orders.not_deleted.each do |old_order|
+          new_order = store.orders.new
+          old_order.items.each do |old_item|
+            product = store.products.find_by_name(old_item.product.name)
+            next if product.nil?
+            variant = product.variants.first
+            variant.price = old_item.price
+            new_order.items << Imentore::LineItem.new(product, variant, old_item.quantity)
+          end
+          unless old_order.invoices.blank?
+            # begin
+              old_invoice = old_order.invoices.last
+              payment_method = (old_invoice.payment.try(:method_type) == "pg") ? store.payment_methods.find_by_handle("pag_seguro") : store.payment_methods.last
+            # rescue Exception => msg
+              # binding.pry
+            # end
+            amount_order = new_order.products_amount
+            amount_order += old_order.shipments.try(:last).try(:price) unless old_order.shipments.blank?
+            new_order.build_invoice(amount: amount_order , payment_method: payment_method)
+
+          end
+          unless old_order.shipments.blank?
+            # begin
+              if old_order.shipments.last.shipping.code.nil?
+                delivery_method = store.delivery_methods.find_by_handle("custom")
+              else
+                delivery_method = store.delivery_methods.find_by_handle(old_order.shipments.last.shipping.code.to_underscore)
+              end
+            # rescue Exception => msg
+              # binding.pry
+            # end
+            old_address = old_order.shipments.last.address
+            address = Imentore::Address.new(name: old_address.title, street: old_address.street1 + old_address.street2, city: old_address.city, state: old_address.state, country: old_address.country, phone: old_address.phone, zip_code: old_address.zip)
+            new_order.build_delivery(address: address, delivery_method: delivery_method, amount: old_order.shipments.last.price) unless old_order.invoices.blank?
+            new_order.shipping_address = address
+            new_order.billing_address = address
+          end
+          # unless old_order.invoices.blank?# or old_order.invoices.blank?
+          # end
+        begin
+          new_order.customer_name = old_order.user.name
+          new_order.customer_email = old_order.user.email
+          new_order.save  
+          new_order.update_attribute(:created_at, old_order.created_at)
+          new_order.invoice.confirm if old_order.invoices.try(:last).try(:state) ==  "paid"
+          new_order.delivery.sent unless old_order.shipping_state != "shipped" or (old_order.shipments.blank? or old_order.invoices.blank?)
+        rescue
+          binding.pry
+        end
+          case old_order.state
+            when "checkout", "placed"
+              new_order.update_attribute(:status, "placed")
+            when "closed", "canceled"
+              new_order.update_attribute(:status, "finished")
+          end 
+          # binding.pry
+        end
+      
+    end
 
     def self.install_customers_employees(store, new_store)
       return if store.nil?
@@ -310,7 +369,7 @@ module AdminImentore
           new_variant.height = variant.height
           new_variant.width = variant.width
           new_variant.quantity = variant.units.size
-          new_variant.price = variant.value
+          new_variant.price = variant.value_deal.present? ? variant.value_deal : variant.value
           unless new_variant.save
             binding.pry
           end

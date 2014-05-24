@@ -80,7 +80,8 @@ module Imentore
     end
 
     def delivery_amount
-      delivery_method.nil? ? 0 : delivery_calculate(zip_code, delivery_method).value
+      return delivery.try(:amount) unless delivery.try(:amount).nil?
+      delivery.update_attribute(:amount, delivery_calculate(zip_code, delivery_method).value)
     end
 
     def coupons_amount
