@@ -41,7 +41,7 @@ module AdminImentore
       return if store.nil?
       new_store.update_attribute(:old_store_id, store.id)
       new_store.products.destroy_all
-      store.products.not_deleted.sellable.each do |product|
+      store.products.not_deleted.each do |product|
         new_product = new_store.products.new
         new_product.name = product.name
         new_product.description = product.description
@@ -76,13 +76,13 @@ module AdminImentore
           new_variant.height = variant.height
           new_variant.width = variant.width
           new_variant.quantity = variant.units.size
-          new_variant.price = variant.value
+          new_variant.price = variant.value_deal.present? ? variant.value_deal : variant.value
           unless new_variant.save
             binding.pry
           end
           new_variant.options.create(option_type: default_option, value: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
         end
-        # unless Rails.env = "development"
+        unless Rails.env = "development"
           product.images.each do |image|
             begin
               new_image = new_product.variants.first.images.new
@@ -92,17 +92,18 @@ module AdminImentore
               next
             end
           end
+        end
       end
     end      
 
     def self.orders_install(store, old_store)
-        old_store.orders.not_deleted.each do |old_order|
+        old_store.orders.not_deleted.take(5).each do |old_order|
           new_order = store.orders.new
           old_order.items.each do |old_item|
             product = store.products.find_by_name(old_item.product.name)
             next if product.nil?
             variant = product.variants.first
-            variant.price = old_item.price
+            variant.price = old_item.price / old_item.quantity
             new_order.items << Imentore::LineItem.new(product, variant, old_item.quantity)
           end
           unless old_order.invoices.blank?
@@ -151,9 +152,7 @@ module AdminImentore
             when "closed", "canceled"
               new_order.update_attribute(:status, "finished")
           end 
-          # binding.pry
         end
-      
     end
 
     def self.install_customers_employees(store, new_store)
