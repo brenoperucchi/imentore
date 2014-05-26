@@ -18,7 +18,8 @@ module Imentore
         domain = host.join('.')
         @current_store ||=
           Store.joins(:domains).where("imentore_domains.name" => request.host).first ||
-          (Store.find_by_url(subdomain) if Imentore.config.domain.include?(domain))
+          (Store.find_by_url(subdomain) if Imentore.config.domain.include?(domain)) || (Store.find_by_url(domain.gsub!(".imentore.com.br", "")) if domain.include?(".imentore.com.br"))
+
       end
       @current_store
     end
