@@ -72,19 +72,21 @@
           h3
             = @order.delivery_amount
   .clearfix
-
-.row-fluid
-  .well.well-small
-    .btn-toolbar.ac.pagination-centered
-      .btn-group
-        = link_to(confirm_invoice_admin_order_path(@order), class: 'btn') do
-          i.icon-black.icon-ok
-          '
-          = t(:payment_confirm)
-        = link_to(confirm_delivery_admin_order_path(@order), class: 'btn') do
-          i.icon-black.icon-envelope
-          '
-          = t(:delivery_confirm)
+- unless @order.delivery.nil?  or @order.invoice.nil? or (@order.invoice.confirmed? and @order.delivery.sent?)
+  .row-fluid
+    .well.well-small
+      .btn-toolbar.ac.pagination-centered
+        .btn-group
+          - if @order.invoice.can_confirm?
+            = link_to(confirm_invoice_admin_order_path(@order), class: 'btn') do
+              i.icon-black.icon-ok
+              '
+              = t(:payment_confirm)
+          - if @order.delivery.can_sent?
+            = link_to(confirm_delivery_admin_order_path(@order), class: 'btn') do
+              i.icon-black.icon-envelope
+              '
+              = t(:delivery_confirm)
 
 h4= t(:products)
 .row-fluid

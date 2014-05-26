@@ -97,111 +97,107 @@ module AdminImentore
     end      
 
     def self.orders_install(store, old_store)
-        old_store.orders.not_deleted.take(5).each do |old_order|
-          new_order = store.orders.new
-          old_order.items.each do |old_item|
-            product = store.products.find_by_name(old_item.product.name)
-            next if product.nil?
-            variant = product.variants.first
-            variant.price = old_item.price / old_item.quantity
-            new_order.items << Imentore::LineItem.new(product, variant, old_item.quantity)
-          end
-          unless old_order.invoices.blank?
-            # begin
-              old_invoice = old_order.invoices.last
-              payment_method = (old_invoice.payment.try(:method_type) == "pg") ? store.payment_methods.find_by_handle("pag_seguro") : store.payment_methods.last
-            # rescue Exception => msg
-              # binding.pry
-            # end
-            amount_order = new_order.products_amount
-            amount_order += old_order.shipments.try(:last).try(:price) unless old_order.shipments.blank?
-            new_order.build_invoice(amount: amount_order , payment_method: payment_method)
-
-          end
-          unless old_order.shipments.blank?
-            # begin
-              if old_order.shipments.last.shipping.code.nil?
-                delivery_method = store.delivery_methods.find_by_handle("custom")
-              else
-                delivery_method = store.delivery_methods.find_by_handle(old_order.shipments.last.shipping.code.to_underscore)
-              end
-            # rescue Exception => msg
-              # binding.pry
-            # end
-            old_address = old_order.shipments.last.address
-            address = Imentore::Address.new(name: old_address.title, street: old_address.street1 + old_address.street2, city: old_address.city, state: old_address.state, country: old_address.country, phone: old_address.phone, zip_code: old_address.zip)
-            new_order.build_delivery(address: address, delivery_method: delivery_method, amount: old_order.shipments.last.price) unless old_order.invoices.blank?
-            new_order.shipping_address = address
-            new_order.billing_address = address
-          end
-          # unless old_order.invoices.blank?# or old_order.invoices.blank?
+      old_store.orders.not_deleted.each do |old_order|
+        # old_order = old_store.orders.find(5633)
+        new_order = store.orders.new
+        old_order.items.each do |old_item|
+          product = store.products.find_by_name(old_item.product.name)
+          next if product.nil?
+          variant = product.variants.first
+          variant.price = old_item.price / old_item.quantity
+          new_order.items << Imentore::LineItem.new(product, variant, old_item.quantity)
+        end
+        unless old_order.invoices.blank?
+          # begin
+            old_invoice = old_order.invoices.last
+            payment_method = (old_invoice.payment.try(:method_type) == "pg") ? store.payment_methods.find_by_handle("pag_seguro") : store.payment_methods.last
+          # rescue Exception => msg
+            # binding.pry
           # end
-        begin
-          new_order.customer_name = old_order.user.name
-          new_order.customer_email = old_order.user.email
-          new_order.save  
-          new_order.update_attribute(:created_at, old_order.created_at)
-          new_order.invoice.confirm if old_order.invoices.try(:last).try(:state) ==  "paid"
-          new_order.delivery.sent unless old_order.shipping_state != "shipped" or (old_order.shipments.blank? or old_order.invoices.blank?)
-        rescue
-          binding.pry
+          amount_order = new_order.products_amount
+          amount_order += old_order.shipments.try(:last).try(:price) unless old_order.shipments.blank?
+          new_order.build_invoice(amount: amount_order , payment_method: payment_method)
+
         end
-          case old_order.state
-            when "checkout", "placed"
-              new_order.update_attribute(:status, "placed")
-            when "closed", "canceled"
-              new_order.update_attribute(:status, "finished")
-          end 
+        unless old_order.shipments.blank?
+          # begin
+            if old_order.shipments.last.shipping.code.nil?
+              delivery_method = store.delivery_methods.find_by_handle("custom")
+            else
+              delivery_method = store.delivery_methods.find_by_handle(old_order.shipments.last.shipping.code.to_underscore)
+            end
+          # rescue Exception => msg
+            # binding.pry
+          # end
+          old_address = old_order.shipments.last.address
+          address = Imentore::Address.new(name: old_address.title, street: old_address.street1 + old_address.street2, city: old_address.city, state: old_address.state, country: old_address.country, phone: old_address.phone, zip_code: old_address.zip)
+          new_order.build_delivery(address: address, delivery_method: delivery_method, amount: old_order.shipments.last.price) unless old_order.invoices.blank?
+          new_order.shipping_address = address
+          new_order.billing_address = address
         end
+        # unless old_order.invoices.blank?# or old_order.invoices.blank?
+        # end
+      # begin
+        customer = store.users.find_by_email(old_order.user.email)
+        unless customer
+          customer_employee_install(store.customers.new, old_order.user)
+          new_order.user = store.users.find_by_email(old_order.user.email)
+        end
+        new_order.user ||= customer
+        new_order.customer_name = old_order.user.name
+        new_order.customer_email = old_order.user.email
+        new_order.save  
+        new_order.update_attribute(:created_at, old_order.created_at)
+        new_order.invoice.confirm if old_order.invoices.try(:last).try(:state) ==  "paid"
+        new_order.delivery.sent unless old_order.shipping_state != "shipped" or (old_order.shipments.blank? or old_order.invoices.blank?)
+      # rescue
+        # binding.pry
+      # end
+        case old_order.state
+          when "checkout", "placed"
+            new_order.update_attribute(:status, "placed")
+          when "closed", "canceled"
+            new_order.update_attribute(:status, "finished")
+        end 
+      end
     end
 
-    def self.install_customers_employees(store, new_store)
-      return if store.nil?
-      store.customers.each do |customer|
-        unless customer.encrypted_password.nil?
-          new_customer = new_store.customers.new 
-          new_customer.name = customer.name
-          new_customer.brand = customer.name if customer.type == "Person"
-          new_customer.irs_id = customer.irs_id 
-          new_customer.national_id = customer.national_id
-          new_customer.birthdate = customer.birthdate
-          new_customer.gender = customer.gender
-          new_customer.person_type = customer.type == 'Person' ? 'person' : 'company'
-          new_customer.store_id = new_store.id
-          new_customer.active = customer.active
-          new_customer.created_at = customer.created_at
-          new_customer.save
-          user = new_customer.build_user(email: customer.email, encrypted_password: customer.encrypted_password, 
-                                   sign_in_count: customer.sign_in_count, current_sign_in_at: customer.current_sign_in_at,
-                                   last_sign_in_ip: customer.last_sign_in_ip, confirmed_at: customer.confirmed_at, 
-                                   created_at: customer.created_at, store_id: new_store.id, password_required: false, 
-                                   password_salt: customer.password_salt)
-          new_customer.destroy unless user.save(validate: false) 
+    def self.customer_employee_install(new_user, old_user)
+        new_user.name = old_user.name
+        new_user.brand = old_user.name if old_user.type == "Person"
+        new_user.irs_id = old_user.irs_id 
+        new_user.national_id = old_user.national_id
+        new_user.birthdate = old_user.birthdate
+        new_user.gender = old_user.gender
+        new_user.person_type = old_user.type == 'Person' ? 'person' : 'company'
+        new_user.department = "owner" if old_user.role == 'admin' or old_user.role == 'employee'
+        new_user.store_id = new_user.store_id
+        new_user.active = old_user.active
+        new_user.created_at = old_user.created_at
+        new_user.save
+        user = new_user.build_user(email: old_user.email, encrypted_password: old_user.encrypted_password, 
+                                 sign_in_count: old_user.sign_in_count, current_sign_in_at: old_user.current_sign_in_at,
+                                 last_sign_in_ip: old_user.last_sign_in_ip, confirmed_at: old_user.confirmed_at, 
+                                 created_at: old_user.created_at, store_id: new_user.store_id, password_required: false, 
+                                 password_salt: old_user.password_salt)
+        user.save(validate: false) 
+    end
+
+    def self.customers_employees_install(new_store, old_store)
+      # return if old_store.nil?
+      # old_store.customers.each do |old_user|
+      #   unless old_user.encrypted_password.nil?
+      #     customer_employee_install(new_store.customers.new, old_user)
+      #   end
+      # end
+      old_store.employees.each do |old_user|
+        unless old_user.encrypted_password.nil?
+          customer_employee_install(new_store.employees.new, old_user)
         end
       end
-
-      employee = store.users.find_by_role('admin')
-      new_employee = new_store.employees.new 
-      new_employee.name = employee.name
-      new_employee.brand = employee.name if employee.type == "Person"
-      new_employee.irs_id = employee.irs_id 
-      new_employee.national_id = employee.national_id
-      new_employee.birthdate = employee.birthdate
-      new_employee.gender = employee.gender
-      new_employee.person_type = employee.type == 'Person' ? 'person' : 'company'
-      new_employee.department = "owner"
-      new_employee.store_id = new_store.id
-      new_employee.active = employee.active
-      new_employee.created_at = employee.created_at
-      unless new_employee.save
-        new_employee.destroy
-      end
-      user = new_employee.build_user(email: employee.email, encrypted_password: employee.encrypted_password, 
-                               sign_in_count: employee.sign_in_count, current_sign_in_at: employee.current_sign_in_at,
-                               last_sign_in_ip: employee.last_sign_in_ip, confirmed_at: employee.confirmed_at, 
-                               created_at: employee.created_at, store_id: new_store.id, password_required: false,
-                               password_salt: employee.password_salt)
-      new_employee.destroy unless user.save(validate: false)
+      # old_employee = store.users.find_by_role('admin')
+      # new_employee = new_store.employees.new 
+      # customer_employee_install(new_employee, old_employee)
     end
 
     def self.category_create(new_category, category, store)
@@ -280,58 +276,11 @@ module AdminImentore
         new_page.created_at = page.created_at
       end
 
-      install_customers_employees(store, new_store)
-
-      store.employees.each do |employee|
-        unless employee.encrypted_password.nil?
-          new_employee = new_store.employees.new 
-          new_employee.name = employee.name
-          new_employee.brand = employee.name if employee.type == "Person"
-          new_employee.irs_id = employee.irs_id 
-          new_employee.national_id = employee.national_id
-          new_employee.birthdate = employee.birthdate
-          new_employee.gender = employee.gender
-          new_employee.person_type = employee.type == 'Person' ? 'person' : 'company'
-          new_employee.department = "owner"
-          new_employee.store_id = new_store.id
-          new_employee.active = employee.active
-          new_employee.created_at = employee.created_at
-          unless new_employee.save
-            new_employee.destroy
-          end
-          user = new_employee.build_user(email: employee.email, encrypted_password: employee.encrypted_password, 
-                                   sign_in_count: employee.sign_in_count, current_sign_in_at: employee.current_sign_in_at,
-                                   last_sign_in_ip: employee.last_sign_in_ip, confirmed_at: employee.confirmed_at, 
-                                   created_at: employee.created_at, store_id: new_store.id, password_required: false,
-                                   password_salt: employee.password_salt)
-          unless user.save
-            new_employee.destroy
-          end
-        end
-      end
+      customers_employees_install(new_store, store)
 
       employee = Person.find(3)
       new_employee = new_store.employees.new 
-      new_employee.name = employee.name 
-      new_employee.brand = employee.name if employee.type == "Person"
-      new_employee.irs_id = employee.irs_id 
-      new_employee.national_id = employee.national_id
-      new_employee.birthdate = employee.birthdate
-      new_employee.gender = employee.gender
-      new_employee.person_type = employee.type == 'Person' ? 'person' : 'company'
-      new_employee.department = "owner"
-      new_employee.store_id = new_store.id
-      new_employee.active = employee.active
-      new_employee.created_at = employee.created_at
-      new_employee.save
-      user = new_employee.build_user(email: employee.email, encrypted_password: employee.encrypted_password, 
-                               sign_in_count: employee.sign_in_count, current_sign_in_at: employee.current_sign_in_at,
-                               last_sign_in_ip: employee.last_sign_in_ip, confirmed_at: employee.confirmed_at, 
-                               created_at: employee.created_at, store_id: new_store.id, password_required: false,
-                               password_salt: employee.password_salt)
-      unless user.save
-        new_employee.destroy
-      end
+      customer_employee_install(new_employee, employee)
 
 
       store.products.not_deleted.each do |product|

@@ -44,6 +44,8 @@ module Imentore
     has_many :feedbacks, as: :feedbackable, :dependent => :destroy
     has_many :notices, :dependent => :destroy
     has_many :invoices, through: :orders
+    
+    has_many :users
 
     accepts_nested_attributes_for :owner, :address
 

@@ -60,6 +60,10 @@ pt-BR:
   limit_customer: Limite/Cliente
   limit_use: Limite/Uso
   value: Valor
+  opened: Aberto
+  closed: Fechado
+  pending:  Pendente
+  finished: Finalizado
   placed: Ativo
   not_placed: Desativado
   level: Nível

@@ -81,6 +81,7 @@ module Imentore
 
     def delivery_amount
       return delivery.try(:amount) unless delivery.try(:amount).nil?
+      return 0 if delivery.nil? or delivery_method.nil?
       delivery.update_attribute(:amount, delivery_calculate(zip_code, delivery_method).value)
     end
 
