@@ -21,6 +21,10 @@ module Imentore
         redirect_to edit_admin_order_path(@order)
       end
 
+      def destroy
+        destroy! { admin_orders_path }
+      end
+
       protected
 
       def begin_of_association_chain

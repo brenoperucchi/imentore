@@ -16,8 +16,7 @@ table.table
     - @orders.each do |order|
       tr
         td= order.id
-        td
-          = button_order_status(order.status)
+        td= button_order_status(order.status)
         td= l(time_zone(order.created_at), format: :short2)
         td= order.customer_email
         td
