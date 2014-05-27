@@ -12,7 +12,7 @@ table.table.table-striped
       tr
         td
           = button_status(payment.active, '#')
-        td= payment.handle
+        td= payment.name
         td
           = link_to(edit_admin_payment_method_path(payment), class: 'btn') do
             i.icon-black.icon-edit

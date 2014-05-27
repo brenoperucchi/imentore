@@ -4,7 +4,7 @@ module Imentore
 
     belongs_to :addressable, polymorphic: true
 
-    validates :name, :street, :city, :state, :country, :zip_code, :phone, presence: true#, if: :validate?
+    validates :name, :street, :complement, :city, :state, :country, :zip_code, :phone, presence: true#, if: :validate?
 
     def validate?
       validate == true

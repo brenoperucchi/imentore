@@ -1,67 +1,67 @@
 doctype html
 html
   head
-  title ImentoreBase
-  = stylesheet_link_tag "admin"
-  = javascript_include_tag "admin"
-  = csrf_meta_tags
-  = yield :header
-  css:
-    ul.nav li {
-      cursor:pointer;
-    }
-    body {
-            padding-top: 60px;
-            padding-bottom: 40px;
-          }
-          .sidebar-nav {
-            padding: 9px 0;
-          }
+    title ImentoreBase
+    = stylesheet_link_tag "admin"
+    = javascript_include_tag "admin"
+    = csrf_meta_tags
+    = yield :header
+    css:
+      ul.nav li {
+        cursor:pointer;
+      }
+      body {
+              padding-top: 60px;
+              padding-bottom: 40px;
+            }
+            .sidebar-nav {
+              padding: 9px 0;
+            }
 
-    .mini{
-      width:15%;
-    }
-    .super-mini{
-      width:5%!important;
-    }
-    / table tr th:first-child{
-    /   width:135px;
-    / }
-    form.simple_form.form-inline div.control-group {
-      display: inline-block;
-    }
-    span.help-inline{
-      margin:0px 10px 0px 0px;
-    }
-    .color-white{
-      color:white;
-    }
-    .color-black{
-      color:#333;
-      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    }
-    i.true{
-      background-image:url(/images/admin/success16.png);
-      display: inline-block;
-      width: 16px;
-      height: 15px;
-      line-height: 14px;
-      vertical-align: text-top;
-      background-position: 0px 0px;
-      background-repeat: no-repeat;
+      .mini{
+        width:15%;
+      }
+      .super-mini{
+        width:5%!important;
+      }
+      / table tr th:first-child{
+      /   width:135px;
+      / }
+      form.simple_form.form-inline div.control-group {
+        display: inline-block;
+      }
+      span.help-inline{
+        margin:0px 10px 0px 0px;
+      }
+      .color-white{
+        color:white;
+      }
+      .color-black{
+        color:#333;
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+      }
+      i.true{
+        background-image:url(/images/admin/success16.png);
+        display: inline-block;
+        width: 16px;
+        height: 15px;
+        line-height: 14px;
+        vertical-align: text-top;
+        background-position: 0px 0px;
+        background-repeat: no-repeat;
 
-    }
-    i.false{
-      background-image:url(/images/admin/failure.png);
-      display: inline-block;
-      width: 16px;
-      height: 15px;
-      line-height: 14px;
-      vertical-align: text-top;
-      background-position: 0px 0px;
-      background-repeat: no-repeat;
+      }
+      i.false{
+        background-image:url(/images/admin/failure.png);
+        display: inline-block;
+        width: 16px;
+        height: 15px;
+        line-height: 14px;
+        vertical-align: text-top;
+        background-position: 0px 0px;
+        background-repeat: no-repeat;
 
-    }
+      }
 - content_for :footer do
   javascript:
     $(document).ready(function(){
@@ -101,38 +101,38 @@ body
         | © Imentore 2012
 
 
-  .footer  
-    = yield :footer
-    / UserVoice JavaScript
-    javascript:
-      $(document).ready(function(){
-        var uvOptions = {};
-        (function() {
-          var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-          uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/VI9HreXZC5OfCYBXzI4hdw.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-        })();
-      })
-.extra
-  .modal.fade#delete-confirm
-    .modal-header
-      a.close[data-dismiss='modal']
-        | x
-      h3= I18n.t(:delete_this_thing)
-    .modal-body
-      p= I18n.t(:delete_be_certain)
-    .modal-footer
-      = link_to t(:destroy), 'pony', method: :delete, :class => 'btn btn-danger' 
-      a[href="#" data-dismiss="modal" class="btn"]
-        = t(:cancel)
-  javascript:
-    $('#delete-confirm').on('show', function() {
-     var $submit = $(this).find('.btn-danger'),
-     href = $submit.attr('href');
-    $submit.attr('href', href.replace('pony', $(this).data('href')));
-    });
+/   .footer  
+/     = yield :footer
+/     / UserVoice JavaScript
+/     javascript:
+/       $(document).ready(function(){
+/         var uvOptions = {};
+/         (function() {
+/           var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+/           uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/VI9HreXZC5OfCYBXzI4hdw.js';
+/           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+/         })();
+/       })
+/ .extra
+/   .modal.fade#delete-confirm
+/     .modal-header
+/       a.close[data-dismiss='modal']
+/         | x
+/       h3= I18n.t(:delete_this_thing)
+/     .modal-body
+/       p= I18n.t(:delete_be_certain)
+/     .modal-footer
+/       = link_to t(:destroy), 'pony', method: :delete, :class => 'btn btn-danger' 
+/       a[href="#" data-dismiss="modal" class="btn"]
+/         = t(:cancel)
+/   javascript:
+/     $('#delete-confirm').on('show', function() {
+/      var $submit = $(this).find('.btn-danger'),
+/      href = $submit.attr('href');
+/     $submit.attr('href', href.replace('pony', $(this).data('href')));
+/     });
 
-    $('.delete-confirm').click(function(e) {
-      e.preventDefault();
-      $('#delete-confirm').data('href', $(this).attr('href')).modal('show');
-    });
+/     $('.delete-confirm').click(function(e) {
+/       e.preventDefault();
+/       $('#delete-confirm').data('href', $(this).attr('href')).modal('show');
+/     });

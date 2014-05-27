@@ -74,9 +74,11 @@ module AdminImentore
         product.variants.each do |variant|
           new_variant = new_product.variants.new
           new_variant.height = variant.height
+          new_variant.weight = variant.real_weight
           new_variant.width = variant.width
           new_variant.quantity = variant.units.size
-          new_variant.price = variant.value_deal.present? ? variant.value_deal : variant.value
+          new_variant.deliverable = true
+          new_variant.price = variant.value_deal == 0 ? variant.value : variant.value_deal
           unless new_variant.save
             binding.pry
           end
@@ -317,7 +319,7 @@ module AdminImentore
           new_variant.height = variant.height
           new_variant.width = variant.width
           new_variant.quantity = variant.units.size
-          new_variant.price = variant.value_deal.present? ? variant.value_deal : variant.value
+          new_variant.price = variant.value_deal == 0 ? variant.value : variant.value_deal
           unless new_variant.save
             binding.pry
           end
@@ -335,7 +337,6 @@ module AdminImentore
             # end
           end
         end        
-
       end
     end
   end

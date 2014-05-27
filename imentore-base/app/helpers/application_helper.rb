@@ -44,23 +44,34 @@ module ApplicationHelper
     end
   end 
 
+  def button_product_datatable(product, path, klass, name)
+    capture do 
+      link_to(path, class: 'btn btn-small') do
+        concat(content_tag(:i, '', :class=>klass))
+        concat(' ' + I18n.t(name))
+      end
+    end
+  end
+
   def button_order_status(status)
     case status
     when 'placed', true
-      link_to("#", class: 'btn disabled btn-warning') do
-        concat(content_tag(:i, '', :class=>'icon-white icon-exclamation-sign'))
-        concat(' ' + I18n.t(status))
+      capture do 
+        link_to("#", class: 'btn disabled btn-warning') do
+          concat(content_tag(:i, '', :class=>'icon-white icon-exclamation-sign'))
+          concat(' ' + I18n.t(status))
+        end
       end
-    when 'pending', false
-      link_to("#", class: 'btn disabled btn-danger') do
-        concat(content_tag(:i, '', :class=>'icon-white icon-remove'))
-        concat(' ' + I18n.t(status))
-      end
-    when 'finished', false
-      link_to("#", class: 'btn disabled btn-success') do
-        concat(content_tag(:i, '', :class=>'icon-white icon-ok'))
-        concat(' ' + I18n.t(status))
-      end
+    # when 'pending', false
+    #   link_to("#", class: 'btn disabled btn-danger') do
+    #     concat(content_tag(:i, '', :class=>'icon-white icon-remove'))
+    #     concat(' ' + I18n.t(status))
+    #   end
+    # when 'finished', false
+    #   link_to("#", class: 'btn disabled btn-success') do
+    #     concat(content_tag(:i, '', :class=>'icon-white icon-ok'))
+    #     concat(' ' + I18n.t(status))
+    #   end
     end
   end
 
