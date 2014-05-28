@@ -5,7 +5,7 @@ gem 'rails', '3.2.16'
 gem 'thin', group: :development
 gem 'rb-readline', group: :development
 
-gem "delocalize", '0.3.1'
+gem "delocalize", '0.3.2'
 gem 'execjs'
 gem 'therubyracer'
 # gem 'rb-readline'
@@ -57,10 +57,10 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.5'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-rails', '3.1.0'
-  gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 end
 
+gem 'jquery-rails', '3.1.0'
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

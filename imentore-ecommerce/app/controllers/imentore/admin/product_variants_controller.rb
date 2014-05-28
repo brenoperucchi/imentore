@@ -15,13 +15,14 @@ module Imentore
       def update
         update! do |success, failure|
           success.html {
-            flash[:success] = "Variant was successfully updated."
+            flash[:success] = "Atualizado com sucesso"
             redirect_to admin_product_variants_path(@product)
           }
           failure.html {
             requires
-            flash[:alert] = "Variant was not updated."
-            render :index }
+            flash[:alert] = "Nao possivel atualizar"
+            redirect_to edit_admin_product_variant_path(@product, @variant_update)
+          }
         end
       end
 
