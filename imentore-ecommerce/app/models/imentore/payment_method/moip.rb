@@ -35,7 +35,7 @@ module Imentore
                  :id_proprio => order.invoice.id,
                  :dias_expiracao => 5,
                  :billing => billing(order),
-                 :shippingCost => ("%.2f" % order.delivery_calculate(order.zip_code, order.delivery.delivery_method).value)
+                 :shippingCost => ("%.2f" % order.delivery_calculate(order.zip_code, order.delivery.delivery_method))
              }
     end
 

@@ -23,7 +23,7 @@ module Imentore
               :shippingId => "3",
               :currency => "BRL",
               :redirectURL =>  "http://app.imentore.com.br/return_pg/#{order.invoice.id}",
-              :shippingCost => ("%.2f" % (order.delivery_calculate(order.zip_code, order.delivery.delivery_method).value).round(2)),
+              :shippingCost => ("%.2f" % (order.delivery_calculate(order.zip_code, order.delivery.delivery_method)).round(2)),
             }
       ret
     end

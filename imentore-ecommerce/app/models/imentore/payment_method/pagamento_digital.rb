@@ -32,7 +32,7 @@ module Imentore
                'id_pedido' => order.invoice.id,
                'email_loja' => order.invoice_method.options['client_id'],
                'tipo_integraca' => 'PAD',
-               'frete' => order.delivery_calculate(order.zip_code, order.delivery_method).value,
+               'frete' => order.delivery_calculate(order.zip_code, order.delivery_method),
                'url_retorno' =>  "http://app.imentore.com.br/return_pd/#{order.invoice.id}",
                'url_aviso' =>  "http://app.imentore.com.br/sync_pd/#{order.invoice.id}",
                'redirect' => 'true',
