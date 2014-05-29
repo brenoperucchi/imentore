@@ -85,14 +85,18 @@ module Imentore
         @order = current_order
         @invoice = current_order.invoice
         @prepare = @invoice.prepare
-        binding.pry
-        send("#{@invoice.payment_method.name}".to_underscore)
+        send("#{@invoice.payment_method.handle}".to_underscore)
       rescue Exception => msg
         flash[:alert] = t(:checkout_charge_problem)
-        # @order = current_order
+        @order = current_order
         render :new
       end
     end
+
+    def custom
+      complete
+    end
+
     def mo_ip
       redirect_to @prepare['redirect_to'] if @prepare['redirect_to'].present?
     end
@@ -101,15 +105,15 @@ module Imentore
       pagamento_digital_form(@prepare)      
     end
 
-
     def pag_seguro
       redirect_to @prepare['redirect_to'] if @prepare['redirect_to'].present?
     end
 
     def complete
-      @current_order = Imentore::Order.find_by_id(params[:order_id])
+      @current_order = Imentore::Order.find_by_id(params[:order_id]) || Imentore::Order.find_by_id(session[:order_id])
       @items = @current_order.items.map { |item| CartItemDrop.new(item) }      
       @order = OrderDrop.new(@current_order)
+      render 'complete'
     end
 
 
