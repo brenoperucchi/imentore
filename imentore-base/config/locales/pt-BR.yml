@@ -569,7 +569,7 @@ pt-BR:
         imentore_order:
           stock_null: Produto sem estoque
         imentore_cart:
-          stock_null: Produto sem estoque
+          stock_null: Produto sem estoque para essa quantidade.
         <<: *errors
   activemodel:
     attributes:

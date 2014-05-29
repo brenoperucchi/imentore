@@ -73,17 +73,17 @@ module Imentore
 
     state_machine :status, :initial => :pending do
       # after_transition :on => [:paid, :canceled], :do => :update_balance
-      before_transition [:canceled, :pending] => :placed,  do: :valid_stock?
-      after_transition [:placed, :finished] => :canceled, do: :update_stock
-      after_transition [:canceled, :pending] => :placed,  do: :update_stock
+      after_transition [:placed, :finished] => :canceled,   do: :update_stock
+      after_transition :pending => :placed,                 do: :update_stock
+      before_transition :pending => :placed,                do: :valid_stock?
 
       event :place do
-        transition [:canceled, :pending] => :placed
+        transition :pending => :placed
       end
       event :finish do
         transition :placed => :finished
       end
-      event :canceled do
+      event :cancel do
         transition [:placed, :finished] => :canceled
       end
 

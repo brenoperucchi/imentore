@@ -18,7 +18,7 @@ module Imentore
     end
 
     def amount
-      quantity * variant.price
+      (quantity * variant.price).to_f
     end
 
     def deliverable?

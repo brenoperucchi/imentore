@@ -29,7 +29,8 @@ module Imentore
           return if quantity.blank?
           product = current_store.products.find_by_id(item[1][:product_id])
           variant = product.variants.find_by_id(item[1][:variant_id])
-          flash[:success] = t(:cart_update) if current_cart.renew(product, variant, quantity)
+          current_cart.renew(product, variant, quantity) ? flash[:success] = t(:cart_update) : flash[:alert] = current_cart.errors.full_messages.first
+
         end
       end
       redirect_to cart_path

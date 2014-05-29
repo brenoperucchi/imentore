@@ -33,7 +33,7 @@ module Imentore
           h(product.created_at.strftime("%B %e, %Y")),
           product.name,
           product.handle,
-          button_product_datatable(product, edit_admin_product_path(product), 'icon-black icon-edit', 'edit') + ' ' + button_product_datatable(product, admin_product_variants_path(product), 'icon-black icon-share', 'variants') + ' ' + button_product_datatable(product, admin_product_options_path(product), 'icon-black icon-plus', 'options') 
+          button_product_datatable(product, edit_admin_product_path(product), 'icon-black icon-edit', 'edit') + ' ' + button_product_datatable(product, edit_admin_product_path(product), 'icon-black icon-share', 'variants') + ' ' + button_product_datatable(product, admin_product_options_path(product), 'icon-black icon-plus', 'options') 
         ]
       end
     end

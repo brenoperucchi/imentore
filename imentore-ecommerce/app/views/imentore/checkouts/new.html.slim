@@ -72,45 +72,58 @@
       })
       
       $('input.checkbox').click(function(){
-        // var type = $(this).attr('id');
+        //var type = $(this).attr('id');
         var value = $(this).val();
         if ( value != 'other' ) {
-          $('#order_billing_address_name').val($('#'+value).find('label.hide#name').html());
-          $('#order_billing_address_street').val($('#'+value).find('label.hide#street').html());
-          $('#order_billing_address_complement').val($('#'+value).find('label.hide#complement').html());
-          $('#order_billing_address_city').val($('#'+value).find('label.hide#city').html());
-          // $('#order_billing_address_state').val($('label.hide#state').html());
-          // $('#order_billing_address_country').val($('label.hide#country').html());
-          $('#order_billing_address_zip_code').val($('#'+value).find('label.hide#zip_code').html());
-          $('#order_billing_address_phone').val($('#'+value).find('label.hide#phone').html());
+          $('#order_billing_address_name').val($('.info.address#'+value).find('label.hide#name').html());
+          $('#order_billing_address_street').val($('.info.address#'+value).find('label.hide#street').html());
+          $('#order_billing_address_complement').val($('.info.address#'+value).find('label.hide#complement').html());
+          $('#order_billing_address_city').val($('.info.address#'+value).find('label.hide#city').html());
+          $('select.select#order_billing_address_state').find('option').filter(function() {
+              var state = $('.info.address#'+value).find('label.hide#state').html();
+              return $(this).val() == state; 
+          }).prop('selected', true);
+
+          $('select.select#order_billing_address_country').find('option').filter(function() {
+              var state = $('.info.address#'+value).find('label.hide#country').html();
+              return $(this).val() == state; 
+          }).prop('selected', true);
+
+          $('#order_billing_address_zip_code').val($('.info.address#'+value).find('label.hide#zip_code').html());
+          $('#order_billing_address_phone').val($('.info.address#'+value).find('label.hide#phone').html());
           if ( $('input#shipping_address').is(':checked') ){
-            $('#order_shipping_address_name').val($('#'+value).find('label.hide#name').html());
-            $('#order_shipping_address_street').val($('#'+value).find('label.hide#street').html());
-            $('#order_shipping_address_complement').val($('#'+value).find('label.hide#complement').html());
-            $('#order_shipping_address_city').val($('#'+value).find('label.hide#city').html());
-            // $('#order_shipping_address_state').val($('label.hide#state').html());
-            // $('#order_shipping_address_country').val($('label.hide#country').html());
-            $('#order_shipping_address_zip_code').val($('#'+value).find('label.hide#zip_code').html());
-            $('#order_shipping_address_phone').val($('#'+value).find('label.hide#phone').html());            
+            $('#order_shipping_address_name').val($('.info.address#'+value).find('label.hide#name').html());
+            $('#order_shipping_address_street').val($('.info.address#'+value).find('label.hide#street').html());
+            $('#order_shipping_address_complement').val($('.info.address#'+value).find('label.hide#complement').html());
+            $('#order_shipping_address_city').val($('.info.address#'+value).find('label.hide#city').html());
+            $('select.select#order_shipping_address_state').find('option').filter(function() {
+                var state = $('.info.address#'+value).find('label.hide#state').html();
+                return $(this).val() == state; 
+            }).prop('selected', true);
+
+            $('select.select#order_shipping_address_country').find('option').filter(function() {
+                var state = $('.info.address#'+value).find('label.hide#country').html();
+                return $(this).val() == state; 
+            }).prop('selected', true);
+            $('#order_shipping_address_zip_code').val($('.info.address#'+value).find('label.hide#zip_code').html());
+            $('#order_shipping_address_phone').val($('.info.address#'+value).find('label.hide#phone').html());            
           }
         } else {
           $('#order_billing_address_name').val('');
           $('#order_billing_address_street').val('');
           $('#order_billing_address_complement').val('');
           $('#order_billing_address_city').val('');
-          // $('#order_billing_address_state').val('');
-          // $('#order_billing_address_country').val('');
           $('#order_billing_address_zip_code').val('');
           $('#order_billing_address_phone').val('');
+          $('#order_billing_address_state').find('option').first().prop('selected', true);
           if ( $('input#shipping_address').val() == 'true' ){
             $('#order_shipping_address_name').val('');
             $('#order_shipping_address_street').val('');
             $('#order_shipping_address_complement').val('');
             $('#order_shipping_address_city').val('');
-            // $('#order_shipping_address_state').val('');
-            // $('#order_shipping_address_country').val('');
             $('#order_shipping_address_zip_code').val('');
             $('#order_shipping_address_phone').val('');
+            $('#order_shipping_address_state').find('option').first().prop('selected', true);
           }
         }
       })
@@ -120,19 +133,26 @@
           $('#order_shipping_address_street').val('');
           $('#order_shipping_address_complement').val('');
           $('#order_shipping_address_city').val('');
-          // $('#order_shipping_address_state').val('');
-          // $('#order_shipping_address_country').val('');
           $('#order_shipping_address_zip_code').val('');
           $('#order_shipping_address_phone').val('');
+          $('#order_shipping_address_state').find('option').first().prop('selected', true);
         }else{
           $('#order_shipping_address_name').val($('#order_billing_address_name').val());
           $('#order_shipping_address_street').val($('#order_billing_address_street').val());
           $('#order_shipping_address_complement').val($('#order_billing_address_complement').val());
           $('#order_shipping_address_city').val($('#order_billing_address_city').val());
-          // $('#order_shipping_address_state').val($('#order_billing_address_state').val());
-          // $('#order_shipping_address_country').val($('#order_billing_address_country').val());
           $('#order_shipping_address_zip_code').val($('#order_billing_address_zip_code').val());
           $('#order_shipping_address_phone').val($('#order_billing_address_phone').val());                    
+          $('select.select#order_shipping_address_state').find('option').filter(function() {
+              var state = $('#order_billing_address_state').val();
+              return $(this).val() == state; 
+          }).prop('selected', true);
+
+          $('select.select#order_shipping_address_country').find('option').filter(function() {
+              var state = $('#order_billing_address_country').val();
+              return $(this).val() == state; 
+          }).prop('selected', true);
+
         }
       })
       $('input#billing_address.checkbox').first().trigger('click')
