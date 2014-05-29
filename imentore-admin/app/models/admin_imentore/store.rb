@@ -98,9 +98,18 @@ module AdminImentore
       end
     end      
 
+    # def teste
+    #   Imentore::Store.last.products.each do |product|
+    #     old_product = Imentore::Store.last.old_store.products.find_by_name(product.name)
+    #     product.variants.each_with_index do |variant, index|
+    #       variant.update_attribute(:weight, old_product.variants[index].real_weight)
+    #     end
+    #   end
+    # end
+
+
     def self.orders_install(store, old_store)
       old_store.orders.not_deleted.each do |old_order|
-        # old_order = old_store.orders.find(5633)
         new_order = store.orders.new
         old_order.items.each do |old_item|
           product = store.products.find_by_name(old_item.product.name)
@@ -110,12 +119,8 @@ module AdminImentore
           new_order.items << Imentore::LineItem.new(product, variant, old_item.quantity)
         end
         unless old_order.invoices.blank?
-          # begin
-            old_invoice = old_order.invoices.last
-            payment_method = (old_invoice.payment.try(:method_type) == "pg") ? store.payment_methods.find_by_handle("pag_seguro") : store.payment_methods.last
-          # rescue Exception => msg
-            # binding.pry
-          # end
+          old_invoice = old_order.invoices.last
+          payment_method = (old_invoice.payment.try(:method_type) == "pg") ? store.payment_methods.find_by_handle("pag_seguro") : store.payment_methods.last
           amount_order = new_order.products_amount
           amount_order += old_order.shipments.try(:last).try(:price) unless old_order.shipments.blank?
           new_order.build_invoice(amount: amount_order , payment_method: payment_method)
@@ -137,9 +142,6 @@ module AdminImentore
           new_order.shipping_address = address
           new_order.billing_address = address
         end
-        # unless old_order.invoices.blank?# or old_order.invoices.blank?
-        # end
-      # begin
         customer = store.users.find_by_email(old_order.user.email)
         unless customer
           customer_employee_install(store.customers.new, old_order.user)
@@ -152,9 +154,6 @@ module AdminImentore
         new_order.update_attribute(:created_at, old_order.created_at)
         new_order.invoice.confirm if old_order.invoices.try(:last).try(:state) ==  "paid"
         new_order.delivery.sent unless old_order.shipping_state != "shipped" or (old_order.shipments.blank? or old_order.invoices.blank?)
-      # rescue
-        # binding.pry
-      # end
         case old_order.state
           when "checkout", "placed"
             new_order.update_attribute(:status, "placed")
@@ -186,20 +185,20 @@ module AdminImentore
     end
 
     def self.customers_employees_install(new_store, old_store)
-      # return if old_store.nil?
-      # old_store.customers.each do |old_user|
-      #   unless old_user.encrypted_password.nil?
-      #     customer_employee_install(new_store.customers.new, old_user)
-      #   end
-      # end
+      return if old_store.nil?
+      old_store.customers.each do |old_user|
+        unless old_user.encrypted_password.nil?
+          customer_employee_install(new_store.customers.new, old_user)
+        end
+      end
       old_store.employees.each do |old_user|
         unless old_user.encrypted_password.nil?
           customer_employee_install(new_store.employees.new, old_user)
         end
       end
-      # old_employee = store.users.find_by_role('admin')
-      # new_employee = new_store.employees.new 
-      # customer_employee_install(new_employee, old_employee)
+      old_employee = store.users.find_by_role('admin')
+      new_employee = new_store.employees.new 
+      customer_employee_install(new_employee, old_employee)
     end
 
     def self.category_create(new_category, category, store)

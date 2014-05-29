@@ -65,12 +65,45 @@ module Imentore
       self.finish if invoice.confirmed? and delivery.sent?
     end
 
+    # def update_stock(event)
+      # binding.pry
+      # items.each do |item|
+        # item.variant.update_stock.      
+    # end
+
     state_machine :status, :initial => :pending do
+      # after_transition :on => [:paid, :canceled], :do => :update_balance
+      before_transition [:canceled, :pending] => :placed,  do: :valid_stock?
+      after_transition [:placed, :finished] => :canceled, do: :update_stock
+      after_transition [:canceled, :pending] => :placed,  do: :update_stock
+
       event :place do
-        transition :pending => :placed
+        transition [:canceled, :pending] => :placed
       end
       event :finish do
         transition :placed => :finished
+      end
+      event :canceled do
+        transition [:placed, :finished] => :canceled
+      end
+
+      state :pending, :canceled do
+        def valid_stock?(event)
+          unless self.items.detect {|i| i.variant.valid_stock?(i.quantity)}
+            errors.add(:base, I18n.t(:stock_null, scope: [:activerecord, :attributes, :errors, self.class.name.to_underscore]))
+            return false
+          end
+        end
+      end
+      state :placed, :canceled do
+        def update_stock(event)
+          case event.to
+          when "placed"
+            self.items.each {|i| i.variant.update_stock(- i.quantity)}
+          when "canceled"
+            self.items.each {|i| i.variant.update_stock(i.quantity)}
+          end
+        end
       end
     end
 

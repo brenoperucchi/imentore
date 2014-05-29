@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
-lock '3.1.0'
+lock '3.2.1'
 
 set :application, 'imentore'
 set :repo_url, 'git@github.com:bperucchi/imentore.git'
@@ -23,6 +23,8 @@ set :log_level, :debug
 # Default value for :pty is false
 set :pty, true
 
+# set :bundle_path, -> { '/home/imentore/app/imentore-base' }      # this is default
+
 # Default value for :linked_files is []
 # set :linked_files, %w{config/database.yml}
 
@@ -33,7 +35,7 @@ set :pty, true
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5
 
 # config/deploy.rb
 set :rbenv_type, :user # or :system, depends on your rbenv setup
@@ -61,6 +63,11 @@ namespace :deploy do
       execute "/etc/init.d/unicorn stop"
     end
   end
+  # task :bundle do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     execute "cd /home/imentore/app/current/imentore-base && bundle install "
+  #   end
+  # end
 
   task :imentore_config_files do
     on roles(:app), in: :sequence, wait: 5 do
@@ -85,6 +92,7 @@ namespace :deploy do
 
   after :publishing, :imentore_config_files
   after :finishing, :restart
+  # after :finishing, :start
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

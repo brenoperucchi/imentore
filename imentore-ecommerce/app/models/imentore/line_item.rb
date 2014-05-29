@@ -1,7 +1,7 @@
 module Imentore
   class LineItem
     extend Forwardable
-    attr_accessor :product, :variant, :quantity, :store
+    attr_accessor :product, :variant, :quantity, :store, :status
 
     def_delegators :@variant, :price, :deliverable?
     def_delegators :@product, :name
@@ -10,6 +10,7 @@ module Imentore
 
     def initialize(product, variant, quantity)
       @product, @variant, @quantity = product, variant, quantity
+      @status = "pending"
     end
 
     def quantity
