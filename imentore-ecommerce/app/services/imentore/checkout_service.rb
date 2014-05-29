@@ -34,6 +34,7 @@ module Imentore
       if order.deliverable?
         delivery = order.delivery || order.build_delivery
         delivery.attributes = { address: order.shipping_address, delivery_method_id: params[:order][:delivery][:delivery_method] }
+        delivery.amount = order.delivery_calculate(order.zip_code, order.delivery_method)
         delivery.save
       end
 

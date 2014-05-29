@@ -62,17 +62,22 @@ module ApplicationHelper
           concat(' ' + I18n.t(status))
         end
       end
-    # when 'pending', false
-    #   link_to("#", class: 'btn disabled btn-danger') do
-    #     concat(content_tag(:i, '', :class=>'icon-white icon-remove'))
-    #     concat(' ' + I18n.t(status))
-    #   end
-    # when 'finished', false
-    #   link_to("#", class: 'btn disabled btn-success') do
-    #     concat(content_tag(:i, '', :class=>'icon-white icon-ok'))
-    #     concat(' ' + I18n.t(status))
-    #   end
-    end
+    when 'pending', false
+      link_to("#", class: 'btn disabled btn-info') do
+        concat(content_tag(:i, '', :class=>'icon-white icon-remove'))
+        concat(' ' + I18n.t(status))
+      end
+    when 'finished', false
+      link_to("#", class: 'btn disabled btn-success') do
+        concat(content_tag(:i, '', :class=>'icon-white icon-ok'))
+        concat(' ' + I18n.t(status))
+      end
+    when 'canceled', false
+      link_to("#", class: 'btn disabled btn-danger') do
+        concat(content_tag(:i, '', :class=>'icon-white icon-remove'))
+        concat(' ' + I18n.t(status))
+      end
+    end    
   end
 
   def types_templates

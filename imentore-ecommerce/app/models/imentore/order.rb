@@ -113,9 +113,7 @@ module Imentore
     end
 
     def delivery_amount
-      return delivery.try(:amount) unless delivery.try(:amount).nil?
-      return 0 if delivery.nil? or delivery_method.nil?
-      delivery.update_attribute(:amount, delivery_calculate(zip_code, delivery_method).value)
+      delivery.try(:amount) ? delivery.try(:amount) : 0
     end
 
     def coupons_amount
@@ -123,7 +121,8 @@ module Imentore
     end
 
     def delivery_calculate(zip_code, method)
-      Imentore::DeliveryHandle.calculate_items(self.items, zip_code, method)
+      return false if zip_code.nil? or method.nil?
+      Imentore::DeliveryHandle.calculate_items(self.items, zip_code, method).value
     end
 
     def invoice_method
@@ -170,7 +169,6 @@ module Imentore
       end
       true      
     end
-
-
+    
   end
 end

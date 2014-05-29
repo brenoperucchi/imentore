@@ -10,7 +10,7 @@ preload_app true
 # This is where we specify the socket.
 # We will point the upstream Nginx module to this socket later on
 listen "/home/imentore/app/shared/tmp/unicorn.sock", :backlog => 64
-listen 8080, :tcp_nopush => true
+# listen 8080, :tcp_nopush => true
 timeout 360
 
 pid "/home/imentore/app/shared/pids/unicorn.pid"

@@ -61,6 +61,7 @@ pt-BR:
   limit_customer: Limite/Cliente
   limit_use: Limite/Uso
   value: Valor
+  canceled: Cancelado
   opened: Aberto
   closed: Fechado
   pending:  Pendente

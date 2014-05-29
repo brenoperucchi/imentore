@@ -76,18 +76,19 @@
               '
               = link_to(t(:images), new_admin_product_variant_image_path(@product, variant))
 
-#update.hide
-  = simple_form_for @variant_update, as: "variant", url: admin_product_variant_path(@product, @variant_update), :html => {:class => 'form-horizontal', method: :put} do |f|
-    = f.error_notification
-    = f.input :sku, input_html: { :class => 'change', :id => 'sku'}
-    .values
-      = f.simple_fields_for :options do |of|
-        = of.input :value, label: of.object.option_type.name, input_html: { :class => 'change', :id => of.object.option_type.name}
-    = f.input :quantity, input_html: { :class => 'change', :id => 'quantity'}
-    = f.input :weight, input_html: { :class => 'change', :id => 'weight'}
-    = f.input :price, input_html: { :class => 'change', :id => 'price'}
-    .form-actions
-      = f.button :submit, :class => "btn-primary"
+- unless @variant_update.nil?
+  #update.hide
+    = simple_form_for @variant_update, as: "variant", url: admin_product_variant_path(@product, @variant_update), :html => {:class => 'form-horizontal', method: :put} do |f|
+      = f.error_notification
+      = f.input :sku, input_html: { :class => 'change', :id => 'sku'}
+      .values
+        = f.simple_fields_for :options do |of|
+          = of.input :value, label: of.object.option_type.name, input_html: { :class => 'change', :id => of.object.option_type.name}
+      = f.input :quantity, input_html: { :class => 'change', :id => 'quantity'}
+      = f.input :weight, input_html: { :class => 'change', :id => 'weight', type: 'text'}
+      = f.input :price, input_html: { :class => 'change', :id => 'price', type: 'text'}
+      .form-actions
+        = f.button :submit, :class => "btn-primary"
 
 .new
   #action
