@@ -1,34 +1,45 @@
-/ - content_for :breadcrumb do
-/   == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
+- content_for :header do
+  = javascript_include_tag('datatable')
 
 legend= t(:orders)
 / p= link_to("New delivery Method", new_admin_delivery_method_path, :class=>'btn btn-primary')
 
-table.table
-  thead
-    tr
-      th.super-mini= sortable "id"
-      th.mini= sortable "status"
-      th= sortable "created_at"
-      th= sortable "customer_email"
-      th= t(:actions)
-  tbody
-    - @orders.each do |order|
+.index
+  table.table.display#datatable[data-source="#{admin_orders_url(format: 'json')}"]
+    thead
       tr
-        td= order.id
-        td= button_order_status(order.status)
-        td= l(time_zone(order.created_at), format: :short2)
-        td= order.customer_email
-        td
-          = link_to(edit_admin_order_path(order), :class=>"btn btn-small") do
-            i.icon-edit.icon-black
+        th.input-mini= t(:id)
+        th.input-medium= t(:status)
+        th.input-medium= t(:created_at)
+        th.input-small= t(:customer_name)
+        th.input-small= t(:customer_email)
+        th.input-mini= t(:order_amount)
+        th.input= t(:actions)
+    tfoot[style='display:table-header-group']
+      tr
+        th id
+        th status
+        th created_at
+        th name
+        th email
+        th[colspan=2] order_amount
+    tbody
+      - @orders.each do |order|
+        tr
+          td= order.id
+          td= button_order_status(order.status)
+          td= l(time_zone(order.created_at), format: :short2)
+          td= order.customer_name
+          td= order.customer_email
+          td= number_with_price(order.total_amount)
+          td
+            = link_to(edit_admin_order_path(order), :class=>"btn btn-small") do
+              i.icon-edit.icon-black
+              '
+              = t(:edit)
             '
-            = t(:edit)
-
-          '
-          '
-          = link_to(admin_order_path(order), method: :delete, :class=>"btn btn-danger btn-small") do
-            i.icon-trash.icon-white
             '
-            = t(:remove)
-= will_paginate @orders, :renderer => BootstrapPagination::Rails
+            = link_to(admin_order_path(order), method: :delete, :class=>"btn btn-danger btn-small") do
+              i.icon-trash.icon-white
+              '
+              = t(:remove)

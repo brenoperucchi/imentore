@@ -1,5 +1,6 @@
 pt-BR:
   stock_null: sdsds
+
   will_paginate:
     previous_label: "&#8592; Anterior"
     next_label: "Próximo &#8594;"
@@ -41,7 +42,10 @@ pt-BR:
 
   customer_info: Info Cliente
   invoice_info: Info Pagamento
-  log_info: Avisos do Pedido
+  log_info: Histórico do pedido
+
+  billing_address: Endereço do pagamento
+  shipping_address: Endereço do pagamento
 
   coupon_new: Novo Cupom 
   store_update: Atualizar Gerais
@@ -66,6 +70,8 @@ pt-BR:
   closed: Fechado
   pending:  Pendente
   finished: Finalizado
+  confirmed: Confirmado
+  sent: Enviado
   placed: Ativo
   not_placed: Desativado
   level: Nível
@@ -542,14 +548,14 @@ pt-BR:
       imentore/variant:
         sku: Sku
         price: Preço
-        quantity: Quantidade
-        value: Valor
+        quantity: Qtd
       imentore/option_type:
         name: Nome
         handle: Url Amigável 
       imentore/product_variant:
         sku: Sku
         price: Preço
+        price_deal: Promoção
         quantity: Quantidade
         weight: Peso
       imentore/product:

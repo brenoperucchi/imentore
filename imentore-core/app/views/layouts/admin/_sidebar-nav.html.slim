@@ -24,16 +24,16 @@
         = link_to(t(:pages), admin_pages_path)
       li.action#notices
         = link_to(t(:notices), admin_notices_path)
-      li.nav-header
-        = t(:store)
-      li.action#products
-        = link_to(t(:products), admin_products_path)
-      li.action#categories
-        = link_to(t(:categories), admin_categories_path)
-      li.action#orders
-        = link_to(t(:orders), admin_orders_path)
       li.action#coupons
         = link_to(t(:coupons), admin_coupons_path)
+      li.nav-header
+        = t(:ecommerce)
+      li.action#categories
+        = link_to(t(:categories), admin_categories_path)
+      li.action#products
+        = link_to(t(:products), admin_products_path)
+      li.action#orders
+        = link_to(t(:orders), admin_orders_path)
 
 
     ul.nav.nav-list.configuration.hide

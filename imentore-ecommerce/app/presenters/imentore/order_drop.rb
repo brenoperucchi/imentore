@@ -30,5 +30,21 @@ module Imentore
       @shipping_address = ObjectDrop.new(@object.shipping_address)
     end
 
+    def products_amount
+      number_with_price(@object.products_amount)
+    end
+
+    def delivery_amount
+      number_with_price(@object.delivery_amount)
+    end
+
+    def coupons_amount
+      number_with_price(@object.coupons_amount)
+    end
+
+    def total_amount
+      number_with_price(@object.total_amount)
+    end
+
   end
 end

@@ -6,7 +6,12 @@ module Imentore
       # actions :index, :new, :create, :edit, :update
 
       def index
-        @orders = current_store.orders.paginate(:page => params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+        # orders = current_store.orders.search(params[:id], params[:condition], params[:created_at], params[:email])
+        # @orders = orders.paginate(:page => params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+        index! do |index|
+          index.html{@orders = current_store.orders}
+          index.js 
+        end
       end
 
       def confirm_invoice

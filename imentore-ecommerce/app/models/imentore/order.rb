@@ -169,6 +169,12 @@ module Imentore
       end
       true      
     end
+
+    # def self.search(id, condition, created_at, email)
+    #   condition = self
+    #   condition = where('id LIKE ?', (id + '%')) unless id.nil? or id.blank?
+    #   condition
+    # end
     
   end
 end

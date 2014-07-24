@@ -29,6 +29,10 @@ module Imentore
     def price
       number_with_price(@product.variants.first.price)
     end
+   
+    def price_deal
+      number_with_price(@product.variants.first.price_deal)
+    end
 
     def product_code
       "XYZ"
@@ -55,5 +59,12 @@ module Imentore
       attr = @product.stock_available? ? "available" : "unavailable"
       I18n.t(attr)
     end
+
+    def variant_deal?
+      @variant = @product.variants.first
+      !@variant.price_deal.nil? and @variant.price_deal > 0 
+    end
+
+
   end
 end

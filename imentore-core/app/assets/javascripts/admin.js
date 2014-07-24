@@ -9,4 +9,3 @@
 //= require tinymce
 //= require admin/dynatree/jquery.dynatree
 //= require admin/dynatree/jquery.cookie
-//= require_tree .

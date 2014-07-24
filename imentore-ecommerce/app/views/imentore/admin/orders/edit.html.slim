@@ -1,6 +1,6 @@
-.row-fluid
+.row
   .span3.well
-    .row-fluid
+    .row
       .span4
         .data-block
           h6.data-heading
@@ -15,13 +15,13 @@
           h3
             = @order.delivery_method.try(:name)
     hr
-    .row-fluid
+    .row
       .span4
         .data-block
           h6.data-heading
             = t(:order_amount)
           h3
-            = @order.total_amount
+            = number_with_price(@order.total_amount)
       .span4
         .data-block
           h6.data-heading
@@ -31,49 +31,49 @@
 
 
   .span9.well
-    .row-fluid
+    .row
       .span3
         .data-block
           h6.data-heading
             = t(:order_status)
           h3
-            = @order.status
+            = t(@order.status).downcase
       .span3
         .data-block
           h6.data-heading
             = t(:invoice_status)
           h3
-            = @order.invoice.try(:status)
+            = t(@order.invoice.try(:status)).downcase unless @order.invoice.try(:status).nil?
       .span3
         .data-block
           h6.data-heading
             = t(:delivery_status)
           h3
-            = @order.delivery.try(:status)
+            = t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
 
     hr
-    .row-fluid
+    .row
       .span3
         .data-block
           h6.data-heading
             = t(:product_amount)
           h3
-            = @order.products_amount
+            = number_with_price(@order.products_amount)
       .span3
         .data-block
           h6.data-heading
             = t(:coupon_amount)
           h3
-            = @order.coupons_amount
+            = number_with_price(@order.coupons_amount)
       .span3
         .data-block
           h6.data-heading
             = t(:delivery_amount)
           h3
-            = @order.delivery_amount
+            = number_with_price(@order.delivery_amount)
   .clearfix
 - unless @order.delivery.nil?  or @order.invoice.nil? or (@order.invoice.confirmed? and @order.delivery.sent?)
-  .row-fluid
+  .row
     .well.well-small
       .btn-toolbar.ac.pagination-centered
         .btn-group
@@ -89,7 +89,7 @@
               = t(:delivery_confirm)
 
 h4= t(:products)
-.row-fluid
+.row
   .span12
     table.table.table-striped
       thead
@@ -99,7 +99,7 @@ h4= t(:products)
           th= t(:variants)
           th= t(:qtd)
           th= t(:amount)
-          th= t(:actions)
+          / th= t(:actions)
       tbody
         - @order.items.each do |item|
           tr
@@ -107,30 +107,83 @@ h4= t(:products)
             td= item.name
             td= item.variant_options.collect{|x,k| "#{x}: #{k}"}.join(' - ')
             td= item.quantity
-            td= item.amount
-            td
+            td= number_with_price(item.amount)
+            / td
 
 
-.row-fluid
+.row
   .tabbable
     ul.nav.nav-tabs#myTab
       li.active
         a[href='#tab1' data-toggle='tab']
-          = t(:customer_info)
+          = t(:shipping_address)
       li
         a[href='#tab2' data-toggle='tab']
-          = t(:invoice_info)
+          = t(:billing_address)
       li
         a[href='#tab2' data-toggle='tab']
           = t(:log_info)
     .tab-content
       .tab-pane.active#tab1
-        table.table.table-striped
+        table.table.table-striped.table-condensed
           tbody
             tr
               th= t(:name)
               td= @order.customer_name
               th= t(:email)
               td= @order.customer_email
+            tr
+              td[colspan=4]
+            tr
+              th= t(:name, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.shipping_address.name
+              th= t(:street, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.shipping_address.street
+            tr
+              th= t(:complement, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.shipping_address.complement
+              th= t(:city, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.shipping_address.city
+            tr
+              th= t(:state, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.shipping_address.state
+              th= t(:country, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.shipping_address.country
+            tr
+              th= t(:zip_code, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.shipping_address.zip_code
+              th= t(:phone, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.shipping_address.phone
+
       .tab-pane#tab2
-        p I'm in Section 2.
+        table.table.table-striped.table-condensed
+          tbody
+            tr
+              th= t(:name)
+              td= @order.customer_name
+              th= t(:email)
+              td= @order.customer_email
+            tr
+              td[colspan=4]
+            tr
+              th= t(:name, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.billing_address.name
+              th= t(:street, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.billing_address.street
+            tr
+              th= t(:complement, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.billing_address.complement
+              th= t(:city, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.billing_address.city
+            tr
+              th= t(:state, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.billing_address.state
+              th= t(:country, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.billing_address.country
+            tr
+              th= t(:zip_code, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.billing_address.zip_code
+              th= t(:phone, scope: [:activerecord, :attributes, 'imentore/address'])
+              td= @order.billing_address.phone
+
+

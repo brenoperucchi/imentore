@@ -196,7 +196,7 @@ module AdminImentore
           customer_employee_install(new_store.employees.new, old_user)
         end
       end
-      old_employee = store.users.find_by_role('admin')
+      old_employee = old_store.users.find_by_role('admin')
       new_employee = new_store.employees.new 
       customer_employee_install(new_employee, old_employee)
     end
@@ -252,7 +252,20 @@ module AdminImentore
         category_create(new_category, category, new_store)
       end
 
+      ## ADD DEFAULT CREATE ON STORE MODEL
       new_store.create_defaults
+
+      ## ADD OLD ORDERS
+      orders_install(new_store, store)
+
+      ## ADD CUSTOMERS AND EMPLOYEES OLD STORE
+      customers_employees_install(new_store, store)
+
+      ## ADD ADMIN IMENTORE
+      employee = Person.find(3)
+      new_employee = new_store.employees.new 
+      customer_employee_install(new_employee, employee)
+
 
       store.pages.each do |page|
         unless page.path == "home"
@@ -277,11 +290,6 @@ module AdminImentore
         new_page.created_at = page.created_at
       end
 
-      customers_employees_install(new_store, store)
-
-      employee = Person.find(3)
-      new_employee = new_store.employees.new 
-      customer_employee_install(new_employee, employee)
 
 
       store.products.not_deleted.each do |product|

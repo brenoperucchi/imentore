@@ -26,5 +26,13 @@ module Imentore
       @product = Imentore::ProductDrop.new(@item.product)
     end
 
+    def value
+      number_with_price(@item.value)
+    end
+
+    def amount
+      number_with_price(@item.amount)
+    end
+
   end
 end

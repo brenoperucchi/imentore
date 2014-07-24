@@ -22,5 +22,16 @@ module Imentore
       quantity_object >= quantity_need and quantity_object > 0
     end
 
+    def value
+      price = price_deal? ? price_deal : self.price
+    end
+
+    def price_deal
+      read_attribute(:price_deal).nil? ? nil : read_attribute(:price_deal)
+    end
+
+    def price_deal?
+      !price_deal.nil? and price_deal > 0
+    end
   end
 end

@@ -23,9 +23,10 @@ module LiquidFilter
   end
 
   def product_image_url(product, size)
+    size = nil if size == "original"
     @product = Imentore::Product.find_by_id(product.id)
     return if @product.variants.first.images.blank?
-    @product.variants.first.images.first.picture.url(size.to_sym).to_s
+    @product.variants.first.images.first.picture.url(size.try(:to_sym)).to_s
   end
 
   def image_url(size,obj)

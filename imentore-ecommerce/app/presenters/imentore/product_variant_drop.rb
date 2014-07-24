@@ -15,7 +15,11 @@ module Imentore
     end
 
     def price
-      @variant.price
+      number_with_price(@variant.price)
+    end
+
+    def value
+      number_with_price(@variant.value)
     end
 
     def options

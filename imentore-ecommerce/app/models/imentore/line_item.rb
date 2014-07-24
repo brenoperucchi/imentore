@@ -3,7 +3,7 @@ module Imentore
     extend Forwardable
     attr_accessor :product, :variant, :quantity, :store, :status
 
-    def_delegators :@variant, :price, :deliverable?
+    def_delegators :@variant, :price, :deliverable?, :value
     def_delegators :@product, :name
     def_delegators :@variant, :weight
     def_delegators :@product, :store
@@ -18,7 +18,7 @@ module Imentore
     end
 
     def amount
-      (quantity * variant.price).to_f
+      (quantity * variant.value).to_f
     end
 
     def deliverable?

@@ -144,7 +144,7 @@
                   = text_field_tag "[items][#{index}]quantity", item.quantity, :class => "input-mini"
                   = hidden_field_tag "[items][#{index}]product_id", item.product.id
                   = hidden_field_tag "[items][#{index}]variant_id", item.variant.id
-                td= number_with_price(item.price)
+                td= number_with_price(item.value)
                 td= number_with_price(item.amount)
             tr
               td

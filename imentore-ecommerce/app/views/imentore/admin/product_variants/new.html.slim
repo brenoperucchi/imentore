@@ -5,6 +5,7 @@
     = of.input :option_type_id, as: :hidden, input_html: { :value => of.object.option_type_id }
     = of.input :value, label: of.object.option_type.name, input_html: { :class => 'change', :id => of.object.option_type.name}
   = f.input :price, input_html: { :class => 'change', :id => 'price'}
+  = f.input :price_deal, input_html: { :class => 'change', :id => 'price'}
   = f.input :quantity, input_html: { :class => 'change', :id => 'quantity'}
   = f.input :weight, input_html: { :class => 'change', :id => 'weight'}
   .form-actions

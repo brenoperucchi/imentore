@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140524073119) do
+ActiveRecord::Schema.define(:version => 20140619201807) do
 
   create_table "admin_imentore_assets", :force => true do |t|
     t.string   "file"
@@ -276,15 +276,16 @@ ActiveRecord::Schema.define(:version => 20140524073119) do
   end
 
   create_table "imentore_product_variants", :force => true do |t|
-    t.float   "price"
+    t.decimal "price",       :precision => 10, :scale => 2
     t.integer "quantity"
     t.string  "sku"
-    t.float   "weight"
-    t.float   "height"
-    t.float   "width"
-    t.float   "depth"
+    t.decimal "weight",      :precision => 10, :scale => 3
+    t.decimal "height",      :precision => 10, :scale => 3
+    t.decimal "width",       :precision => 10, :scale => 3
+    t.decimal "depth",       :precision => 10, :scale => 3
     t.boolean "deliverable"
     t.integer "product_id"
+    t.decimal "price_deal",  :precision => 10, :scale => 2
   end
 
   create_table "imentore_products", :force => true do |t|

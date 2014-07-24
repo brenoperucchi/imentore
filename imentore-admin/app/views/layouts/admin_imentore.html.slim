@@ -80,7 +80,7 @@ html
 body
   .navbar.navbar-fixed-top
     .navbar-inner
-      .container-fluid
+      .container
         a.btn.btn-navbar[data-toggle="collapse" data-target=".nav-collapse"]
           span.icon-bar
           span.icon-bar
@@ -153,8 +153,8 @@ body
                 / a[href="#"]
 
   = yield :top_nav
-  .container-fluid
-    .row-fluid
+  .container
+    .row
       .span2
         - if user_signed_in?
           .well.sidebar-nav

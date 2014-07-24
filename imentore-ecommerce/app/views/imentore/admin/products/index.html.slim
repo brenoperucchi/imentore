@@ -1,3 +1,5 @@
+- content_for :header do
+  = javascript_include_tag('datatable.js.coffee')
 / - content_for :breadcrumb do
 /   == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
@@ -8,43 +10,42 @@ p
     '
     = t(:product_new)
 
-
-/ table.table.table-striped#products
-/ table.table.table-nomargin.table-striped.datatables
-table.table.table-nomargin.table-striped.datatables[data-source="#{admin_products_url(format: 'json')}"]
+table.table.table-nomargin.table-striped#datatable[data-source="#{admin_products_url(format: 'json')}"]
   thead
     tr
-      th.super-mini= t(:id)
-      th= t(:active)
-      th.mini= t(:created_at)
-      th= t(:name)
-      th= t(:handle)
-      th= t(:action)
+      th.input-mini= t(:id)
+      th.input-small= t(:status)
+      th.input-small= t(:created_at)
+      th.input-medium= t(:name)
+      th.input-medium= t(:action)
+  tfoot[style='display:table-header-group']
+    tr
+      th id
+      th status
+      th created_at
+      th[colspan=2] name
+      / th handle
   tbody
-    / - @products.each do |product|
-    /   tr
-    /     td= product.id
-    /     td= button_status(product.active, edit_admin_product_path(product))
-    /     td= l(time_zone(product.created_at), format: :short2)
-    /     td= link_to(product.name, edit_admin_product_path(product))
-    /     td= product.handle
-    /     td
-    /       = link_to(edit_admin_product_path(product), class: 'btn btn-small') do
-    /         i.icon-black.icon-edit
-    /         '
-    /         = t(:edit)
-    /       '
-    /       = link_to(admin_product_variants_path(product), :class=>"btn btn-small") do
-    /         i.icon-black.icon-share
-    /         '
-    /         = t(:variants)
-    /       '
-    /       = link_to(admin_product_options_path(product), :class=>"btn btn-small") do
-    /         i.icon-black.icon-plus
-    /         '
-    /         = t(:options)            
+    - @products.each do |product|
+      tr
+        td= product.id
+        td= button_status(product.active, edit_admin_product_path(product))
+        td= l(time_zone(product.created_at), format: :short2)
+        td= link_to(product.name, edit_admin_product_path(product))
+        / td= product.handle
+        td
+          = link_to(edit_admin_product_path(product), class: 'btn btn-small') do
+            i.icon-black.icon-edit
+            '
+            = t(:edit)
+          '
+          = link_to(admin_product_variants_path(product), :class=>"btn btn-small") do
+            i.icon-black.icon-share
+            '
+            = t(:variants)
+          '
+          = link_to(admin_product_options_path(product), :class=>"btn btn-small") do
+            i.icon-black.icon-plus
+            '
+            = t(:options)            
 / = will_paginate @products, :renderer => BootstrapPagination::Rails
-/ javascript:
-/   $(document).ready(function() {
-/     $('.datatables').dataTable();
-/   } );

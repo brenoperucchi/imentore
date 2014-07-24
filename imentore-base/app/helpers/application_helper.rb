@@ -44,7 +44,7 @@ module ApplicationHelper
     end
   end 
 
-  def button_product_datatable(product, path, klass, name)
+  def button_datatable(product, path, klass, name)
     capture do 
       link_to(path, class: 'btn btn-small') do
         concat(content_tag(:i, '', :class=>klass))

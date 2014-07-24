@@ -1,6 +1,6 @@
 = simple_form_for([:admin, @payment_method], :html => {:class => 'form-horizontal'}) do |f|
   = f.error_notification
-  .row-fluid
+  .row
     .span6
       = f.input :active
       / = f.input :handle, as: :select, collection: Imentore.config.payment_methods
