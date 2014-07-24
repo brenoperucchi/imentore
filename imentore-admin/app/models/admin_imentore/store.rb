@@ -335,13 +335,17 @@ module AdminImentore
 
         unless Rails.env == "development"
           product.images.each do |image|
-            # begin
+            begin
               new_image = new_product.variants.first.images.new
               new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
               new_image.save
-            # rescue OpenURI::HTTPError
-              # next
-            # end
+            rescue OpenURI::HTTPError
+              logger.debug { "Product:#{product.id} - Image:#{image.id}" }
+              open('product_with_image.out', 'a') do |f|
+                f << "Product:#{product.id} - Image:#{image.id}\n"
+              end
+              next
+            end
           end
         end        
       end
