@@ -321,7 +321,7 @@ module AdminImentore
 
         default_option = new_product.options.create(name: I18n.t(:variant), handle:'variant')
 
-        product.variants.each do |variant|
+        product.variants.each do |variant|0
           new_variant = new_product.variants.new
           new_variant.height = variant.height
           new_variant.width = variant.width
@@ -340,7 +340,7 @@ module AdminImentore
               new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
               new_image.save
             rescue OpenURI::HTTPError
-              logger.debug { "Product:#{product.id} - Image:#{image.id}" }
+              Rails.logger.debug { "Product:#{product.id} - Image:#{image.id}" }
               open('product_with_image.out', 'a') do |f|
                 f << "Product:#{product.id} - Image:#{image.id}\n"
               end
