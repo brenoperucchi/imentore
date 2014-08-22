@@ -29,12 +29,12 @@ module AdminImentore
     end
 
 
-    def self.products_reinstall
-      Imentore::Store.active.each do |new_store|
-        next if store.nil?
-        products_reinstall_store(new_store)
-      end
-    end
+    # def self.products_reinstall
+    #   Imentore::Store.active.each do |new_store|
+    #     next if store.nil?
+    #     products_reinstall_store(new_store)
+    #   end
+    # end
 
     def self.products_reinstall_store(new_store)
       store = new_store.old_store
@@ -42,59 +42,7 @@ module AdminImentore
       new_store.update_attribute(:old_store_id, store.id)
       new_store.products.destroy_all
       store.products.not_deleted.each do |product|
-        new_product = new_store.products.new
-        new_product.name = product.name
-        new_product.description = product.description
-        new_product.active = product.sellable
-        new_product.handle = ActiveSupport::Inflector.transliterate(product.name).to_underscore
-        new_product.created_at = product.created_at
-        new_product.save
-        unless new_product.save
-          new_product.handle = new_product.handle + "_#{rand(100)}"
-          unless new_product.save
-            new_product.handle = new_product.handle + "_#{rand(1000)}"
-            unless new_product.save
-              new_product.handle = new_product.handle[0..10]
-              new_product.save
-            end
-          end
-        end
-
-        product.categories.each do |category|
-          c = new_store.categories.find_by_name(category.title)
-          unless c.nil?
-            c = c.categories_products.new
-            c.product_id = new_product.id
-            c.save
-          end
-        end
-
-        default_option = new_product.options.create(name: I18n.t(:variant), handle:'variant')
-
-        product.variants.each do |variant|
-          new_variant = new_product.variants.new
-          new_variant.height = variant.height
-          new_variant.weight = variant.real_weight
-          new_variant.width = variant.width
-          new_variant.quantity = variant.units.size
-          new_variant.deliverable = true
-          new_variant.price = variant.value_deal == 0 ? variant.value : variant.value_deal
-          unless new_variant.save
-            binding.pry
-          end
-          new_variant.options.create(option_type: default_option, value: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
-        end
-        unless Rails.env = "development"
-          product.images.each do |image|
-            begin
-              new_image = new_product.variants.first.images.new
-              new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
-              new_image.save
-            rescue 
-              next
-            end
-          end
-        end
+        reinstall_products(new_store, product)
       end
     end      
 
@@ -106,7 +54,26 @@ module AdminImentore
     #     end
     #   end
     # end
+    # def page(new_store)
+    #   old_store = new_store.old_store
+    #   old_store.notices.each do |page|
+    #     new_page = new_store.notices.new
+    #     new_page.active = page.active
+    #     new_page.name = page.title
+    #     new_page.handle = ActiveSupport::Inflector.transliterate(page.title).to_underscore
+    #     new_page.body = page.description
+    #     new_page.created_at = page.created_at
+    #     new_page.save
+    #   end
+    # end
 
+      Imentore::Store.last.products.each do |product|
+        # old_product = Imentore::Store.last.old_store.products.find_by_name(product.name)
+        product.variants.each_with_index do |variant, index|
+          variant.update_attribute(:weight, old_product.variants[index].real_weight)
+        end
+      end
+    end
 
     def self.orders_install(store, old_store)
       old_store.orders.not_deleted.each do |old_order|
@@ -266,7 +233,6 @@ module AdminImentore
       new_employee = new_store.employees.new 
       customer_employee_install(new_employee, employee)
 
-
       store.pages.each do |page|
         unless page.path == "home"
           new_page = new_store.pages.new
@@ -280,7 +246,6 @@ module AdminImentore
         end
       end
 
-
       store.notices.each do |page|
         new_page = new_store.notices.new
         new_page.active = page.active
@@ -288,67 +253,73 @@ module AdminImentore
         new_page.handle = ActiveSupport::Inflector.transliterate(page.title).to_underscore
         new_page.body = page.description
         new_page.created_at = page.created_at
+        new_page.save
       end
 
-
-
       store.products.not_deleted.each do |product|
-        new_product = Imentore::Product.new
-        new_product.store_id = new_store.id
-        new_product.name = product.name
-        new_product.description = product.description
-        new_product.active = product.sellable
-        new_product.handle = ActiveSupport::Inflector.transliterate(product.name).to_underscore
-        new_product.store_id = new_store.id
-        new_product.save
+        reinstall_products(new_store, product)
+      end
+    end
+
+    def self.reinstall_products(new_store, product)
+      new_product = new_store.products.new
+      new_product.name = product.name
+      new_product.description = product.description
+      new_product.active = product.sellable
+      new_product.handle = ActiveSupport::Inflector.transliterate(product.name).to_underscore
+      new_product.created_at = product.created_at
+      new_product.save
+      unless new_product.save
+        new_product.handle = new_product.handle + "_#{rand(100)}"
         unless new_product.save
           new_product.handle = new_product.handle + "_#{rand(1000)}"
           unless new_product.save
-            new_product.handle = new_product.handle + "_#{rand(1000)}"
+            new_product.handle = new_product.handle[0..10]
             new_product.save
-            binding.pry
           end
         end
-
-        product.categories.each do |category|
-          c = new_store.categories.find_by_name(category.title)
-          unless c.nil?
-            c = c.categories_products.new
-            c.product_id = new_product.id
-            c.save
-          end
-        end
-
-        default_option = new_product.options.create(name: I18n.t(:variant), handle:'variant')
-
-        product.variants.each do |variant|0
-          new_variant = new_product.variants.new
-          new_variant.height = variant.height
-          new_variant.width = variant.width
-          new_variant.quantity = variant.units.size
-          new_variant.price = variant.value_deal == 0 ? variant.value : variant.value_deal
-          unless new_variant.save
-            binding.pry
-          end
-          new_variant.options.create(option_type: default_option, value: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
-        end
-
-        unless Rails.env == "development"
-          product.images.each do |image|
-            begin
-              new_image = new_product.variants.first.images.new
-              new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
-              new_image.save
-            rescue OpenURI::HTTPError
-              Rails.logger.debug { "Product:#{product.id} - Image:#{image.id}" }
-              open('product_with_image.out', 'a') do |f|
-                f << "Product:#{product.id} - Image:#{image.id}\n"
-              end
-              next
-            end
-          end
-        end        
       end
-    end
+
+      product.categories.each do |category|
+        c = new_store.categories.find_by_name(category.title)
+        unless c.nil?
+          c = c.categories_products.new
+          c.product_id = new_product.id
+          c.save
+        end
+      end
+
+      default_option = new_product.options.create(name: I18n.t(:variant), handle:'variant')
+
+      product.variants.each do |variant|
+        new_variant = new_product.variants.new
+        new_variant.height = variant.height
+        new_variant.weight = variant.real_weight
+        new_variant.width = variant.width
+        new_variant.quantity = variant.units.size
+        new_variant.deliverable = true
+        new_variant.price = variant.value_deal == 0 ? variant.value : variant.value_deal
+        unless new_variant.save
+          binding.pry
+        end
+        new_variant.options.create(option_type: default_option, value: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
+      end
+      unless Rails.env == "development"
+        product.images.each do |image|
+          begin
+            new_image = new_product.variants.first.images.new
+            new_image.remote_picture_url = "http://lojateste2.imentore.com.br" + image.picture.url 
+            new_image.save
+          rescue OpenURI::HTTPError
+            Rails.logger.debug { "Product:#{product.id} - Image:#{image.id}" }
+            open('product_with_image.out', 'a') do |f|
+              f << "Product:#{product.id} - Image:#{image.id}\n"
+            end
+            next
+          end
+        end
+      end
+    end 
+
   end
 end

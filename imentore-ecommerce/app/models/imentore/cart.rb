@@ -18,9 +18,11 @@ module Imentore
     end
 
     def valid_stock?
-      unless items.detect {|i| i.variant.valid_stock?(i.quantity)}
-        errors.add(:base, I18n.t(:stock_null, scope: [:activerecord, :attributes, :errors, self.class.name.to_underscore]))
-        return false
+      items.each do |i| 
+        unless i.variant.valid_stock?(i.quantity)
+          errors.add(:base, I18n.t(:stock_null, scope: [:activerecord, :attributes, :errors, self.class.name.to_underscore]))
+          return false
+        end
       end
     end
 

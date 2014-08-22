@@ -48,7 +48,7 @@ module Imentore
 
     def image
       return nil if @product.variants.first.images.blank?
-      @product.variants.first.images.first.picture.url(:thumb)
+      @product.variants.first.images.first.picture.url(:small_fit)
     end
 
     def variant_id
