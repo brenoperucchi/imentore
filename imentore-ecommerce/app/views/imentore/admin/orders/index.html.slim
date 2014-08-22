@@ -37,9 +37,14 @@ legend= t(:orders)
               i.icon-edit.icon-black
               '
               = t(:edit)
-            '
-            '
-            = link_to(admin_order_path(order), method: :delete, :class=>"btn btn-danger btn-small") do
-              i.icon-trash.icon-white
               '
-              = t(:remove)
+            - if order.can_cancel?
+              = link_to(cancel_admin_order_path(order), method: :get, :class=>"btn btn-danger btn-small") do
+                i.icon-question-sign.icon-white
+                '
+                = t(:cancel)
+            - else
+              = link_to(admin_order_path(order), method: :delete, :class=>"btn btn-inverse btn-small") do
+                i.icon-trash.icon-white
+                '
+                = t(:remove)

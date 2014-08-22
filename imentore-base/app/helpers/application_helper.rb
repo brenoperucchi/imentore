@@ -57,13 +57,13 @@ module ApplicationHelper
     case status
     when 'placed', true
       capture do 
-        link_to("#", class: 'btn disabled btn-warning') do
+        link_to("#", class: 'btn disabled btn-info') do
           concat(content_tag(:i, '', :class=>'icon-white icon-exclamation-sign'))
           concat(' ' + I18n.t(status))
         end
       end
     when 'pending', false
-      link_to("#", class: 'btn disabled btn-info') do
+      link_to("#", class: 'btn disabled btn-warning') do
         concat(content_tag(:i, '', :class=>'icon-white icon-remove'))
         concat(' ' + I18n.t(status))
       end

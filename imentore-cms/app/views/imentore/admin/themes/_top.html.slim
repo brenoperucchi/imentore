@@ -14,7 +14,6 @@
 
 - content_for :breadcrumb do
   == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => admin_themes_path},{@theme.name => admin_theme_path(@theme)}])
-
 ul.nav.nav-tabs#myTab
   li#theme
     = link_to(t('imentore/theme', scope: [:activerecord, :models]), admin_theme_path(@theme))

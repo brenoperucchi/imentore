@@ -50,9 +50,8 @@ module Imentore
 
     has_many :coupons_orders
     has_many :coupons, :through => :coupons_orders, :source => :coupon
-    validate :valid_addresses, :on => :update
-
-    validates :customer_name, :customer_email, presence: true, :on => :update
+    validate :valid_addresses, :on => :update, unless: Proc.new {|order| order.canceled?}
+    validates :customer_name, :customer_email, presence: true, :on => :update, unless: Proc.new {|order| order.canceled?}
 
     def valid_addresses
       valid_billing = billing_address.valid? 
@@ -84,7 +83,7 @@ module Imentore
         transition :placed => :finished
       end
       event :cancel do
-        transition [:placed, :finished] => :canceled
+        transition [:pending, :placed, :finished] => :canceled
       end
 
       state :pending, :canceled do

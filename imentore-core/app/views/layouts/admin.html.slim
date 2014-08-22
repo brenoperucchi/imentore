@@ -79,11 +79,11 @@ html
 
 body
   = render 'layouts/admin/menu'
-  .container
+  .container-fluid
     .row
       .span2
         = render 'layouts/admin/sidebar-nav'
-      .span10
+      .span12
         = yield :breadcrumb
         .notification
           .div.alert.alert-error.hide

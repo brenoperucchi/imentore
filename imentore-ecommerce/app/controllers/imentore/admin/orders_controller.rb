@@ -14,6 +14,12 @@ module Imentore
         end
       end
 
+      def cancel
+        @order = current_store.orders.find(params[:id])
+        @order.cancel
+        redirect_to admin_orders_path
+      end
+
       def confirm_invoice
         @order = current_store.orders.find(params[:id])
         @order.invoice.confirm

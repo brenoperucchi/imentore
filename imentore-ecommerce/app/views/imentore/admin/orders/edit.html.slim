@@ -1,14 +1,14 @@
 .row
   .span3.well
     .row
-      .span4
+      .span1
         .data-block
           h6.data-heading
             = t(:order_id)
           h3
             | #
             = @order.id
-      .span5
+      .span2
         .data-block
           h6.data-heading
             = t(:delivery_method)
@@ -16,13 +16,13 @@
             = @order.delivery_method.try(:name)
     hr
     .row
-      .span4
+      .span1
         .data-block
           h6.data-heading
             = t(:order_amount)
           h3
             = number_with_price(@order.total_amount)
-      .span4
+      .span2
         .data-block
           h6.data-heading
             = t(:invoice_method)
@@ -30,9 +30,9 @@
             = @order.invoice_method.try(:name)
 
 
-  .span9.well
+  .span8.well
     .row
-      .span3
+      .span2
         .data-block
           h6.data-heading
             = t(:order_status)
@@ -44,7 +44,7 @@
             = t(:invoice_status)
           h3
             = t(@order.invoice.try(:status)).downcase unless @order.invoice.try(:status).nil?
-      .span3
+      .span2
         .data-block
           h6.data-heading
             = t(:delivery_status)
@@ -53,7 +53,7 @@
 
     hr
     .row
-      .span3
+      .span2
         .data-block
           h6.data-heading
             = t(:product_amount)
@@ -65,7 +65,7 @@
             = t(:coupon_amount)
           h3
             = number_with_price(@order.coupons_amount)
-      .span3
+      .span2
         .data-block
           h6.data-heading
             = t(:delivery_amount)
@@ -74,7 +74,7 @@
   .clearfix
 - unless @order.delivery.nil?  or @order.invoice.nil? or (@order.invoice.confirmed? and @order.delivery.sent?)
   .row
-    .well.well-small
+    .span12.well.well-small
       .btn-toolbar.ac.pagination-centered
         .btn-group
           - if @order.invoice.can_confirm?
@@ -112,7 +112,7 @@ h4= t(:products)
 
 
 .row
-  .tabbable
+  .span12.tabbable
     ul.nav.nav-tabs#myTab
       li.active
         a[href='#tab1' data-toggle='tab']
