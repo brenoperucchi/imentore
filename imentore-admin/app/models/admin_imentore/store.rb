@@ -67,13 +67,13 @@ module AdminImentore
     #   end
     # end
 
-      Imentore::Store.last.products.each do |product|
-        # old_product = Imentore::Store.last.old_store.products.find_by_name(product.name)
-        product.variants.each_with_index do |variant, index|
-          variant.update_attribute(:weight, old_product.variants[index].real_weight)
-        end
-      end
-    end
+    #   Imentore::Store.last.products.each do |product|
+    #     # old_product = Imentore::Store.last.old_store.products.find_by_name(product.name)
+    #     product.variants.each_with_index do |variant, index|
+    #       variant.update_attribute(:weight, old_product.variants[index].real_weight)
+    #     end
+    #   end
+    # end
 
     def self.orders_install(store, old_store)
       old_store.orders.not_deleted.each do |old_order|
