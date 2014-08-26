@@ -307,8 +307,8 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
-    will_paginate (3.0.3)
-    will_paginate-bootstrap (1.0.0)
+    will_paginate (3.0.7)
+    will_paginate-bootstrap (0.2.5)
       will_paginate (>= 3.0.3)
 
 PLATFORMS
@@ -361,5 +361,5 @@ DEPENDENCIES
   tinymce-rails
   turn (~> 0.8.3)
   uglifier (>= 1.0.3)
-  will_paginate (= 3.0.3)
-  will_paginate-bootstrap
+  will_paginate (= 3.0.7)
+  will_paginate-bootstrap (= 0.2.5)

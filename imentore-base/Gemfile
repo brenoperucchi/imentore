@@ -16,8 +16,8 @@ gem 'sqlite3'
 
 gem 'mysql2'
 
-gem 'will_paginate', '3.0.3'
-gem 'will_paginate-bootstrap'
+gem 'will_paginate', '3.0.7'
+gem 'will_paginate-bootstrap', '0.2.5'
 
 gem 'devise', '2.1.2'
 gem 'devise-encryptable'

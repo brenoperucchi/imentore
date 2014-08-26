@@ -560,6 +560,7 @@ pt-BR:
         weight: Peso
       imentore/product:
         active: Ativo
+        featured: Destaque
         name: Nome
         handle: Url Amigável 
         description: Descrição 

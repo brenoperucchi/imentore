@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140619201807) do
+ActiveRecord::Schema.define(:version => 20140826003555) do
 
   create_table "admin_imentore_assets", :force => true do |t|
     t.string   "file"
@@ -298,6 +298,7 @@ ActiveRecord::Schema.define(:version => 20140619201807) do
     t.string   "handle"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "featured"
   end
 
   create_table "imentore_send_emails", :force => true do |t|

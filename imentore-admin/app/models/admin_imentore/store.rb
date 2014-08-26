@@ -67,10 +67,17 @@ module AdminImentore
     #   end
     # end
 
-    #   Imentore::Store.last.products.each do |product|
-    #     # old_product = Imentore::Store.last.old_store.products.find_by_name(product.name)
+    # def price_deal
+    #   store = Imentore::Store.find(113)
+    #   store.products.each do |product|
+    #     old_product = store.old_store.products.find_by_name(product.name)
+    #     next if old_product.nil?
     #     product.variants.each_with_index do |variant, index|
-    #       variant.update_attribute(:weight, old_product.variants[index].real_weight)
+    #       # begin
+    #         variant.update_attribute(:price_deal, old_product.variants[index].value_deal)
+    #       # rescue
+    #         # next
+    #       # end
     #     end
     #   end
     # end

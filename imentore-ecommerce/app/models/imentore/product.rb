@@ -13,6 +13,7 @@ module Imentore
     has_many :feedbacks, as: :feedbackable, dependent: :destroy
 
     scope :active, where(active: true)
+    scope :featured, where(featured: true)
     scope :product_search, lambda { |search| { :conditions => ["name like ?", "%#{search}%"] } }
 
     validates :name, :handle, :store, presence: true

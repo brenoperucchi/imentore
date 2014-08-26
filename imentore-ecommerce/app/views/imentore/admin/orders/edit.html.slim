@@ -3,30 +3,30 @@
     .row
       .span1
         .data-block
-          h6.data-heading
+          h5.data-heading
             = t(:order_id)
-          h3
+          h4
             | #
             = @order.id
       .span2
         .data-block
-          h6.data-heading
+          h5.data-heading
             = t(:delivery_method)
-          h3
+          h4
             = @order.delivery_method.try(:name)
     hr
     .row
       .span1
         .data-block
-          h6.data-heading
+          h5.data-heading
             = t(:order_amount)
-          h3
+          h4
             = number_with_price(@order.total_amount)
       .span2
         .data-block
-          h6.data-heading
+          h5.data-heading
             = t(:invoice_method)
-          h3
+          h4
             = @order.invoice_method.try(:name)
 
 
@@ -34,42 +34,42 @@
     .row
       .span2
         .data-block
-          h6.data-heading
+          h5.data-heading
             = t(:order_status)
-          h3
+          h4
             = t(@order.status).downcase
       .span3
         .data-block
-          h6.data-heading
+          h5.data-heading
             = t(:invoice_status)
-          h3
+          h4
             = t(@order.invoice.try(:status)).downcase unless @order.invoice.try(:status).nil?
       .span2
         .data-block
-          h6.data-heading
+          h5.data-heading
             = t(:delivery_status)
-          h3
+          h4
             = t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
 
     hr
     .row
       .span2
         .data-block
-          h6.data-heading
+          h5.data-heading
             = t(:product_amount)
-          h3
+          h4
             = number_with_price(@order.products_amount)
       .span3
         .data-block
-          h6.data-heading
+          h5.data-heading
             = t(:coupon_amount)
-          h3
+          h4
             = number_with_price(@order.coupons_amount)
       .span2
         .data-block
-          h6.data-heading
+          h5.data-heading
             = t(:delivery_amount)
-          h3
+          h4
             = number_with_price(@order.delivery_amount)
   .clearfix
 - unless @order.delivery.nil?  or @order.invoice.nil? or (@order.invoice.confirmed? and @order.delivery.sent?)

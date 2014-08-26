@@ -22,6 +22,9 @@
         },
         checkbox: true,
         selectMode: 2,
+        minExpandLevel:1,
+        autoCollapse:false,
+        activeVisible:true,
         onSelect: function(select, node) {
           // Get a list of all selected nodes, and convert to a key array:
           var selKeys = $.map(node.tree.getSelectedNodes(), function(node){
@@ -94,11 +97,12 @@
 .tab#product
   = simple_form_for([:admin, @product], :html => {:class => 'form-horizontal'}) do |f|
     .row
-      .span10
+      .span12
         .row
           .span7
               = f.error_notification
               = f.input :active
+              = f.input :featured
               = f.input :name
               = f.input :handle
               = f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
