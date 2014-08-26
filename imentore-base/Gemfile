@@ -4,6 +4,7 @@ gem 'rails', '3.2.16'
 
 gem 'thin', group: :development
 gem 'rb-readline', group: :development
+gem 'quiet_assets', group: :development
 
 gem "delocalize", '0.3.2'
 gem 'execjs'

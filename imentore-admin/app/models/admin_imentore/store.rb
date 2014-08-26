@@ -67,18 +67,19 @@ module AdminImentore
     #   end
     # end
 
-    # def price_deal
+    # def featured
     #   store = Imentore::Store.find(113)
     #   store.products.each do |product|
     #     old_product = store.old_store.products.find_by_name(product.name)
     #     next if old_product.nil?
-    #     product.variants.each_with_index do |variant, index|
+    #     product.update_attribute(:featured, old_product.featured)
+    #     # product.variants.each_with_index do |variant, index|
     #       # begin
-    #         variant.update_attribute(:price_deal, old_product.variants[index].value_deal)
+    #         # variant.update_attribute(:price_deal, old_product.variants[index].value_deal)
     #       # rescue
     #         # next
     #       # end
-    #     end
+    #     # end
     #   end
     # end
 

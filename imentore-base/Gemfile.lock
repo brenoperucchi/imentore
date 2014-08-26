@@ -219,6 +219,8 @@ GEM
     pry-stack_explorer (0.4.1)
       binding_of_caller (~> 0.6.2)
       pry (~> 0.9.8.2)
+    quiet_assets (1.0.3)
+      railties (>= 3.1, < 5.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -348,6 +350,7 @@ DEPENDENCIES
   pry (= 0.9.8.2)
   pry-nav (= 0.1.0)
   pry-stack_explorer (= 0.4.1)
+  quiet_assets
   rails (= 3.2.16)
   rb-readline
   ruby-plesk!

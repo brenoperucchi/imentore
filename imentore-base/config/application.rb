@@ -60,5 +60,9 @@ module ImentoreBase
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    ## Add 26/09/2014
+    config.log_tags = [:remote_ip, :host]
+    # Other config settings omitted.
   end
 end
