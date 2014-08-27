@@ -1,5 +1,5 @@
 //= require jquery
-//= require jquery_ujs
+//= require jquery.ui.all
 //= require bootstrap
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/2/jquery.dataTables.bootstrap

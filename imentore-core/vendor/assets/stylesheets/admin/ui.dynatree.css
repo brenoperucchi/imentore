@@ -11,7 +11,8 @@ ul.dynatree-container
 	background-color: white;
 	border: 1px dotted gray;
 	overflow: auto;
-	height: 100%; /* issue 263 */
+/*	height: 100%; /* issue 263, 470 */
+	min-height: 0%;
 }
 
 ul.dynatree-container ul
@@ -31,10 +32,10 @@ ul.dynatree-container li
 	background-attachment: scroll;
 	background-color: transparent;
 	background-repeat: repeat-y;
-	background-image: url("admin/vline.gif");
+	background-image: url("vline.gif");
 	background-position: 0 0;
 	/*
-	background-image: url("admin/icons_96x256.gif");
+	background-image: url("icons_96x256.gif");
 	background-position: -80px -64px;
 	*/
 	margin: 0;
@@ -80,7 +81,7 @@ span.dynatree-drag-helper-img,
 	vertical-align: top;
 	background-repeat: no-repeat;
 	background-position: left;
-	background-image: url("admin/icons.gif");
+	background-image: url("icons.gif");
 	background-position: 0 0;
 }
 
@@ -145,7 +146,7 @@ span.dynatree-expander
 .dynatree-loading span.dynatree-expander  /* 'Loading' status overrides all others */
 {
 	background-position: 0 0;
-	background-image: url("admin/loading.gif");
+	background-image: url("loading.gif");
 }
 
 
@@ -243,13 +244,13 @@ span.dynatree-icon /* Default icon */
 
 .dynatree-statusnode-wait span.dynatree-icon
 {
-	background-image: url("admin/loading.gif");
+	background-image: url("loading.gif");
 }
 
 .dynatree-statusnode-error span.dynatree-icon
 {
 	background-position: 0px -112px;
-/*	background-image: url("admin/ltError.gif");*/
+/*	background-image: url("ltError.gif");*/
 }
 
 /*******************************************************************************
@@ -262,7 +263,8 @@ span.dynatree-node
 {
 /*	display: -moz-inline-box; /* issue 133, 165, 172, 192. removed for issue 221*/
 /*	-moz-box-align: start; /* issue 221 */
-/*  display: inline-block; /* Required to make a span sizeable */
+	display: inline-block; /* issue 373 Required to make a span sizeable */
+	vertical-align: top;
 }
 
 
