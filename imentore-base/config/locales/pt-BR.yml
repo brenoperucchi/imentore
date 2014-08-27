@@ -58,6 +58,9 @@ pt-BR:
   object_destroy: Registro removido
   object_failure: Registro com problema
 
+  save: Salvar
+  close: Fechar
+
   view_default: Mostrar padrão
   default_updated_at: Atualização do sistema
   status: Condição

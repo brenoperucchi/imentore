@@ -28,6 +28,7 @@ module Imentore
 
       def confirm_delivery
         @order = current_store.orders.find(params[:id])
+        @order.delivery.update_attribute(:tracking_code, params[:delivery][:tracking_code])
         @order.delivery.sent
         redirect_to edit_admin_order_path(@order)
       end

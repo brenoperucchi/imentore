@@ -1,3 +1,15 @@
+#myModal.modal.hide.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  = simple_form_for(@order.delivery, url: confirm_delivery_admin_order_path(@order), method: 'get', :html=> { :class=>'form-horizontal' } ) do |f|
+    .modal-header
+      button.close aria-hidden="true" data-dismiss="modal" type="button"  ×
+      h3#myModalLabel= t(:delivery_confirm)
+    .modal-body
+      = f.input :tracking_code
+    .modal-footer
+      = f.button :submit, t(:save), :class => 'btn btn-primary'
+      button.btn aria-hidden="true" data-dismiss="modal"= t(:close)
+      / button.btn.btn-primary Save changes
+
 .row
   .span3.well
     .row
@@ -38,18 +50,26 @@
             = t(:order_status)
           h4
             = t(@order.status).downcase
-      .span3
+      .span2
         .data-block
           h5.data-heading
             = t(:invoice_status)
           h4
             = t(@order.invoice.try(:status)).downcase unless @order.invoice.try(:status).nil?
-      .span2
+      .span3
         .data-block
           h5.data-heading
             = t(:delivery_status)
+            '
+            - if @order.delivery.sent?
+              a[title="" data-placement="top" data-toggle="modal" href="#myModal" ]
+                / = link_to("#myModal", role: 'button', class:'btn', 'data-toggle' => 'modal')
+                i.icon-black.icon-envelope
+                = @order.delivery.tracking_code
           h4
             = t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
+
+
 
     hr
     .row
@@ -59,13 +79,13 @@
             = t(:product_amount)
           h4
             = number_with_price(@order.products_amount)
-      .span3
+      .span2
         .data-block
           h5.data-heading
             = t(:coupon_amount)
           h4
             = number_with_price(@order.coupons_amount)
-      .span2
+      .span3
         .data-block
           h5.data-heading
             = t(:delivery_amount)
@@ -83,10 +103,14 @@
               '
               = t(:payment_confirm)
           - if @order.delivery.can_sent?
-            = link_to(confirm_delivery_admin_order_path(@order), class: 'btn') do
+            = link_to("#myModal", role: 'button', class:'btn', 'data-toggle' => 'modal') do
               i.icon-black.icon-envelope
               '
               = t(:delivery_confirm)
+            / = link_to(confirm_delivery_admin_order_path(@order), class: 'btn') do
+            /   i.icon-black.icon-envelope
+            /   '
+            /   = t(:delivery_confirm)
 
 h4= t(:products)
 .row

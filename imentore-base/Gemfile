@@ -60,7 +60,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails', '3.1.0'
+gem 'jquery-rails', '>=3.1.0'
+gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', '~> 2.1.10.0.3'
 # gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 # gem 'jquery-datatables-rails', git: 'git://github.com/toxix/jquery-datatables-rails.git'
