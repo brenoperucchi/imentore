@@ -2,7 +2,7 @@
  *= require bootstrap
  *= require bootstrap-responsive
  *= require imentore-cms
- *= require jquery.ui.all
+ *= require jquery-ui
  *= require admin/ui.dynatree
  *= require dataTables/bootstrap/2/jquery.dataTables.bootstrap
 */
