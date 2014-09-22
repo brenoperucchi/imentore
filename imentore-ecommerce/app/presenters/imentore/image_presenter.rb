@@ -11,9 +11,9 @@ module Imentore
         "name" => @image.picture_identifier,
         "size" => @image.picture.size,
         "url" => @image.picture.url,
-        "thumbnail_url" => @image.picture.url(:super_thumb),
-        "delete_url" => admin_product_variant_image_path(@image.imageable.product, @image.imageable, @image),
-        "delete_type" => "delete"
+        "thumbnailUrl" => @image.picture.url(:super_thumb),
+        "deleteUrl" => admin_product_variant_image_path(@image.imageable.product, @image.imageable, @image),
+        "deleteType" => "delete"
       }
     end
   end

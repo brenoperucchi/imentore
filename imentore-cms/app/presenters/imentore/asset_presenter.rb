@@ -13,9 +13,9 @@ module Imentore
         "name" => @asset.file_identifier,
         "size" => @asset.file.size,
         "url" => @asset.file.url,
-        "thumbnail_url" => thumbnail_url(@asset),
-        "delete_url" => admin_theme_asset_path(@asset.theme, @asset),
-        "delete_type" => "delete"
+        "thumbnailUrl" => thumbnail_url(@asset),
+        "deleteUrl" => admin_theme_asset_path(@asset.theme, @asset),
+        "deleteType" => "delete"
       }
     end
 

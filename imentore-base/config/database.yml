@@ -28,7 +28,8 @@ production:
 development:
  adapter: mysql2
  database: imentore
+ host: imac.local
  pool: 5
  timeout: 5000
- username: root
+ username: imentore
  password: 

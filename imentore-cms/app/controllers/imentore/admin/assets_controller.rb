@@ -5,15 +5,16 @@ module Imentore
       actions :new, :create, :destroy, :index
       belongs_to :theme
       respond_to :json, only: [:create, :index, :destroy]
+      skip_before_filter :verify_authenticity_token, :if => Proc.new {|c| c.request.format == 'application/json'}
 
       def index
-        respond_with(collection.map { |asset| Imentore::AssetPresenter.new(asset).to_json })
+        respond_with(files: collection.map {|asset| Imentore::AssetPresenter.new(asset).to_json})
       end
 
       def create
         create! do |success, failure|
           success.json {
-            render json: [Imentore::AssetPresenter.new(@asset).to_json]
+            render json:{files: [Imentore::AssetPresenter.new(@asset).to_json]}, status: :created 
           }
         end
       end

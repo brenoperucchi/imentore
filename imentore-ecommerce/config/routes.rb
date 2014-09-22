@@ -17,7 +17,7 @@ Imentore::Core::Engine.routes.draw do
       resources :products,  only: [:index, :new, :create, :edit, :update] do
         resources :options,  to: "product_options"
         resources :variants, to: 'product_variants' do
-          resources :images, only: [:new, :create, :destroy, :index], to: 'images'
+          resources :images, only: [:create, :destroy, :index], to: 'images'
         end
       end
       resources :payment_methods, path: "payment-methods"

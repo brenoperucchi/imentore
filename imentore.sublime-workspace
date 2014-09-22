@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"btn-",
+				"btn-small"
+			],
+			[
 				"co",
 				"coupons_amount"
 			],
@@ -510,23 +514,11 @@
 			[
 				"p",
 				"payment_method"
-			],
-			[
-				"lo",
-				"lorem	Lorem ipsum"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "imentore-base/config/locales/pt-BR.yml",
-			"settings":
-			{
-				"buffer_size": 15110,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -535,8 +527,16 @@
 		"selected_items":
 		[
 			[
+				"ra",
+				"Set Syntax: HTML (Rails)"
+			],
+			[
 				"rails",
-				"Set Syntax: Ruby on Rails"
+				"Set Syntax: HTML (Rails)"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
 			],
 			[
 				"script",
@@ -557,10 +557,6 @@
 			[
 				"logd",
 				"Snippet: logger.debug"
-			],
-			[
-				"html",
-				"Set Syntax: HTML"
 			],
 			[
 				"package",
@@ -687,7 +683,7 @@
 				"Snippet: YAML.load(file)"
 			]
 		],
-		"width": 530.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -706,136 +702,151 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Users/breno/app/imentore",
+		"/Users/breno/app/imentore/imentore-admin",
+		"/Users/breno/app/imentore/imentore-base",
+		"/Users/breno/app/imentore/imentore-base/config",
+		"/Users/breno/app/imentore/imentore-base/config/environments",
+		"/Users/breno/app/imentore/imentore-base/config/initializers",
+		"/Users/breno/app/imentore/imentore-core",
+		"/Users/breno/app/imentore/imentore-core/app",
+		"/Users/breno/app/imentore/imentore-core/vendor",
+		"/Users/breno/app/imentore/imentore-core/vendor/assets",
+		"/Users/breno/app/imentore/imentore-core/vendor/assets/stylesheets",
+		"/Users/breno/app/imentore/imentore-core/vendor/assets/stylesheets/admin"
+	],
 	"file_history":
 	[
+		"/Users/breno/app/imentore/imentore-admin/app/controllers/admin_imentore/base_controller.rb",
+		"/Users/breno/app/imentore/imentore-admin/app/controllers/base_controller_slice.rb",
+		"/Users/breno/app/imentore/imentore-core/lib/imentore-core/base_helper.rb",
+		"/Users/breno/app/imentore/imentore-base/config/initializers/backtrace_silencers.rb",
+		"/Users/breno/app/imentore/imentore-core/vendor/assets/stylesheets/bootstrap.css",
 		"/Users/breno/app/imentore/imentore-base/Gemfile",
-		"/Users/breno/app/imentore/imentore-base/config/environments/development.rb",
-		"/Users/breno/app/imentore/imentore-base/config/locales/pt-BR.yml",
-		"/Users/breno/app/imentore/imentore-base/config/environment.rb",
-		"/Users/breno/app/imentore/imentore-core/app/assets/javascripts/datatable.js.coffee",
-		"/Users/breno/app/imentore/imentore-base/config/deploy.rb",
-		"/Users/breno/app/imentore/imentore-base/db/development.sqlite3",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/products/edit.html.slim",
+		"/Users/breno/app/imentore/imentore-base/config/database.yml",
+		"/Users/breno/app/imentore/imentore-core/app/views/layouts/admin.html.slim",
+		"/Users/breno/app/imentore/imentore-core/app/views/layouts/admin/_sidebar-nav.html.slim",
 		"/Users/breno/app/imentore/imentore-core/app/assets/javascripts/admin.js",
 		"/Users/breno/app/imentore/imentore-core/app/assets/stylesheets/admin.css",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/products/index.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/orders/index.html.slim",
-		"/Users/breno/app/imentore/imentore-base/app/models/old/address.rb",
+		"/Users/breno/app/imentore/imentore-core/vendor/assets/stylesheets/bootstrap-responsive.css",
+		"/Users/breno/app/imentore/imentore-cms/app/assets/stylesheets/ace/bootstrap.min.css",
+		"/Users/breno/app/imentore/imentore-core/vendor/assets/javascripts/bootstrap.js",
+		"/Users/breno/app/imentore/imentore-base/config/environments/development.rb",
+		"/Users/breno/app/imentore/imentore-base/app/models/old/store.rb",
+		"/Users/breno/app/imentore/imentore-base/config/application.rb",
+		"/Users/breno/app/imentore/imentore-base/config/environments/production.rb",
+		"/Users/breno/app/imentore/imentore-base/config/environments/test.rb",
+		"/Users/breno/app/imentore/imentore-base/config/environment.rb",
+		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/site.js",
+		"/Users/breno/app/imentore/imentore-base/public/sitemap.xml",
+		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/site_tour.js",
+		"/Users/breno/app/imentore/imentore-admin/app/models/admin_imentore/store.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/store_drop.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/stores/show.html.slim",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/datatables/imentore/datatable.rb",
+		"/Users/breno/app/imentore/imentore-core/app/assets/javascripts/datatable.js.coffee",
+		"/Users/breno/app/imentore/imentore-base/config/deploy.rb",
+		"/Users/breno/app/imentore/imentore-auth/Gemfile",
+		"/Users/breno/app/imentore/imentore-auth/config/initializers/devise.rb",
+		"/Users/breno/app/imentore/imentore-cms/app/assets/javascripts/imentore-cms.js.coffee",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/controllers/imentore/admin/orders_controller.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/orders/edit.html.slim",
+		"/Users/breno/app/imentore/imentore.sublime-project",
 		"/Users/breno/app/imentore/imentore-base/config/initializers/session_store.rb",
 		"/Users/breno/app/imentore/imentore-ecommerce/app/services/imentore/checkout_service.rb",
 		"/Users/breno/app/imentore/imentore-base/Capfile",
-		"/Users/breno/app/imentore/imentore-base/app/helpers/application_helper.rb",
-		"/Users/breno/app/imentore/imentore-core/vendor/assets/javascripts/admin/dynatree/jquery.dynatree.js",
-		"/Users/breno/app/imentore/imentore-core/vendor/assets/stylesheets/admin/ui.dynatree.css",
-		"/Users/breno/app/imentore/imentore-base/config/database.yml",
-		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/site/bootstrap-modal.js",
-		"/Users/breno/app/imentore/imentore-core/vendor/assets/javascripts/modernizr-2.5.0.min.js",
-		"/Users/breno/app/imentore/imentore-core/vendor/assets/javascripts/jquery.session.js",
-		"/Users/breno/app/imentore/imentore-core/vendor/assets/javascripts/bootstrap.js",
-		"/Users/breno/app/imentore/imentore-core/app/assets/javascripts/cart.js",
-		"/Users/breno/app/imentore/imentore-cms/vendor/assets/javascripts/load-image.js",
-		"/Users/breno/app/imentore/imentore-cms/vendor/assets/javascripts/blueimp-tmpl.js",
-		"/Users/breno/app/imentore/imentore-cms/app/assets/javascripts/imentore-cms.js.erb",
-		"/Users/breno/app/imentore/imentore-cms/app/assets/javascripts/imentore-cms-ui.js.erb",
-		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/site_tour.js",
-		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/site_roi.js",
-		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/site_jquery.colorbox-min.js",
-		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/site_index.js",
-		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/site.js",
-		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/fileuploader.js",
-		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/client.js",
-		"/Users/breno/app/imentore/imentore-cms/app/assets/javascripts/wymeditor/lang/tr.js",
-		"/Users/breno/app/imentore/imentore-base/app/assets/javascripts/site/bootstrap-popover.js",
-		"/Users/breno/app/imentore/imentore-cms/app/assets/javascripts/wymeditor/iframe/pretty/visitor1.woff",
-		"/Users/breno/app/imentore/imentore-base/public/uploads/imentore/asset/file/101/180/jquery-ui-timepicker-addon.js",
-		"/Users/breno/app/imentore/imentore-cms/app/assets/javascripts/wymeditor/lang/pl.js",
-		"/Users/breno/app/imentore/imentore-base/config/application.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/product_variants/edit.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/product_options/edit.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/product_search_drop.rb",
-		"/Users/breno/app/imentore/imentore-base/db/production.sqlite3",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/product.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/order.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/line_item.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/cart.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/cart_item_drop.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/controllers/imentore/admin/orders_controller.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/product_drop.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/product_variant_drop.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/product_variant.rb",
-		"/Users/breno/app/imentore/imentore-admin/app/views/admin_imentore/dashboard/index.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/delivery_method/sedex_hoje.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/invoice.rb",
+		"/Users/breno/app/imentore/imentore-admin/config/initializers/devise.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/products/edit.html.slim",
+		"/Users/breno/app/imentore/imentore-testing/Gemfile",
+		"/Users/breno/app/imentore/imentore-ecommerce/Gemfile",
+		"/Users/breno/app/imentore/imentore-dashboard/Gemfile",
+		"/Users/breno/app/imentore/imentore-core/Gemfile",
+		"/Users/breno/app/imentore/imentore-cms/Gemfile",
+		"/Users/breno/app/imentore/imentore-admin/Gemfile",
+		"/Users/breno/app/imentore/imentore-admin/Gemfile.lock",
+		"/Users/breno/app/imentore/imentore-cms/imentore-cms.gemspec",
+		"/Users/breno/.rbenv/versions/2.1.2/gemsets/imentore/extensions/x86_64-darwin-13/2.1.0-static/binding_of_caller-0.6.8/gem_make.out",
+		"/Users/breno/app/imentore/imentore-base/Gemfile.lock",
+		"/Users/breno/app/imentore/imentore-testing/imentore-testing.gemspec",
+		"/Users/breno/app/imentore/imentore-ecommerce/imentore-ecommerce.gemspec",
+		"/Users/breno/app/imentore/imentore-dashboard/imentore-dashboard.gemspec",
+		"/Users/breno/app/imentore/imentore-core/imentore-core.gemspec",
+		"/Users/breno/app/imentore/imentore-auth/imentore-auth.gemspec",
+		"/Users/breno/app/imentore/imentore-admin/imentore-deal.gemspec",
+		"/Users/breno/app/imentore/personhood/personhood.gemspec",
+		"/Users/breno/app/imentore/imentore-base/db/migrate/20120416124613_create_employees.imentore_ecommerce.rb",
+		"/Users/breno/app/imentore/imentore-base/db/migrate/20120919202830_alter_employees_active.rb",
+		"/Users/breno/app/imentore/imentore-auth/.rbenv-gemsets",
+		"/Users/breno/app/imentore/imentore-auth/Gemfile.lock",
+		"/Users/breno/.rbenv/versions/1.9.3-p547/gemsets/imentore/extensions/x86_64-darwin-13/1.9.1-static/capybara-webkit-1.3.0/gem_make.out",
+		"/Users/breno/app/imentore/imentore-auth/Users/breno/.rbenv/versions/1.9.3-p547/gemsets/imentore/extensions/x86_64-darwin-13/1.9.1-static/capybara-webkit-0.10.0/gem_make.out",
 		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/image.rb",
-		"/Users/breno/app/imentore/imentore-base/db/migrate/20120416124623_create_orders.imentore_ecommerce.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/datatables/imentore/orders_datatable.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/datatables/imentore/products_datatable.rb",
-		"/Users/breno/app/imentore/imentore-base/README",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/image_drop.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/controllers/imentore/carts_controller.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/carts/show.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/controllers/imentore/checkouts_controller.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/checkouts/new.html.slim",
-		"/Users/breno/app/imentore/imentore-cms/config/initializers/liquid.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/invoice.rb",
+		"/Users/breno/app/imentore/imentore-dashboard/app/models/imentore/send_email.rb",
+		"/Users/breno/app/imentore/imentore-base/app/helpers/send_email_helper.rb",
+		"/Users/breno/app/imentore/imentore-admin/app/models/admin_imentore/send_email.rb",
+		"/Users/breno/app/imentore/imentore-admin/app/controllers/admin_imentore/send_emails_controller.rb",
+		"/Users/breno/app/imentore/imentore-base/app/mailers/imentore/send_email_mailer.rb",
+		"/Users/breno/app/imentore/imentore-base/app/models/delivery_observer.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/domains/emails.html.slim",
+		"/Users/breno/app/imentore/imentore-dashboard/app/controllers/imentore/admin/send_emails_controller.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/controllers/imentore/admin/domain_emails_controller.rb",
+		"/Users/breno/app/imentore/imentore-base/db/migrate/20120612185726_create_send_emails.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/db/migrate/20120412220743_alter_domains_add_emails.rb",
+		"/Users/breno/app/imentore/imentore-base/db/migrate/20120416124625_alter_domains_add_emails.imentore_ecommerce.rb",
+		"/Users/breno/app/imentore/imentore-base/db/migrate/20120829185506_create_admin_imentore_send_emails.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/db/migrate/20120319193757_add_plesk_id_to_domains_table.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/line_item.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/db/migrate/20120420132521_alter_payment_methods.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/db/migrate/20120423143625_alter_delivery_methods.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/db/development.sqlite3",
+		"/Users/breno/app/imentore/imentore-base/db/development.sqlite3",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/option_value.rb",
 		"/Users/breno/app/imentore/imentore-cms/lib/liquid_filter.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/store_drop.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/page_drop.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/order_drop.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/object_drop.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/notice_drop.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/category_drop.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/cart_drop.rb",
-		"/Users/breno/app/imentore/imentore-base/app/models/old/line_item.rb",
-		"/Users/breno/app/imentore/imentore-base/app/models/old/ledger_item.rb",
-		"/Users/breno/app/imentore/imentore-dashboard/lib/imentore-dashboard.rb",
-		"/Users/breno/app/imentore/imentore-admin/app/models/admin_imentore/template.rb",
-		"/Users/breno/app/imentore/imentore-base/app/models/old/product.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/product_variants/index.html.slim",
-		"/Users/breno/app/imentore/imentore-base/app/models/old/notice.rb",
-		"/Users/breno/app/imentore/imentore-base/app/models/order_observer.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/uploaders/order_asset_uploader.rb",
-		"/Users/breno/app/imentore/imentore-base/app/models/old/product_variant.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/controllers/imentore/admin/product_variants_controller.rb",
-		"/Users/breno/app/imentore/imentore-base/app/models/old/order.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/checkouts/charge.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_custom.html.slim",
-		"/Users/breno/app/imentore/imentore-auth/db/migrate/20120502232943_create_customers.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/delivery_methods/_custom.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/payment_methods/_custom.html.slim",
-		"/Users/breno/app/imentore/imentore-dashboard/app/controllers/imentore/admin/customers_controller.rb",
-		"/Users/breno/app/imentore/imentore-auth/app/controllers/imentore/customers_controller.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/payment_method/custom.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/delivery_method/custom.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/feedback.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/delivery_method/sedex_dez.rb",
+		"/Users/breno/app/imentore/imentore-base/db/development.sqlite3.bck",
+		"/Users/breno/app/imentore/imentore-admin/app/views/admin_imentore/send_emails/edit.html.slim",
+		"/Users/breno/app/imentore/imentore-ecommerce/lib/sentient_store.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/settings.rb",
 		"/Users/breno/app/imentore/imentore-base/app/models/customer_observer.rb",
-		"/Users/breno/app/imentore/imentore-auth/app/models/imentore/customer.rb",
-		"/Users/breno/app/imentore/imentore-base/app/models/company.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/coupon.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_pagamento_digital.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/edit.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/index.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_pag_seguro.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_moip.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_form.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_cielo.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/payment_methods/_pag_seguro.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/payment_methods/_moip.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/payment_methods/_cielo.html.slim",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/payment_method/pagamento_digital.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/payment_method/pag_seguro.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/payment_method/moip.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/payment_method/cielo.rb",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/payment_method.rb",
-		"/Users/breno/app/imentore/imentore-base/app/models/old/payment.rb",
-		"/Users/breno/app/imentore/imentore-base/public/uploads/admin_imentore/asset/file/1/Ubuntu-B-webfont.woff",
-		"/Users/breno/app/imentore/imentore-base/config/pagseguro.yml",
-		"/Users/breno/app/imentore/imentore-ecommerce/app/views/imentore/checkouts/complete.html.slim",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/object_drop.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/order.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/controllers/imentore/admin/products_controller.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/controllers/imentore/products_controller.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/presenters/imentore/product_search_drop.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/models/imentore/product.rb",
+		"/Users/breno/app/imentore/imentore-base/config/locales/pt-BR.yml",
+		"/Users/breno/app/imentore/imentore-base/app/helpers/product_helper.rb",
+		"/Users/breno/app/imentore/imentore-base/app/models/old/product.rb",
+		"/Users/breno/app/imentore/imentore-cms/config/initializers/liquid.rb",
+		"/Users/breno/app/imentore/imentore-cms/vendor/assets/javascripts/load-image.js",
+		"/Users/breno/app/imentore/imentore-base/public/uploads/imentore/image/picture/13/RemoveFlashback.log",
+		"/Users/breno/app/imentore/imentore-base/log/production.log",
 		"/Users/breno/app/imentore/imentore-base/config/deploy/production.rb",
-		"/Users/breno/app/imentore/imentore-cms/app/views/imentore/admin/themes/_top.html.slim",
-		"/Users/breno/app/imentore/imentore-cms/app/controllers/imentore/admin/templates_controller.rb",
-		"/Users/breno/app/imentore/imentore-admin/app/controllers/admin_imentore/templates_controller.rb",
-		"/Users/breno/app/imentore/imentore-base/db/test.sqlite3",
-		"/Users/breno/app/imentore/imentore-admin/app/controllers/admin_imentore/themes_controller.rb",
-		"/Users/breno/app/imentore/imentore-admin/app/models/admin_imentore/theme.rb"
+		"/Users/breno/app/imentore/imentore-cms/app/assets/javascripts/imentore-cms-ui.js.erb",
+		"/Users/breno/app/imentore/imentore-cms/app/assets/javascripts/imentore-cms.js.erb",
+		"/Users/breno/app/imentore/imentore-core/vendor/assets/javascripts/admin/dynatree/jquery.dynatree.js",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/controllers/imentore/carts_controller.rb",
+		"/Users/breno/app/imentore/imentore-dashboard/app/controllers/imentore/client/dashboard_controller.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/app/controllers/imentore/checkouts_controller.rb",
+		"/Users/breno/app/imentore/imentore-core/app/views/layouts/public.html.slim",
+		"/Users/breno/app/imentore/imentore-admin/app/controllers/admin_imentore/sessions_controller.rb",
+		"/Users/breno/app/imentore/imentore-auth/app/controllers/imentore/admin/base_controller_slice.rb",
+		"/Users/breno/app/imentore/imentore-cms/vendor/assets/stylesheets/jquery.fileupload-ui.css",
+		"/Users/breno/app/imentore/imentore-core/config/initializers/imentore_initializer.rb",
+		"/Users/breno/app/imentore/imentore-core/config/initializers/imentore_config.rb",
+		"/Users/breno/app/imentore/imentore-testing/lib/imentore-testing.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/lib/imentore-ecommerce.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/config/initializers/imentore.rb",
+		"/Users/breno/app/imentore/imentore-dashboard/lib/imentore-dashboard.rb",
+		"/Users/breno/app/imentore/imentore-core/lib/imentore-core.rb",
+		"/Users/breno/app/imentore/imentore-cms/lib/imentore-cms.rb",
+		"/Users/breno/app/imentore/imentore-auth/lib/imentore-auth.rb",
+		"/Users/breno/app/imentore/imentore-admin/lib/imentore-admin.rb",
+		"/Users/breno/app/imentore/imentore-ecommerce/lib/imentore.rb"
 	],
 	"find":
 	{
@@ -846,6 +857,39 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *.js",
+			"/Users/breno/app/imentore, *.css",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *.slim",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *.slim",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *.slim",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *.slim",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *.js",
+			"/Users/breno/app/imentore, *.slim",
+			"/Users/breno/app/imentore, *.css",
+			"/Users/breno/app/imentore, *",
+			"/Users/breno/app/imentore, *.css",
+			"/Users/breno/app/imentore, *.slim",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *.css",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *.slim",
+			"/Users/breno/app/imentore, *",
+			"/Users/breno/app/imentore, *.slim",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *.slim",
+			"/Users/breno/app/imentore, *.rb",
+			"/Users/breno/app/imentore, *",
+			"/Users/breno/app/imentore, *.rb",
 			"/Users/breno/app/imentore, *",
 			"/Users/breno/app/imentore, *.rb",
 			"/Users/breno/app/imentore, *.slim",
@@ -940,40 +984,7 @@
 			"/Users/breno/app/imentore, *.rb",
 			"/Users/breno/app/imentore, *.slim",
 			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.*",
-			"/Users/breno/app/imentore, *.erb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.slim",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.*",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore, *.erb",
-			"/Users/breno/app/imentore, *.rb",
-			"/Users/breno/app/imentore",
-			""
+			"/Users/breno/app/imentore, *.slim"
 		]
 	},
 	"find_state":
@@ -981,134 +992,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"date:",
-			"date",
-			"#tree",
-			"#tree2",
+			":host",
+			"tree",
+			"debug",
+			"=",
+			"require_tree",
+			"options",
+			"APP",
+			"207.7.85.39",
+			"207.7.84.39",
+			"ns1.imentore.com.br",
+			"config.secret",
+			"secret",
+			"0.10.1",
+			"0.9.8.2",
+			"\"0.9.8.2\"",
+			"pry-",
+			"pry-stack_explorer",
+			"pry",
+			"pry-stack_explorer",
+			"binding_of_caller",
+			"bcrypt",
+			"gem 'devise'",
+			"2.1.2\"",
+			"bcrypt",
+			"GIT",
+			"gem \"liquid\", \"2.4.1\"",
+			"gem \"liquid\"",
+			"'devise', '2.1.2'",
+			"bcrypt",
+			"'2.1.2'",
+			"gem 'devise', '2.1.2'",
+			"bcrypt",
+			"escape",
+			"verify_authenticity_token",
+			"def verify_authenticity_token",
+			"verify_authenticity_token",
+			"def verify_authenticity_token",
+			"verify_authenticity_token",
+			"def verify_authenticity_token",
+			"authenticity_token",
+			".ajax",
+			"updateCategories",
+			"skip_before_filter",
+			"authorize_admin",
+			"skip_before_filter",
+			"def authorize_admin",
+			"authorize_admin",
+			"authorize_admin ",
+			"def authorize_admin ",
+			"'\n",
 			"dynatree",
-			"item",
-			"number_with_price",
-			"number_with_precision",
-			"number_with_price",
-			"number_",
-			"precision",
-			"number_",
-			"number_precision",
-			"number_precison",
-			"number_to_precision",
-			".value",
-			"complete",
-			".price",
-			"item.price",
-			"price",
-			"pr",
-			"price",
-			"quantidade",
-			"minimal",
-			"quantidade",
-			"minimal",
+			"[rel",
+			"[rel~=",
+			"glyphicons-halflings.png",
+			"assets/glyphicons-halflings.png",
+			"simple_form",
+			"form_tag",
+			"form",
+			"data-toggle",
+			"modal",
+			"log",
+			"def current_store",
+			"current_store",
+			"h3",
+			"h6.data-heading",
+			"glyphicons",
+			"bootstrap",
+			".input-medium",
+			"product:",
+			"old_product",
+			"Imentore::Store.find(113)",
+			"value_cost",
+			"deal",
+			"order",
+			"destroy",
+			"custom_actions",
+			"layouts",
+			"view_default",
+			"binding.pry",
 			"price_deal",
-			"scope:",
-			":scope",
-			"price",
-			":decimal",
-			":price",
-			"orders",
-			"confirm:",
-			"billing",
-			"t(",
-			"address:",
-			"scope:",
-			"i18n",
-			"i18n.t",
+			"cart",
+			"time",
+			"str",
+			"strt",
+			"content_tag",
+			"each",
+			"content_tag",
+			"remote",
+			"remote:",
+			"remote: true",
+			"remote",
+			"link_to",
+			"do",
+			"$.session",
+			"session",
+			"jquery",
+			"def number_with_price",
 			"number_",
 			"number_to",
-			"update_stock",
-			".input-small",
-			".input-mini",
-			"products",
-			"resurce",
-			"order",
-			"order.",
-			"order",
-			"or name like :search",
-			"button",
-			"button_product_datatable",
-			"products",
+			"favicon.ico",
+			"image",
+			".css",
+			"reinstall_products",
+			"Old::Store",
+			"reinstall_products",
+			"products_reinstall_store",
+			"orders_install",
+			"store",
+			"store.",
+			"store",
 			"product",
-			"button_product_datatable",
+			"products_reinstall_store",
 			"product",
-			"button_product_datatable",
-			"button_product",
-			"product",
-			"Product",
-			"products",
-			"datatable",
-			"th ",
-			"example",
-			"datatable",
-			"#example",
-			"#input.input-mini",
-			"sortable",
-			"id",
-			"key",
-			"form_Tag",
-			"td= text_",
+			"products_reinstall_store",
+			"Review",
+			"review",
+			"prettyPhoto",
+			"product_images",
+			"grid_4 alpha",
+			"product_image_preview",
+			"image",
+			"paperclip",
+			"150",
 			"product_image_url",
-			"method).value",
-			"delivery_method).value",
-			"total_amount",
-			"delivery_amount",
-			"def delivery_calculate",
-			"delivery_amount",
-			"placed",
-			"delivery_amount",
-			"coupons_amount",
-			"              ",
-			"         ",
-			"        ",
-			"       ",
-			"      ",
-			"91        ",
-			"91         ",
-			"       ",
-			"      ",
-			"     ",
-			"    ",
-			"def current_cart",
-			"session",
-			"OrderDrop",
-			"Imentore::OrderDrop",
-			"render",
-			"render:",
-			"custom",
-			"confirm",
-			"custom",
-			"sqlite3",
-			"1.3.9",
-			"sqlite",
-			"sqlite3",
-			"==",
-			"====",
-			"=======",
-			"$('#order_shipping_address_country'",
-			"// $('#order_shipping_address_country').find('option').first().prop('selected', true);",
-			"update_balance",
-			"address_address",
-			"shipping_",
-			"_billing",
-			"state",
-			"select",
-			"'#'+",
-			".hide",
-			"canceled",
-			"root",
-			"messenger",
-			"messeger",
-			".live",
-			"$(this).parents(\"div#notification\").showFlash();",
-			"notification",
-			"live"
+			"image",
+			"logger",
+			"image",
+			"logger"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1116,6 +1127,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"gem \"liquid\", \"2.6.1\"",
+			"'devise'",
 			":host     => 'app.imentore.com.br',",
 			":host     => 'localhost',",
 			":host     => 'app.imentore.com.br',",
@@ -1192,39 +1205,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "imentore-base/config/locales/pt-BR.yml",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15110,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6789,
-								6882
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/YAML/YAML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4888.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1283,12 +1265,36 @@
 		"selected_items":
 		[
 			[
-				"pt",
-				"imentore-base/config/locales/pt-BR.yml"
+				"base",
+				"imentore-admin/app/controllers/admin_imentore/base_controller.rb"
+			],
+			[
+				"bootstrap.css",
+				"imentore-core/vendor/assets/stylesheets/bootstrap.css"
 			],
 			[
 				"envi",
 				"imentore-base/config/environments/development.rb"
+			],
+			[
+				"admin.cs",
+				"imentore-core/app/assets/stylesheets/admin.css"
+			],
+			[
+				"admin.",
+				"imentore-core/app/assets/javascripts/admin.js"
+			],
+			[
+				"sidebar",
+				"imentore-core/app/views/layouts/admin/_sidebar-nav.html.slim"
+			],
+			[
+				"store.",
+				"imentore-base/app/models/old/store.rb"
+			],
+			[
+				"data",
+				"imentore-base/config/database.yml"
 			],
 			[
 				"gemfile",
@@ -1299,48 +1305,308 @@
 				"imentore-core/app/assets/stylesheets/admin.css"
 			],
 			[
-				"admin.js",
-				"imentore-core/app/assets/javascripts/admin.js"
+				"devise",
+				"imentore-auth/config/initializers/devise.rb"
 			],
 			[
-				"g",
+				"gem",
+				"imentore-auth/Gemfile"
+			],
+			[
+				"gemfilelock",
+				"imentore-base/Gemfile.lock"
+			],
+			[
+				"gemf.",
+				"imentore-auth/Gemfile.lock"
+			],
+			[
+				"deplo",
+				"imentore-base/config/deploy.rb"
+			],
+			[
+				"applic",
+				"imentore-base/config/application.rb"
+			],
+			[
+				"development",
+				"imentore-base/config/environments/development.rb"
+			],
+			[
+				"gemfi",
 				"imentore-base/Gemfile"
+			],
+			[
+				"delivery",
+				"imentore-base/app/models/delivery_observer.rb"
+			],
+			[
+				"sendmai",
+				"imentore-base/app/mailers/imentore/send_email_mailer.rb"
+			],
+			[
+				"ordercontro",
+				"imentore-ecommerce/app/controllers/imentore/admin/orders_controller.rb"
+			],
+			[
+				"productcontro",
+				"imentore-ecommerce/app/controllers/imentore/admin/products_controller.rb"
+			],
+			[
+				"imentore-cms",
+				"imentore-cms/app/assets/javascripts/imentore-cms.js.coffee"
+			],
+			[
+				"imentore-cms-ui",
+				"imentore-cms/app/assets/javascripts/imentore-cms-ui.js.erb"
+			],
+			[
+				"admin",
+				"imentore-core/app/views/layouts/admin.html.slim"
 			],
 			[
 				"dynatree",
 				"imentore-core/vendor/assets/javascripts/admin/dynatree/jquery.dynatree.js"
 			],
 			[
-				"gem",
-				"imentore-base/Gemfile"
-			],
-			[
 				"productedit",
 				"imentore-ecommerce/app/views/imentore/admin/products/edit.html.slim"
 			],
 			[
-				"variantdrop",
-				"imentore-ecommerce/app/presenters/imentore/product_variant_drop.rb"
+				"admin.s",
+				"imentore-core/app/assets/javascripts/admin.js"
 			],
 			[
-				"productdrop",
-				"imentore-ecommerce/app/presenters/imentore/product_drop.rb"
+				"ordercontr",
+				"imentore-ecommerce/app/controllers/imentore/admin/orders_controller.rb"
+			],
+			[
+				"pt",
+				"imentore-base/config/locales/pt-BR.yml"
+			],
+			[
+				"orderedit",
+				"imentore-ecommerce/app/views/imentore/admin/orders/edit.html.slim"
+			],
+			[
+				"c",
+				"imentore-base/Capfile"
+			],
+			[
+				"deploy",
+				"imentore-base/config/deploy.rb"
+			],
+			[
+				"appli",
+				"imentore-base/config/application.rb"
+			],
+			[
+				"devel",
+				"imentore-base/config/environments/development.rb"
+			],
+			[
+				"product.rb",
+				"imentore-ecommerce/app/models/imentore/product.rb"
+			],
+			[
+				"bootsta",
+				"imentore-core/vendor/assets/stylesheets/bootstrap.css"
+			],
+			[
+				"bootstrap",
+				"imentore-core/vendor/assets/stylesheets/bootstrap.css"
+			],
+			[
+				"oriderindex",
+				"imentore-ecommerce/app/views/imentore/admin/orders/index.html.slim"
+			],
+			[
+				".css",
+				"imentore-base/app/assets/stylesheets/site.css"
+			],
+			[
+				"customerindex",
+				"imentore-dashboard/app/views/imentore/admin/customers/index.html.slim"
+			],
+			[
+				"clientindex",
+				"imentore-dashboard/app/views/imentore/client/address/index.html.slim"
+			],
+			[
+				"addfe",
+				"imentore-base/db/migrate/20140826003555_add_featured_to_products.rb"
+			],
+			[
+				"old",
+				"imentore-base/app/models/old/store.rb"
+			],
+			[
+				"store.rb",
+				"imentore-admin/app/models/admin_imentore/store.rb"
+			],
+			[
+				"helper",
+				"imentore-base/app/helpers/application_helper.rb"
+			],
+			[
+				"route",
+				"imentore-ecommerce/config/routes.rb"
+			],
+			[
+				"ordercon",
+				"imentore-ecommerce/app/controllers/imentore/admin/orders_controller.rb"
 			],
 			[
 				"orderindex",
 				"imentore-ecommerce/app/views/imentore/admin/orders/index.html.slim"
 			],
 			[
+				"order",
+				"imentore-ecommerce/app/models/imentore/order.rb"
+			],
+			[
+				"template",
+				"imentore-cms/app/controllers/imentore/admin/templates_controller.rb"
+			],
+			[
+				"layouts",
+				"imentore-cms/app/views/imentore/admin/templates/layouts.html.slim"
+			],
+			[
+				"top",
+				"imentore-cms/app/views/imentore/admin/themes/_top.html.slim"
+			],
+			[
+				"theme_top",
+				"imentore-cms/app/views/imentore/admin/themes/_top.html.slim"
+			],
+			[
+				"layout",
+				"imentore-core/app/views/layouts/admin.html.slim"
+			],
+			[
+				"variant",
+				"imentore-ecommerce/app/models/imentore/product_variant.rb"
+			],
+			[
+				"lineitem",
+				"imentore-ecommerce/app/models/imentore/line_item.rb"
+			],
+			[
+				"line",
+				"imentore-ecommerce/app/models/imentore/line_item.rb"
+			],
+			[
+				"cart",
+				"imentore-ecommerce/app/models/imentore/cart.rb"
+			],
+			[
+				"cartc",
+				"imentore-ecommerce/app/controllers/imentore/carts_controller.rb"
+			],
+			[
+				"depl",
+				"imentore-base/config/deploy.rb"
+			],
+			[
+				"check",
+				"imentore-ecommerce/app/controllers/imentore/checkouts_controller.rb"
+			],
+			[
+				"invoice",
+				"imentore-ecommerce/app/models/imentore/invoice.rb"
+			],
+			[
+				"admin.js",
+				"imentore-core/app/assets/javascripts/admin.js"
+			],
+			[
+				"productdrop",
+				"imentore-ecommerce/app/presenters/imentore/product_drop.rb"
+			],
+			[
+				"store",
+				"imentore-base/app/models/old/store.rb"
+			],
+			[
+				"store.r",
+				"imentore-base/app/models/old/store.rb"
+			],
+			[
+				"screen.css",
+				"imentore-base/public/uploads/imentore/asset/file/96/188/screen.css"
+			],
+			[
+				"picture",
+				"imentore-ecommerce/app/uploaders/picture_uploader.rb"
+			],
+			[
+				"admicss",
+				"imentore-core/app/assets/stylesheets/admin.css"
+			],
+			[
+				"javajs",
+				"imentore-core/app/assets/javascripts/admin.js"
+			],
+			[
+				"oldstore",
+				"imentore-base/app/models/old/store.rb"
+			],
+			[
+				"adminstore",
+				"imentore-admin/app/models/admin_imentore/store.rb"
+			],
+			[
+				"gme",
+				"imentore-base/Gemfile"
+			],
+			[
+				"option",
+				"imentore-ecommerce/app/models/imentore/option_value.rb"
+			],
+			[
+				"sseting",
+				"imentore-ecommerce/app/controllers/imentore/admin/settings_controller.rb"
+			],
+			[
+				"virtua",
+				"imentore-ecommerce/app/models/imentore/settings/virtual.rb"
+			],
+			[
+				"setting",
+				"imentore-ecommerce/app/models/imentore/settings.rb"
+			],
+			[
+				"virut",
+				"imentore-ecommerce/app/models/imentore/settings/virtual.rb"
+			],
+			[
+				"alter",
+				"imentore-base/db/migrate/20121002010256_alter_product_variant.rb"
+			],
+			[
+				"route.rb",
+				"imentore-ecommerce/config/routes.rb"
+			],
+			[
+				"models/",
+				"imentore-auth/app/models/imentore/customer.rb"
+			],
+			[
+				"company",
+				"imentore-base/app/models/company.rb"
+			],
+			[
+				"g",
+				"imentore-base/Gemfile"
+			],
+			[
+				"variantdrop",
+				"imentore-ecommerce/app/presenters/imentore/product_variant_drop.rb"
+			],
+			[
 				"productindex",
 				"imentore-ecommerce/app/views/imentore/admin/products/index.html.slim"
-			],
-			[
-				"data",
-				"imentore-core/app/assets/javascripts/datatable.js.coffee"
-			],
-			[
-				"ordercontr",
-				"imentore-ecommerce/app/controllers/imentore/admin/orders_controller.rb"
 			],
 			[
 				"cartitemdrop",
@@ -1371,16 +1637,8 @@
 				"imentore-ecommerce/app/models/imentore/order.rb"
 			],
 			[
-				"check",
-				"imentore-ecommerce/app/controllers/imentore/checkouts_controller.rb"
-			],
-			[
 				"checkout/",
 				"imentore-ecommerce/app/views/imentore/checkouts/charge.html.slim"
-			],
-			[
-				"product.rb",
-				"imentore-ecommerce/app/models/imentore/product.rb"
 			],
 			[
 				"cartshow",
@@ -1389,10 +1647,6 @@
 			[
 				"productvariant.rb",
 				"imentore-ecommerce/app/models/imentore/product_variant.rb"
-			],
-			[
-				"lineitem",
-				"imentore-ecommerce/app/models/imentore/line_item.rb"
 			],
 			[
 				"cart.rb",
@@ -1419,10 +1673,6 @@
 				"imentore-admin/app/controllers/admin_imentore/base_controller.rb"
 			],
 			[
-				"sidebar",
-				"imentore-core/app/views/layouts/admin/_sidebar-nav.html.slim"
-			],
-			[
 				"adminlayout",
 				"imentore-admin/app/views/layouts/admin_imentore.html.slim"
 			],
@@ -1439,20 +1689,8 @@
 				"imentore-base/db/migrate/20140619201807_add_price_deal_to_variant.rb"
 			],
 			[
-				"store.rb",
-				"imentore-ecommerce/app/models/imentore/store.rb"
-			],
-			[
-				"helper",
-				"imentore-base/app/helpers/application_helper.rb"
-			],
-			[
 				"ptbr",
 				"imentore-base/config/locales/pt-BR.yml"
-			],
-			[
-				"orderedit",
-				"imentore-ecommerce/app/views/imentore/admin/orders/edit.html.slim"
 			],
 			[
 				"address",
@@ -1469,18 +1707,6 @@
 			[
 				"datable",
 				"imentore-ecommerce/app/datatables/imentore/products_datatable.rb"
-			],
-			[
-				"productcontro",
-				"imentore-ecommerce/app/controllers/imentore/admin/products_controller.rb"
-			],
-			[
-				"admin.",
-				"imentore-core/app/assets/stylesheets/admin.css"
-			],
-			[
-				"admin",
-				"imentore-core/app/assets/javascripts/admin.js"
 			],
 			[
 				"product.js",
@@ -1511,10 +1737,6 @@
 				"imentore-ecommerce/app/views/imentore/admin/orders/index.html.slim"
 			],
 			[
-				"picture",
-				"imentore-ecommerce/app/uploaders/picture_uploader.rb"
-			],
-			[
 				"image.rb",
 				"imentore-ecommerce/app/models/imentore/image.rb"
 			],
@@ -1525,10 +1747,6 @@
 			[
 				"pag_seguro",
 				"imentore-ecommerce/app/models/imentore/payment_method/pag_seguro.rb"
-			],
-			[
-				"ordercon",
-				"imentore-ecommerce/app/controllers/imentore/admin/orders_controller.rb"
 			],
 			[
 				"variantindex",
@@ -1551,248 +1769,12 @@
 				"imentore-ecommerce/app/views/imentore/admin/product_variants/edit.html.slim"
 			],
 			[
-				"order",
-				"imentore-ecommerce/app/models/imentore/order.rb"
-			],
-			[
-				"line",
-				"imentore-ecommerce/app/models/imentore/line_item.rb"
-			],
-			[
 				"alterproduct",
 				"imentore-base/db/migrate/20121002010256_alter_product_variant.rb"
 			],
 			[
-				"appli",
-				"imentore-base/app/helpers/application_helper.rb"
-			],
-			[
 				"uni",
 				"imentore-base/config/unicorn.rb"
-			],
-			[
-				"lq",
-				"imentore-cms/config/initializers/liquid.rb"
-			],
-			[
-				"deplo",
-				"imentore-base/config/deploy.rb"
-			],
-			[
-				"git",
-				"imentore-base/.gitignore"
-			],
-			[
-				"gemfile.lock",
-				"imentore-base/Gemfile.lock"
-			],
-			[
-				"gemlock",
-				"imentore-base/Gemfile.lock"
-			],
-			[
-				"checkout",
-				"imentore-ecommerce/app/views/imentore/checkouts/new.html.slim"
-			],
-			[
-				"site",
-				"imentore-base/app/assets/javascripts/site.js"
-			],
-			[
-				"caartcontro",
-				"imentore-ecommerce/app/controllers/imentore/carts_controller.rb"
-			],
-			[
-				"filter",
-				"imentore-cms/lib/liquid_filter.rb"
-			],
-			[
-				"route.rb",
-				"imentore-auth/config/routes.rb"
-			],
-			[
-				"cap",
-				"imentore-base/Capfile"
-			],
-			[
-				"cartcontro",
-				"imentore-ecommerce/app/controllers/imentore/carts_controller.rb"
-			],
-			[
-				"cart",
-				"imentore-ecommerce/app/controllers/imentore/carts_controller.rb"
-			],
-			[
-				"variant",
-				"imentore-ecommerce/app/models/imentore/product_variant.rb"
-			],
-			[
-				"controller.rb",
-				"imentore-ecommerce/app/controllers/imentore/checkouts_controller.rb"
-			],
-			[
-				"ordercontroller.rb",
-				"imentore-ecommerce/app/controllers/imentore/admin/orders_controller.rb"
-			],
-			[
-				"cartpresenter",
-				"imentore-ecommerce/app/presenters/imentore/cart_presenter.rb"
-			],
-			[
-				"cartcontrl",
-				"imentore-ecommerce/app/controllers/imentore/carts_controller.rb"
-			],
-			[
-				"deploy",
-				"imentore-base/config/deploy.rb"
-			],
-			[
-				".yml",
-				"imentore-base/config/locales/en.yml"
-			],
-			[
-				"variant.rb",
-				"imentore-ecommerce/app/models/imentore/product_variant.rb"
-			],
-			[
-				"migratealter",
-				"imentore-base/db/migrate/20121002010256_alter_product_variant.rb"
-			],
-			[
-				"productvar",
-				"imentore-ecommerce/app/controllers/imentore/admin/product_variants_controller.rb"
-			],
-			[
-				"productcontroller",
-				"imentore-ecommerce/app/controllers/imentore/admin/products_controller.rb"
-			],
-			[
-				"imentore-cmsgemfile",
-				"imentore-cms/Gemfile"
-			],
-			[
-				"bootstrap.js",
-				"imentore-core/vendor/assets/javascripts/bootstrap.js"
-			],
-			[
-				"alter",
-				"imentore-base/db/migrate/20120619071019_alter_products_add_active.rb"
-			],
-			[
-				"productvariantindex",
-				"imentore-ecommerce/app/views/imentore/admin/product_variants/index.html.slim"
-			],
-			[
-				"applihelper",
-				"imentore-base/app/helpers/application_helper.rb"
-			],
-			[
-				"productdatable",
-				"imentore-ecommerce/app/datatables/admin/products_datatable.rb"
-			],
-			[
-				"productcontroller.rb",
-				"imentore-ecommerce/app/controllers/imentore/admin/product_options_controller.rb"
-			],
-			[
-				"imentoreproductcontro",
-				"imentore-ecommerce/app/controllers/imentore/products_controller.rb"
-			],
-			[
-				"layoutadmin",
-				"imentore-core/app/views/layouts/admin.html.slim"
-			],
-			[
-				"gme",
-				"imentore-base/Gemfile"
-			],
-			[
-				"asset/javascript/",
-				"imentore-base/app/assets/javascripts/site.js"
-			],
-			[
-				"javascript.js",
-				"imentore-core/app/assets/javascripts/admin.js.erb"
-			],
-			[
-				"customer.rb",
-				"imentore-auth/app/models/imentore/customer.rb"
-			],
-			[
-				"oaymentindex",
-				"imentore-ecommerce/app/views/imentore/admin/payment_methods/index.html.slim"
-			],
-			[
-				"controller",
-				"imentore-admin/app/controllers/admin_imentore/templates_controller.rb"
-			],
-			[
-				"ordercontro",
-				"imentore-ecommerce/app/controllers/imentore/admin/orders_controller.rb"
-			],
-			[
-				"oldstore",
-				"imentore-base/app/models/old/store.rb"
-			],
-			[
-				"delivery",
-				"imentore-ecommerce/app/models/imentore/delivery.rb"
-			],
-			[
-				"invoice.",
-				"imentore-ecommerce/app/models/imentore/invoice.rb"
-			],
-			[
-				"invoice.rb",
-				"imentore-ecommerce/app/models/imentore/invoice.rb"
-			],
-			[
-				"add",
-				"imentore-base/app/models/old/address.rb"
-			],
-			[
-				"user.rb",
-				"imentore-base/app/models/old/user.rb"
-			],
-			[
-				"shipment",
-				"imentore-base/app/models/old/shipment.rb"
-			],
-			[
-				"old",
-				"imentore-base/app/models/old/product_variant.rb"
-			],
-			[
-				"order.",
-				"imentore-ecommerce/app/models/imentore/order.rb"
-			],
-			[
-				"orderedit.html",
-				"imentore-ecommerce/app/views/imentore/admin/orders/edit.html.slim"
-			],
-			[
-				"addamount",
-				"imentore-base/db/migrate/20140524073119_add_amount_to_delivery.rb"
-			],
-			[
-				"dbmigrate20121019",
-				"imentore-base/db/migrate/20120619071019_alter_products_add_active.rb"
-			],
-			[
-				"addamout",
-				"imentore-base/db/migrate/20140524073119_add_amount_to_delivery.rb"
-			],
-			[
-				"adminstore",
-				"imentore-admin/app/models/admin_imentore/store.rb"
-			],
-			[
-				"order.r",
-				"imentore-base/app/models/old/order.rb"
-			],
-			[
-				"store.",
-				"imentore-ecommerce/app/models/imentore/store.rb"
 			]
 		],
 		"width": 0.0
@@ -1817,6 +1799,7 @@
 		],
 		"width": 392.0
 	},
+	"selected_group": 0,
 	"settings":
 	{
 	},
