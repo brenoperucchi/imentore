@@ -303,6 +303,8 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    turbolinks (2.3.0)
+      coffee-rails
     turn (0.8.3)
       ansi
     tzinfo (0.3.41)
@@ -365,6 +367,7 @@ DEPENDENCIES
   therubyracer
   thin
   tinymce-rails
+  turbolinks
   turn (~> 0.8.3)
   uglifier (>= 1.0.3)
   will_paginate (= 3.0.7)

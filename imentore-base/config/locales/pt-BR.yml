@@ -9,7 +9,7 @@ pt-BR:
   id: "#"
   created_at: Data
   customer_email: E-mail Cliente
-  delete_this_thing: Você deseja remover ?
+  delete_this_thing?: 'Você deseja remover ?'
   delete_be_certain: Tenha certeza
   destroy: Remover
   previous: Anterior
@@ -27,6 +27,7 @@ pt-BR:
   delivery_sent: Encomenda enviada
   customer_create: Cliente criado
   select_parent: Selecionar parentesco
+  polymorphic_created: "%{name} criado com sucesso" 
 
   order_id: '#ID'
   order_amount: Valor Pedido
