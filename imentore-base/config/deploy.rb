@@ -87,6 +87,7 @@ namespace :deploy do
       execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/log"
       execute "chown -h imentore.imentore /home/imentore/app/current/tmp"
       execute "cp -f /home/imentore/app/shared/database.yml /home/imentore/app/current/imentore-base/config/database.yml"
+      execute "cd /home/imentore/app/current/imentore-base ; bundle exec bundler install"
     end
   end  
 

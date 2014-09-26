@@ -59,7 +59,6 @@ end
 gem 'jquery-rails', '>=3.1.0'
 gem 'jquery-ui-rails', '5.0.0'
 gem 'jquery-datatables-rails', '~> 2.1.10.0.3'
-gem 'turbolinks'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

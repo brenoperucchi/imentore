@@ -1,14 +1,16 @@
-#myModal.modal.hide.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
-  = simple_form_for(@order.delivery, url: confirm_delivery_admin_order_path(@order), method: 'get', :html=> { :class=>'form-horizontal' } ) do |f|
-    .modal-header
-      button.close aria-hidden="true" data-dismiss="modal" type="button"  ×
-      h3#myModalLabel= t(:delivery_confirm)
-    .modal-body
-      = f.input :tracking_code
-    .modal-footer
-      = f.button :submit, t(:save), :class => 'btn btn-primary'
-      button.btn aria-hidden="true" data-dismiss="modal"= t(:close)
-      / button.btn.btn-primary Save changes
+- unless @order.delivery.nil?
+  #myModal.modal.hide.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+    = form_for(@order.delivery, url: confirm_delivery_admin_order_path(@order), method: 'post', :html=> { :class=>'form-horizontal' } ) do |f|
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button"
+          | x
+        h3#myModalLabel= t(:delivery_confirm)
+      .modal-body
+        / = f.input :tracking_code
+      .modal-footer
+        / = f.button :submit, t(:save), :class => 'btn btn-primary'
+        button.btn aria-hidden="true" data-dismiss="modal"= t(:close)
+        / button.btn.btn-primary Save changes
 
 .row
   .span3.well
@@ -61,7 +63,7 @@
           h5.data-heading
             = t(:delivery_status)
             '
-            - if @order.delivery.sent?
+            - if @order.delivery.try(:sent?)
               a[title="" data-placement="top" data-toggle="modal" href="#myModal" ]
                 / = link_to("#myModal", role: 'button', class:'btn', 'data-toggle' => 'modal')
                 i.icon-black.icon-envelope
