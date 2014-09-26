@@ -17,7 +17,7 @@ module Imentore
         create! do |success, failure|
           success.html{
             @delivery_method.update_attribute(:handle, "custom")
-            flash[:success] = 'Delivery Method Successfully Created '
+            flash[:success] = t(:polymorphic_created, name: t(:delivery_method).capitalize)
             redirect_to admin_delivery_methods_path
           }
           failure.html{
@@ -25,6 +25,10 @@ module Imentore
             # flash[:alert] = 'Could not updated'
             render :new }
         end
+      end
+
+      def destroy
+        destroy! { admin_delivery_methods_path }
       end
 
       protected

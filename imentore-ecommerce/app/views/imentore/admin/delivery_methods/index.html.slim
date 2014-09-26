@@ -21,7 +21,7 @@ table.table
             = t(:edit)
           '
           - if delivery.handle == "custom"
-            = link_to(admin_delivery_method_path(delivery), method: :delete, :class=>"btn btn-danger") do
+            = link_to(admin_delivery_method_path(delivery), method: :delete, data: { confirm: t(:delete_this_thing?) }, :class=>"btn btn-danger") do
               i.icon-white.icon-trash
               '
               = t(:remove)
