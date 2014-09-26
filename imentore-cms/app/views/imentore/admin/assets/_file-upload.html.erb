@@ -1,3 +1,10 @@
+<%- content_for :footer do %>
+  <%= stylesheet_link_tag "css/style.css" %> 
+  <%= stylesheet_link_tag "css/blueimp-gallery.min.css" %>
+  <%= stylesheet_link_tag "css/jquery.fileupload.css" %>
+  <%= stylesheet_link_tag "css/jquery.fileupload-ui.css" %>
+<% end %>
+
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
@@ -59,7 +66,7 @@
             {% if (file.deleteUrl) { %}
                 <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
-                    <span>Delete</span>
+                    <span><%= t(:destroy)%></span>
                 </button>
                 <input type="checkbox" name="delete" value="1" class="toggle">
             {% } else { %}
@@ -74,15 +81,14 @@
 </script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <!-- The Templates plugin is included to render the upload/download listings -->
-<%= javascript_include_tag "//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js" %>
+<%= javascript_include_tag "file-upload/js/tmpl.min.js" %>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<%= javascript_include_tag "//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js" %>
+<%= javascript_include_tag "file-upload/js/load-image.all.min.js" %>
 <!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<%= javascript_include_tag "//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js" %>
+<%= javascript_include_tag "file-upload/js/canvas-to-blob.min.js" %>
 <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<%= javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" %>
 <!-- blueimp Gallery script -->
-<%= javascript_include_tag "//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js" %>
+<%= javascript_include_tag "file-upload/js/jquery.blueimp-gallery.min.js" %>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
 <%= javascript_include_tag "file-upload/js/jquery.iframe-transport.js" %>
 <!-- The basic File Upload plugin -->

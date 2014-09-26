@@ -1,11 +1,10 @@
-- content_for :breadcrumb do
-  == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:management) => '' }, { t(:products) => url_for(:controller => :products) }, { @variant.product.name => '' }, { t(:variants) => url_for(:controller => :product_variants, product_id: @variant.product.id ) }, { @variant.id.to_s => '' }, { t(:images) => '' } ])
+=  render "imentore/admin/themes/top"
 
 legend= t(:images)
 
 .container-fluid
   /! The file upload form used as target for the file upload widget
-  form#fileupload action=admin_product_variant_images_path(@variant.product.id, @variant.id) enctype="multipart/form-data" method="POST" 
+  form#fileupload action=admin_theme_assets_path(@theme) method="POST" enctype="multipart/form-data"
     /! Redirect browsers with JavaScript disabled to the origin page
     input name="authenticity_token" type="hidden" value=form_authenticity_token 
       /! The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload
@@ -15,7 +14,7 @@ legend= t(:images)
           span.btn.btn-success.fileinput-button
             i.glyphicon.glyphicon-plus
             spanAdd= t(:add)
-            input multiple="" name="image[picture]" type="file" 
+            input multiple="" name="asset[file]" type="file" 
           '
           button.btn.btn-primary.start type="submit" 
             i.glyphicon.glyphicon-upload
