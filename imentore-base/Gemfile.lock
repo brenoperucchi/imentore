@@ -173,6 +173,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.2.1)
+    fabrication (2.11.3)
     has_scope (0.5.1)
     hike (1.2.3)
     httparty (0.8.3)
@@ -331,6 +332,7 @@ DEPENDENCIES
   devise (= 3.3.0)
   devise-encryptable
   execjs
+  fabrication
   i18n_alchemy
   imentore-admin!
   imentore-auth!

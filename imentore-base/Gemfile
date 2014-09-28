@@ -67,9 +67,11 @@ gem 'jquery-datatables-rails', '~> 2.1.10.0.3'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano', '3.2.1'
-gem 'capistrano-rbenv', '~> 2.0'
-gem 'capistrano-bundler', '1.1.2'
+group :development do
+  gem 'capistrano', '3.2.1'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-bundler', '1.1.2'
+end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
@@ -77,4 +79,5 @@ gem 'capistrano-bundler', '1.1.2'
 group :test do
   # Pretty printed test output
   gem 'turn', '~> 0.8.3', :require => false
+  gem 'fabrication'
 end

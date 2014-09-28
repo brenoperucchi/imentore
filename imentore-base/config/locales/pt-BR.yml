@@ -62,6 +62,7 @@ pt-BR:
   save: Salvar
   close: Fechar
 
+  message: Mensagem
   view_default: Mostrar padrão
   default_updated_at: Atualização do sistema
   status: Condição
@@ -153,7 +154,7 @@ pt-BR:
   hint_store_zip_code: O Cep será usado pelo sistema
   order_asset: Habilitar arquivos no pedido
   email_contact: Email de contato usado pelo sistema
-  site: Endereço do site usado pelo sistema
+  site: 'Endereço do site: http://'
   store_zip_code: Cep
 
 
@@ -383,6 +384,13 @@ pt-BR:
       create: Criar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
+    send_mail:
+      products:
+        line_item: "Código: %{code} - Produto: %{item} - quantidade: %{quantity} - preço: %{value} - total: %{amount}"
+      delivery:
+        shipping: "Código: %{code} - situação: %{status} - método: %{method} - endereço: %{address} - total: %{amount}"
+      invoice:
+        invoice: "Código: %{code} - situação: %{status} - método: %{method} - endereço: %{address} - total: %{amount}"
   number:
     currency:
       format:
