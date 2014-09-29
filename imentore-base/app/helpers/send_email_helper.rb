@@ -26,7 +26,8 @@ module SendEmailHelper
             I18n.t(:shipping, scope: 'helpers.send_mail.delivery', code: order.delivery.id, status: I18n.t(order.delivery.status), method: order.delivery.delivery_method.name, address: order.shipping_address.to_s , amount: number_to_currency(order.delivery.amount)) 
           end)
           concat(content_tag(:li, id:'customer-name') do
-            I18n.t(:message) + ": " + order.delivery.delivery_method.description
+            binding.pry
+            I18n.t(:message) + ": " + order.delivery.delivery_method.description.to_s
           end)
 
         end)
@@ -43,7 +44,7 @@ module SendEmailHelper
             I18n.t(:invoice, scope: 'helpers.send_mail.invoice', code: order.invoice.id, status: I18n.t(order.invoice.status), method: order.invoice.payment_method.name, address: order.billing_address.to_s , amount: number_to_currency(order.invoice.amount)) 
           end)
           concat(content_tag(:li, id:'customer-name') do
-            I18n.t(:message) + ": " + order.invoice.payment_method.description
+            I18n.t(:message) + ": " + order.invoice.payment_method.description.to_s
           end)
 
         end)
