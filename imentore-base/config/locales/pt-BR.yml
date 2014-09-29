@@ -301,6 +301,10 @@ pt-BR:
     - :day
     - :month
     - :year
+  hint:
+    imentore/setting:
+      limit_product_newest: Que aparecerá na primeira página 
+      limit_product_featured: Que aparecerá na primeira página 
   datetime:
     distance_in_words:
       about_x_hours:
@@ -482,6 +486,9 @@ pt-BR:
       imentore/category: Categoria
       imentore/coupon: Cupom
     attributes:
+      imentore/settings:
+        limit_product_newest: Produtos novos
+        limit_product_featured: Produtos em destaque
       imentore/store:
         name: Nome 
         email: Email
