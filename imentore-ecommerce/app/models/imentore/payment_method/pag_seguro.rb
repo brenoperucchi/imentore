@@ -33,7 +33,7 @@ module Imentore
       order.items.each do |item|
         ret << { :id => "#{item.product.id} - #{item.variant.id}",
                  :description => "#{item.name} - ##{item.variant.id}",
-                 :amount => ("%.2f" % item.price.to_f),
+                 :amount => ("%.2f" % item.value.to_f),
                  :quantity => item.quantity.to_i,
                 }
       end
