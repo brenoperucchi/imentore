@@ -26,7 +26,6 @@ module SendEmailHelper
             I18n.t(:shipping, scope: 'helpers.send_mail.delivery', code: order.delivery.id, status: I18n.t(order.delivery.status), method: order.delivery.delivery_method.name, address: order.shipping_address.to_s , amount: number_to_currency(order.delivery.amount)) 
           end)
           concat(content_tag(:li, id:'customer-name') do
-            binding.pry
             I18n.t(:message) + ": " + order.delivery.delivery_method.description.to_s
           end)
 
