@@ -11,7 +11,7 @@ gem 'therubyracer'
 
 gem 'i18n_alchemy'
 gem 'tinymce-rails'
-gem 'sqlite3'
+gem 'sqlite3', group: :test
 gem 'mysql2'
 
 gem 'will_paginate', '3.0.7'
@@ -71,6 +71,7 @@ group :development do
   gem 'capistrano', '3.2.1'
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano-bundler', '1.1.2'
+  gem 'fabrication'
 end
 
 # To use debugger

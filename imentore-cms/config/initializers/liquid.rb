@@ -37,8 +37,8 @@ class LiquidView
     store = @view.current_store
     assigns["user_signed?"] = @view.user_signed_in?
     assigns["store"] = @store = Imentore::StoreDrop.new(store)
-    assigns["pages"] = store.pages.active.map { |page| Imentore::PageDrop.new(page) }
-    assigns["notices"] = store.notices.active.map { |notice| Imentore::NoticeDrop.new(notice) }
+    assigns["pages"] = store.pages.active.order('id desc').map { |page| Imentore::PageDrop.new(page) }
+    assigns["notices"] = store.notices.active.order('id desc').map { |notice| Imentore::NoticeDrop.new(notice) }
     assigns["categories"] = store.categories.roots.order('name').map { |category| Imentore::CategoryDrop.new(category) }
 
 

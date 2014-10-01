@@ -36,7 +36,7 @@ module Imentore
               "#pedido_pagamento#" => order_invoice, 
               "#pedido_codigo_rastreamento#" => order.delivery.try(:tracking_code) 
             }
-    # case name
+      # case name
       # when "order_placed", "invoice_paid"
       # when "delivery_sent"
       #   delivery_tracking(self, order)

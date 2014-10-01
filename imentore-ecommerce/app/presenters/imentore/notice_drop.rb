@@ -33,7 +33,7 @@ module Imentore
     end
 
     def body_strip
-      breaking_wrap_wrap(strip_tags(@notice.body),60)[0..90]+ "...." if breaking_wrap_wrap(strip_tags(@notice.body),60).length > 90
+      (breaking_wrap_wrap(strip_tags(@notice.body),60).length > 90) ? breaking_wrap_wrap(strip_tags(@notice.body),60)[0..90]+ " [...]" : breaking_wrap_wrap(strip_tags(@notice.body))
     end
 
   end
