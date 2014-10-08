@@ -19,10 +19,10 @@ module Imentore
               :city => order.billing_address.city,
               :state => order.billing_address.state,
               :country => order.billing_address.country,
-              :zip_code => order.billing_address.zip_code,
-              :shippingId => "3",
+              :postalCode => order.billing_address.zip_code,
               :currency => "BRL",
               :redirectURL =>  "http://app.imentore.com.br/return_pg/#{order.invoice.id}",
+              :shippingType => 3,
               :shippingCost => ("%.2f" % (order.delivery_calculate(order.zip_code, order.delivery.delivery_method)).round(2)),
             }
       ret

@@ -9,8 +9,10 @@ module Imentore
 
     def value(amount = 0 , weight = 0)
       value = 0
-      value += amount * (@options['percent_rate'].to_f / 100) unless @options['percent_rate'].to_i == 0
-      value += @options['fixed_rate'].to_f unless @options['fixed_rate'].to_i == 0
+      fixed_rate = Delocalize::LocalizedNumericParser.parse(@options['fixed_rate']).to_f
+      percent_rate = Delocalize::LocalizedNumericParser.parse(@options['percent_rate']).to_f
+      value += amount * (percent_rate / 100) unless percent_rate == 0
+      value += fixed_rate unless fixed_rate == 0
       return value
     end
 
