@@ -40,7 +40,10 @@ set :keep_releases, 5
 set :user, "imentore"
 set :branch, "master"
 
+SSHKit.config.command_map[:rake] = "bundle exec rake --gemfile /home/imentore/app/current/imentore-base/Gemfile"
+
 # config/deploy.rb
+set :bundle_gemfile,  "#{current_path}/imentore-base/Gemfile"
 set :rbenv_type, :user # or :system, depends on your rbenv setup
 set :rbenv_ruby, '1.9.3-p547'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
@@ -52,8 +55,8 @@ namespace :setup do
   task :symlink_config do
     on roles(:app) do
       # execute "rm -f /etc/nginx/sites-enabled/default"
-      execute "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{fetch(:application)}"
-      execute "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{fetch(:application)}"
+      execute "ln -nfs #{current_path}/imentore-base/config/nginx.conf /etc/nginx/sites-enabled/#{fetch(:application)}"
+      execute "ln -nfs #{current_path}/imentore-base/config/unicorn_init.sh /etc/init.d/unicorn_#{fetch(:application)}"
    end
   end
 end
