@@ -1,3 +1,4 @@
+root = "/home/imentore/app/current/imentore-base"
 worker_processes 1
 working_directory "/home/imentore/app/current/imentore-base"
 
@@ -16,8 +17,8 @@ timeout 360
 pid "/home/imentore/app/shared/pids/unicorn.pid"
 
 # Set the path of the log files inside the log folder of the testapp
-stderr_path "/home/imentore/app/shared/log/unicorn.stderr.log"
-stdout_path "/home/imentore/app/shared/log/unicorn.stdout.log"
+stderr_path "#{root}/log/unicorn.log"
+stdout_path "#{root}/log/unicorn.log"
 
 preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and

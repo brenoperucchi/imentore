@@ -16,9 +16,9 @@ GIT
 
 GIT
   remote: git://github.com/bperucchi/pagseguro.git
-  revision: 5628049ca91a31f3dfd401ead2363b56078eafaa
+  revision: f14d5492a3dbaef634e3e6731da1cc22c2f105b6
   specs:
-    pag_seguro (0.1.17)
+    pag_seguro (0.1.18)
       httparty (>= 0.7.8)
 
 GIT
@@ -348,7 +348,7 @@ DEPENDENCIES
   mini_magick (= 3.4)
   moip-ruby (= 0.1.2)!
   mysql2
-  pag_seguro (= 0.1.17)!
+  pag_seguro (= 0.1.18)!
   pagamento_digital!
   paperclip!
   personhood!

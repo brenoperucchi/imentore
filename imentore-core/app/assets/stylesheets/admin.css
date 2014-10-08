@@ -4,6 +4,5 @@
  *= require imentore-cms
  *= require jquery-ui
  *= require admin/ui.dynatree
- *= require dataTables/bootstrap/2/jquery.dataTables.bootstrap
- 
+ *= require dataTables/bootstrap/2/jquery.dataTables.bootstrap 
 */
