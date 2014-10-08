@@ -1,3 +1,4 @@
+SSHKit.config.command_map[:rake] = "bundle exec rake --gemfile /home/imentore/app/current/imentore-base/Gemfile"
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
@@ -40,10 +41,10 @@ set :keep_releases, 5
 set :user, "imentore"
 set :branch, "master"
 
-SSHKit.config.command_map[:rake] = "bundle exec rake --gemfile /home/imentore/app/current/imentore-base/Gemfile"
+
 
 # config/deploy.rb
-set :bundle_gemfile,  "#{current_path}/imentore-base/Gemfile"
+# set :bundle_gemfile,  "#{current_path}/imentore-base/Gemfile"
 set :rbenv_type, :user # or :system, depends on your rbenv setup
 set :rbenv_ruby, '1.9.3-p547'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
