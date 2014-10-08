@@ -104,38 +104,38 @@ namespace :deploy do
   after :deploy, "deploy:restart"
   after :rollback, "deploy:restart"
 
-  task :imentore_config_files do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute "rm -rf /home/imentore/app/current/imentore-base/tmp"
-      execute "rm -rf /home/imentore/app/current/imentore-base/log"
-      execute "mkdir /home/imentore/app/current/imentore-base/tmp"
-      execute "rm -rf /home/imentore/app/current/imentore-base/public/uploads"
-      execute "ln -s /home/imentore/app/shared/uploads /home/imentore/app/current/imentore-base/public/uploads"
-      execute "ln -s /home/imentore/app/shared/pids /home/imentore/app/current/imentore-base/tmp/pids"
-      execute "ln -s /home/imentore/app/shared/cache /home/imentore/app/current/imentore-base/tmp/cache"
-      execute "ln -s /home/imentore/app/shared/log /home/imentore/app/current/imentore-base/log"
-      execute "ln -s /home/imentore/app/shared /home/imentore/app/current/tmp"
+  # task :imentore_config_files do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     execute "rm -rf /home/imentore/app/current/imentore-base/tmp"
+  #     execute "rm -rf /home/imentore/app/current/imentore-base/log"
+  #     execute "mkdir /home/imentore/app/current/imentore-base/tmp"
+  #     execute "rm -rf /home/imentore/app/current/imentore-base/public/uploads"
+  #     execute "ln -s /home/imentore/app/shared/uploads /home/imentore/app/current/imentore-base/public/uploads"
+  #     execute "ln -s /home/imentore/app/shared/pids /home/imentore/app/current/imentore-base/tmp/pids"
+  #     execute "ln -s /home/imentore/app/shared/cache /home/imentore/app/current/imentore-base/tmp/cache"
+  #     execute "ln -s /home/imentore/app/shared/log /home/imentore/app/current/imentore-base/log"
+  #     execute "ln -s /home/imentore/app/shared /home/imentore/app/current/tmp"
 
-      execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/public/uploads"
-      execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/pids"
-      execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/cache"
-      execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/log"
-      execute "chown -h imentore.imentore /home/imentore/app/current/tmp"
-      execute "cp -f /home/imentore/app/shared/database.yml /home/imentore/app/current/imentore-base/config/database.yml"
-    end
-  end  
+  #     execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/public/uploads"
+  #     execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/pids"
+  #     execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/tmp/cache"
+  #     execute "chown -h imentore.imentore /home/imentore/app/current/imentore-base/log"
+  #     execute "chown -h imentore.imentore /home/imentore/app/current/tmp"
+  #     execute "cp -f /home/imentore/app/shared/database.yml /home/imentore/app/current/imentore-base/config/database.yml"
+  #   end
+  # end  
 
-  after :publishing, :imentore_config_files
-  after :finishing, :restart
-  # after :finishing, :start
+  # after :publishing, :imentore_config_files
+  # after :finishing, :restart
+  # # after :finishing, :start
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
+  # after :restart, :clear_cache do
+  #   on roles(:web), in: :groups, limit: 3, wait: 10 do
+  #     # Here we can do anything such as:
+  #     # within release_path do
+  #     #   execute :rake, 'cache:clear'
+  #     # end
+  #   end
+  # end
 
 end
