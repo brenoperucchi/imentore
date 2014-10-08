@@ -14,10 +14,11 @@ $(document).ready ->
   # jQuery -> 
   table = $('#datatable').DataTable(
     # sDom: "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
+    sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
     sPaginationType: "bootstrap"
-    # bProcessing: true
-    # bServerSide: true
-    # sAjaxSource: $('#datatable').data('source')
+    bProcessing: true
+    bServerSide: true
+    sAjaxSource: $('#datatable').data('source')
     order: [0, 'desc']
   )
 

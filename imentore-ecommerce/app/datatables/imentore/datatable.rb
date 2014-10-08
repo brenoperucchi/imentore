@@ -17,7 +17,7 @@ module Imentore
     def as_json(options = {})
       {
         sEcho: params[:sEcho].to_i,
-        iTotalRecords: @current_store.products.count,
+        iTotalRecords: resources.count,
         iTotalDisplayRecords: resources.total_entries,
         aaData: data
       }

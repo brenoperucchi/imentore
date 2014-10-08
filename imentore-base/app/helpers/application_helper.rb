@@ -44,10 +44,10 @@ module ApplicationHelper
     end
   end 
 
-  def button_datatable(product, path, klass, name)
+  def button_datatable(product, path, klass_button ,klass_icon, name, method=nil)
     capture do 
-      link_to(path, class: 'btn btn-small') do
-        concat(content_tag(:i, '', :class=>klass))
+      link_to(path, class: klass_button, method: method) do
+        concat(content_tag(:i, '', :class=>klass_icon))
         concat(' ' + I18n.t(name))
       end
     end
@@ -56,27 +56,25 @@ module ApplicationHelper
   def button_order_status(status)
     case status
     when 'placed', true
-      capture do 
-        link_to("#", class: 'btn disabled btn-info') do
-          concat(content_tag(:i, '', :class=>'icon-white icon-exclamation-sign'))
-          concat(' ' + I18n.t(status))
-        end
-      end
+        concat(link_to("#", class: 'btn disabled btn-info') do
+          content_tag(:i, '', :class=>'icon-white icon-exclamation-sign') +
+          " " + I18n.t(status)
+        end)
     when 'pending', false
-      link_to("#", class: 'btn disabled btn-warning') do
-        concat(content_tag(:i, '', :class=>'icon-white icon-remove'))
-        concat(' ' + I18n.t(status))
-      end
+      concat(link_to("#", class: 'btn disabled btn-warning') do
+        content_tag(:i, '', :class=>'icon-white icon-remove') +
+        " " + I18n.t(status)
+      end)
     when 'finished', false
-      link_to("#", class: 'btn disabled btn-success') do
-        concat(content_tag(:i, '', :class=>'icon-white icon-ok'))
-        concat(' ' + I18n.t(status))
-      end
+      concat(link_to("#", class: 'btn disabled btn-success') do
+        content_tag(:i, '', :class=>'icon-white icon-ok') +
+        " " + I18n.t(status)
+      end)
     when 'canceled', false
-      link_to("#", class: 'btn disabled btn-danger') do
-        concat(content_tag(:i, '', :class=>'icon-white icon-remove'))
-        concat(' ' + I18n.t(status))
-      end
+      concat(link_to("#", class: 'btn disabled btn-danger') do
+        content_tag(:i, '', :class=>'icon-white icon-remove') +
+        " " + I18n.t(status)
+      end)
     end    
   end
 

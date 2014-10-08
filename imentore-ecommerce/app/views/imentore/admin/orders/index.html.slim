@@ -15,36 +15,36 @@ legend= t(:orders)
         th.input-small= t(:customer_email)
         th.input-mini= t(:order_amount)
         th.input= t(:actions)
-    tfoot[style='display:table-header-group']
-      tr
-        th id
-        th status
-        th created_at
-        th name
-        th email
-        th[colspan=2] order_amount
-    tbody
-      - @orders.each do |order|
-        tr
-          td= order.id
-          td= button_order_status(order.status)
-          td= l(time_zone(order.created_at), format: :short2)
-          td= order.customer_name
-          td= order.customer_email
-          td= number_with_price(order.total_amount)
-          td
-            = link_to(edit_admin_order_path(order), :class=>"btn btn-small") do
-              i.icon-edit.icon-black
-              '
-              = t(:edit)
-              '
-            - if order.can_cancel?
-              = link_to(cancel_admin_order_path(order), method: :get, :class=>"btn btn-danger btn-small") do
-                i.icon-question-sign.icon-white
-                '
-                = t(:cancel)
-            - else
-              = link_to(admin_order_path(order), method: :delete, :class=>"btn btn-inverse btn-small") do
-                i.icon-trash.icon-white
-                '
-                = t(:remove)
+    / tfoot[style='display:table-header-group']
+    /   tr
+    /     th id
+    /     th status
+    /     th created_at
+    /     th name
+    /     th email
+    /     th[colspan=2] order_amount
+    / tbody
+    /   - @orders.each do |order|
+    /     tr
+    /       td= order.id
+    /       td= button_order_status(order.status)
+    /       td= l(time_zone(order.created_at), format: :short2)
+    /       td= order.customer_name
+    /       td= order.customer_email
+    /       td= number_with_price(order.total_amount)
+    /       td
+    /         = link_to(edit_admin_order_path(order), :class=>"btn btn-small") do
+    /           i.icon-edit.icon-black
+    /           '
+    /           = t(:edit)
+    /           '
+    /         - if order.can_cancel?
+    /           = link_to(cancel_admin_order_path(order), method: :get, :class=>"btn btn-danger btn-small") do
+    /             i.icon-question-sign.icon-white
+    /             '
+    /             = t(:cancel)
+    /         - else
+    /           = link_to(admin_order_path(order), method: :delete, :class=>"btn btn-inverse btn-small") do
+    /             i.icon-trash.icon-white
+    /             '
+    /             = t(:remove)
