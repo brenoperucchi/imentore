@@ -182,7 +182,7 @@ module AdminImentore
         unless category_1.save
           category_1.handle = category_1.handle + "_#{rand(1000)}"
           unless category_1.save
-            binding.pry
+            # binding.pry
           end
         end
         if children.has_children?
@@ -210,7 +210,7 @@ module AdminImentore
         puts "----------------------"
         puts store.id
         puts store.errors.full_messages
-        binding.pry
+        # binding.pry
         puts "----------------------"
         return 
       end
@@ -221,7 +221,7 @@ module AdminImentore
           new_category.handle = new_category.handle + "_#{rand(1000)}"
           new_category.store_id = new_store.id
           unless new_category.save
-            binding.pry
+            # binding.pry
           end
         end
         category_create(new_category, category, new_store)
@@ -308,7 +308,7 @@ module AdminImentore
         new_variant.deliverable = true
         new_variant.price = variant.value_deal == 0 ? variant.value : variant.value_deal
         unless new_variant.save
-          binding.pry
+          # binding.pry
         end
         new_variant.options.create(option_type: default_option, value: ActiveSupport::Inflector.transliterate(variant.name).to_underscore)
       end
