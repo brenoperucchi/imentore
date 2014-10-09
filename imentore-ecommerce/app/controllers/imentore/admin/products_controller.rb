@@ -9,7 +9,7 @@ module Imentore
         index! do |index|
           # index.html{@products = current_store.products.paginate(:page => params[:page]).order(sort_column + " " + sort_direction)}
           index.html{@products = current_store.products}
-          index.json#{render json: Imentore::ProductsDatatable.new(view_context, current_store)}
+          index.json {render json: Imentore::ProductsDatatable.new(view_context, current_store)}
         end
       end
 

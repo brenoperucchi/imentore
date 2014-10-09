@@ -22,10 +22,10 @@ $(document).ready ->
     order: [0, 'desc']
   )
 
-  table.columns().eq(0).each (colIdx) ->
-    $("input", table.column(colIdx).footer()).on "keyup change", ->
-      table.column(colIdx).search(@value).draw()
-    return
-  return
+  # table.columns().eq(0).each (colIdx) ->
+  #   $("input", table.column(colIdx).footer()).on "keyup change", ->
+  #     table.column(colIdx).search(@value).draw()
+  #   return
+  # return
 
 return

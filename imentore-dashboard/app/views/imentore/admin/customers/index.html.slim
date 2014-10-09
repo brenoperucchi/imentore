@@ -1,3 +1,6 @@
+- content_for :header do
+  = javascript_include_tag('datatable')
+
 legend= t(:customers)
 / p
 /   = link_to(new_admin_customer_path, :class=>'btn btn-primary') do
@@ -6,30 +9,32 @@ legend= t(:customers)
 /     | New SendEmail
 
 
-table.table.table-striped
+/ table.table.table-nomargin.table-striped
+table.table.table-striped#datatable[data-source="#{admin_customers_url(format: 'json')}"]
   thead
     tr
       th.input-small= sortable "active"
+      th= sortable "id"
       th= sortable "name"
       th= sortable "email"
       th= sortable "created_at"
       th= t(:actions)
-  tbody
-    - @customers.each do |customer|
-      tr
-        td
-          = button_status(customer.active, '#')
-        td= customer.name
-        td= customer.user.email
-        td= l(time_zone(customer.created_at), format: :short2)
-        td
-          = link_to(edit_admin_customer_path(customer), class: 'btn') do
-            i.icon-black.icon-edit
-            '
-            = t(:edit)
-          '
-          = link_to(admin_customer_path(customer), class: 'btn btn-danger', method: :delete) do
-            i.icon-white.icon-trash
-            '
-            = t(:remove)
-= will_paginate @customers, :renderer => BootstrapPagination::Rails
+/   tbody
+/     - @customers.each do |customer|
+/       tr
+/         td
+/           = button_status(customer.active, '#')
+/         td= customer.name
+/         td= customer.user.email
+/         td= l(time_zone(customer.created_at), format: :short2)
+/         td
+/           = link_to(edit_admin_customer_path(customer), class: 'btn') do
+/             i.icon-black.icon-edit
+/             '
+/             = t(:edit)
+/           '
+/           = link_to(admin_customer_path(customer), class: 'btn btn-danger', method: :delete) do
+/             i.icon-white.icon-trash
+/             '
+/             = t(:remove)
+/ = will_paginate @customers, :renderer => BootstrapPagination::Rails

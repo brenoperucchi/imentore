@@ -4,7 +4,12 @@ module Imentore
       inherit_resources
 
       def index
-        @customers = current_store.customers.paginate(:page => params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+        # @customers = current_store.customers.paginate(:page => params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+        index! do |index|
+        index.html
+        index.json  { render json: CustomersDatatable.new(view_context, current_store) }
+      end
+
       end
 
       def edit

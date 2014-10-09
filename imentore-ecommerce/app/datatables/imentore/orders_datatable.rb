@@ -49,7 +49,7 @@ module Imentore
     end
 
     def sort_column
-      columns = %w[id active created_at customer_name customer_email price]
+      columns = %w[id active created_at customer_name customer_email ]
       columns[params[:iSortCol_0].to_i]
     end
 

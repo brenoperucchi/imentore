@@ -42,7 +42,7 @@ module Imentore
         if user_signed_in? and not current_user.userable.owner?
           @order.customer_name = current_user.userable.name
           @order.customer_email = current_user.email
-          @order.user_id = current_user
+          @order.user = current_user
         else
           @order.customer_name = params[:order][:customer_name]
           @order.customer_email = params[:order][:customer_email]
