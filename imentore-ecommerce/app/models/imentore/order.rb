@@ -121,7 +121,9 @@ module Imentore
 
     def delivery_calculate(zip_code, method)
       return false if zip_code.nil? or method.nil?
-      Imentore::DeliveryHandle.calculate_items(self.items, zip_code, method).value
+      handle = Imentore::DeliveryHandle.new(self.items, zip_code, store.config.store_zip_code, method)
+      handle.calculate
+      handle.method.cost
     end
 
     def invoice_method

@@ -26,7 +26,9 @@ module Imentore
     end
 
     def delivery_calculate(zip_code, method)
-      Imentore::DeliveryHandle.calculate_item(self, zip_code, method)
+      handle = Imentore::DeliveryHandle.new(self, zip_code, store.config.store_zip_code, method)
+      handle.calculate
+      handle.method.cost
     end
 
     def variant_options

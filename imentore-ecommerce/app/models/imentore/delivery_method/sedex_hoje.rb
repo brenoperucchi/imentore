@@ -9,10 +9,11 @@ module Imentore
                                               :largura => 15,
                                               :altura => 2
       service = frete.calcular :sedex_hoje
-      value = (service.valor + value(amount, weight)).round(2)
-      error = service.erro
-      error_msg = service.msg_erro
-      return value, error, error_msg
+      @cost = (service.valor + value(amount, weight)).round(2)
+      @error = service.erro
+      @message = service.msg_erro
+      @delivery_time = service.prazo_entrega
+      self
     end
 
     def self.name
