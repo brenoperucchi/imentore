@@ -123,8 +123,6 @@ pt-BR:
   customer_sign_in_title: Acesso do Cliente
   permission_denied: "Permissão negada, você deve acessar a sua conta."
   cart_need_variant: Você deve selecionar uma variação
-  product_added: Produto Adicionado
-  product_not_added: Produto não adicionado
   cart_update: Carrinho atualizado
   cart_empty: Carrinho vazio
   cart: Carrinho
@@ -380,21 +378,6 @@ pt-BR:
       header:
         one: ! 'Não foi possível gravar %{model}: 1 erro'
         other: ! 'Não foi possível gravar %{model}: %{count} erros.'
-  helpers:
-    select:
-      prompt: Por favor selecione
-    submit:
-      new: Novo %{model}
-      create: Criar %{model}
-      submit: Salvar %{model}
-      update: Atualizar %{model}
-    send_mail:
-      products:
-        line_item: "Código: %{code} - Produto: %{item} - quantidade: %{quantity} - preço: %{value} - total: %{amount}"
-      delivery:
-        shipping: "Código: %{code} - situação: %{status} - método: %{method} - endereço: %{address} - total: %{amount}"
-      invoice:
-        invoice: "Código: %{code} - situação: %{status} - método: %{method} - endereço: %{address} - total: %{amount}"
   number:
     currency:
       format:
@@ -606,3 +589,23 @@ pt-BR:
       pages: Pagina
     errors:
       <<: *errors
+  helpers:
+    select:
+      prompt: Por favor selecione
+    submit:
+      new: Novo %{model}
+      create: Criar %{model}
+      submit: Salvar %{model}
+      update: Atualizar %{model}
+    cart:
+      create:
+        without_stock: Produto sem estoque no momento.
+        not_valid: Produto não é válido.
+        add: Produto Adicionado
+    send_mail:
+      products:
+        line_item: "Código: %{code} - Produto: %{item} - quantidade: %{quantity} - preço: %{value} - total: %{amount}"
+      delivery:
+        shipping: "Código: %{code} - situação: %{status} - método: %{method} - endereço: %{address} - total: %{amount}"
+      invoice:
+        invoice: "Código: %{code} - situação: %{status} - método: %{method} - endereço: %{address} - total: %{amount}"

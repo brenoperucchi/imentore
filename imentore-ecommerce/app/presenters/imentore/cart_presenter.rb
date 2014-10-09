@@ -28,7 +28,7 @@ module Imentore
         "total_items" =>  @cart.items.size,
         "total_amount" => number_with_price(@cart.amount),
         "message" => {
-                       "success" => I18n.t(:product_added)
+                       "success" => I18n.t(:add, scope: 'helpers.cart.create')
                      }
                  }
     end

@@ -5,15 +5,20 @@ module Imentore
     respond_to :json, only: [:create, :index, :destroy, :show, :calculate_shipping]
 
     def calculate_shipping
+      # zip_code = params[:zip_code]
+      # method = current_store.delivery_methods.find_by_id(params[:method])
       zip_code = params[:zip_code]
-      method = current_store.delivery_methods.find_by_id(params[:method])
-      unless method.nil?
+      delivery_method = current_store.delivery_methods.find_by_id(params[:method])
+      unless delivery_method.nil?
         respond_to do |wants|
           wants.json do
-            delivery_amount = Imentore::DeliveryHandle.calculate_items(current_cart.items,zip_code, method).value
-            render json: { 'total_delivery' => number_with_price(delivery_amount),
+            handle = Imentore::DeliveryHandle.new(current_cart.items, zip_code, current_store.config.store_zip_code, delivery_method)
+            handle.calculate
+            # delivery_amount = Imentore::DeliveryHandle.calculate_items(current_cart.items,zip_code, method).value
+            render json: { 'total_delivery' => number_with_price(handle.method.cost),
                            'total_coupon' => number_with_price(current_cart.coupons_amount),
-                           'total_amount' => number_with_price(current_cart.total_amount +  delivery_amount)
+                           'total_amount' => number_with_price(current_cart.total_amount +  handle.method.cost),
+                           'delivery_time' => handle.method.delivery_time
                          }
           end
         end
@@ -87,10 +92,10 @@ module Imentore
             if quantity > 0 and current_cart.add(product, variant, quantity)
                 render json: Imentore::CartPresenter.new(current_cart).to_json
             else
-                render :json => { "message" => {"alert" => t(:product_not_added) }}, status: 400
+                render :json => { "message" => {"alert" => I18n.t(:without_stock, scope: 'helpers.cart.create') }}, status: 400
             end
           rescue ActiveRecord::RecordNotFound
-            render :json => { "message" => {"alert" => t(:product_not_added) }}, status: 422
+            render :json => { "message" => {"alert" => I18n.t(:not_valid, scope: 'helpers.cart.create') }}, status: 422
           end
         end
         wants.html do
