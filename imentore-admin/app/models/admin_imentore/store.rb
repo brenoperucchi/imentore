@@ -329,5 +329,31 @@ module AdminImentore
       end
     end 
 
+
+    def self.images
+      store = Imentore::Store.find(113)
+      store.products.each do |product|
+        product_data2 = Old::Store.find(113).products.find_by_name(product.name)
+        next if product_data2.nil?
+        # product.update_attribute(:featured, product_data2.featured)
+        product.variants.each_with_index do |variant, index|
+          product_data2.variants[index].images.each do |image|
+            begin
+              new_image = product.variants[index].images.new
+              new_image.remote_picture_url = "http://useimeucartao.imentore.com.br:3000" + image.picture.url.gsub("old", "imentore") 
+              new_image.save
+            rescue OpenURI::HTTPError
+              Rails.logger.debug { "Product:#{product.id} - Image:#{image.id}" }
+              open('product_with_image.out', 'a') do |f|
+                f << "Product:#{product.id} - Image:#{image.id}\n"
+              end
+              next
+            end
+          end
+        end
+      end
+    end
+
+
   end
 end

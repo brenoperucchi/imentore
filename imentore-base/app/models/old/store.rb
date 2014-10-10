@@ -2,7 +2,8 @@ module Old
   class Store < ActiveRecord::Base
 
     def self.table_name
-      "stores"
+      # "stores"
+      "imentore_stores"
     end
     
     has_many :categories, :dependent => :destroy
@@ -13,7 +14,9 @@ module Old
 
     has_many :notices
 
-    has_many :products, :dependent => :destroy
+    has_many :products,
+      :class_name => Old::Product,
+      :dependent => :destroy
 
     has_many :customers,
       :conditions => "role = 'customer'",
@@ -40,11 +43,20 @@ module Old
     self.abstract_class = true
      establish_connection(
      :adapter  => 'mysql2',
-     :database => 'go2b_production',
-     :host     => 'app.imentore.com.br',
-     :username => 'imentoreapp',
-     :password => 'app0p..za'
+     :database => 'imentore2',
+     :host     => 'dns.imentore.com.br',
+     :username => 'imentore2',
+     :password => '123123'
      )
+
+    # self.abstract_class = true
+    #  establish_connection(
+    #  :adapter  => 'mysql2',
+    #  :database => 'go2b_production',
+    #  :host     => 'app.imentore.com.br',
+    #  :username => 'imentoreapp',
+    #  :password => 'app0p..za'
+    #  )
 
      def active?
        state == "actived"

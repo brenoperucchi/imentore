@@ -2,7 +2,8 @@ module Old
   class Product < ActiveRecord::Base
 
     def self.table_name
-      "products"
+    #   "products"
+      "imentore_products"
     end
 
     scope :not_deleted, where(deleted_at: nil)
@@ -17,8 +18,8 @@ module Old
 
     has_many :images,
       :as => :imageable,
-      :dependent => :destroy,
-      :finder_sql => proc {" SELECT images.* FROM images  WHERE images.imageable_id = #{self.id} AND images.imageable_type = 'Product' "}
+      :dependent => :destroy
+      # :finder_sql => proc {" SELECT images.* FROM images  WHERE images.imageable_id = #{self.id} AND images.imageable_type = 'Product' "}
 
       #:finder_sql => ' SELECT users.* FROM users STRAIGHT_JOIN
       # (`products`, `categories_products`) WHERE (`users`.store_id = #{store_id} AND `categories_products`.category_id =
@@ -28,14 +29,22 @@ module Old
       :through => :variants,
       :source => :units
 
-
     self.abstract_class = true
      establish_connection(
      :adapter  => 'mysql2',
-     :database => 'go2b_production',
-     :host     => 'app.imentore.com.br',
-     :username => 'imentoreapp',
-     :password => 'app0p..za'
+     :database => 'imentore2',
+     :host     => 'dns.imentore.com.br',
+     :username => 'imentore2',
+     :password => '123123'
      )
+
+    # self.abstract_class = true
+    #  establish_connection(
+    #  :adapter  => 'mysql2',
+    #  :database => 'go2b_production',
+    #  :host     => 'app.imentore.com.br',
+    #  :username => 'imentoreapp',
+    #  :password => 'app0p..za'
+    #  )
   end
 end
