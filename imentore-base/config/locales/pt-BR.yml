@@ -104,7 +104,7 @@ pt-BR:
   previous: Anterior
   addresses: Endereços
   address: Endereço
-  shipping_address_diff: Igual ao endereço de cobrança
+  shipping_address_diff: O mesmo endereço de cobrança
   other_address: Outro endereço
   select: Selecionar
   select_state: Selecionar Estado
