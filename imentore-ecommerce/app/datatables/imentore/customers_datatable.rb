@@ -32,7 +32,7 @@ module Imentore
       customers = @current_store.customers.order("#{sort_column} #{sort_direction}")
       customers = customers.page(page).per_page(per_page)
       if params[:sSearch].present?
-        customers = customers.where("id like :search or created_at like :search or name like :search or email like :search", search: "%#{params[:sSearch]}%")
+        customers = customers.joins(:user).where("imentore_customers.id like :search or imentore_customers.created_at like :search or imentore_customers.name like :search or imentore_users.email like :search", search: "%#{params[:sSearch]}%")
       end
       customers
     end
