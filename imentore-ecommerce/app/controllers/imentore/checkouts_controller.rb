@@ -131,8 +131,7 @@ module Imentore
     def sync_pg
       current_store = Imentore::Store.find(params[:store_id])
       notification_code = {notificationCode: params[:notificationCode]}
-      pagseguro = Imentore::Store.first.payment_methods.find_by_handle('pag_seguro')
-      provider_class = "Imentore::PaymentMethod::PagSeguro".constantize.new(pagseguro.options)
+      provider_class = current_store.payment_methods.find_by_handle('pag_seguro').provider
       response = provider_class.notification_rpc(notification_code)
       invoice = current_store.invoices.find_by_id(response['transaction']['reference'])
       render nothing: true and return if invoice.nil? or not invoice.payment_method.pag_seguro?
