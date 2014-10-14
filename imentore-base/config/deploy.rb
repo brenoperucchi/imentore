@@ -91,8 +91,8 @@ namespace :deploy do
   end  
 
   after :publishing, :imentore_config_files
-  after :finishing, :stop
-  after :finishing, :start
+  # after :finishing, :stop
+  # after :finishing, :start
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
