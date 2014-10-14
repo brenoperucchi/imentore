@@ -135,12 +135,12 @@
             = f.input :irs_id, input_html: { class: :span6, style:'margin-left:20px'} 
             .controls-group
               label for="store_url" style='float:none;display:inline-block;margin-right:20px'
-                | Domínio Gratuito
+                | Endereço (url)
               | http://
               = f.text_field :url, class: 'span3', style:'margin-left:0px'
-              = select_tag 'url_domain', options_for_select(['.imentore.com.br']), {class: :span3}
+              = select_tag 'url_domain', options_for_select(['.imentore.com.br']), {class: :span3, disabled: true}
               p[class="help-block" style='margin-left:150px']
-                | * Você poderá adicionar o seu domínio próprio depois 
+                | * exemplo: minhaloja 
               = f.simple_fields_for :owner do |owner|
                 = owner.simple_fields_for :user do |user|
                   = user.input :email, input_html: { class: :span6, style:'margin-left:20px'} 
@@ -179,6 +179,7 @@
             .form-actions
               .alert.alert-info[style='text-align:;']
                 / = f.input :term, as: 'check_boxes', :wrapper => :inline_checkbox
+                / = f.input :term, :wrapper => :inline_checkbox, :wrapper_tag => false, :as => :boolean, :label => false, :boolean_style => :inline
                 = f.input :term, :wrapper => :inline_checkbox, :wrapper_tag => false, :as => :boolean, :label => false, :boolean_style => :inline
                 '
                 | Concordo com 
@@ -186,7 +187,8 @@
                   | termos
                 '
                 | usados
-              = f.input :plan_id, :collection => [ ['Gratuito - R$0,00' ,1], ['Básico - R$19,00' ,2], ['Avançado - 39,00' ,3], ['Profissional - R$79,00', 4], ['Premium - R$149,00', 4] ], prompt: 'Selecione um Plano', input_html: { class: :span5, style:'margin-left:10px'} 
+              / = f.input :plan_id, :collection => [ ['Gratuito - R$0,00' ,1], ['Básico - R$19,00' ,2], ['Avançado - 39,00' ,3], ['Profissional - R$79,00', 4], ['Premium - R$149,00', 4] ], prompt: 'Selecione um Plano', input_html: { class: :span5, style:'margin-left:10px'} 
+              = f.input :plan_id, :collection => [ ['Gratuito - R$0,00' ,1], ['Básico - R$19,00' ,2], ['Avançado - R$99,00' ,3]], prompt: 'Selecione um Plano', input_html: { class: :span5, style:'margin-left:10px'} 
               input.btn.btn-primary.btn-large data-disable-with="Aguarde um momento..." name="commit" onclick="_gaq.push(['_trackEvent', 'accounts', 'signup']);" type="submit" value="Crie sua Conta"
             / p.ar
             /   i.icon-user

@@ -7,5 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require site_index
-//= require site_jquery.colorbox-min
+//= require site/site_index
+// require site/site_jquery.colorbox-min
