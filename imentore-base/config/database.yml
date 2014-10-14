@@ -17,14 +17,16 @@ test:
   database: db/test.sqlite3
   pool: 5
   timeout: 5000
-production:
-  adapter: mysql2
-  database: imentore
-  host: dns.imentore.com.br
-  pool: 5
-  timeout: 5000
-  username: imentore
-  password: app0p..az 
+
+# production:
+#   adapter: mysql2
+#   database: imentore
+#   host: dns.imentore.com.br
+#   pool: 5
+#   timeout: 5000
+#   username: imentore
+#   password: 
+
 development:
  adapter: mysql2
  database: imentore

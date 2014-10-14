@@ -13,11 +13,11 @@ legend= t(:customers)
 table.table.table-striped#datatable[data-source="#{admin_customers_url(format: 'json')}"]
   thead
     tr
-      th.input-small= sortable "active"
-      th= sortable "id"
-      th= sortable "name"
-      th= sortable "email"
-      th= sortable "created_at"
+      th.input-mini= t(:active)
+      th= t(:id)
+      th= t(:name)
+      th= t(:email)
+      th= t(:created_at)
       th= t(:actions)
 /   tbody
 /     - @customers.each do |customer|

@@ -62,17 +62,16 @@
         .data-block
           h5.data-heading
             = t(:delivery_status)
-            '
-            - if @order.delivery.try(:sent?)
-              a[title="" data-placement="top" data-toggle="modal" href="#myModal" ]
-                / = link_to("#myModal", role: 'button', class:'btn', 'data-toggle' => 'modal')
-                i.icon-black.icon-envelope
-                = @order.delivery.tracking_code
           h4
-            = t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
-
-
-
+            - if @order.delivery.try(:sent?)
+              i.icon-black.icon-envelope[style='margin-top:5px']
+              a[title="" data-placement="top" data-toggle="modal" href="#myModal" ]
+                = t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
+            '
+            small
+              - if @order.delivery.try(:sent?) and @order.delivery_method.try(:handle) != "custom" 
+                = link_to('rastrear', "http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=#{@order.delivery.tracking_code}",  :target => "_blank")
+                  
     hr
     .row
       .span2

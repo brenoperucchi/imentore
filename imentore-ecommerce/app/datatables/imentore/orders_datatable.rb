@@ -11,7 +11,7 @@ module Imentore
           h(resource.created_at.strftime("%B %e, %Y")),
           resource.customer_name,
           resource.customer_email,
-          resource.total_amount,
+          number_with_price(resource.total_amount),
           button_link(resource),
         ]
       end
@@ -29,8 +29,8 @@ module Imentore
         button_datatable(resource, edit_admin_order_path(resource), 'btn btn-small', 'icon-edit icon-black', 'edit') +
         if resource.can_cancel?
           button_datatable(resource, cancel_admin_order_path(resource), 'btn btn-danger btn-small', 'icon-white icon-edit', 'cancel')
-        else
-          button_datatable(resource, admin_order_path(resource), 'btn btn-inverse btn-small', 'icon-trash icon-white', 'remove', :delete)
+        # else
+          # button_datatable(resource, admin_order_path(resource), 'btn btn-inverse btn-small', 'icon-trash icon-white', 'remove', :delete)
         end
       end
     end

@@ -56,22 +56,22 @@ module ApplicationHelper
   def button_order_status(status)
     case status
     when 'placed', true
-        concat(link_to("#", class: 'btn disabled btn-info') do
+        concat(link_to("#", class: 'btn btn-small btn-mini disabled btn-info') do
           content_tag(:i, '', :class=>'icon-white icon-exclamation-sign') +
           " " + I18n.t(status)
         end)
     when 'pending', false
-      concat(link_to("#", class: 'btn disabled btn-warning') do
+      concat(link_to("#", class: 'btn btn-small disabled btn-warning') do
         content_tag(:i, '', :class=>'icon-white icon-remove') +
         " " + I18n.t(status)
       end)
     when 'finished', false
-      concat(link_to("#", class: 'btn disabled btn-success') do
+      concat(link_to("#", class: 'btn btn-small disabled btn-success') do
         content_tag(:i, '', :class=>'icon-white icon-ok') +
         " " + I18n.t(status)
       end)
     when 'canceled', false
-      concat(link_to("#", class: 'btn disabled btn-danger') do
+      concat(link_to("#", class: 'btn btn-small disabled btn-danger') do
         content_tag(:i, '', :class=>'icon-white icon-remove') +
         " " + I18n.t(status)
       end)
