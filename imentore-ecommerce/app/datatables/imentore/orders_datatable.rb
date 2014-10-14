@@ -43,7 +43,7 @@ module Imentore
       orders = @current_store.orders.order("#{sort_column} #{sort_direction}")
       orders = orders.page(page).per_page(per_page)
       if params[:sSearch].present?
-        orders = orders.where("id like :search or created_at like :search or customer_email like :search", search: "%#{params[:sSearch]}%")
+        orders = orders.joins(:invoice).where("imentore_orders.id like :search or imentore_orders.created_at like :search or imentore_orders.customer_email like :search or imentore_invoices.amount like :search", search: "%#{params[:sSearch]}%")
       end
       orders
     end

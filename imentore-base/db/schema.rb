@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140826003555) do
+ActiveRecord::Schema.define(:version => 20141014013907) do
 
   create_table "admin_imentore_assets", :force => true do |t|
     t.string   "file"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(:version => 20140826003555) do
     t.string  "tracking_code"
     t.string  "status"
     t.integer "delivery_method_id"
-    t.float   "amount"
+    t.decimal "amount",             :precision => 10, :scale => 2
   end
 
   create_table "imentore_delivery_methods", :force => true do |t|
