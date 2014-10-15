@@ -11,7 +11,7 @@ module Imentore
     end
 
     def image(size = "small")
-      @image.picture.url(size.to_sym)
+      @image.picture.url(size.try(:to_sym))
     end
 
   end

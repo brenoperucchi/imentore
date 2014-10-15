@@ -29,8 +29,9 @@ module LiquidFilter
     @product.variants.first.images.first.picture.url(size.try(:to_sym)).to_s
   end
 
-  def image_url(size,obj)
-    obj.image(size.to_s)
+  def image_url(obj, size)
+    size = nil if size == "original"
+    obj.image(size)
   end
 
   def variant_options_values(variant)

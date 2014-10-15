@@ -49,27 +49,24 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
 
-  version :bigger do
-    process :resize_to_fill => [900, 900]
-  end
+  # version :bigger do
+  #   process :resize_to_fill => [900, 900]
+  # end
   version :big do
     process :resize_to_fill => [600, 600]
   end
   version :larger do
     process :resize_to_fill => [300, 300]
   end
-  version :medium do
-    process :resize_to_fill => [200, 200]
-  end
+  # version :medium do
+  #   process :resize_to_fill => [200, 200]
+  # end
   version :small do
     process :resize_to_fill => [150, 150]
   end
-  version :thumb do
-    process :resize_to_fill => [100, 100]
-  end
-  version :mini_thumb do
-    process :resize_to_fill => [75, 75]
-  end
+  # version :thumb do
+  #   process :resize_to_fill => [100, 100]
+  # end
   version :super_thumb do
     process :resize_to_fill => [50, 50]
   end
@@ -85,8 +82,8 @@ class PictureUploader < CarrierWave::Uploader::Base
   version :small_fit do
     process :resize_to_fit => [150, 150]
   end
-  version :mini_fit do
-    process :resize_to_fit => [75, 75]
+  version :thumb_fit do
+    process :resize_to_fit => [50, 50]
   end
 
 
