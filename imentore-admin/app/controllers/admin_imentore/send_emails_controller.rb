@@ -25,10 +25,11 @@ module AdminImentore
 
     def update_stores
       admin_send_email = AdminImentore::SendEmail.find(params[:id])
-      stores_send_emails = admin_send_email.stores_send_emails        
-      stores_send_emails.each do |send_email| 
-        send_email.body_default = admin_send_email.body
-        send_email.body_default_updated_at = DateTime.now.utc
+      Imentore::Store.all.each do |store|
+        send_email = store.send_emails.find_or_initialize_by_name(admin_send_email.name)
+        send_email.active = true
+        send_email.subject = admin_send_email.subject
+        send_email.body = admin_send_email.body
         send_email.save
       end
       flash[:success] = "Successfully created..."

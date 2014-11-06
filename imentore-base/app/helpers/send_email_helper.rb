@@ -52,7 +52,7 @@ module SendEmailHelper
     return ret
   end
 
-  def delivery_tracking(send_email, order)
+  def helper_delivery_tracking(send_email, order)
     ret = capture do
       content_tag(:div, id:'customer', class:'box') do
         content_tag(:hr, size:1)

@@ -6,8 +6,6 @@ module AdminImentore
     end
     scope :active, where(active: true)
 
-    has_many :stores_send_emails, :class_name => Imentore::SendEmail, :foreign_key => "admin_imentore_send_email_id"
-
     def self.install_store(store)
       self.active.each do |send_email|
         att = send_email.dup.attributes

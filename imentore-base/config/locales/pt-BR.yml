@@ -26,6 +26,8 @@ pt-BR:
   invoice_paid: Cobrança paga
   delivery_sent: Encomenda enviada
   customer_create: Cliente criado
+  notify_admin: Notifição ao Admin
+
   select_parent: Selecionar parentesco
   polymorphic_created: "%{name} criado com sucesso" 
 
@@ -62,6 +64,7 @@ pt-BR:
   save: Salvar
   close: Fechar
 
+  notify: Notificar
   message: Mensagem
   view_default: Mostrar padrão
   default_updated_at: Atualização do sistema
@@ -545,6 +548,7 @@ pt-BR:
         customer_email: Email do Cliente
       imentore/send_email:
         active: Ativo
+        notify: Notificar Admin
         name: 'Quando será enviado:'
         subject: Assunto do e-mail
         action: Ação

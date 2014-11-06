@@ -12,15 +12,16 @@ legend= t(:send_emails)
 table.table.table-striped
   thead
     tr
-      th.span1= t(:active)
+      th= t(:active)
+      th= t(:notify)
       th= t(:name)
       th= t(:subject)
       th= t(:action)
   tbody
     - @send_emails.each do |send_email|
       tr
-        td
-          = button_status(send_email.active, '#')
+        td= button_status(send_email.active, '#')
+        td= send_email.name == 'notify_admin' ? button_status(true, '#') : button_status(send_email.notify, '#')
         td= t(send_email.name)
         td= send_email.subject
         / td= button_to("Destroy", admin_send_email_path(send_email), method: :delete, :class=>"btn-danger")

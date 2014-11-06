@@ -11,6 +11,7 @@ module Imentore
         new!
       end
 
+        @template = liquid.render(@template.body)
       def edit
         @template = parent.templates.find(params[:id])
         @kind = @template.kind

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141014013907) do
+ActiveRecord::Schema.define(:version => 20141106230833) do
 
   create_table "admin_imentore_assets", :force => true do |t|
     t.string   "file"
@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(:version => 20141014013907) do
     t.string   "subject"
     t.text     "body"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "notify",     :default => false
   end
 
   create_table "admin_imentore_templates", :force => true do |t|
@@ -307,8 +308,9 @@ ActiveRecord::Schema.define(:version => 20141014013907) do
     t.string   "subject"
     t.text     "body"
     t.integer  "store_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "notify",     :default => false
   end
 
   create_table "imentore_stores", :force => true do |t|

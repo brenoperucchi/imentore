@@ -342,7 +342,7 @@ DEPENDENCIES
   devise (= 3.3.0)
   devise-encryptable
   execjs
-  fabrication
+  fabrication (= 2.11.3)
   i18n_alchemy
   imentore-admin!
   imentore-auth!
