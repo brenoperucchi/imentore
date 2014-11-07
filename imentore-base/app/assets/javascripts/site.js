@@ -8,4 +8,3 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require site/site_index
-// require site/site_jquery.colorbox-min
