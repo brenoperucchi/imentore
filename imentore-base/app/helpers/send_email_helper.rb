@@ -60,7 +60,7 @@ module SendEmailHelper
           content_tag(:h4, t('imentore/delivery_method', scope: 'activerecord.models'))
           content_tag(:hr, size:1)
           content_tag(:li, id:'customer-name') do
-            link_to('Rastreamento do Envio', "http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=#{order.delivery.tracking_code}")
+            link_to('Rastreamento do Envio', "http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=#{order.delivery.try(:tracking_code)}")
           end
         end
       end

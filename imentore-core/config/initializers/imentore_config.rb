@@ -72,7 +72,7 @@ module Imentore
 
   def defaults
     {
-      domain: ["imentore.dev", "imentore.com","imentore.com.br"]
+      domain: ["imentore.dev", "imentore.com","imentore.com.br","imentore.local"]
     }
   end
 
