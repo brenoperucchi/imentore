@@ -26,10 +26,20 @@ module Imentore
       return ret
     end
 
-    def place_order(order, params = {})
-      order.billing_address = Imentore::Address.new(params[:order][:billing_address]) if params[:order][:billing_address].present?
-      order.shipping_address = Imentore::Address.new(params[:order][:shipping_address]) if params[:order][:shipping_address].present?
+    def place_address(order, params = {})
+      if params[:shipping_address]
+        billing_address = Imentore::Address.new(params[:order][:shipping_address]) if params[:order][:shipping_address].present?
+        shipping_address = Imentore::Address.new(params[:order][:shipping_address])if params[:order][:shipping_address].present?
+      else
+        billing_address = Imentore::Address.new(params[:order][:billing_address]) if params[:order][:billing_address].present?
+        shipping_address = Imentore::Address.new(params[:order][:shipping_address])if params[:order][:shipping_address].present?
+      end
+      order.billing_address = billing_address
+      order.shipping_address = shipping_address
+      order.save(:validate => false) #and order.deliverable?
+    end
 
+    def place_order(order, params = {})
       store = order.store
       if order.deliverable?
         delivery = order.delivery || order.build_delivery
@@ -44,7 +54,7 @@ module Imentore
         invoice.attributes = { amount: order.total_amount, payment_method_id: params[:order][:invoice][:payment_method] }
         invoice.save
       end
-      order.save(:validate => false) #and order.deliverable?
+      
     end
   end
 end

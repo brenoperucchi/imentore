@@ -483,7 +483,7 @@ pt-BR:
       imentore/address:
         name: Titulo do Endereço
         street: Rua
-        complement: Complemento
+        complement: Número(casa/apto)
         city: Cidade
         country: País
         state: Estado

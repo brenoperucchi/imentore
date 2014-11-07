@@ -1,0 +1,385 @@
+- content_for :header do
+  = stylesheet_link_tag    "cart"
+  = javascript_include_tag "cart"
+  css:
+    label.inline {
+      display: inline-block;
+      padding-top: 5px;
+      margin-bottom: 0;
+      vertical-align: middle;
+    }
+    .fileinput-button input {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      border: solid transparent;
+      border-width: 0 0 100px 200px;
+      opacity: 0;
+      filter: alpha(opacity=0);
+      -moz-transform: translate(-300px, 0) scale(4);
+      direction: ltr;
+      cursor: pointer;
+    }
+
+  javascript:
+    $(document).ready(function(){
+      // Javascript Notication - Alert/Success
+      $('div.alert').each(function(){
+        if ( $(this).find('p').text().length > 1 ) {
+         $(this).slideDown('slow')
+        }
+      })
+      $('.close').bind('click',function(){
+        $(this).parents('div.hide').first().slideUp('slow');
+      })
+      
+      $('input.checkbox').click(function(){
+        //var type = $(this).attr('id');
+        var value = $(this).val();
+        if ( value != 'other' ) {
+          $('#order_shipping_address_name').val($('.info.address#'+value).find('label.hide#name').html());
+          $('#order_shipping_address_street').val($('.info.address#'+value).find('label.hide#street').html());
+          $('#order_shipping_address_complement').val($('.info.address#'+value).find('label.hide#complement').html());
+          $('#order_shipping_address_city').val($('.info.address#'+value).find('label.hide#city').html());
+          $('select.select#order_shipping_address_state').find('option').filter(function() {
+              var state = $('.info.address#'+value).find('label.hide#state').html();
+              return $(this).val() == state; 
+          }).prop('selected', true);
+
+          $('select.select#order_shipping_address_country').find('option').filter(function() {
+              var state = $('.info.address#'+value).find('label.hide#country').html();
+              return $(this).val() == state; 
+          }).prop('selected', true);
+
+          $('#order_shipping_address_zip_code').val($('.info.address#'+value).find('label.hide#zip_code').html());
+          $('#order_shipping_address_phone').val($('.info.address#'+value).find('label.hide#phone').html());
+          if ( $('input#shipping_address').is(':checked') ){
+            $('#order_shipping_address_name').val($('.info.address#'+value).find('label.hide#name').html());
+            $('#order_shipping_address_street').val($('.info.address#'+value).find('label.hide#street').html());
+            $('#order_shipping_address_complement').val($('.info.address#'+value).find('label.hide#complement').html());
+            $('#order_shipping_address_city').val($('.info.address#'+value).find('label.hide#city').html());
+            $('select.select#order_shipping_address_state').find('option').filter(function() {
+                var state = $('.info.address#'+value).find('label.hide#state').html();
+                return $(this).val() == state; 
+            }).prop('selected', true);
+
+            $('select.select#order_shipping_address_country').find('option').filter(function() {
+                var state = $('.info.address#'+value).find('label.hide#country').html();
+                return $(this).val() == state; 
+            }).prop('selected', true);
+            $('#order_shipping_address_zip_code').val($('.info.address#'+value).find('label.hide#zip_code').html());
+            $('#order_shipping_address_phone').val($('.info.address#'+value).find('label.hide#phone').html());            
+          }
+        } else {
+          $('#order_billing_address_name').val('');
+          $('#order_billing_address_street').val('');
+          $('#order_billing_address_complement').val('');
+          $('#order_billing_address_city').val('');
+          $('#order_billing_address_zip_code').val('');
+          $('#order_billing_address_phone').val('');
+          $('#order_billing_address_state').find('option').first().prop('selected', true);
+          if ( $('input#shipping_address').val() == 'true' ){
+            $('#order_shipping_address_name').val('');
+            $('#order_shipping_address_street').val('');
+            $('#order_shipping_address_complement').val('');
+            $('#order_shipping_address_city').val('');
+            $('#order_shipping_address_zip_code').val('');
+            $('#order_shipping_address_phone').val('');
+            $('#order_shipping_address_state').find('option').first().prop('selected', true);
+          }
+        }
+      })
+      $('input#shipping_address').click(function(){
+        if (!$(this).is(':checked')){
+          $(".addresses #billing").show()
+          $(".addresses #billing input").each(function() {
+            $(this).attr('disabled', false)
+          });
+          $(".addresses #billing select").each(function() {
+            $(this).attr('disabled', false)
+          });
+          $('#order_billing_address_name').val('');
+          $('#order_billing_address_street').val('');
+          $('#order_billing_address_complement').val('');
+          $('#order_billing_address_city').val('');
+          $('#order_billing_address_zip_code').val('');
+          $('#order_billing_address_phone').val('');
+          $('#order_billing_address_state').find('option').first().prop('selected', true);
+        }else{
+          $(".addresses #billing").hide()
+          $(".addresses #billing input").each(function() {
+            $(this).attr('disabled', true)
+          });          
+          $(".addresses #billing select").each(function() {
+            $(this).attr('disabled', true)
+          });
+          $('#order_billing_address_name').val($('#order_shipping_address_name').val());
+          $('#order_billing_address_street').val($('#order_shipping_address_street').val());
+          $('#order_billing_address_complement').val($('#order_shipping_address_complement').val());
+          $('#order_billing_address_city').val($('#order_shipping_address_city').val());
+          $('#order_billing_address_zip_code').val($('#order_shipping_address_zip_code').val());
+          $('#order_billing_address_phone').val($('#order_shipping_address_phone').val());                    
+          $('select.select#order_billing_address_state').find('option').filter(function() {
+              var state = $('#order_shipping_address_state').val();
+              return $(this).val() == state; 
+          }).prop('selected', true);
+
+          $('select.select#order_billing_address_country').find('option').filter(function() {
+              var state = $('#order_shipping_address_country').val();
+              return $(this).val() == state; 
+          }).prop('selected', true);
+
+        }
+      })
+
+      $('input#billing_address.checkbox:checked').trigger('click')
+      $('input#shipping_address').first().trigger('click')
+      //$.fn.collapsy = function(option, id) {
+      //  var self = $(this).attr('href');
+      //  if (self == undefined){
+      //    self = id;
+      //  }
+      //  if (self == '#collapseTwo'){
+      //    $('.form-actions.hide').fadeIn('slow');
+      //  }
+      //  switch(option){
+      //    case 'show':
+      //      $(self).slideDown('slow');
+      //      break;
+      //    case 'hide':
+      //      $(self).slideUp('slow');
+      //      break;
+      //    case 'toggle':
+      //      if (!$(self).is(':visible')){
+      //        $(self).slideDown('slow')
+      //      } else {
+      //        $(self).slideUp('slow')
+      //      }
+      //      break
+      //  }
+      //}
+      //$('a.accordion-toggle[data-toggle=collapsy]').click(function(e){
+      //  $('.accordion-body.collapsy').slideUp();
+      //  $(this).collapsy('toggle')
+      //  e.preventDefault();
+      //})
+      //$('#collapseOne a.next').click(function(e){
+      //  $('#collapseOne').collapsy('hide', '#collapseOne');
+      //  $('#collapseTwo').collapsy('show', '#collapseTwo');
+      //});
+      //$('#collapseTwo a.next').click(function(e){ 
+      //  $('#collapseTwo').collapsy('hide', '#collapseTwo');
+      //  $('#collapseThree').collapsy('show', '#collapseThree');
+      //  e.preventDefault();
+      //})
+      //$('span.help-inline').each(function(e){
+      //  var id = $(this).parents('.accordion-group').find('a').attr('href')
+      //  $(id).collapsy('show', id);
+      //  $('.form-actions.hide').show();
+      //})
+      //var key = $.session.get('delivery_method_id');
+      //if (key != null){
+      //  $('select#delivery_method').find('option[value='+key+']').attr('selected', true)
+      //}
+      // $('a#calculate_zip').click(function(e){
+      //   var zip_code = $("input[id$='zip_code']").last().val();
+      //   var method = $('select#delivery_method').find('option:selected').val()
+      //   delivery_calculate(zip_code,method)
+      //   e.preventDefault();
+      // })
+      // $('select#delivery_method').change(function(){
+      //   var zip_code = $("input[id$='zip_code']").last().val();
+      //   var method = $('select#delivery_method').find('option:selected').val();
+      //   delivery_calculate(zip_code,method)
+      // })
+    })
+
+
+/! **********************
+/! I N T R O
+/! **********************
+#intro
+  #intro_wrap
+    .container_12
+      #breadcrumbs.grid_12
+        a href="/cart"  Carrinho
+        '
+        | &gt;
+        '
+        a href=""  Endereço
+      h1 Endereço
+/! end of intro
+
+
+.container
+  .row
+    .notification
+      div.alert.alert-block.hide
+        a[class="close" data-dismiss="alert" href="#"]
+          = "x"
+        h4[class="alert-heading"]
+          = t(:warning)
+        p
+          = flash[:alert]
+      div.alert.alert-success.hide
+        a[class="close" data-dismiss="alert" href="#"]
+          = "x"
+        h4[class="alert-heading"]
+          = t(:success)
+        p
+          = flash[:success]
+
+
+.container
+  / .row
+  /   table.table.table-striped.table-bordered.table-condensed
+  /     thead
+  /       tr
+  /         th= t(:product)
+  /         th= t(:variant)
+  /         th= t(:quantity)
+  /         th= t(:price)
+  /         th= t(:amount)
+  /     tbody
+  /       - current_cart.items.each do |item|
+  /         tr
+  /           td
+  /             = "#" + item.product.id.to_s
+  /             '
+  /             = item.product.name
+  /           td
+  /             - item.variant.options.each do |type|
+  /               = "#" + type.product_variant_id.to_s
+  /               '
+  /               = "#{type.option_type.name}: #{type.value}"
+  /               = " | "
+  /           td= item.quantity
+  /           td= number_with_price(item.value)
+  /           td= number_with_price(item.amount)
+  /       tr
+  /         td &nbsp
+  /         td &nbsp
+  /         td(colspan='2' style='text-align:center;')
+  /           '
+  /           = t(:sub_total)
+  /         td#sub_total
+  /           = number_with_price(current_cart.amount)
+  /       tr
+  /         td &nbsp
+  /         td &nbsp
+  /         td(colspan='2' style='text-align:center;')
+  /           = t(:shipping_value)
+  /         td#shipping_value
+  /           | 0
+  /       tr
+  /         td &nbsp
+  /         td &nbsp
+  /         td(colspan='2' style='text-align:center;')
+  /           = t(:coupon_value)
+  /         td#coupon_value
+  /           = number_with_price(current_cart.coupons_amount)
+  /       tr
+  /         td &nbsp
+  /         td &nbsp
+  /         td(colspan='2' style='text-align:center;')
+  /           h3= t(:total)
+  /         td#total_amount
+  /           h4= number_with_price(@order.total_amount)
+
+  .row
+    = simple_form_for(@order, url: address_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
+      = f.error_notification
+      #accordion1.accordion
+        fieldset#address_customer
+          - current_user.try(:userable).try(:addresses).try(:each) do |addr|
+            .info.hide.address[id=addr.name.to_underscore!]
+              label.hide#name
+                = addr.name
+              label.hide#street
+                = addr.street
+              label.hide#complement
+                = addr.complement
+              label.hide#city
+                = addr.city
+              label.hide#state
+                = addr.state
+              label.hide#country
+                = addr.country
+              label.hide#zip_code
+                = addr.zip_code
+              label.hide#phone
+                = addr.phone
+          .accordion-group
+            #collapseOne.accordion-body.in.collapsy[style="height: auto; "]
+              .accordion-inner
+                .span12
+                  .row
+                    .span6
+                      = f.input :customer_name, hint: "* nome completo", input_html: { value: current_user.try(:userable).try(:name) }
+                    .span6
+                      = f.input :customer_email, input_html: { value: current_user.try(:email) }
+              .span12
+                .row
+                  .span6
+                    .address
+                      - if user_signed_in? and not current_user.userable.owner?
+                        = f.input :billing_checkbox, :as => :radio_buttons, collection: addresses_checkout_helper , input_html: { :class=>'checkbox', id: 'billing_address' }, checked: (f.object.billing_checkbox.nil? ? addresses_checkout_helper.first : f.object.billing_checkbox) if user_signed_in?
+                    .address
+                      .control-group
+                        label.control-label
+                          = t(:shipping_address)
+                        .controls
+                          label.checkbox
+                            = check_box_tag 'shipping_address', true
+                            = t(:shipping_address_diff)
+                .span12.addresses
+                  .row
+                    .span6#shipping
+                      = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
+                        = render("shared/address", addr: addr)
+                    .span6#billing
+                      = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
+                        = render("shared/address", addr: addr)
+              .clearfix
+      .form-actions
+        .span2
+          - if current_store.config.order_asset
+            a(class="btn" data-toggle="modal" href="#orderAssets" class='btn btn-primary btn-large')
+              i.icon-file.icon-white
+              '
+              = t(:send_files)
+        .span3.offset5
+          button(class='btn-primary btn-large btn-success')
+            i.icon-ok.icon-white
+            '
+            = t(:next)
+
+
+  / .modal.hide#orderAssets(style='width:840px')
+  /   .modal-header
+  /     button(type="button" class="close" data-dismiss="modal")
+  /      ' x
+  /     h3 Arquivos
+  /   .modal-body(style='height:400px;')
+  /     = form_for(@image, as: :asset, url: order_assets_path(:order_id => @order.id), html: { multipart: true }) do |f|
+  /       .row.fileupload-buttonbar
+  /         .span6
+  /           span.btn.btn-success.fileinput-button
+  /             i.icon-plus.icon-white
+  /             span= t(:send_files)
+  /             = file_field_tag "asset[file]", multiple: true
+  /           '
+  /           button.btn.btn-primary.start(type="submit")
+  /             i.icon-upload.icon-white
+  /             span= t(:start_upload)
+  /         .span4
+  /           .progress.progress-success.progress-striped.active.fade
+  /             .bar(style="width:0%;")
+  /       .fileupload-loading
+  /       table.table.table-striped
+  /         tbody.files(data-toggle="modal-gallery" data-target="#modal-gallery")
+  /     = render "imentore/admin/assets/file-upload"
+  /   .modal-footer
+  /     a(href="#" class="btn" data-dismiss="modal")
+  /       | Close2

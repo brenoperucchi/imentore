@@ -92,6 +92,20 @@
 
 .container
   .row
+    /! **********************
+    /! I N T R O
+    /! **********************
+    #intro
+      #intro_wrap
+        .container_12
+          #breadcrumbs.grid_12
+            a href="/cart"  Carrinho
+            '
+            | &gt;
+          h1 Carrinho
+    /! end of intro
+
+  .row
     .notification
       div.alert.alert-block.hide
         a[class="close" data-dismiss="alert" href="#"]
@@ -109,13 +123,11 @@
           = t(:success)
         p
           = flash[:success]
-  legend= t(:cart)
-
   = form_tag(cart_path, method: 'put', id:'cart') do
     table.table.table-bordered.table-striped
         thead
           tr
-            th= t(:action)
+            th[style='width:80px']= t(:action)
             th= t(:product)
             th= t(:variant)
             th= t(:quantity)
@@ -217,14 +229,14 @@
           span#loading
     .clearfix
     hr
-    .span4.offset9
+    .span5.offset7
       .controls
         button(type='submit' class='btn btn-large' onclick="$('form#cart').submit();")
           i.icon-refresh
           '
           = t(:update_cart)
         '
-        = link_to(checkout_path, :class=>'btn btn-large btn-success') do
+        = link_to(address_checkout_path, :class=>'btn btn-large btn-success') do
           i.icon-shopping-cart.icon-white
           '
           = t(:checkout_cart)

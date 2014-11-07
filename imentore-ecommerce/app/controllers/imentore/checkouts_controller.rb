@@ -1,7 +1,7 @@
 module Imentore
   class CheckoutsController < BaseController
     include PagamentoDigital::Helper
-    before_filter :authenticate_to_buy!, only: [:new, :confirm]
+    before_filter :authenticate_to_buy!, only: [:new, :confirm, :address]
     before_filter :check_cart, only:[:new]
     skip_before_filter :authorize_client, except: [:new]
     skip_before_filter :verify_authenticity_token, :check_store, only: [:return_mp, :return_pd, :sync_pd, :return_pg, :sync_pg,
@@ -25,20 +25,15 @@ module Imentore
     def new
       @order = current_order
       @image = @order.assets.new
+      redirect_to address_checkout_path(@order.id)
     end
 
-    def confirm
+    def address
       @order = current_order
       if request.get?
-        render :new
+        render :address
       elsif request.put?
-        @order.items = current_cart.items
-        CheckoutService.place_order(@order, params)
-          # if CheckoutService.place_order(@order, params)
-          # flash[:alert] = @order.errors.full_messages
-          # render :new and return false
-          # end
-
+        @order.billing_checkbox = params[:order][:billing_checkbox]
         if user_signed_in? and not current_user.userable.owner?
           @order.customer_name = current_user.userable.name
           @order.customer_email = current_user.email
@@ -47,37 +42,38 @@ module Imentore
           @order.customer_name = params[:order][:customer_name]
           @order.customer_email = params[:order][:customer_email]
         end
-        if params[:order].present?
-          # @order.billing_address = Imentore::Address.new(params[:order][:billing_address]) if params[:order][:billing_address].present?
-          # @order.shipping_address = Imentore::Address.new(params[:order][:shipping_address]) if params[:order][:shipping_address].present?
+        CheckoutService.place_address(@order, params)  
+        unless @order.valid?
+          render :address
+        else
+          redirect_to confirm_checkout_path(@order)
+        end
+      end
+    end
 
-          @order.billing_checkbox = params[:order][:billing_checkbox] if params[:order][:billing_checkbox]
-          @order.shipping_checkbox = params[:order][:shipping_checkbox] if params[:order][:shipping_checkbox]
+    def confirm
+      @order = current_order  
+      if request.get?
+        render :confirm
+      elsif request.put?
+        CheckoutService.place_order(@order, params)
+        @order.items = current_cart.items
+        if params[:order].present?
           unless CheckoutService.place_coupons(@order, current_cart, current_store)
             flash[:alert] = t(:coupon_not_valid)
-            render :new and return false
+            render :confirm and return false
           end
           if @order.save
             @order.place
           end
         end
-        if not @order.valid? and @order.deliverable? and @order.chargeable?
-          render :new
+        if not @order.deliverable? and @order.chargeable?
+          render :confirm
           flash[:alert] = @order.errors.full_messages
-        # unless 
-          # render :new
-        # elsif @order.chargeable? and @order.valid?
-          # redirect_to charge_checkout_path
         else
           charge
-          # render :new
         end
       end
-      # if @order.chargeable? and @order.valid?
-      #   redirect_to charge_checkout_path
-      # else
-      #   redirect_to complete_checkout_path
-      # end
     end
 
     def charge

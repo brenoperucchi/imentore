@@ -181,26 +181,25 @@
             break
         }
       }
-      $('a.accordion-toggle[data-toggle=collapsy]').click(function(e){
-        $('.accordion-body.collapsy').slideUp();
-        $(this).collapsy('toggle')
-        e.preventDefault();
-      })
-      $('#collapseOne a.next').click(function(e){
-        $('#collapseOne').collapsy('hide', '#collapseOne');
-        $('#collapseTwo').collapsy('show', '#collapseTwo');
-      });
-      $('#collapseTwo a.next').click(function(e){ 
-        $('#collapseTwo').collapsy('hide', '#collapseTwo');
-        $('#collapseThree').collapsy('show', '#collapseThree');
-        e.preventDefault();
-      })
-      $('span.help-inline').each(function(e){
-        var id = $(this).parents('.accordion-group').find('a').attr('href')
-        $(id).collapsy('show', id);
-        $('.form-actions.hide').show();
-      })
-      
+      //$('a.accordion-toggle[data-toggle=collapsy]').click(function(e){
+      //  $('.accordion-body.collapsy').slideUp();
+      //  $(this).collapsy('toggle')
+      //  e.preventDefault();
+      //})
+      //$('#collapseOne a.next').click(function(e){
+      //  $('#collapseOne').collapsy('hide', '#collapseOne');
+      //  $('#collapseTwo').collapsy('show', '#collapseTwo');
+      //});
+      //$('#collapseTwo a.next').click(function(e){ 
+      //  $('#collapseTwo').collapsy('hide', '#collapseTwo');
+      //  $('#collapseThree').collapsy('show', '#collapseThree');
+      //  e.preventDefault();
+      //})
+      //$('span.help-inline').each(function(e){
+      //  var id = $(this).parents('.accordion-group').find('a').attr('href')
+      //  $(id).collapsy('show', id);
+      //  $('.form-actions.hide').show();
+      //})
       //var key = $.session.get('delivery_method_id');
       //if (key != null){
       //  $('select#delivery_method').find('option[value='+key+']').attr('selected', true)
@@ -239,6 +238,26 @@
 
 .container
   .row
+    /! **********************
+    /! I N T R O
+    /! **********************
+    #intro
+      #intro_wrap
+        .container_12
+          #breadcrumbs.grid_12
+            a href="/cart"  Carrinho
+            '
+            | &gt;
+            '
+            a href=address_checkout_path 
+              | Endereço
+            '
+            | &gt;
+            '
+            a href=""  Pagamento
+          h1 Pagamento
+    /! end of intro
+
     table.table.table-striped.table-bordered.table-condensed
       thead
         tr
@@ -295,99 +314,11 @@
 
   .row
     = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
+      = hidden_field_tag :zip_code, f.object.try(:zip_code)
       = f.error_notification
       #accordion1.accordion
-        fieldset#address_customer
-          - current_user.try(:userable).try(:addresses).try(:each) do |addr|
-            .info.hide.address[id=addr.name.to_underscore!]
-              label.hide#name
-                = addr.name
-              label.hide#street
-                = addr.street
-              label.hide#complement
-                = addr.complement
-              label.hide#city
-                = addr.city
-              label.hide#state
-                = addr.state
-              label.hide#country
-                = addr.country
-              label.hide#zip_code
-                = addr.zip_code
-              label.hide#phone
-                = addr.phone
-          .accordion-group
-            .accordion-heading
-              a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion1" href="#collapseOne"]
-                = ' 1) ' + t(:name) + ' / '+ t(:email)
-            #collapseOne.accordion-body.in.collapsy[style="height: auto; "]
-              .accordion-inner
-                .span12
-                  .row
-                    .span6
-                      = f.input :customer_name, hint: "* nome completo", input_html: { value: current_user.try(:userable).try(:name) }
-
-                      = f.input :customer_email, input_html: { value: current_user.try(:email) }
-                  .span1.offset0
-                    a{href='#' class='btn next btn-success btn-larger'}
-                      = t(:next)
-                .clearfix
         .accordion-group
-          .accordion-heading
-            a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion1" href="#collapseTwo"]
-              = ' 2) ' + t(:billing_addresss_title)
-          #collapseTwo.accordion-body.in.collapsy.hide[style="height: auto; "]
-            .accordion-inner
-              .span12
-                .row
-                  .span6
-                    / .control-group
-                    /   label.control-label
-                    /     = t(:addresses)
-                    /   .controls
-                    /     label.radio
-                    /       - if user_signed_in? 
-                    /         - current_user.userable.addresses.each do |address|
-                    /           = radio_button_tag(:address, address.name, class: address.name.to_underscore!)
-                    /           = address.name
-                    .address
-                      - if user_signed_in? and not current_user.userable.owner?
-                        = f.input :billing_checkbox, :as => :radio_buttons, collection: addresses_checkout_helper , input_html: { :class=>'checkbox', id: 'billing_address' } if user_signed_in?
-                      = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
-                        = render("shared/address", addr: addr)
-                  .span6
-                    .address
-                      .control-group
-                        label.control-label
-                          = t(:shipping_address)
-                        .controls
-                          label.checkbox
-                            = check_box_tag 'shipping_address', true
-                            '
-                            = t(:shipping_address_diff)
-                      / = f.input :shipping_checkbox, collection: ['Preencher endereço de envio diferente'], as: :check_boxes, input_html: { class: 'checkbox', id: 'shipping_address' } if user_signed_in?
-
-                      = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
-                        = render("shared/address", addr: addr)
-                .span1.offset0
-                  a{href='#' class='btn next btn-success btn-larger'}
-                    = t(:next)
-              .clearfix
-
-
-            / .row
-            /   .span12
-            /     | Level 1 of column
-            /     .accordion-inner
-            /       .span6
-            /         | Level 1 of column
-            /       .span6
-            /         | Level 2 of column
-        .accordion-group
-          .accordion-heading
-            a.accordion-toggle[data-toggle="collapsy" data-parent="#accordion1" href="#collapseThree"]
-              = '3) ' + t(:payment_delivery_title)
-          #collapseThree.accordion-body.collapsy.hide[style="height: auto; "]
+          #collapseThree.accordion-body.collapsy
             .accordion-inner
               .span12
                 .row
@@ -414,41 +345,41 @@
               i.icon-file.icon-white
               '
               = t(:send_files)
-        .span2.offset5
+        .span3.offset5
           button(class='btn-primary btn-large btn-success')
             i.icon-ok.icon-white
             '
             = t(:finished_order)
 
 
-  .modal.hide#orderAssets(style='width:840px')
-    .modal-header
-      button(type="button" class="close" data-dismiss="modal")
-       ' x
-      h3 Arquivos
-    .modal-body(style='height:400px;')
-      = form_for(@image, as: :asset, url: order_assets_path(:order_id => @order.id), html: { multipart: true }) do |f|
-        .row.fileupload-buttonbar
-          .span6
-            span.btn.btn-success.fileinput-button
-              i.icon-plus.icon-white
-              span= t(:send_files)
-              = file_field_tag "asset[file]", multiple: true
-            '
-            button.btn.btn-primary.start(type="submit")
-              i.icon-upload.icon-white
-              span= t(:start_upload)
+  / .modal.hide#orderAssets(style='width:840px')
+  /   .modal-header
+  /     button(type="button" class="close" data-dismiss="modal")
+  /      ' x
+  /     h3 Arquivos
+  /   .modal-body(style='height:400px;')
+  /     = form_for(@image, as: :asset, url: order_assets_path(:order_id => @order.id), html: { multipart: true }) do |f|
+  /       .row.fileupload-buttonbar
+  /         .span6
+  /           span.btn.btn-success.fileinput-button
+  /             i.icon-plus.icon-white
+  /             span= t(:send_files)
+  /             = file_field_tag "asset[file]", multiple: true
+  /           '
+  /           button.btn.btn-primary.start(type="submit")
+  /             i.icon-upload.icon-white
+  /             span= t(:start_upload)
 
-          .span4
-            .progress.progress-success.progress-striped.active.fade
-              .bar(style="width:0%;")
+  /         .span4
+  /           .progress.progress-success.progress-striped.active.fade
+  /             .bar(style="width:0%;")
 
-        .fileupload-loading
+  /       .fileupload-loading
 
-        table.table.table-striped
-          tbody.files(data-toggle="modal-gallery" data-target="#modal-gallery")
+  /       table.table.table-striped
+  /         tbody.files(data-toggle="modal-gallery" data-target="#modal-gallery")
 
-      = render "imentore/admin/assets/file-upload"
-    .modal-footer
-      a(href="#" class="btn" data-dismiss="modal")
-        | Close2
+  /     = render "imentore/admin/assets/file-upload"
+  /   .modal-footer
+  /     a(href="#" class="btn" data-dismiss="modal")
+  /       | Close2
