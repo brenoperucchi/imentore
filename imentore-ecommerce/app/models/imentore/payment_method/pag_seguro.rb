@@ -10,7 +10,8 @@ module Imentore
     end
 
     def billing(order)
-      ret = { :id => order.invoice.id,
+      id = Rails.env == "development" ? 1 : order.invoice.id
+      ret = { :id => id,
               :name => order.customer_name,
               :email => order.customer_email,
               :phone => order.billing_address.phone,

@@ -1,8 +1,18 @@
-= addr.input :name
-= addr.input :street
-= addr.input :complement
-= addr.input :city
-= addr.input :country, :collection => countries, :selected=> "BR"
-= addr.input :state, :collection => states, :prompt=> t(:select_state)
-= addr.input :zip_code
-= addr.input :phone
+- unless @disabled
+  = addr.input :name
+  = addr.input :street
+  = addr.input :complement
+  = addr.input :city
+  = addr.input :country, :collection => countries, :selected=> "BR"
+  = addr.input :state, :collection => states, :prompt=> t(:select_state)
+  = addr.input :zip_code
+  = addr.input :phone
+- else
+  = addr.input :name, disabled:true
+  = addr.input :street, disabled:true
+  = addr.input :complement, disabled:true
+  = addr.input :city, disabled:true
+  = addr.input :country, :collection => countries, :selected=> "BR", disabled:true
+  = addr.input :state, :collection => states, :prompt=> t(:select_state), disabled:true
+  = addr.input :zip_code, disabled:true
+  = addr.input :phone, disabled:true

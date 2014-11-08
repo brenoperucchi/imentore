@@ -39,22 +39,22 @@ module Imentore
       order.save(:validate => false) #and order.deliverable?
     end
 
-    def place_order(order, params = {})
+    def place_order(order, params = {}, cart)
       store = order.store
+      order.items = cart.items
       if order.deliverable?
         delivery = order.delivery || order.build_delivery
         delivery.attributes = { address: order.shipping_address, delivery_method_id: params[:order][:delivery][:delivery_method] }
         delivery.amount = order.delivery_calculate(order.zip_code, order.delivery_method)
         delivery.save
       end
-
       if order.chargeable?
         # delivery.changed.include? "delivery_method_id"
         invoice = order.invoice || order.build_invoice
         invoice.attributes = { amount: order.total_amount, payment_method_id: params[:order][:invoice][:payment_method] }
         invoice.save
       end
-      
+      order.save(:validate => false) 
     end
   end
 end

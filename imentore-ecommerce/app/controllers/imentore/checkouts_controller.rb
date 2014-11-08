@@ -23,13 +23,14 @@ module Imentore
     end
 
     def new
-      @order = current_order
+      @order = current_store.orders.new
       @image = @order.assets.new
-      redirect_to address_checkout_path(@order.id)
+      redirect_to address_checkout_path
     end
 
     def address
-      @order = current_order
+      @order = current_store.orders.new
+      @image = @order.assets.new
       if request.get?
         render :address
       elsif request.put?
@@ -52,12 +53,11 @@ module Imentore
     end
 
     def confirm
-      @order = current_order  
+      @order = current_store.orders.find(params[:id])
       if request.get?
         render :confirm
       elsif request.put?
-        CheckoutService.place_order(@order, params)
-        @order.items = current_cart.items
+        CheckoutService.place_order(@order, params, current_cart)
         if params[:order].present?
           unless CheckoutService.place_coupons(@order, current_cart, current_store)
             flash[:alert] = t(:coupon_not_valid)
@@ -78,14 +78,13 @@ module Imentore
 
     def charge
       begin
-        @order = current_order
-        @invoice = current_order.invoice
+        @order = current_store.orders.find(params[:id])
+        @invoice = @order.invoice
         @prepare = @invoice.prepare
         send("#{@invoice.payment_method.handle}".to_underscore)
       rescue Exception => msg
         flash[:alert] = t(:checkout_charge_problem)
-        @order = current_order
-        render :new
+        render :confirm
       end
     end
 
@@ -106,9 +105,9 @@ module Imentore
     end
 
     def complete
-      @current_order = Imentore::Order.find_by_id(params[:order_id]) || Imentore::Order.find_by_id(session[:order_id])
-      @items = @current_order.items.map { |item| CartItemDrop.new(item) }      
-      @order = OrderDrop.new(@current_order)
+      @order = Imentore::Order.find_by_id(params[:id])
+      @items = @order.items.map { |item| CartItemDrop.new(item) }      
+      @order = OrderDrop.new(@order)
       render 'complete'
     end
 
@@ -153,30 +152,20 @@ module Imentore
 
     def return_pg
       invoice = Imentore::Invoice.find(params[:invoice_id])
-      @current_order = invoice.order
+      @order = invoice.order
       current_store = invoice.order.store
-      redirect_to complete_checkout_url(host: current_store.url_site, order_id: @current_order.id)
+      redirect_to complete_checkout_url(host: current_store.url_site, order_id: @order.id)
     end
 
     def return_pd
       invoice = Imentore::Invoice.find(params[:invoice_id])
-      @current_order = invoice.order
+      @order = invoice.order
       current_store = invoice.order.store
       notificacao = PagamentoDigital::Notificacao.new(params, invoice.payment_method.options['token'])
       invoice.confirm if notificacao.status == :concluida
       # redirect_to complete_checkout_path
-      redirect_to complete_checkout_url(host: current_store.url_site, order_id: @current_order.id)
+      redirect_to complete_checkout_url(host: current_store.url_site, order_id: @order.id)
     end
-
-    protected
-
-    def current_order
-      @current_order = current_store.orders.find_by_id(session[:order_id])
-      unless @current_order
-        @current_order = current_store.orders.create(false)
-        session[:order_id] = @current_order.id
-      end
-      @current_order
-    end
+    
   end
 end

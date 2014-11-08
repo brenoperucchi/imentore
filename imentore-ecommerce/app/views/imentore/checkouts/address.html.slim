@@ -1,6 +1,7 @@
 - content_for :header do
   = stylesheet_link_tag    "cart"
   = javascript_include_tag "cart"
+  = csrf_meta_tags
   css:
     label.inline {
       display: inline-block;
@@ -134,7 +135,7 @@
       })
 
       $('input#billing_address.checkbox:checked').trigger('click')
-      $('input#shipping_address').first().trigger('click')
+      //$('input#shipping_address').first().trigger('click')
       //$.fn.collapsy = function(option, id) {
       //  var self = $(this).attr('href');
       //  if (self == undefined){
@@ -331,16 +332,16 @@
                           = t(:shipping_address)
                         .controls
                           label.checkbox
-                            = check_box_tag 'shipping_address', true
+                            = check_box_tag 'shipping_address', true, true
                             = t(:shipping_address_diff)
                 .span12.addresses
                   .row
                     .span6#shipping
                       = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
                         = render("shared/address", addr: addr)
-                    .span6#billing
+                    .span6#billing.hide
                       = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
-                        = render("shared/address", addr: addr)
+                        = render("shared/address", addr: addr, disabled:true)
               .clearfix
       .form-actions
         .span2
