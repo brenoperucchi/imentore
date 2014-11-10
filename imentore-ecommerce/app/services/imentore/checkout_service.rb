@@ -26,7 +26,7 @@ module Imentore
       return ret
     end
 
-    def place_address(order, params = {})
+    def place_address(order, params={})
       if params[:shipping_address]
         billing_address = Imentore::Address.new(params[:order][:shipping_address]) if params[:order][:shipping_address].present?
         shipping_address = Imentore::Address.new(params[:order][:shipping_address])if params[:order][:shipping_address].present?
@@ -39,9 +39,8 @@ module Imentore
       order.save(:validate => false) #and order.deliverable?
     end
 
-    def place_order(order, params = {}, cart)
+    def place_order(order, params={})
       store = order.store
-      order.items = cart.items
       if order.deliverable?
         delivery = order.delivery || order.build_delivery
         delivery.attributes = { address: order.shipping_address, delivery_method_id: params[:order][:delivery][:delivery_method] }

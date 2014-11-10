@@ -2,7 +2,7 @@ module Imentore
   class CheckoutsController < BaseController
     include PagamentoDigital::Helper
     before_filter :authenticate_to_buy!, only: [:new, :confirm, :address]
-    before_filter :check_cart, only:[:new]
+    before_filter :check_cart, only:[:address]
     skip_before_filter :authorize_client, except: [:new]
     skip_before_filter :verify_authenticity_token, :check_store, only: [:return_mp, :return_pd, :sync_pd, :return_pg, :sync_pg,
                                                                          :sync_mp, :complete]
@@ -11,6 +11,9 @@ module Imentore
       if current_cart.total_amount == 0 or current_cart.items.size == 0
         redirect_to cart_path
         flash[:alert] = t(:cart_not_valid)
+      elsif not current_cart.valid_stock?
+        flash[:alert] = current_cart.errors.full_messages.first
+        redirect_to cart_path
       end
     end
 
@@ -21,15 +24,14 @@ module Imentore
     def authenticate_to_buy!
       authenticate_user! unless current_store.config.authenticate_to_buy
     end
-
+      
     def new
-      @order = current_store.orders.new
+      @order = current_order
       @image = @order.assets.new
-      redirect_to address_checkout_path
     end
 
     def address
-      @order = current_store.orders.new
+      @order = current_order
       @image = @order.assets.new
       if request.get?
         render :address
@@ -47,6 +49,7 @@ module Imentore
         unless @order.valid?
           render :address
         else
+          set_order(@order)
           redirect_to confirm_checkout_path(@order)
         end
       end
@@ -54,10 +57,11 @@ module Imentore
 
     def confirm
       @order = current_store.orders.find(params[:id])
+      @order.items = current_cart.items unless @order.placed?
       if request.get?
         render :confirm
       elsif request.put?
-        CheckoutService.place_order(@order, params, current_cart)
+        CheckoutService.place_order(@order, params)
         if params[:order].present?
           unless CheckoutService.place_coupons(@order, current_cart, current_store)
             flash[:alert] = t(:coupon_not_valid)
@@ -82,6 +86,7 @@ module Imentore
         @invoice = @order.invoice
         @prepare = @invoice.prepare
         send("#{@invoice.payment_method.handle}".to_underscore)
+        set_order_cart_default
       rescue Exception => msg
         flash[:alert] = t(:checkout_charge_problem)
         render :confirm
@@ -154,7 +159,7 @@ module Imentore
       invoice = Imentore::Invoice.find(params[:invoice_id])
       @order = invoice.order
       current_store = invoice.order.store
-      redirect_to complete_checkout_url(host: current_store.url_site, order_id: @order.id)
+      redirect_to complete_checkout_url(host: current_store.url_site, id: @order.id)
     end
 
     def return_pd
@@ -163,9 +168,28 @@ module Imentore
       current_store = invoice.order.store
       notificacao = PagamentoDigital::Notificacao.new(params, invoice.payment_method.options['token'])
       invoice.confirm if notificacao.status == :concluida
-      # redirect_to complete_checkout_path
-      redirect_to complete_checkout_url(host: current_store.url_site, order_id: @order.id)
+      redirect_to complete_checkout_url(host: current_store.url_site, id: @order.id)
     end
-    
+
+    protected
+
+      def set_order_cart_default
+        session[:order_id] = nil
+        current_cart.destroy
+      end
+
+      def set_order(order)
+        session[:order_id] = order.id
+      end
+
+      def current_order
+        order = current_store.orders.find_by_id(session[:order_id])
+        @current_order = if order.nil?
+                          current_store.orders.new
+                        else
+                          order
+                        end        
+      end
+
   end
 end

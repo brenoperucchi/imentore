@@ -5,8 +5,6 @@ module Imentore
     respond_to :json, only: [:create, :index, :destroy, :show, :calculate_shipping]
 
     def calculate_shipping
-      # zip_code = params[:zip_code]
-      # method = current_store.delivery_methods.find_by_id(params[:method])
       zip_code = params[:zip_code]
       delivery_method = current_store.delivery_methods.find_by_id(params[:method])
       unless delivery_method.nil?
@@ -14,7 +12,6 @@ module Imentore
           wants.json do
             handle = Imentore::DeliveryHandle.new(current_cart.items, zip_code, current_store.config.store_zip_code, delivery_method)
             handle.calculate
-            # delivery_amount = Imentore::DeliveryHandle.calculate_items(current_cart.items,zip_code, method).value
             render json: { 'total_delivery' => number_with_price(handle.method.cost),
                            'total_coupon' => number_with_price(current_cart.coupons_amount),
                            'total_amount' => number_with_price(current_cart.total_amount +  handle.method.cost),
@@ -34,8 +31,13 @@ module Imentore
           return if quantity.blank?
           product = current_store.products.find_by_id(item[1][:product_id])
           variant = product.variants.find_by_id(item[1][:variant_id])
-          current_cart.renew(product, variant, quantity) ? flash[:success] = t(:cart_update) : flash[:alert] = current_cart.errors.full_messages.first
-
+          if current_cart.renew(product, variant, quantity)
+            flash[:success] = t(:cart_update)
+            flash[:alert] = nil
+          else
+            flash[:success] = nil
+            flash[:alert] = current_cart.errors.full_messages.first
+          end
         end
       end
       redirect_to cart_path
@@ -89,10 +91,10 @@ module Imentore
       respond_to do |wants|
         wants.json do
           begin
-            if quantity > 0 and current_cart.add(product, variant, quantity)
-                render json: Imentore::CartPresenter.new(current_cart).to_json
+            if current_cart.add(product, variant, quantity)
+              render json: Imentore::CartPresenter.new(current_cart).to_json
             else
-                render :json => { "message" => {"alert" => I18n.t(:without_stock, scope: 'helpers.cart.create') }}, status: 400
+              render :json => { "message" => {"alert" => I18n.t(:without_stock, scope: 'helpers.cart.create') }}, status: 400
             end
           rescue ActiveRecord::RecordNotFound
             render :json => { "message" => {"alert" => I18n.t(:not_valid, scope: 'helpers.cart.create') }}, status: 422

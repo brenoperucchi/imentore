@@ -11,8 +11,6 @@ module Imentore
     has_many :coupons_orders
     has_many :coupons, :through => :coupons_orders, :source => :coupon
 
-    validate :valid_stock?
-
     def empty?
       items.empty?
     end
@@ -34,15 +32,18 @@ module Imentore
       if item
         item.quantity = quantity
       end
-      save
+      valid_stock? and save
     end
 
     def add(product, variant, quantity)
+      return false if quantity < 0 
       item = items.detect { |i| i.product == product && i.variant == variant }
       if item
         item.quantity += quantity
+        return false unless variant.valid_stock?(item.quantity) 
       else
         items << LineItem.new(product, variant, quantity)
+        return false unless variant.valid_stock?(quantity) 
       end
       save
     end

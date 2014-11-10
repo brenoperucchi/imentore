@@ -268,7 +268,7 @@
           th= t(:price)
           th= t(:amount)
       tbody
-        - current_cart.items.each do |item|
+        - @order.items.each do |item|
           tr
             td
               = "#" + item.product.id.to_s
