@@ -50,10 +50,10 @@ module Imentore
 
     has_many :coupons_orders
     has_many :coupons, :through => :coupons_orders, :source => :coupon
-    validate :valid_addresses, :on => :update, unless: Proc.new {|order| order.canceled?}
+    validate :valid_addresses?, unless: Proc.new {|order| order.canceled?}
     validates :customer_name, :customer_email, presence: true, :on => :update, unless: Proc.new {|order| order.canceled?}
 
-    def valid_addresses
+    def valid_addresses?
       valid_billing = billing_address.valid? 
       valid_address = shipping_address.valid? 
       errors.add(:base, "err") unless valid_address && valid_billing
@@ -64,17 +64,20 @@ module Imentore
       self.finish if invoice.confirmed? and delivery.sent?
     end
 
-    # def update_stock(event)
-      # binding.pry
-      # items.each do |item|
-        # item.variant.update_stock.      
-    # end
+    def valid_stock?(event=nil)
+      self.items.each do |i| 
+        unless i.variant.valid_stock?(i.quantity)
+          self.errors.add(:base, I18n.t(:stock_null, scope: [:activerecord, :attributes, :errors, self.class.name.to_underscore]))
+          return false
+        end
+      end
+    end
 
     state_machine :status, :initial => :pending do
       # after_transition :on => [:paid, :canceled], :do => :update_balance
+      before_transition :pending => :placed,                do: :valid_stock?
       after_transition [:placed, :finished] => :canceled,   do: :update_stock
       after_transition :pending => :placed,                 do: :update_stock
-      before_transition :pending => :placed,                do: :valid_stock?
 
       event :place do
         transition :pending => :placed
@@ -86,14 +89,9 @@ module Imentore
         transition [:pending, :placed, :finished] => :canceled
       end
 
-      state :pending, :canceled do
-        def valid_stock?(event)
-          unless self.items.detect {|i| i.variant.valid_stock?(i.quantity)}
-            errors.add(:base, I18n.t(:stock_null, scope: [:activerecord, :attributes, :errors, self.class.name.to_underscore]))
-            return false
-          end
-        end
-      end
+      # state :pending, :canceled do
+      #   valid_stock?
+      # end
       state :placed, :canceled do
         def update_stock(event)
           case event.to
@@ -105,7 +103,6 @@ module Imentore
         end
       end
     end
-
 
     def products_amount
       items.sum(&:amount).to_f
@@ -147,15 +144,7 @@ module Imentore
     end
 
     def deliverable?
-      # validation = items.each{|i| break if i.variant.quantity > 0}.nil?
-      # self.errors.add(:base, :not_delivery) if validation
-      # validation
-      if items.each{|i| break if i.variant.quantity > 0}.nil?
-        true
-      else
-        self.errors.add(:base, :not_delivery)
-        false
-      end
+      valid_stock? ? true : false
     end
 
     def shipment_calculate
@@ -170,12 +159,6 @@ module Imentore
       end
       true      
     end
-
-    # def self.search(id, condition, created_at, email)
-    #   condition = self
-    #   condition = where('id LIKE ?', (id + '%')) unless id.nil? or id.blank?
-    #   condition
-    # end
-    
+        
   end
 end

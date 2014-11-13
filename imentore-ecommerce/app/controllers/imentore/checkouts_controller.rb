@@ -46,9 +46,9 @@ module Imentore
           @order.customer_email = params[:order][:customer_email]
         end
         CheckoutService.place_address(@order, params)  
-        unless @order.valid?
+        unless @order.save
           render :address
-        else
+        else          
           set_order(@order)
           redirect_to confirm_checkout_path(@order)
         end
@@ -58,24 +58,23 @@ module Imentore
     def confirm
       @order = current_store.orders.find(params[:id])
       @order.items = current_cart.items unless @order.placed?
-      if request.get?
+      if @order.placed?
+        flash[:alert] = "Completed"
+        redirect_to complete_checkout_path(id: @order)
+      elsif request.get?
         render :confirm
       elsif request.put?
         CheckoutService.place_order(@order, params)
-        if params[:order].present?
-          unless CheckoutService.place_coupons(@order, current_cart, current_store)
-            flash[:alert] = t(:coupon_not_valid)
-            render :confirm and return false
-          end
-          if @order.save
-            @order.place
-          end
+        unless CheckoutService.place_coupons(@order, current_cart, current_store)
+          flash[:alert] = t(:coupon_not_valid)
+          render :confirm and return false
         end
-        if not @order.deliverable? and @order.chargeable?
-          render :confirm
-          flash[:alert] = @order.errors.full_messages
-        else
+        if @order.deliverable? and @order.chargeable? and @order.save
+          @order.place
           charge
+        else
+          flash[:alert] = @order.errors.full_messages.join(" / ")
+          render :confirm
         end
       end
     end
@@ -111,7 +110,7 @@ module Imentore
 
     def complete
       @order = Imentore::Order.find_by_id(params[:id])
-      @items = @order.items.map { |item| CartItemDrop.new(item) }      
+      @items = @order.items.map {|item| CartItemDrop.new(item)}      
       @order = OrderDrop.new(@order)
       render 'complete'
     end

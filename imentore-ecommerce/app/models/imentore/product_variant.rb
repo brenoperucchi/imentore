@@ -19,7 +19,7 @@ module Imentore
 
     def valid_stock?(quantity_need = 0)
       quantity_object = self.class.find_by_id(id).quantity 
-      quantity_object >= quantity_need and quantity_object > 0
+      quantity_object > 0 and (quantity_object >= quantity_need)
     end
 
     def value

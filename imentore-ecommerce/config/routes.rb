@@ -52,7 +52,7 @@ Imentore::Core::Engine.routes.draw do
     match "checkout/:id/confirm",   to: "checkouts#confirm",  via: "get",   as: "confirm_checkout"
     match "checkout/:id/confirm",   to: "checkouts#confirm",  via: "put",   as: "confirm_checkout"
     match "checkout/charge",        to: "checkouts#charge",   as: "charge_checkout"
-    match "checkout/complete",      to: "checkouts#complete", as: "complete_checkout"
+    match "checkout/:id/complete",  to: "checkouts#complete", as: "complete_checkout"
     match "return_mp/:invoice_id",  to: "checkouts#return_mp", as: 'return_mp'
     match "return_pd/:invoice_id",  to: "checkouts#return_pd", as: 'return_pd'
     match "return_pg/:invoice_id",  to: "checkouts#return_pg", as: 'return_pg'

@@ -546,6 +546,8 @@ pt-BR:
         shipping_checkbox: Endereço do Envio
         customer_name: Nome do Cliente
         customer_email: Email do Cliente
+        invoice: Método de Pagamento
+        delivery: Método de Envio
       imentore/send_email:
         active: Ativo
         notify: Notificar Admin

@@ -158,53 +158,6 @@
       })
       $('input#billing_address.checkbox').first().trigger('click')
       $('input#shipping_address').first().trigger('click')
-      $.fn.collapsy = function(option, id) {
-        var self = $(this).attr('href');
-        if (self == undefined){
-          self = id;
-        }
-        if (self == '#collapseTwo'){
-          $('.form-actions.hide').fadeIn('slow');
-        }
-        switch(option){
-          case 'show':
-            $(self).slideDown('slow');
-            break;
-          case 'hide':
-            $(self).slideUp('slow');
-            break;
-          case 'toggle':
-            if (!$(self).is(':visible')){
-              $(self).slideDown('slow')
-            } else {
-              $(self).slideUp('slow')
-            }
-            break
-        }
-      }
-      //$('a.accordion-toggle[data-toggle=collapsy]').click(function(e){
-      //  $('.accordion-body.collapsy').slideUp();
-      //  $(this).collapsy('toggle')
-      //  e.preventDefault();
-      //})
-      //$('#collapseOne a.next').click(function(e){
-      //  $('#collapseOne').collapsy('hide', '#collapseOne');
-      //  $('#collapseTwo').collapsy('show', '#collapseTwo');
-      //});
-      //$('#collapseTwo a.next').click(function(e){ 
-      //  $('#collapseTwo').collapsy('hide', '#collapseTwo');
-      //  $('#collapseThree').collapsy('show', '#collapseThree');
-      //  e.preventDefault();
-      //})
-      //$('span.help-inline').each(function(e){
-      //  var id = $(this).parents('.accordion-group').find('a').attr('href')
-      //  $(id).collapsy('show', id);
-      //  $('.form-actions.hide').show();
-      //})
-      //var key = $.session.get('delivery_method_id');
-      //if (key != null){
-      //  $('select#delivery_method').find('option[value='+key+']').attr('selected', true)
-      //}
       $('a#calculate_zip').click(function(e){
         var zip_code = $("input[id$='zip_code']").last().val();
         var method = $('select#delivery_method').find('option:selected').val()
@@ -316,7 +269,6 @@
   .row
     = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
       = hidden_field_tag :zip_code, f.object.try(:zip_code)
-      = f.error_notification
       #accordion1.accordion
         .accordion-group
           #collapseThree.accordion-body.collapsy
