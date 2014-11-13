@@ -3,7 +3,6 @@ module Imentore
     extend self
 
     def place_coupons(order, cart, store)
-      ret = true
       cart.coupons.each do |coupon|
         limit = order.customer_email.present? ? store.coupons_orders.find_all_by_email(order.customer_email).size : 0
         limit += order.user_id.present? ? store.coupons_orders.find_all_by_user_id(order.user_id).size : 0
@@ -23,7 +22,7 @@ module Imentore
       cart.coupons_orders.each do |c|
         c.update_attributes(order: order, email: order.customer_email, user_id: order.user_id)
       end
-      return ret
+      return true
     end
 
     def place_address(order, params={})

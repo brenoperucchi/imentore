@@ -58,8 +58,7 @@ module Imentore
     def confirm
       @order = current_store.orders.find(params[:id])
       @order.items = current_cart.items unless @order.placed?
-      if @order.placed?
-        flash[:alert] = "Completed"
+      if @order.placed? or @order.canceled?
         redirect_to complete_checkout_path(id: @order)
       elsif request.get?
         render :confirm
@@ -69,7 +68,10 @@ module Imentore
           flash[:alert] = t(:coupon_not_valid)
           render :confirm and return false
         end
-        if @order.deliverable? and @order.chargeable? and @order.save
+        if not @order.deliverable? 
+          flash[:alert] = @order.errors.full_messages.join
+          redirect_to cart_path
+        elsif @order.chargeable? and @order.save
           @order.place
           charge
         else
