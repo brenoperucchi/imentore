@@ -3,6 +3,12 @@ module Imentore
     # default from: "from@example.com"
     default :content_type => "text/html"
 
+    def notice_imentore(store)
+      mail(from: 'atendimento@imentore.com.br', to: 'atendimento@imentore.com.br', subject: "Store Criado: #{store.url}") do |format|
+        format.html {render text: "Criado"}
+      end
+    end
+
     def create_store(to, store, password)
       @store = store
       @password = password

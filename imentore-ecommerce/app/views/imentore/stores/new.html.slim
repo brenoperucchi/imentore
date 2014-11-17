@@ -121,7 +121,6 @@
 
           = simple_form_for @store, url: stores_path , html: {id: 'new_user', class: 'new_user'} do |f|
             = f.error_notification
-            = f.input :name, input_html: { class: :span6, style:'margin-left:20px'}
             / .controls-group
             / label for="user_full_name"
             / = f.label :name
@@ -132,19 +131,20 @@
             /     / | National ID
             /   = f.label :irs_id
             /   = f.text_field :irs_id, class: 'span6', style:'margin-left:20px'
-            = f.input :irs_id, input_html: { class: :span6, style:'margin-left:20px'} 
-            .controls-group
-              label for="store_url" style='float:none;display:inline-block;margin-right:20px'
-                | Endereço (url)
-              | http://
-              = f.text_field :url, class: 'span3', style:'margin-left:0px'
+            = f.input :url, label: "Endereço:", :wrapper => :append do
+              span.inline[style='margin-left:20px;']
+                | http://
+              = f.input_field :url, class: 'span3', style:"float:none"
               = select_tag 'url_domain', options_for_select(['.imentore.com.br']), {class: :span3, disabled: true}
-              p[class="help-block" style='margin-left:150px']
+              p[class="help-block" style='margin-left:190px']
                 | * exemplo: minhaloja 
-              = f.simple_fields_for :owner do |owner|
-                = owner.simple_fields_for :user do |user|
-                  = user.input :email, input_html: { class: :span6, style:'margin-left:20px'} 
-                  = user.input :password, input_html: { class: :span6, style:'margin-left:20px'} 
+            end
+            = f.simple_fields_for :owner do |owner|
+              = owner.input :name, input_html: { class: :span6, style:'margin-left:20px'}
+              = f.input :irs_id, input_html: { class: :span6, style:'margin-left:20px'} 
+              = owner.simple_fields_for :user do |user|
+                = user.input :email, input_html: { class: :span6, style:'margin-left:20px'} 
+                = user.input :password, input_html: { class: :span6, style:'margin-left:20px'} 
                   / .controls-group
                   /   / label for="store_irs_id" style='float:none;display:inline-block;'
                   /     / | Email

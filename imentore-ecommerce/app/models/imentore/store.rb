@@ -12,9 +12,7 @@ module Imentore
     DNS_LABEL_REGEX = /^[a-z][a-z0-9-]*[a-z0-9]$/i
     INVALID_DOMAINS = %w(www mail ftp)
 
-    validates :name, presence: true
     validates :term, acceptance: true
-    validates :brand,  presence: true
     validates :url,   presence: true,
                       uniqueness: true,
                       format: { with: DNS_LABEL_REGEX },

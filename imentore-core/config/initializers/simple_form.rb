@@ -73,11 +73,6 @@ SimpleForm.setup do |config|
     end
   end
 
-    # config.wrappers :prepend, :class => "form-actions", error_class: "error" do |b|
-    #   b.use :button, :class =>'btn'
-    # end
-
-
   config.wrappers :append, :tag => 'div', :class => "control-group", :error_class => 'error' do |b|
     b.use :html5
     b.use :placeholder
