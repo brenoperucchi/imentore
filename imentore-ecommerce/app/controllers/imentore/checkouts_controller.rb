@@ -34,8 +34,10 @@ module Imentore
       @order = current_order
       @image = @order.assets.new
       if request.get?
+        @order.shipping_address = current_user.userable.try(:addresses).try(:first).try(:dup) if user_signed_in?
         render :address
       elsif request.put?
+        @order.shipping_checkbox = params[:order][:shipping_checkbox]
         @order.billing_checkbox = params[:order][:billing_checkbox]
         if user_signed_in? and not current_user.userable.owner?
           @order.customer_name = current_user.userable.name

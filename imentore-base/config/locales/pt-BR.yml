@@ -47,8 +47,8 @@ pt-BR:
   invoice_info: Info Pagamento
   log_info: Histórico do pedido
 
-  billing_address: Endereço do pagamento
-  shipping_address: Endereço do pagamento
+  billing_address: Endereço do cobrança
+  shipping_address: Endereço do envio
 
   coupon_new: Novo Cupom 
   store_update: Atualizar Gerais
@@ -107,7 +107,7 @@ pt-BR:
   previous: Anterior
   addresses: Endereços
   address: Endereço
-  shipping_address_diff: O mesmo endereço de cobrança
+  shipping_address_diff: igual ao endereço de envio
   other_address: Outro endereço
   select: Selecionar
   select_state: Selecionar Estado
@@ -144,7 +144,6 @@ pt-BR:
   variant_new: Nova variação
   update_cart: Atualizar Carrinho
 
-  shipping_address: Endereço de Envio
   billing_addresss_title: Endereço de compra e Envio
   payment_delivery_title: Forma de Pagamento e Envio
 

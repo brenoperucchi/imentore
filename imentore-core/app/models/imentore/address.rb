@@ -6,6 +6,8 @@ module Imentore
 
     validates :name, :street, :complement, :city, :state, :country, :zip_code, :phone, presence: true#, if: :validate?
 
+    validates :name, length: { maximum: 10 }
+
     def to_s
       "#{street}, #{city}, #{state}, #{zip_code}, #{country}"
     end

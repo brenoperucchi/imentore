@@ -26,7 +26,7 @@ module Imentore
     end
 
     def place_address(order, params={})
-      if params[:shipping_address]
+      if order.shipping_checkbox == "1"
         billing_address = Imentore::Address.new(params[:order][:shipping_address]) if params[:order][:shipping_address].present?
         shipping_address = Imentore::Address.new(params[:order][:shipping_address])if params[:order][:shipping_address].present?
       else
