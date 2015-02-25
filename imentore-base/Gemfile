@@ -6,7 +6,7 @@ gem 'thin', group: :development
 gem 'rb-readline', group: :development
 gem 'quiet_assets', group: :development
 
-gem "delocalize", '0.3.1'
+gem "delocalize", '0.3.2'
 gem 'execjs'
 gem 'therubyracer'
 
@@ -36,7 +36,7 @@ gem "moip-ruby", "0.1.2", git: "git://github.com/bperucchi/moip-ruby.git"
 gem "pag_seguro", "0.1.18", git: "git://github.com/bperucchi/pagseguro.git" 
 # gem "pag_seguro", "0.1.18", path: "../../2 - plugins/pagseguro" 
 gem "pagamento_digital", git: "git://github.com/bperucchi/pagamento_digital.git"
-gem 'state_machine', '1.1.2'
+gem 'state_machine', '1.2.0'
 gem 'ancestry', '1.3.0'
 
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
@@ -60,11 +60,9 @@ group :assets do
   gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 end
 
-gem 'jquery-rails', '>=3.1.0'
 gem 'jquery-ui-rails', '5.0.0'
 ## I don't know why I was use lately version
 # gem 'jquery-datatables-rails', '~> 2.1.10.0.3'
-gem 'jquery-datatables-rails', '~> 2.2.3'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

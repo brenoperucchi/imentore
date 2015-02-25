@@ -29,7 +29,7 @@ test:
 
 development:
   adapter: mysql2
-  database: iemntore
+  database: imentore
   host: localhost
   username: root
   password: 123
