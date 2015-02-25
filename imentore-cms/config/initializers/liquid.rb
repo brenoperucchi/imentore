@@ -30,6 +30,7 @@ class LiquidView
       assigns["content_for_header"] = @view.content_for(:header)
     end
     assigns["_csrf_token"] = @view.controller.session['_csrf_token']
+    assigns["csrf_token"] = @view.form_authenticity_token
     assigns.merge!(local_assigns.stringify_keys)
 
 

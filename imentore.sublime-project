@@ -3,7 +3,7 @@
 	[
 		{
       "folder_exclude_patterns": ["tmp", "public/system","public/data", "script", "test", "features", "dummy", "log"],
-			"path": "/Users/breno/app/imentore",
+			"path": "/Users/brenoperucchi/Google Drive/03 - Apps/imentore",
       "file_exclude_patterns": ["*.ru", "RakeFile", ".log", "Notes", "go2b.tmproj", "*.sublime*", "README.*", "MIT-LICENSE", "*.gemspec", 
                                  "*.lock", ".gitkeep"]
 		}

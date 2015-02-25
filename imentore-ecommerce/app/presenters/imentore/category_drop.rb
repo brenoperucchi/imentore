@@ -37,6 +37,10 @@ module Imentore
     def ancestors
       @ancestors = @category.ancestors.collect{|ancestor| CategoryDrop.new(ancestor)}
     end
+    
+    def has_children?
+      @category.has_children?
+    end
 
     protected
 

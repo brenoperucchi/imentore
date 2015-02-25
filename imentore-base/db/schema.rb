@@ -318,6 +318,7 @@ ActiveRecord::Schema.define(:version => 20141106230833) do
     t.string   "brand"
     t.string   "url"
     t.string   "irs_id"
+    t.boolean  "active",                :default => false
     t.text     "settings"
     t.string   "national_id"
     t.string   "date_initial_business"
@@ -349,7 +350,6 @@ ActiveRecord::Schema.define(:version => 20141106230833) do
     t.string   "kind"
     t.boolean  "default",                    :default => false
     t.integer  "admin_imentore_template_id"
-    t.integer  "layout_id"
   end
 
   create_table "imentore_themes", :force => true do |t|

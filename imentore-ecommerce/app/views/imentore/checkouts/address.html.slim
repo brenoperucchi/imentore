@@ -212,13 +212,6 @@
                         = f.input :billing_checkbox, :as => :radio_buttons, collection: addresses_checkout_helper , input_html: { :class=>'checkbox', id: 'billing_address'}, label: t(:shipping_address), checked: (f.object.billing_checkbox.nil? ? addresses_checkout_helper.first : f.object.billing_checkbox) if user_signed_in?
                     .address
                       = f.input :shipping_checkbox, as: :boolean, inline_label: t(:shipping_address_diff), label: t(:billing_address), input_html: {checked: checkbox_shipping_helper(f), id: 'shipping_address'}
-                      / .control-group
-                      /   label.control-label
-                      /     = t(:billing_address)
-                      /   .controls
-                      /     label.checkbox
-                      /       = check_box_tag 'shipping_address', true, (params[:shipping_address].nil? ? true : false)
-                      /       = t(:shipping_address_diff)
                 .span12.addresses
                   .row
                     .span6#shipping

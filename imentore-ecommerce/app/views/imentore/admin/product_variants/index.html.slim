@@ -104,8 +104,8 @@
         = of.input :option_type_id, as: :hidden, input_html: { :value => of.object.option_type_id }
         = of.input :value, label: of.object.option_type.name
       = f.input :quantity
-      = f.input :weight
-      = f.input :price
-      = f.input :price_deal
+      = f.input :weight, as: :string
+      = f.input :price, as: :string
+      = f.input :price_deal, as: :string
       .form-actions
         = f.button :submit, :class => "btn-primary"

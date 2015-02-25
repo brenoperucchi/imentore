@@ -14,6 +14,10 @@ module Imentore
       @variant.id
     end
 
+    def product
+      @product = ProductDrop.new(@variant.product)
+    end
+
     def price
       number_with_price(@variant.price)
     end
@@ -23,7 +27,7 @@ module Imentore
     end
 
     def options
-      @options = @variant.options
+      @variant.options.collect {|option| OptionValueDrop.new(option)}
     end
 
     def product_code

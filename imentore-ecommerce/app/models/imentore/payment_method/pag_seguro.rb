@@ -10,7 +10,13 @@ module Imentore
     end
 
     def billing(order)
-      id = Rails.env == "development" ? 1 : order.invoice.id
+      if Rails.env == "development" 
+        id = 1
+        redirectURL = "http://perucchi.myftp.org:3000/return_pg/#{order.invoice.id}"
+      else
+        id = order.invoice.id
+        redirectURL = "http://app.imentore.com.br/return_pg/#{order.invoice.id}"
+      end
       ret = { :id => id,
               :name => order.customer_name,
               :email => order.customer_email,
@@ -22,7 +28,7 @@ module Imentore
               :country => order.billing_address.country,
               :postalCode => order.billing_address.zip_code,
               :currency => "BRL",
-              :redirectURL =>  "http://app.imentore.com.br/return_pg/#{order.invoice.id}",
+              :redirectURL =>  redirectURL,
               :shippingType => 3,
               :shippingCost => ("%.2f" % (order.delivery_calculate(order.zip_code, order.delivery.delivery_method)).round(2)),
             }

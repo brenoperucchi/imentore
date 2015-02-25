@@ -73,13 +73,14 @@ class FileUploader < CarrierWave::Uploader::Base
   protected
 
   def is_picture?(picture)
+    return false if set_content_type(picture).include?('svg')
     set_content_type(picture).include?('image')
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
-  #   %w(jpg jpeg gif png)
+  #   %w(jpg jpeg gif png svg)
   # end
 
   # Override the filename of the uploaded files:

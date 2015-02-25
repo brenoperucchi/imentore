@@ -60,6 +60,10 @@ module Imentore
       items.sum(&:weight)
     end
 
+    def total_items
+      items.sum(&:quantity)
+    end
+
     # def delivery_amount
     #   return 0 if zip_code.nil? or delivery_method.nil?
     #   items.sum{|i| i.delivery_calculate(zip_code, delivery_method).value}
