@@ -1,6 +1,4 @@
 pt-BR:
-  stock_null: sdsds
-
   will_paginate:
     previous_label: "&#8592; Anterior"
     next_label: "Próximo &#8594;"
@@ -582,12 +580,12 @@ pt-BR:
         limit_customer: Limite/Cliente
         limit_use: Limite/Uso
         due_at: Data Vencimento
+
       errors:
         imentore_order:
           stock_null: Produto sem estoque
         imentore_cart:
           stock_null: Produto sem estoque para essa quantidade.
-        <<: *errors
   activemodel:
     attributes:
       page: Pagina

@@ -277,13 +277,13 @@ ActiveRecord::Schema.define(:version => 20141106230833) do
   end
 
   create_table "imentore_product_variants", :force => true do |t|
-    t.decimal "price",       :precision => 10, :scale => 2
+    t.float   "price"
     t.integer "quantity"
     t.string  "sku"
-    t.decimal "weight",      :precision => 10, :scale => 3
-    t.decimal "height",      :precision => 10, :scale => 3
-    t.decimal "width",       :precision => 10, :scale => 3
-    t.decimal "depth",       :precision => 10, :scale => 3
+    t.float   "weight"
+    t.float   "height"
+    t.float   "width"
+    t.float   "depth"
     t.boolean "deliverable"
     t.integer "product_id"
     t.decimal "price_deal",  :precision => 10, :scale => 2

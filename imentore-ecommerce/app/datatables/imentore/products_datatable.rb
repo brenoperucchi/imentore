@@ -1,5 +1,6 @@
 module Imentore
   class ProductsDatatable < Imentore::Datatable
+  # button_product_datatable(product, edit_admin_product_path(product), 'icon-black icon-edit', 'edit') + ' ' + button_product_datatable(product, edit_admin_product_path(product), 'icon-black icon-share', 'variants') + ' ' + button_product_datatable(product, admin_product_options_path(product), 'icon-black icon-plus', 'options') 
 
   private
 
@@ -10,7 +11,7 @@ module Imentore
           button_status(product.active, edit_admin_product_path(product)),
           h(product.created_at.strftime("%B %e, %Y")),
           product.name,
-          button_link(product),
+          button_link(product)
         ]
       end
     end
