@@ -91,7 +91,9 @@ module Imentore
       respond_to do |wants|
         wants.json do
           begin
-            if current_cart.add(product, variant, quantity)
+            if quantity == 0 
+              render :json => { "message" => {"alert" => I18n.t(:quantity_invalid, scope: 'helpers.cart.create') }}, status: 400
+            elsif current_cart.add(product, variant, quantity)
               render json: Imentore::CartPresenter.new(current_cart).to_json
             else
               render :json => { "message" => {"alert" => I18n.t(:without_stock, scope: 'helpers.cart.create') }}, status: 400

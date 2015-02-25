@@ -7,7 +7,6 @@
 
       # SABER O QUE ISSO FAZ
       def create
-        # binding.pry
         params[:user].merge!(store_id: 1)
         super
       end

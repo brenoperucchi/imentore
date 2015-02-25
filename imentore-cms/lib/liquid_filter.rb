@@ -34,10 +34,9 @@ module LiquidFilter
     obj.image(size)
   end
 
-  def variant_options_values(option)
-      # names = options.collect{|option| ["#{option.option_type.name}: #{option.value}"]}
-      # names.join(' - ')
-      "#{option.option_type.name}: #{option.value}"
+  def variant_options_values(variant)
+      names = variant.options.collect{|option| ["#{option.option_type.name}: #{option.value}"]}
+      names.join(' - ')
   end
 
   def form_token(token)

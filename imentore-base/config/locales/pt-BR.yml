@@ -605,6 +605,7 @@ pt-BR:
         without_stock: Produto sem estoque no momento.
         not_valid: Produto não é válido.
         add: Produto Adicionado
+        quantity_invalid: Quantidade não é valida
     send_mail:
       products:
         line_item: "Código: %{code} - Produto: %{item} - quantidade: %{quantity} - preço: %{value} - total: %{amount}"

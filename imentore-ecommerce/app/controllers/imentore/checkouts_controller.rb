@@ -132,7 +132,6 @@ module Imentore
     end
 
     def sync_pg
-      binding.pry
       current_store = Imentore::Store.find(params[:store_id])
       notification_code = {notificationCode: params[:notificationCode]}
       provider_class = current_store.payment_methods.find_by_handle('pag_seguro').provider
