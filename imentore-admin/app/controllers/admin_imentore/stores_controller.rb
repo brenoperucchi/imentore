@@ -20,9 +20,9 @@ module AdminImentore
     end
 
     def reinstall_theme
-      theme = Imentore::Theme.find(params(:id))
+      theme = Imentore::Theme.find(params[:id])
       admin_theme = theme.admin_theme
-      if admin_theme.reinstall(current_store, theme)
+      if admin_theme.reinstall(theme.store, theme)
         flash[:notice] = "Successfully"
         redirect_to admin_imentore_stores_path
       else

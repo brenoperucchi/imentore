@@ -16,7 +16,7 @@ role :db,  %w{imentore@app.imentore.com.br}
 # extended properties on the server.
 server 'app.imentore.com.br', user: 'imentore', roles: %w{web app}
 
-set :ssh_options, { :forward_agent => true, :keys => "#{ENV['HOME']}/.ssh/app.imentore.com.br/imentore" }
+set :ssh_options, { :forward_agent => true, :keys => "#{ENV['HOME']}/.ssh/id_rsa" }
 set :use_sudo, false
 
 # you can set custom ssh options

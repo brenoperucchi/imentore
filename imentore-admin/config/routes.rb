@@ -17,7 +17,7 @@ AdminImentore::Admin::Engine.routes.draw do
       end
       resources :stores do 
         get 'install_store', :on => :member
-        get '/reinstall_theme/:theme', to: 'admin_imentore/stores#reinstall_theme' , as: 'reinstall_theme', :on => :collection
+        get '/reinstall_theme/:id', to: 'stores#reinstall_theme' , as: 'reinstall_theme', :on => :collection
         # match '/reinstall_theme/:theme' => 'admin_imentore/stores#reinstall_theme'
       end
 
