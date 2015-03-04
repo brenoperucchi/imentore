@@ -277,13 +277,13 @@ ActiveRecord::Schema.define(:version => 20141106230833) do
   end
 
   create_table "imentore_product_variants", :force => true do |t|
-    t.float   "price"
+    t.decimal "price",       :precision => 10, :scale => 2
     t.integer "quantity"
     t.string  "sku"
-    t.float   "weight"
-    t.float   "height"
-    t.float   "width"
-    t.float   "depth"
+    t.decimal "weight",      :precision => 10, :scale => 3
+    t.decimal "height",      :precision => 10, :scale => 3
+    t.decimal "width",       :precision => 10, :scale => 3
+    t.decimal "depth",       :precision => 10, :scale => 3
     t.boolean "deliverable"
     t.integer "product_id"
     t.decimal "price_deal",  :precision => 10, :scale => 2
@@ -318,7 +318,6 @@ ActiveRecord::Schema.define(:version => 20141106230833) do
     t.string   "brand"
     t.string   "url"
     t.string   "irs_id"
-    t.boolean  "active",                :default => false
     t.text     "settings"
     t.string   "national_id"
     t.string   "date_initial_business"
@@ -350,6 +349,7 @@ ActiveRecord::Schema.define(:version => 20141106230833) do
     t.string   "kind"
     t.boolean  "default",                    :default => false
     t.integer  "admin_imentore_template_id"
+    t.integer  "layout_id"
   end
 
   create_table "imentore_themes", :force => true do |t|

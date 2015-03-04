@@ -7,39 +7,39 @@ module Imentore
     end
 
     def initialize(category)
-      @category = category
+      @object = category
     end
 
     def name
-      @category.name
+      @object.name
     end
 
     def id
-      @category.id
+      @object.id
     end
 
     def url
-      category_path(@category)
+      category_path(@object)
     end
 
     def products_count
-      @category.products.size
+      @object.products.size
     end
 
     def products
-      @category.products
+      @object.products.collect{|product| ProductDrop.new(product)}
     end
 
     def children
-      children = @category.children.collect{|category| CategoryDrop.new(category)}
+      children = @object.children.collect{|category| CategoryDrop.new(category)}
     end
 
     def ancestors
-      @ancestors = @category.ancestors.collect{|ancestor| CategoryDrop.new(ancestor)}
+      @ancestors = @object.ancestors.collect{|ancestor| CategoryDrop.new(ancestor)}
     end
     
     def has_children?
-      @category.has_children?
+      @object.has_children?
     end
 
     protected

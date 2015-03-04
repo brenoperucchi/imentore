@@ -27,6 +27,14 @@ test:
 #   username: imentore
 #   password: 
 
+production:
+  adapter: mysql2
+  database: imentore
+  host: localhost
+  username: root
+  password: 123
+  pool: 5
+  timeout: 5000
 development:
   adapter: mysql2
   database: imentore
