@@ -34,6 +34,10 @@ module Imentore
         end
       end
 
+      def collection
+        @categories = begin_of_association_chain.categories.order('name')
+      end
+
       def update
         update! { admin_categories_path }
       end

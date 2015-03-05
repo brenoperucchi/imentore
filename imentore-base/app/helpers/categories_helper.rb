@@ -50,7 +50,7 @@ module CategoriesHelper
         end
       end)
       concat(content_tag(:tbody) do
-        collection.roots.collect do |category|
+        collection.roots.order('name').collect do |category|
           concat(content_tag(:tr) do
             concat(content_tag(:td, category.ancestors.count))
             concat(content_tag(:td, id: 'name') do
