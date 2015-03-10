@@ -7,8 +7,8 @@ legend= t(:newo) + " " + t(:product)
     = f.input :handle
   = f.input :description
   = f.simple_fields_for(:variants) do |v|
-    = v.input :price
-    = v.input :quantity
-    = v.input :weight
+    = v.input :price, as: :string
+    = v.input :quantity, as: :integer
+    = v.input :weight, as: :string
   .form-actions
     = f.submit(:class => "btn btn-primary")

@@ -11,7 +11,7 @@ module Imentore
 
     def handle=(param)
       return nil if name.blank?
-      param.blank? ? write_attribute(:handle, name.to_underscore!) : write_attribute(:handle, param.to_underscore!)
+      param.blank? ? write_attribute(:handle, name.to_underscore) : write_attribute(:handle, param.to_underscore)
     end
 
   end
