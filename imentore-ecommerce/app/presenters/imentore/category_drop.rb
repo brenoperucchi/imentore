@@ -27,7 +27,7 @@ module Imentore
     end
 
     def products
-      @object.products.collect{|product| ProductDrop.new(product)}
+      @object.products.active.collect{|product| ProductDrop.new(product)}
     end
 
     def children
