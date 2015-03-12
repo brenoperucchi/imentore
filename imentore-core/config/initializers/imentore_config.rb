@@ -31,6 +31,7 @@ class String
     str = str.gsub("___", "_")
     str = str.gsub("__", "_")
     str = str.gsub("*", "_")
+    str = I18n.transliterate(str)
     str.downcase
   end
   def to_underscore
@@ -63,6 +64,7 @@ class String
     str = str.gsub("___", "_")
     str = str.gsub("__", "_")
     str = str.gsub("*", "_")
+    str = I18n.transliterate(str)
     str.downcase
   end
 end
