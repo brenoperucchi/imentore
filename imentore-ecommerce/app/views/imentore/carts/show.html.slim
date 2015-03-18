@@ -111,8 +111,6 @@
           = "x"
         h4[class="alert-heading"]
           = t(:warning)
-        - if current_cart.empty?
-          p= t(:cart_empty)
         p
           = flash[:alert]
       div.alert.alert-success.hide

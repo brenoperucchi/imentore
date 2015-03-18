@@ -215,6 +215,9 @@
                 .span12.addresses
                   .row
                     .span6#shipping
+                      .control-group.boolean.optional
+                        label.boolean.optional.control-label
+                          | Endereço de envio
                       = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
                         = render("shared/address", addr: addr)
                     - unless checkbox_shipping_helper(f)
@@ -223,6 +226,9 @@
                           = render("shared/address", addr: addr)
                     - else
                       .span6#billing.hide
+                        .control-group.boolean.optional
+                          label.boolean.optional.control-label
+                            | Endereço de cobrança
                         = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
                           = render("shared/address", addr: addr, disabled:true)
               .clearfix

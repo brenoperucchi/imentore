@@ -32,7 +32,7 @@ module Imentore
   # end
 
   class Order < ActiveRecord::Base
-    attr_accessor :billing_checkbox, :shipping_checkbox
+    attr_accessor :billing_checkbox, :shipping_checkbox, :payment_url
 
     mattr_accessor :sent_email
     self.sent_email = false

@@ -74,8 +74,7 @@ module Imentore
           flash[:alert] = @order.errors.full_messages.join
           redirect_to cart_path
         elsif @order.chargeable? and @order.save
-          charge
-          @order.place
+          @order.place if charge?
         else
           flash[:alert] = @order.errors.full_messages.join(" / ")
           render :confirm
@@ -83,13 +82,14 @@ module Imentore
       end
     end
 
-    def charge
+    def charge?
       begin
         @order = current_store.orders.find(params[:id])
         @invoice = @order.invoice
         @prepare = @invoice.prepare
         send("#{@invoice.payment_method.handle}".to_underscore)
         set_order_cart_default
+        return true
       rescue Exception => msg
         flash[:alert] = t(:checkout_charge_problem)
         render :confirm
@@ -112,11 +112,20 @@ module Imentore
       redirect_to @prepare['redirect_to'] if @prepare['redirect_to'].present?
     end
 
+    def payment_url(order)
+      case order.invoice.payment_method.handle 
+      when "pag_seguro", "mo_ip"
+        invoice = order.invoice
+        prepare = invoice.prepare
+        prepare['redirect_to']
+      end
+    end
+
     def complete
-      @order = Imentore::Order.find_by_id(params[:id])
-      @items = @order.items.map {|item| CartItemDrop.new(item)}      
-      @order = OrderDrop.new(@order)
-      render 'complete'
+      order = Imentore::Order.find_by_id(params[:id])
+      order.payment_url = payment_url(order)
+      items = order.items.map {|item| CartItemDrop.new(item)}      
+      render 'complete', locals: {order: OrderDrop.new(order)}
     end
 
 
