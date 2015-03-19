@@ -2,7 +2,7 @@ module Imentore
   module Admin
     class ProductsController < BaseController
       inherit_resources
-      actions :index, :new, :create, :edit, :update
+      # actions :index, :new, :create, :edit, :update
       respond_to :json, only: :update
 
       def index
@@ -61,6 +61,14 @@ module Imentore
           end
         end
       end
+
+      def destroy
+        destroy! do 
+          flash[:success] = "Removido com sucesso"
+          admin_products_path
+        end
+      end
+
 
       protected
 

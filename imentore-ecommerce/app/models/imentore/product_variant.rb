@@ -1,5 +1,7 @@
 module Imentore
   class ProductVariant < ActiveRecord::Base
+    acts_as_paranoid
+    
     has_many    :options, class_name: "::Imentore::OptionValue", dependent: :destroy
     has_many    :images, as: :imageable, dependent: :destroy 
     belongs_to  :product
