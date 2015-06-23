@@ -4,6 +4,7 @@ end
 
 # http://www.royvandermeij.com/blog/2011/09/21/create-a-liquid-handler-for-rails-3-dot-1/
 require 'liquid_filter'
+require 'liquid_filter_cart'
 
 # Liquid::Template.class_eval do
 #   def register_filter(mod)
@@ -28,6 +29,7 @@ class LiquidView
     if @view.content_for?(:layout)
       assigns["content_for_layout"] = @view.content_for(:layout)
       assigns["content_for_header"] = @view.content_for(:header)
+      assigns["content_for_javascript"] = @view.content_for(:javascript) 
     end
     assigns["_csrf_token"] = @view.controller.session['_csrf_token']
     assigns["csrf_token"] = @view.form_authenticity_token
@@ -58,6 +60,7 @@ class LiquidView
     liquid = Liquid::Template.new
     t = liquid.parse(template)
     t.class.register_filter(LiquidFilter)
+    t.class.register_filter(LiquidFilterCart)
     t.render(assigns.merge("current_cart" => Imentore::CartDrop.new(controller.current_cart)), :filters => filters,
       :registers => {current_store: @view.controller.current_store, :action_view => @view, :controller => @view.controller})
   end

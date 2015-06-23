@@ -7,11 +7,11 @@ require "personhood/version"
 Gem::Specification.new do |s|
   s.name        = "personhood"
   s.version     = Personhood::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Personhood."
-  s.description = "TODO: Description of Personhood."
+  s.authors     = ["Breno Perucchi"]
+  s.email       = ["bperucchi@gmail.com"]
+  s.homepage    = ""
+  s.summary     = "Summary of ImentoreUser."
+  s.description = "Description of ImentoreUser."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 

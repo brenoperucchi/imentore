@@ -124,7 +124,7 @@ module Imentore
     def complete
       order = Imentore::Order.find_by_id(params[:id])
       order.payment_url = payment_url(order)
-      items = order.items.map {|item| CartItemDrop.new(item)}      
+      @items = order.items.map {|item| CartItemDrop.new(item)}      
       render 'complete', locals: {order: OrderDrop.new(order)}
     end
 

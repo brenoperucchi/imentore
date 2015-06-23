@@ -55,6 +55,9 @@ class PictureUploader < CarrierWave::Uploader::Base
   version :big do
     process :resize_to_fill => [600, 600]
   end
+  version :wide do
+    process :resize_to_fill => [500, 500]
+  end
   version :larger do
     process :resize_to_fill => [300, 300]
   end
@@ -65,7 +68,7 @@ class PictureUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [150, 150]
   end
   # version :thumb do
-  #   process :resize_to_fill => [100, 100]
+  #   process :resize_to_fill => [111, 111]
   # end
   version :super_thumb do
     process :resize_to_fill => [50, 50]
@@ -82,6 +85,9 @@ class PictureUploader < CarrierWave::Uploader::Base
   version :small_fit do
     process :resize_to_fit => [150, 150]
   end
+  # version :thumb_fit do
+  #   process :resize_to_fit => [111, 111]
+  # end
   version :thumb_fit do
     process :resize_to_fit => [50, 50]
   end

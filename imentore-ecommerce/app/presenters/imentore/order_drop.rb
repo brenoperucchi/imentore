@@ -10,6 +10,10 @@ module Imentore
       @object = object
     end
 
+    def created_at
+      I18n.l(@object.created_at, :format=>:short2)
+    end
+
     def invoice
       @invoice = ObjectDrop.new(@object.invoice)
     end

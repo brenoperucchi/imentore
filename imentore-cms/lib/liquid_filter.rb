@@ -2,7 +2,10 @@ module LiquidFilter
   include ActionView::Context
   # include ActionView::Helpers::URLHelper
   # include ActionDispatch::Routing::Mapper
+  # include ActionView::Helpers
+  include ActionView::Helpers::FormTagHelper 
   include Imentore::Core::Engine.routes.url_helpers
+  # include ActionDispatch::Routing::Mapper::Base
 
   def asset_url(name)
     begin

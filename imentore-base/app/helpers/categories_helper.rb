@@ -4,7 +4,7 @@ module CategoriesHelper
   self.children = false
 
   def categories_descendants(descendants)
-    descendants.each do |descendant|
+    descendants.order('name asc').each do |descendant|
       concat(content_tag(:tr) do
         concat(content_tag(:td, descendant.ancestors.count))
         concat(content_tag(:td, :style=>"white-space:nowrap;", id: 'name') do

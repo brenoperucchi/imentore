@@ -7,11 +7,11 @@ require "imentore-admin/version"
 Gem::Specification.new do |s|
   s.name        = "imentore-admin"
   s.version     = Imentore::Deal::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ImentoreUser."
-  s.description = "TODO: Description of ImentoreUser."
+  s.authors     = ["Breno Perucchi"]
+  s.email       = ["bperucchi@gmail.com"]
+  s.homepage    = ""
+  s.summary     = "Summary of ImentoreUser."
+  s.description = "Description of ImentoreUser."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
