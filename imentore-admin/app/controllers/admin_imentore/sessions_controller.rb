@@ -5,7 +5,6 @@
       skip_before_action :check_store
       layout "admin_imentore"
 
-      # SABER O QUE ISSO FAZ
       def create
         params[:user].merge!(store_id: 1)
         super

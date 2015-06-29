@@ -4,6 +4,7 @@
   <div class="inputs">
     <%= f.input :email, :required => false, :autofocus => true %>
     <%= f.input :password, :required => false %>
+    <%= f.input :store_id, as: :hidden, :required => false, input_html:{value: current_store.id} %>
     <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
   </div>
 
