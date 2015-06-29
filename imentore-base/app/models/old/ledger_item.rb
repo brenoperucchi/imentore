@@ -1,7 +1,7 @@
 module Old
   class LedgerItem < ActiveRecord::Base
     self.inheritance_column = :foo
-    attr_accessible :type
+    # attr_accessible :type
     belongs_to :payment, class_name: Old::Payment
 
     def self.table_name

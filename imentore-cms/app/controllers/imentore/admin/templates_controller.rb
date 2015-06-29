@@ -2,10 +2,10 @@ module Imentore
   module Admin
     class TemplatesController < Admin::BaseController
       include Imentore::Core::Engine.routes.url_helpers
-      # inherit_resources
-      # belongs_to :theme, parent_class: Imentore::Theme
+      inherit_resources
+      belongs_to :theme, parent_class: Imentore::Theme
       before_action :uniqueness_default, only:[:update, :create]
-      before_action :set_template, only: [:update, :create, :show, :edit]
+      before_action :set_template, only: [:show, :edit]
       before_action :parent, only: [:index, :layouts, :show, :edit, :index, :new]
       respond_to :html, :json, :xml
       # custom_actions :collection => :layouts
@@ -30,12 +30,11 @@ module Imentore
       end
 
       def create
-        create! { admin_theme_path(template_params) }
+        create! { admin_theme_path(params[:theme_id]) }
       end
 
       def update
-        @template.update(template_params)
-        respond_with(@template, location: admin_theme_templates_path(id: params[:theme_id]))
+        update!(template_params) {admin_theme_templates_path(id: params[:theme_id])}
       end
 
       def destroy
@@ -60,7 +59,7 @@ module Imentore
       end
 
       def template_params
-        params.require(:template).permit(:default, :body, :path)
+        params.require(:template).permit(:default, :body, :path, :kind, :layout_id)
       end
 
       ## TODO in the model

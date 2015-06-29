@@ -24,7 +24,7 @@ module Imentore
       protected
 
       def theme_params
-        params.require(:theme).permit(:active)
+        params.require(:theme).permit(:active, :name)
       end
 
       def uniqueness_active

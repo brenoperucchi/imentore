@@ -2,8 +2,7 @@ module AdminImentore
   require 'carrierwave/processing/mime_types'
   class AssetPresenter
     include AdminImentore::Admin::Engine.routes.url_helpers
-    # include CarrierWave::MimeTypes
-    include CarrierWave::MagicMimeTypes
+    include CarrierWave::MimeTypes
 
     def initialize(asset)
       @asset = asset
