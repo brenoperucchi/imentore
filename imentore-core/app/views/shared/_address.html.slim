@@ -1,18 +1,19 @@
+- model_class = Imentore::Address
 - unless @disabled
-  = addr.input :name, hint: "exemplo: casa/escritório"
-  = addr.input :street
-  = addr.input :complement
-  = addr.input :city
+  = addr.input :name, hint: "exemplo: casa/escritório", placeholder: model_class.human_attribute_name(:name)
+  = addr.input :street, placeholder: model_class.human_attribute_name(:street)
+  = addr.input :complement, placeholder: model_class.human_attribute_name(:complement)
+  = addr.input :city, input_html: {class: 'form-control'}, placeholder: model_class.human_attribute_name(:city)
   = addr.input :country, :collection => countries, :selected=> "BR"
   = addr.input :state, :collection => states, :prompt=> t(:select_state)
-  = addr.input :zip_code
-  = addr.input :phone
+  = addr.input :zip_code, placeholder: model_class.human_attribute_name(:zip_code)
+  = addr.input :phone, placeholder: model_class.human_attribute_name(:phone)
 - else
-  = addr.input :name, disabled:true
-  = addr.input :street, disabled:true
-  = addr.input :complement, disabled:true
-  = addr.input :city, disabled:true
-  = addr.input :country, :collection => countries, :selected=> "BR", disabled:true
+  = addr.input :name, disabled:true, placeholder: model_class.human_attribute_name(:name)
+  = addr.input :street, disabled:true, placeholder: model_class.human_attribute_name(:street)
+  = addr.input :complement, disabled:true, placeholder: model_class.human_attribute_name(:complement)
+  = addr.input :city, disabled:true, placeholder: model_class.human_attribute_name(:city)
+  = addr.input :country, :collection => countries, :selected=> "BR"
   = addr.input :state, :collection => states, :prompt=> t(:select_state), disabled:true
-  = addr.input :zip_code, disabled:true
-  = addr.input :phone, disabled:true
+  = addr.input :zip_code, disabled:true, placeholder: model_class.human_attribute_name(:zip_code)
+  = addr.input :phone, disabled:true, placeholder: model_class.human_attribute_name(:phone)

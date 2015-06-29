@@ -1,8 +1,8 @@
 module Imentore
   class SiteController < BaseController
-    skip_before_filter :check_store
+    skip_before_action :check_store
 
-    before_filter :set_page
+    before_action :set_page
 
     def index
       

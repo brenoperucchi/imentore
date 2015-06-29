@@ -3,6 +3,9 @@
   = javascript_include_tag "cart"
   = csrf_meta_tags
 
+- content_for :javascript do
+  = javascript_include_tag "jquery_ujs"
+  = javascript_include_tag current_store.theme.assets.find_by_file('cart.js').file_url
   javascript:
     $(document).ready(function(){
       function calculate_items(){
@@ -90,152 +93,154 @@
     })    
 
 .container
-  .row
-    /! **********************
-    /! I N T R O
-    /! **********************
-    #intro
-      #intro_wrap
-        .container_12
-          #breadcrumbs.grid_12
-            a href="/cart"  Carrinho
-            '
-            | &gt;
-          h1 Carrinho
-    /! end of intro
+  .col-md-12
+    .row
+      .col-md-12
+        ul.breadcrumb
+          li
+            a href="/"
+              | Home
+          li Carrinho
+    .row
+      .notification
+        div.alert.alert-block.hide
+          a[class="close" data-dismiss="alert" href="#"]
+            = "x"
+          h4[class="alert-heading"]
+            = t(:warning)
+          p
+            = flash[:alert]
+        div.alert.alert-success.hide
+          a[class="close" data-dismiss="alert" href="#"]
+            = "x"
+          h4[class="alert-heading"]
+            = t(:success)
+          p
+            = flash[:success]
+    .row
+      .box
+        = form_tag(cart_path, method: 'put', id:'cart') do
+          table.table.table-bordered.table-striped
+              thead
+                tr
+                  th[style='width:80px']= t(:action)
+                  th= t(:product)
+                  th= t(:variant)
+                  th= t(:quantity)
+                  th= t(:price)
+                  th= t(:amount)
+              tbody
+                  - current_cart.items.each_with_index do |item, index|
+                    tr
+                      td
+                        = link_to(cart_path(:variant_id => item.variant.id, :product_id => item.product.id), method: :delete, :class=>"btn btn-danger btn-mini") do
+                          i.icon-trash.icon-white
+                          '
+                          = t(:remove)
 
-  .row
-    .notification
-      div.alert.alert-block.hide
-        a[class="close" data-dismiss="alert" href="#"]
-          = "x"
-        h4[class="alert-heading"]
-          = t(:warning)
-        p
-          = flash[:alert]
-      div.alert.alert-success.hide
-        a[class="close" data-dismiss="alert" href="#"]
-          = "x"
-        h4[class="alert-heading"]
-          = t(:success)
-        p
-          = flash[:success]
-  = form_tag(cart_path, method: 'put', id:'cart') do
-    table.table.table-bordered.table-striped
-        thead
-          tr
-            th[style='width:80px']= t(:action)
-            th= t(:product)
-            th= t(:variant)
-            th= t(:quantity)
-            th= t(:price)
-            th= t(:amount)
-        tbody
-            - current_cart.items.each_with_index do |item, index|
-              tr
-                td
-                  = link_to(cart_path(:variant_id => item.variant.id, :product_id => item.product.id), method: :delete, :class=>"btn btn-danger btn-mini") do
-                    i.icon-trash.icon-white
-                    '
-                    = t(:remove)
+                      td
+                        / = "#" + item.product.id.to_s
+                        / '
+                        = item.product.name
+                      td
+                        - item.variant.options.each do |type|
+                          / = "#" + type.product_variant_id.to_s
+                          / '
+                          = "#{type.option_type.name}: #{type.value}"
+                          / = " | "
+                      td
+                        = text_field_tag "[items][#{index}]quantity", item.quantity, :class => "input-mini form-control"
+                        = hidden_field_tag "[items][#{index}]product_id", item.product.id
+                        = hidden_field_tag "[items][#{index}]variant_id", item.variant.id
+                      td= number_with_price(item.value)
+                      td= number_with_price(item.amount)
+                  tr
+                    td
+                      | &nbsp
+                    td
+                      | &nbsp
+                    td
+                      | &nbsp
+                    td(colspan='2' style='text-align:center;')
+                      = t(:sub_total)
+                    td#sub_total
+                      = number_with_price(current_cart.amount)
+                  tr
+                    td
+                      | &nbsp
+                    td
+                      | &nbsp
+                    td
+                      | &nbsp
+                    td(colspan='2' style='text-align:center;')
+                      = t(:shipping_value)
+                    td#shipping_value
+                      | 0
+                  tr
+                    td
+                      | &nbsp
+                    td
+                      | &nbsp
+                    td
+                      .col-md-12
+                        .form-inline
+                          = text_field_tag "coupon_code", nil, class: 'form-control', style: "margin-bottom:0px;"
+                          a(href='#' type='submit' class='btn btn-small' id='add_coupon')
+                            i.icon-plus
+                            '
+                            = t(:coupon)
+                          .span2#coupons
 
-                td
-                  = "#" + item.product.id.to_s
-                  '
-                  = item.product.name
-                td
-                  - item.variant.options.each do |type|
-                    = "#" + type.product_variant_id.to_s
-                    '
-                    = "#{type.option_type.name}: #{type.value}"
-                    = " | "
-                td
-                  = text_field_tag "[items][#{index}]quantity", item.quantity, :class => "input-mini"
-                  = hidden_field_tag "[items][#{index}]product_id", item.product.id
-                  = hidden_field_tag "[items][#{index}]variant_id", item.variant.id
-                td= number_with_price(item.value)
-                td= number_with_price(item.amount)
-            tr
-              td
-                | &nbsp
-              td
-                | &nbsp
-              td
-                | &nbsp
-              td(colspan='2' style='text-align:center;')
-                = t(:sub_total)
-              td#sub_total
-                = number_with_price(current_cart.amount)
-            tr
-              td
-                | &nbsp
-              td
-                | &nbsp
-              td
-                | &nbsp
-              td(colspan='2' style='text-align:center;')
-                = t(:shipping_value)
-              td#shipping_value
-                | 0
-            tr
-              td
-                | &nbsp
-              td
-                | &nbsp
-              td
-                .span3
-                  = text_field_tag "coupon_code", nil, class: 'input-small', style: "margin-bottom:0px;"
-                  a(href='#' type='submit' class='btn btn-small' id='add_coupon')
-                    i.icon-plus
-                    '
-                    = t(:coupon)
-                .span2#coupons
-
-              td(colspan='2' style='text-align:center;')
-                = t(:coupon_value)
-              td#coupon_value
-                = number_with_price(current_cart.coupons_amount)
-            tr
-              td
-                | &nbsp
-              td
-                | &nbsp
-              td
-                | &nbsp
-              td(colspan='2' style='text-align:center;')
-                h3 Total
-              td#total_amount
-                h4= number_with_price(current_cart.amount)
-  .row
-    .span5.offset1
-        .control-group
-          label.control-label
-            = t(:delivery_method)
-          .controls
-            label
-              = select_tag 'delivery_method', options_from_collection_for_select(current_store.delivery_methods.active, "id", "name", :id => 'delivery_method')
-    .span4.offset2
-      .control-group
-        label.control-label
-          = t(:zip_code_to)
-        .controls
-          = text_field_tag "zip_code", nil, class: 'input-small'
-          a(href='#' type='submit' class='btn btn-small' id='calculate_zip')
-            i.icon-refresh
-            = t(:calculate)
-          span#loading
-    .clearfix
-    hr
-    .span5.offset7
-      .controls
-        button(type='submit' class='btn btn-large' onclick="$('form#cart').submit();")
-          i.icon-refresh
-          '
-          = t(:update_cart)
-        '
-        = link_to(address_checkout_path, :class=>'btn btn-large btn-success') do
-          i.icon-shopping-cart.icon-white
-          '
-          = t(:checkout_cart)
-    .clearfix
-    hr
+                    td(colspan='2' style='text-align:center;')
+                      = t(:coupon_value)
+                    td#coupon_value
+                      = number_with_price(current_cart.coupons_amount)
+                  tr
+                    td
+                      | &nbsp
+                    td
+                      | &nbsp
+                    td
+                      | &nbsp
+                    td(colspan='2' style='text-align:center;')
+                      h3 Total
+                    td#total_amount
+                      h4= number_with_price(current_cart.amount)
+    .row
+      .col-lg-6
+        .col-md-4
+            .control-group
+              label.control-label
+                = t(:delivery_method)
+              .controls
+                = select_tag 'delivery_method', options_from_collection_for_select(current_store.delivery_methods.active, "id", "name", :id => 'delivery_method'), class:'form-control'
+        .col-md-4
+          .control-group
+            label.control-label
+              = t(:zip_code_to)
+            .controls
+              = text_field_tag "zip_code", nil, class: 'form-control'
+        .col-md-4
+          .control-group
+            label.control-label
+              | 
+            .controls
+              a(href='#' type='submit' class='btn btn' id='calculate_zip')
+                i.icon-refresh
+                = t(:calculate)
+              span#loading
+      .col-lg-6
+        .pull-right
+          .span5.offset7
+            .controls
+              button(type='submit' class='btn btn-large' onclick="$('form#cart').submit();")
+                i.icon-refresh
+                '
+                = t(:update_cart)
+              '
+              = link_to(address_checkout_path, :class=>'btn btn-large btn-success') do
+                i.icon-shopping-cart.icon-white
+                '
+                = t(:checkout_cart)
+      .clearfix
+      hr

@@ -2,7 +2,7 @@
   module AdminImentore
     class SessionsController < Devise::SessionsController
       include AdminImentore::Admin::Engine.routes.url_helpers
-      skip_before_filter :check_store
+      skip_before_action :check_store
       layout "admin_imentore"
 
       # SABER O QUE ISSO FAZ

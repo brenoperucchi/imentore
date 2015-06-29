@@ -5,9 +5,9 @@ module LiquidFilter
   # include ActionView::Helpers
   include ActionView::Helpers::FormTagHelper 
   include Imentore::Core::Engine.routes.url_helpers
-  # include ActionDispatch::Routing::Mapper::Base
+  include ActionDispatch::Routing::Mapper::Base
 
-  def asset_url(name)
+  def asset_source(name)
     begin
       @context.registers[:current_store].theme.assets.find_by_file(name).file_url
     rescue StandardError
@@ -32,7 +32,7 @@ module LiquidFilter
     @product.variants.first.images.first.picture.url(size.try(:to_sym)).to_s
   end
 
-  def image_url(obj, size)
+  def image_source(obj, size)
     size = nil if size == "original"
     obj.image(size)
   end
@@ -57,26 +57,6 @@ module LiquidFilter
     rescue StandardError
       "File Not Found: #{name.to_s}"
     end
-  end
-
-  def default_pagination(paginate)    
-    html = []    
-    html << %(<span class="prev">#{link_to(paginate['previous']['title'], paginate['previous']['url'])}</span>) if paginate['previous']
-
-    for part in paginate['parts']
-
-      if part['is_link']
-        html << %(<span class="page">#{link_to(part['title'], part['url'])}</span>)        
-      elsif part['title'].to_i == paginate['current_page'].to_i
-        html << %(<span class="page current">#{part['title']}</span>)        
-      else
-        html << %(<span class="deco">#{part['title']}</span>)                
-      end
-      
-    end
-
-    html << %(<span class="next">#{link_to(paginate['next']['title'], paginate['next']['url'])}</span>) if paginate['next']
-    html.join(' ')
   end
 
 end

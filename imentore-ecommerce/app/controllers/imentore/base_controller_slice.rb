@@ -1,5 +1,5 @@
 Imentore::BaseController.class_eval do
-  before_filter :current_cart
+  before_action :current_cart
 
   helper_method :current_cart
 

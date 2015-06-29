@@ -4,7 +4,7 @@ module AdminImentore
     def self.table_name 
       "admin_imentore_send_emails"
     end
-    scope :active, where(active: true)
+    scope :active, -> { where(active: true) }
 
     def self.install_store(store)
       self.active.each do |send_email|

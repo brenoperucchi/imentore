@@ -6,8 +6,8 @@ Imentore::Core::Engine.routes.draw do
 
     namespace :admin do
       resource :store, only: [:edit, :update]
-      match "store/settings/:group", to: "settings#edit",   via: "get", as: "edit_settings"
-      match "store/settings/:group", to: "settings#update", via: "put", as: "update_settings"
+      get "store/settings/:group", to: "settings#edit",   via: "get", as: "edit_settings"
+      put "store/settings/:group", to: "settings#update", as: "update_settings"
       resources :domains, only: [:index, :create, :destroy] do
         resources :emails, only: [:index, :create, :update, :destroy], to: "domain_emails"
       end
@@ -38,25 +38,25 @@ Imentore::Core::Engine.routes.draw do
       get 'calculate_shipping', on: :member
     end
     
-    match "store/success",              to: "stores#create_success"
-    match "contact",                    to: "stores#contact",       as: "store_contact"
-    match "product/:handle",            to: "products#handle",      as: 'product_handle'
-    match "product_search/:name",       to: "products#search",      as: 'product_search'
-    match "notices/:handle",            to: "notices#show",         as: "notices"
-    match "pages/:page",                to: "pages#show",           as: "pages"
-    match "categories/*categories",     to: "categories#index",     as: "categories"
-    match "coupon",                     to: "coupons#add_coupon",   as: "add_coupon"
-    match "checkout",               to: "checkouts#new",                    as: "checkout"
-    match "checkout/address",       to: "checkouts#address",  via: "get",   as: "address_checkout"
-    match "checkout/address",       to: "checkouts#address",  via: "put",   as: "address_checkout"
-    match "checkout/:id/confirm",   to: "checkouts#confirm",  via: "get",   as: "confirm_checkout"
-    match "checkout/:id/confirm",   to: "checkouts#confirm",  via: "put",   as: "confirm_checkout"
-    match "checkout/charge",        to: "checkouts#charge",   as: "charge_checkout"
-    match "checkout/:id/complete",  to: "checkouts#complete", as: "complete_checkout"
-    match "return_mp/:invoice_id",  to: "checkouts#return_mp", as: 'return_mp'
-    match "return_pd/:invoice_id",  to: "checkouts#return_pd", as: 'return_pd'
-    match "return_pg/:invoice_id",  to: "checkouts#return_pg", as: 'return_pg'
-    match "sync_pd/:invoice_id",    to: "checkouts#sync_pd",   as: 'sync_pd'
-    match "sync_pg/:store_id",      to: "checkouts#sync_pg",   as: 'sync_pg'
-    match "sync_mp/:store_id",      to: "checkouts#sync_mp",   as: 'sync_mp'
+    get "store/success",              to: "stores#create_success"
+    get "contact",                    to: "stores#contact",       as: "store_contact"
+    get "product/:handle",            to: "products#handle",      as: 'product_handle'
+    get "product_search/:name",       to: "products#search",      as: 'product_search'
+    get "notices/:handle",            to: "notices#show",         as: "notices"
+    get "pages/:page",                to: "pages#show",           as: "pages"
+    get "categories/*categories",     to: "categories#index",     as: "categories"
+    get "coupon",                     to: "coupons#add_coupon",   as: "add_coupon"
+    get "checkout",               to: "checkouts#new",                    as: "checkout"
+    # get "checkout/address",       to: "checkouts#address",  via: "get",   as: "address_checkout"
+    match "checkout/address",       to: "checkouts#address",   as: "address_checkout",  via: [:get, :put]
+    # get "checkout/:id/confirm",   to: "checkouts#confirm",  via: "get",   as: "confirm_checkout"
+    match "checkout/:id/confirm",   to: "checkouts#confirm",  as: "confirm_checkout", via:[:get, :put]
+    get "checkout/charge",        to: "checkouts#charge",   as: "charge_checkout"
+    get "checkout/:id/complete",  to: "checkouts#complete", as: "complete_checkout"
+    get "return_mp/:invoice_id",  to: "checkouts#return_mp", as: 'return_mp'
+    get "return_pd/:invoice_id",  to: "checkouts#return_pd", as: 'return_pd'
+    get "return_pg/:invoice_id",  to: "checkouts#return_pg", as: 'return_pg'
+    get "sync_pd/:invoice_id",    to: "checkouts#sync_pd",   as: 'sync_pd'
+    get "sync_pg/:store_id",      to: "checkouts#sync_pg",   as: 'sync_pg'
+    get "sync_mp/:store_id",      to: "checkouts#sync_mp",   as: 'sync_mp'
 end

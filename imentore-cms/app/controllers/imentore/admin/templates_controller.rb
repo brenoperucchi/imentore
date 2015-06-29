@@ -1,27 +1,41 @@
 module Imentore
   module Admin
     class TemplatesController < Admin::BaseController
-      inherit_resources
-      belongs_to :theme, parent_class: Imentore::Theme
-      before_filter :uniqueness_default, only:[:update, :create]
-      custom_actions :collection => :layouts
+      include Imentore::Core::Engine.routes.url_helpers
+      # inherit_resources
+      # belongs_to :theme, parent_class: Imentore::Theme
+      before_action :uniqueness_default, only:[:update, :create]
+      before_action :set_template, only: [:update, :create, :show, :edit]
+      before_action :parent, only: [:index, :layouts, :show, :edit, :index, :new]
+      respond_to :html, :json, :xml
+      # custom_actions :collection => :layouts
+
+      def layouts
+      end
+
+      def index
+      end
 
       def new
         @kind = params[:kind]
         new!
       end
 
+      def show
+        respond_with(@template)
+      end
+
       def edit
-        @template = parent.templates.find(params[:id])
         @kind = @template.kind
       end
 
       def create
-        create! { admin_theme_path(params[:theme_id]) }
+        create! { admin_theme_path(template_params) }
       end
 
       def update
-        update! { edit_admin_theme_template_path(params[:theme_id], params[:id]) }
+        @template.update(template_params)
+        respond_with(@template, location: admin_theme_templates_path(id: params[:theme_id]))
       end
 
       def destroy
@@ -37,6 +51,19 @@ module Imentore
 
       protected
 
+      def parent
+        @theme = current_store.themes.find(params[:theme_id])
+      end
+
+      def set_template
+        @template = parent.templates.find(params[:id])
+      end
+
+      def template_params
+        params.require(:template).permit(:default, :body, :path)
+      end
+
+      ## TODO in the model
       def uniqueness_default
         @theme = current_store.themes.find(params[:theme_id])
         if params[:template][:default] == '1'

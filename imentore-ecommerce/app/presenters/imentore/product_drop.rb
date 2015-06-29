@@ -43,12 +43,18 @@ module Imentore
     end
 
     def variants
-      @product.variants.collect {|variant| ObjectDrop.new(variant)}
+      @product.variants.collect {|variant| ProductVariantDrop.new(variant)}
     end
 
     def image
       return nil if @product.variants.first.images.blank?
       @product.variants.first.images.first.picture.url(:small_fit)
+    end
+
+    def images
+      @images = []
+      @product.variants.map{|variant| @images << variant.images.map{|image| ImageDrop.new(image)}}
+      @images.flatten
     end
 
     def variant_id

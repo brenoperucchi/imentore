@@ -3,7 +3,7 @@ module Imentore
 
     attr_accessor :password_required
 
-    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :authentication_keys => [:email, :store_id]
+    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, authentication_keys: {email:true, login:false, store_id:true}
 
     alias :devise_valid_password? :valid_password?
 

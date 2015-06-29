@@ -5,18 +5,18 @@
 # // the compiled file.
 $(document).ready ->  
 
-  $("#datatable tfoot th").each ->
-    title = $("#datatable thead th").eq($(this).index()).text()
-    klass = $("#datatable thead th").eq($(this).index()).attr('class')
-    $(this).html "<input type=\"text\" class=" + klass + " placeholder=" + title + " />"
-    return
+  # $("#datatable tfoot th").each ->
+  #   title = $("#datatable thead th").eq($(this).index()).text()
+  #   klass = $("#datatable thead th").eq($(this).index()).attr('class')
+  #   $(this).html "<input type=\"text\" class=" + klass + " placeholder=" + title + " />"
+  #   return
 
   # jQuery -> 
   table = $('#datatable').DataTable(
     # sDom: "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
     language: {url: "/javascripts/admin/datatables.pt-br.lang"},
     sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-    sPaginationType: "bootstrap"
+    # sPaginationType: "bootstrap"
     bProcessing: true
     bServerSide: true
     sAjaxSource: $('#datatable').data('source')

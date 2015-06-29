@@ -2,7 +2,13 @@
   = stylesheet_link_tag    "cart"
   = javascript_include_tag "cart"
   = csrf_meta_tags
+
+- content_for :javascript do
+  = javascript_include_tag "jquery_ujs"
   css:
+    abbr[title="required"] {
+      display: none;
+    }
     label[class="checkbox"] {
       padding-top: 5px;
     }
@@ -141,109 +147,130 @@
 /! **********************
 /! I N T R O
 /! **********************
-#intro
-  #intro_wrap
-    .container_12
-      #breadcrumbs.grid_12
-        a href="/cart"  Carrinho
-        '
-        | &gt;
-        '
-        a href=""  Endereço
-      h1 Endereço
-/! end of intro
-
-
 .container
-  .row
-    .notification
-      div.alert.alert-block.hide
-        a[class="close" data-dismiss="alert" href="#"]
-          = "x"
-        h4[class="alert-heading"]
-          = t(:warning)
-        p
-          = flash[:alert]
-      div.alert.alert-success.hide
-        a[class="close" data-dismiss="alert" href="#"]
-          = "x"
-        h4[class="alert-heading"]
-          = t(:success)
-        p
-          = flash[:success]
-.container
-  .row
-    = simple_form_for(@order, url: address_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
-      = f.error_notification
-      #accordion1.accordion
-        fieldset#address_customer
-          - current_user.try(:userable).try(:addresses).try(:each) do |addr|
-            .info.hide.address[id=addr.name.to_underscore!]
-              label.hide#name
-                = addr.name
-              label.hide#street
-                = addr.street
-              label.hide#complement
-                = addr.complement
-              label.hide#city
-                = addr.city
-              label.hide#state
-                = addr.state
-              label.hide#country
-                = addr.country
-              label.hide#zip_code
-                = addr.zip_code
-              label.hide#phone
-                = addr.phone
-          .accordion-group
-            #collapseOne.accordion-body.in.collapsy[style="height: auto; "]
-              .accordion-inner
-                .span12
-                  .row
-                    .span6
-                      = f.input :customer_name, hint: "* nome completo", input_html: { value: current_user.try(:userable).try(:name) }
-                    .span6
-                      = f.input :customer_email, input_html: { value: current_user.try(:email) }
-              .span12
+  .col-md-12
+    .row
+      .col-md-12
+        ul.breadcrumb
+          li
+            a href="/"
+              | Home
+          li
+            a href="/cart" Carrinho
+          li Endereço
+    .row
+      .notification
+        div.alert.alert-block.hide
+          a[class="close" data-dismiss="alert" href="#"]
+            = "x"
+          h4[class="alert-heading"]
+            = t(:warning)
+          p
+            = flash[:alert]
+        div.alert.alert-success.hide
+          a[class="close" data-dismiss="alert" href="#"]
+            = "x"
+          h4[class="alert-heading"]
+            = t(:success)
+          p
+            = flash[:success]
+    .row
+      .col-md-12
+        .box
+          = simple_form_for(@order, url: address_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
+            = f.error_notification
+            #accordion1.accordion
+              fieldset#address_customer
+                - current_user.try(:userable).try(:addresses).try(:each) do |addr|
+                  .info.hide.address[id=addr.name.to_underscore!]
+                    label.hide#name
+                      = addr.name
+                    label.hide#street
+                      = addr.street
+                    label.hide#complement
+                      = addr.complement
+                    label.hide#city
+                      = addr.city
+                    label.hide#state
+                      = addr.state
+                    label.hide#country
+                      = addr.country
+                    label.hide#zip_code
+                      = addr.zip_code
+                    label.hide#phone
+                      = addr.phone
                 .row
-                  .span6
-                    .address
-                      - if user_signed_in? and not current_user.userable.owner?
-                        = f.input :billing_checkbox, :as => :radio_buttons, collection: addresses_checkout_helper , input_html: { :class=>'checkbox', id: 'billing_address'}, label: t(:shipping_address), checked: (f.object.billing_checkbox.nil? ? addresses_checkout_helper.first : f.object.billing_checkbox) if user_signed_in?
-                    .address
-                      = f.input :shipping_checkbox, as: :boolean, inline_label: t(:shipping_address_diff), label: t(:billing_address), input_html: {checked: checkbox_shipping_helper(f), id: 'shipping_address'}
-                .span12.addresses
+                  .col-md-6
+                    .accordion-group
+                      #collapseOne.accordion-body.in.collapsy[style="height: auto; "]
+                        .accordion-inner
+                          .col-md-6
+                            .row
+                              .span
+                                = f.input :customer_name, hint: "* nome completo", input_html: { value: current_user.try(:userable).try(:name), class: 'form-control' }
+                              .span6
+                                = f.input :customer_email, input_html: { value: current_user.try(:email), class: 'form-control' }
                   .row
-                    .span6#shipping
-                      .control-group.boolean.optional
-                        label.boolean.optional.control-label
-                          | Endereço de envio
-                      = f.simple_fields_for :shipping_address, f.object.shipping_address do |addr|
-                        = render("shared/address", addr: addr)
-                    - unless checkbox_shipping_helper(f)
-                      .span6#billing
-                        = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
-                          = render("shared/address", addr: addr)
-                    - else
-                      .span6#billing.hide
-                        .control-group.boolean.optional
-                          label.boolean.optional.control-label
-                            | Endereço de cobrança
-                        = f.simple_fields_for :billing_address, f.object.billing_address do |addr|
-                          = render("shared/address", addr: addr, disabled:true)
-              .clearfix
-      .form-actions
-        .span2
-          - if current_store.config.order_asset
-            a(class="btn" data-toggle="modal" href="#orderAssets" class='btn btn-primary btn-large')
-              i.icon-file.icon-white
-              '
-              = t(:send_files)
-        .span3.offset5
-          button(class='btn-primary btn-large btn-success')
-            i.icon-ok.icon-white
-            '
-            = t(:next)
+                    .col-md-6
+                      .address
+                        - if user_signed_in? and not current_user.userable.owner?
+                          = f.input :billing_checkbox, :as => :radio_buttons, collection: addresses_checkout_helper , input_html: { :class=>'checkbox', id: 'billing_address'}, label: t(:shipping_address), checked: (f.object.billing_checkbox.nil? ? addresses_checkout_helper.first : f.object.billing_checkbox) if user_signed_in?
+                      .address
+                        = f.input :shipping_checkbox, as: :boolean, inline_label: t(:shipping_address_diff), label: t(:billing_address), input_html: {checked: checkbox_shipping_helper(f), id: 'shipping_address'}
+                .addresses
+                  .row
+                    .col-md-12
+                      .row
+                        .col-md-6
+                          .row
+                            .col-md-10
+                              #shipping
+                                .control-group.boolean.optional
+                                  label.boolean.optional.control-label
+                                    | Endereço de envio
+                                = f.simple_fields_for :shipping_address, f.object.shipping_address, wrapper: 'inline_form' do |addr|
+                                  = render("shared/address", addr: addr)
+                        .col-md-6
+                          .row
+                            .col-md-10
+                              - unless checkbox_shipping_helper(f)
+                                #billing
+                                  = f.simple_fields_for :billing_address, f.object.billing_address, wrapper: 'inline_form' do |addr|
+                                    = render("shared/address", addr: addr)
+                              - else
+                                  #billing[style='display:none']
+                                    .control-group.boolean.optional
+                                      label.boolean.optional.control-label
+                                        | Endereço de cobrança
+                                    = f.simple_fields_for :billing_address, f.object.billing_address, wrapper: 'inline_form' do |addr|
+                                      = render("shared/address", addr: addr, disabled:true)
+
+            .row
+              .col-md-12
+                .box-footer
+                  .pull-left
+                    a.btn.btn-default href="/cart" 
+                      i.fa.fa-chevron-left
+                      | Back to Cart
+                  .pull-right
+                    button(class='btn btn-large btn-success')
+                      i.fa.fa-chevron-right
+                      '
+                      = t(:next)
+
+
+          / .form-controls
+          /   .span2
+          /     - if current_store.config.order_asset
+          /       a(class="btn" data-toggle="modal" href="#orderAssets" class='btn btn-primary btn-large')
+          /         i.icon-file.icon-white
+          /         '
+          /         = t(:send_files)
+          /   .span3.offset5
+          /     button(class='btn btn-primary btn-large btn-success')
+          /       i.fa.fa-chevron-right
+          /       '
+          /       = t(:next)
 
 
   / .modal.hide#orderAssets(style='width:840px')

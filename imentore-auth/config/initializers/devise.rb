@@ -2,7 +2,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
 
-  config.secret_key = '58b726ba2ca2ceac5e6be1beb978f834d0fbea1fb08262cdefd236c12044dde25356a254151f591f51a66fab737e1cf021eedffa9768a5a2bd86d79d2955993c'
+  config.secret_key = '6c5250962c00a143691f24266f54b9da8dc0d3a28122c4e3ce9c8809a2d28d20fbb7674e3cfcf7dad0f4e9a60a9c2a7e31992ad3bf54f20b8c1fc787b524b025'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,

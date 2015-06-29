@@ -34,5 +34,9 @@ module Imentore
       @variant.sku
     end
 
+    def images
+      @variant.images.collect {|image| ImageDrop.new(image)}
+    end
+
   end
 end

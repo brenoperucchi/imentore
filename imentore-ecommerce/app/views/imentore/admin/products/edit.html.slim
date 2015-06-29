@@ -3,10 +3,12 @@
     $(function(){
       $('.typeahead').typeahead()
       function updateCategories(cat_ids){
+        console.log(cat_ids == "")
+        var ids = (cat_ids == "" ? null : cat_ids)
         $.ajax({
           url: '#{{admin_product_path(@product)}}',
           type: 'put',
-          data: {authenticity_token:"#{{form_authenticity_token}}", cat_ids:cat_ids},
+          data: {authenticity_token:"#{{form_authenticity_token}}", product:{category_ids:ids}},
           dataType: 'json',
           success: function(json) {
           }

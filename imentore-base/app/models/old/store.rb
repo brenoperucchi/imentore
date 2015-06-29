@@ -18,27 +18,27 @@ module Old
       :class_name => Old::Product,
       :dependent => :destroy
 
-    has_many :customers,
-      :conditions => "role = 'customer'",
-      :class_name => Old::User
+    # has_many :customers,
+    #   :conditions => "role = 'customer'",
+    #   :class_name => Old::User
 
-    has_many :employees,
-      :class_name => Old::User,
-      :conditions => "role = 'employee'"
+    # has_many :employees,
+    #   :class_name => Old::User,
+    #   :conditions => "role = 'employee'"
 
-    has_many :suppliers,
-      :class_name => Old::User,
-      :conditions => "role = 'supplier'"
+    # has_many :suppliers,
+    #   :class_name => Old::User,
+    #   :conditions => "role = 'supplier'"
 
-    has_many :dealers,
-      :class_name => Old::User,
-      :conditions => "role = 'dealer'"
+    # has_many :dealers,
+    #   :class_name => Old::User,
+    #   :conditions => "role = 'dealer'"
 
-    has_many :orders,
-      :class_name => Old::Order
-      # :conditions => "role = 'dealer'"
+    # has_many :orders,
+    #   :class_name => Old::Order
+    #   # :conditions => "role = 'dealer'"
 
-    scope :active, where(state: 'actived')
+    # scope :active, where(state: 'actived')
 
     self.abstract_class = true
      establish_connection(

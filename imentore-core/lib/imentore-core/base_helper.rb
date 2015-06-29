@@ -3,7 +3,7 @@ module Imentore
     def self.included(base)
       base.class_eval do
         include Imentore::Core::Engine.routes.url_helpers
-        before_filter :check_store
+        before_action :check_store
         helper_method :current_store
       end
     end

@@ -3,7 +3,8 @@
 
 legend #{@template.kind.capitalize} #{@template.path}
 
-= simple_form_for(@template, url: admin_theme_template_path(@theme, @template), html: {class: 'form-horizontal'}) do |f|
+
+= simple_form_for(@template, url: admin_theme_template_path(theme_id: @theme, id: @template), html: {class: 'form-horizontal'}) do |f|
   = f.error_notification
   - if @template.kind == 'layout'
     = f.input :default 
