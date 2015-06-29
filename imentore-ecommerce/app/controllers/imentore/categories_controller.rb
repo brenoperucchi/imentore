@@ -8,7 +8,8 @@ module Imentore
         aux = current_store.categories.find_by_handle(cat)
         @category = (aux ? aux : nil)
       end
-      @products = @category ? @category.products.active.order(sort_column).map { |product| Imentore::ProductDrop.new(product) } : []
+      @products_model = @category.products.active.order(sort_column)
+      @products = @category ? @products_model.map { |product| Imentore::ProductDrop.new(product) } : []
       @ancestors = @category ? (@category.ancestors.map { |category| Imentore::CategoryDrop.new(category) } ) : []
       @childrens = @category ? (@category.children.map { |category| Imentore::CategoryDrop.new(category) } ) : []
       @category = Imentore::CategoryDrop.new(@category)
@@ -17,7 +18,7 @@ module Imentore
     private
     
     def sort_column
-      case params[:sort]
+      case params['sort-by']
       when nil
         'id'
       when "recent"

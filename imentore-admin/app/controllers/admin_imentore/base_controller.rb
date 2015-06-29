@@ -3,8 +3,8 @@ module AdminImentore
     include AdminImentore::Admin::Engine.routes.url_helpers
 
     layout "admin_imentore"
-    skip_before_filter :check_store
-    before_filter :authorize_admin
+    skip_before_action :check_store
+    before_action :authorize_admin
 
     def authorize_admin
       unless user_signed_in? and (current_user.email == "admin@imentore.com.br")

@@ -4,7 +4,7 @@ module Imentore
       inherit_resources
       actions :edit, :update
 
-      before_filter :set_group
+      before_action :set_group
 
       def update
         update! { admin_edit_settings_path(@group) }

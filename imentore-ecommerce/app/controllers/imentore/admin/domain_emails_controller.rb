@@ -1,7 +1,7 @@
 module Imentore
   module Admin
     class DomainEmailsController < Admin::BaseController
-      before_filter  :require_domain
+      before_action  :require_domain
 
       def index
         @emails = @domain.emails

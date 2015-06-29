@@ -16,8 +16,8 @@ module SqlTemplate
     def find_templates(name, prefix, partial, details)
       templates     = []
       template_path = build_path(name, prefix, partial)
-      template      = find_by_request_path unless template_path.include?("layouts/")
-      template      ||= find_by_template_path(template_path)
+      template      = find_by_request_path unless template_path.prefix.include?("layouts/")
+      template      ||= find_by_template_path(template_path.virtual)
       template
 
       if template

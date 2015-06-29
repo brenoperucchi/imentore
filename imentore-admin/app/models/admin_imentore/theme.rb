@@ -15,7 +15,7 @@ module AdminImentore
     has_many :stores_themes, :class_name => Imentore::Theme, 
       :foreign_key => "admin_imentore_theme_id"
 
-    scope :active, where(active: true)
+    scope :active, -> { where(active: true) }
 
     def self.install_store(store)
       self.active.each do |admin_theme|

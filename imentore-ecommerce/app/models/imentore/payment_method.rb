@@ -9,7 +9,7 @@ module Imentore
 
     associate_values :handle, associate = [:pagamento_digital, :moip, :cielo, :moip, :pag_seguro]
 
-    scope :active, where(active: true)
+    scope :active, -> { where(active: true) } 
 
     validates :name, presence: true
     # validate :validate_provider

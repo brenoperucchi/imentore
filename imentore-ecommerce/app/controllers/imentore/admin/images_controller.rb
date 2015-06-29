@@ -1,9 +1,10 @@
 module Imentore
   module Admin
+
     class ImagesController < BaseController
       inherit_resources
       belongs_to :variant, parent_class: Imentore::ProductVariant
-      skip_before_filter :verify_authenticity_token, :if => Proc.new {|c| c.request.format == 'application/json'}
+      skip_before_action :verify_authenticity_token, :if => Proc.new {|c| c.request.format == 'application/json'}
 
       respond_to :json, only: [:create, :index, :destroy, :new]
 
@@ -19,6 +20,10 @@ module Imentore
         end
       end
 
+      def image_params
+        params.require(:image).permit(:picture)
+      end
+    
     end
   end
 end

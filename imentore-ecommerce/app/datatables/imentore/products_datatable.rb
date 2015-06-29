@@ -9,7 +9,7 @@ module Imentore
         [
           product.id,
           button_status(product.active, edit_admin_product_path(product)),
-          h(product.created_at.strftime("%B %e, %Y")),
+          product.created_at.strftime("%B %e, %Y"),
           product.name,
           button_link(product)
         ]

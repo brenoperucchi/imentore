@@ -27,11 +27,11 @@ module Imentore
 
     def place_address(order, params={})
       if order.shipping_checkbox == "1"
-        billing_address = Imentore::Address.new(params[:order][:shipping_address]) if params[:order][:shipping_address].present?
-        shipping_address = Imentore::Address.new(params[:order][:shipping_address])if params[:order][:shipping_address].present?
+        billing_address = Imentore::Address.new(params[:shipping_address]) if params[:shipping_address].present?
+        shipping_address = Imentore::Address.new(params[:shipping_address])if params[:shipping_address].present?
       else
-        billing_address = Imentore::Address.new(params[:order][:billing_address]) if params[:order][:billing_address].present?
-        shipping_address = Imentore::Address.new(params[:order][:shipping_address])if params[:order][:shipping_address].present?
+        billing_address = Imentore::Address.new(params[:billing_address]) if params[:billing_address].present?
+        shipping_address = Imentore::Address.new(params[:shipping_address])if params[:shipping_address].present?
       end
       order.billing_address = billing_address
       order.shipping_address = shipping_address
@@ -40,11 +40,11 @@ module Imentore
     def place_order(order, params={})
       store = order.store
       delivery = order.delivery || order.build_delivery
-      delivery.attributes = { address: order.shipping_address, delivery_method_id: params[:order][:delivery][:delivery_method] }
+      delivery.attributes = { address: order.shipping_address, delivery_method_id: params[:delivery][:delivery_method] }
       delivery.amount = order.delivery_calculate(order.zip_code, order.delivery_method)
 
       invoice = order.invoice || order.build_invoice
-      invoice.attributes = { amount: order.total_amount, payment_method_id: params[:order][:invoice][:payment_method] }
+      invoice.attributes = { amount: order.total_amount, payment_method_id: params[:invoice][:payment_method] }
     end
   end
 end

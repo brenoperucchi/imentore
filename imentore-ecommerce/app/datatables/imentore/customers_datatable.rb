@@ -10,7 +10,7 @@ module Imentore
           button_status(customer.active, edit_admin_customer_path(customer)),
           customer.name,
           customer.user.try(:email),
-          h(customer.created_at.strftime("%B %e, %Y")),
+          customer.created_at.strftime("%B %e, %Y"),
           button_link(customer),
         ]
       end

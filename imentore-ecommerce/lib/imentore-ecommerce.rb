@@ -1,3 +1,3 @@
 require "imentore-ecommerce/engine"
 
-require "ruby-plesk"
+# require "ruby-plesk"

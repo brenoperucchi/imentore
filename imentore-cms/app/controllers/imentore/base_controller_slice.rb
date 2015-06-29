@@ -1,7 +1,7 @@
 require 'resolver'
 
 Imentore::BaseController.class_eval do
-  before_filter :prepend_theme_path
+  before_action :prepend_theme_path
 
   layout :theme_layout
 

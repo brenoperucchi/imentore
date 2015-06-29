@@ -8,7 +8,7 @@ module Imentore
         [
           resource.id,
           button_status(resource),
-          h(resource.created_at.strftime("%B %e, %Y")),
+          resource.created_at.strftime("%B %e, %Y"),
           resource.customer_name,
           resource.customer_email,
           number_with_price(resource.total_amount),

@@ -5,7 +5,7 @@ require 'imentore'
 module Imentore
   class Store < ActiveRecord::Base
 
-    scope :active, where(state: "actived")
+    scope :active, -> { where(state: "actived") }
 
     serialize :config, Settings
 
@@ -13,18 +13,17 @@ module Imentore
     INVALID_DOMAINS = %w(www mail ftp)
 
     validates :term, acceptance: true
-    validates :url,   presence: true,
-                      uniqueness: true,
-                      format: { with: DNS_LABEL_REGEX },
-                      length: { maximum: 63 },
-                      exclusion: { in: INVALID_DOMAINS }
+    validates :url, presence: true, uniqueness: true
+
+    ## TODO verify format in validate presence
+    #, format: { with: DNS_LABEL_REGEX }, length: { maximum: 63 }, exclusion: { in: INVALID_DOMAINS } 
     # validates :contract_term, acceptance: true
 
     belongs_to :old_store, :class_name => Old::Store, :foreign_key => "old_store_id"
 
     has_many :employees, :dependent => :destroy
-    has_one  :owner, class_name: 'Imentore::Employee', conditions: { department: 'owner' }, :dependent => :destroy
-    has_one  :address, class_name: 'Imentore::Address', as: 'addressable', :dependent => :destroy
+    has_one  :owner, class_name: Imentore::Employee
+    has_one  :address, class_name: Imentore::Address, as: 'addressable', :dependent => :destroy
     has_many :domains, :dependent => :destroy
     has_many :products, :dependent => :destroy
     has_many :orders, :dependent => :destroy

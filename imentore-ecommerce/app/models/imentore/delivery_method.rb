@@ -3,7 +3,7 @@ module Imentore
     belongs_to :store
     serialize :options, Hash
 
-    scope :active, where(active: true)
+    scope :active, -> { where(active: true) }
     validates :name, presence: true
 
     def provider

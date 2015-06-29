@@ -40,7 +40,7 @@ module Imentore
 
       def update
         @product = current_store.products.find_by_id(params[:id])
-        @product.attributes = params[:product]
+        @product.attributes = permitted_params
         update! do |success, failure|
           success.html do
             @product.product_brand = current_store.product_brands.find_by_name(params[:product][:product_brand_name])
@@ -51,7 +51,7 @@ module Imentore
           end
           success.json do
             @product.category_ids = []
-            @product.category_ids = params[:cat_ids]
+            @product.category_ids = params[:product][:category_ids]
             render :edit
           end
           failure.html do
@@ -75,6 +75,25 @@ module Imentore
       def begin_of_association_chain
         current_store
       end
+
+      protected
+      def permitted_params
+        params.require(:product).permit(:active, :featured, :handle, :product_brand_name, :name, :description,
+                                        variants_attributes: [:price, :quantity, :weight])
+                                            #.tap {|whitelisted| whitelisted[:category_ids] = params[:product][:category_ids] end
+      end
+      # def resource_params
+      #     params.require(:project).permit(:name, :description)
+      # end
+
+      # def permitted_params
+      #   {:product => params.fetch(:product, {}).permit(:name:, :description, variants_attributes: [:price, :quantity, :weight])}
+      # end
+
+      # def build_resource_params
+      #   [params.fetch(:product, {}).permit(:name:, :description, variants_attributes: [:price, :quantity, :weight])]
+      # end
+
     end
   end
 end

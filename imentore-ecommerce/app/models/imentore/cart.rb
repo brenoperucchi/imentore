@@ -49,19 +49,19 @@ module Imentore
     end
 
     def coupons_amount
-      coupons.sum(&:value)
+      coupons.to_a.sum(&:value)
     end
 
     def amount
-      items.sum(&:amount)
+      items.to_a.sum(&:amount)
     end
 
     def weight
-      items.sum(&:weight)
+      items.to_a.sum(&:weight)
     end
 
     def total_items
-      items.sum(&:quantity)
+      items.to_a.sum(&:quantity)
     end
 
     # def delivery_amount

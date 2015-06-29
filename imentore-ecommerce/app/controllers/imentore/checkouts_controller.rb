@@ -1,10 +1,10 @@
 module Imentore
   class CheckoutsController < BaseController
     include PagamentoDigital::Helper
-    before_filter :authenticate_to_buy!, only: [:new, :confirm, :address]
-    before_filter :check_cart, only:[:address]
-    skip_before_filter :authorize_client, except: [:new]
-    skip_before_filter :verify_authenticity_token, :check_store, only: [:return_mp, :return_pd, :sync_pd, :return_pg, :sync_pg,
+    before_action :authenticate_to_buy!, only: [:new, :confirm, :address]
+    before_action :check_cart, only:[:address]
+    skip_before_action :authorize_client, except: [:new]
+    skip_before_action :verify_authenticity_token, :check_store, only: [:return_mp, :return_pd, :sync_pd, :return_pg, :sync_pg,
                                                                          :sync_mp, :complete]
 
     def check_cart
@@ -47,7 +47,7 @@ module Imentore
           @order.customer_name = params[:order][:customer_name]
           @order.customer_email = params[:order][:customer_email]
         end
-        CheckoutService.place_address(@order, params)  
+        CheckoutService.place_address(@order, order_params)  
         unless @order.save
           render :address
         else          
@@ -65,7 +65,7 @@ module Imentore
       elsif request.get?
         render :confirm
       elsif request.put?
-        CheckoutService.place_order(@order, params)
+        CheckoutService.place_order(@order, order_params)
         unless CheckoutService.place_coupons(@order, current_cart, current_store)
           flash[:alert] = t(:coupon_not_valid)
           render :confirm and return false
@@ -184,6 +184,14 @@ module Imentore
     end
 
     protected
+
+      def order_params
+        params.require(:order).permit(:customer_name, :customer_email, :billing_checkbox, :shipping_checkbox, 
+                                      shipping_address: [:name, :street, :complement, :city, :country, :state, :zip_code, :phone], 
+                                      billing_address: [:name, :street, :complement, :city, :country, :state,:zip_code, :phone],
+                                      delivery: [:delivery_method],
+                                      invoice: [:payment_method])
+      end
 
       def set_order_cart_default
         session[:order_id] = nil

@@ -1,5 +1,5 @@
 Imentore::Admin::BaseController.class_eval do
-  before_filter :authorize_admin
+  before_action :authorize_admin
 
   def authorize_admin
     unless(user_signed_in? && (current_user.userable.owner? || current_user.userable.admin?))

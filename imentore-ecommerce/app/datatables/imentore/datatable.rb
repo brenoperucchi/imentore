@@ -1,13 +1,14 @@
 module Imentore
   class Datatable
+    include ActionView::Helpers
+    include ActionView::Helpers::UrlHelper
     include Imentore::Core::Engine.routes.url_helpers
     include ActionView::Context
-    include ActionView::Helpers
     include ActionView::Helpers::TagHelper
     include ApplicationHelper
 
 
-    delegate :params, :h, :link_to, :number_to_currency, :button_status, :button_datatable, to: :@view
+    delegate :params, :link_to, :number_to_currency, :button_status, :button_datatable, to: :@view
 
     def initialize(view, current_store)
       @view = view

@@ -23,10 +23,10 @@ module Old
 
     validates_presence_of :variant_id
 
-    scope :in_stock, :conditions => { :state => 'stock' }
-    scope :reserved, :conditions => { :state => 'reserved' }
-    scope :shipped, :conditions => { :state => 'shipped' }
-    scope :backorder, :conditions => { :state => 'backorder' }, :order => "created_at ASC"
+    # scope :in_stock, :conditions => { :state => 'stock' }
+    # scope :reserved, :conditions => { :state => 'reserved' }
+    # scope :shipped, :conditions => { :state => 'shipped' }
+    # scope :backorder, :conditions => { :state => 'backorder' }, :order => "created_at ASC"
 
     state_machine :initial => :stock do
       after_transition :on => :ship, :do => lambda { |iu| Log.logger(iu, I18n.t(:inventory_unit_shipped, :order => iu.item.order_id)) }

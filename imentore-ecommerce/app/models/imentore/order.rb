@@ -107,7 +107,7 @@ module Imentore
     end
 
     def products_amount
-      items.sum(&:amount).to_f
+      items.to_a.sum(&:amount).to_f
     end
 
     def delivery_amount
@@ -115,7 +115,7 @@ module Imentore
     end
 
     def coupons_amount
-      coupons.sum(&:value)
+      coupons.sum(:value)
     end
 
     def delivery_calculate(zip_code, method)

@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/bperucchi/moip-ruby.git
-  revision: 69ea8ce20037dde7bdc8b06360aea80e04354143
+  revision: fe58b8b99607cc7909309546d942ad7c2441bad5
   specs:
-    moip-ruby (0.1.2)
+    moip-ruby (0.1.3)
       activesupport (>= 3.2.3)
       httparty (~> 0.8.3)
       nokogiri (~> 1.5.2)
@@ -22,55 +22,34 @@ GIT
       httparty (>= 0.7.8)
 
 GIT
-  remote: git://github.com/bperucchi/ruby-plesk.git
-  revision: 71948232b9354096d64319a8d387d45bcfb9be28
-  specs:
-    ruby-plesk (0.0.1)
-
-GIT
-  remote: git://github.com/rweng/jquery-datatables-rails.git
-  revision: db17aa0145164095b2b21f83f1ef7ccf91b9ea54
-  specs:
-    jquery-datatables-rails (3.1.1)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
-      sass-rails
-
-GIT
   remote: git://github.com/thoughtbot/paperclip.git
-  revision: 97c78efdce65b07c6425e76000f34f1909a257cb
+  revision: 7f732ee5a90400f2110c14f4614d335911c227c2
   specs:
-    paperclip (4.2.1)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
+    paperclip (4.3.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
       cocaine (~> 0.5.5)
       mime-types
+      mimemagic (= 0.3.0)
 
 PATH
   remote: ../imentore-admin
   specs:
     imentore-admin (0.0.1)
-      rails (~> 3.2.3)
 
 PATH
   remote: ../imentore-auth
   specs:
     imentore-auth (0.0.1)
-      rails (~> 3.2.3)
 
 PATH
   remote: ../imentore-cms
   specs:
     imentore-cms (0.0.1)
-      carrierwave (~> 0.6.1)
+      carrierwave (~> 0.7.0)
       country_select (~> 0.0.1)
-      devise (~> 3.3.0)
-      inherited_resources (~> 1.3.0)
-      liquid (~> 2.6.1)
-      mini_magick (~> 3.4)
-      rails (~> 3.2.3)
-      simple_form (~> 2.0.1)
+      devise (~> 3.5.1)
+      mini_magick (~> 4.2.7)
       slim (~> 1.2.1)
 
 PATH
@@ -78,64 +57,65 @@ PATH
   specs:
     imentore-core (0.0.1)
       country_select (= 0.0.1)
-      rails (~> 3.2.3)
 
 PATH
   remote: ../imentore-dashboard
   specs:
     imentore-dashboard (0.0.1)
-      rails (~> 3.2.3)
 
 PATH
   remote: ../imentore-ecommerce
   specs:
     imentore-ecommerce (0.0.1)
-      rails (~> 3.2.3)
 
 PATH
   remote: ../personhood
   specs:
     personhood (0.0.1)
-      rails (~> 3.2.3)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    actionmailer (3.2.21)
-      actionpack (= 3.2.21)
-      mail (~> 2.5.4)
-    actionpack (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
-      builder (~> 3.0.0)
+    actionmailer (4.0.13)
+      actionpack (= 4.0.13)
+      mail (~> 2.5, >= 2.5.4)
+    actionpack (4.0.13)
+      activesupport (= 4.0.13)
+      builder (~> 3.1.0)
       erubis (~> 2.7.0)
-      journey (~> 1.0.4)
-      rack (~> 1.4.5)
-      rack-cache (~> 1.2)
-      rack-test (~> 0.6.1)
-      sprockets (~> 2.2.1)
-    activemodel (3.2.21)
-      activesupport (= 3.2.21)
-      builder (~> 3.0.0)
-    activerecord (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
-      arel (~> 3.0.2)
-      tzinfo (~> 0.3.29)
-    activeresource (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
-    activesupport (3.2.21)
-      i18n (~> 0.6, >= 0.6.4)
-      multi_json (~> 1.0)
-    ancestry (1.3.0)
-      activerecord (>= 2.3.14)
+      rack (~> 1.5.2)
+      rack-test (~> 0.6.2)
+    activemodel (4.0.13)
+      activesupport (= 4.0.13)
+      builder (~> 3.1.0)
+    activerecord (4.0.13)
+      activemodel (= 4.0.13)
+      activerecord-deprecated_finders (~> 1.0.2)
+      activesupport (= 4.0.13)
+      arel (~> 4.0.0)
+    activerecord-deprecated_finders (1.0.4)
+    activesupport (4.0.13)
+      i18n (~> 0.6, >= 0.6.9)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
+      thread_safe (~> 0.1)
+      tzinfo (~> 0.3.37)
+    ancestry (2.1.0)
+      activerecord (>= 3.0.0)
     ansi (1.5.0)
-    arel (3.0.3)
+    arel (4.0.2)
     bcrypt (3.1.10)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    builder (3.0.4)
+    builder (3.1.4)
+    bullet (4.14.7)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.9.0)
+    callsite (0.0.11)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -143,41 +123,42 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-rails (1.1.2)
+    capistrano-rails (1.1.3)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capistrano-rbenv (2.0.3)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
-    carrierwave (0.6.2)
+    carrierwave (0.7.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cocaine (0.5.5)
+    cocaine (0.5.7)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
-    coffee-rails (3.2.2)
+    coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
-      railties (~> 3.2.0)
-    coffee-script (2.3.0)
+      railties (>= 4.0.0, < 5.0)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1)
-    colorize (0.7.5)
+    coffee-script-source (1.9.1.1)
+    colorize (0.7.7)
     correios-frete (1.6.1)
       log-me (~> 0.0.2)
       nokogiri (~> 1.5)
       sax-machine (~> 0.1)
     country_select (0.0.1)
-    daemons (1.1.9)
+    daemons (1.2.2)
     debug_inspector (0.0.2)
-    delocalize (0.3.2)
-      rails (>= 3.0, < 4)
-    devise (3.3.0)
+    delocalize (0.4.0)
+      rails (>= 3.0)
+    devise (3.5.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
+      responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     devise-encryptable (0.2.0)
@@ -185,10 +166,11 @@ GEM
     diff-lcs (1.1.3)
     erubis (2.7.0)
     eventmachine (1.0.7)
-    execjs (2.3.0)
+    execjs (2.5.2)
     fabrication (2.11.3)
-    has_scope (0.5.1)
-    hike (1.2.3)
+    has_scope (0.6.0)
+      actionpack (>= 3.2, < 5)
+      activesupport (>= 3.2, < 5)
     httparty (0.8.3)
       multi_json (~> 1.0)
       multi_xml
@@ -196,28 +178,38 @@ GEM
     i18n_alchemy (0.2.1)
       activesupport (>= 3.2.0, < 4.2)
       i18n (~> 0.6)
-    inherited_resources (1.3.0)
-      has_scope (~> 0.5.0)
-      responders (~> 0.6.0)
-    journey (1.0.4)
-    jquery-rails (3.1.2)
+    inherited_resources (1.6.0)
+      actionpack (>= 3.2, < 5)
+      has_scope (~> 0.6.0.rc)
+      railties (>= 3.2, < 5)
+      responders
+    jquery-datatables-rails (3.3.0)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
+      sass-rails
+    jquery-rails (3.1.3)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (5.0.0)
+    jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
-    json (1.8.2)
+    json (1.8.3)
     kgio (2.9.3)
     libv8 (3.16.14.7)
-    liquid (2.6.1)
+    liquid (3.0.3)
     log-me (0.0.9)
-    mail (2.5.4)
-      mime-types (~> 1.16)
-      treetop (~> 1.4.8)
+    mail (2.6.3)
+      mime-types (>= 1.16, < 3)
+    meta_request (0.3.4)
+      callsite (~> 0.0, >= 0.0.11)
+      rack-contrib (~> 1.1)
+      railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
-    mime-types (1.25.1)
-    mini_magick (3.4)
-      subexec (~> 0.2.1)
-    multi_json (1.10.1)
+    mime-types (2.6.1)
+    mimemagic (0.3.0)
+    mini_magick (4.2.7)
+    minitest (4.7.5)
+    multi_json (1.11.1)
     multi_xml (0.5.5)
     mysql2 (0.3.18)
     net-scp (1.2.1)
@@ -225,10 +217,9 @@ GEM
     net-ssh (2.9.2)
     nokogiri (1.5.11)
     orm_adapter (0.5.0)
-    paranoia (1.3.4)
-      activerecord (~> 3.1)
-    polyglot (0.3.5)
-    power_assert (0.2.2)
+    paranoia (2.1.3)
+      activerecord (~> 4.0)
+    power_assert (0.2.3)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -240,35 +231,32 @@ GEM
       pry (>= 0.9.11)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.4.5)
-    rack-cache (1.2)
-      rack (>= 0.4)
-    rack-ssl (1.3.4)
-      rack
+    rack (1.5.5)
+    rack-contrib (1.2.0)
+      rack (>= 0.9.1)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (3.2.21)
-      actionmailer (= 3.2.21)
-      actionpack (= 3.2.21)
-      activerecord (= 3.2.21)
-      activeresource (= 3.2.21)
-      activesupport (= 3.2.21)
-      bundler (~> 1.0)
-      railties (= 3.2.21)
-    railties (3.2.21)
-      actionpack (= 3.2.21)
-      activesupport (= 3.2.21)
-      rack-ssl (~> 1.3.2)
+    rails (4.0.13)
+      actionmailer (= 4.0.13)
+      actionpack (= 4.0.13)
+      activerecord (= 4.0.13)
+      activesupport (= 4.0.13)
+      bundler (>= 1.3.0, < 2.0)
+      railties (= 4.0.13)
+      sprockets-rails (~> 2.0)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
+    railties (4.0.13)
+      actionpack (= 4.0.13)
+      activesupport (= 4.0.13)
       rake (>= 0.8.7)
-      rdoc (~> 3.4)
-      thor (>= 0.14.6, < 2.0)
+      thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
-    rb-readline (0.5.2)
-    rdoc (3.12.2)
-      json (~> 1.4)
+    rb-readline (0.5.3)
     ref (1.0.5)
-    responders (0.6.5)
+    responders (1.1.2)
+      railties (>= 3.2, < 4.2)
     rspec (2.1.0)
       rspec-core (~> 2.1.0)
       rspec-expectations (~> 2.1.0)
@@ -277,36 +265,38 @@ GEM
     rspec-expectations (2.1.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.1.0)
-    sass (3.4.12)
-    sass-rails (3.2.6)
-      railties (~> 3.2.0)
-      sass (>= 3.1.10)
-      tilt (~> 1.3)
+    sass (3.4.15)
+    sass-rails (5.0.3)
+      railties (>= 4.0.0, < 5.0)
+      sass (~> 3.1)
+      sprockets (>= 2.8, < 4.0)
+      sprockets-rails (>= 2.0, < 4.0)
+      tilt (~> 1.1)
     sax-machine (0.1.0)
       nokogiri (> 0.0.0)
-    simple_form (2.0.3)
-      actionpack (~> 3.0)
-      activemodel (~> 3.0)
+    simple_form (3.1.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     slim (1.2.1)
       temple (~> 0.4.0)
       tilt (~> 1.3.3)
     slop (3.6.0)
-    sprockets (2.2.3)
-      hike (~> 1.2)
-      multi_json (~> 1.0)
+    sprockets (3.2.0)
       rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
+    sprockets-rails (2.3.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.10)
-    sshkit (1.6.1)
+    sshkit (1.7.1)
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     state_machine (1.2.0)
-    subexec (0.2.3)
     temple (0.4.1)
-    test-unit (3.0.9)
+    test-unit (3.1.2)
       power_assert
-    therubyracer (0.12.1)
+    therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
     thin (1.6.3)
@@ -314,23 +304,21 @@ GEM
       eventmachine (~> 1.0)
       rack (~> 1.0)
     thor (0.19.1)
-    thread_safe (0.3.4)
+    thread_safe (0.3.5)
     tilt (1.3.7)
     tinymce-rails (4.1.6)
       railties (>= 3.1.1)
-    treetop (1.4.15)
-      polyglot
-      polyglot (>= 0.3.1)
     turn (0.8.3)
       ansi
-    tzinfo (0.3.43)
-    uglifier (2.7.0)
+    tzinfo (0.3.44)
+    uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.8.3)
+    unicorn (4.9.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    uniform_notifier (1.9.0)
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.7)
@@ -341,17 +329,20 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ancestry (= 1.3.0)
+  ancestry (= 2.1.0)
+  better_errors
+  binding_of_caller
+  bullet
   capistrano (= 3.2.1)
   capistrano-bundler (~> 1.1.3)
   capistrano-rails (~> 1.1.1)
   capistrano-rbenv (~> 2.0.2)
-  carrierwave (= 0.6.2)
-  coffee-rails (~> 3.2.1)
+  carrierwave (= 0.7.0)
+  coffee-rails (>= 4.0.0)
   correios-frete (= 1.6.1)
   country_select (= 0.0.1)
-  delocalize (= 0.3.2)
-  devise
+  delocalize
+  devise (= 3.5.1)
   devise-encryptable
   execjs
   fabrication (= 2.11.3)
@@ -362,28 +353,29 @@ DEPENDENCIES
   imentore-core!
   imentore-dashboard!
   imentore-ecommerce!
-  inherited_resources (= 1.3.0)
-  jquery-datatables-rails!
-  jquery-rails (= 3.1.2)
-  jquery-ui-rails (= 5.0.0)
-  liquid (= 2.6.1)
-  mini_magick (= 3.4)
-  moip-ruby (= 0.1.2)!
+  inherited_resources (= 1.6.0)
+  jquery-datatables-rails (= 3.3.0)
+  jquery-rails (= 3.1.3)
+  jquery-ui-rails (= 5.0.5)
+  liquid (= 3.0.3)
+  meta_request
+  mini_magick (= 4.2.7)
+  moip-ruby (= 0.1.3)!
   mysql2
   pag_seguro (= 0.1.18)!
   pagamento_digital!
   paperclip!
-  paranoia (~> 1.0)
+  paranoia (~> 2.0)
   personhood!
   pry (= 0.10.1)
   pry-nav (= 0.2.4)
   pry-stack_explorer (= 0.4.9.1)
   quiet_assets
-  rails (= 3.2.21)
+  rails (= 4.0.13)
+  rails-observers
   rb-readline
-  ruby-plesk!
-  sass-rails (~> 3.2.5)
-  simple_form (= 2.0.3)
+  sass-rails (>= 4.0.0)
+  simple_form (= 3.1.0)
   slim (= 1.2.1)
   sqlite3
   state_machine (= 1.2.0)
@@ -392,7 +384,10 @@ DEPENDENCIES
   thin
   tinymce-rails
   turn (~> 0.8.3)
-  uglifier (>= 1.0.3)
+  uglifier (>= 1.3.0)
   unicorn
   will_paginate (= 3.0.7)
   will_paginate-bootstrap (= 0.2.5)
+
+BUNDLED WITH
+   1.10.5

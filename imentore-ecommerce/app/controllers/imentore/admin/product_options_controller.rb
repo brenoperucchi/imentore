@@ -34,6 +34,12 @@ module Imentore
       def update
         update! { admin_product_options_path(@product) }
       end
+
+      protected
+      def option_params
+        params.require(:option).permit(:name, :handle)
+      end
+
     end
   end
 end

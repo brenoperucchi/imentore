@@ -6,15 +6,15 @@ module Old
       "imentore_products"
     end
 
-    scope :not_deleted, where(deleted_at: nil)
-    scope :sellable, where(sellable: true)
+    scope :not_deleted, -> { where(deleted_at: nil) }
+    scope :sellable, -> { where(sellable: true) }
 
     has_many :categories_products
     has_many :categories, :through => :categories_products, :source => :category
 
-    has_many :variants,
-      :class_name => Old::ProductVariant,
-      :dependent => :destroy
+    # has_many :variants,
+    #   :class_name => Old::ProductVariant,
+    #   :dependent => :destroy
 
     has_many :images,
       :as => :imageable,

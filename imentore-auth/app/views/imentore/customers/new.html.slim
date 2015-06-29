@@ -1,28 +1,39 @@
 - content_for :header do
   = stylesheet_link_tag "cart"
 
-.container
-  Legend= t(:new_customer)
+- content_for :javascript do
+  = javascript_include_tag "jquery_ujs"
 
-  = simple_form_for @customer, :html => {:class => 'form-horizontal'} do |f|
-    .row
-      .span12
+.container
+  .col-md-12
+    .box.text-center
+      h1= t(:new_customer)
+  .col-md-12
+    .box
+      = simple_form_for @customer, :html => {:class => 'form-horizontal'}, wrapper: :horizontal_form,
+        wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes,
+        radio_buttons: :horizontal_radio_and_checkboxes,
+        file: :horizontal_file_input,
+        boolean: :horizontal_boolean } do |f|
         .row
-          .span6
-            = f.input :person_type, :collection => [[t(:person), 'person'], [t(:company), 'company']] , :as => :radio_buttons, 
-              checked: f.object.person_type
-            = f.input :gender, :collection => [t(:woman), t(:male)],:as => :radio_buttons
-            = f.input :name
-            = f.input :brand
-            = f.input :irs_id
-            = f.input :birthdate, input_html: {:style=>"width:auto;"}, :as => :date, :start_year => 1900, :end_year => Date.today.year - 8, :order => [ :day, :month, :year], :required => true
-            = f.simple_fields_for :user do |user|
-                = user.input :email
-                = user.input :password
-                = user.input :password_confirmation
-          .span6
-            - f.object.addresses.build if f.object.addresses.blank? 
-            = f.simple_fields_for :addresses do |addr|
-              = render("shared/address", addr: addr)
-              
-    = f.button :submit
+          .col-md-12
+            .row
+              .col-md-6
+                = f.input :person_type, :collection => [[t(:person), 'person'], [t(:company), 'company']] , :as => :radio_buttons, 
+                  checked: f.object.person_type
+                = f.input :name
+                = f.input :brand
+                = f.input :irs_id
+                = f.input :birthdate, input_html: {:style=>"width:auto;"}, :as => :date, :start_year => 1900, :end_year => Date.today.year - 8, :order => [ :day, :month, :year], :required => true
+                = f.simple_fields_for :user do |user|
+                    = user.input :email
+                    = user.input :password
+                    = user.input :password_confirmation
+              .col-md-6
+                = f.input :gender, :collection => [t(:woman), t(:male)],:as => :radio_buttons
+                - f.object.addresses.build if f.object.addresses.blank? 
+                = f.simple_fields_for :addresses, wrapper: 'inline_form' do |addr|
+                  = render("shared/address", addr: addr)
+        .box-footer
+          .pull-right
+            = f.button :submit, class: 'btn btn-primary'

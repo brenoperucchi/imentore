@@ -5,7 +5,7 @@ module Imentore
       # actions :new, :create, :destroy, :index
       # belongs_to :theme
       respond_to :html, :json, only: [:create, :index, :destroy]
-      # skip_before_filter :verify_authenticity_token, :if => Proc.new {|c| c.request.format == 'application/json'}
+      # skip_before_action :verify_authenticity_token, :if => Proc.new {|c| c.request.format == 'application/json'}
 
       def index
         @theme = current_store.themes.find(params[:theme_id])
@@ -14,7 +14,7 @@ module Imentore
       end
 
       def create
-        @asset = current_store.themes.find(params[:theme_id]).assets.new(params[:asset])
+        @asset = current_store.themes.find(params[:theme_id]).assets.new(asset_params)
         respond_to do |format|
           if @asset.save
             format.json {
@@ -33,6 +33,10 @@ module Imentore
 
       def begin_of_association_chain
         current_store
+      end
+
+      def asset_params
+        params.require(:asset).permit(:file)
       end
     end
   end

@@ -7,15 +7,15 @@ require "imentore-core/version"
 Gem::Specification.new do |s|
   s.name        = "imentore-core"
   s.version     = Imentore::Core::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ImentoreCore."
-  s.description = "TODO: Description of ImentoreCore."
+  s.authors     = ["Breno Perucchi"]
+  s.email       = ["bperucchi@gmail.com"]
+  s.homepage    = ""
+  s.summary     = "Summary of ImentoreUser."
+  s.description = "Description of ImentoreUser."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "rails", "~> 3.2.3"
+  # s.add_dependency "rails", "~> 3.2.3"
   s.add_dependency 'country_select', '0.0.1'
   # s.add_dependency "jquery-rails"
 

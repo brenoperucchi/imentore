@@ -4,7 +4,7 @@ Imentore::Client::BaseController.class_eval do
   #   resource.userable.owner? ? admin_dashboard_path : client_dashboard_path
   # end
 
-  before_filter :authorize_client
+  before_action :authorize_client
 
   def authorize_client
     if(user_signed_in? && (current_user.userable.owner? || current_user.userable.admin?))

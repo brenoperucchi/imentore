@@ -9,7 +9,7 @@ module Imentore
     end
 
     def create
-      @customer = Imentore::Customer.new(params[:customer])
+      @customer = Imentore::Customer.new(customer_params)
       @customer.store = current_store
       @customer.user.store = current_store
       create! do |success, failure|
@@ -25,6 +25,12 @@ module Imentore
     end
 
     protected
+
+    def customer_params
+      params.require(:customer).permit(:person_type, :name, :brand, :irs_id, :birthdate, :gender,
+                                        user_attributes:[:email, :password, :password_confirmation], 
+                                        addresses_attributes:[:name, :street, :complement, :city, :country, :state, :zip_code, :phone])
+    end
 
     def begin_of_association_chain
       current_store

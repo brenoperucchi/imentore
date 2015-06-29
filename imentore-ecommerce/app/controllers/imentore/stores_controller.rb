@@ -2,7 +2,7 @@ module Imentore
   class StoresController < BaseController
     inherit_resources
 
-    skip_before_filter :check_store, only: [:new, :create, :create_success]
+    skip_before_action :check_store, only: [:new, :create, :create_success]
 
     def contact
       

@@ -13,8 +13,8 @@ Imentore::Core::Engine.routes.draw do
   devise_scope :user do
     get '/client/login',   to: 'client/sessions#new',    as: 'new_client_session'
     post '/client/login',  to: 'client/sessions#create', as: 'client_session'
-    delete '/client/logout',  to: 'client/sessions#destroy', as: 'destroy_client_session'
-    get '/client/logout',  to: 'client/sessions#destroy', as: 'destroy_client_session'
+    # delete '/client/logout',  to: 'client/sessions#destroy', as: 'destroy_client_session'
+    match '/client/logout',  to: 'client/sessions#destroy', as: 'destroy_client_session', via:[:delete, :get]
   end
 
   devise_scope :user do

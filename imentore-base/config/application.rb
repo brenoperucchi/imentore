@@ -2,12 +2,13 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-if defined?(Bundler)
+# if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  # Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
-end
+# end
+Bundler.require(:default, Rails.env)
 
 module ImentoreBase
   class Application < Rails::Application
@@ -24,7 +25,7 @@ module ImentoreBase
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-    config.active_record.observers = :order_observer, :invoice_observer, :delivery_observer, :customer_observer
+    # config.active_record.observers = :order_observer, :invoice_observer, :delivery_observer, :customer_observer
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

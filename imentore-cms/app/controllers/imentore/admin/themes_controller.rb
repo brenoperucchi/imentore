@@ -3,7 +3,7 @@ module Imentore
     class ThemesController < Admin::BaseController
       inherit_resources
 
-      before_filter :uniqueness_active, only:[:update, :create]
+      before_action :uniqueness_active, only:[:update, :create]
 
 
       def create
@@ -22,6 +22,10 @@ module Imentore
       end
       
       protected
+
+      def theme_params
+        params.require(:theme).permit(:active)
+      end
 
       def uniqueness_active
         if params[:theme][:active] == '1'

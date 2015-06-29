@@ -5,7 +5,7 @@ module Imentore
     validates :name, presence: true
     validates :handle, uniqueness: { scope: :store_id }
     # validates :handle, format: { with: /^[-A-Za-z\d_]+$/ }
-    scope :active, where(active: true)
+    scope :active, -> { where(active: true) }
 
     def handle
       return if read_attribute(:name).blank?
