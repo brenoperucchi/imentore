@@ -24,7 +24,16 @@ module LiquidFilterPaginate
     @context.registers[:controller].params[param] 
   end
 
-  def per_page(paginate, per_page)
+  def param_active(param, value, default = nil)
+    if @context.registers[:controller].params[param.to_sym] == value 
+      "active" 
+    elsif 
+      @context.registers[:controller].params[param.to_sym].blank? and value == default
+      "active" 
+    end
+  end
+
+  def per_page_url(paginate, per_page)
     current_url = @context.registers[:controller].request.fullpath.gsub(/(per_page=)[0-9]+&?/, '')
     current_url = current_url.gsub(/(page=)[0-9]+&?/, '')
     current_url = current_url.slice(0..-2) if current_url.last == '?' || current_url.last == '&'

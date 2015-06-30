@@ -82,18 +82,7 @@ module Imentore
                                         variants_attributes: [:price, :quantity, :weight])
                                             #.tap {|whitelisted| whitelisted[:category_ids] = params[:product][:category_ids] end
       end
-      # def resource_params
-      #     params.require(:project).permit(:name, :description)
-      # end
-
-      # def permitted_params
-      #   {:product => params.fetch(:product, {}).permit(:name:, :description, variants_attributes: [:price, :quantity, :weight])}
-      # end
-
-      # def build_resource_params
-      #   [params.fetch(:product, {}).permit(:name:, :description, variants_attributes: [:price, :quantity, :weight])]
-      # end
-
+      
     end
   end
 end
