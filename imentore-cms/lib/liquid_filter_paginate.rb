@@ -57,8 +57,8 @@ module LiquidFilterPaginate
       elsif part['title'].to_i == paginate['current_page'].to_i
         # html << %(<li class="page active">#{part['title']}</li>)
         html << %(<li class="active">#{link_to(part['title'], '#')}</li>)
-      else
-        html << %(<li>#{part['title']}</li>)
+      # else
+      #   html << %(<li>#{part['title']}</li>)
      end
     end
     html << %(<li class="next">#{link_to(paginate['next']['title'], paginate['next']['url'])}</li>) if paginate['next']
