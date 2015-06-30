@@ -133,6 +133,7 @@ require 'i18n'
 
       def link(title, page)
         _current_url = %(#{current_url}#{current_url.include?('?') ? '&' : '?'}page=#{page})
+        _current_url += "#{_current_url.include?('?') ? '&' : '?'}per_page=#{per_page}"
         { 'title' => title, 'url' => _current_url, 'is_link' => true }
       end
 
