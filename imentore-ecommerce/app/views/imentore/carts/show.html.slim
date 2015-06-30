@@ -5,7 +5,7 @@
 
 - content_for :javascript do
   = javascript_include_tag "jquery_ujs"
-  = javascript_include_tag current_store.theme.assets.find_by_file('cart.js').file_url
+  = javascript_include_tag current_store.theme.assets.find_by_file('cart.js').try(:file_url)
   javascript:
     $(document).ready(function(){
       function calculate_items(){
