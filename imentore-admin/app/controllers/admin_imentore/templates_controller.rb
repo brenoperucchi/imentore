@@ -57,6 +57,12 @@ module AdminImentore
       flash[:success] = "Successfully created..."
       redirect_to admin_imentore_theme_templates_path(params[:theme_id])
     end
+    
+    protected
+    def template_params
+      params.require(:admin_imentore_template).permit(:default, :body, :path, :kind, :layout_id)
+    end
+
 
   end
 end
