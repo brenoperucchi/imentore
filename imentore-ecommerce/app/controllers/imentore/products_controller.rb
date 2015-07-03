@@ -19,9 +19,20 @@ module Imentore
     end
 
     def search
-      @product_search = Imentore::ProductSearchDrop.new(params[:name]) if params[:name].present?
-      @products = current_store.products.active.product_search(params[:name]).map {|p| Imentore::ProductDrop.new(p)}
-      @products ||= []
+      if params[:name].present?
+        redirect_to products_result_path(name: params[:name])
+      else
+        @products = []          
+        render :result
+      end
+
+    end
+
+    def result
+      @product = Imentore::ProductSearchDrop.new(params[:name]) 
+      @products_model = current_store.products.active.product_search(params[:name])
+      @products = @products_model.map {|p| Imentore::ProductDrop.new(p)}
+      @products ||= []          
     end
 
   end

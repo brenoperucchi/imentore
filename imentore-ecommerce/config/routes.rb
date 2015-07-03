@@ -41,7 +41,8 @@ Imentore::Core::Engine.routes.draw do
     get "store/success",              to: "stores#create_success"
     get "contact",                    to: "stores#contact",       as: "store_contact"
     get "product/:handle",            to: "products#handle",      as: 'product_handle'
-    get "product_search/:name",       to: "products#search",      as: 'product_search'
+    post  "products/search",           to: "products#search",      as: 'products_search'
+    get   "products/result/:name",     to: "products#result",      as: 'products_result'
     get "notices/:handle",            to: "notices#show",         as: "notices"
     get "pages/:page",                to: "pages#show",           as: "pages"
     get "categories/*categories",     to: "categories#index",     as: "categories"

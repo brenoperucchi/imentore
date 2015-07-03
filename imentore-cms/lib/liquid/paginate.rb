@@ -49,26 +49,28 @@ require 'i18n'
           context['paginate'] = pagination
           
           collection_model = @context.registers[:action_view].assigns["products_model"]
-          paginate_collection = collection_model.paginate(
-            :page       => current_page,
-            :per_page   => per_page)  
-          new_collection = paginate_collection.map{|product| Imentore::ProductDrop.new(product)}
-          context[@collection_name] = new_collection
+          if collection_model
+            paginate_collection = collection_model.paginate(
+              :page       => current_page,
+              :per_page   => per_page)  
+            new_collection = paginate_collection.map{|product| Imentore::ProductDrop.new(product)}
+            context[@collection_name] = new_collection
+          end
 
 
           collection_size  = context[@collection_name].size
 
           raise ArgumentError.new("Cannot paginate array '#{@collection_name}'. Not found.") if collection_size.nil?
 
-          page_count = paginate_collection.total_pages
+          page_count = paginate_collection.try(:total_pages) || 0
 
           pagination['current_offset']  = (current_page-1) * per_page
           pagination['current_page']    = current_page
           pagination['page_size']       = per_page
           pagination['pages']           = page_count
 
-          pagination['items']           = paginate_collection.total_entries
-          pagination['items_page']      = paginate_collection.count
+          pagination['items']           = paginate_collection.try(:total_entries)
+          pagination['items_page']      = paginate_collection.try(:count)
 
           pagination['previous']   = link(I18n.t(:previous_label, scope: 'will_paginate').html_safe, current_page - 1) unless 1 >= current_page
           pagination['next']       = link(I18n.t(:next_label, scope: 'will_paginate').html_safe, current_page + 1) unless page_count < current_page + 1

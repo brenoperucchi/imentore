@@ -17,7 +17,7 @@ module Imentore
 
     scope :active,         -> { where(active: true) }
     scope :featured,       -> { where(featured: true) }
-    scope :product_search, -> (object){ where("name like ?", "%#{search}%") }
+    scope :product_search, -> (object){ where("name like ?", "%#{object}%") }
 
     validates :name, :handle, :store, presence: true
     validates :handle, uniqueness: { scope: :store_id }
