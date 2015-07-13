@@ -40,7 +40,7 @@ module Imentore
 
       def update
         @product = current_store.products.find_by_id(params[:id])
-        @product.attributes = permitted_params
+        @product.attributes = product_params
         update! do |success, failure|
           success.html do
             @product.product_brand = current_store.product_brands.find_by_name(params[:product][:product_brand_name])
