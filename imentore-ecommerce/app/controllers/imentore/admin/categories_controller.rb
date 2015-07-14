@@ -22,7 +22,7 @@ module Imentore
       def create
         respond_to do |wants|
           wants.html do
-            @category = current_store.categories.new(permitted_params)
+            @category = current_store.categories.new(category_params)
             @category.parent = current_store.categories.find_by_id(params[:category][:ancestry])
             if @category.save
               redirect_to admin_categories_path
@@ -48,7 +48,7 @@ module Imentore
 
       protected
 
-      def permitted_params
+      def category_params
         params.require(:category).permit(:name, :handle, :ancestry)
       end
 

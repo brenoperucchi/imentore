@@ -15,7 +15,7 @@ module Imentore
       def update
         @product = current_store.products.find(params[:product_id])
         @variant = @product.variants.find(params[:id])
-        @variant.attributes = permitted_params
+        @variant.attributes = variant_params
         update! do |success, failure|
           success.html {
             flash[:success] = "Atualizado com sucesso"
@@ -46,7 +46,7 @@ module Imentore
 
       def create
         @product = current_store.products.find(params[:product_id])
-        @variant = @product.variants.new(permitted_params)
+        @variant = @product.variants.new(variant_params)
         @variant.options.delete_all
         @variant.transaction do
           @variant.save
@@ -67,7 +67,7 @@ module Imentore
 
       protected
 
-      def permitted_params
+      def variant_params
         params.require(:variant).permit(:sku, :quantity, :weight, :price, :price_deal, options_attributes:[:option_type_id, :value, :id])
       end
 

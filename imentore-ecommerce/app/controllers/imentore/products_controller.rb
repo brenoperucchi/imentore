@@ -25,7 +25,6 @@ module Imentore
         @products = []          
         render :result
       end
-
     end
 
     def result
