@@ -9,9 +9,9 @@ module LiquidFilterPaginate
 
   def option_select(selected, value, name)
     if selected != value
-      "<option id=#{name} value=#{value} label=#{name}>#{name}</option>"
+      "<option label='#{name}' id='#{name}' value='#{value}')/>"
     else
-      "<option id=#{name} value=#{value} label=#{name} selected='selected'>#{name}</option>"
+      "<option label='#{name}' id='#{name}' value='#{value}' selected='selected')/>"
     end
   end
 
