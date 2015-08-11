@@ -1,8 +1,5 @@
 module Imentore
   class Product < ActiveRecord::Base
-    acts_as_paranoid
-
-    before_destroy :destroy_disabled
 
     attr_accessor :product_brand_name
 
@@ -27,10 +24,6 @@ module Imentore
 
     def low_price
       
-    end
-
-    def destroy_disabled
-      update_column(:active, 0)
     end
 
     def handle

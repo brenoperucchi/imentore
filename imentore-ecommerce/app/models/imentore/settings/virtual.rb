@@ -2,8 +2,7 @@ module Imentore
   class Settings
     module Virtual
       def self.attributes
-        #, :limit_product_newest, :limit_product_featured]
-        [:authenticate_to_buy, :store_zip_code, :order_asset, :email_contact, :site, :time_zone]
+        [:authenticate_to_buy, :store_zip_code, :order_asset, :email_contact, :site, :time_zone, :limit_product_newest, :limit_product_featured]
       end
 
       attr_accessor *attributes
@@ -35,13 +34,13 @@ module Imentore
         @time_zone || 'Brasilia'
       end
 
-      # def limit_product_featured
-      #   @limit_product_featured || 30
-      # end
+      def limit_product_featured
+        @limit_product_featured || 30
+      end
 
-      # def limit_product_newest
-      #   @limit_product_featured || 30
-      # end
+      def limit_product_newest
+        @limit_product_featured || 30
+      end
 
     end
   end

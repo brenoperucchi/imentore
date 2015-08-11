@@ -71,7 +71,7 @@ module ApplicationHelper
         " " + I18n.t(status)
       end)
     when 'canceled', false
-      concat(link_to("#", class: 'btn btn-small disabled btn-warning') do
+      concat(link_to("#", class: 'btn btn-small disabled btn-danger') do
         content_tag(:i, '', :class=>'icon-white icon-remove') +
         " " + I18n.t(status)
       end)

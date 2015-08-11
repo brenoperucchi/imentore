@@ -18,12 +18,12 @@ module Imentore
         @variant.attributes = variant_params
         update! do |success, failure|
           success.html {
-            flash[:success] = "Atualizado com sucesso"
+            flash[:success] = "Variant was successfully updated."
             redirect_to admin_product_variants_path(@product)
           }
           failure.html {
             requires
-            # flash[:alert] = "Não foi atualizado!"
+            flash[:alert] = "Variant was not updated."
             render :index }
         end
       end
@@ -35,13 +35,6 @@ module Imentore
       end
 
       def new
-      end
-
-      def destroy
-        destroy! do 
-          flash[:success] = "Removido com sucesso"
-          admin_product_variants_path(@product) 
-        end
       end
 
       def create
@@ -56,12 +49,12 @@ module Imentore
         end
         if @variant.save
           @variant_update = @product.variants.first
-          flash[:success] = "Criado com sucesso"
+          flash[:success] = "Variant was successfully created."
           redirect_to admin_product_variants_path(@product)
         else
-          @variant_update = nil
-          # flash[:alert] = "Variant was not created."
-          render "index"
+          @variant_update = @product.variants.first
+          flash[:alert] = "Variant was not created."
+          render :index
         end
       end
 

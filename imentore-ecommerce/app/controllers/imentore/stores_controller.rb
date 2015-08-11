@@ -43,8 +43,8 @@ module Imentore
 
     def show
       store = current_store
-      @products = store.products.active.order('id desc').map { |product| ProductDrop.new(product) }
-      @features = store.products.active.featured.order('id desc').map { |product| ProductDrop.new(product) }
+      @products = store.products.active.limit(current_store.config.limit_product_newest).order('id desc').map { |product| ProductDrop.new(product) }
+      @features = store.products.active.featured.limit(current_store.config.limit_product_featured).order('id desc').map { |product| ProductDrop.new(product) }
     end
   end
 end
