@@ -30,6 +30,7 @@ module Imentore
     # validates_length_of :password, :within => Devise.password_length, :allow_blank => true, :if => :password_required
     
     validates :email, uniqueness: { :case_sensitive => false, :allow_blank => true, scope: [:email, :store_id] }, :if => :email_changed?    
+    validates_format_of :email, with: Devise::email_regexp, allow_blank: true
     validates :password, :email, presence: true, on: :create
     validates :password, confirmation: true
 

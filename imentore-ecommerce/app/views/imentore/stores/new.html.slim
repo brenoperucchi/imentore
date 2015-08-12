@@ -4,99 +4,6 @@
   meta[name='description' content='Registre uma Loja Virtual Grátis e em poucos começe a vender.']
   
   css:
-    / .form-horizontal .control-group {
-    / margin-bottom: 18px;
-    / }
-    / form-horizontal .control-group::before, .form-horizontal .control-group::after {
-    / display: table;
-    / content: "";
-    / }
-    form.new_user div.control-group {
-      margin-bottom:15px;
-      margin-top:15px;
-    }
-    .section-large .section-body {
-      padding: 18px 20px 0;
-    }
-    div.container div.section-header{
-      padding:10px;
-      padding-left:18px;
-    }
-    div.container div.section-header h3{
-      margin: 0;
-      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-      font-weight: bold;
-      color: #333;
-      text-rendering: optimizelegibility;
-      color: #555;
-      text-transform: uppercase;
-      text-shadow: 1px 1px 0 white;
-    }
-    .help-block, .help-inline {
-    color: #999;
-    margin: 0 0 0px;
-    font-family: "Lucida Grande",Verdana,sans-serif;
-    font-size: 12px;
-    line-height: 18px;
-    }
-    .form-actions {
-    padding: 17px 20px 18px;
-    margin-top: 18px;
-    margin-bottom: 18px;
-    background-color: whiteSmoke;
-    border-top: 1px solid #DDD;
-    }
-    .alert {
-    padding: 8px 35px 8px 14px;
-    margin-bottom: 18px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-    background-color: #FCF8E3;
-    border: 1px solid #FBEED5;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    color: #C09853;
-    }
-    .alert-info {
-    background-color: #D9EDF7;
-    border-color: #BCE8F1;
-    color: #3A87AD;
-    }
-    .btn-primary {
-    background-color: #4296EB!important;
-    background-image: -moz-linear-gradient(top, #4E9FEA, #3289ED);
-    background-image: -ms-linear-gradient(top, #4E9FEA, #3289ED);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4E9FEA), to(#3289ED));
-    background-image: -webkit-linear-gradient(top, #4E9FEA, #3289ED);
-    background-image: -o-linear-gradient(top, #4E9FEA, #3289ED);
-    background-image: linear-gradient(top, #4E9FEA,#3289ED);
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF4E9FEA', endColorstr='#FF3289ED', GradientType=0);
-    border-color: #3289ED #3289ED #1163C2;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) fadein(rgba(0, 0, 0, 0.1), 15%);
-    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-    }
-    button, input[type="button"], input[type="reset"], input[type="submit"] {
-    cursor: pointer;
-    -webkit-appearance: button;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    color: white;
-    }
-    input[type="button"], input[type="reset"], input[type="submit"] {
-    width: auto;
-    height: auto;
-    }
-    .btn {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    }
-    .btn-large {
-      padding: 9px 14px;
-      font-size: 15px;
-      line-height: normal;
-      -webkit-border-radius: 5px;
-      -moz-border-radius: 5px;
-      border-radius: 5px;
-    }
 
 
 #login.container[style='padding-top:20px']
@@ -119,7 +26,7 @@
           /       = user.input :password_confirmation
           /   = f.button :submit, class: 'btn-success'
 
-          = simple_form_for @store, url: stores_path , html: {id: 'new_user', class: 'new_user'} do |f|
+          = simple_form_for @store, url: stores_path, :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
             = f.error_notification
             / .controls-group
             / label for="user_full_name"
@@ -131,10 +38,11 @@
             /     / | National ID
             /   = f.label :irs_id
             /   = f.text_field :irs_id, class: 'span6', style:'margin-left:20px'
-            = f.input :url, label: "Endereço:", :wrapper => :append do
-              span.inline[style='margin-left:20px;']
+            = f.input :url, label: "Endereço:", wrapper: :append do
+              span.inline.pull-left[style='margin-left:20px;']
                 | http://
-              = f.input_field :url, class: 'span3', style:"float:none"
+              .col-md-3
+                = f.input_field :url, class: 'span3 string required form-control', style:"float:none"
               = select_tag 'url_domain', options_for_select(['.imentore.com.br']), {class: :span3, disabled: true}
               p[class="help-block" style='margin-left:190px']
                 | * exemplo: minhaloja 
@@ -179,7 +87,7 @@
             .form-actions
               .alert.alert-info[style='text-align:;']
                 / = f.input :term, as: 'check_boxes', :wrapper => :inline_checkbox
-                = f.input :term, :wrapper => :inline_checkbox, :wrapper_tag => false, :as => :boolean, :label => false, :boolean_style => :inline
+                = f.input :term, :wrapper => :inline_checkbox, :as => :boolean, :label => false, :boolean_style => :inline
                 '
                 | Concordo com 
                 a[data-toggle="modal" href="#orderAssets"]

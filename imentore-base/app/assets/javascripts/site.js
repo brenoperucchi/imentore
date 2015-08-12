@@ -6,5 +6,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require bootstrap3
 //= require site/site_index

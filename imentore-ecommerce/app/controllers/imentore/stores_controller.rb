@@ -16,11 +16,12 @@ module Imentore
     end
 
     def create
-      @store = Store.new(params[:store])
+      @store = Imentore::Store.new(store_params)
       @store.brand = @store.url.capitalize
       @store.name = @store.url.capitalize
       @store.owner.user.store = @store
       @store.owner.person_type = 'person'
+      @store.owner.department = 'owner'
       @store.config.email_contact = @store.owner.user.email
       respond_to do |wants|
         wants.html {  
@@ -35,6 +36,7 @@ module Imentore
               redirect_to "http://#{@store.url}.imentore.com.br"
             end
           else
+            binding.pry
             render :new
           end
         }
@@ -45,6 +47,12 @@ module Imentore
       store = current_store
       @products = store.products.active.order('id desc').map { |product| ProductDrop.new(product) }
       @features = store.products.active.featured.order('id desc').map { |product| ProductDrop.new(product) }
+    end
+
+    protected
+
+    def store_params
+      params.require(:store).permit(:url, :irs_id, :plan_id, :term, owner_attributes: [:id, :name, :irs_id, user_attributes:[:password, :email] ])
     end
   end
 end
