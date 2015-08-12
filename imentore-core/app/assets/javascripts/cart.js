@@ -1,3 +1,3 @@
 //= require jquery
 //= require jquery.session
-//= require bootstrap
+//= require bootstrap2
