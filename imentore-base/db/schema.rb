@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141106230833) do
+ActiveRecord::Schema.define(:version => 20150319065954) do
 
   create_table "admin_imentore_assets", :force => true do |t|
     t.string   "file"
@@ -247,7 +247,10 @@ ActiveRecord::Schema.define(:version => 20141106230833) do
     t.datetime "updated_at",       :null => false
     t.integer  "user_id"
     t.string   "customer_name"
+    t.datetime "deleted_at"
   end
+
+  add_index "imentore_orders", ["deleted_at"], :name => "index_imentore_orders_on_deleted_at"
 
   create_table "imentore_pages", :force => true do |t|
     t.boolean  "active"
@@ -277,17 +280,20 @@ ActiveRecord::Schema.define(:version => 20141106230833) do
   end
 
   create_table "imentore_product_variants", :force => true do |t|
-    t.decimal "price",       :precision => 10, :scale => 2
-    t.integer "quantity"
-    t.string  "sku"
-    t.decimal "weight",      :precision => 10, :scale => 3
-    t.decimal "height",      :precision => 10, :scale => 3
-    t.decimal "width",       :precision => 10, :scale => 3
-    t.decimal "depth",       :precision => 10, :scale => 3
-    t.boolean "deliverable"
-    t.integer "product_id"
-    t.decimal "price_deal",  :precision => 10, :scale => 2
+    t.decimal  "price",       :precision => 10, :scale => 2
+    t.integer  "quantity"
+    t.string   "sku"
+    t.decimal  "weight",      :precision => 10, :scale => 3
+    t.decimal  "height",      :precision => 10, :scale => 3
+    t.decimal  "width",       :precision => 10, :scale => 3
+    t.decimal  "depth",       :precision => 10, :scale => 3
+    t.boolean  "deliverable"
+    t.integer  "product_id"
+    t.decimal  "price_deal",  :precision => 10, :scale => 2
+    t.datetime "deleted_at"
   end
+
+  add_index "imentore_product_variants", ["deleted_at"], :name => "index_imentore_product_variants_on_deleted_at"
 
   create_table "imentore_products", :force => true do |t|
     t.string   "name"
@@ -300,7 +306,10 @@ ActiveRecord::Schema.define(:version => 20141106230833) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "featured"
+    t.datetime "deleted_at"
   end
+
+  add_index "imentore_products", ["deleted_at"], :name => "index_imentore_products_on_deleted_at"
 
   create_table "imentore_send_emails", :force => true do |t|
     t.boolean  "active"

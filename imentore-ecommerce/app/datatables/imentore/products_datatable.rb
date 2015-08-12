@@ -20,7 +20,8 @@ module Imentore
       capture do 
         button_datatable(resource, edit_admin_product_path(resource), 'btn btn-small', 'icon-edit icon-black', 'edit') +
         button_datatable(resource, admin_product_variants_path(resource), 'btn btn-small', 'icon-black icon-plus', 'variants') +
-        button_datatable(resource, admin_product_options_path(resource), 'btn btn-small', 'icon-black icon-share', 'options') 
+        button_datatable(resource, admin_product_options_path(resource), 'btn btn-small', 'icon-black icon-share', 'options') +
+        button_datatable(resource, admin_product_path(resource), 'btn btn-danger btn-small', 'icon-trash icon-white', 'remove', :delete)
       end
     end
 

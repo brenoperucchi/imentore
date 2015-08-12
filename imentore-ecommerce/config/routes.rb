@@ -14,7 +14,7 @@ Imentore::Core::Engine.routes.draw do
       resources :feedbacks, only: [:uodate, :edit, :index, :destroy]
       resources :coupons
       resources :product_brands,  only: [:new, :create]
-      resources :products,  only: [:index, :new, :create, :edit, :update] do
+      resources :products do
         resources :options,  to: "product_options"
         resources :variants, to: 'product_variants' do
           resources :images, only: [:create, :destroy, :index], to: 'images'
