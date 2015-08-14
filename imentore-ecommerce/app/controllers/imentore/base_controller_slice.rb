@@ -3,6 +3,22 @@ Imentore::BaseController.class_eval do
 
   helper_method :current_cart
 
+  def sort_column
+    case params['sort-by']
+    when nil
+      "created_at desc"
+    when "recent"
+      "created_at desc"
+    when "name_a_z"
+      "name desc"
+    when "name_z_a"
+      "name asc"
+    when "price_low"
+      "name desc"
+    end
+  end
+
+
   def current_cart
     @current_cart ||= Imentore::Cart.find_by_id(session[:cart_id])
 

@@ -29,7 +29,7 @@ module Imentore
 
     def result
       @product = Imentore::ProductSearchDrop.new(params[:name]) 
-      @products_model = current_store.products.active.product_search(params[:name])
+      @products_model = current_store.products.active.product_search(params[:name]).order(sort_column)
       @products = @products_model.map {|p| Imentore::ProductDrop.new(p)}
       @products ||= []          
     end
