@@ -10,9 +10,9 @@ Imentore::BaseController.class_eval do
     when "recent"
       "created_at desc"
     when "name_a_z"
-      "name desc"
-    when "name_z_a"
       "name asc"
+    when "name_z_a"
+      "name desc"
     when "price_low"
       "name desc"
     end
