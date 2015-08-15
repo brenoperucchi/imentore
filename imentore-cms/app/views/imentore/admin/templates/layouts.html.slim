@@ -13,20 +13,20 @@
         tr
           td= button_status(template.default, edit_admin_theme_template_path(@theme, template))
           td= link_to(template.path, edit_admin_theme_template_path(@theme, template)) + " "
-          td= l(time_zone(template.admin_template.updated_at)) unless template.admin_template.nil?
+          td= l(time_zone(template.manager_template.updated_at)) unless template.manager_template.nil?
           td
             = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn') do
               i.icon-black.icon-edit
               '
               = t(:edit)
             '
-            - unless template.admin_template.nil?
+            - unless template.manager_template.nil?
               = link_to(view_default_admin_theme_template_path(@theme, template), class: 'btn') do
                 i.icon-black.icon-edit
                 '
                 = t(:view_default)
               '
-            - if template.admin_template.nil?
+            - if template.manager_template.nil?
               = link_to(admin_theme_template_path(@theme, template), method: :delete , class: 'btn btn-danger') do
                 i.icon-white.icon-remove
                 '
