@@ -1,0 +1,13 @@
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => manager_themes_path},{@theme.name => manager_theme_path(@theme)}])
+
+Legend= t(:newo) + ' ' + t(@kind) 
+
+= simple_form_for(@template, url: manager_theme_templates_path(@theme), html: {class: 'form-horizontal'}) do |f|
+  = f.error_notification
+  = f.input :path, label: t("path_#{@kind.downcase}", scope: [:activerecord, :attributes, 'imentore/template'])
+  - if @kind == 'template'
+    = f.input :layout, as: 'radio', collection: @theme.templates.layouts.collect{|x| x.path}
+  = f.input :kind, as: 'hidden', input_html: {value: @kind}
+  = f.input :body
+  = f.button :submit, "#{t(:create)} #{@kind.capitalize}", class: 'btn btn-primary'

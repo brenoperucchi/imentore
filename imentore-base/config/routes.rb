@@ -1,6 +1,5 @@
 ImentoreBase::Application.routes.draw do
   mount Imentore::Core::Engine, at: "/"
-  mount AdminImentore::Admin::Engine, at: "/"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

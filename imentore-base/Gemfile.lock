@@ -33,11 +33,6 @@ GIT
       mimemagic (= 0.3.0)
 
 PATH
-  remote: ../imentore-admin
-  specs:
-    imentore-admin (0.0.1)
-
-PATH
   remote: ../imentore-auth
   specs:
     imentore-auth (0.0.1)
@@ -67,6 +62,11 @@ PATH
   remote: ../imentore-ecommerce
   specs:
     imentore-ecommerce (0.0.1)
+
+PATH
+  remote: ../imentore-manager
+  specs:
+    imentore-manager (0.0.1)
 
 PATH
   remote: ../personhood
@@ -347,12 +347,12 @@ DEPENDENCIES
   execjs
   fabrication (= 2.11.3)
   i18n_alchemy
-  imentore-admin!
   imentore-auth!
   imentore-cms!
   imentore-core!
   imentore-dashboard!
   imentore-ecommerce!
+  imentore-manager!
   inherited_resources (= 1.6.0)
   jquery-datatables-rails (= 3.3.0)
   jquery-rails (= 3.1.3)

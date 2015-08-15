@@ -1,0 +1,52 @@
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'themes' => url_for(:controller => :themes) }])
+
+legend= t(:themes)
+p= link_to(new_manager_theme_path, :class=>'btn btn-primary') do
+  i.icon-white.icon-plus
+  '
+  = t(:newo) + ' ' + t(:theme).downcase
+
+
+table.table
+  thead
+    tr
+      th= t(:name)
+      th= t(:actions)
+  tbody
+    - @themes.each do |theme|
+      tr
+        td= theme.name
+        td
+          = link_to(reinstall_templates_manager_theme_path(theme), class: 'btn btn-danger') do
+            i.icon-black.icon-edit
+            ' Reinstall Templates on Store            
+          '
+          = link_to(install_stores_manager_theme_path(theme), class: 'btn') do
+            i.icon-black.icon-edit
+            ' Install Theme
+          '
+          = link_to(update_stores_manager_theme_path(theme), class: 'btn') do
+            i.icon-black.icon-edit
+            ' Update Theme
+          '
+          = link_to(new_manager_theme_asset_path(theme), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            = t(:asset)
+          '
+          = link_to(manager_theme_templates_path(theme), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            = t(:templates)
+          '
+          = link_to(edit_manager_theme_path(theme), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            = t(:edit)
+          / '
+          / = link_to(manager_theme_path(theme), method: :delete, :class=>"btn btn-danger") do
+          /   i.icon-white.icon-trash
+          /   '
+          /   = t(:remove)
+

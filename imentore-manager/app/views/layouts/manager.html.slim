@@ -1,0 +1,202 @@
+doctype html
+html
+  head
+  title ImentoreBase
+  = stylesheet_link_tag "admin"
+  = javascript_include_tag "admin"
+  = csrf_meta_tags
+  = yield :header
+  css:
+    ul.nav li {
+      cursor:pointer;
+    }
+    body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+          }
+          .sidebar-nav {
+            padding: 9px 0;
+          }
+
+    .mini{
+      width:15%;
+    }
+    .super-mini{
+      width:5%!important;
+    }
+    / table tr th:first-child{
+    /   width:135px;
+    / }
+    form.simple_form.form-inline div.control-group {
+      display: inline-block;
+    }
+    span.help-inline{
+      margin:0px 10px 0px 0px;
+    }
+    .color-white{
+      color:white;
+    }
+    .color-black{
+      color:#333;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    }
+    i.true{
+      background-image:url(/images/admin/success16.png);
+      display: inline-block;
+      width: 16px;
+      height: 15px;
+      line-height: 14px;
+      vertical-align: text-top;
+      background-position: 0px 0px;
+      background-repeat: no-repeat;
+
+    }
+    i.false{
+      background-image:url(/images/admin/failure.png);
+      display: inline-block;
+      width: 16px;
+      height: 15px;
+      line-height: 14px;
+      vertical-align: text-top;
+      background-position: 0px 0px;
+      background-repeat: no-repeat;
+
+    }
+- content_for :footer do
+  javascript:
+    $(document).ready(function(){
+      if ( $('div.alert.alert-success.hide').text().length > 1 ) {
+        $('div.alert.alert-success.hide').slideDown('');
+      }
+      if ( $('div.alert.alert-error.hide').text().length > 1 ) {
+        $('div.alert.alert-error.hide').slideDown('');
+      }
+      $('.close').bind('click',function(){
+        $(this).parents('div.hide').first().slideUp('slow');
+      })
+    })
+
+
+body
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container
+        a.btn.btn-navbar[data-toggle="collapse" data-target=".nav-collapse"]
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.brand[href="/admin"]
+          | Admin Imentore
+        .btn-group.pull-right
+          - if user_signed_in?
+            a(class="btn dropdown-toggle" data-toggle="dropdown" href="#")
+              i(class="icon-user")
+              = t(:user)
+              ':
+              '
+              = current_user.userable.name
+              '
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='#')
+                  = t(:profile)
+              li.divider
+              li
+                = link_to(t(:sign_out), destroy_manager_session_path, method: :delete)
+                / a(href=destroy_admin_session_path)
+                  / | Sign-out
+          - else
+            a(class="btn dropdown-toggle" data-toggle="dropdown" href=new_manager_session_path)
+              i(class="icon-user")
+              '
+              = t(:sign_in)
+              '
+              / span.caret
+            / ul.dropdown-menu
+            /   li
+            /     = link_to("Sign-in", new_admin_session_path)
+            /     a(href='#')
+            /       | Profile
+            /   li.divider
+            /   li
+            /     a(href='#')
+            /       | Sign_out
+
+
+        .nav-collapse
+          ul.nav
+            - if user_signed_in?
+              .tabbable
+              / li#dashboard
+              /   a[href=admin_dashboard_path]
+              /     = t(:dashboard)
+              li#configuration
+                a[]
+                  = t(:configuration)
+              li#management
+                a[]
+                  = t(:management)
+              li#reports
+                a[]
+                  = t(:reports)
+              / | Logged in as
+              / a[]
+              /   '
+              /   = current_user.userable.name
+              / '  and
+              / = link_to("Logout", destroy_admin_session_path, method: :delete)
+            / - else
+            /   p.navbar-text.pull-right
+            /     = link_to "Sign-in", new_admin_session_path
+                / | Sign-in as
+                / a[href="#"]
+
+  = yield :top_nav
+  .container
+    .row
+      .span2
+        - if user_signed_in?
+          .well.sidebar-nav
+            ul.nav.nav-list.dashboard.hide
+              li.nav-header
+                = t(:dashboard)
+              / li
+              /   a[href="#"]
+              /     = t(:Link)
+
+            ul.nav.nav-list.reports.hide
+              li.nav-header
+                = t(:reports)
+              li.action#feedback
+
+            ul.nav.nav-list.configuration.hide
+              li.nav-header
+                = t(:configuration)
+              li.action#stores
+                = link_to(t(:stores), manager_stores_path)
+              li.action#themes
+                = link_to(t(:theme), manager_themes_path)
+              li.action#send_emails
+                = link_to(t(:send_emails), manager_send_emails_path)
+
+            ul.nav.nav-list.management.hide
+      .span10
+        = yield :breadcrumb
+        .notification
+          .div.alert.alert-error.hide
+            a(class="close" data-dismiss="alert" href="#")
+              = "x"
+            = flash[:alert]
+          .div.alert.alert-success.hide
+            a(class="close" data-dismiss="alert" href="#")
+              = "x"
+            = flash[:success]
+        = yield
+    hr
+    footer
+      p
+        | © Imentore 2012
+
+  .footer   
+    = yield :footer

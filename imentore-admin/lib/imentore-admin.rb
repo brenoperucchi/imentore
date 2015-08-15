@@ -1,1 +1,0 @@
-require "imentore-admin/engine"

@@ -75,8 +75,8 @@ module Imentore
       self.delivery_methods.create(name: 'Weight', handle: 'weight')
       self.delivery_methods.create(name: 'Custom', handle: 'custom')
 
-      AdminImentore::SendEmail.install_store(self)
-      AdminImentore::Theme.install_store(self)
+      Imentore::Manager::SendEmail.install_store(self)
+      Imentore::Manager::Theme.install_store(self)
     end
 
     # http://www.ietf.org/rfc/rfc1035.txt

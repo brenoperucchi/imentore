@@ -1,7 +1,7 @@
 module Imentore
   class Theme < ActiveRecord::Base
     belongs_to :store
-    belongs_to :admin_theme, :class_name => AdminImentore::Theme, :foreign_key => "admin_imentore_theme_id"
+    belongs_to :manager_theme, :class_name => Imentore::Manager::Theme, :foreign_key => "admin_imentore_theme_id"
     
     has_many :templates, class_name: Imentore::Template, :dependent => :destroy
     has_many :assets, :dependent => :destroy

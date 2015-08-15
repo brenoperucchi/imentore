@@ -1,0 +1,12 @@
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => manager_themes_path},{@theme.name => manager_theme_path(@theme)}])
+
+Legend= t(:new)
+
+= simple_form_for(@send_email, url: manager_send_emails_path, html: {class: 'form-horizontal'}) do |f|
+  = f.error_notification
+  = f.input :active
+  = f.input :name
+  = f.input :subject
+  = f.input :body,:input_html=> {:style=> 'width:95%; height:300px;'}
+  = f.button :submit

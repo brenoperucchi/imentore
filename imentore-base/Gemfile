@@ -58,7 +58,7 @@ gem 'imentore-auth', path: '../imentore-auth'
 gem 'imentore-ecommerce', path: '../imentore-ecommerce'
 gem 'imentore-dashboard', path: '../imentore-dashboard'
 gem 'imentore-cms', path: '../imentore-cms'
-gem 'imentore-admin', path: '../imentore-admin'
+gem 'imentore-manager', path: '../imentore-manager'
 
 
 # Gems used only for assets and not required

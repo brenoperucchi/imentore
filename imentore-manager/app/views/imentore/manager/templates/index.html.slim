@@ -1,0 +1,69 @@
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :templates) }, { 'templates' => url_for(:controller => :templates) }])
+
+legend= t(:templates)
+p= link_to(new_manager_theme_template_path(@theme, kind: :template), :class=>'btn btn-primary') do
+  i.icon-white.icon-plus
+  '
+  = t(:newo) + ' ' + t(:template).downcase
+
+
+table.table
+  thead
+    tr
+      th= t(:name)
+      th= t(:layout)
+      th= t(:actions)
+  tbody
+    - @templates.templates.each do |template|
+      tr
+        td= template.path
+        td= template.layout
+        td
+          = link_to(edit_manager_theme_template_path(@theme,template), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            = t(:edit)
+          '
+          = link_to(update_stores_manager_theme_template_path(@theme,template), class: 'btn') do
+            i.icon-black.icon-edit
+            ' Updates Template Stores
+          '
+          = link_to(install_stores_manager_theme_template_path(@theme,template), class: 'btn') do
+            i.icon-black.icon-edit
+            ' Install Template Stores
+          / = link_to(admin_template_path(template), method: :delete, :class=>"btn btn-danger") do
+          /   i.icon-white.icon-trash
+          /   '
+          /   = t(:remove)
+
+legend= t(:layouts)
+p= link_to(new_manager_theme_template_path(@theme, kind: :layout), :class=>'btn btn-primary') do
+  i.icon-white.icon-plus
+  '
+  = t(:newo) + ' ' + t(:layout).downcase
+
+
+table.table
+  thead
+    tr
+      th= t(:name)
+      th= t(:actions)
+  tbody
+    - @templates.layouts.each do |template|
+      tr
+        td= template.path
+        td
+          = link_to(edit_manager_theme_template_path(@theme,template), class: 'btn') do
+            i.icon-black.icon-edit
+            '
+            = t(:edit)
+          '
+          = link_to(update_stores_manager_theme_template_path(@theme,template), class: 'btn') do
+            i.icon-black.icon-edit
+            ' Updates Stores Template
+
+          / = link_to(admin_template_path(template), method: :delete, :class=>"btn btn-danger") do
+          /   i.icon-white.icon-trash
+          /   '
+          /   = t(:remove)

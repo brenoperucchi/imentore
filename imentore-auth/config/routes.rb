@@ -23,11 +23,11 @@ Imentore::Core::Engine.routes.draw do
     delete '/admin/logout',  to: 'admin/sessions#destroy', as: 'destroy_admin_session'
   end
 
-  # devise_scope :user do
-  #   get '/admin_imentore/login',   to: 'admin_imentore/sessions#new',    as: 'new_admin_imentore_session'
-  #   post '/admin_imentore/login',  to: 'admin_imentore/sessions#create', as: 'admin_imentore_session'
-  #   delete '/admin_imentore/logout',  to: 'admin_imentore/sessions#destroy', as: 'destroy_admin_imentore_session'
-  # end
+  devise_scope :user do
+    get '/manager/login',   to: 'manager/sessions#new',    as: 'new_manager_session'
+    post '/manager/login',  to: 'manager/sessions#create', as: 'manager_session'
+    delete '/manager/logout',  to: 'manager/sessions#destroy', as: 'destroy_manager_session'
+  end
 
   # match 'admin',              to: "admin/sessions#new", via: "get"
   # match 'client',             to: "client/sessions#new", via: "get"

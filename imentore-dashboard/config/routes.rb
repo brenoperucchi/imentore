@@ -8,6 +8,9 @@ Imentore::Core::Engine.routes.draw do
     root to: "dashboard#index", as: 'dashboard'
   end
   
+  namespace :manager do
+    root to: "dashboard#index", as: 'dashboard'
+  end
   namespace :client do
     resources "address"
     root to: "dashboard#index", as: 'dashboard'

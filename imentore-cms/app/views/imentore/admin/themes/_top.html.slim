@@ -12,11 +12,11 @@
       $('ul.nav.nav-tabs li#'+id).attr('class','active');
     })
 
-- content_for :breadcrumb do
-  == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => admin_themes_path},{@theme.name => admin_theme_path(@theme)}])
+/ - content_for :breadcrumb do
+/  == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => admin_themes_path},{@theme.name => admin_theme_path(@theme)}])
 ul.nav.nav-tabs#myTab
   li#theme
-    = link_to(t('imentore/theme', scope: [:activerecord, :models]), admin_theme_path(@theme))
+    / = link_to(t('imentore/theme', scope: [:activerecord, :models]), admin_theme_path(@theme))
   li#layouts
     = link_to(t(:layouts), layouts_admin_theme_templates_path(@theme))
   li#templates
