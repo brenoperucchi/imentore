@@ -8,6 +8,11 @@ class FileUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   process :set_content_type
+  process :save_content_type_and_size_in_model
+
+  def save_content_type_and_size_in_model
+    model.content_type = file.content_type if file.content_type
+  end
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -15,7 +20,6 @@ class FileUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   storage :file
-  # storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:

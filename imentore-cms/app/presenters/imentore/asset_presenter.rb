@@ -22,7 +22,7 @@ module Imentore
     protected
 
     def thumbnail_url(asset)
-      if asset.file.set_content_type(asset).include?('image')
+      if asset.content_type.include?('image')
         asset.file.try(:url, :super_thumb)
       else
         icon_for(asset.file_identifier, size: '48px')
