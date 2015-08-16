@@ -75,6 +75,20 @@ module Imentore
       self.delivery_methods.create(name: 'Weight', handle: 'weight')
       self.delivery_methods.create(name: 'Custom', handle: 'custom')
 
+      category = self.categories.create(name: "Categoria Exemplo", handle:'categoria_exemplo')
+      product = self.products.create(name: 'Produto Exemplo', description: "Descricao do Produto", active: true, variants_attributes: [{price: 10, quantity: 10, weight: 1}], category_ids:[category.id])
+      default_option = product.options.create(name: I18n.t(:default), handle: I18n.t(:default).to_underscore)
+      variant = product.variants.first
+      variant.options.create(option_type: default_option, value: I18n.t(:default))
+
+      new_image = product.variants.first.images.new
+      new_image.picture = File.open("#{Rails.root}/public/images/product1.jpg")
+      new_image.save
+      new_image = product.variants.first.images.new
+      new_image.picture = File.open("#{Rails.root}/public/images/product2.jpg")
+      new_image.save
+
+
       Imentore::Manager::SendEmail.install_store(self)
       Imentore::Manager::Theme.install_store(self)
     end

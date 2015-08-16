@@ -5,7 +5,7 @@ module Imentore
       defaults :resource_class => Imentore::Store, :collection_name => 'stores', :instance_name => 'store'
 
       def index
-        @old_stores = Old::Store.active
+        @old_stores = []
         @stores = Imentore::Store.all
       end
 

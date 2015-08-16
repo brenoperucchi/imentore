@@ -1,8 +1,6 @@
 module Imentore
   class Template < ActiveRecord::Base
 
-    # include AdminImentore
-
     scope :layouts,   -> { where(kind: 'layout') }
     scope :templates, -> { where(kind: 'template') }
     belongs_to :theme

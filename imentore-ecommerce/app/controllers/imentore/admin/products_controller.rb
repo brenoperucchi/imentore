@@ -29,7 +29,7 @@ module Imentore
           success.html do
             default_option = @product.options.create(name: t(:default), handle: t(:default).to_underscore)
             variant = @product.variants.first
-            variant.options.create(option_type: default_option, value: "default")
+            variant.options.create(option_type: default_option, value: t(:default))
             redirect_to admin_products_path
           end
           failure.html do

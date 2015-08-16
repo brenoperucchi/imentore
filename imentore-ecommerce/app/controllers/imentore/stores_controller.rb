@@ -31,7 +31,7 @@ module Imentore
             Imentore::SendEmailMailer.notice_imentore(@store).deliver
             @store.create_defaults
             if Rails.env == 'development'
-              redirect_to "http://#{@store.url}.imentore.dev:3000" 
+              redirect_to "http://#{@store.url}.imentore.dev:4000" 
             else
               redirect_to "http://#{@store.url}.imentore.com.br"
             end
