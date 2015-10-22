@@ -1,6 +1,6 @@
 ImentoreBase::Application.configure do
   #ADD
-  I18n.enforce_available_locales = false
+  # I18n.enforce_available_locales = false
   config.log_level = :debug
 
   # Settings specified here will take precedence over those in config/application.rb
@@ -26,21 +26,10 @@ ImentoreBase::Application.configure do
   config.active_support.deprecation = :debug
 
   ## RAILS 4
-    # # Only use best-standards-support built into browsers
-    # config.action_dispatch.best_standards_support = :builtin
-
-    # # Raise exception on mass assignment protection for Active Record models
-    # config.active_record.mass_assignment_sanitizer = :strict
-
-    # # Log the query plan for queries taking more than this (works
-    # # with SQLite, MySQL, and PostgreSQL)
-    # config.active_record.auto_explain_threshold_in_seconds = 0.5
-
-    # # Do not compress assets
-    # config.assets.compress = false
+  config.active_record.migration_error = :page_load
 
   # Expands the lines which load the assets
-  config.assets.debug = false
+  config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 

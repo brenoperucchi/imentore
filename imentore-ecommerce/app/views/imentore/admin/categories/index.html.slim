@@ -26,24 +26,45 @@
 
     })
 
-legend= t(:categories)
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5= t(:product_index)
+          .ibox-tools
+            a.collapse-link
+              i.fa.fa-chevron-up
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              i.fa.fa-wrench
+            ul.dropdown-menu.dropdown-user
+              / li
+              /   a href="#"  Config option 1
+              / li
+              /   a href="#"  Config option 2
+            a.close-link
+              i.fa.fa-times
+        .ibox-content
+          = categories_table(@categories)
+          .row 
+            .hr-line-dashed
+            .form-group
+              .col-sm-8.col-sm-offset-0
+                .div.hide#edit
+                  h3= t(:category_edit)
+                  = simple_form_for [:admin, @category], :html=> {:class =>"well form-inline", id: 'edit', method: 'put'}, wrapper: :inline_form do |f|
+                    = f.error_notification
+                    = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => t(:select_parent), input_html: {:class =>  "inline"}, :label => false, :disabled => true
+                    = f.input :name, placeholder: t(:category_option_name), input_html: {:class =>  "inline"}, :label => false
+                    = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, :label => false
+                    .form-group
+                      = f.button :submit, t(:category_update)
 
-= categories_table(@categories)
-
-hr
-.div.hide#edit
-  h3= t(:category_edit)
-  = simple_form_for([:admin, @category], :html=> {:class =>"well form-inline", id: 'edit', method: 'put'}) do |f|
-    = f.error_notification
-    = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => t(:select_parent), input_html: {:class =>  "inline"}, :label => false, :disabled => true
-    = f.input :name, placeholder: t(:category_option_name), input_html: {:class =>  "inline"}, :label => false
-    = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, :label => false
-    = f.button :submit, t(:category_update)
-
-h3= t(:category_create)
-= simple_form_for([:admin, @category], :html=> {:class =>"well form-inline"})do |f|
-  = f.error_notification
-  = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => t(:select_parent), input_html: {:class =>  "inline"}, :label => false
-  = f.input :name, :placeholder => t(:category_option_name), input_html: {:class =>  "inline"}, :label => false
-  = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, :label => false
-  = f.button :submit
+                h3= t(:category_create)
+                = simple_form_for [:admin, @category], :html=> {:class =>"well form-inline"}, wrapper: :inline_form do |f|
+                  = f.error_notification
+                  = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => t(:select_parent), input_html: {:class =>  "inline"}, :label => false
+                  = f.input :name, :placeholder => t(:category_option_name), input_html: {:class =>  "inline"}, :label => false
+                  = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, :label => false
+                  .form-group
+                    = f.button :submit

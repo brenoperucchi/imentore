@@ -1,8 +1,17 @@
-- content_for :breadcrumb do
-  == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:management) => '' }, { t(:products) => url_for(:controller => :products) }, { @product.name => '' }, { t(:options) => url_for(:controller => :product_options, product_id: @product.id ) }, { @option.name => "" } ])
+/ - content_for :breadcrumb do
+/   == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:management) => '' }, { t(:products) => url_for(:controller => :products) }, { @product.name => '' }, { t(:options) => url_for(:controller => :product_options, product_id: @product.id ) }, { @option.name => "" } ])
 
-= simple_form_for @option, as: "option", url: admin_product_option_path(@product, @option) do |f|
-  = f.error_notification
-  = f.input :name
-  = f.input :handle
-  = f.button :submit
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5
+            | Opções de Produto
+            / small Simple login form example
+        .ibox-content
+          = simple_form_for @option, as: "option", url: admin_product_option_path(@product, @option), :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+            = f.error_notification
+            = f.input :name
+            = f.input :handle
+            = f.button :submit

@@ -1,0 +1,81 @@
+.col-lg-12
+  .ibox-content#actions
+    h2 Ações
+    / small This is example of task list
+    - unless @order.delivery.nil?  or @order.invoice.nil?
+      ul.todo-list.m-t
+        li
+          = check_box_tag 'i-check-invoice', 1, @order.invoice.confirmed?, class: 'i-checks', disabled: true
+          '
+          span.m-l-xs
+            =editable @order.invoice, :status, url: confirm_invoice_admin_order_path(@order), value: @order.invoice.status, type: 'select', source: {'pending': t(:invoice_pending), 'confirmed': t(:invoice_confirmed)}
+          / small.label.label-primary
+          /   i.fa.fa-clock-o
+          /   | 1 mins
+        li
+          = check_box_tag 'i-check-delivery', 1, @order.delivery.sent?, class: 'i-checks', disabled: true
+          '
+          span.m-l-xs#multiple-toggle
+            a[href='#']= @order.delivery.pending? ? t(:delivery_pending) : t(:delivery_sent)
+            / =editable @order.delivery, :status, url: confirm_delivery_admin_order_path(@order), value: @order.delivery.status, type: 'select', source: {'pending': t(:delivery_pending), 'sent': t(:delivery_sent)}, class: '.editable-multiple'
+            '
+            =editable @order.delivery, :tracking_code, url: confirm_delivery_admin_order_path(@order), value: @order.delivery.tracking_code, class: '.editable-multiple'
+          / small.label.label-primary
+            / i.fa.fa-clock-o
+          - if @order.delivery.try(:sent?) #and not @order.delivery_method.try(:handle) == "custom"
+            '
+            = link_to "http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=#{@order.delivery.tracking_code}",  :target => "_blank", class: 'btn btn-xs btn-white' do
+              i.fa.fa-envelope-o
+              '
+              | Rastrear
+javascript:
+  $(document).ready(function(){
+      $('.i-checks').iCheck({
+          checkboxClass: 'icheckbox_square-green',
+          radioClass: 'iradio_square-green',
+      });
+      $('.footable').footable();
+    $('.iCheck-helper').on('click', function(e){
+      e.stopPropagation();
+      $(this).parents('li').find('span.editable').editable('toggle');
+    })
+    $('.editable').editable({
+      mode: 'inline',
+      showbuttons: false,
+      onblur: 'ignore',
+      error: function(response, newValue) { 
+        var error_msgs = []
+        $.each(response.responseJSON, function(key, value){ 
+          error_msgs.push(value)
+        })
+        return error_msgs.join("; ");
+      }
+    })
+    $('span#multiple-toggle').on('click', 'a', function(e){
+      e.stopPropagation();
+      $(this).parents('li').find('span.editable').editable('toggle');
+    })
+    // $.fn.editable.defaults.mode = 'inline';
+    // $('.editable-multiple').editable({
+    //   type: 'text',
+    //   emptytext: 'Click to Edit',
+    //   showbuttons: false,
+    //   unsavedclass: null,
+    //   toggle: 'manual',
+    //   onblur: 'ignore',
+    //   success: function (response, newValue) {
+    //                 console.log(newValue);
+    //   }
+    // })
+    // function submitEditable() {
+    //         $('a.editable-multiple').editable().submit();
+    //     }
+    // $('a.editable-multiple').on('click', function (e) {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     //if ($(this).find('.editableform').length < 1) { submitEditable();}
+    //     if ($(this).parents('span#delivery').find('a.editable-multiple').length < 1) { submitEditable();}
+    //     $(this).find('a').each(function () { $(this).editable('show'); });
+    //     $(this).find('.editable-multiple').each(function () { $(this).on('keydown', function (e) { if ((e.keyCode || e.which) == 13) { submitEditable(); } }) });
+    // });
+  })

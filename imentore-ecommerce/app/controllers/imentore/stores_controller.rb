@@ -36,7 +36,6 @@ module Imentore
               redirect_to "http://#{@store.url}.imentore.com.br"
             end
           else
-            binding.pry
             render :new
           end
         }

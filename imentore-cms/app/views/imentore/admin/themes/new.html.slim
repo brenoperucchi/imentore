@@ -1,3 +1,26 @@
-= simple_form_for @theme, url: admin_themes_path do |f|
-  = f.input :name
-  = f.button :submit
+/ = simple_form_for @theme, url: admin_themes_path do |f|
+= simple_form_for @theme, url: admin_themes_path, :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5= t(:newo) + ' ' + t(:theme) 
+            .ibox-tools
+              a.collapse-link
+                i.fa.fa-chevron-up
+              a.dropdown-toggle data-toggle="dropdown" href="#" 
+                i.fa.fa-wrench
+              ul.dropdown-menu.dropdown-user
+                / li
+                /   a href="#"  Config option 1
+                / li
+                /   a href="#"  Config option 2
+              a.close-link
+                i.fa.fa-times
+          .ibox-content
+            = f.input :name
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-2
+                = f.submit nil, :class => 'btn btn-primary'

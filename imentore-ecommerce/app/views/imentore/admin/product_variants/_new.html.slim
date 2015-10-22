@@ -1,0 +1,24 @@
+#myModal.modal.inmodal.fade aria-hidden="true" role="dialog" tabindex="-1" 
+  = simple_form_for @variant, as: "variant", url: admin_product_variants_path(@product), :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          button.close data-dismiss="modal" type="button" 
+            span aria-hidden="true"  &times;
+            span.sr-only Close
+          h4.modal-title Modal title
+          / small.font-bold Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        .modal-body        
+          = f.error_notification
+          = f.input :sku
+          = f.simple_fields_for :options do |of|
+            = of.input :option_type_id, as: :hidden, input_html: { :value => of.object.option_type_id }
+            = of.input :value, label: of.object.option_type.name
+          = f.input :quantity
+          = f.input :weight, as: :string
+          = f.input :price, as: :string
+          = f.input :price_deal, as: :string
+        .modal-footer
+          / button.btn.btn-white data-dismiss="modal" type="button"  Close
+          = f.button :submit
+          button.btn.btn-primary type="button"  Save changes

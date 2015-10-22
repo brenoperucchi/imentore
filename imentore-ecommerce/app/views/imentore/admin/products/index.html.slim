@@ -3,21 +3,48 @@
 / - content_for :breadcrumb do
 /   == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
-legend= t(:product_index)
-p
-  = link_to(new_admin_product_path, :class=>'btn btn-primary') do
-    i.icon-white.icon-plus
-    '
-    = t(:product_new)
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5= t(:product_index)
+          .ibox-tools
+            a.collapse-link
+              i.fa.fa-chevron-up
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              i.fa.fa-wrench
+            ul.dropdown-menu.dropdown-user
+              / li
+              /   a href="#"  Config option 1
+              / li
+              /   a href="#"  Config option 2
+            a.close-link
+              i.fa.fa-times
+        .ibox-content
+          table.table.table-striped.table-bordered.table-hover.dataTables-example#datatable[data-source="#{admin_products_url(format: 'json')}"]
+            thead
+              tr
+                th.w-5= t(:id)
+                th.w-10= t(:status)
+                th.w-15= t(:created_at)
+                th.input-medium= t(:name)
+                th.input-large= t(:action)
+          .row 
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-0
+                = link_to(new_admin_product_path, :class=>'btn btn-primary') do
+                  i.icon-white.icon-plus
+                  '
+                  = t(:product_new)
 
-table.table.table-nomargin.table-striped#datatable[data-source="#{admin_products_url(format: 'json')}"]
-  thead
-    tr
-      th.input-mini= t(:id)
-      th.input-small= t(:status)
-      th.input-small= t(:created_at)
-      th.input-medium= t(:name)
-      th.input-large= t(:action)
+/ .wrapper.wrapper-content.animated.fadeInRight.ecommerce
+/   .ibox-content.m-b-sm.border-bottom
+/   .row
+/     .col-lg-12
+/       .ibox
+/         .ibox-content
   / tfoot[style='display:table-header-group']
   /   tr
   /     th id

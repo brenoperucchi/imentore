@@ -1,38 +1,105 @@
-=  render "imentore/admin/themes/top"
+/ =  render "imentore/admin/themes/top"
+- model_class = Imentore::Template
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    h2=t '.title', :default => model_class.model_name.human.pluralize.titleize
+    / ol.breadcrumb
+    /   li
+    /     a href="index.html"  Home
+    /   li
+    /     a UI Elements
+    /   li.active
+    /     strong Tabs
+  .col-lg-2
 
-.tab#layouts
-  table.table
-    thead
-      tr
-        th= t(:default)
-        th= t(:name)
-        th= t(:default_updated_at)
-        th= t(:actions)
-    tbody
-      - @theme.templates.layouts.each do |template|
-        tr
-          td= button_status(template.default, edit_admin_theme_template_path(@theme, template))
-          td= link_to(template.path, edit_admin_theme_template_path(@theme, template)) + " "
-          td= l(time_zone(template.manager_template.updated_at)) unless template.manager_template.nil?
-          td
-            = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn') do
-              i.icon-black.icon-edit
-              '
-              = t(:edit)
-            '
-            - unless template.manager_template.nil?
-              = link_to(view_default_admin_theme_template_path(@theme, template), class: 'btn') do
-                i.icon-black.icon-edit
-                '
-                = t(:view_default)
-              '
-            - if template.manager_template.nil?
-              = link_to(admin_theme_template_path(@theme, template), method: :delete , class: 'btn btn-danger') do
-                i.icon-white.icon-remove
-                '
-                = t(:remove)
-  .controls
-    = link_to(new_admin_theme_template_path(@theme, kind: :layout), :class=>'btn btn-primary') do
-        i.icon-white.icon-plus
-        '
-        = t(:newo) + ' ' + t(:layout) 
+.wrapper.wrapper-content.animated.fadeInRight
+  .row  
+    .col-lg-12
+      .tabs-container
+        =  render "imentore/admin/themes/top"
+        / ul.nav.nav-tabs
+        /   li.active
+        /     a data-toggle="tab" href="#tab-1"  This is tab
+        /   li
+        /     a data-toggle="tab" href="#tab-2"  This is second tab
+        .tab-content
+          .tab#layouts.tab-pane.active
+            .panel-body
+              table.table.table-striped
+                thead
+                  tr
+                    th= t(:default)
+                    th= t(:name)
+                    th= t(:default_updated_at)
+                    th= t(:actions)
+                tbody
+                  - @theme.templates.layouts.each do |template|
+                    tr
+                      td= button_status(template.default, edit_admin_theme_template_path(@theme, template))
+                      td= link_to(template.path, edit_admin_theme_template_path(@theme, template)) + " "
+                      td= l(time_zone(template.manager_template.updated_at)) unless template.manager_template.nil?
+                      td
+                        = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn btn-xs') do
+                          = glyph 'pencil'
+                        '
+                        - unless template.manager_template.nil?
+                          = link_to(view_default_admin_theme_template_path(@theme, template), class: 'btn') do
+                            i.icon-black.icon-edit
+                            '
+                            = t(:view_default)
+                          '
+                        - if template.manager_template.nil?
+                          = link_to(admin_theme_template_path(@theme, template), method: :delete , class: 'btn btn-xs') do
+                            = glyph 'remove'
+              .controls
+                = link_to(new_admin_theme_template_path(@theme, kind: :layout), :class=>'btn btn-primary') do
+                  i.icon-white.icon-plus
+                  '
+                  = t(:newo) + ' ' + t(:layout) 
+
+/ .row  
+/   .col-lg-12
+/     .panel.blank-panel
+/       .panel-heading
+/         / .panel-title.m-b-md
+/         /   h4 Blank Panel with text tabs
+/         .panel-options
+/           =  render "imentore/admin/themes/top"
+/       .panel-body
+/         .tab-content
+/           .tab#layouts
+/             table.table
+/               thead
+/                 tr
+/                   th= t(:default)
+/                   th= t(:name)
+/                   th= t(:default_updated_at)
+/                   th= t(:actions)
+/               tbody
+/                 - @theme.templates.layouts.each do |template|
+/                   tr
+/                     td= button_status(template.default, edit_admin_theme_template_path(@theme, template))
+/                     td= link_to(template.path, edit_admin_theme_template_path(@theme, template)) + " "
+/                     td= l(time_zone(template.manager_template.updated_at)) unless template.manager_template.nil?
+/                     td
+/                       = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn') do
+/                         i.icon-black.icon-edit
+/                         '
+/                         = t(:edit)
+/                       '
+/                       - unless template.manager_template.nil?
+/                         = link_to(view_default_admin_theme_template_path(@theme, template), class: 'btn') do
+/                           i.icon-black.icon-edit
+/                           '
+/                           = t(:view_default)
+/                         '
+/                       - if template.manager_template.nil?
+/                         = link_to(admin_theme_template_path(@theme, template), method: :delete , class: 'btn btn-danger') do
+/                           i.icon-white.icon-remove
+/                           '
+/                           = t(:remove)
+/             .controls
+/               = link_to(new_admin_theme_template_path(@theme, kind: :layout), :class=>'btn btn-primary') do
+/                   i.icon-white.icon-plus
+/                   '
+/                   = t(:newo) + ' ' + t(:layout) 

@@ -15,6 +15,10 @@ module Imentore
 
       protected
 
+      def store_params
+        params.require(:store).permit(:name, :email, :brand, :irs_id, address_attributes:[:name, :street, :complement, :city, :country, :state, :zip_code, :phone])
+      end
+
       def resource
         @store ||= current_store
       end

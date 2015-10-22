@@ -1,50 +1,68 @@
 - content_for :header do
   = javascript_include_tag('admin/datatable.js')
 
-legend= t(:orders)
+/ legend= t(:orders)
 / p= link_to("New delivery Method", new_admin_delivery_method_path, :class=>'btn btn-primary')
 
-.index
-  table.table.display#datatable[data-source="#{admin_orders_url(format: 'json')}"]
-    thead
-      tr
-        th.input-mini= t(:id)
-        th= t(:status)
-        th= t(:created_at)
-        th= t(:customer_name)
-        th= t(:customer_email)
-        th= t(:order_amount)
-        th= t(:actions)
-    / tfoot[style='display:table-header-group']
-    /   tr
-    /     th id
-    /     th status
-    /     th created_at
-    /     th name
-    /     th email
-    /     th[colspan=2] order_amount
-    / tbody
-    /   - @orders.each do |order|
-    /     tr
-    /       td= order.id
-    /       td= button_order_status(order.status)
-    /       td= l(time_zone(order.created_at), format: :short2)
-    /       td= order.customer_name
-    /       td= order.customer_email
-    /       td= number_with_price(order.total_amount)
-    /       td
-    /         = link_to(edit_admin_order_path(order), :class=>"btn btn-small") do
-    /           i.icon-edit.icon-black
-    /           '
-    /           = t(:edit)
-    /           '
-    /         - if order.can_cancel?
-    /           = link_to(cancel_admin_order_path(order), method: :get, :class=>"btn btn-danger btn-small") do
-    /             i.icon-question-sign.icon-white
-    /             '
-    /             = t(:cancel)
-    /         - else
-    /           = link_to(admin_order_path(order), method: :delete, :class=>"btn btn-inverse btn-small") do
-    /             i.icon-trash.icon-white
-    /             '
-    /             = t(:remove)
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5= t(:order_index)
+          .ibox-tools
+            a.collapse-link
+              i.fa.fa-chevron-up
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              i.fa.fa-wrench
+            ul.dropdown-menu.dropdown-user
+              / li
+              /   a href="#"  Config option 1
+              / li
+              /   a href="#"  Config option 2
+            a.close-link
+              i.fa.fa-times
+        .ibox-content
+          table.table.table-striped.table-bordered.table-hover.dataTables-example#datatable[data-source="#{admin_orders_url(format: 'json')}"]
+            thead
+              tr
+                th.w-5= t(:id)
+                th.w-10= t(:status)
+                th.w-10= t(:created_at)
+                th.w-10= t(:customer_name)
+                th.w-20= t(:customer_email)
+                th.w-10= t(:order_amount)
+                th= t(:actions)
+            / tfoot[style='display:table-header-group']
+            /   tr
+            /     th id
+            /     th status
+            /     th created_at
+            /     th name
+            /     th email
+            /     th[colspan=2] order_amount
+            / tbody
+            /   - @orders.each do |order|
+            /     tr
+            /       td= order.id
+            /       td= button_order_status(order.status)
+            /       td= l(time_zone(order.created_at), format: :short2)
+            /       td= order.customer_name
+            /       td= order.customer_email
+            /       td= number_with_price(order.total_amount)
+            /       td
+            /         = link_to(edit_admin_order_path(order), :class=>"btn btn-small") do
+            /           i.icon-edit.icon-black
+            /           '
+            /           = t(:edit)
+            /           '
+            /         - if order.can_cancel?
+            /           = link_to(cancel_admin_order_path(order), method: :get, :class=>"btn btn-danger btn-small") do
+            /             i.icon-question-sign.icon-white
+            /             '
+            /             = t(:cancel)
+            /         - else
+            /           = link_to(admin_order_path(order), method: :delete, :class=>"btn btn-inverse btn-small") do
+            /             i.icon-trash.icon-white
+            /             '
+            /             = t(:remove)

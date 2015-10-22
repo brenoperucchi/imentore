@@ -4,6 +4,7 @@ module Imentore
       inherit_resources
       custom_actions :resource => :confirm_invoice
       # actions :index, :new, :create, :edit, :update
+      respond_to :json, :html
 
       def index
         # orders = current_store.orders.search(params[:id], params[:condition], params[:created_at], params[:email])
@@ -14,6 +15,11 @@ module Imentore
         end
       end
 
+      def edit
+        @order = current_store.orders.find(params[:id])
+        edit!
+      end
+
       def cancel
         @order = current_store.orders.find(params[:id])
         @order.cancel
@@ -22,15 +28,32 @@ module Imentore
 
       def confirm_invoice
         @order = current_store.orders.find(params[:id])
-        @order.invoice.confirm
-        redirect_to edit_admin_order_path(@order)
+        respond_to do |format|
+          if @order.invoice.confirm
+            @html = view_context.render 'imentore/admin/orders/actions'
+            format.html { redirect_to edit_admin_order_path(@order) }
+            format.json { render json: { message: "success", html: @html}, :status => 200 }
+          else
+            format.html { redirect_to edit_admin_order_path(@order) }
+            format.json { render json: { error: @order.invoice.errors.full_messages.join(',')}, :status => 400 }
+          end
+        end
+        
       end
 
       def confirm_delivery
         @order = current_store.orders.find(params[:id])
         @order.delivery.update_attribute(:tracking_code, params[:delivery][:tracking_code])
-        @order.delivery.sent
-        redirect_to edit_admin_order_path(@order)
+        respond_to do |format|
+          if @order.delivery.sent or not @order.delivery.status_changed?
+            @html = view_context.render 'imentore/admin/orders/actions'
+            format.html { redirect_to edit_admin_order_path(@order) }
+            format.json { render json: { message: "success", html: @html}, :status => 200 }
+          else
+            format.html { redirect_to edit_admin_order_path(@order) }
+            format.json { render json: { error: @order.delivery.errors.full_messages.join(',')}, :status => 400 }
+          end
+        end
       end
 
       def destroy

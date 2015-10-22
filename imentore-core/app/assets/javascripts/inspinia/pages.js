@@ -1,0 +1,1 @@
+//= require inspinia/iCheck/icheck.min.js

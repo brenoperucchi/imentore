@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta charset="utf-8" /
+    meta content="width=device-width, initial-scale=1.0" name="viewport" /
+    title Admin da Loja
+    = stylesheet_link_tag "inspinia/#{params[:controller].gsub("imentore/admin/", "")}" if ::Rails.application.assets.find_asset("inspinia/#{params[:controller].gsub("imentore/admin/", "")}.css")
+    = stylesheet_link_tag    'inspinia', media: 'all', 'data-turbolinks-track' => true 
+    = javascript_include_tag 'inspinia', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    = yield :header
+  body
+    = render 'layouts/inspinia/skinconfig' 
+    #wrapper[class="dashboards.dashboard_4_1"]
+      = render 'layouts/inspinia/navigation'
+      #page-wrapper[class="gray-bg"]
+        = render 'layouts/inspinia/topnavbar'
+        = yield
+        = render 'layouts/inspinia/footer'
+      = render 'layouts/inspinia/rightsidebar'
+    = javascript_include_tag "inspinia/#{params[:controller].gsub("imentore/admin/", "")}" if ::Rails.application.assets.find_asset("inspinia/#{params[:controller].gsub("imentore/admin/", "")}.js")
+    .javascript
+      = yield :footer

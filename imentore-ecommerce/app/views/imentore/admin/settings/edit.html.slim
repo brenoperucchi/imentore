@@ -1,6 +1,2 @@
-= simple_form_for(resource, url: admin_update_settings_path, method: 'put', :html=> { :class=>'form-horizontal' } ) do |f|
+= simple_form_for resource, url: admin_update_settings_path, :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean }, method: :put do |f|
   = render(@group, f: f)
-  .form-actions
-    = f.button :submit, t("store_#{@group.downcase}_update"), :class=> 'btn btn-primary'
-    / = " "
-    / = button_tag "Cancel", class: "btn"

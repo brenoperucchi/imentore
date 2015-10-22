@@ -5,12 +5,11 @@ module Imentore
       actions :index, :create, :destroy
 
       def index
-        build_resource
-        index!
+        @domains = current_store.domains
       end
 
       def create
-        @domain = current_store.domains.build(params[:domain])
+        @domain = current_store.domains.build(domain_params)
 
         if @domain.hosting
           plesk = Plesk::Client.new("207.7.84.39", "admin", "plaszx12qw")
@@ -51,6 +50,16 @@ module Imentore
       end
 
       protected
+
+      def domain_params
+        params.require(:domain).permit(:name)
+      end
+
+
+      def collection
+        @domains = begin_of_association_chain.domains
+      end
+
 
       def begin_of_association_chain
         current_store

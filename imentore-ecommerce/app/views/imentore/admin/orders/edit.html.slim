@@ -1,217 +1,585 @@
-- unless @order.delivery.nil?
-  #myModal.modal.hide.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
-    = simple_form_for(@order.delivery, url: confirm_delivery_admin_order_path(@order), method: 'get', :html=> { :class=>'form-horizontal' } ) do |f|
-      .modal-header
-        button.close aria-hidden="true" data-dismiss="modal" type="button"
-          | x
-        h3#myModalLabel= t(:delivery_confirm)
-      .modal-body
-        = f.input :tracking_code
-      .modal-footer
-        = f.button :submit, t(:save), :class => 'btn btn-primary'
-        button.btn aria-hidden="true" data-dismiss="modal"= t(:close)
-        / button.btn.btn-primary Save changes
+- content_for :footer do
+  javascript:
+    $(function() {
+      $('.editable').on('save', function(e, params) {
+          var html_params = params.response.html
+          $(".row#actions").html(html_params)
+      });
+    })
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-8
+    h2 Pedido
+  /   ol.breadcrumb
+  /     li
+  /       a href="#"  Home
+  /     li
+  /       | Other Pages
+  /     li.active
+  /       strong Invoice
+  / .col-lg-4
+  /   .title-action
+  /     a.btn.btn-white href="#" 
+  /       i.fa.fa-pencil
+  /       | Edit
+  /     a.btn.btn-white href="#" 
+  /       i.fa.fa-check
+  /       | Save
+  /     a.btn.btn-primary href="#" target="_blank" 
+  /       i.fa.fa-print
+  /       | Print Invoice
 
-.row
-  .span3.well
-    .row
-      .span1
-        .data-block
-          h5.data-heading
-            = t(:order_id)
-          h4
-            | #
-            = @order.id
-      .span2
-        .data-block
-          h5.data-heading
-            = t(:delivery_method)
-          h4
-            = @order.delivery_method.try(:name)
-    hr
-    .row
-      .span1
-        .data-block
-          h5.data-heading
-            = t(:order_amount)
-          h4
-            = number_with_price(@order.total_amount)
-      .span2
-        .data-block
-          h5.data-heading
-            = t(:invoice_method)
-          h4
-            = @order.invoice_method.try(:name)
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-md-4
+      .payment-card
+        .row
+          .col-sm-6
+            button.btn.btn-xs.btn-primary.m-r-sm type="button"
+              | ID
+            strong= @order.id
+          .col-sm-6
+            button.btn.btn-xs.btn-primary.m-r-sm type="button"
+              | Metodo de Envio
+            strong= @order.delivery_method.try(:name) || "-"
+        hr
+        .row
+          .col-sm-6
+            button.btn.btn-xs.btn-primary.m-r-sm type="button"
+              | Valor Pedido
+            strong= number_with_price(@order.total_amount) || 0
+          .col-sm-6
+            button.btn.btn-xs.btn-primary.m-r-sm type="button"
+              | Método de Cobrança
+            strong= @order.invoice_method.try(:name) || "-"
+    .col-md-8
+      .payment-card
+        .row
+          .col-sm-4
+            button.btn.btn-xs.btn-info.m-r-sm type="button"
+              = t(:order_status)
+            strong= t(@order.status).downcase
+          .col-sm-4
+            button.btn.btn-xs.btn-info.m-r-sm type="button"
+              = t(:invoice_status)
+            strong= t(@order.invoice.try(:status)).downcase unless @order.invoice.try(:status).nil?
+          .col-sm-4
+            button.btn.btn-xs.btn-info.m-r-sm type="button"
+              = t(:delivery_amount)
+            strong= number_with_price(@order.delivery_amount)
+        hr
+        .row
+          .col-sm-4
+            button.btn.btn-xs.btn-info.m-r-sm type="button"
+              = t(:product_amount)
+            strong= number_with_price(@order.products_amount)
+          .col-sm-4
+            button.btn.btn-xs.btn-info.m-r-sm type="button"
+              = t(:coupon_amount)
+            strong= number_with_price(@order.coupons_amount)
+          .col-sm-4
+            button.btn.btn-xs.btn-info.m-r-sm type="button"
+              = t(:delivery_amount)
+            strong= number_with_price(@order.delivery_amount)
+    / .col-md-8
+    /   .payment-card
+    /     i.fa.fa-cc-mastercard.payment-icon-big.text-warning
+    /     h2
+    /       | **** **** **** 7002
+    /     .row
+    /       .col-sm-6
+    /         small
+    /           strong Expiry date:
+    /           | 10/16
+    /       .col-sm-6.text-right
+    /         small
+    /           strong Name:
+    /           | Anna Smith
+  .row#actions
+    = render "actions", order: @order
+
+  / .wrapper.wrapper-content.animated.fadeInRight
+  /   .row
+  /     .col-lg-12
+  /       .ibox.float-e-margins
+  /         .ibox-content
+  /           - if @order.delivery.try(:sent?)
+  /             h4
+  /               i.icon-black.icon-envelope[style='margin-top:5px']
+  /               a[title="" data-placement="top" data-toggle="modal" href="#myModal" ]
+  /                   = t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
+  /               '
+  /               small
+  /                 - unless @order.delivery_method.try(:handle) == "custom" 
+  /                   = link_to('rastrear', "http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=#{@order.delivery.tracking_code}",  :target => "_blank")
+  /           - else
+  /             h4= t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
+  br
+  .row
+    .col-lg-12
+      .ibox
+        .ibox-content
+          table.footable.table.table-stripped.toggle-arrow-tiny data-page-size="15" 
+            thead
+            thead
+              tr
+                th data-toggle="true"= t(:name)
+                th data-hide="phone"= t(:variants)
+                th data-hide="all"= t(:description)
+                th data-hide="phone"= t(:qtd)
+                th data-hide="phone,tablet"= t(:amount)
+                th data-hide="phone"= t(:status)
+                th.text-right data-sort-ignore="true"= t(:action)
+            tbody
+              - @order.items.each do |item|
+                tr
+                  td= item.name
+                  td= item.variant_options.collect{|x,k| "#{x}: #{k}"}.join(' - ')
+                  td= item.try(:product).try(:description)
+                  td= item.quantity
+                  td= item.try(:product).try(:status)
+                  td= number_with_price(item.amount)
+                  / td
+            / tbody
+            /   tr
+            /     td
+            /       | Example product 1
+            /     td
+            /       | Model 1
+            /     td
+            /       | It is a long established fact that a reader will be distracted by the readable
+            /       | content of a page when looking at its layout. The point of using Lorem Ipsum is
+            /       | that it has a more-or-less normal distribution of letters, as opposed to using
+            /       | 'Content here, content here', making it look like readable English.
+            /     td
+            /       | $50.00
+            /     td
+            /       | 1000
+            /     td
+            /       span.label.label-primary Enable
+            /     td.text-right
+            /       .btn-group
+            /         button.btn-white.btn.btn-xs View
+            /         button.btn-white.btn.btn-xs Edit
+            /   tr
+            /     td
+            /       | Example product 2
+            /     td
+            /       | Model 2
+            /     td
+            /       | It is a long established fact that a reader will be distracted by the readable
+            /       | content of a page when looking at its layout. The point of using Lorem Ipsum is
+            /       | that it has a more-or-less normal distribution of letters, as opposed to using
+            /       | 'Content here, content here', making it look like readable English.
+            /     td
+            /       | $40.00
+            /     td
+            /       | 4300
+            /     td
+            /       span.label.label-primary Enable
+            /     td.text-right
+            /       .btn-group
+            /         button.btn-white.btn.btn-xs View
+            /         button.btn-white.btn.btn-xs Edit
+            /   tr
+            /     td
+            /       | Example product 3
+            /     td
+            /       | Model 3
+            /     td
+            /       | It is a long established fact that a reader will be distracted by the readable
+            /       | content of a page when looking at its layout. The point of using Lorem Ipsum is
+            /       | that it has a more-or-less normal distribution of letters, as opposed to using
+            /       | 'Content here, content here', making it look like readable English.
+            /     td
+            /       | $22.00
+            /     td
+            /       | 300
+            /     td
+            /       span.label.label-danger Disabled
+            /     td.text-right
+            /       .btn-group
+            /         button.btn-white.btn.btn-xs View
+            /         button.btn-white.btn.btn-xs Edit
+
+  .row
+    .col-lg-12
+      .tabs-container
+        ul.nav.nav-tabs
+          li.active
+            a data-toggle="tab" href="#tab-1"
+              = t(:shipping_address)
+          li
+            a data-toggle="tab" href="#tab-2"
+              = t(:billing_address)
+        .tab-content
+          #tab-1.tab-pane.active
+            .panel-body
+              table.table.table-striped.table-condensed
+                tbody
+                  tr
+                    th= t(:name)
+                    td= @order.customer_name
+                    th= t(:email)
+                    td= @order.customer_email
+                  tr
+                    td[colspan=4]
+                  tr
+                    th= t(:name, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.shipping_address.name
+                    th= t(:street, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.shipping_address.street
+                  tr
+                    th= t(:complement, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.shipping_address.complement
+                    th= t(:city, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.shipping_address.city
+                  tr
+                    th= t(:state, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.shipping_address.state
+                    th= t(:country, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.shipping_address.country
+                  tr
+                    th= t(:zip_code, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.shipping_address.zip_code
+                    th= t(:phone, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.shipping_address.phone
+
+          #tab-2.tab-pane
+            .panel-body
+              table.table.table-striped.table-condensed
+                tbody
+                  tr
+                    th= t(:name)
+                    td= @order.customer_name
+                    th= t(:email)
+                    td= @order.customer_email
+                  tr
+                    td[colspan=4]
+                  tr
+                    th= t(:name, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.billing_address.name
+                    th= t(:street, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.billing_address.street
+                  tr
+                    th= t(:complement, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.billing_address.complement
+                    th= t(:city, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.billing_address.city
+                  tr
+                    th= t(:state, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.billing_address.state
+                    th= t(:country, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.billing_address.country
+                  tr
+                    th= t(:zip_code, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.billing_address.zip_code
+                    th= t(:phone, scope: [:activerecord, :attributes, 'imentore/address'])
+                    td= @order.billing_address.phone
 
 
-  .span8.well
-    .row
-      .span2
-        .data-block
-          h5.data-heading
-            = t(:order_status)
-          h4
-            = t(@order.status).downcase
-      .span2
-        .data-block
-          h5.data-heading
-            = t(:invoice_status)
-          h4
-            = t(@order.invoice.try(:status)).downcase unless @order.invoice.try(:status).nil?
-      .span3
-        .data-block
-          h5.data-heading
-            = t(:delivery_status)
-          - if @order.delivery.try(:sent?)
-            h4
-              i.icon-black.icon-envelope[style='margin-top:5px']
-              a[title="" data-placement="top" data-toggle="modal" href="#myModal" ]
-                  = t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
-              '
-              small
-                - unless @order.delivery_method.try(:handle) == "custom" 
-                  = link_to('rastrear', "http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=#{@order.delivery.tracking_code}",  :target => "_blank")
-          - else
-            h4= t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
+
+  / .row
+  /   .col-lg-12
+  /     .ibox
+  /       .ibox-title
+  /         | Payment method
+  /       .ibox-content
+  /         #accordion.panel-group.payments-method
+  /           .panel.panel-default
+  /             .panel-heading
+  /               .pull-right
+  /                 i.fa.fa-cc-paypal.text-success
+  /               h5.panel-title
+  /                 a data-parent="#accordion" data-toggle="collapse" href="#collapseOne"  PayPal
+  /             #collapseOne.panel-collapse.collapse
+  /               .panel-body
+  /                 .row
+  /                   .col-md-10
+  /                     h2 Summary
+  /                     strong Product:
+  /                     | Name of product
+  /                     br/
+  /                     strong Price:
+  /                     span.text-navy $452.90
+  /                     p.m-t
+  /                       | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+  /                       | eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+  /                       | enim ad minim veniam, quis nostrud exercitation ullamco laboris
+  /                       | nisi ut aliquip ex ea commodo consequat.
+  /                     a.btn.btn-success
+  /                       i.fa.fa-cc-paypal
+  /                         | Purchase via PayPal
+  /           .panel.panel-default
+  /             .panel-heading
+  /               .pull-right
+  /                 i.fa.fa-cc-amex.text-success
+  /                 i.fa.fa-cc-mastercard.text-warning
+  /                 i.fa.fa-cc-discover.text-danger
+  /               h5.panel-title
+  /                 a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo"  Credit Card
+  /             #collapseTwo.panel-collapse.collapse.in
+  /               .panel-body
+  /                 .row
+  /                   .col-md-4
+  /                     h2 Summary
+  /                     strong Product:
+  /                     | Name of product
+  /                     br/
+  /                     strong Price:
+  /                     span.text-navy $452.90
+  /                     p.m-t
+  /                       | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+  /                       | eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+  /                       | enim ad minim veniam, quis nostrud exercitation ullamco laboris
+  /                       | nisi ut aliquip ex ea commodo consequat.
+  /                     p
+  /                       | Duis aute irure dolor
+  /                       | in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+  /                       | nulla pariatur. Excepteur sint occaecat cupidatat.
+  /                   .col-md-8
+  /                     form#payment-form role="form" 
+  /                       .row
+  /                         .col-xs-12
+  /                           .form-group
+  /                             label CARD NUMBER
+  /                             .input-group
+  /                               input.form-control name="Number" placeholder=("Valid Card Number") required="" type="text" /
+  /                               span.input-group-addon
+  /                                 i.fa.fa-credit-card
+  /                       .row
+  /                         .col-xs-7.col-md-7
+  /                           .form-group
+  /                             label EXPIRATION DATE
+  /                             input.form-control name="Expiry" placeholder=("MM / YY") required="" type="text" /
+  /                         .col-xs-5.col-md-5.pull-right
+  /                           .form-group
+  /                             label CV CODE
+  /                             input.form-control name="CVC" placeholder="CVC" required="" type="text" /
+  /                       .row
+  /                         .col-xs-12
+  /                           .form-group
+  /                             label NAME OF CARD
+  /                             input.form-control name="nameCard" placeholder=("NAME AND SURNAME") type="text" /
+  /                       .row
+  /                         .col-xs-12
+  /                           button.btn.btn-primary type="submit"  Make a payment!
+
+
+
+/ - unless @order.delivery.nil?
+/   #myModal.modal.hide.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+/     = simple_form_for(@order.delivery, url: confirm_delivery_admin_order_path(@order), method: 'get', :html=> { :class=>'form-horizontal' } ) do |f|
+/       .modal-header
+/         button.close aria-hidden="true" data-dismiss="modal" type="button"
+/           | x
+/         h3#myModalLabel= t(:delivery_confirm)
+/       .modal-body
+/         = f.input :tracking_code
+/       .modal-footer
+/         = f.button :submit, t(:save), :class => 'btn btn-primary'
+/         button.btn aria-hidden="true" data-dismiss="modal"= t(:close)
+/         / button.btn.btn-primary Save changes
+
+/ .row
+/   .span3.well
+/     .row
+/       .span1
+/         .data-block
+/           h5.data-heading
+/             = t(:order_id)
+/           h4
+/             | #
+/             = @order.id
+/       .span2
+/         .data-block
+/           h5.data-heading
+/             = t(:delivery_method)
+/           h4
+/             = @order.delivery_method.try(:name)
+/     hr
+/     .row
+/       .span1
+/         .data-block
+/           h5.data-heading
+/             = t(:order_amount)
+/           h4
+/             = number_with_price(@order.total_amount)
+/       .span2
+/         .data-block
+/           h5.data-heading
+/             = t(:invoice_method)
+/           h4
+/             = @order.invoice_method.try(:name)
+
+
+/   .span8.well
+/     .row
+/       .span2
+/         .data-block
+/           h5.data-heading
+/             = t(:order_status)
+/           h4
+/             = t(@order.status).downcase
+/       .span2
+/         .data-block
+/           h5.data-heading
+/             = t(:invoice_status)
+/           h4
+/             = t(@order.invoice.try(:status)).downcase unless @order.invoice.try(:status).nil?
+/       .span3
+/         .data-block
+/           h5.data-heading
+/             = t(:delivery_status)
+/           - if @order.delivery.try(:sent?)
+/             h4
+/               i.icon-black.icon-envelope[style='margin-top:5px']
+/               a[title="" data-placement="top" data-toggle="modal" href="#myModal" ]
+/                   = t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
+/               '
+/               small
+/                 - unless @order.delivery_method.try(:handle) == "custom" 
+/                   = link_to('rastrear', "http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=#{@order.delivery.tracking_code}",  :target => "_blank")
+/           - else
+/             h4= t(@order.delivery.try(:status)).downcase unless @order.delivery.try(:status).nil?
 
                   
-    hr
-    .row
-      .span2
-        .data-block
-          h5.data-heading
-            = t(:product_amount)
-          h4
-            = number_with_price(@order.products_amount)
-      .span2
-        .data-block
-          h5.data-heading
-            = t(:coupon_amount)
-          h4
-            = number_with_price(@order.coupons_amount)
-      .span3
-        .data-block
-          h5.data-heading
-            = t(:delivery_amount)
-          h4
-            = number_with_price(@order.delivery_amount)
-  .clearfix
-- unless @order.delivery.nil?  or @order.invoice.nil? or (@order.invoice.confirmed? and @order.delivery.sent?)
-  .row
-    .span12.well.well-small
-      .btn-toolbar.ac.pagination-centered
-        .btn-group
-          - if @order.invoice.can_confirm?
-            = link_to(confirm_invoice_admin_order_path(@order), class: 'btn') do
-              i.icon-black.icon-ok
-              '
-              = t(:payment_confirm)
-          - if @order.delivery.can_sent?
-            = link_to("#myModal", role: 'button', class:'btn', 'data-toggle' => 'modal') do
-              i.icon-black.icon-envelope
-              '
-              = t(:delivery_confirm)
-            / = link_to(confirm_delivery_admin_order_path(@order), class: 'btn') do
-            /   i.icon-black.icon-envelope
-            /   '
-            /   = t(:delivery_confirm)
+/     hr
+/     .row
+/       .span2
+/         .data-block
+/           h5.data-heading
+/             = t(:product_amount)
+/           h4
+/             = number_with_price(@order.products_amount)
+/       .span2
+/         .data-block
+/           h5.data-heading
+/             = t(:coupon_amount)
+/           h4
+/             = number_with_price(@order.coupons_amount)
+/       .span3
+/         .data-block
+/           h5.data-heading
+/             = t(:delivery_amount)
+/           h4
+/             = number_with_price(@order.delivery_amount)
+/   .clearfix
+/ - unless @order.delivery.nil?  or @order.invoice.nil? or (@order.invoice.confirmed? and @order.delivery.sent?)
+/   .row
+/     .span12.well.well-small
+/       .btn-toolbar.ac.pagination-centered
+/         .btn-group
+/           - if @order.invoice.can_confirm?
+/             = link_to(confirm_invoice_admin_order_path(@order), class: 'btn') do
+/               i.icon-black.icon-ok
+/               '
+/               = t(:payment_confirm)
+/           - if @order.delivery.can_sent?
+/             = link_to("#myModal", role: 'button', class:'btn', 'data-toggle' => 'modal') do
+/               i.icon-black.icon-envelope
+/               '
+/               = t(:delivery_confirm)
+/             / = link_to(confirm_delivery_admin_order_path(@order), class: 'btn') do
+/             /   i.icon-black.icon-envelope
+/             /   '
+/             /   = t(:delivery_confirm)
 
-h4= t(:products)
-.row
-  .span12
-    table.table.table-striped
-      thead
-        tr
-          th.minimal #
-          th= t(:name)
-          th= t(:variants)
-          th= t(:qtd)
-          th= t(:amount)
-          / th= t(:actions)
-      tbody
-        - @order.items.each do |item|
-          tr
-            td= item.product.id
-            td= item.name
-            td= item.variant_options.collect{|x,k| "#{x}: #{k}"}.join(' - ')
-            td= item.quantity
-            td= number_with_price(item.amount)
-            / td
+/ h4= t(:products)
+/ .row
+/   .span12
+/     table.table.table-striped
+/       thead
+/         tr
+/           th.minimal #
+/           th= t(:name)
+/           th= t(:variants)
+/           th= t(:qtd)
+/           th= t(:amount)
+/           / th= t(:actions)
+/       tbody
+/         - @order.items.each do |item|
+/           tr
+/             td= item.product.id
+/             td= item.name
+/             td= item.variant_options.collect{|x,k| "#{x}: #{k}"}.join(' - ')
+/             td= item.quantity
+/             td= number_with_price(item.amount)
+/             / td
 
 
-.row
-  .span12.tabbable
-    ul.nav.nav-tabs#myTab
-      li.active
-        a[href='#tab1' data-toggle='tab']
-          = t(:shipping_address)
-      li
-        a[href='#tab2' data-toggle='tab']
-          = t(:billing_address)
-      li
-        a[href='#tab2' data-toggle='tab']
-          = t(:log_info)
-    .tab-content
-      .tab-pane.active#tab1
-        table.table.table-striped.table-condensed
-          tbody
-            tr
-              th= t(:name)
-              td= @order.customer_name
-              th= t(:email)
-              td= @order.customer_email
-            tr
-              td[colspan=4]
-            tr
-              th= t(:name, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.shipping_address.name
-              th= t(:street, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.shipping_address.street
-            tr
-              th= t(:complement, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.shipping_address.complement
-              th= t(:city, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.shipping_address.city
-            tr
-              th= t(:state, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.shipping_address.state
-              th= t(:country, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.shipping_address.country
-            tr
-              th= t(:zip_code, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.shipping_address.zip_code
-              th= t(:phone, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.shipping_address.phone
+/ .row
+/   .span12.tabbable
+/     ul.nav.nav-tabs#myTab
+/       li.active
+/         a[href='#tab1' data-toggle='tab']
+/           = t(:shipping_address)
+/       li
+/         a[href='#tab2' data-toggle='tab']
+/           = t(:billing_address)
+/       li
+/         a[href='#tab2' data-toggle='tab']
+/           = t(:log_info)
+/     .tab-content
+/       .tab-pane.active#tab1
+/         table.table.table-striped.table-condensed
+/           tbody
+/             tr
+/               th= t(:name)
+/               td= @order.customer_name
+/               th= t(:email)
+/               td= @order.customer_email
+/             tr
+/               td[colspan=4]
+/             tr
+/               th= t(:name, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.shipping_address.name
+/               th= t(:street, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.shipping_address.street
+/             tr
+/               th= t(:complement, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.shipping_address.complement
+/               th= t(:city, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.shipping_address.city
+/             tr
+/               th= t(:state, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.shipping_address.state
+/               th= t(:country, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.shipping_address.country
+/             tr
+/               th= t(:zip_code, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.shipping_address.zip_code
+/               th= t(:phone, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.shipping_address.phone
 
-      .tab-pane#tab2
-        table.table.table-striped.table-condensed
-          tbody
-            tr
-              th= t(:name)
-              td= @order.customer_name
-              th= t(:email)
-              td= @order.customer_email
-            tr
-              td[colspan=4]
-            tr
-              th= t(:name, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.billing_address.name
-              th= t(:street, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.billing_address.street
-            tr
-              th= t(:complement, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.billing_address.complement
-              th= t(:city, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.billing_address.city
-            tr
-              th= t(:state, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.billing_address.state
-              th= t(:country, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.billing_address.country
-            tr
-              th= t(:zip_code, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.billing_address.zip_code
-              th= t(:phone, scope: [:activerecord, :attributes, 'imentore/address'])
-              td= @order.billing_address.phone
+/       .tab-pane#tab2
+/         table.table.table-striped.table-condensed
+/           tbody
+/             tr
+/               th= t(:name)
+/               td= @order.customer_name
+/               th= t(:email)
+/               td= @order.customer_email
+/             tr
+/               td[colspan=4]
+/             tr
+/               th= t(:name, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.billing_address.name
+/               th= t(:street, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.billing_address.street
+/             tr
+/               th= t(:complement, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.billing_address.complement
+/               th= t(:city, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.billing_address.city
+/             tr
+/               th= t(:state, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.billing_address.state
+/               th= t(:country, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.billing_address.country
+/             tr
+/               th= t(:zip_code, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.billing_address.zip_code
+/               th= t(:phone, scope: [:activerecord, :attributes, 'imentore/address'])
+/               td= @order.billing_address.phone
 
 

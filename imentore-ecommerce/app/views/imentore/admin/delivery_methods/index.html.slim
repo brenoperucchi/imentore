@@ -1,27 +1,56 @@
-legend= t(:delivery_methods)
-p= link_to(t(:delivery_method_new), new_admin_delivery_method_path, :class=>'btn btn-primary')
+/ legend= t(:delivery_methods)
+/ p= link_to(t(:delivery_method_new), new_admin_delivery_method_path, :class=>'btn btn-primary')
 
-table.table
-  thead
-    tr
-      th= t(:active)
-      th= t(:name)
-      th= t(:actions)
-  tbody
-    - @delivery_methods.each do |delivery|
-      tr
-        td
-          = button_status(delivery.active, '#')
-        td= delivery.name
-        / td= button_to("Destroy", admin_delivery_method_path(delivery), method: :delete, :class=>"btn-danger")
-        td
-          = link_to(edit_admin_delivery_method_path(delivery), class: 'btn') do
-            i.icon-black.icon-edit
-            '
-            = t(:edit)
-          '
-          - if delivery.handle == "custom"
-            = link_to(admin_delivery_method_path(delivery), method: :delete, data: { confirm: t(:delete_this_thing?) }, :class=>"btn btn-danger") do
-              i.icon-white.icon-trash
-              '
-              = t(:remove)
+- model_class = Imentore::SendEmail
+/ .page-header
+/   h1=t model_class.model_name.human.pluralize, scope: 'activerecord.models'.titleize
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5=t model_class.model_name.human.pluralize, scope: 'activerecord.models'.titleize
+          / h5= t(:product_index)
+          .ibox-tools
+            a.collapse-link
+              i.fa.fa-chevron-up
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              i.fa.fa-wrench
+            ul.dropdown-menu.dropdown-user
+              / li
+              /   a href="#"  Config option 1
+              / li
+              /   a href="#"  Config option 2
+            a.close-link
+              i.fa.fa-times
+        .ibox-content
+          table.table.table.table-striped.table-hover.table-condensed
+            thead
+              tr
+                th= t(:active)
+                th= t(:name)
+                th= t(:actions)
+            tbody
+              - @delivery_methods.each do |delivery|
+                tr
+                  td
+                    = button_status(delivery.active, '#')
+                  td= delivery.name
+                  / td= button_to("Destroy", admin_delivery_method_path(delivery), method: :delete, :class=>"btn-danger")
+                  td
+                    = link_to(edit_admin_delivery_method_path(delivery), class: 'btn btn-outline btn-default btn-sm') do
+                      i.icon-black.icon-edit
+                      '
+                      = t(:edit)
+                    '
+                    - if delivery.handle == "custom"
+                      = link_to(admin_delivery_method_path(delivery), method: :delete, data: { confirm: t(:delete_this_thing?) }, :class=>"btn btn-outline btn-danger btn-sm") do
+                        i.icon-white.icon-trash
+                        '
+                        = t(:remove)
+          .row
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-0
+                = link_to(t(:delivery_method_new), new_admin_delivery_method_path, :class=>'btn btn-primary')

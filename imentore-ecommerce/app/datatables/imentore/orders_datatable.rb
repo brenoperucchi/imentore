@@ -19,18 +19,17 @@ module Imentore
 
     def button_status(resource)
       capture do
-        " " +
-        button_order_status(resource.status)
+        " #{button_order_status(resource.status)}"
       end
     end
 
     def button_link(resource)
       capture do 
-        button_datatable(resource, edit_admin_order_path(resource), 'btn btn-small', 'icon-edit icon-black', 'edit') +
+        button_datatable(resource, edit_admin_order_path(resource), 'btn btn-outline btn-default btn-sm', 'icon-edit icon-black', 'edit') +
         if resource.can_cancel?
-          button_datatable(resource, cancel_admin_order_path(resource), 'btn btn-warning btn-small', 'icon-white icon-edit', 'cancel')
+          button_datatable(resource, cancel_admin_order_path(resource), 'btn btn-outline btn-warning btn-sm', 'icon-white icon-edit', 'cancel')
         else
-          button_datatable(resource, admin_order_path(resource), 'btn btn-danger btn-small', 'icon-trash icon-white', 'remove', :delete)
+          button_datatable(resource, admin_order_path(resource), 'btn btn-outline btn-danger btn-sm', 'icon-trash icon-white', 'remove', :delete)
         end
       end
     end

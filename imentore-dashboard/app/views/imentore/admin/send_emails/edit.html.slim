@@ -1,4 +1,14 @@
 - content_for :footer do
+  javascript:
+    $(function() {
+        var editor_two = CodeMirror.fromTextArea(document.getElementById("code2"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            styleActiveLine: true
+        });
+    });
+
+- content_for :footer do
   css:
     dl.dl-horizontal{
       padding:10px;
@@ -8,57 +18,141 @@
       text-align:left;
     }
 
-= simple_form_for([:admin, @send_email], :html => {:class => 'form-horizontal'}) do |f|
-  = f.error_notification
-  = f.input :active, as: :boolean
-  - unless @send_email.name == 'notify_admin'
-    = f.input :notify, as: :boolean
-  = f.input :name, input_html: {value: t(@send_email.name), :class => 'span6'}, disabled: true
-  = f.input :subject, input_html: {:class => 'span6'}
-  .control-group.string.optional
-    label.string.optional.control-label Tags
-    .controls
-      #accordion2.accordion
-        .accordion-group
-          .accordion-heading
-            a.accordion-toggle[data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"]
-              |  Show Tags
-          #collapseOne.accordion-body.in.collapse[style="height: 0px; "]
-            .accordion-inner
-              .span6
-                dl.dl-horizontal
-                  dt.text_left "#empresa_nome#"
-                  dd "Nome da sua Empresa"
-                  /! %dt.right= "10"
-                  dt "#empresa_url#"
-                  dd "Url da sua empresa"
-                  /! %dt.right= "10"
-                  dt "#empresa_nome_loja#"
-                  dd "Nome da sua Loja"
-                  dt "#empresa_email#"
-                  dd "Email de contato da loja"
-                  dt "#cliente_nome#"
-                  dd "Nome do cliente"
-                  dt "#cliente_nome#"
-                  dd "Nome do cliente"
-                  dt "#cliente_email#"
-                  dd "Email do Cliente"
-              .span6
-                dl.dl-horizontal
-                  dt "#pedido_codigo#"
-                  dd "Código do pedido"
-                  dt "#pedido_data#"
-                  dd "Data do Pedido"
-                  dt "#pedido_info_cliente#"
-                  dd "Cliente do pedido"
-                  dt "#pedido_produtos#"
-                  dd "Produtos do pedido"
-                  dt "#pedido_frete#"
-                  dd "Informações de envio do pedido"
-                  dt "#link_rastreamento#"
-                  dd "Link de Rastreamento da Loja"
+= simple_form_for @send_email, url: [:admin, @send_email], :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5
+              | Informações do Envio do Email
+              / small Simple login form example
+          .ibox-content
+            = f.error_notification
+            = f.input :active, as: :boolean
+            - unless @send_email.name == 'notify_admin'
+              = f.input :notify, as: :boolean
+            = f.input :name, input_html: {value: t(@send_email.name), :class => 'span6'}, disabled: true
+            = f.input :subject, input_html: {:class => 'span6'}
+            = f.input :body, input_html: {id:"code2"}
+            / = tinymce
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-2
+                = f.submit nil, :class => 'btn btn-primary'
 
-  = f.input :body, input_html: {:class => 'span6 tinymce'}
-  = tinymce
-  .form-actions
-    = f.button :submit, :class => 'btn-primary wymupdate'
+
+
+
+/ .wrapper.wrapper-content
+/   .row
+/     .col-lg-6
+/       .ibox
+/         .ibox-title
+/           h5 Code Editor - Theme Example
+/         .ibox-content
+/           p.m-b-lg
+/             | A rich programming API and a CSS theming system are available for customizing CodeMirror to fit your application, and extending it with new functionality. For mor info go to
+/             a href="http://codemirror.net/" target="_blank"  http://codemirror.net/
+/           textarea#code2
+/             javascript:
+/               | var SpeechApp = angular.module('SpeechApp', []);
+              
+/               | function VoiceCtrl($scope) {
+              
+/                   | $scope.said = '...';
+              
+/                   | $scope.helloWorld = function () {
+/                       | $scope.said = "Hello world!";
+/                   | }
+              
+/                   | $scope.commands = {
+/                       | 'hello (world)': function () {
+/                           | if (typeof console !== "undefined") console.log('hello world!')
+/                           | $scope.$apply($scope.helloWorld);
+/                       | },
+/                       | 'hey': function () {
+/                           | if (typeof console !== "undefined") console.log('hey!')
+/                           | $scope.$apply($scope.helloWorld);
+/                       | }
+/                   | };
+              
+/                   | annyang.debug();
+/                   | annyang.init($scope.commands);
+/                   | annyang.start();
+/               | }
+
+/   .row
+/     .col-lg-12
+/       .ibox.float-e-margins
+/         .ibox-title
+/           h5 Wyswig Summernote Editor
+/           .ibox-tools
+/             a.collapse-link
+/               i.fa.fa-chevron-up
+/             a.dropdown-toggle data-toggle="dropdown" href="#" 
+/               i.fa.fa-wrench
+/             ul.dropdown-menu.dropdown-user
+/               li
+/                 a href="#"  Config option 1
+/               li
+/                 a href="#"  Config option 2
+/             a.close-link
+/               i.fa.fa-times
+/         .ibox-content.no-padding
+/           .summernote
+/             h3 Lorem Ipsum is simply
+/             | dummy text of the printing and typesetting industry.
+/             strong Lorem Ipsum has been the industry's
+/             | standard dummy text ever since the 1500s,
+/             | when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+/             | typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+/             br/
+/             br/
+/             ul
+/               li Remaining essentially unchanged
+/               li Make a type specimen book
+/               li Unknown printer
+
+/ .control-group.string.optional
+/   label.string.optional.control-label Tags
+/   .controls
+/     #accordion2.accordion
+/       .accordion-group
+/         .accordion-heading
+/           a.accordion-toggle[data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"]
+/             |  Show Tags
+/         #collapseOne.accordion-body.in.collapse[style="height: 0px; "]
+/           .accordion-inner
+/             .span6
+/               dl.dl-horizontal
+/                 dt.text_left "#empresa_nome#"
+/                 dd "Nome da sua Empresa"
+/                 /! %dt.right= "10"
+/                 dt "#empresa_url#"
+/                 dd "Url da sua empresa"
+/                 /! %dt.right= "10"
+/                 dt "#empresa_nome_loja#"
+/                 dd "Nome da sua Loja"
+/                 dt "#empresa_email#"
+/                 dd "Email de contato da loja"
+/                 dt "#cliente_nome#"
+/                 dd "Nome do cliente"
+/                 dt "#cliente_nome#"
+/                 dd "Nome do cliente"
+/                 dt "#cliente_email#"
+/                 dd "Email do Cliente"
+/             .span6
+/               dl.dl-horizontal
+/                 dt "#pedido_codigo#"
+/                 dd "Código do pedido"
+/                 dt "#pedido_data#"
+/                 dd "Data do Pedido"
+/                 dt "#pedido_info_cliente#"
+/                 dd "Cliente do pedido"
+/                 dt "#pedido_produtos#"
+/                 dd "Produtos do pedido"
+/                 dt "#pedido_frete#"
+/                 dd "Informações de envio do pedido"
+/                 dt "#link_rastreamento#"
+/                 dd "Link de Rastreamento da Loja"

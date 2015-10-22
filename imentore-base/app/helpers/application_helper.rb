@@ -2,6 +2,18 @@
 module ApplicationHelper
   include ActionView::Helpers
 
+  def xeditable? object = nil
+    true # Or something like current_user.xeditable?
+  end
+
+  def is_active_controller(controller_name)
+      params[:controller] == controller_name ? "active" : nil
+  end
+
+  def is_active_action(action_name)
+      params[:action] == action_name ? "active" : nil
+  end
+  
   def sortable(column, title = nil)
     title ||= column.downcase
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
@@ -27,51 +39,53 @@ module ApplicationHelper
     @object.in_time_zone(current_store.config.time_zone)
   end
 
-  def button_status(status, url, msg_ok = nil, msg_err = nil)
-    msg_ok ||= 'active'
-    msg_err ||= 'disable'
+  def button_status(status, url, message = nil, error = nil)
+    message ||= I18n.t('active')
+    error ||= I18n.t('disable')
     case status
     when 'placed', true
-      link_to(url, class: 'btn disabled btn-warning') do
-        concat(content_tag(:i, '', :class=>'icon-white icon-ok'))
-        concat(' ' + I18n.t(msg_ok))
-      end
+      content_tag(:label, message, :class=>'label label-primary')
+      # link_to(url, class: 'btn disabled btn-warning') do
+      #   concat(content_tag(:label, '', :class=>'icon-white icon-ok'))
+      #   concat(' ' + I18n.t(message))
+      # end
     when 'pending', false
-      link_to(url, class: 'btn disabled btn-danger') do
-        concat(content_tag(:i, '', :class=>'icon-white icon-asterisk'))
-        concat(' ' + I18n.t(msg_err))
-      end
+      content_tag(:label, error, :class=>'label label-danger')
+      # link_to(url, class: 'btn disabled btn-danger') do
+      #   concat(content_tag(:i, '', :class=>'icon-white icon-asterisk'))
+      #   concat(' ' + I18n.t(error))
+      # end
     end
   end 
 
   def button_datatable(product, path, klass_button ,klass_icon, name, method=nil)
     capture do 
-      link_to(path, class: klass_button, method: method) do
+      concat(link_to(path, class: klass_button, method: method) do
         concat(content_tag(:i, '', :class=>klass_icon))
         concat(' ' + I18n.t(name))
-      end
+      end) + concat(' ')
     end
   end
 
   def button_order_status(status)
     case status
     when 'placed', true
-        concat(link_to("#", class: 'btn btn-small btn-mini disabled btn-info') do
+        concat(link_to("#", class: 'btn btn-xs btn-mini disabled btn-info') do
           content_tag(:i, '', :class=>'icon-white icon-exclamation-sign') +
           " " + I18n.t(status)
         end)
     when 'pending', false
-      concat(link_to("#", class: 'btn btn-small disabled btn-warning') do
+      concat(link_to("#", class: 'btn btn-xs disabled btn-warning') do
         content_tag(:i, '', :class=>'icon-white icon-remove') +
         " " + I18n.t(status)
       end)
     when 'finished', false
-      concat(link_to("#", class: 'btn btn-small disabled btn-success') do
+      concat(link_to("#", class: 'btn btn-xs disabled btn-success') do
         content_tag(:i, '', :class=>'icon-white icon-ok') +
         " " + I18n.t(status)
       end)
     when 'canceled', false
-      concat(link_to("#", class: 'btn btn-small disabled btn-warning') do
+      concat(link_to("#", class: 'btn btn-xs disabled btn-warning') do
         content_tag(:i, '', :class=>'icon-white icon-remove') +
         " " + I18n.t(status)
       end)

@@ -1,0 +1,12 @@
+//= require inspinia/iCheck/icheck.min.js
+//= require inspinia/dataTables/jquery.dataTables.js
+//= require inspinia/dataTables/dataTables.bootstrap.js
+//= require inspinia/dataTables/dataTables.responsive.js
+//= require inspinia/dataTables/dataTables.tableTools.min.js
+//= require inspinia/jquery-ui/jquery-ui.min.js
+//= require inspinia/footable/footable.all.min.js
+//= require admin/dynatree/jquery.dynatree
+//= require admin/dynatree/jquery.cookie
+//= require typeahead.js
+//= require editable/bootstrap-editable
+//= require editable/rails

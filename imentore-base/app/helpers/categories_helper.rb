@@ -38,7 +38,7 @@ module CategoriesHelper
   end
 
   def categories_table(collection)
-    content_tag(:table, class: 'table table-stripped table-condensed') do
+    content_tag(:table, class: 'table table-striped table-bordered table-hover') do
       concat(content_tag(:thead) do
         content_tag(:tr) do
           concat(content_tag(:th, I18n.t(:level)))

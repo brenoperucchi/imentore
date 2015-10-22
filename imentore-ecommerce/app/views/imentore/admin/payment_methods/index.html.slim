@@ -1,26 +1,51 @@
-legend= t(:payment_methods)
-p= link_to(t(:payment_method_new), new_admin_payment_method_path, :class=>'btn btn-primary')
+- model_class = Imentore::PaymentMethod
+/ legend= t(:payment_methods)
 
-table.table.table-striped
-  thead
-    tr
-      th.minimal= t(:active)
-      th= t(:name)
-      th= t(:action)
-  tbody
-    - @payment_methods.each do |payment|
-      tr
-        td
-          = button_status(payment.active, '#')
-        td= payment.name
-        td
-          = link_to(edit_admin_payment_method_path(payment), class: 'btn') do
-            i.icon-black.icon-edit
-            '
-            = t(:edit)
-          '
-          - if payment.handle == "custom"
-            = link_to(admin_payment_method_path(payment), class: "btn btn-danger delete-confirm") do
-              i.icon-white.icon-remove
-              '
-              = t(:remove)
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5=t model_class.model_name.human.pluralize, scope: 'activerecord.models'.titleize
+          / h5= t(:product_index)
+          .ibox-tools
+            a.collapse-link
+              i.fa.fa-chevron-up
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              i.fa.fa-wrench
+            ul.dropdown-menu.dropdown-user
+              / li
+              /   a href="#"  Config option 1
+              / li
+              /   a href="#"  Config option 2
+            a.close-link
+              i.fa.fa-times
+        .ibox-content
+          table.table.table.table-striped.table-hover.table-condensed
+            thead
+              tr
+                th.minimal= t(:active)
+                th= t(:name)
+                th= t(:action)
+            tbody
+              - @payment_methods.each do |payment|
+                tr
+                  td
+                    = button_status(payment.active, '#')
+                  td= payment.name
+                  td
+                    = link_to(edit_admin_payment_method_path(payment), class: 'btn btn-outline btn-default btn-sm') do
+                      i.icon-black.icon-edit
+                      '
+                      = t(:edit)
+                    '
+                    - if payment.handle == "custom"
+                      = link_to(admin_payment_method_path(payment), method: :delete, data: { confirm: t(:delete_this_thing?) }, :class=>"btn btn-outline btn-danger btn-sm") do
+                        i.icon-white.icon-remove
+                        '
+                        = t(:remove)
+          .row 
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-0
+                = link_to(t(:payment_method_new), new_admin_payment_method_path, :class=>'btn btn-primary')

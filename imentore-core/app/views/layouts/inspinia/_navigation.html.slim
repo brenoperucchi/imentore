@@ -1,0 +1,112 @@
+nav.navbar-default.navbar-static-side role="navigation" 
+  .sidebar-collapse
+    ul#side-menu.nav.metismenu
+      li.nav-header
+        .dropdown.profile-element
+          span
+          a.dropdown-toggle data-toggle="dropdown" href="#" 
+            span.clear
+              span.block.m-t-xs
+                strong.font-bold= current_user.try(:userable).try(:name).capitalize
+              / span.text-muted.text-xs.block
+              /   | Art Director
+                b.caret
+          ul.dropdown-menu.animated.fadeInRight.m-t-xs
+            li
+              a href=""  Profile
+            li
+              a href=""  Contacts
+            li
+              a href=""  Mail
+            li.divider
+            li
+              a href=""  Logout
+        .logo-element
+          | Admin
+      / li class="#{is_active_controller('dashboards')}" 
+      /   a href="" 
+      /     i.fa.fa-th-large
+      /     span.nav-label Dashboards
+      /     span.fa.arrow
+      /   ul.nav.nav-second-level class="#{is_active_controller('dashboards')}" 
+      /     li class="#{is_active_action('dashboard_1')}"  
+      /       = link_to "Dashboard v.1", root_path
+      /     li class="#{is_active_action('dashboard_2')}"  
+      /       = link_to "Dashboard v.2"
+      /     li class="#{is_active_action('dashboard_3')}"  
+      /       = link_to "Dashboard v.3"
+      /     li class="#{is_active_action('dashboard_4_1')}"  
+      /       = link_to "Dashboard v.4"
+      /   ul.nav.nav-second-level class="#{is_active_controller('dashboards')}" 
+      li class="#{is_active_controller('dashboards')}" 
+        a href="" 
+          i.fa.fa-th-large
+          span.nav-label Dashboards
+          span.fa.arrow
+
+        ul.nav.nav-second-level.reports
+          li.nav-header
+            = t(:reports)
+          li#feedback
+            = link_to(t(:feedback), admin_feedbacks_path)
+      li class="#{is_active_controller('dashboards')}" 
+        a href="" 
+          i.fa.fa-diamond
+          span.nav-label
+            = t(:configuration)
+          span.fa.arrow
+        
+        ul.nav.nav-second-level.configuration
+          li#general_settings
+            = link_to(t(:general_settings), edit_admin_store_path)
+          li#virtual_settings
+            = link_to(t(:virtual_settings), admin_edit_settings_path(:virtual))
+          li.nav-header
+            = t(:cms)
+          li#themes
+            = link_to(t(:themes), admin_themes_path)
+          li.nav-header
+            = t(:others)
+          / li#domains
+          /   = link_to(t(:domains), admin_domains_path)
+          li#send_emails
+            = link_to(t(:send_emails), admin_send_emails_path)
+
+          li#payment_method
+            = link_to(t(:payment_methods), admin_payment_methods_path)
+          li#delivery_method
+            = link_to(t(:delivery_methods), admin_delivery_methods_path)
+
+      li class="#{is_active_controller('dashboards')}" 
+        a href="" 
+          i.fa.fa-th-large
+          span.nav-label
+            = t(:management)
+          span.fa.arrow
+        
+        ul.nav.nav-second-level.management
+          li#customers
+            = link_to(t(:customers), admin_customers_path)
+          li#employees
+            = link_to(t(:users), admin_employees_path)
+          li#pages
+            = link_to(t(:pages), admin_pages_path)
+          li#notices
+            = link_to(t(:notices), admin_notices_path)
+          li#coupons
+            = link_to(t(:coupons), admin_coupons_path)
+          li.nav-header
+            = t(:ecommerce)
+          li#categories
+            = link_to(t(:categories), admin_categories_path)
+          li#products
+            = link_to(t(:products), admin_products_path)
+          li#orders
+            = link_to(t(:orders), admin_orders_path)
+
+
+      / li class="#{is_active_controller('layoutsoptions')}" 
+      /   = link_to "#" do 
+      /     i.fa.fa-diamond
+      /     span.nav-label Layouts
+      /     span.label.label-primary.pull-right NEW

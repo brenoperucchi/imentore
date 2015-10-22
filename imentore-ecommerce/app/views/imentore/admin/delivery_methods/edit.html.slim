@@ -1,7 +1,18 @@
-= simple_form_for([:admin, @delivery_method], :html => {:class => 'form-horizontal'}) do |f|
-  = f.error_notification
-  = f.input :active
-  = render(@delivery_method.handle, f: f)
-  .form-actions
-    = f.button :submit, :class => 'btn-primary'
-    / = f.input :calculator, collection: [["Flat rate", "flat_rate"]]
+= simple_form_for @delivery_method, url: [:admin, @delivery_method], :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5
+              | Método de Pagamento
+              / small Simple login form example
+          .ibox-content
+            = f.error_notification
+            = f.input :active
+            = render(@delivery_method.handle, f: f)
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-2
+                = f.submit nil, :class => 'btn btn-primary'
+                / = f.input :calculator, collection: [["Flat rate", "flat_rate"]] 

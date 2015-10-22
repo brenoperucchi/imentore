@@ -1,14 +1,22 @@
-legend= t(:newo) + " " + t(:product)
-
-= simple_form_for([:admin, @product], :html => {:class => 'form-horizontal'}) do |f|
-  = f.error_notification
-  = f.input :name
-  - unless f.error_notification.blank?
-    = f.input :handle
-  = f.input :description
-  = f.simple_fields_for(:variants) do |v|
-    = v.input :price, as: :string
-    = v.input :quantity, as: :integer
-    = v.input :weight, as: :string
-  .form-actions
-    = f.submit(:class => "btn btn-primary")
+/ = simple_form_for(, :html => {:class => 'form-horizontal'}) do |f|
+= simple_form_for @product, url: [:admin, @product], :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5
+              = t(:newo) + " " + t(:product)
+              / small Simple login form example
+          .ibox-content
+            = f.error_notification
+            = f.input :name
+            - unless f.error_notification.blank?
+              = f.input :handle
+            = f.input :description
+            = f.simple_fields_for(:variants) do |v|
+              = v.input :price, as: :string
+              = v.input :quantity, as: :integer
+              = v.input :weight, as: :string
+            .form-actions
+              = f.submit(:class => "btn btn-primary")

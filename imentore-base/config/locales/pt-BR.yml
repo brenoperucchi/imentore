@@ -24,10 +24,13 @@ pt-BR:
 
   order_placed: Pedido criado
   invoice_paid: Cobrança paga
-  delivery_sent: Encomenda enviada
   customer_create: Cliente criado
   notify_admin: Notifição ao Admin
+  invoice_confirmed: Cobrança Confirmada
+  invoice_pending: Cobrança pendente
 
+  delivery_sent: Encomenda enviada
+  delivery_pending: Encomenda Pendente
   select_parent: Selecionar parentesco
   polymorphic_created: "%{name} criado com sucesso" 
 
@@ -582,12 +585,25 @@ pt-BR:
         limit_customer: Limite/Cliente
         limit_use: Limite/Uso
         due_at: Data Vencimento
-
+      imentore/delivery:
+        status: Situação
+      imentore/invoice:
+        status: Situação
       errors:
         imentore_order:
           stock_null: Produto sem estoque
         imentore_cart:
-          stock_null: Produto sem estoque para essa quantidade.
+          stock_null: Produto sem estoque para essa quantidade
+    errors:
+      models:
+        imentore/invoice:
+          attributes:
+            status:
+              invalid_transition: não pode ser trocada.
+        imentore/delivery:
+          attributes:
+            status:
+              invalid_transition: não pode ser trocada.
   activemodel:
     attributes:
       page: Pagina

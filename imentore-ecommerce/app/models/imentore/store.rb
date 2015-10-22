@@ -27,10 +27,11 @@ module Imentore
     has_many :domains, :dependent => :destroy
     has_many :products, :dependent => :destroy
     has_many :orders, :dependent => :destroy
+    has_many :invoices, through: :orders
     has_many :payment_methods, :dependent => :destroy
     has_many :delivery_methods, :dependent => :destroy
-    has_many :assets, :through => :themes, :source => :assets
     has_many :themes, :dependent => :destroy
+    has_many :assets, :through => :themes, :source => :assets
     has_many :customers, :dependent => :destroy
     has_many :coupons, :dependent => :destroy
     has_many :coupons_orders, :dependent => :destroy
@@ -40,9 +41,8 @@ module Imentore
     has_many :pages, :dependent => :destroy
     has_many :feedbacks, as: :feedbackable, :dependent => :destroy
     has_many :notices, :dependent => :destroy
-    has_many :invoices, through: :orders
     
-    has_many :users
+    has_many :users, :dependent => :destroy
 
     accepts_nested_attributes_for :owner, :address
 

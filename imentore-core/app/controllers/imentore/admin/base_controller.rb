@@ -3,7 +3,7 @@ module Imentore
     class BaseController < ::ApplicationController
       include Imentore::BaseHelper
       helper_method :sort_column, :sort_direction
-      layout "admin"
+      layout "inspinia"
 
       private
         

@@ -1,30 +1,48 @@
-legend
-  = t(:domains)
+- model_class = Imentore::Domain
+/ .page-header
+/   h1=t model_class.model_name.human.pluralize, scope: 'activerecord.models'.titleize
 
-table.table
-  thead
-    tr
-      th= t(:name)
-      th= t(:hosting)
-      th= t(:action)
-  tbody
-    - @domains.each do |domain|
-      tr
-        td= domain.name
-        td 
-          span.label.label-success
-            = domain.hosting.to_s
-        td= link_to(admin_domain_path(domain), method: :delete, :class=>"btn btn-danger") do
-          i.icon-white.icon-trash
-          '
-          = t(:remove)
-        td= link_to("Mails", admin_domain_emails_path(domain), class: 'btn') if domain.hosting
+= simple_form_for Imentore::Domain.new, url: admin_domains_path, :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5
+              | Domínios
+          .ibox-content
+            .row
+              table.table.table-striped
+                thead
+                  tr
+                    th= model_class.human_attribute_name(:name)
+                    th= model_class.human_attribute_name(:hosting)
+                    th=t 'actions', scope: "helpers.menu"
+                tbody
+                  - @domains.each do |domain|
+                    tr
+                      td= domain.name
+                      td 
+                        span.label.label-success
+                          = domain.hosting.to_s
+                      td= link_to admin_domain_path(domain), method: :delete, data: { confirm: t(:delete_this_thing?) }, :class=>"btn btn-outline btn-danger btn-sm" do
+                        i.icon-white.icon-trash
+                        '
+                        = t(:remove)
 
-= simple_form_for([:admin, @domain], :html=> { :class=>'form-horizontal well'} ) do |f|
-  h3= t(:domain_create)
-  hr
-  = f.input :name,:input_html => { :class => "" }, :hint => t(:domain_name_hint)
-  / = f.label :hosting, :class => "checkbox" do
-  = f.input :hosting
-  .form-actions
-    = f.submit(:class => "btn btn-primary")
+                      td= link_to("Mails", admin_domain_emails_path(domain), class: 'btn') if domain.hosting
+            .hr-line-dashed
+            .row
+              .col-lg-12
+                h3= t(:domain_create)
+                = f.input :name,:input_html => { :class => "" }, :hint => t(:domain_name_hint)
+                .hr-line-dashed
+                .form-group
+                  / = f.label :hosting, :class => "checkbox" do
+                  / = f.input :hosting
+                  .col-sm-4.col-sm-offset-0
+                    = f.submit(:class => "btn btn-primary")
+                    / = link_to(new_admin_theme_path, :class=>'btn btn-primary') do
+                    /   i.fa.fa-plus
+                    /   '
+                    /   = t(:new)

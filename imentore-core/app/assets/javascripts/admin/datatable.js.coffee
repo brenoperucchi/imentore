@@ -13,9 +13,11 @@ $(document).ready ->
 
   # jQuery -> 
   table = $('#datatable').DataTable(
+    "dom": 'T<"clear">lfrtip',
+    "tableTools": {"sSwfPath": "../assets/inspinia/dataTables/swf/copy_csv_xls_pdf.swf"},
     # sDom: "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
     language: {url: "/javascripts/admin/datatables.pt-br.lang"},
-    sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+    # sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
     # sPaginationType: "bootstrap"
     bProcessing: true
     bServerSide: true

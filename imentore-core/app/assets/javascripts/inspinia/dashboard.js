@@ -1,0 +1,11 @@
+//= require inspinia/flot/jquery.flot.js
+//= require inspinia/flot/jquery.flot.tooltip.min.js
+//= require inspinia/flot/jquery.flot.resize.js
+//= require inspinia/flot/jquery.flot.pie.js
+//= require inspinia/flot/jquery.flot.time.js
+//= require inspinia/flot/jquery.flot.spline.js
+//= require inspinia/sparkline/jquery.sparkline.min.js
+//= require inspinia/chartjs/Chart.min.js
+//= require inspinia/jvectormap/jquery-jvectormap-2.0.2.min.js
+//= require inspinia/jvectormap/jquery-jvectormap-world-mill-en.js
+//= require inspinia/toastr/toastr.min.js

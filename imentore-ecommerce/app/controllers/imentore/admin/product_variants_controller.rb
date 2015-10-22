@@ -4,6 +4,7 @@ module Imentore
       inherit_resources
       defaults :resource_class => Imentore::ProductVariant, :collection_name => 'variants', :instance_name => 'variant'
       belongs_to :product, parent_class: Imentore::Product
+      respond_to :js, only: [:edit, :new]
 
       def requires
         @variant_update = @variant
@@ -28,13 +29,14 @@ module Imentore
         end
       end
 
+      def new
+        requires
+      end
+
       def index
         requires
         @variant_update = parent.variants.first
         index!
-      end
-
-      def new
       end
 
       def destroy

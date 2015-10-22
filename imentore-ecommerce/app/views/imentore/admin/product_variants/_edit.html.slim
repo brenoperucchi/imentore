@@ -1,0 +1,25 @@
+#myModal.modal.inmodal.fade aria-hidden="true" role="dialog" tabindex="-1" 
+  = simple_form_for @variant, as: "variant", url: admin_product_variant_path(@product, @variant), :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean }, input_html: { method: :post }  do |f|
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          button.close data-dismiss="modal" type="button" 
+            span aria-hidden="true"  &times;
+            span.sr-only Close
+          h4.modal-title Modal title
+          / small.font-bold Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        .modal-body        
+          = f.error_notification
+          = f.input :sku, input_html: { :class => 'change', :id => 'sku'}
+          .values
+            = f.simple_fields_for :options do |of|
+              = of.input :value, label: of.object.option_type.name, input_html: { :class => 'change', :id => of.object.option_type.name}
+          = f.input :quantity, input_html: { :class => 'change', :id => 'quantity'}
+          = f.input :weight, input_html: { :class => 'change', :id => 'weight', type: 'text'}
+          = f.input :price, input_html: { :class => 'change', :id => 'price', type: 'text'}
+          = f.input :price_deal, input_html: { :class => 'change', :id => 'price_deal', type: 'text'}
+          
+        .modal-footer
+          / button.btn.btn-white data-dismiss="modal" type="button"  Close
+          = f.button :submit
+          button.btn.btn-primary type="button"  Save changes

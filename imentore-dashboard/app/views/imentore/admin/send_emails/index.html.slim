@@ -1,32 +1,54 @@
 / - content_for :breadcrumb do
 /   == breadcrumb([{ t(:home) => admin_dashboard_path }, { 'Configuration' => url_for(:controller => :themes) }, { 'Themes' => url_for(:controller => :themes) }])
 
-legend= t(:send_emails)
+/ legend= t(:send_emails)
 / p
 /   = link_to(new_admin_send_email_path, :class=>'btn btn-primary') do
 /     i.icon-white.icon-plus
 /     '
 /     | New SendEmail
+- model_class = Imentore::SendEmail
+/ .page-header
+/   h1=t model_class.model_name.human.pluralize, scope: 'activerecord.models'.titleize
 
-
-table.table.table-striped
-  thead
-    tr
-      th= t(:active)
-      th= t(:notify)
-      th= t(:name)
-      th= t(:subject)
-      th= t(:action)
-  tbody
-    - @send_emails.each do |send_email|
-      tr
-        td= button_status(send_email.active, '#')
-        td= send_email.name == 'notify_admin' ? button_status(true, '#') : button_status(send_email.notify, '#')
-        td= t(send_email.name)
-        td= send_email.subject
-        / td= button_to("Destroy", admin_send_email_path(send_email), method: :delete, :class=>"btn-danger")
-        td
-          = link_to(edit_admin_send_email_path(send_email), class: 'btn') do
-            i.icon-black.icon-edit
-            '
-            = t(:edit)
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5=t model_class.model_name.human.pluralize, scope: 'activerecord.models'.titleize
+          / h5= t(:product_index)
+          .ibox-tools
+            a.collapse-link
+              i.fa.fa-chevron-up
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              i.fa.fa-wrench
+            ul.dropdown-menu.dropdown-user
+              / li
+              /   a href="#"  Config option 1
+              / li
+              /   a href="#"  Config option 2
+            a.close-link
+              i.fa.fa-times
+        .ibox-content
+          table.table.table.table-striped.table-hover.table-condensed
+            thead
+              tr
+                th= t(:active)
+                th= t(:notify)
+                th= t(:name)
+                th= t(:subject)
+                th= t(:action)
+            tbody
+              - @send_emails.each do |send_email|
+                tr
+                  td= button_status(send_email.active, '#')
+                  td= send_email.name == 'notify_admin' ? button_status(true, '#') : button_status(send_email.notify, '#')
+                  td= t(send_email.name)
+                  td= send_email.subject
+                  / td= button_to("Destroy", admin_send_email_path(send_email), method: :delete, :class=>"btn-danger")
+                  td
+                    = link_to(edit_admin_send_email_path(send_email), class: 'btn') do
+                      i.icon-black.icon-edit
+                      '
+                      = t(:edit)

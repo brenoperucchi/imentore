@@ -1,12 +1,27 @@
-- content_for :breadcrumb do
-  == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => admin_themes_path},{@theme.name => admin_theme_path(@theme)}])
+/- content_for :breadcrumb do
+  / == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => admin_themes_path},{@theme.name => admin_theme_path(@theme)}])
 
-Legend= t(:newo) + ' ' + t(@kind) 
-= simple_form_for(@template, url: admin_theme_templates_path(@theme), html: {class: 'form-horizontal'}) do |f|
-  = f.error_notification
-  = f.input :path, label: t("path_#{@kind.downcase}", scope: [:activerecord, :attributes, 'imentore/template'])
-  - if @kind == 'template'
-    = f.input :layout_id, as: 'radio_buttons', collection: @theme.templates.layouts.collect{|x|[x.path, x.id]}
-  = f.input :kind, as: 'hidden', input_html: {value: @kind}
-  = f.input :body
-  = f.button :submit, "#{t(:create)} #{@kind.capitalize}", class: 'btn btn-primary'
+/ Legend= t(:newo) + ' ' + t(@kind) 
+= simple_form_for @template, url: [:admin, @theme, @template], :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5
+              | Página da Loja
+              / small Simple login form example
+          .ibox-content
+            = f.error_notification
+            = f.input :path, label: t("path_#{@kind.downcase}", scope: [:activerecord, :attributes, 'imentore/template'])
+            - if @kind == 'template'
+              = f.input :layout_id, as: 'radio_buttons', collection: @theme.templates.layouts.collect{|x|[x.path, x.id]}
+            = f.input :kind, as: 'hidden', input_html: {value: @kind}
+            = f.input :body
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-2
+                / = f.button :submit, , class: 'btn btn-primary'
+                = f.submit "#{t(:create)} #{@kind.capitalize}", :class => 'btn btn-primary'
+
+/ = simple_form_for(@template, url: admin_theme_templates_path(@theme), html: {class: 'form-horizontal'}) do |f|

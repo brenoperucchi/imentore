@@ -1,9 +1,23 @@
+- model_class = Imentore::Theme
+.page-header
+  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
 
-=  render "imentore/admin/themes/top"
-
-.tab#theme
-  = simple_form_for(@theme, url: admin_theme_path(@theme), html: {class: 'form-horizontal'}) do |f|
-    = f.error_notification
-    = f.input :active
-    '
-    = f.button :submit, class: 'btn btn-primary'
+.wrapper.wrapper-content.animated.fadeInRight
+  .row  
+    .col-lg-12
+      .tabs-container
+        =  render "imentore/admin/themes/top"
+        / ul.nav.nav-tabs
+        /   li.active
+        /     a data-toggle="tab" href="#tab-1"  This is tab
+        /   li
+        /     a data-toggle="tab" href="#tab-2"  This is second tab
+        .tab-content
+          .tab#themes.tab-pane.active
+            .panel-body
+              / = simple_form_for(@theme, url: admin_theme_path(@theme), html: {class: 'form-horizontal'}) do |f|
+              = simple_form_for @theme, url: admin_theme_path(@theme), :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+                = f.error_notification
+                = f.input :active
+                '
+                = f.submit nil, :class => 'btn btn-primary'

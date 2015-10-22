@@ -1,9 +1,13 @@
 - content_for :footer do
+  css:
+    ul.dynatree-container { 
+      height: 300px;important! 
+      overflow: scroll;important!
+    }
   javascript:
     $(function(){
       $('.typeahead').typeahead()
       function updateCategories(cat_ids){
-        console.log(cat_ids == "")
         var ids = (cat_ids == "" ? null : cat_ids)
         $.ajax({
           url: '#{{admin_product_path(@product)}}',
@@ -85,50 +89,58 @@
         var href = "../src/"
           + $(this).val()
           + "/ui.dynatree.css"
-          + "?reload=" + new Date().getTime();
+          + "?reload="+ new Date().getTime();
         $("#skinSheet").attr("href", href);
       });
-      <!-- End_Exclude -->
     });
 
 - content_for :breadcrumb do
   == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:management) => '' }, { t(:products) => url_for(:controller => :products) }, { @product.name => '' }])
 
-= render "imentore/admin/products/top"
+/ = render "imentore/admin/products/top"
 
-.tab#product
-  = simple_form_for([:admin, @product], :html => {:class => 'form-horizontal'}) do |f|
-    .row
-      .span12
-        .row
-          .span7
-              = f.error_notification
-              = f.input :active
-              = f.input :featured
-              = f.input :name
-              = f.input :handle
-              = f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
-          .span4
-            h4
-              = t(:categories)
-            #tree3
-    legend
-      = t(:brand)
-      '
-      small
-       = t(:product_brand)
-    .row
-      .span10
-        = f.input :product_brand_name, input_html: {class: 'span5', 'data-provide'=>"typeahead", 'data-source'=>"#{brand_collection(current_store)}", value: f.object.try(:product_brand).try(:name), autocomplete:"off"}, placeholder: t(:product_brand_select) + '...'
-    .row
-      .span10
-        = link_to('#product-brand', class: :btn, 'data-toggle'=>'modal') do
-          i.icon-black.icon-plus
-          '
-          = t(:product_brand_new)
-
-    .form-actions
-      = f.submit(:class => "btn btn-primary")
+.wrapper.wrapper-content.animated.fadeInRight
+  .row  
+    .col-lg-12
+      .tabs-container
+        =  render "imentore/admin/products/top"
+        / ul.nav.nav-tabs
+        /   li.active
+        /     a data-toggle="tab" href="#tab-1"  This is tab
+        /   li
+        /     a data-toggle="tab" href="#tab-2"  This is second tab
+        .tab-content
+          .tab#product.tab-pane.active
+            .panel-body
+              = simple_form_for @product, url: [:admin, @product], :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+                .row
+                  .col-md-6
+                    = f.error_notification
+                    = f.input :active
+                    = f.input :featured
+                    = f.input :name
+                    = f.input :handle
+                    = f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
+                  .col-md-6
+                    h4
+                      = t(:categories)
+                    #tree3
+                .row
+                  .col-md-12
+                    legend= t(:brand)
+                    = f.input :product_brand_name, input_html: {class: 'span5', 'data-provide'=>"typeahead", 'data-source'=>"#{brand_collection(current_store)}", value: f.object.try(:product_brand).try(:name), autocomplete:"off"}, placeholder: t(:product_brand_select) + '...'
+                / .row
+                /   .span10
+                /     = link_to('#product-brand', class: :btn, 'data-toggle'=>'modal') do
+                /       i.icon-black.icon-plus
+                /       '
+                /       = t(:product_brand_new)
+                .hr-line-dashed
+                .row 
+                  .col-md-12
+                    .form-group
+                      .col-sm-4.col-sm-offset-0
+                        = f.submit(:class => "btn btn-primary")
 
 #product-brand.modal.hide.fade.in
   = render file: 'imentore/admin/product_brands/new', product: @product
