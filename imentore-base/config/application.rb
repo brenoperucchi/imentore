@@ -65,5 +65,8 @@ module ImentoreBase
     ## Add 26/09/2014
     # config.log_tags = [:remote_ip, :host]
     # Other config settings omitted.
+    
+    ## Add 23/10/2015
+    config.assets.paths << Rails.root.join("vendor", "assets", "fonts")
   end
 end
