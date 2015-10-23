@@ -31,7 +31,7 @@
             a.close-link
               i.fa.fa-times
         .ibox-content
-          table.table.table.table-striped.table-hover.table-condensed
+          table.table.table.table-striped.table-hover.table-condensed.table-bordered
             thead
               tr
                 th= model_class.human_attribute_name(:active)
@@ -67,4 +67,4 @@
                 = link_to(new_admin_theme_path, :class=>'btn btn-primary') do
                   i.fa.fa-plus
                   '
-                  = t(:new)
+                  = I18n.t(:new, scope: 'helpers.submit', model: model_class.model_name.human)

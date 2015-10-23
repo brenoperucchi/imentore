@@ -7,8 +7,8 @@
 
 / legend= t(:configurations) + ' ' + t(:ofa) + ' ' + t(:virtual_settings)
 / - model_class = Build
-div class="page-header"
-  h1= t('settings', scope: 'helpers.titles', model: "")
+/ div class="page-header"
+/   h1= t('settings', scope: 'helpers.titles', model: "")
 .wrapper.wrapper-content.animated.fadeInRight
   .row
     .col-lg-12
@@ -26,7 +26,8 @@ div class="page-header"
           .hr-line-dashed
           .form-group
             .col-sm-4.col-sm-offset-2
-              = f.submit nil, :class => 'btn btn-primary'
+              / = f.submit nil, :class => 'btn btn-primary'
+              = f.submit "#{t(:update)} #{t(:virtual_settings)}", :class => 'btn btn-primary'
 
           / = f.input :limit_product_featured, :input_html => { :class => "span3" }, :hint => t(:limit_product_featured, scope: 'hint.imentore/setting'), label: t(:limit_product_featured, scope: 'activerecord.attributes.imentore/settings')
           / = f.input :limit_product_newest, :input_html => { :class => "span3" }, :hint => t(:limit_product_newest, scope: 'hint.imentore/setting'), :label=> t(:limit_product_newest, scope: 'activerecord.attributes.imentore/settings')

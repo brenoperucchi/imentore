@@ -39,18 +39,22 @@
                       td= link_to(template.path, edit_admin_theme_template_path(@theme, template)) + " "
                       td= l(time_zone(template.manager_template.updated_at)) unless template.manager_template.nil?
                       td
-                        = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn btn-xs') do
-                          = glyph 'pencil'
+                        = link_to edit_admin_theme_template_path(@theme, template), class: 'btn btn-outline btn-default btn-sm' do
+                          i.icon-black.icon-edit
+                          '
+                          = t(:edit)
                         '
                         - unless template.manager_template.nil?
-                          = link_to(view_default_admin_theme_template_path(@theme, template), class: 'btn') do
+                          = link_to(view_default_admin_theme_template_path(@theme, template), class: 'btn btn-outline btn-default btn-sm') do
                             i.icon-black.icon-edit
                             '
                             = t(:view_default)
                           '
                         - if template.manager_template.nil?
-                          = link_to(admin_theme_template_path(@theme, template), method: :delete , class: 'btn btn-xs') do
-                            = glyph 'remove'
+                          = link_to admin_theme_template_path(@theme, template), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-outline btn-danger btn-sm', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do
+                            i.icon-white.icon-remove
+                            '
+                            = t(:remove)
               .controls
                 = link_to(new_admin_theme_template_path(@theme, kind: :layout), :class=>'btn btn-primary') do
                   i.icon-white.icon-plus

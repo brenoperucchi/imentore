@@ -31,7 +31,7 @@
             a.close-link
               i.fa.fa-times
         .ibox-content
-          table.table.table.table-striped.table-hover.table-condensed
+          table.table.table.table-striped.table-hover.table-condensed.table-bordered
             thead
               tr
                 th= t(:active)
@@ -48,7 +48,7 @@
                   td= send_email.subject
                   / td= button_to("Destroy", admin_send_email_path(send_email), method: :delete, :class=>"btn-danger")
                   td
-                    = link_to(edit_admin_send_email_path(send_email), class: 'btn') do
+                    = link_to(edit_admin_send_email_path(send_email), class: 'btn btn-outline btn-default btn-sm') do
                       i.icon-black.icon-edit
                       '
                       = t(:edit)
