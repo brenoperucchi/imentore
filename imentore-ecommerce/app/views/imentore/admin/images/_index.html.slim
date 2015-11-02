@@ -1,0 +1,104 @@
+- model_class = Imentore::Image
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5=t model_class.model_name.human.pluralize, scope: 'activerecord.models'.titleize
+          / h5= t(:product_index)
+          .ibox-tools
+            a.collapse-link
+              i.fa.fa-chevron-up
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              i.fa.fa-wrench
+            ul.dropdown-menu.dropdown-user
+              / li
+              /   a href="#"  Config option 1
+              / li
+              /   a href="#"  Config option 2
+            a.close-link
+              i.fa.fa-times
+        .ibox-content
+          table.table.table.table-striped.table-hover.table-condensed.table-bordered
+            thead
+              tr
+                th= model_class.human_attribute_name(:active)
+                th= model_class.human_attribute_name(:name)
+                th= model_class.human_attribute_name(:actions)
+            tbody
+              - @images.each do |image|
+                tr
+                  td
+                    = image_tag image.picture.url(:super_thumb)
+                        / .caption
+                        /   p
+                        /     = check_box_tag "image_contents[]", image.id
+
+                  td= image.picture_identifier
+                  td= link_to admin_product_variant_image_path(@variant.product, @variant, image), :method => :delete, remote: true, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-outline btn-danger btn-sm', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do
+                        i.icon-white.icon-trash
+                        '
+                        = t(:remove)
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5=t model_class.model_name.human.pluralize, scope: 'activerecord.models'.titleize
+          / h5= t(:product_index)
+          .ibox-tools
+            a.collapse-link
+              i.fa.fa-chevron-up
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              i.fa.fa-wrench
+            ul.dropdown-menu.dropdown-user
+              / li
+              /   a href="#"  Config option 1
+              / li
+              /   a href="#"  Config option 2
+            a.close-link
+              i.fa.fa-times
+        .ibox-content                        
+          = form_for @variant, url: admin_product_variant_images_path(@variant.product.id, @variant.id), html: { multipart: true, class: "dropzone", id: "my-awesome-dropzone"}, method: :post do |f| 
+            .dropzone-previews
+              i.fa.fa-cloud-upload.fa-3x.pull-left.hidden-xs.hidden-sm
+              .pull-left
+                h4 style=("margin-top: -10px;") 
+                  strong Arraste e solte ou clique aqui para enviar os arquivos
+                  br/
+                  small Formatos aceitos: JPG e PNG - Tamanho máximo: 5mb - Máximo de 500 arquivos
+              .clearfix
+
+            .fallback
+              = f.fields_for :images  do |asset|
+                = asset.file_field :picture
+              = f.submit "Upload"
+
+
+javascript:
+  $(document).ready(function(){
+    // disable auto discover
+    Dropzone.autoDiscover = false;
+   
+    // grap our upload form by its id
+    $(".dropzone").dropzone({
+      // restrict image size to a maximum 1MB
+      previewsContainer: ".dropzone-previews",
+      maxFilesize: 10,
+      acceptedFiles: "image/*",
+      // changed the passed param to one accepted by
+      // our rails app
+      paramName: "image[picture]",
+      // show remove links on each image upload
+      addRemoveLinks: true,
+      // if the upload was successful
+      success: function(file, response){
+        // find the remove button link of the uploaded file and give it an id
+        // based of the fileID response from the server
+        $(file.previewTemplate).find('.dz-remove').attr('id', response.fileID);
+        // add the dz-success class (the green tick sign)
+        $(file.previewElement).addClass("dz-success");
+        $.getScript(window.location.pathname)
+      },
+      //when the remove button is clicked
+    }); 
+  });
