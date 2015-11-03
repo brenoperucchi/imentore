@@ -31,39 +31,40 @@
             a.close-link
               i.fa.fa-times
         .ibox-content
-          table.table.table.table-striped.table-hover.table-condensed.table-bordered
-            thead
-              tr
-                th= model_class.human_attribute_name(:active)
-                th= model_class.human_attribute_name(:name)
-                th= model_class.human_attribute_name(:actions)
-            tbody
-              - @themes.each do |theme|
+          .table-responsive
+            table.table.table.table-striped.table-hover.table-condensed.table-bordered
+              thead
                 tr
-                  td
-                    = button_status(theme.active, admin_theme_path(theme))
-                    - unless theme.manager_theme.nil?
-                      br
-                        = t(theme.manager_theme.used_for)
-                  td= theme.name
-                  td
-                    = link_to admin_theme_path(theme), :class => 'btn btn-outline btn-default btn-sm', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do
-                      i.icon-black.icon-edit
-                      '
-                      = t(:edit)
-                    / = link_to(admin_theme_path(theme), class: 'btn') do
-                    /   i.icon-black.icon-edit
-                    /   '
-                    '
-                    - if theme.manager_theme.nil?
-                      = link_to admin_theme_path(theme), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-outline btn-danger btn-sm', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do
-                        i.icon-white.icon-trash
+                  th= model_class.human_attribute_name(:active)
+                  th= model_class.human_attribute_name(:name)
+                  th= model_class.human_attribute_name(:actions)
+              tbody
+                - @themes.each do |theme|
+                  tr
+                    td
+                      = button_status(theme.active, admin_theme_path(theme))
+                      - unless theme.manager_theme.nil?
+                        br
+                          = t(theme.manager_theme.used_for)
+                    td= theme.name
+                    td
+                      = link_to admin_theme_path(theme), :class => 'btn btn-outline btn-default btn-sm', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do
+                        i.icon-black.icon-edit
                         '
-                        = t(:remove)
+                        = t(:edit)
+                      / = link_to(admin_theme_path(theme), class: 'btn') do
+                      /   i.icon-black.icon-edit
+                      /   '
+                      '
+                      - if theme.manager_theme.nil?
+                        = link_to admin_theme_path(theme), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-outline btn-danger btn-sm', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do
+                          i.icon-white.icon-trash
+                          '
+                          = t(:remove)
           .row 
             .hr-line-dashed
             .form-group
-              .col-sm-4.col-sm-offset-0
+              .col-sm-4.col-sm-offset-1
                 = link_to(new_admin_theme_path, :class=>'btn btn-primary') do
                   i.fa.fa-plus
                   '

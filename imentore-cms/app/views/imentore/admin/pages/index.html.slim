@@ -5,30 +5,30 @@ p
     '
     = t('newa') + ' ' + t('page')
 
-
-table.table.table-striped
-  thead
-    tr
-      th= t(:active)
-      th= t(:name)
-      th= t(:handle)
-      th= t(:created_at)
-      th= t(:actions)
-  tbody
-    - @pages.each do |page|
+.table-responsive
+  table.table.table-striped
+    thead
       tr
-        td
-          = button_status(page.active, '#')
-        td= page.name
-        td= page.handle
-        td= l(time_zone(page.created_at), format: :short2)
-        td
-          = link_to(edit_admin_page_path(page), class: 'btn') do
-            i.icon-black.icon-edit
+        th= t(:active)
+        th= t(:name)
+        th= t(:handle)
+        th= t(:created_at)
+        th= t(:actions)
+    tbody
+      - @pages.each do |page|
+        tr
+          td
+            = button_status(page.active, '#')
+          td= page.name
+          td= page.handle
+          td= l(time_zone(page.created_at), format: :short2)
+          td
+            = link_to(edit_admin_page_path(page), class: 'btn') do
+              i.icon-black.icon-edit
+              '
+              = t(:edit)
             '
-            = t(:edit)
-          '
-          = link_to(admin_page_path(page), class: 'btn btn-danger', method: :delete) do
-            i.icon-white.icon-trash
-            '
-            = t(:remove)
+            = link_to(admin_page_path(page), class: 'btn btn-danger', method: :delete) do
+              i.icon-white.icon-trash
+              '
+              = t(:remove)

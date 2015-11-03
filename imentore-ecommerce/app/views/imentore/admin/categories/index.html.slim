@@ -45,7 +45,8 @@
             a.close-link
               i.fa.fa-times
         .ibox-content
-          = categories_table(@categories)
+          .table-responsive
+            = categories_table(@categories)
           .row 
             .hr-line-dashed
             .form-group

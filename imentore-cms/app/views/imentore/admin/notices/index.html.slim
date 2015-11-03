@@ -5,30 +5,30 @@ p
     '
     = t(:newa) + ' ' + t(:notices).downcase
 
-
-table.table.table-striped
-  thead
-    tr
-      th= t(:active)
-      th= t(:name)
-      th= t(:handle)
-      th= t(:created_at)
-      th= t(:actions)
-  tbody
-    - @notices.each do |notice|
+.table-responsive
+  table.table.table-striped
+    thead
       tr
-        td
-          = button_status(notice.active, '#')
-        td= notice.name
-        td= notice.handle
-        td= l(time_zone(notice.created_at), format: :short2)
-        td
-          = link_to(edit_admin_notice_path(notice), class: 'btn') do
-            i.icon-black.icon-edit
+        th= t(:active)
+        th= t(:name)
+        th= t(:handle)
+        th= t(:created_at)
+        th= t(:actions)
+    tbody
+      - @notices.each do |notice|
+        tr
+          td
+            = button_status(notice.active, '#')
+          td= notice.name
+          td= notice.handle
+          td= l(time_zone(notice.created_at), format: :short2)
+          td
+            = link_to(edit_admin_notice_path(notice), class: 'btn') do
+              i.icon-black.icon-edit
+              '
+              = t(:edit)
             '
-            = t(:edit)
-          '
-          = link_to(admin_notice_path(notice), class: 'btn btn-danger', method: :delete) do
-            i.icon-white.icon-trash
-            '
-            = t(:remove)
+            = link_to(admin_notice_path(notice), class: 'btn btn-danger', method: :delete) do
+              i.icon-white.icon-trash
+              '
+              = t(:remove)

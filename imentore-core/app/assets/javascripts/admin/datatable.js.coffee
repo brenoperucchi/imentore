@@ -21,6 +21,7 @@ $(document).ready ->
     # sPaginationType: "bootstrap"
     bProcessing: true
     bServerSide: true
+    scrollX: true
     sAjaxSource: $('#datatable').data('source')
     order: [0, 'desc']
   )

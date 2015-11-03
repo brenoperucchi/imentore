@@ -19,26 +19,27 @@
             a.close-link
               i.fa.fa-times
         .ibox-content
-          table.table.table.table-striped.table-hover.table-condensed.table-bordered
-            thead
-              tr
-                th= model_class.human_attribute_name(:active)
-                th= model_class.human_attribute_name(:name)
-                th= model_class.human_attribute_name(:actions)
-            tbody
-              - @images.each do |image|
+          .table-responsive
+            table.table.table.table-striped.table-hover.table-condensed.table-bordered
+              thead
                 tr
-                  td
-                    = image_tag image.picture.url(:super_thumb)
-                        / .caption
-                        /   p
-                        /     = check_box_tag "image_contents[]", image.id
+                  th= model_class.human_attribute_name(:image)
+                  th= model_class.human_attribute_name(:name)
+                  th= model_class.human_attribute_name(:actions)
+              tbody
+                - @images.each do |image|
+                  tr
+                    td
+                      = image_tag image.picture.url(:super_thumb)
+                          / .caption
+                          /   p
+                          /     = check_box_tag "image_contents[]", image.id
 
-                  td= image.picture_identifier
-                  td= link_to admin_product_variant_image_path(@variant.product, @variant, image), :method => :delete, remote: true, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-outline btn-danger btn-sm', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do
-                        i.icon-white.icon-trash
-                        '
-                        = t(:remove)
+                    td= image.picture_identifier
+                    td= link_to admin_product_variant_image_path(@variant.product, @variant, image), :method => :delete, remote: true, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-outline btn-danger btn-sm', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do
+                          i.icon-white.icon-trash
+                          '
+                          = t(:remove)
   .row
     .col-lg-12
       .ibox.float-e-margins

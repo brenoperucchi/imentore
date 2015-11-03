@@ -19,12 +19,12 @@ module CategoriesHelper
         #   concat(tag(:input, :name=>"ordering", :class=> 'span1'))
         # end)
         concat(content_tag(:td) do
-          concat(content_tag(:a, 'Edit', :href=>edit_admin_category_path(descendant), :class=>'btn', id: 'edit_category', :category_id =>descendant.id, parent_id: descendant.parent_id) do
+          concat(content_tag(:a, 'Edit', :href=>edit_admin_category_path(descendant), :class=>'btn btn-outline btn-default btn-sm', id: 'edit_category', :category_id =>descendant.id, parent_id: descendant.parent_id) do
             concat(content_tag(:i,'',:class=> 'icon-black icon-edit'))
             concat(' ' + I18n.t(:edit))
           end)
           concat(" ")
-          concat(content_tag(:a, 'Destroy', :href=>admin_category_path(descendant), 'data-method'=>'delete', :class=>'btn btn-danger' ) do
+          concat(content_tag(:a, 'Destroy', :href=>admin_category_path(descendant), 'data-method'=>'delete', :class=>'btn btn-outline btn-danger btn-sm' ) do
             concat(content_tag(:i,'',:class=> 'icon-white icon-trash'))
             concat(' ' + I18n.t(:remove))
           end)
@@ -38,7 +38,7 @@ module CategoriesHelper
   end
 
   def categories_table(collection)
-    content_tag(:table, class: 'table table-striped table-bordered table-hover') do
+    content_tag(:table, class: 'table table-striped table-hover table-condensed table-bordered') do
       concat(content_tag(:thead) do
         content_tag(:tr) do
           concat(content_tag(:th, I18n.t(:level)))
@@ -60,12 +60,12 @@ module CategoriesHelper
             concat(content_tag(:td, category.products.count))
             # concat(content_tag(:td))
             concat(content_tag(:td) do
-              concat(content_tag(:a, 'Edit', :href=>edit_admin_category_path(category), :class=>'btn', id: 'edit_category', :category_id =>category.id, parent_id: category.parent_id) do
+              concat(content_tag(:a, 'Edit', :href=>edit_admin_category_path(category), :class=>'btn btn-outline btn-default btn-sm', id: 'edit_category', :category_id =>category.id, parent_id: category.parent_id) do
                 concat(content_tag(:i,'',:class=> 'icon-black icon-edit'))
                 concat(' ' + I18n.t(:edit))
               end)
               concat(" ")
-              concat(content_tag(:a, 'Destroy', :href=>admin_category_path(category), 'data-method'=> 'delete', :class=>'btn btn-danger' ) do
+              concat(content_tag(:a, 'Destroy', :href=>admin_category_path(category), 'data-method'=> 'delete', :class=>'btn btn-outline btn-danger btn-sm' ) do
                 concat(content_tag(:i,'',:class=> 'icon-white icon-trash'))
                 concat(' ' + I18n.t(:remove))
               end)
