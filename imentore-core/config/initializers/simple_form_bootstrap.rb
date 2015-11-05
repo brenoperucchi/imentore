@@ -150,7 +150,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :append, :tag => 'div', :class => "control-group", :error_class => 'has-error' do |b|
+  config.wrappers :append, :tag => 'div', :class => "form-group", :error_class => 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label

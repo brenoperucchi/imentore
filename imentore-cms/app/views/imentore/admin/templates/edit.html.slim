@@ -8,24 +8,23 @@
         });
     });
 
-/ - content_for :breadcrumb do
-/   == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => admin_themes_path},{@theme.name => admin_theme_path(@theme)}])
-
-/ legend #{@template.kind.capitalize} #{@template.path}
 - model_class = Imentore::Template
 .row.wrapper.border-bottom.white-bg.page-heading
   .col-lg-10
-    h2=t '.title', :default => model_class.model_name.human.pluralize.titleize
-    / ol.breadcrumb
-    /   li
-    /     a href="index.html"  Home
-    /   li
-    /     a UI Elements
-    /   li.active
-    /     strong Tabs
+    h2= t model_class.human_attribute_name(@template.kind)
+    ol.breadcrumb
+      li
+        a href="index.html"  
+        = link_to "Temas", admin_themes_path
+      li
+        - if @template.kind == 'template'
+          = link_to @theme.name, admin_theme_templates_path(@theme)
+        else
+          = link_to 'Layouts', layouts_admin_theme_templates_path(@theme)
+      li.active
+        strong
+          = @template.path
   .col-lg-2
-
-
 
 = simple_form_for @template, url: admin_theme_template_path(theme_id: @theme, id: @template), :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
   .wrapper.wrapper-content.animated.fadeInRight
@@ -43,6 +42,11 @@
             = f.input :path, label: t("path_#{@kind.downcase}", scope: [:activerecord, :attributes, 'imentore/template'])
             - if @template.kind == 'template'
               = f.input :layout_id, as: 'radio_buttons', collection: @theme.templates.layouts.collect{|x| [x.path, x.id]}
-            = f.input :body, :input_html=> {id: 'code2'}
-            / = f.input :body, :input_html=> {:style=> 'width:95%; height:300px;'}
-            = f.submit "#{t(:update)} #{@kind.capitalize}", class: 'btn btn-primary'
+            = f.input :body, label: false, wrapper: :append do
+              div[class='col-sm-12']
+                = f.text_area :body, id: 'code2'
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-2
+                / = f.input :body, :input_html=> {:style=> 'width:95%; height:300px;'}
+                = f.submit "#{t(:update)} #{@kind.capitalize}", class: 'btn btn-primary'

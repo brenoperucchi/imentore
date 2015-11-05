@@ -6,7 +6,6 @@ module Imentore
     def data
       resources.map do |customer|
         [
-          customer.id,
           button_status(customer.active, edit_admin_customer_path(customer)),
           customer.name,
           customer.user.try(:email),
@@ -18,8 +17,8 @@ module Imentore
 
     def button_link(resource)
       capture do 
-        button_datatable(resource, edit_admin_customer_path(resource), 'btn btn-small', 'icon-edit icon-black', 'edit') +
-        button_datatable(resource, admin_customer_path(resource), 'btn btn-danger btn-small', 'icon-white icon-remove', 'remove', :delete) 
+        button_datatable(resource, edit_admin_customer_path(resource), 'btn btn-outline btn-default btn-sm', 'icon-edit icon-black', 'edit') +
+        button_datatable(resource, admin_customer_path(resource), 'btn btn-outline btn-danger btn-sm', 'icon-white icon-remove', 'remove', :delete) 
       end
     end
 

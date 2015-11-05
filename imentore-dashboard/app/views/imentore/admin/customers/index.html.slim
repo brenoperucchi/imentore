@@ -23,8 +23,8 @@
           table.table.table-striped.table-bordered.table-hover.dataTables-example#datatable[data-source="#{admin_customers_url(format: 'json')}"]
             thead
               tr
-                th.input-mini= t(:active)
-                th= t(:id)
+                / th= t(:id)
+                th.w-5= t(:active)
                 th= t(:name)
                 th= t(:email)
                 th= t(:created_at)

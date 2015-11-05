@@ -2,13 +2,13 @@
 .row.wrapper.border-bottom.white-bg.page-heading
   .col-lg-10
     h2=t '.title', :default => model_class.model_name.human.pluralize.titleize
-    / ol.breadcrumb
-    /   li
-    /     a href="index.html"  Home
-    /   li
-    /     a UI Elements
-    /   li.active
-    /     strong Tabs
+    ol.breadcrumb
+      li
+        a href="index.html"  
+        = link_to "Temas", admin_themes_path
+      li.active
+        strong 
+          = t '.title', :default => model_class.model_name.human.pluralize.titleize
   .col-lg-2
 
 .wrapper.wrapper-content.animated.fadeInRight
