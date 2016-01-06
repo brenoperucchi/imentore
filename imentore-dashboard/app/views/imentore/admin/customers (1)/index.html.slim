@@ -1,0 +1,50 @@
+- content_for :header do
+  = javascript_include_tag('admin/datatable.js')
+  
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5= t(:customers)
+          .ibox-tools
+            a.collapse-link
+              i.fa.fa-chevron-up
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              i.fa.fa-wrench
+            ul.dropdown-menu.dropdown-user
+              / li
+              /   a href="#"  Config option 1
+              / li
+              /   a href="#"  Config option 2
+            a.close-link
+              i.fa.fa-times
+        .ibox-content
+          table.table.table-striped.table-bordered.table-hover.dataTables-example#datatable[data-source="#{admin_customers_url(format: 'json')}"]
+            thead
+              tr
+                / th= t(:id)
+                th.w-5= t(:active)
+                th= t(:name)
+                th= t(:email)
+                th= t(:created_at)
+                th= t(:actions)
+          /   tbody
+          /     - @customers.each do |customer|
+          /       tr
+          /         td
+          /           = button_status(customer.active, '#')
+          /         td= customer.name
+          /         td= customer.user.email
+          /         td= l(time_zone(customer.created_at), format: :short2)
+          /         td
+          /           = link_to(edit_admin_customer_path(customer), class: 'btn') do
+          /             i.icon-black.icon-edit
+          /             '
+          /             = t(:edit)
+          /           '
+          /           = link_to(admin_customer_path(customer), class: 'btn btn-danger', method: :delete) do
+          /             i.icon-white.icon-trash
+          /             '
+          /             = t(:remove)
+          / = will_paginate @customers, :renderer => BootstrapPagination::Rails

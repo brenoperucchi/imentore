@@ -6,7 +6,7 @@ Imentore::Core::Engine.routes.draw do
 
     namespace :admin do
       resource :store, only: [:edit, :update]
-      get "store/settings/:group", to: "settings#edit",   via: "get", as: "edit_settings"
+      get "store/settings/:group", to: "settings#edit",   as: "edit_settings"
       put "store/settings/:group", to: "settings#update", as: "update_settings"
       resources :domains, only: [:index, :create, :destroy] do
         resources :emails, only: [:index, :create, :update, :destroy], to: "domain_emails"
@@ -31,6 +31,7 @@ Imentore::Core::Engine.routes.draw do
     end
 
     resources :stores, only: [:show] do
+      get "render_template/:template", action:"render_template", on: :collection
       resources :feedbacks, only: [:create, :new]
     end
     resources :order_assets, only: [:new, :create, :destroy, :index]
@@ -38,21 +39,34 @@ Imentore::Core::Engine.routes.draw do
     resource  :cart,      only: [:show, :create, :update, :destroy, :calculate_shipping] do
       get 'calculate_shipping', on: :member
     end
+
+    get "checkouts",                   to: "checkouts#address"
+    resources :checkouts, only: [:create] , path:'/:store_id/checkouts/:order_id' do
+      # get '/', action: :new, controller: 'checkouts', on: :collection
+      # get '/', action: :start, on: :collection, as: 'start'
+      get '/address', action: :address, on: :collection, as: 'address'
+      put '/address', action: :address, on: :collection, as: 'address_confirm'
+      get '/shipping', action: :shipping, on: :collection, as: 'shipping'
+      put '/shipping', action: :shipping, on: :collection, as: 'shipping_shipping'
+      get '/payment', action: :payment, on: :collection, as: 'payment'
+      put '/payment', action: :payment, on: :collection, as: 'confirm_payment'
+    end
     
-    get "store/success",              to: "stores#create_success"
-    get "contact",                    to: "stores#contact",       as: "store_contact"
-    get "product/:handle",            to: "products#handle",      as: 'product_handle'
-    post  "products/search",           to: "products#search",      as: 'products_search'
-    get   "products/result/:name",     to: "products#result",      as: 'products_result'
+    get "store/success",                             to: "stores#create_success"
+    get "contact",                                   to: "stores#contact",       as: "store_contact"
+    get "product/render_template/:template",         to: "products#render_template",        as: 'render_template_product'
+    get "product/:handle",                           to: "products#handle",      as: 'product_handle'
+    post "products/search",           to: "products#search",      as: 'products_search'
+    get "products/result/:name",      to: "products#result",      as: 'products_result'
     get "notices/:handle",            to: "notices#show",         as: "notices"
     get "pages/:page",                to: "pages#show",           as: "pages"
     get "categories/*categories",     to: "categories#index",     as: "categories"
     get "coupon",                     to: "coupons#add_coupon",   as: "add_coupon"
-    get "checkout",               to: "checkouts#new",                    as: "checkout"
+    # get "checkout",                   to: "checkouts#new",                    as: "checkout"
     # get "checkout/address",       to: "checkouts#address",  via: "get",   as: "address_checkout"
-    match "checkout/address",       to: "checkouts#address",   as: "address_checkout",  via: [:get, :put]
+    # match "checkout/address",       to: "checkouts#address",   as: "address",  via: [:get, :put]
     # get "checkout/:id/confirm",   to: "checkouts#confirm",  via: "get",   as: "confirm_checkout"
-    match "checkout/:id/confirm",   to: "checkouts#confirm",  as: "confirm_checkout", via:[:get, :put]
+    # match "checkout/:id/confirm",   to: "checkouts#confirm",  as: "confirm_checkout", via:[:get, :put]
     get "checkout/charge",        to: "checkouts#charge",   as: "charge_checkout"
     get "checkout/:id/complete",  to: "checkouts#complete", as: "complete_checkout"
     get "return_mp/:invoice_id",  to: "checkouts#return_mp", as: 'return_mp'

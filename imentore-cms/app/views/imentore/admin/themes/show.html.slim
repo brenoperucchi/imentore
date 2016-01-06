@@ -12,12 +12,12 @@
         /     a data-toggle="tab" href="#tab-1"  This is tab
         /   li
         /     a data-toggle="tab" href="#tab-2"  This is second tab
-        .tab-content
-          .tab#themes.tab-pane.active
-            .panel-body
-              / = simple_form_for(@theme, url: admin_theme_path(@theme), html: {class: 'form-horizontal'}) do |f|
-              = simple_form_for @theme, url: admin_theme_path(@theme), :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
-                = f.error_notification
-                = f.input :active
-                '
-                = f.submit nil, :class => 'btn btn-primary'
+        / .tab-content
+        /   .tab#themes.tab-pane.active
+        /     .panel-body
+        /       / = simple_form_for(@theme, url: admin_theme_path(@theme), html: {class: 'form-horizontal'}) do |f|
+        /       = simple_form_for @theme, url: admin_theme_path(@theme), :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+        /         = f.error_notification
+        /         = f.input :active
+        /         '
+        /         = f.submit nil, :class => 'btn btn-primary'

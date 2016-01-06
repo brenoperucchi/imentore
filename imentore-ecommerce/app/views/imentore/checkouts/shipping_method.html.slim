@@ -1,0 +1,58 @@
+= render "sidebar", order: @order
+
+.row
+  .col-sm-12
+    h3.blog-title= current_store.name
+    small
+      ol.breadcrumb
+        li
+          a href="/cart"  Cart
+        li
+          a href="#{address_checkouts_path(current_store, @order)}" Customer Shipping
+        li.active
+          | Shipping Method
+        li
+          a href="#{payment_checkouts_path(current_store, @order)}" Payment Method
+.row
+  .col-sm-12
+    h3= t(:address)
+    address
+      strong= @order.shipping_address.try(:name)
+      br/
+      = @order.shipping_address.to_s
+      br/
+      abbr title="Phone"  P:
+      = @order.shipping_address.try(:phone)
+    address
+      strong= @order.try(:customer_name)
+      br/
+      a href="mailto:#"= @order.try(:customer_email)
+
+.row
+  .col-sm-12
+    = simple_form_for @order, url: shipping_checkouts_path(current_store, @order), :html => { :method => 'put' }, wrapper: :vertical_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+      .row
+        .col-sm-12
+          = f.simple_fields_for :delivery, f.object.delivery do |inv|
+            = inv.input :zip_code, as: :hidden, input_html:{value: f.object.try(:zip_code)}
+            = inv.input :delivery_method, label: t(:delivery_method), :wrapper => :append do
+              ul.list-group
+                - current_store.delivery_methods.active.each do |delivery|
+                  li.list-group-item
+                    span.pull-right
+                      label
+                        = number_with_price @order.delivery_calculate(@order.zip_code, delivery).try(:cost)
+                    span.radio
+                      label
+                        = inv.radio_button :delivery_method, delivery.id, checked: delivery == inv.object.try(:delivery_method)
+                        = delivery.name
+      .row
+        .col-sm-6
+          a.btn.btn-default[href="#{address_checkouts_path(current_store, @order)}" class="btn btn-link btn-lg"]
+            i.fa.fa-chevron-left
+            = t(:back)
+        .col-sm-6.text-right
+          button(class='btn btn-lg btn-success')
+            i.fa.fa-chevron-right
+            '
+            = t(:next)

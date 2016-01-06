@@ -6,23 +6,13 @@
       $('ul.nav.nav-tabs li#'+id).attr('class','active');
     })
 
-/ - content_for :breadcrumb do
-/  == breadcrumb([{ 'Inicio' => admin_dashboard_path }, { 'Configuração' => url_for(:controller => :themes) },{'Temas' => admin_themes_path},{@theme.name => admin_theme_path(@theme)}])
-
-/ ul.nav.nav-tabs
-/   li.active
-/     a data-toggle="tab" href="#tab-1"  This is tab
-/   li
-/     a data-toggle="tab" href="#tab-2"  This is second tab
-
-
 ul.nav.nav-tabs
-  li#themes
-    / a data-toggle="tab" href="#tab-1"  Credits
-    = link_to t('imentore/theme', scope: [:activerecord, :models]), admin_theme_path(@theme), input_html:{data:{toggle:'tab'}}
+  / li#themes
+  /   / a data-toggle="tab" href="#tab-1"  Credits
+  /   = link_to t('imentore/theme', scope: [:activerecord, :models]), admin_theme_path(@theme), input_html:{data:{toggle:'tab'}}
   li#layouts
     = link_to t(:layouts), layouts_admin_theme_templates_path(@theme), input_html:{data:{toggle:'tab'}}
   li#templates
     = link_to t(:templates), admin_theme_templates_path(@theme), input_html:{data:{toggle:'tab'}}
   li#assets
-    = link_to t(:assets), admin_theme_assets_path(@theme), input_html:{data:{toggle:'tab'}}
+    = link_to t(:assets), admin_theme_asset_folders_path(@theme), input_html:{data:{toggle:'tab'}}

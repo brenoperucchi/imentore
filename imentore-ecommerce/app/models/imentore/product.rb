@@ -23,7 +23,7 @@ module Imentore
     validates :handle, uniqueness: { scope: :store_id }
     # validates :handle, format: { with: /^[-A-Za-z\d_]+$/ }
 
-    accepts_nested_attributes_for :variants
+    accepts_nested_attributes_for :variants, allow_destroy: true
 
     def low_price
       

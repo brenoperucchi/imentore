@@ -62,8 +62,9 @@ module Imentore
     end
 
     def stock_available?
-      attr = @product.stock_available? ? "available" : "unavailable"
-      I18n.t(attr)
+      # attr = @product.stock_available? ? "available" : "unavailable"
+      # I18n.t(attr)
+      @product.stock_available?
     end
 
     def variant_deal?

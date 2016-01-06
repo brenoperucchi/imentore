@@ -18,4 +18,5 @@ tmp
 tmp/cache/assets/*
 public/uploads/imentore/
 public/uploads/
+public/uploads/tmp/
 spec/dummy/

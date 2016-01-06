@@ -1,6 +1,7 @@
 module AssetHelper
   def asset_thumbnail_url(asset)
-    if asset.content_type.include?('image')
+    content_type = asset.content_type
+    if content_type.include?('image') and not content_type.include?('svg')
       asset.file.try(:url, :super_thumb)
     else
       icon_for(asset.file_identifier, size: '32px')
@@ -8,14 +9,10 @@ module AssetHelper
   end
 
   def icon_for(filename, options={})
-    name = filename.match(/[.](\w{1,6})\Z/)[1]
+    name = filename.match(/[.](\w{1,6})\Z/) ? filename.match(/[.](\w{1,6})\Z/)[1] : "_blank"
     size = options[:size] ? options[:size] : "16px" 
     name = "/images/admin/file_icons/#{size}/#{name}.png"
     default = "/images/admin/file_icons/#{size}/_blank.png"
     name = File.exist?("#{Rails.root}/public#{name}") ? name : default
-    return name
-    # size = "#{options[:size]}/" if options[:size]
-    # "/images/admin/file_icons/#{size ||=""}#{ext}.png"
   end
-
 end

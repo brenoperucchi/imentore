@@ -1,0 +1,164 @@
+- model_class = Imentore::Asset
+.modal-header
+  button.close data-dismiss="modal" type="button" 
+    span aria-hidden="true"  &times;
+    span.sr-only Close
+  h4.modal-title
+    = @folder.name
+.modal-body
+  .row
+    .table-responsive
+      = form_for @asset, url: admin_theme_asset_folder_assets_path(@theme, @folder), html: { multipart: true, class: "dropzone", id: "my-awesome-dropzone"}, method: :post do |f| 
+        = f.hidden_field :folder_id, value: @folder.id
+        .dropzone-previews
+          i.fa.fa-cloud-upload.fa-3x.pull-left.hidden-xs.hidden-sm
+          .pull-left
+            h4 style=("margin-top: -10px;") 
+              strong Arraste e solte ou clique aqui para enviar os arquivos
+              br/
+              small Formatos aceitos: JPG e PNG - Tamanho máximo: 5mb - Máximo de 500 arquivos
+          .clearfix
+
+        .fallback
+          / = f.fields_for :assets  do |asset|
+          = f.file_field :file
+          = f.submit "Upload"        
+  .hr-line-dashed
+  .row
+    .table-responsive
+      table.table.table.table-striped.table-hover.table-condensed.table-bordered
+        thead
+          tr
+            th= model_class.human_attribute_name(:image)
+            th= model_class.human_attribute_name(:name)
+            th= model_class.human_attribute_name(:actions)
+        tbody
+          - @assets.each do |asset|
+            tr
+              td
+                = image_tag asset_thumbnail_url(asset)
+              td= asset.file_identifier
+              td
+                / , :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-outline btn-danger btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }"
+                = link_to admin_theme_asset_folder_asset_path(@theme, @folder, asset), :method => :delete, remote: true, :class => 'btn btn-outline btn-danger btn-xs' do
+                  i.icon-white.icon-trash
+                  '
+                  = t(:remove)
+.modal-footer
+  button.btn.btn-white data-dismiss="modal" type="button"  Close
+javascript:
+  $(document).ready(function(){
+    // disable auto discover
+    Dropzone.autoDiscover = false;
+   
+    // grap our upload form by its id
+    $(".dropzone").dropzone({
+      // restrict image size to a maximum 1MB
+      previewsContainer: ".dropzone-previews",
+      maxFilesize: 10,
+      // changed the passed param to one accepted by
+      // our rails app
+      paramName: "asset[file]",
+      // show remove links on each image upload
+      addRemoveLinks: true,
+      // if the upload was successful
+      success: function(file, response){
+        // find the remove button link of the uploaded file and give it an id
+        // based of the fileID response from the server
+        $(file.previewTemplate).find('.dz-remove').attr('id', response.fileID);
+        // add the dz-success class (the green tick sign)
+        $(file.previewElement).addClass("dz-success");
+        $.getScript("#{{admin_theme_asset_folder_assets_path(@theme, @folder)}}")
+      },
+      //when the remove button is clicked
+    }); 
+  });
+
+/ - model_class = Imentore::Asset
+/ .row.wrapper.border-bottom.white-bg.page-heading
+/   .col-lg-10
+/     h2=t '.title', :default => model_class.model_name.human.pluralize.titleize
+/     ol.breadcrumb
+/       li
+/         a href="index.html"  
+/         = link_to "Temas", admin_themes_path
+/       li.active
+/         strong 
+/           = t '.title', :default => model_class.model_name.human.pluralize.titleize
+/   .col-lg-2
+/
+/ .wrapper.wrapper-content.animated.fadeInRight
+/   .row
+/     .col-lg-12
+/       .tabs-container
+/         / =  render "imentore/admin/themes/top"
+/         ul.nav.nav-tabs
+/           li#themes
+/             / a data-toggle="tab" href="#tab-1"  Credits
+/             = link_to t('imentore/theme', scope: [:activerecord, :models]), admin_theme_path(@theme), input_html:{data:{toggle:'tab'}}
+/           li#layouts
+/             = link_to t(:layouts), layouts_admin_theme_templates_path(@theme), input_html:{data:{toggle:'tab'}}
+/           li#templates
+/             = link_to t(:templates), admin_theme_templates_path(@theme), input_html:{data:{toggle:'tab'}}
+/           li#assets.active
+/             = link_to t(:assets), admin_theme_assets_path(@theme), input_html:{data:{toggle:'tab'}}
+/         .tab-content
+/           .tab#assets.tab-pane.active
+/             .panel-body
+/               .table-responsive
+/                 table.table.table.table-striped.table-hover.table-condensed.table-bordered
+/                   thead
+/                     tr
+/                       th= model_class.human_attribute_name(:image)
+/                       th= model_class.human_attribute_name(:name)
+/                       th= model_class.human_attribute_name(:actions)
+/                   tbody
+/                     - @assets.each do |asset|
+/                       tr
+/                         td
+/                           = image_tag asset_thumbnail_url(asset)
+/                               / .caption
+/                               /   p
+/                               /     = check_box_tag "image_contents[]", image.id
+
+/                         td= asset.file_identifier
+/                         td= link_to admin_theme_asset_path(@theme, asset), :method => :delete, remote: true, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-outline btn-danger btn-sm', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do
+/                             i.icon-white.icon-trash
+/                             '
+/                             = t(:remove)
+/   .row  
+/     .col-lg-12      
+/       .ibox.float-e-margins
+/         .ibox-title
+/           h5=t model_class.model_name.human.pluralize, scope: 'activerecord.models'.titleize
+/           / h5= t(:product_index)
+/           .ibox-tools
+/             a.collapse-link
+/               i.fa.fa-chevron-up
+/             a.dropdown-toggle data-toggle="dropdown" href="#" 
+/               i.fa.fa-wrench
+/             ul.dropdown-menu.dropdown-user
+/               / li
+/               /   a href="#"  Config option 1
+/               / li
+/               /   a href="#"  Config option 2
+/             a.close-link
+/               i.fa.fa-times
+/         .ibox-content
+/           .table-responsive
+/             = form_for @theme, url: admin_theme_assets_path(@theme), html: { multipart: true, class: "dropzone", id: "my-awesome-dropzone"}, method: :post do |f| 
+/               .dropzone-previews
+/                 i.fa.fa-cloud-upload.fa-3x.pull-left.hidden-xs.hidden-sm
+/                 .pull-left
+/                   h4 style=("margin-top: -10px;") 
+/                     strong Arraste e solte ou clique aqui para enviar os arquivos
+/                     br/
+/                     small Formatos aceitos: JPG e PNG - Tamanho máximo: 5mb - Máximo de 500 arquivos
+/                 .clearfix
+
+/               .fallback
+/                 = f.fields_for :assets  do |asset|
+/                   = asset.file_field :file
+/                 = f.submit "Upload"
+
+

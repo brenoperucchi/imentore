@@ -1,0 +1,80 @@
+- model_class = Imentore::AssetFolder
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    h2=t '.title', :default => model_class.model_name.human.pluralize.titleize
+    ol.breadcrumb
+      li
+        a href="index.html"  
+        = link_to "Temas", admin_themes_path
+      li.active
+        strong 
+          = t '.title', :default => model_class.model_name.human.pluralize.titleize
+  .col-lg-2
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row  
+    .col-lg-12
+      .tabs-container
+        ul.nav.nav-tabs
+          li#layouts
+            = link_to t(:layouts), layouts_admin_theme_templates_path(@theme), input_html:{data:{toggle:'tab'}}
+          li#templates
+            = link_to t(:templates), admin_theme_templates_path(@theme), input_html:{data:{toggle:'tab'}}
+          li#assets.active
+            = link_to t(:assets), admin_theme_asset_folders_path(@theme), input_html:{data:{toggle:'tab'}}
+        .tab-content
+          .tab#assets.tab-pane.active
+            .panel-body
+              #nestable2.dd
+                ol.dd-list
+                  - @folders.each do |folder|
+                    li.dd-item data-id="2" 
+                      .dd-handle.dd-nodrag
+                        span.pull-right
+                          = link_to t('folders', :default => t("helpers.links.folders")), new_folder_admin_theme_asset_folders_path(@theme, folder.id), :class=>'btn btn-outline btn-info btn-xs', remote: true
+                          '
+                          = link_to t('files', :default => t("helpers.links.files")),  new_admin_theme_asset_folder_asset_path(@theme, folder), :class => 'btn btn-outline btn-info btn-xs', remote: true
+                        span.label.label-info
+                          i.fa.fa-folder
+                        = folder.name
+                      = render "actions", folder:folder
+              / - unless params[:action] == "new"
+              /   .row
+              /     .hr-line-dashed
+              /     .form-group
+              /       .col-sm-4.col-sm-offset-1
+              /         = link_to new_folder_admin_theme_asset_folders_path(@theme, @folder), :class=>'btn btn-primary', remote:true do
+              /           i.fa.fa-plus
+              /           '
+              /           = I18n.t(:new, scope: 'helpers.submit', model: model_class.model_name.human)
+javascript:
+  $(document).ready(function(){
+    // activate Nestable for list 2
+    $('#nestable2').nestable({
+        group: 1
+    })
+
+    $('#nestable-menu').on('click', function (e) {
+        var target = $(e.target),
+                action = target.data('action');
+        if (action === 'expand-all') {
+            $('.dd').nestable('expandAll');
+        }
+        if (action === 'collapse-all') {
+            $('.dd').nestable('collapseAll');
+        }
+    });
+    $("div.dd-nodrag").on("mousedown", function(event) { // mousedown prevent nestable click
+      if (!$(event.target).is('a')) {
+        event.preventDefault();
+        return false;
+      }
+    });
+
+    $("div.dd-nodrag").on("click", function(event) { // click event
+      if (!$(event.target).is('a')) {
+        event.preventDefault();
+        return false;
+      }
+    });
+  });

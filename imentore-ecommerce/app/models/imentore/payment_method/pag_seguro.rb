@@ -30,7 +30,7 @@ module Imentore
               :currency => "BRL",
               :redirectURL =>  redirectURL,
               :shippingType => 3,
-              :shippingCost => ("%.2f" % (order.delivery_calculate(order.zip_code, order.delivery.delivery_method)).round(2)),
+              :shippingCost => ("%.2f" % (order.delivery_amount).round(2)),
             }
       ret
     end

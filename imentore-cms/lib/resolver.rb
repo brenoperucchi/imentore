@@ -1,6 +1,33 @@
 module SqlTemplate
+  module ResolverMethods
+
+    def render_to_controller(path, kind = :body)
+      template = render_template_path(path, kind)
+      render_to_string(template: template, layout: false)
+    end
+
+    def render_template_path(template, kind = :body)
+      template_data = current_store.theme.templates.find_by_path(template)
+      render_liquid_template(template_data, kind) if template_data
+    end
+
+    def render_liquid_template(template, kind = :body)
+      handler = ActionView::Template.handler_for_extension(template.handler)
+      template_id = "#{template.id}-#{template.path}"
+      details = {
+        format:       Mime['html'],
+        updated_at:   template.updated_at,
+        virtual_path: template.path
+      }
+      SqlTemplate::Resolver.instance.clear_cache
+      template_liquid = ActionView::Template.new(template.send(kind), template_id, handler, details)
+    end
+  end
+
   class Resolver < ActionView::Resolver
     include Singleton
+
+    include SqlTemplate::ResolverMethods
 
     attr_accessor :current_store, :request
 
@@ -21,18 +48,19 @@ module SqlTemplate
       template
 
       if template
-        handler = ActionView::Template.handler_for_extension(template.handler)
-        template_id = "#{template.id}-#{template.path}"
-        details = {
-          format:       Mime['html'],
-          # Resolvers now consider timestamps
-          # https://github.com/rails/rails/commit/38d78f99d5
-          # http://forums.pragprog.com/forums/191/topics/8666
-          updated_at:   template.updated_at,
-          virtual_path: template.path
-        }
-        SqlTemplate::Resolver.instance.clear_cache
-        templates << ActionView::Template.new(template.body, template_id, handler, details)
+        # handler = ActionView::Template.handler_for_extension(template.handler)
+        # template_id = "#{template.id}-#{template.path}"
+        # details = {
+        #   format:       Mime['html'],
+        #   # Resolvers now consider timestamps
+        #   # https://github.com/rails/rails/commit/38d78f99d5
+        #   # http://forums.pragprog.com/forums/191/topics/8666
+        #   updated_at:   template.updated_at,
+        #   virtual_path: template.path
+        # }
+        # SqlTemplate::Resolver.instance.clear_cache
+        # templates << ActionView::Template.new(template.body, template_id, handler, details)
+        templates << render_liquid_template(template)
         # http://stackoverflow.com/a/6358022
       end
       templates

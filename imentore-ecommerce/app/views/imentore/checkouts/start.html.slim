@@ -1,0 +1,82 @@
+- content_for :sidebar do 
+  .sidebar-module.sidebar-module-inset
+    h4 About
+    p
+      | Etiam porta
+      em sem malesuada magna
+      | mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
+  .sidebar-module
+    h4 Archives
+    ol.list-unstyled
+      li
+        a href="#"  March 2014
+- content_for :header do 
+  css:
+    / .inline {
+      / display: inline-block;
+    / }
+    / div.form-group .form-half {
+    /   width: 50%;
+    / }
+    form#checkout .form-group{
+      / padding-left: 0.25em;
+      / padding-right: 0.25em;
+    }
+
+h1.blog-title The Bootstrap Blog
+= simple_form_for(@order, url: address_confirm_checkouts_path(current_store, @order), :html => {id: 'checkout', :method => 'put' }) do |f|
+  = f.error_notification
+  .row
+    .col-sm-9
+      | Level 1: .col-sm-9
+      .row
+        .col-xs-8.col-sm-6
+          | Level 2: .col-xs-8 .col-sm-6
+        .col-xs-4.col-sm-6
+          | Level 2: .col-xs-4 .col-sm-6
+
+  .row
+    .col-sm-12
+      .row
+        .col-sm-6
+          = f.input :customer_name, hint: "* nome completo", input_html: { value: current_user.try(:userable).try(:name), class: 'form-control' }
+          = f.input :customer_email, placeholder: "teste", input_html: { value: current_user.try(:email), class: 'form-control' }
+      .control-group.boolean.optional
+        label.boolean.optional.control-label
+          | Endereço de envio
+      .row
+        = f.simple_fields_for :shipping_address, f.object.shipping_address, wrapper: :inline_form do |addr|
+          .col-sm-6
+              / .form-group
+              = addr.input :name, placeholder: addr.object.class.human_attribute_name(:name), label: false, input_html:{class: 'input-lg'}
+          .col-sm-6
+              / .form-group
+              = addr.input :street, placeholder: addr.object.class.human_attribute_name(:street), label: false, input_html: {class: 'input-lg'}
+          .col-sm-6
+              / .form-group
+              = addr.input :complement, placeholder: addr.object.class.human_attribute_name(:complement), label: false, input_html: {class: 'input-lg'}
+          .col-sm-6
+              / .form-group
+              = addr.input :city, input_html: {class: 'form-control'}, placeholder: addr.object.class.human_attribute_name(:city), label: false, input_html: {class: 'input-lg'}
+          .col-sm-6
+              / .form-group
+              = addr.input :country, :collection => countries, :selected=> "BR", label: false, input_html: {class: 'input-lg'}
+          .col-sm-6
+              / .form-group
+              = addr.input :state, :collection => states, :prompt=> t(:select_state), label: false, input_html: {class: 'input-lg'}
+          .col-sm-6
+              / .form-group
+              = addr.input :zip_code, placeholder: addr.object.class.human_attribute_name(:zip_code), label: false, input_html: {class: 'input-lg'}
+          .col-sm-6
+              / .form-group
+              = addr.input :phone, placeholder: addr.object.class.human_attribute_name(:phone), label: false, input_html: {class: 'input-lg'}
+    .col-sm-12
+      .pull-left
+        a.btn.btn-default href="/cart" 
+          i.fa.fa-chevron-left
+          | Back to Cart
+      .pull-right
+        button(class='btn btn-large btn-success')
+          i.fa.fa-chevron-right
+          '
+          = t(:next)

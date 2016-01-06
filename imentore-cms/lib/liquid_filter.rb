@@ -1,17 +1,23 @@
 module LiquidFilter
   include ActionView::Context
-  # include ActionView::Helpers::URLHelper
-  # include ActionDispatch::Routing::Mapper
-  # include ActionView::Helpers
   include ActionView::Helpers::FormTagHelper 
   include Imentore::Core::Engine.routes.url_helpers
   include ActionDispatch::Routing::Mapper::Base
 
-  def asset_source(name)
+  def asset_source(name, directories="")
     begin
-      @context.registers[:current_store].theme.assets.find_by_file(name).file_url
+      directories = directories.split('/').reject { |c| c.empty? }
+      @folder = @context.registers[:current_store].theme.folders.find_by_name("root")
+      directories.each do |dir|
+        @folder = @folder.children.find_by_name(dir)
+      end
+      unless directories.blank?
+        @folder.assets.find_by_file(name).try(:file_url) || "/#{directories.join('/')}/#{name}"
+      else
+        @context.registers[:current_store].theme.assets.find_by_file(name).file_url || "/#{directories.join('/')}/#{name}"
+      end
     rescue StandardError
-      "File Not Found: #{name.to_s}"
+      "/#{directories.join('/')}/#{name}"
     end
   end
 
@@ -45,17 +51,17 @@ module LiquidFilter
     SecureRandom.base64(32)
   end
 
-  def theme_include(name)
-    begin
-      url = @context.registers[:current_store].theme.assets.find_by_file(name).file_url
-      if name.include?(".js",)
-        "#{content_tag("script", "", { "type" => "text/javascript", "src" => url })}\n"
-      elsif name.include?(".css")
-        "#{content_tag('link', "", {'rel'=>'Stylesheet', 'media'=>'screen', 'type'=> 'text/css', 'href'=>url})}\n"
-      end
-    rescue StandardError
-      "File Not Found: #{name.to_s}"
-    end
-  end
+  # def theme_include(name)
+  #   begin
+  #     url = @context.registers[:current_store].theme.assets.find_by_file(name).file_url
+  #     if name.include?(".js",)
+  #       "#{content_tag("script", "", { "type" => "text/javascript", "src" => url })}\n"
+  #     elsif name.include?(".css")
+  #       "#{content_tag('link', "", {'rel'=>'Stylesheet', 'media'=>'screen', 'type'=> 'text/css', 'href'=>url})}\n"
+  #     end
+  #   rescue StandardError
+  #     "File Not Found: #{name.to_s}"
+  #   end
+  # end
 
 end

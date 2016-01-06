@@ -6,7 +6,12 @@
           button.close data-dismiss="modal" type="button" 
             span aria-hidden="true"  &times;
             span.sr-only Close
-          h4.modal-title Modal title
+          h4.modal-title
+            = t('edit', :default => t('helpers.links.edit'))
+            '
+            = @variant.class.model_name.human.singularize.titleize
+            '
+            = @variant.id
           / small.font-bold Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         .modal-body        
           = f.error_notification
@@ -17,9 +22,7 @@
           = f.input :quantity, input_html: { :class => 'change', :id => 'quantity'}
           = f.input :weight, input_html: { :class => 'change', :id => 'weight', type: 'text'}
           = f.input :price, input_html: { :class => 'change', :id => 'price', type: 'text'}
-          = f.input :price_deal, input_html: { :class => 'change', :id => 'price_deal', type: 'text'}
-          
+          = f.input :price_deal, input_html: { :class => 'change', :id => 'price_deal', type: 'text'}          
         .modal-footer
-          / button.btn.btn-white data-dismiss="modal" type="button"  Close
-          = f.button :submit
-          button.btn.btn-primary type="button"  Save changes
+          button.btn.btn-white data-dismiss="modal" type="button"  Close
+          = f.submit(:class => "btn btn-primary")

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815194654) do
+ActiveRecord::Schema.define(version: 20160105211530) do
 
   create_table "admin_imentore_assets", force: true do |t|
     t.string   "file"
@@ -64,12 +64,27 @@ ActiveRecord::Schema.define(version: 20150815194654) do
     t.string  "addressable_type"
   end
 
+  create_table "imentore_asset_folders", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ancestry"
+    t.integer  "ancestry_depth", default: 0
+    t.integer  "store_id"
+    t.integer  "theme_id"
+  end
+
+  add_index "imentore_asset_folders", ["ancestry"], name: "index_imentore_asset_folders_on_ancestry", using: :btree
+  add_index "imentore_asset_folders", ["theme_id"], name: "index_imentore_asset_folders_on_theme_id", using: :btree
+
   create_table "imentore_assets", force: true do |t|
     t.string   "file"
     t.integer  "theme_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "content_type"
+    t.integer  "folder_id"
   end
 
   create_table "imentore_carts", force: true do |t|
@@ -244,11 +259,12 @@ ActiveRecord::Schema.define(version: 20150815194654) do
     t.string   "customer_email"
     t.text     "items"
     t.integer  "store_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "user_id"
     t.string   "customer_name"
     t.datetime "deleted_at"
+    t.boolean  "same_billing_address", default: false
   end
 
   add_index "imentore_orders", ["deleted_at"], name: "index_imentore_orders_on_deleted_at", using: :btree
@@ -301,13 +317,14 @@ ActiveRecord::Schema.define(version: 20150815194654) do
     t.text     "description"
     t.string   "permalink"
     t.integer  "store_id"
-    t.boolean  "active",           default: false
+    t.boolean  "active",              default: false
     t.integer  "product_brand_id"
     t.string   "handle"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "featured"
     t.datetime "deleted_at"
+    t.string   "description_preview"
   end
 
   add_index "imentore_products", ["deleted_at"], name: "index_imentore_products_on_deleted_at", using: :btree
@@ -360,6 +377,7 @@ ActiveRecord::Schema.define(version: 20150815194654) do
     t.boolean  "default",                    default: false
     t.integer  "admin_imentore_template_id"
     t.integer  "layout_id"
+    t.text     "header_view"
   end
 
   create_table "imentore_themes", force: true do |t|

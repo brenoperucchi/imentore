@@ -32,6 +32,10 @@ module Imentore
 
       protected
 
+      def payment_method_params
+        params.require(:payment_method).permit(:name, :active, :description, options:[:token, :client_id])
+      end
+
       def begin_of_association_chain
         current_store
       end

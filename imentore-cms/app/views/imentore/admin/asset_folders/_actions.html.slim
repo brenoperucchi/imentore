@@ -1,0 +1,15 @@
+ol.dd-list
+  - folder.children.each do |folder|
+    li.dd-item data-id="2" 
+      .dd-handle.dd-nodrag
+        span.pull-right
+          = link_to t('folders', :default => t("helpers.links.folders")),  new_folder_admin_theme_asset_folders_path(@theme, folder.id), :class=>'btn btn-outline btn-info btn-xs', remote: true
+          '
+          = link_to t('files', :default => t("helpers.links.files")),  new_admin_theme_asset_folder_asset_path(@theme, folder), :class => 'btn btn-outline btn-info btn-xs', remote:true
+          '
+          = link_to t('destroy', :default => t('helpers.links.destroy')), admin_theme_asset_folder_path(@theme, folder), :method => :delete, remote: true, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-outline btn-danger btn-sm', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }", remote:true 
+        span.label.label-info
+          i.fa.fa-folder
+        = folder.name
+      - if folder.has_children?
+        = render "actions", folder:folder

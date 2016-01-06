@@ -28,6 +28,10 @@ module Imentore
 
       protected
 
+      def customer_params
+        params.require(:customer).permit(:active, :name, :brand, :irs_id, :national_id, user_attributes:[:email, :id], addresses_attributes:[:name, :street, :complement, :city, :country, :state, :zip_code, :phone])
+      end
+
       def begin_of_association_chain
         current_store
       end

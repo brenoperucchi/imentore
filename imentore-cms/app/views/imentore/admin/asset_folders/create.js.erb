@@ -1,0 +1,7 @@
+<%- if @folder.errors.present? %>
+  $("#myModal .modal-content").html('<%= escape_javascript(render "new", folder:@folder, parent:@parent) %>');
+  $('#myModal').modal('show')
+<%- else %>
+  $('#myModal').modal('hide')
+  $('.index-js').html('<%= escape_javascript(render("index")) %>');
+<%- end %>

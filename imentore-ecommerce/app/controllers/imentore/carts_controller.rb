@@ -1,6 +1,8 @@
 module Imentore
   class CartsController < BaseController
 
+    include SqlTemplate::ResolverMethods
+
     skip_before_action :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
     respond_to :json, only: [:create, :index, :destroy, :show, :calculate_shipping]
 
@@ -32,6 +34,7 @@ module Imentore
           product = current_store.products.find_by_id(item[1][:product_id])
           variant = product.variants.find_by_id(item[1][:variant_id])
           if current_cart.renew(product, variant, quantity)
+            @notification = Imentore::ObjectDrop.new(Imentore::Notification.new(message: t(:cart_update), kind: 'success'))
             flash[:success] = t(:cart_update)
             flash[:alert] = nil
           else
@@ -40,17 +43,15 @@ module Imentore
           end
         end
       end
-      redirect_to cart_path
-
+      @content_for_footer = render_to_controller("imentore/carts/show", :header_view)
+      render :show
     end
 
     def show
+      @content_for_footer = render_to_controller("imentore/products/show", :header_view)
       respond_to do |wants|
-        wants.json do
-            render json: Imentore::CartPresenter.new(current_cart).to_json
-        end
-        wants.html {
-        }
+        wants.json { render json: Imentore::CartPresenter.new(current_cart).to_json }
+        wants.html 
       end
     end
 

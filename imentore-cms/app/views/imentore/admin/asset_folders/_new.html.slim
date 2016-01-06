@@ -1,0 +1,16 @@
+= simple_form_for @folder, url: [:admin, @theme, @folder], :html => { :class => "form-horizontal", id: "my-awesome-dropzone" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean }, remote: true do |f| 
+  .modal-header
+    button.close data-dismiss="modal" type="button" 
+      span aria-hidden="true"  &times;
+      span.sr-only Close
+    h4.modal-title
+      = @parent.try(:name) 
+  .modal-body
+      = f.input :name
+      = f.association :theme, as: :hidden
+      = f.association :store, as: :hidden
+      = f.input :parent_id, as: :hidden, input_html:{value: f.object.parent.try(:id)}
+      = f.input :parent, as: :string, input_html:{value: f.object.parent.try(:name)}, disabled: true
+  .modal-footer
+    button.btn.btn-white data-dismiss="modal" type="button"  Close
+    = f.button :submit, t(:save), :class => 'btn btn-primary'

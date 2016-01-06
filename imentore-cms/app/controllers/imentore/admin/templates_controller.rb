@@ -30,15 +30,33 @@ module Imentore
       end
 
       def create
-        create! { admin_theme_path(params[:theme_id]) }
+        create! do 
+          if @template.kind == "layout"
+            layouts_admin_theme_templates_path(params[:theme_id]) 
+          else
+            admin_theme_templates_path(params[:theme_id])
+          end
+        end
       end
 
       def update
-        update!(template_params) {admin_theme_templates_path(id: params[:theme_id])}
+        update! do 
+          if @template.kind == "layout"
+            layouts_admin_theme_templates_path(params[:theme_id]) 
+          else
+            admin_theme_templates_path(params[:theme_id])
+          end
+        end
       end
 
       def destroy
-        destroy! { admin_theme_path(params[:theme_id]) }
+        destroy! do
+          if @template.kind == "layout"
+            layouts_admin_theme_templates_path(params[:theme_id]) 
+          else
+            admin_theme_templates_path(params[:theme_id])
+          end
+        end
       end
 
       def view_default
@@ -59,7 +77,7 @@ module Imentore
       end
 
       def template_params
-        params.require(:template).permit(:default, :body, :path, :kind, :layout_id)
+        params.require(:template).permit(:default, :body, :path, :kind, :layout_id, :header_view)
       end
 
       ## TODO in the model

@@ -1,0 +1,92 @@
+- model_class = Imentore::Theme
+
+.row
+  .col-lg-12
+    .ibox.float-e-margins
+      .ibox-title
+        h5=t model_class.model_name.human.pluralize, scope: 'activerecord.models'.titleize
+        / h5= t(:product_index)
+        .ibox-tools
+          a.collapse-link
+            i.fa.fa-chevron-up
+          a.dropdown-toggle data-toggle="dropdown" href="#" 
+            i.fa.fa-wrench
+          ul.dropdown-menu.dropdown-user
+            / li
+            /   a href="#"  Config option 1
+            / li
+            /   a href="#"  Config option 2
+          a.close-link
+            i.fa.fa-times
+      .ibox-content
+        .table-responsive
+          table.table.table.table-striped.table-hover.table-condensed.table-bordered
+            thead
+              tr
+                th= model_class.human_attribute_name(:status)
+                / th= model_class.human_attribute_name(:user_for)
+                th= model_class.human_attribute_name(:name)
+                th= model_class.human_attribute_name(:actions)
+            tbody
+              - @themes.each do |theme|
+                tr
+                  td
+                    = check_box_tag 'i-check-invoice', 1, theme.active, class: 'i-checks', :data => { :remote => true, :url => admin_theme_path(theme, theme:{active:'1'}) }, disabled: theme.active
+                  / td= t theme.manager_theme.used_for unless theme.manager_theme.nil?
+                  td= theme.name
+                  td
+                    = link_to layouts_admin_theme_templates_path(theme), :class => 'btn btn-outline btn-default btn-sm', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do
+                      i.icon-black.icon-edit
+                      '
+                      = t(:edit)
+                    / = link_to(admin_theme_path(theme), class: 'btn') do
+                    /   i.icon-black.icon-edit
+                    /   '
+                    '
+                    - if theme.manager_theme.nil?
+                      = link_to admin_theme_path(theme), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-outline btn-danger btn-sm', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do
+                        i.icon-white.icon-trash
+                        '
+                        = t(:remove)
+        .row 
+          .hr-line-dashed
+          .form-group
+            .col-sm-4.col-sm-offset-1
+              = link_to(new_admin_theme_path, :class=>'btn btn-primary') do
+                i.fa.fa-plus
+                '
+
+                = I18n.t(:new, scope: 'helpers.submit', model: model_class.model_name.human)
+
+css:
+  .icheckbox_square-green.checked.disabled {
+    background-position: -48px!important;
+    }
+
+javascript:
+  $(document).ready(function(){
+    $('.i-checks').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+    });
+    $('input').on('ifChecked', function(event){
+      var url = $(this).data('url')
+      $.ajax({
+          type: "patch",
+          dataType: 'script',
+          url: url
+       });     
+    });
+    $('.editable').editable({
+      mode: 'inline',
+      showbuttons: false,
+      onblur: 'ignore',
+      error: function(response, newValue) { 
+        var error_msgs = []
+        $.each(response.responseJSON, function(key, value){ 
+          error_msgs.push(value)
+        })
+        return error_msgs.join("; ");
+      }
+    })
+  })

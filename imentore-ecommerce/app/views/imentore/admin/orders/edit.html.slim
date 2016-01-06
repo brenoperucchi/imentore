@@ -9,12 +9,13 @@
 .row.wrapper.border-bottom.white-bg.page-heading
   .col-lg-8
     h2 Pedido
-  /   ol.breadcrumb
-  /     li
-  /       a href="#"  Home
-  /     li
-  /       | Other Pages
-  /     li.active
+    ol.breadcrumb
+      li
+        = link_to 'Pedidos', admin_orders_path
+      li.active
+        strong
+          | #
+          = @order.id
   /       strong Invoice
   / .col-lg-4
   /   .title-action

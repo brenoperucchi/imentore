@@ -30,11 +30,11 @@
               | Rastrear
 javascript:
   $(document).ready(function(){
-      $('.i-checks').iCheck({
-          checkboxClass: 'icheckbox_square-green',
-          radioClass: 'iradio_square-green',
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
       });
-      $('.footable').footable();
+    $('.footable').footable();
     $('.iCheck-helper').on('click', function(e){
       e.stopPropagation();
       $(this).parents('li').find('span.editable').editable('toggle');

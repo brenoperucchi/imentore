@@ -94,8 +94,18 @@
       });
     });
 
-- content_for :breadcrumb do
-  == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:management) => '' }, { t(:products) => url_for(:controller => :products) }, { @product.name => '' }])
+- model_class = Imentore::Product
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    h2= t('edit', :default => t('helpers.links.edit'))
+    ol.breadcrumb
+      li
+        = link_to model_class.model_name.human.pluralize.titleize, admin_products_path
+      li.active
+        strong
+          = @product.name
+  .col-lg-2
+
 
 / = render "imentore/admin/products/top"
 
@@ -120,6 +130,7 @@
                     = f.input :featured
                     = f.input :name
                     = f.input :handle
+                    = f.input :description_preview, input_html: { :rows => 2, :class => 'textarea' }, :as => :text
                     = f.input :description, input_html: { :rows => 5, :class => 'textarea' }, :as => :text
                   .col-md-6
                     h4

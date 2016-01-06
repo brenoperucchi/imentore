@@ -1,0 +1,82 @@
+= render "sidebar", order: @order
+
+.row
+  .col-sm-12
+    h3.blog-title= current_store.name
+    small
+      ol.breadcrumb
+        li
+          a href="/cart"  Cart
+        li
+          | Customer Shipping
+        li.active
+          a href="#{shipping_checkouts_path(current_store, @order)}" Shipping Method
+        li
+          a href="#{shipping_checkouts_path(current_store, @order)}" Payment Method
+    = simple_form_for(@order, url: address_confirm_checkouts_path(current_store, @order), :html => {id: 'checkout', :method => 'put' }) do |f|
+      = f.error_notification
+      .row
+        .col-sm-12
+          .row
+            .col-sm-12
+              = f.input :customer_name, placeholder: f.object.class.human_attribute_name(:customer_name), input_html: { value: (f.object.nil? ? current_user.try(:userable).try(:name) : f.object.customer_name) , class: 'input-lg' }
+              = f.input :customer_email, placeholder: f.object.class.human_attribute_name(:email), input_html: { value: (f.object.nil? ? current_user.try(:userable).try(:email) : f.object.customer_email), class: 'input-lg' }
+          .control-group.boolean.optional
+            label.boolean.optional.control-label
+              | Endereço de envio
+          .row
+            = f.simple_fields_for :shipping_address, f.object.shipping_address, wrapper: :inline_form do |addr|
+              .col-sm-6
+                  / .form-group
+                  = addr.input :name, placeholder: addr.object.class.human_attribute_name(:name), label: false, input_html:{class: 'input-lg'}
+              .col-sm-6
+                  / .form-group
+                  = addr.input :street, placeholder: addr.object.class.human_attribute_name(:street), label: false, input_html: {class: 'input-lg'}
+              .col-sm-6
+                  / .form-group
+                  = addr.input :complement, placeholder: addr.object.class.human_attribute_name(:complement), label: false, input_html: {class: 'input-lg'}
+              .col-sm-6
+                  / .form-group
+                  = addr.input :city, placeholder: addr.object.class.human_attribute_name(:city), label: false, input_html: {class: 'input-lg'}
+              .col-sm-6
+                  / .form-group
+                  = addr.input :country, :collection => countries, :selected=> "BR", label: false, input_html: {class: 'input-lg'}
+              .col-sm-6
+                  / .form-group
+                  = addr.input :state, :collection => states, :prompt=> t(:select_state), label: false, input_html: {class: 'input-lg'}
+              .col-sm-6
+                  / .form-group
+                  = addr.input :zip_code, placeholder: addr.object.class.human_attribute_name(:zip_code), label: false, input_html: {class: 'input-lg'}
+              .col-sm-6
+                  / .form-group
+                  = addr.input :phone, placeholder: addr.object.class.human_attribute_name(:phone), label: false, input_html: {class: 'input-lg'}
+        .col-sm-12
+          .pull-left
+            a.btn.btn-default[href="/cart" class="btn btn-link btn-lg"]
+              i.fa.fa-chevron-left
+              = t(:back)
+          .pull-right
+            button(class='btn btn-lg btn-success')
+              i.fa.fa-chevron-right
+              '
+              = t(:next)
+
+- content_for :header do 
+  css:
+    .sidebar {
+        background-color: #f5f5f5;
+        border-right-color: #eee;
+        border-right-style: solid;
+        border-right-width: 1px;
+        bottom: 0;
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+        position: fixed;
+        top: 0px;
+        z-index: 1000;
+    }

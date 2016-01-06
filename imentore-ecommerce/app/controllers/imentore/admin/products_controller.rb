@@ -77,7 +77,7 @@ module Imentore
       end
 
       def product_params
-        params.require(:product).permit(:active, :featured, :handle, :product_brand_name, :name, :description,
+        params.require(:product).permit(:active, :featured, :handle, :product_brand_name, :name, :description, :description_preview,
                                         variants_attributes: [:price, :quantity, :weight])
                                             #.tap {|whitelisted| whitelisted[:category_ids] = params[:product][:category_ids] end
       end

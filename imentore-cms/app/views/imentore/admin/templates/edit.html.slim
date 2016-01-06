@@ -1,6 +1,13 @@
 - content_for :footer do
   javascript:
     $(function() {
+        var editor_two = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            styleActiveLine: true
+        });
+    });
+    $(function() {
         var editor_two = CodeMirror.fromTextArea(document.getElementById("code2"), {
             lineNumbers: true,
             matchBrackets: true,
@@ -14,7 +21,6 @@
     h2= t model_class.human_attribute_name(@template.kind)
     ol.breadcrumb
       li
-        a href="index.html"  
         = link_to "Temas", admin_themes_path
       li
         - if @template.kind == 'template'
@@ -42,9 +48,14 @@
             = f.input :path, label: t("path_#{@kind.downcase}", scope: [:activerecord, :attributes, 'imentore/template'])
             - if @template.kind == 'template'
               = f.input :layout_id, as: 'radio_buttons', collection: @theme.templates.layouts.collect{|x| [x.path, x.id]}
+            = f.label :body
             = f.input :body, label: false, wrapper: :append do
               div[class='col-sm-12']
-                = f.text_area :body, id: 'code2'
+                = f.text_area :body, id: 'code'
+            = f.label :header_view
+            = f.input :header_view, label: false, wrapper: :append do
+              div[class='col-sm-12']
+                = f.text_area :header_view, id: 'code2'
             .hr-line-dashed
             .form-group
               .col-sm-4.col-sm-offset-2

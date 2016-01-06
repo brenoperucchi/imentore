@@ -1,0 +1,73 @@
+- content_for :header do 
+  javascript:
+    $(document).ready(function(){
+      // Javascript Notication - Alert/Success
+      $('div.alert').each(function(){
+        if ( $(this).find('p').text().length > 1 ) {
+         $(this).slideDown('slow')
+        }
+      })
+      $('.close').bind('click',function(){
+        $(this).parents('div.hide').first().slideUp('slow');
+      })
+
+      $("input:radio[name='order[same_billing_address]']").change(function(){
+        if($(this).val() == '1'){
+          $('span#checkbox_billing_address').show()
+        }else{
+          $('span#checkbox_billing_address').hide()
+        }
+      })
+    })
+  css:
+    .sidebar {
+        background-color: #f5f5f5;
+        border-right-color: #eee;
+        border-right-style: solid;
+        border-right-width: 1px;
+        bottom: 0;
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+        position: fixed;
+        top: 0px;
+        z-index: 1000;
+    }
+    
+- content_for :sidebar do 
+  .row
+    .col-sm-10.col-sm-offset-1
+      table.table.table-condensed
+        tbody
+          - @order.items.each do |item|
+            tr
+              td= image_tag(item.variant.images.first.picture.url(:thumb_fit), class: 'img-thumbnail') 
+              / || image_tag(item.product.variants.first.images.first.picture.url(:thumb_fit), class: 'img-thumbnail')
+              td
+                span= item.product.name
+                span.help-block= item.variant.options_name
+              td= item.quantity
+              td= number_with_price item.amount
+  .row
+    .col-sm-10.col-sm-offset-1
+      table.table.table-condensed
+        tbody
+          tr
+            td.text-left Amount
+            td.text-right= number_with_price @order.products_amount
+          tr
+            td.text-left Shippings
+            td.text-right= number_with_price @order.delivery_amount
+          tr
+            td.text-left Coupons
+            td.text-right= number_with_price @order.coupons_amount
+          tr
+            td.text-left 
+              h3
+                small Total
+            td.text-right
+              h3= number_to_currency @order.total_amount

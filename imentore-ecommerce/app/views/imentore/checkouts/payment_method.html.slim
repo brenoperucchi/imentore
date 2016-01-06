@@ -1,0 +1,80 @@
+= render "sidebar", order: @order
+
+.row
+  .col-sm-12
+    h3.blog-title= current_store.name
+    small
+      ol.breadcrumb
+        li
+          a href="/cart"  Cart
+        li
+          a href="#{address_checkouts_path(current_store, @order)}" Customer Shipping
+        li
+          a href="#{shipping_checkouts_path(current_store, @order)}" Shipping Method
+        li.active
+          | Payment Method
+.row
+  .col-sm-6
+    .notification
+      div.alert.alert-block.hide
+        a[class="close" data-dismiss="alert" href="#"]
+          = "x"
+        h4[class="alert-heading"]
+          = t(:warning)
+        p
+          = flash[:alert]
+      div.alert.alert-success.hide
+        a[class="close" data-dismiss="alert" href="#"]
+          = "x"
+        h4[class="alert-heading"]
+          = t(:success)
+        p
+          = flash[:success]
+.row
+  .col-sm-12
+    = simple_form_for @order, url: payment_checkouts_path(current_store, @order), :html => { :method => 'put' }, wrapper: :vertical_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+      = hidden_field_tag :zip_code, f.object.try(:zip_code)
+      = hidden_field_tag :valid_billing, true
+      .row
+        .col-sm-12
+          = f.simple_fields_for :invoice, f.object.invoice do |invoice|
+            = invoice.input :payment_method, label: t(:payment_method), required: false, as: :radio_buttons, wrapper: :append do
+              ul.list-group
+                - current_store.payment_methods.active.each do |payment|
+                  li.list-group-item
+                    span.radio
+                      label
+                        = invoice.radio_button "payment_method", payment.id, checked: f.object.invoice.try(:payment_method) == payment
+                        = payment.name
+                    small
+                      p[class="list-group-item-text"]
+                        | Você será direcionado para o site de Pagamento
+      .row
+        .col-sm-12
+          = f.input :same_billing_address, label: t(:payment_method), as: :radio_buttons, wrapper: :append do
+            ul.list-group
+              li.list-group-item
+                span.radio
+                  label
+                    = f.radio_button :same_billing_address, 0, checked: !f.object.same_billing_address
+                    = t(:same_billing_address_false)
+              li.list-group-item
+                span.radio
+                  label
+                    = f.radio_button :same_billing_address, 1, checked: f.object.same_billing_address
+                    = t(:same_billing_address_true)
+                span#checkbox_billing_address[style="display:#{f.object.same_billing_address ? 'inline' : 'none'}"]
+                  = f.simple_fields_for :billing_address, f.object.billing_address, wrapper: 'inline_form' do |addr|
+                    = render("shared/address", addr: addr)
+                
+
+      .row
+        .col-sm-6
+          a.btn.btn-default[href="#{shipping_checkouts_path(current_store, @order)}" class="btn btn-link btn-lg"]
+            i.fa.fa-chevron-left
+            = t(:back)
+        .col-sm-6.text-right
+          button(class='btn btn-lg btn-success')
+            i.fa.fa-chevron-right
+            '
+            = t(:next)

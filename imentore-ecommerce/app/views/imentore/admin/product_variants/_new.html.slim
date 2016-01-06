@@ -6,7 +6,10 @@
           button.close data-dismiss="modal" type="button" 
             span aria-hidden="true"  &times;
             span.sr-only Close
-          h4.modal-title Modal title
+          h4.modal-title
+            = t('newa', :default => t('helpers.links.new'))
+            '
+            = @variant.class.model_name.human.singularize.titleize
           / small.font-bold Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         .modal-body        
           = f.error_notification
@@ -19,6 +22,5 @@
           = f.input :price, as: :string
           = f.input :price_deal, as: :string
         .modal-footer
-          / button.btn.btn-white data-dismiss="modal" type="button"  Close
-          = f.button :submit
-          button.btn.btn-primary type="button"  Save changes
+          button.btn.btn-white data-dismiss="modal" type="button"=  t(:close)
+          = f.submit(:class => "btn btn-primary")

@@ -50,6 +50,8 @@ pt-BR:
   invoice_info: Info Pagamento
   log_info: Histórico do pedido
 
+  same_billing_address_false: Mesmo endereço de envio
+  same_billing_address_true: Usar o mesmo endereço de envio 
   billing_address: Endereço do cobrança
   shipping_address: Endereço do envio
 
@@ -106,11 +108,13 @@ pt-BR:
   send_files: Enviar Arquivos
   finished_order: Finalizar Pedido
   start_upload: Iniciar envio
+  
   next: Próximo
   previous: Anterior
+  back: Voltar
+
   addresses: Endereços
   address: Endereço
-  shipping_address_diff: igual ao endereço de envio
   other_address: Outro endereço
   select: Selecionar
   select_state: Selecionar Estado
@@ -354,7 +358,7 @@ pt-BR:
   errors: &errors
     format: ! '%{attribute} %{message}'
     messages_custom:
-      full_name_required: "Nome deve ser completo"
+      full_name_required: "deve ser completo"
     messages:
       'Some errors were found, please take a look': 'Existe algum error, por favor verifque'
       accepted: deve ser aceito
@@ -576,6 +580,7 @@ pt-BR:
         name: Nome
         handle: Url Amigável 
         description: Descrição 
+        description_preview: Breve Descrição
         product_brand_name: Marca do produto
       imentore/coupon:
         active: Ativo
@@ -611,6 +616,11 @@ pt-BR:
     errors:
       <<: *errors
   helpers:
+    links:
+      new: Novo 
+      destroy: Remove
+      folders: New Folder
+      files: Files
     select:
       prompt: Por favor selecione
     submit:

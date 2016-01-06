@@ -39,41 +39,41 @@ module Imentore
         end
       end
 
-      def reinstall_templates
-        self.stores_themes.each do |thema| 
-          thema.templates.destroy_all
-          self.templates.each do |template|
-            store_template = thema.templates.new
-            store_template.path = template.path
-            # store_template.layout = template.layout
-            store_template.kind = template.kind
-            store_template.layout_id = template.layout
-            store_template.default = true if store_template.kind == "layout"
-            store_template.body = template.body
-            store_template.admin_imentore_template_id = template.id
-            if store_template.save
-              if store_template.kind  == "layout"
-                @id = store_template.id
-              else
-                store_template.update_attribute(:layout_id, @id)
-              end
-            end
-            thema.templates.each do |template|
-              template.layout_id = thema.templates.layouts.first.id if template.kind == "template"
-            end
-          end
-        end
-      end
+      # def reinstall_templates
+      #   self.stores_themes.each do |thema| 
+      #     thema.templates.destroy_all
+      #     self.templates.each do |template|
+      #       store_template = thema.templates.new
+      #       store_template.path = template.path
+      #       # store_template.layout = template.layout
+      #       store_template.kind = template.kind
+      #       store_template.layout_id = template.layout
+      #       store_template.default = true if store_template.kind == "layout"
+      #       store_template.body = template.body
+      #       store_template.admin_imentore_template_id = template.id
+      #       if store_template.save
+      #         if store_template.kind  == "layout"
+      #           @id = store_template.id
+      #         else
+      #           store_template.update_attribute(:layout_id, @id)
+      #         end
+      #       end
+      #       thema.templates.each do |template|
+      #         template.layout_id = thema.templates.layouts.first.id if template.kind == "template"
+      #       end
+      #     end
+      #   end
+      # end
 
       def reinstall(store, theme)
         theme.destroy
-        install_store_method(store)
+        theme_templates_store(store)
       end
 
       def install_store(store)
         begin
           if store.themes.find_by_name(self.name).nil?
-            install_store_method(store)
+            theme_templates_store(store)
           end
         return
             Rails.logger.debug { "store =>#{store.id}" }
@@ -83,8 +83,9 @@ module Imentore
 
       private 
 
-      def install_store_method(store)
+      def theme_templates_store(store)
         theme = Imentore::Theme.create(name: self.name, admin_imentore_theme_id: self.id, store: store, system: true)
+        theme.folders.create(name: "root", store: store)
         self.templates.each do |manager|
           template = theme.templates.new
           template.path = manager.path

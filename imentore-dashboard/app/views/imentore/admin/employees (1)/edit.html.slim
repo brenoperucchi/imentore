@@ -1,0 +1,33 @@
+/ legend.page-title= t(:user_edit)
+= simple_form_for @employee, url: [:admin, @employee], :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5
+              | Usuário do sistema
+              / small Simple login form example
+          .ibox-content
+            .row
+              .col-lg-12
+                .row
+                  .col-lg-6
+                    = f.input :active
+                    = f.input :name
+                    = f.input :brand
+                    = f.input :irs_id
+                    = f.input :national_id
+                    = f.simple_fields_for :user do |user|
+                      = user.input :email
+                      = user.input :password
+                      = user.input :password_confirmation
+                  .col-lg-6
+                    = f.simple_fields_for :addresses do |addr|
+                      = render("shared/address", addr: addr)
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-2
+                = f.submit nil, :class => 'btn btn-primary'
+                '
+                = submit_tag t(:cancel), :type => :reset, :class => "btn btn-danger"

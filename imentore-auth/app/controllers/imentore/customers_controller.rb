@@ -1,6 +1,11 @@
 module Imentore
   class CustomersController < BaseController
+    include SqlTemplate::ResolverMethods
     inherit_resources
+
+    def index
+      render :new
+    end
 
     def new
       @customer = build_resource
@@ -19,6 +24,7 @@ module Imentore
           redirect_to session["user_return_to"] || root_path
         end
         failure.html do
+          @notification = Imentore::ObjectDrop.new(Imentore::Notification.new(message: @customer.errors.full_messages, kind: 'error'))
           render :new
         end
       end

@@ -34,7 +34,7 @@ module Imentore
   class Order < ActiveRecord::Base
     acts_as_paranoid
     
-    attr_accessor :billing_checkbox, :shipping_checkbox, :payment_url
+    attr_accessor :shipping_checkbox, :payment_url, :valid_billing
 
     mattr_accessor :sent_email
     self.sent_email = false
@@ -47,20 +47,24 @@ module Imentore
     belongs_to  :store
     belongs_to  :user
     has_many    :assets,    class_name: "OrderAsset", as: 'assetable'
-    has_one     :invoice,   dependent: :destroy, validate: true
-    has_one     :delivery,  dependent: :destroy, validate: true
+    has_one     :invoice,   dependent: :destroy, validate: true, autosave: true
+    has_one     :delivery,  dependent: :destroy, validate: true, autosave: true
 
     has_many :coupons_orders
     has_many :coupons, :through => :coupons_orders, :source => :coupon
-    validate :valid_addresses?, unless: Proc.new {|order| order.canceled?}
     validates :customer_name, :customer_email, presence: true, :on => :update, unless: Proc.new {|order| order.canceled?}
+    validate :valid_addresses?
 
     def valid_addresses?
-      valid_billing = billing_address.valid? 
-      valid_address = shipping_address.valid? 
-      errors.add(:base, "err") unless valid_address && valid_billing
-      valid_billing && valid_address
+      if same_billing_address and not billing_address.valid?
+        errors.add(:base, "error")
+        return false
+      end
     end
+    #   valid_address = shipping_address.valid? 
+    #   errors.add(:base, "err") unless valid_address# && valid_billing
+    #   valid_address
+    # end
 
     def update_status
       self.finish if invoice.confirmed? and delivery.sent?
@@ -122,7 +126,6 @@ module Imentore
       return false if zip_code.nil? or method.nil?
       handle = Imentore::DeliveryHandle.new(self.items, zip_code, store.config.store_zip_code, method)
       handle.calculate
-      handle.method.cost
     end
 
     def invoice_method

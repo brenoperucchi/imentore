@@ -6,6 +6,7 @@ end
 require 'liquid_filter'
 require 'liquid_filter_cart'
 require 'liquid_filter_paginate'
+require 'liquid_filter_html'
 
 # Liquid::Template.class_eval do
 #   def register_filter(mod)
@@ -29,13 +30,13 @@ class LiquidView
 
     if @view.content_for?(:layout)
       assigns["content_for_layout"] = @view.content_for(:layout)
-      assigns["content_for_header"] = @view.content_for(:header)
-      assigns["content_for_javascript"] = @view.content_for(:javascript) 
+      assigns["content_for_header"] ||= @view.content_for(:header)
+      assigns["content_for_footer"] ||= @view.content_for(:javascript)
     end
+
     assigns["_csrf_token"] = @view.controller.session['_csrf_token']
     assigns["csrf_token"] = @view.form_authenticity_token
     assigns.merge!(local_assigns.stringify_keys)
-
 
     #Assigns Permanent
     store = @view.current_store
@@ -44,8 +45,6 @@ class LiquidView
     assigns["pages"] = store.pages.active.order('id desc').map { |page| Imentore::PageDrop.new(page) }
     assigns["notices"] = store.notices.active.order('id desc').map { |notice| Imentore::NoticeDrop.new(notice) }
     assigns["categories"] = store.categories.roots.order('name').map { |category| Imentore::CategoryDrop.new(category) }
-
-
 
     controller = @view.controller
     filters = if controller.respond_to?(:liquid_filters, true)
@@ -63,6 +62,7 @@ class LiquidView
     t.class.register_filter(LiquidFilter)
     t.class.register_filter(LiquidFilterCart)
     t.class.register_filter(LiquidFilterPaginate)
+    t.class.register_filter(LiquidFilterHtml)
     t.render(assigns.merge("current_cart" => Imentore::CartDrop.new(controller.current_cart)), :filters => filters,
       :registers => {current_store: @view.controller.current_store, :action_view => @view, :controller => @view.controller})
   end

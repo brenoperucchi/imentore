@@ -19,7 +19,7 @@ module Imentore
     #, format: { with: DNS_LABEL_REGEX }, length: { maximum: 63 }, exclusion: { in: INVALID_DOMAINS } 
     # validates :contract_term, acceptance: true
 
-    belongs_to :old_store, :class_name => Old::Store, :foreign_key => "old_store_id"
+    belongs_to :old_store, :class_name => 'Old::Store', :foreign_key => "old_store_id"
 
     has_many :employees, :dependent => :destroy
     has_one  :owner, class_name: Imentore::Employee
@@ -41,6 +41,7 @@ module Imentore
     has_many :pages, :dependent => :destroy
     has_many :feedbacks, as: :feedbackable, :dependent => :destroy
     has_many :notices, :dependent => :destroy
+    has_many :folders, class_name: Imentore::AssetFolder, :dependent => :destroy
     
     has_many :users, :dependent => :destroy
 

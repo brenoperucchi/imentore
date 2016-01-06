@@ -24,7 +24,13 @@ class FileUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.theme.store_id}/#{model.theme.id}"
+    # folder_name = model.folder ? model.folder.name.to_underscore : "root"
+    if model.folder.is_root?
+      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.theme.store_id}/#{model.theme.id}/#{model.folder.name.to_underscore}/"
+    else
+      folders = model.folder.ancestors.map{|x| x.name.downcase}.join('/')
+      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.theme.store_id}/#{model.theme.id}/#{folders}/#{model.folder.name.to_underscore}"
+    end
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

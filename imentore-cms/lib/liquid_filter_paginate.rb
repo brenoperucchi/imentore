@@ -7,32 +7,6 @@ module LiquidFilterPaginate
   include Imentore::Core::Engine.routes.url_helpers
   include ActionDispatch::Routing::Mapper::Base
 
-  def option_select(selected, value, name)
-    if selected != value
-      "<option label='#{name}' id='#{name}' value='#{value}')/>"
-    else
-      "<option label='#{name}' id='#{name}' value='#{value}' selected='selected')/>"
-    end
-  end
-
-  def select_selected(param, value)
-    {'selected' => 'selected'} if param == value
-  end
-
-  def url_param(param)
-    ## sort-by=[^&]+)
-    @context.registers[:controller].params[param] 
-  end
-
-  def param_active(param, value, default = nil)
-    if @context.registers[:controller].params[param.to_sym] == value 
-      "active" 
-    elsif 
-      @context.registers[:controller].params[param.to_sym].blank? and value == default
-      "active" 
-    end
-  end
-
   def per_page_url(paginate, per_page)
     current_url = @context.registers[:controller].request.fullpath.gsub(/(per_page=)[0-9]+&?/, '')
     current_url = current_url.gsub(/(page=)[0-9]+&?/, '')

@@ -1,0 +1,68 @@
+- model_class = Imentore::AssetFolder
+.modal-js
+  #myModal.modal.inmodal.fade aria-hidden="true" role="dialog" tabindex="-1" 
+    .modal-dialog.modal-lg
+      .modal-content
+
+.index-js
+  = render "index"
+
+javascript:
+  $(document).ready(function(){
+    // activate Nestable for list 2
+    $('#nestable2').nestable({
+        group: 1
+    })
+
+    $('#nestable-menu').on('click', function (e) {
+        var target = $(e.target),
+                action = target.data('action');
+        if (action === 'expand-all') {
+            $('.dd').nestable('expandAll');
+        }
+        if (action === 'collapse-all') {
+            $('.dd').nestable('collapseAll');
+        }
+    });
+    $("div.dd-nodrag").on("mousedown", function(event) { // mousedown prevent nestable click
+      if (!$(event.target).is('a')) {
+        event.preventDefault();
+        return false;
+      }
+    });
+
+    $("div.dd-nodrag").on("click", function(event) { // click event
+      if (!$(event.target).is('a')) {
+        event.preventDefault();
+        return false;
+      }
+    });
+  });
+/     $('#jstree1').jstree({
+/         'core': {
+/             'check_callback': true
+/         },
+/         'plugins': ['types', 'dnd'],
+/         'types': {
+/             'default': {
+/                 'icon': 'fa fa-folder'
+/             },
+/             'html': {
+/                 'icon': 'fa fa-file-code-o'
+/             },
+/             'svg': {
+/                 'icon': 'fa fa-file-picture-o'
+/             },
+/             'css': {
+/                 'icon': 'fa fa-file-code-o'
+/             },
+/             'img': {
+/                 'icon': 'fa fa-file-image-o'
+/             },
+/             'js': {
+/                 'icon': 'fa fa-file-text-o'
+/             }
+
+/         }
+/     })
+/   })

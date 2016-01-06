@@ -5,10 +5,10 @@ module CheckoutsHelper
     collection += [[t(:other_address), 'other']]
   end
 
-  def checkbox_shipping_helper(f)
-    if f.object.shipping_checkbox == "0" 
+  def checkbox_shipping_helper(f, attr = :shipping_checkbox)
+    if f.object.send(attr) == "0" or f.object.send(attr).nil?
       false
-    elsif f.object.shipping_checkbox.nil? or f.object.shipping_checkbox == "1"
+    elsif f.object.send(attr) == "1"
       true
     end
   end

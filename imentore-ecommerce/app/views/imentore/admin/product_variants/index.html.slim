@@ -1,44 +1,3 @@
-/ - content_for :footer do
-/   javascript:
-/     $('a#update_item').click(function(){
-/       $('div#form').slideUp('fast');
-/       $('div#update').slideDown('fast')
-/       $('div.new div#action').show();
-/       var setname = $(this).attr('id'), elements = {};
-/       $(this).parents('tr').find('td.change').each(function(e){
-/         var setname = $(this).attr('id')
-/         elements[setname] = $(this).text();
-/       })
-
-/       $(this).first().parents('tr').first().find('#option_value_id').each(function(e){
-/         $('#variant_options_attributes_'+e+'_id').val($(this).val())
-/       })
-/       $('form input.change').each(function(index, item){
-/         $(this).val((elements[$(item).attr('id')]))
-/       })
-/       var product_id = #{@product.id}
-/       var variant_id = $(this).parents('tr').find('input#variant_id').val();
-/       var option_type_id = $(this).parents('tr').find('#option_value_id').val();
-/       $('input#variant_options_attributes_0_product_variant_id').val(variant_id)
-
-/       url = "/admin/products/"+product_id+"/variants/"+variant_id
-/       $('form#edit_variant').attr('action', url)
-/     })
-/     $('input#new_variant').click(function(){
-/       $('div.new div#action').hide();
-/       $('div#form').slideDown('fast');
-/       $('div#update').slideUp('fast')
-/     })
-/     $('.error').parents('div.hide').show();
-/     if ($('.error').parents('form').attr('id') == 'new_variant'){
-/       $('div.new div#action').hide();
-/     }error_notification
-
-/ - content_for :breadcrumb do
-/   == breadcrumb([{ t(:home) => admin_dashboard_path }, { t(:management) => '' }, { t(:products) => url_for(:controller => :products) }, { @product.name => '' }, { t(:variants) => url_for(:controller => :product_variants, product_id: @product.id ) } ])
-
-
-/ = render "imentore/admin/products/top"
 .modal-container
 
 .wrapper.wrapper-content.animated.fadeInRight
@@ -46,11 +5,6 @@
     .col-lg-12
       .tabs-container
         =  render "imentore/admin/products/top"
-        / ul.nav.nav-tabs
-        /   li.active
-        /     a data-toggle="tab" href="#tab-1"  This is tab
-        /   li
-        /     a data-toggle="tab" href="#tab-2"  This is second tab
         .tab-content
           .tab#variants.tab-pane.active
             .panel-body
@@ -95,41 +49,9 @@
                           '|
                           '
                           = link_to(t(:remove), admin_product_variant_path(@product, variant), method: :delete)
-
-              / - unless @variant_update.nil?
-              /   .hr-line-dashed
-              /   .row 
-              /     .col-md-12
-              /       #update.hide
-              /         = simple_form_for @variant_update, as: "variant", url: admin_product_variant_path(@product, @variant_update), :html => {:class => 'form-horizontal', method: :put} do |f|
-              /           = f.error_notification
-              /           = f.input :sku, input_html: { :class => 'change', :id => 'sku'}
-              /           .values
-              /             = f.simple_fields_for :options do |of|
-              /               = of.input :value, label: of.object.option_type.name, input_html: { :class => 'change', :id => of.object.option_type.name}
-              /           = f.input :quantity, input_html: { :class => 'change', :id => 'quantity'}
-              /           = f.input :weight, input_html: { :class => 'change', :id => 'weight', type: 'text'}
-              /           = f.input :price, input_html: { :class => 'change', :id => 'price', type: 'text'}
-              /           = f.input :price_deal, input_html: { :class => 'change', :id => 'price_deal', type: 'text'}
-              /           .form-actions
-              /             = f.button :submit, :class => "btn-primary"
               .hr-line-dashed
               .row 
                 .col-md-12
                   .new
                     #action
                       = link_to(t(:newa), new_admin_product_variant_path(@product), remote: true, class: 'btn btn-primary')
-                      / = text_field_tag "new_variant", t(:variant_new), :class=>'btn btn-primary', :type=> "submit"
-              /       #form.hide
-              /         = simple_form_for @variant, as: "variant", url: admin_product_variants_path(@product), :html => {:class => 'form-horizontal'}, input_html: { method: :post } do |f|
-              /           = f.error_notification
-              /           = f.input :sku
-              /           = f.simple_fields_for :options do |of|
-              /             = of.input :option_type_id, as: :hidden, input_html: { :value => of.object.option_type_id }
-              /             = of.input :value, label: of.object.option_type.name
-              /           = f.input :quantity
-              /           = f.input :weight, as: :string
-              /           = f.input :price, as: :string
-              /           = f.input :price_deal, as: :string
-              /           .form-actions
-              /             = f.button :submit, :class => "btn-primary"

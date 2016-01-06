@@ -3,6 +3,7 @@ module Imentore
     belongs_to :store
     belongs_to :manager_theme, :class_name => Imentore::Manager::Theme, :foreign_key => "admin_imentore_theme_id"
     
+    has_many :folders, :class_name => Imentore::AssetFolder, :foreign_key => "theme_id", :dependent => :destroy
     has_many :templates, class_name: Imentore::Template, :dependent => :destroy
     has_many :assets, :dependent => :destroy
 

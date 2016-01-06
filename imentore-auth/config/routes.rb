@@ -1,6 +1,6 @@
 Imentore::Core::Engine.routes.draw do
 
-  resources :customers, only: [:new, :create]
+  resources :customers, only: [:new, :create, :index]
 
   devise_for :users,
     class_name: 'Imentore::User',

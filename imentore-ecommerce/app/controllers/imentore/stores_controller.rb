@@ -1,13 +1,27 @@
 module Imentore
   class StoresController < BaseController
-    inherit_resources
+    include SqlTemplate::ResolverMethods
 
+    inherit_resources
+    respond_to :html, :json
     skip_before_action :check_store, only: [:new, :create, :create_success]
 
-    def contact
-      
+
+    def render_template
+      if params[:template]
+        template = render_to_controller(params[:template])
+        respond_to do |format|
+          format.html { render :inline => template  }
+          format.json do 
+            render :json => {response: template}, status: 200
+          end
+        end
+      end
     end
 
+    def contact
+    end
+    
     def new
       @store = Store.new
       @store.build_owner

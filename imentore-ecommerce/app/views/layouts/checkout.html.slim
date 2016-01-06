@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta charset="utf-8" /
+    meta content="width=device-width, initial-scale=1.0" name="viewport" /
+    title= current_store.name
+    = stylesheet_link_tag    'checkout', media: 'all', 'data-turbolinks-track' => true 
+    = javascript_include_tag 'checkout', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    = yield :header
+  body
+    .container
+      .row
+        .col-sm-12
+          .row
+            .col-md-5.pull-right
+              .sidebar.sidebar-nav-fixed.pull-right.affix.col-md-5
+                = yield :sidebar
+            .col-sm-7
+              = yield
+
+    .footer
+      = yield :footer

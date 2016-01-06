@@ -5,6 +5,8 @@ module Imentore
       "imentore_assets"
     end
 
+    belongs_to :folder, :class_name => Imentore::AssetFolder, :foreign_key => "folder_id"
+
     attr_accessor :filename
     # validates_uniqueness_of :file, :on => :create, :message => "must be unique", :if => proc { |obj| obj.class.find(:all, :conditions=> ['store_id == ?, and name == ?', obj.store_id, obj.file]).size >= 1 }
     mount_uploader :file, FileUploader

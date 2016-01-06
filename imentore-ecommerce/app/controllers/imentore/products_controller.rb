@@ -1,14 +1,34 @@
 module Imentore
   class ProductsController < BaseController
-    inherit_resources
-    actions :show, :handle
+    respond_to :html, :js, :json
+    include SqlTemplate::ResolverMethods
+
+    def render_template
+      product = current_store.products.active.find_by_handle(params[:handle])
+      @product = ProductDrop.new(product)
+      @variants = product.variants.map { |variant| ProductVariantDrop.new(variant) }
+      @images = product.all_images.map { |image| ImageDrop.new(image)}
+      if params[:template]
+        template_liquid = render_to_controller(params[:template])
+        respond_to do |format|
+          format.html { render :inline => template_liquid }
+          format.json do 
+            render :json => {response: template}, status: 200
+          end
+        end
+      end
+    end
 
     def handle
       product = current_store.products.active.find_by_handle(params[:handle])
       @product = ProductDrop.new(product)
       @variants = product.variants.map { |variant| ProductVariantDrop.new(variant) }
       @images = product.all_images.map { |image| ImageDrop.new(image)}
-      render :show
+      @content_for_footer = render_to_controller("imentore/products/show", :header_view)
+      # @content_for_footer = render_to_string(template:(render_template_controller("imentore/products/show", :header_view)), layout:false)
+      respond_to do |format|
+        format.html { render :show }
+      end
     end
 
     def show
@@ -16,6 +36,10 @@ module Imentore
       @product = ProductDrop.new(Imentore::Product.find(params[:id]))
       @variants = product.variants.map { |variant| ProductVariantDrop.new(variant) }
       @images = product.all_images.map { |image| ImageDrop.new(image)}
+      respond_to do |format|
+        format.html { }
+        format.js 
+      end
     end
 
     def search
