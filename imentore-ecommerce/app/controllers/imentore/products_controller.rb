@@ -13,7 +13,7 @@ module Imentore
         respond_to do |format|
           format.html { render :inline => template_liquid }
           format.json do 
-            render :json => {response: template}, status: 200
+            render :json => {response: template_liquid}, status: 200
           end
         end
       end
