@@ -263,7 +263,7 @@
 
       .row
         .col-md-12
-          = simple_form_for(@order, url: confirm_checkout_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
+          = simple_form_for(@order, url: confirm_checkouts_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
             .row
               = hidden_field_tag :zip_code, f.object.try(:zip_code)
               .col-md-6

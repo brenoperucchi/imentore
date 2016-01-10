@@ -25,10 +25,6 @@ module Imentore
 
     accepts_nested_attributes_for :variants, allow_destroy: true
 
-    def low_price
-      
-    end
-
     def destroy_disabled
       update_column(:active, 0)
     end

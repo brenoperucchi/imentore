@@ -8,6 +8,7 @@ module Imentore
     end
 
     def place_initial(order, params, current_user)
+      order.validate_step = :initial
       shipping_address = Imentore::Address.new(params[:shipping_address])if params[:shipping_address].present?
       order.shipping_address = shipping_address
       if current_user and not current_user.userable.owner?
@@ -18,12 +19,11 @@ module Imentore
         order.customer_name = params[:customer_name]
         order.customer_email = params[:customer_email]
       end
-      valid_order = order.save 
-      valid_shipping = order.shipping_address.valid?
-      valid_shipping && valid_order
+      order.save 
     end
 
     def place_second(order, params)
+      order.validate_step = :second
       order.build_delivery if order.delivery.nil?
       order.delivery.attributes = { address: order.shipping_address, delivery_method_id: params[:delivery][:delivery_method] } if params[:delivery].present?
       order.delivery.amount = order.delivery_calculate(order.zip_code, order.delivery_method).try(:cost)
@@ -31,6 +31,7 @@ module Imentore
     end
 
     def place_third(order, params)
+      order.validate_step = :thrid
       order.same_billing_address = params[:same_billing_address]
       
       order.billing_address = Imentore::Address.new(params[:billing_address]) if params[:billing_address].present? and order.same_billing_address

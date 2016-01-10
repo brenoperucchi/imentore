@@ -177,7 +177,7 @@
     .row
       .col-md-12
         .box
-          = simple_form_for(@order, url: address_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
+          = simple_form_for(@order, url: address_checkouts_path, :html => {:class => 'form-horizontal', :method => 'put' }) do |f|
             = f.error_notification
             #accordion1.accordion
               fieldset#address_customer

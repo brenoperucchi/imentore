@@ -13,6 +13,9 @@
           | Shipping Method
         li
           a href="#{payment_checkouts_path(current_store, @order)}" Payment Method
+
+/ = render "sidebar", order: @order
+
 .row
   .col-sm-12
     h3= t(:address)

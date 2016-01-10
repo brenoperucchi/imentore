@@ -13,6 +13,11 @@
           a href="#{shipping_checkouts_path(current_store, @order)}" Shipping Method
         li
           a href="#{shipping_checkouts_path(current_store, @order)}" Payment Method
+
+/ = render "sidebar", order: @order          
+
+.row
+  .col-sm-12
     = simple_form_for(@order, url: address_confirm_checkouts_path(current_store, @order), :html => {id: 'checkout', :method => 'put' }) do |f|
       = f.error_notification
       .row

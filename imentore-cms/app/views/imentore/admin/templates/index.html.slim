@@ -44,12 +44,11 @@
                             i.icon-black.icon-edit
                             '
                             = t(:edit)
-
-                          = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn btn-outline btn-default btn-sm') do
-                            i.icon-black.icon-edit
-                            '
-                            = t(:edit)
-                          '
+                          / = link_to(edit_admin_theme_template_path(@theme, template), class: 'btn btn-outline btn-default btn-sm') do
+                          /   i.icon-black.icon-edit
+                          /   '
+                          /   = t(:edit)
+                          / '
                           - unless template.manager_template.nil?
                             = link_to(view_default_admin_theme_template_path(@theme, template), class: 'btn btn-outline btn-default btn-sm') do
                               i.icon-black.icon-edit

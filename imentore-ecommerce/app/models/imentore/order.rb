@@ -34,7 +34,7 @@ module Imentore
   class Order < ActiveRecord::Base
     acts_as_paranoid
     
-    attr_accessor :shipping_checkbox, :payment_url, :valid_billing
+    attr_accessor :shipping_checkbox, :payment_url, :valid_billing, :validate_step
 
     mattr_accessor :sent_email
     self.sent_email = false
@@ -47,30 +47,34 @@ module Imentore
     belongs_to  :store
     belongs_to  :user
     has_many    :assets,    class_name: "OrderAsset", as: 'assetable'
-    has_one     :invoice,   dependent: :destroy, validate: true, autosave: true
-    has_one     :delivery,  dependent: :destroy, validate: true, autosave: true
+    has_one     :invoice,   dependent: :destroy, autosave: true, validate: true
+    has_one     :delivery,  dependent: :destroy, autosave: true, validate: true
 
     has_many :coupons_orders
     has_many :coupons, :through => :coupons_orders, :source => :coupon
-    validates :customer_name, :customer_email, presence: true, :on => :update, unless: Proc.new {|order| order.canceled?}
-    validate :valid_addresses?
 
-    def valid_addresses?
-      if same_billing_address and not billing_address.valid?
-        errors.add(:base, "error")
-        return false
+    validate :validate_checkout, unless: "validate_step.nil?"
+
+    ## TODO change this to state_machine behavor 
+    def validate_checkout
+      case validate_step
+      when :initial
+        validates_presence_of :customer_name, :customer_email
+        errors.add(:base, "error") unless shipping_address.valid?
+      when :second
+        errors.add(:base, "error") unless delivery.try(:valid?)
+      when :third
+        errors.add(:base, "error") unless invoice.try(:valid?)
+      else
+        true
       end
     end
-    #   valid_address = shipping_address.valid? 
-    #   errors.add(:base, "err") unless valid_address# && valid_billing
-    #   valid_address
-    # end
 
     def update_status
       self.finish if invoice.confirmed? and delivery.sent?
     end
 
-    def valid_stock?(event=nil)
+    def valid_stock?(event = nil)
       self.items.each do |i| 
         unless i.variant.valid_stock?(i.quantity)
           self.errors.add(:base, I18n.t(:stock_null, scope: [:activerecord, :attributes, :errors, self.class.name.to_underscore]))

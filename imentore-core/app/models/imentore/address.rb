@@ -3,10 +3,7 @@ module Imentore
     attr_accessor :validate
 
     belongs_to :addressable, polymorphic: true
-
     validates :name, :street, :complement, :city, :state, :country, :zip_code, :phone, presence: true#, if: :validate?
-
-    validates :name, length: { maximum: 10 }
 
     def to_s
       "#{street}, #{city}, #{state}, #{zip_code}, #{country}"

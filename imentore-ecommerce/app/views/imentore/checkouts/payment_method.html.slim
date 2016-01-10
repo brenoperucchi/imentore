@@ -13,23 +13,9 @@
           a href="#{shipping_checkouts_path(current_store, @order)}" Shipping Method
         li.active
           | Payment Method
-.row
-  .col-sm-6
-    .notification
-      div.alert.alert-block.hide
-        a[class="close" data-dismiss="alert" href="#"]
-          = "x"
-        h4[class="alert-heading"]
-          = t(:warning)
-        p
-          = flash[:alert]
-      div.alert.alert-success.hide
-        a[class="close" data-dismiss="alert" href="#"]
-          = "x"
-        h4[class="alert-heading"]
-          = t(:success)
-        p
-          = flash[:success]
+
+= render "notification", flash: flash
+
 .row
   .col-sm-12
     = simple_form_for @order, url: payment_checkouts_path(current_store, @order), :html => { :method => 'put' }, wrapper: :vertical_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|

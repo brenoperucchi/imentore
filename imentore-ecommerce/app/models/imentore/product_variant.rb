@@ -10,7 +10,7 @@ module Imentore
     validates :price, :quantity, presence: true
 
     def options_name
-      options.collect{|option| option.option_type.name + ":" + option.value}.join(' / ')
+      options.collect{|option| option.option_type.name + ": " + option.value}.join(' / ')
     end
 
     def update_stock(qtd)

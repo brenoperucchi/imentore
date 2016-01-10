@@ -27,11 +27,11 @@ module Imentore
     end
 
     def price
-      number_with_price(@product.variants.first.price)
+      number_with_price(@product.variants.try(:first).try(:price))
     end
    
     def price_deal
-      number_with_price(@product.variants.first.price_deal)
+      number_with_price(@product.variants.try(:first).try(:price_deal))
     end
 
     def product_code
@@ -68,8 +68,10 @@ module Imentore
     end
 
     def variant_deal?
-      @variant = @product.variants.first
-      !@variant.price_deal.nil? and @variant.price_deal > 0 
+      variant = @product.variants.first
+      if variant
+        !variant.price_deal.nil? and variant.price_deal > 0 
+      end
     end
 
 
