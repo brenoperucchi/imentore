@@ -32,8 +32,8 @@ module Imentore
       authenticate_user! unless current_store.config.authenticate_to_buy
     end
 
-    def cart
-     redirect_to address_checkouts_path(current_store, current_order) if verify_cart_valid?
+    def start
+      redirect_to address_checkouts_path(store_id: current_store, order_id: current_order) if verify_cart_valid?
     end
       
     def address
@@ -258,7 +258,7 @@ module Imentore
 
       def check_order
         unless current_store.orders.find_by_id(params[:order_id])      
-          redirect_to address_checkouts_path(current_store, current_order)
+          redirect_to checkouts_path
         end
       end
 
@@ -268,7 +268,7 @@ module Imentore
       end
 
       def current_order
-        order = current_store.orders.find_by_id(params[:order_id]) || session[:order_id]
+        order = current_store.orders.find_by_id(params[:order_id]) || current_store.orders.find_by_id(session[:order_id])
         current_order = if order.nil?# or order.placed?
                           order = current_store.orders.new
                           order.save(validate: false) 
@@ -277,7 +277,6 @@ module Imentore
                         else
                           order
                         end   
-        current_order     
       end
 
   end
