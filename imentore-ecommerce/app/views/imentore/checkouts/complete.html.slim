@@ -39,11 +39,6 @@
             | via
             '
             = @order.delivery_method.try(:name)
-        - if @order.delivery_method.try(:description).present?
-          p
-            | Aviso do método de envio:
-            '
-            = @order.delivery_method.try(:description)
 
         address.text-capitalize
           strong= @order.shipping_address.try(:name)
@@ -59,6 +54,11 @@
           br/
           abbr[title="Phone"]P:
           = @order.shipping_address.try(:phone)
+        - if @order.delivery_method.try(:description).present?
+          p
+            ins Aviso do método de envio:
+            '
+            = @order.delivery_method.try(:description)
   .col-sm-12
     ul.list-group
       li.list-group-item
@@ -69,14 +69,15 @@
             | via
             '
             = @order.invoice_method.try(:name)
-        - if @order.invoice_method.try(:description).present?
-          p
-            | Aviso do método de pagamento:
-            '
-            = @order.invoice_method.try(:description)
         small
           p[class="list-group-item-text text-uppercase"]
             = @order.billing_address.to_s.upcase
+        - if @order.invoice_method.try(:description).present?
+          br
+          p
+            ins Aviso do método de pagamento:
+            '
+            = @order.invoice_method.try(:description)
 
       / .row
       /   .col-sm-12
