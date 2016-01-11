@@ -14,9 +14,13 @@ module Imentore
       if current_cart.items.size == 0
         redirect_to cart_path
         flash[:alert] = t(:cart_not_valid)
+        return false
       elsif not current_cart.valid_stock?
         flash[:alert] = current_cart.errors.full_messages.first
         redirect_to cart_path
+        return false
+      else
+        return true
       end
     end
 
@@ -26,6 +30,10 @@ module Imentore
 
     def authenticate_to_buy!
       authenticate_user! unless current_store.config.authenticate_to_buy
+    end
+
+    def cart
+     redirect_to address_checkouts_path(current_store, current_order) if verify_cart_valid?
     end
       
     def address

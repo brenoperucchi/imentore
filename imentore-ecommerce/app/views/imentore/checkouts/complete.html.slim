@@ -23,7 +23,7 @@
         span.prefix= t(:order_status)
         '
         span.label.label-success= t(@order.status)
-    p.lead= "Compra com número #{@order.id} foi criada em #{I18n.l(@order.created_at, :format=>:short2)}. Estamos preprando o seu pedido."
+    p.lead= "Compra com número #{@order.id} foi criada em #{I18n.l(@order.created_at, :format=>:short2)}. Estamos preparando o seu pedido."
 
     p.muted== "Se houver alguma dúvida, por favor sinta se a vontade para perguntar no e-mail <a href='mailto:##{@order.store.email_contact}'>#{current_store.email_contact}</a>"
 

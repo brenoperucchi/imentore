@@ -40,7 +40,7 @@ Imentore::Core::Engine.routes.draw do
       get 'calculate_shipping', on: :member
     end
 
-    get "checkouts",                   to: "checkouts#address"
+    get "checkouts",                   to: "checkouts#cart"
     resources :checkouts, only: [:create] , path:'/:store_id/checkouts/:order_id' do
       # get '/', action: :new, controller: 'checkouts', on: :collection
       # get '/', action: :start, on: :collection, as: 'start'
