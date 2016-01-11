@@ -1,1 +1,109 @@
-h2 Order receipt
+= render "sidebar", order: @order
+
+.row
+  .col-sm-12
+    h3.blog-title= current_store.name
+    small
+      ol.breadcrumb
+        li
+          a href="/cart"  Carrinho
+        li
+          a[href="#{address_checkouts_path(current_store, @order)}"]=t(:shipping_address)
+        li
+          a[href="#{shipping_checkouts_path(current_store, @order)}"]=t(:delivery_method)
+        li
+          a[href="#{payment_checkouts_path(current_store, @order)}"]=t(:payment_method)
+
+= render "notification", flash: flash
+
+.row
+  .col-sm-12
+    p
+      h4
+        span.prefix= t(:order_status)
+        '
+        span.label.label-success= t(@order.status)
+    p.lead= "Compra com número #{@order.id} foi criada em #{I18n.l(@order.created_at, :format=>:short2)}. Estamos preprando o seu pedido."
+
+    p.muted== "Se houver alguma dúvida, por favor sinta se a vontade para perguntar no e-mail <a href='mailto:##{@order.store.email_contact}'>#{current_store.email_contact}</a>"
+
+
+.row
+  .col-sm-12
+    ul.list-group
+      li.list-group-item
+        h4
+          | Endereço de envio 
+          small
+            '
+            | via
+            '
+            = @order.delivery_method.try(:name)
+        - if @order.delivery_method.try(:description).present?
+          p
+            | Aviso do método de envio:
+            '
+            = @order.delivery_method.try(:description)
+
+        address.text-capitalize
+          strong= @order.shipping_address.try(:name)
+          br/
+          = @order.shipping_address.to_s
+          br/
+          abbr title="Phone"  P:
+          = @order.shipping_address.try(:phone)
+        address
+          strong= @order.try(:customer_name)
+          br/
+          a href="mailto:#"= @order.try(:customer_email)
+          br/
+          abbr[title="Phone"]P:
+          = @order.shipping_address.try(:phone)
+  .col-sm-12
+    ul.list-group
+      li.list-group-item
+        h4
+          | Endereço de cobrança:
+          small
+            '
+            | via
+            '
+            = @order.invoice_method.try(:name)
+        - if @order.invoice_method.try(:description).present?
+          p
+            | Aviso do método de pagamento:
+            '
+            = @order.invoice_method.try(:description)
+        small
+          p[class="list-group-item-text text-uppercase"]
+            = @order.billing_address.to_s.upcase
+
+      / .row
+      /   .col-sm-12
+      /     = f.input :same_billing_address, label: t(:payment_method), as: :radio_buttons, wrapper: :append do
+      /       ul.list-group
+      /         li.list-group-item
+      /           span.radio
+      /             label
+      /               = f.radio_button :same_billing_address, 0, checked: !f.object.same_billing_address
+      /               = t(:same_billing_address_false)
+      /         li.list-group-item
+      /           span.radio
+      /             label
+      /               = f.radio_button :same_billing_address, 1, checked: f.object.same_billing_address
+      /               = t(:same_billing_address_true)
+      /           span#checkbox_billing_address[style="display:#{f.object.same_billing_address ? 'inline' : 'none'}"]
+      /             = f.simple_fields_for :billing_address, f.object.billing_address, wrapper: 'inline_form' do |addr|
+      /               = render("shared/address", addr: addr)
+                
+
+      / .row
+      /   .col-sm-6
+      /     a.btn.btn-default[href="#{shipping_checkouts_path(current_store, @order)}" class="btn btn-link btn-lg"]
+      /       i.fa.fa-chevron-left
+      /       = t(:back)
+      /   .col-sm-6.text-right
+      /     button(class='btn btn-lg btn-success')
+      /       i.fa.fa-chevron-right
+      /       '
+      /       = t(:next)

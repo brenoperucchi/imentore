@@ -25,7 +25,7 @@ module Imentore
     def place_second(order, params)
       order.validate_step = :second
       order.build_delivery if order.delivery.nil?
-      order.delivery.attributes = { address: order.shipping_address, delivery_method_id: params[:delivery][:delivery_method] } if params[:delivery].present?
+      order.delivery.attributes = { delivery_method_id: params[:delivery][:delivery_method] } if params[:delivery].present?
       order.delivery.amount = order.delivery_calculate(order.zip_code, order.delivery_method).try(:cost)
       order.save
     end

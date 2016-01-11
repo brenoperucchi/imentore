@@ -52,7 +52,7 @@ module Imentore
     end
 
     def url_site
-      "#{url}.imentore.com.br"
+      Rails.env.production? ? "#{url}.imentore.com.br" : "#{url}.imentore.dev:4000"
     end
 
     def theme

@@ -50,8 +50,8 @@ pt-BR:
   invoice_info: Info Pagamento
   log_info: Histórico do pedido
 
-  same_billing_address_false: Mesmo endereço de envio
-  same_billing_address_true: Usar o mesmo endereço de envio 
+  same_billing_address_false: Usar o mesmo endereço de envio
+  same_billing_address_true: Usar outro endereço
   billing_address: Endereço do cobrança
   shipping_address: Endereço do envio
 

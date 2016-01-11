@@ -6,13 +6,14 @@
     small
       ol.breadcrumb
         li
-          a href="/cart"  Cart
-        li
-          | Customer Shipping
+          a href="/cart"  Carrinho
         li.active
-          a href="#{shipping_checkouts_path(current_store, @order)}" Shipping Method
+          =t(:shipping_address)
         li
-          a href="#{shipping_checkouts_path(current_store, @order)}" Payment Method
+          a[href="#{shipping_checkouts_path(current_store, @order)}"]=t(:delivery_method)
+        li
+          a[href="#{payment_checkouts_path(current_store, @order)}"]=t(:payment_method)
+
 
 / = render "sidebar", order: @order          
 

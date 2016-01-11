@@ -142,7 +142,7 @@ module Imentore
         @invoice = @order.invoice
         @prepare = @invoice.prepare
         send("#{@invoice.payment_method.handle}".to_underscore)
-        before_order_placed
+        setting_before_order
         return true
       rescue Exception => msg
         flash[:alert] = t(:checkout_charge_problem)
@@ -152,7 +152,7 @@ module Imentore
     end
 
     def custom
-      complete
+      redirect_to complete_checkouts_url(host: current_store.url_site, store_id: current_store.id, order_id: @order.id)
     end
 
     def mo_ip
@@ -177,10 +177,10 @@ module Imentore
     end
 
     def complete
-      order = Imentore::Order.find_by_id(params[:id])
-      order.payment_url = payment_url(order)
-      @items = order.items.map {|item| CartItemDrop.new(item)}      
-      render 'complete', locals: {order: OrderDrop.new(order)}
+      @order = current_order
+      @order.payment_url = payment_url(@order)
+      @items = @order.items.map {|item| CartItemDrop.new(item)}      
+      render 'complete', layout: 'checkout', locals: {order: OrderDrop.new(@order)}
     end
 
 
@@ -226,7 +226,7 @@ module Imentore
       invoice = Imentore::Invoice.find(params[:invoice_id])
       @order = invoice.order
       current_store = invoice.order.store
-      redirect_to complete_checkout_url(host: current_store.url_site, id: @order.id)
+      redirect_to complete_checkouts_url(host: current_store.url_site, store_id: current_store.id, order_id: @order.id)
     end
 
     def return_pd
@@ -235,7 +235,7 @@ module Imentore
       current_store = invoice.order.store
       notificacao = PagamentoDigital::Notificacao.new(params, invoice.payment_method.options['token'])
       invoice.confirm if notificacao.status == :concluida
-      redirect_to complete_checkout_url(host: current_store.url_site, id: @order.id)
+      redirect_to complete_checkouts_url(host: current_store.url_site, store_id: current_store.id, order_id: @order.id)
     end
 
     protected
@@ -254,17 +254,13 @@ module Imentore
         end
       end
 
-      def before_order_placed
-        # session[:order_id] = nil
+      def setting_before_order
+        session[:order_id] = nil
         current_cart.destroy
       end
 
-      # def set_order(order)
-      #   session[:order_id] = order.id
-      # end
-
       def current_order
-        order = current_store.orders.find_by_id(params[:order_id])
+        order = current_store.orders.find_by_id(params[:order_id]) || session[:order_id]
         current_order = if order.nil?# or order.placed?
                           order = current_store.orders.new
                           order.save(validate: false) 

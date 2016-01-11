@@ -50,6 +50,7 @@ Imentore::Core::Engine.routes.draw do
       put '/shipping', action: :shipping, on: :collection, as: 'shipping_shipping'
       get '/payment', action: :payment, on: :collection, as: 'payment'
       put '/payment', action: :payment, on: :collection, as: 'confirm_payment'
+      get '/complete', action: :complete, on: :collection, as: 'complete'
     end
     
     get "store/success",                             to: "stores#create_success"
@@ -67,8 +68,8 @@ Imentore::Core::Engine.routes.draw do
     # match "checkout/address",       to: "checkouts#address",   as: "address",  via: [:get, :put]
     # get "checkout/:id/confirm",   to: "checkouts#confirm",  via: "get",   as: "confirm_checkout"
     # match "checkout/:id/confirm",   to: "checkouts#confirm",  as: "confirm_checkout", via:[:get, :put]
-    get "checkout/charge",        to: "checkouts#charge",   as: "charge_checkout"
-    get "checkout/:id/complete",  to: "checkouts#complete", as: "complete_checkout"
+    # get "checkout/charge",        to: "checkouts#charge",   as: "charge_checkout"
+    # get "checkout/:id/complete",  to: "checkouts#complete", as: "complete_checkout"
     get "return_mp/:invoice_id",  to: "checkouts#return_mp", as: 'return_mp'
     get "return_pd/:invoice_id",  to: "checkouts#return_pd", as: 'return_pd'
     get "return_pg/:invoice_id",  to: "checkouts#return_pg", as: 'return_pg'

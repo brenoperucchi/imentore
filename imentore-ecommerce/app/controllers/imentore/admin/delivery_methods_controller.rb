@@ -33,6 +33,10 @@ module Imentore
 
       protected
 
+      def delivery_method_params
+        params.require(:delivery_method).permit(:name, :active, :description, options:[:fixed_rate, :percent_rate])
+      end
+
       def begin_of_association_chain
         current_store
       end
