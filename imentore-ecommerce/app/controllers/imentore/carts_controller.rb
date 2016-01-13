@@ -74,7 +74,7 @@ module Imentore
           product = current_store.products.find_by_id(params[:product_id])
           variant = product.variants.find_by_id(params[:variant_id])
           current_cart.renew(product, variant, 0)
-          redirect_to cart_path
+          redirect_to :back
         end
       end
     end
@@ -90,6 +90,7 @@ module Imentore
       quantity = params[:item][:quantity].to_i
 
       respond_to do |wants|
+        set_current_cart
         wants.json do
           begin
             if quantity == 0 
@@ -109,6 +110,17 @@ module Imentore
           end
           redirect_to cart_path
         end
+      end
+    end
+
+    protected
+
+    def set_current_cart
+      cart = current_cart
+      unless current_cart
+        cart = current_store.carts.new
+        cart.save(validate: false)
+        session[:cart_id] = cart.id
       end
     end
 

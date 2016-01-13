@@ -11,11 +11,11 @@ module Imentore
     end
 
     def items
-      @items = @cart.items.map { |item| CartItemDrop.new(item) }
+      @items = @cart.try(:items).try(:map) { |item| CartItemDrop.new(item) }
     end
 
     def amount
-      number_with_price(@cart.amount)
+      number_with_price(@cart.try(:amount))
     end
 
     def delivery_methods

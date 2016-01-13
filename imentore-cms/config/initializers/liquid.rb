@@ -25,13 +25,12 @@ class LiquidView
 
   def render(template, local_assigns = {})
     @view.controller.headers["Content-Type"] ||= 'text/html; charset=utf-8'
-    # @view.controller.headers["X-CSRF-Token"] ||= @view.controller.session['_csrf_token']
     assigns = @view.assigns
 
     if @view.content_for?(:layout)
       assigns["content_for_layout"] = @view.content_for(:layout)
-      assigns["content_for_header"] ||= @view.content_for(:header)
-      assigns["content_for_footer"] ||= @view.content_for(:javascript)
+      assigns["content_for_header"] = @view.content_for(:header)
+      assigns["content_for_footer"] = @view.content_for(:javascript)
     end
 
     assigns["_csrf_token"] = @view.controller.session['_csrf_token']
@@ -45,6 +44,9 @@ class LiquidView
     assigns["pages"] = store.pages.active.order('id desc').map { |page| Imentore::PageDrop.new(page) }
     assigns["notices"] = store.notices.active.order('id desc').map { |notice| Imentore::NoticeDrop.new(notice) }
     assigns["categories"] = store.categories.roots.order('name').map { |category| Imentore::CategoryDrop.new(category) }
+
+    ## TODO
+    # assigns["flash_message"] = Imentore::ObjectDrop.new(category)
 
     controller = @view.controller
     filters = if controller.respond_to?(:liquid_filters, true)

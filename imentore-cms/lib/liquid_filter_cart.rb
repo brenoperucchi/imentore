@@ -16,7 +16,7 @@ module LiquidFilterCart
   end
 
   def cart_remove_item(item, klass)
-    content_tag(:a, href: cart_path(variant_id: item.variant.id, product_id: item.product.id), method: :delete, class: 'klass') do 
+    content_tag(:a, href: cart_path(variant_id: item.variant.id, product_id: item.product.id), "data-method" => 'delete', class: 'klass') do 
       content_tag(:i, class: 'icon-trash.icon-white') do
         concat(' ' + I18n.t(:remove))
       end

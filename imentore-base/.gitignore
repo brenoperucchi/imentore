@@ -15,8 +15,9 @@
 log/*.log
 log
 tmp
-tmp/cache/assets/*
+tmp/cache/assets/
 public/uploads/imentore/
 public/uploads/
+public/assets/
 public/uploads/tmp/
 spec/dummy/

@@ -3,7 +3,7 @@
   = javascript_include_tag "cart"
   = csrf_meta_tags
 
-- content_for :footer do
+- content_for :javascript do
   = javascript_include_tag "jquery_ujs"
   = javascript_include_tag current_store.theme.assets.find_by_file('cart.js').try(:file_url)
   javascript:

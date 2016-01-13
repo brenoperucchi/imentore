@@ -42,8 +42,8 @@ module Imentore
     has_many :feedbacks, as: :feedbackable, :dependent => :destroy
     has_many :notices, :dependent => :destroy
     has_many :folders, class_name: Imentore::AssetFolder, :dependent => :destroy
-    
     has_many :users, :dependent => :destroy
+    has_many :carts, :dependent => :destroy
 
     accepts_nested_attributes_for :owner, :address
 

@@ -1,6 +1,7 @@
 module LiquidFilter
   include ActionView::Context
   include ActionView::Helpers::FormTagHelper 
+  include ActionView::Helpers::AssetTagHelper
   include Imentore::Core::Engine.routes.url_helpers
   include ActionDispatch::Routing::Mapper::Base
 
@@ -49,6 +50,10 @@ module LiquidFilter
 
   def form_token(token)
     SecureRandom.base64(32)
+  end
+
+  def imentore_asset_url(name)
+    javascript_include_tag "/assets/#{name}"
   end
 
   # def theme_include(name)
