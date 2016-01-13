@@ -1,6 +1,7 @@
 module Imentore
   class StoresController < BaseController
     include SqlTemplate::ResolverMethods
+    skip_before_action :current_cart, only:[:create, :new]
 
     inherit_resources
     respond_to :html, :json
