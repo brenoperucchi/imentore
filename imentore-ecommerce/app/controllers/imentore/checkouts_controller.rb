@@ -4,16 +4,20 @@ module Imentore
 
     before_action :authenticate_to_buy!, only: [:confirm]
     before_action :check_order, only: [:address, :shipping, :payment]
-    # before_action :verify_cart_valid?, only:[:address]
+    before_action :verify_cart_valid?, only:[:start]
 
     skip_before_action :authorize_client, except: [:new]
     skip_before_action :verify_authenticity_token, :check_store, only: [:return_mp, :return_pd, :sync_pd, :return_pg, :sync_pg,
                                                                          :sync_mp, :complete]
     def verify_cart_valid?
       return true unless request.get?
-      if current_cart.items.size == 0
+      if current_cart.nil?
+        flash[:alert] = t(:cart_empty)
         redirect_to cart_path
+        return false
+      elsif current_cart.items.size == 0
         flash[:alert] = t(:cart_not_valid)
+        redirect_to cart_path
         return false
       elsif not current_cart.valid_stock?
         flash[:alert] = current_cart.errors.full_messages.first
@@ -33,13 +37,13 @@ module Imentore
     end
 
     def start
-      redirect_to address_checkouts_path(store_id: current_store, order_id: current_order) if verify_cart_valid?
+      CheckoutService.place_items(@order, current_cart)  
+      redirect_to address_checkouts_path(store_id: current_store, order_id: current_order) 
     end
       
     def address
       @order = current_order 
       if request.get?
-        CheckoutService.place_items(@order, current_cart)  
         respond_to do |wants|
           wants.html do 
             render :address_shipping, layout: 'checkout'
@@ -85,7 +89,12 @@ module Imentore
         end
       elsif request.put?
         if CheckoutService.place_third(@order, order_params)
-          @order.place if charge?
+          if @order.place
+            before_order_placed if charge? 
+          else
+            flash[:alert] = @order.errors.full_messages.join(" / ")
+            render :complete, layout: 'checkout'
+          end
         else
           respond_to do |wants|
             wants.html { render :payment_method, layout: 'checkout' }
@@ -150,7 +159,6 @@ module Imentore
         @invoice = @order.invoice
         @prepare = @invoice.prepare
         send("#{@invoice.payment_method.handle}".to_underscore)
-        setting_before_order
         return true
       rescue Exception => msg
         flash[:alert] = t(:checkout_charge_problem)
@@ -262,7 +270,7 @@ module Imentore
         end
       end
 
-      def setting_before_order
+      def before_order_placed
         session[:order_id] = nil
         current_cart.destroy
       end
