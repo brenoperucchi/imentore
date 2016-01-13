@@ -1,7 +1,7 @@
 module Imentore
   class SiteController < BaseController
     skip_before_action :check_store
-
+    skip_before_action :current_cart
     before_action :set_page
 
     def index
