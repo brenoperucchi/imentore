@@ -37,8 +37,9 @@ module Imentore
     end
 
     def start
-      CheckoutService.place_items(@order, current_cart)  
-      redirect_to address_checkouts_path(store_id: current_store, order_id: current_order) 
+      order = current_order 
+      CheckoutService.place_items(order, current_cart)  
+      redirect_to address_checkouts_path(store_id: current_store, order_id: order) 
     end
       
     def address
