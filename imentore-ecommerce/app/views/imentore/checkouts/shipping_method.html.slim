@@ -36,8 +36,9 @@
     = simple_form_for @order, url: shipping_checkouts_path(current_store, @order), :html => { :method => 'put' }, wrapper: :vertical_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
       .row
         .col-sm-12
+          - f.object.build_delivery if f.object.delivery.nil?
           = f.simple_fields_for :delivery, f.object.delivery do |inv|
-            = inv.input :zip_code, as: :hidden, input_html:{value: f.object.try(:zip_code)}
+            / = inv.input :zip_code, as: :hidden, input_html:{value: f.object.try(:zip_code)}
             = inv.input :delivery_method, label: t(:delivery_method), :wrapper => :append do
               ul.list-group
                 - current_store.delivery_methods.active.each do |delivery|
@@ -47,7 +48,7 @@
                         = number_with_price @order.delivery_calculate(@order.zip_code, delivery).try(:cost)
                     span.radio
                       label
-                        = inv.radio_button :delivery_method, delivery.id, checked: delivery == inv.object.try(:delivery_method)
+                        = inv.radio_button :delivery_method_id, delivery.id, checked: delivery == inv.object.try(:delivery_method)
                         = delivery.name
       .row
         .col-sm-6

@@ -47,13 +47,13 @@ module Imentore
     belongs_to  :store
     belongs_to  :user
     has_many    :assets,    class_name: "OrderAsset", as: 'assetable'
-    has_one     :invoice,   dependent: :destroy, autosave: false, validate: true
-    has_one     :delivery,  dependent: :destroy, autosave: false, validate: true
+    has_one     :invoice,   dependent: :destroy, validate: true
+    has_one     :delivery,  dependent: :destroy, validate: true
 
     has_many :coupons_orders
     has_many :coupons, :through => :coupons_orders, :source => :coupon
 
-    accepts_nested_attributes_for :invoice
+    accepts_nested_attributes_for :invoice, :delivery
 
     validate :validate_checkout, unless: "validate_step.nil?"
 
@@ -117,15 +117,12 @@ module Imentore
       end
     end
 
-    def after_placed(order)
+    def after_placed
       if self.placed? and not self.sent_email
-        self.sent_email = true
         store = self.store
-        send_email = store.send_emails.find_by_name('order_placed').prepare(order)
-        if send_email.active?
-          Imentore::SendEmailMailer.send_mail_mailer(store.email_contact,
-                                                   self.customer_email, send_email.topic, send_email.frame).deliver
-        end
+        send_email = store.send_emails.find_by_name('order_placed').prepare(self)
+        Imentore::SendEmailMailer.send_mail_mailer(store.email_contact,self.customer_email, send_email.topic, send_email.frame).deliver if send_email.active?
+        self.sent_email = true
       end
     end
 

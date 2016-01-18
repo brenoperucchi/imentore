@@ -263,7 +263,7 @@ module Imentore
         params.require(:order).permit(:customer_name, :customer_email, :billing_checkbox, :shipping_checkbox, :same_billing_address,
                                       shipping_address: [:name, :street, :complement, :city, :country, :state, :zip_code, :phone], 
                                       billing_address: [:name, :street, :complement, :city, :country, :state,:zip_code, :phone],
-                                      delivery: [:delivery_method],
+                                      delivery_attributes: [:id, :delivery_method_id],
                                       invoice_attributes: [:id, :payment_method_id])
       end
 
