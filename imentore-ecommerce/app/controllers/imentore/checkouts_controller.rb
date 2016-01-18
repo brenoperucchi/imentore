@@ -93,11 +93,13 @@ module Imentore
           if @order.place
             before_order_placed if charge? 
           else
+            @order = current_order
             flash[:alert] = @order.errors.full_messages.join(" / ")
             render :complete, layout: 'checkout'
           end
         else
           respond_to do |wants|
+            @order = current_order
             wants.html { render :payment_method, layout: 'checkout' }
           end
         end   
@@ -262,7 +264,7 @@ module Imentore
                                       shipping_address: [:name, :street, :complement, :city, :country, :state, :zip_code, :phone], 
                                       billing_address: [:name, :street, :complement, :city, :country, :state,:zip_code, :phone],
                                       delivery: [:delivery_method],
-                                      invoice: [:payment_method])
+                                      invoice_attributes: [:id, :payment_method_id])
       end
 
       def check_order
@@ -273,7 +275,7 @@ module Imentore
 
       def before_order_placed
         session[:order_id] = nil
-        current_cart.destroy
+        current_cart.try(:destroy)
       end
 
       def current_order

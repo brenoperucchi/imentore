@@ -47,11 +47,13 @@ module Imentore
     belongs_to  :store
     belongs_to  :user
     has_many    :assets,    class_name: "OrderAsset", as: 'assetable'
-    has_one     :invoice,   dependent: :destroy, autosave: true, validate: true
-    has_one     :delivery,  dependent: :destroy, autosave: true, validate: true
+    has_one     :invoice,   dependent: :destroy, autosave: false, validate: true
+    has_one     :delivery,  dependent: :destroy, autosave: false, validate: true
 
     has_many :coupons_orders
     has_many :coupons, :through => :coupons_orders, :source => :coupon
+
+    accepts_nested_attributes_for :invoice
 
     validate :validate_checkout, unless: "validate_step.nil?"
 
@@ -64,7 +66,7 @@ module Imentore
       when :second
         errors.add(:base, "error") unless delivery.try(:valid?)
       when :third
-        errors.add(:base, "error") unless invoice.try(:valid?)
+        errors.add(:base, "error") unless invoice.try(:valid?)# and !self.can_place? and !self.canceled?
       else
         true
       end
@@ -88,6 +90,7 @@ module Imentore
       before_transition :pending => :placed,                do: :valid_stock?
       after_transition [:placed, :finished] => :canceled,   do: :update_stock
       after_transition :pending => :placed,                 do: :update_stock
+      after_transition :pending => :placed,                 do: :after_placed
 
       event :place do
         transition :pending => :placed
@@ -114,12 +117,28 @@ module Imentore
       end
     end
 
+    def after_placed(order)
+      if self.placed? and not self.sent_email
+        self.sent_email = true
+        store = self.store
+        send_email = store.send_emails.find_by_name('order_placed').prepare(order)
+        if send_email.active?
+          Imentore::SendEmailMailer.send_mail_mailer(store.email_contact,
+                                                   self.customer_email, send_email.topic, send_email.frame).deliver
+        end
+      end
+    end
+
     def products_amount
       items.to_a.sum(&:amount).to_f
     end
 
     def delivery_amount
       delivery.try(:amount) ? delivery.try(:amount) : 0
+    end
+
+    def payment_amount
+      invoice_method ? (invoice_method.options['overcharge'] ? invoice_method.options['overcharge'].to_f : 0) : 0
     end
 
     def coupons_amount
@@ -145,7 +164,7 @@ module Imentore
     end
 
     def total_amount
-      delivery_amount + items.sum(&:amount) + coupons_amount
+      delivery_amount + items.sum(&:amount) + coupons_amount + payment_amount
     end
 
     def chargeable?

@@ -2,4 +2,5 @@
 = f.simple_fields_for :options do |fo|
   = fo.input :client_id, label: t(:client_id), input_html: { value: @payment_method.options["client_id"] }
   = fo.input :token, label: t(:token), input_html: { value: @payment_method.options["token"] }
+  = fo.input :overcharge, label: t(:overcharge), input_html: { overcharge: @payment_method.options["overcharge"] }
 = f.input :description, input_html: { rows: 5, class: 'textarea'}

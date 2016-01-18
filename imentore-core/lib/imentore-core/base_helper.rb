@@ -28,10 +28,6 @@ module Imentore
       unless current_store
         render template: 'imentore/site/show'
       end
-      # unless current_store
-      #   render('shared/not_found', status: 404)
-      #   return false
-      # end
     end
 
   end

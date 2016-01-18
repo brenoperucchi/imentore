@@ -1,5 +1,5 @@
 Imentore::BaseController.class_eval do
-  before_action :current_cart
+  # before_action :current_cart
   helper_method :current_cart
 
   def sort_column

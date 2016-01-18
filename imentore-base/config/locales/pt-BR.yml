@@ -98,6 +98,7 @@ pt-BR:
   amount: Total
   coupon: Cupom
   sub_total: Sub Total
+  additional_value: Valor Adicional
   shipping_value: Valor do Envio
   coupon_value: Valor do Cupons
   delivery_method: Método de Envio

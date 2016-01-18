@@ -23,14 +23,18 @@
       = hidden_field_tag :valid_billing, true
       .row
         .col-sm-12
+          - f.object.build_invoice if f.object.invoice.nil?
           = f.simple_fields_for :invoice, f.object.invoice do |invoice|
             = invoice.input :payment_method, label: t(:payment_method), required: false, as: :radio_buttons, wrapper: :append do
               ul.list-group
                 - current_store.payment_methods.active.each do |payment|
                   li.list-group-item
+                    span.pull-right
+                      label
+                        = number_with_price payment.options['overcharge']
                     span.radio
                       label
-                        = invoice.radio_button "payment_method", payment.id, checked: f.object.invoice.try(:payment_method) == payment
+                        = invoice.radio_button "payment_method_id", payment.id, checked: f.object.invoice.try(:payment_method) == payment
                         = payment.name
                     small
                       p[class="list-group-item-text"]

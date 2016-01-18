@@ -31,15 +31,20 @@ module Imentore
     end
 
     def place_third(order, params)
-      order.validate_step = :thrid
+      order.validate_step = :third
       order.same_billing_address = params[:same_billing_address]
       
       order.billing_address = Imentore::Address.new(params[:billing_address]) if params[:billing_address].present? and order.same_billing_address
       order.billing_address = order.shipping_address unless order.same_billing_address
 
       order.build_invoice if order.invoice.nil?
-      order.invoice.attributes = { amount: order.total_amount, payment_method_id: params[:invoice][:payment_method] } if params[:invoice].present?
-      order.save
+      order.attributes = {invoice_attributes: params[:invoice_attributes]} if params[:invoice_attributes].present?
+      order.invoice.amount = order.total_amount
+      if order.placed? or order.canceled?
+        return true
+      else
+        order.save
+      end
     end
 
     # def place_coupons(order, cart, store)
@@ -63,28 +68,6 @@ module Imentore
     #     c.update_attributes(order: order, email: order.customer_email, user_id: order.user_id)
     #   end
     #   return true
-    # end
-
-    # def place_address(order, params={})
-    #   if order.same_billing_address == "1"
-    #     billing_address = Imentore::Address.new(params[:shipping_address]) if params[:shipping_address].present?
-    #     shipping_address = Imentore::Address.new(params[:shipping_address])if params[:shipping_address].present?
-    #   else
-    #     billing_address = Imentore::Address.new(params[:billing_address]) if params[:billing_address].present?
-    #     shipping_address = Imentore::Address.new(params[:shipping_address])if params[:shipping_address].present?
-    #   end
-    #   order.billing_address = billing_address
-    #   order.shipping_address = shipping_address
-    # end
-
-    # def place_order(order, params={})
-    #   store = order.store
-    #   delivery = order.delivery || order.build_delivery
-    #   delivery.attributes = { address: order.shipping_address, delivery_method_id: params[:delivery][:delivery_method] }
-    #   delivery.amount = order.delivery_calculate(order.zip_code, order.delivery_method)
-
-    #   invoice = order.invoice || order.build_invoice
-    #   invoice.attributes = { amount: order.total_amount, payment_method_id: params[:invoice][:payment_method] }
     # end
 
   end
