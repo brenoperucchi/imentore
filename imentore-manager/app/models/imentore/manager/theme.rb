@@ -85,7 +85,7 @@ module Imentore
 
       def theme_templates_store(store)
         theme = Imentore::Theme.create(name: self.name, admin_imentore_theme_id: self.id, store: store, system: true)
-        theme.folders.create(name: "root", store: store)
+        theme.folders.create(name: "assets", store: store)
         self.templates.each do |manager|
           template = theme.templates.new
           template.path = manager.path
@@ -94,6 +94,7 @@ module Imentore
           template.layout_id = manager.layout
           template.default = true if manager.kind == "layout"
           template.body = manager.body
+          template.header_view = ""
           template.admin_imentore_template_id = manager.id
           if template.save
             if template.kind  == "layout"
@@ -107,7 +108,7 @@ module Imentore
           end
         end
         self.assets.each do |admin_asset|
-          asset = theme.assets.create(file: admin_asset.file)
+          asset = theme.folders.first.assets.create(file: admin_asset.file, theme: theme)
         end      
       end
 

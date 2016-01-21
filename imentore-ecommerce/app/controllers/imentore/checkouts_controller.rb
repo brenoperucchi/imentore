@@ -70,7 +70,7 @@ module Imentore
           wants.html { render :shipping_method, layout: 'checkout' }
         end
       elsif request.put?
-        if CheckoutService.place_second(@order, order_params)# and CheckoutService.place_shipping_address(@order, order_params)
+        if CheckoutService.place_second(@order, order_params)
           respond_to do |wants|
             wants.html { redirect_to payment_checkouts_path(current_store, @order) }
           end

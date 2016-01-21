@@ -5,20 +5,20 @@ module LiquidFilter
   include Imentore::Core::Engine.routes.url_helpers
   include ActionDispatch::Routing::Mapper::Base
 
-  def asset_source(name, directories="")
+  def asset_source(name, directories=[])
     begin
       directories = directories.split('/').reject { |c| c.empty? }
-      @folder = @context.registers[:current_store].theme.folders.find_by_name("root")
-      directories.each do |dir|
+      @folder = @context.registers[:current_store].theme.folders.find_by_name(directories.first)
+      directories[1..-1].each do |dir|
         @folder = @folder.children.find_by_name(dir)
       end
-      unless directories.blank?
+      if @folder and not directories.blank?
         @folder.assets.find_by_file(name).try(:file_url) || "/#{directories.join('/')}/#{name}"
       else
         @context.registers[:current_store].theme.assets.find_by_file(name).file_url || "/#{directories.join('/')}/#{name}"
       end
-    rescue StandardError
-      "/#{directories.join('/')}/#{name}"
+    rescue Exception => msg
+      "Error:#{msg} on file:/#{directories.join('/')}/#{name}"
     end
   end
 
