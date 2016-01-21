@@ -2,6 +2,8 @@ module Imentore
   module Manager
     class SessionsController < Devise::SessionsController
       skip_before_action :check_store
+      skip_before_action :check_is_logged
+
       layout "manager"
 
       def after_sign_out_path_for(resource)

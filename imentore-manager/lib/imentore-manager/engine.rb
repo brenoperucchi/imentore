@@ -1,7 +1,7 @@
 module Imentore
   module Manager
     class Engine < Rails::Engine
-      # isolate_namespace Imentore
+      isolate_namespace Imentore
       engine_name "imentore_manager"
 
       config.to_prepare do

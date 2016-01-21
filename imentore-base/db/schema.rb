@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112185833) do
+ActiveRecord::Schema.define(version: 20160121230832) do
 
   create_table "admin_imentore_assets", force: true do |t|
     t.string   "file"
     t.integer  "theme_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "content_type"
   end
 
   create_table "admin_imentore_send_emails", force: true do |t|

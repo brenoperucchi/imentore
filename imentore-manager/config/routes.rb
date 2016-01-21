@@ -1,6 +1,6 @@
 Imentore::Core::Engine.routes.draw do
   namespace :manager do
-    root :to => "dashboard#index"
+    # root :to => "dashboard#index"
     resources :send_emails do
       get 'install_stores', 'update_stores', :on => :member
     end

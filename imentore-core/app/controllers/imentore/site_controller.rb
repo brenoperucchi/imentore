@@ -4,6 +4,13 @@ module Imentore
     skip_before_action :current_cart
     before_action :set_page
 
+    before_action :check_is_logged
+
+    def check_is_logged
+      binding.pry
+      sign_out if user_signed_in?
+    end
+
     def index
       
     end

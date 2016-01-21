@@ -7,7 +7,7 @@ nav.navbar-default.navbar-static-side role="navigation"
           a.dropdown-toggle data-toggle="dropdown" href="#" 
             span.clear
               span.block.m-t-xs
-                strong.font-bold= current_user.try(:userable).try(:name).capitalize
+                strong.font-bold= current_user.try(:userable).try(:name).try(:capitalize)
               / span.text-muted.text-xs.block
               /   | Art Director
                 b.caret

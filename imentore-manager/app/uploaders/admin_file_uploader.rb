@@ -8,6 +8,11 @@ class AdminFileUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   process :set_content_type
+  process :save_content_type_and_size_in_model
+
+  def save_content_type_and_size_in_model
+    model.content_type = file.content_type if file.content_type
+  end
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -73,6 +78,7 @@ class AdminFileUploader < CarrierWave::Uploader::Base
   protected
 
   def is_picture?(picture)
+    return false if set_content_type(picture).include?('svg')
     set_content_type(picture).include?('image')
   end
 
