@@ -1,7 +1,7 @@
 module AssetHelper
   def asset_thumbnail_url(asset)
     content_type = asset.content_type
-    if content_type.include?('image') and not content_type.include?('svg')
+    if not content_type.nil? and content_type.include?('image') and not content_type.include?('svg')
       asset.file.try(:url, :super_thumb)
     else
       icon_for(asset.file_identifier, size: '32px')

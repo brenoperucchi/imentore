@@ -11,7 +11,7 @@ module Imentore
     end
 
     def items
-      @items = @cart.try(:items).try(:map) { |item| CartItemDrop.new(item) }
+      @items = @cart.try(:items).map { |item| CartItemDrop.new(item) }
     end
 
     def amount

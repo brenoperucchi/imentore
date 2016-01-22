@@ -46,7 +46,7 @@ class LiquidView
     assigns["pages"] = store.pages.active.order('id desc').map { |page| Imentore::PageDrop.new(page) }
     assigns["notices"] = store.notices.active.order('id desc').map { |notice| Imentore::NoticeDrop.new(notice) }
     assigns["categories"] = store.categories.roots.order('name').map { |category| Imentore::CategoryDrop.new(category) }
-    assigns["current_cart"] = Imentore::CartDrop.new(store.carts.build)
+    assigns["current_cart"] = Imentore::CartDrop.new(controller.current_cart)
     ## TODO
     # assigns["flash_message"] = Imentore::ObjectDrop.new(category)
 

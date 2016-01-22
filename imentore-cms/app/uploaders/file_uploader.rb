@@ -25,7 +25,7 @@ class FileUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     # folder_name = model.folder ? model.folder.name.to_underscore : "root"
-    if model.folder.is_root?
+    if model.folder and model.folder.is_root?
       "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.theme.store_id}/#{model.theme.id}/#{model.folder.name.to_underscore}/"
     else
       folders = model.folder.ancestors.map{|x| x.name.downcase}.join('/')

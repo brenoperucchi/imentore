@@ -12,7 +12,11 @@ module Imentore
       end
 
       def update
-        update! { manager_themes_path}
+        update! { manager_themes_path }
+      end
+
+      def destroy
+        destroy! { manager_themes_path }
       end
 
       def create
@@ -47,7 +51,7 @@ module Imentore
 
       protected
       def theme_params
-        params.require(:manager_theme).permit(:name)
+        params.require(:manager_theme).permit(:name, :active, :user_for)
       end
 
 

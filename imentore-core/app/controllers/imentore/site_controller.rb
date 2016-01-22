@@ -7,7 +7,6 @@ module Imentore
     before_action :check_is_logged
 
     def check_is_logged
-      binding.pry
       sign_out if user_signed_in?
     end
 
