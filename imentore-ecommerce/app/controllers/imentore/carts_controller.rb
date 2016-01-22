@@ -117,7 +117,7 @@ module Imentore
 
     def set_current_cart
       cart = current_cart
-      unless current_cart
+      if current_cart.id.nil?
         cart = current_store.carts.new
         cart.save(validate: false)
         session[:cart_id] = cart.id

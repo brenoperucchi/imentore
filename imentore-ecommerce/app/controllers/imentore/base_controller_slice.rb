@@ -19,6 +19,6 @@ Imentore::BaseController.class_eval do
 
 
   def current_cart
-    @current_cart = current_store.carts.find_by_id(session[:cart_id])
+    @current_cart = current_store.carts.find_by_id(session[:cart_id]) || current_store.carts.build
   end
 end

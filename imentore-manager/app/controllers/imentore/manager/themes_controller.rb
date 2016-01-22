@@ -16,7 +16,7 @@ module Imentore
       end
 
       def create
-        @theme = Imentore::Manager::Theme.new(params[:manager_theme])
+        @theme = Imentore::Manager::Theme.new(theme_params)
         if @theme.save
           redirect_to manager_themes_path
         else 
@@ -44,6 +44,12 @@ module Imentore
         flash[:success] = "Successfully created..."
         redirect_to manager_themes_path
       end
+
+      protected
+      def theme_params
+        params.require(:manager_theme).permit(:name)
+      end
+
 
     end
   end

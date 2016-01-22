@@ -39,16 +39,17 @@ class LiquidView
 
     #Assigns Permanent
     store = @view.current_store
+    controller = @view.controller
+
     assigns["user_signed?"] = @view.user_signed_in?
     assigns["store"] = @store = Imentore::StoreDrop.new(store)
     assigns["pages"] = store.pages.active.order('id desc').map { |page| Imentore::PageDrop.new(page) }
     assigns["notices"] = store.notices.active.order('id desc').map { |notice| Imentore::NoticeDrop.new(notice) }
     assigns["categories"] = store.categories.roots.order('name').map { |category| Imentore::CategoryDrop.new(category) }
-
+    assigns["current_cart"] = Imentore::CartDrop.new(store.carts.build)
     ## TODO
     # assigns["flash_message"] = Imentore::ObjectDrop.new(category)
 
-    controller = @view.controller
     filters = if controller.respond_to?(:liquid_filters, true)
                 controller.send(:liquid_filters)
               elsif controller.respond_to?(:master_helper_module)
@@ -65,7 +66,7 @@ class LiquidView
     t.class.register_filter(LiquidFilterCart)
     t.class.register_filter(LiquidFilterPaginate)
     t.class.register_filter(LiquidFilterHtml)
-    t.render(assigns.merge("current_cart" => Imentore::CartDrop.new(controller.current_cart)), :filters => filters,
+    t.render(assigns, :filters => filters,
       :registers => {current_store: @view.controller.current_store, :action_view => @view, :controller => @view.controller})
   end
 
