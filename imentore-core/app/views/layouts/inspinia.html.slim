@@ -21,3 +21,8 @@ html
     = javascript_include_tag "inspinia/#{params[:controller].gsub("imentore/admin/", "")}" if ::Rails.application.assets.find_asset("inspinia/#{params[:controller].gsub("imentore/admin/", "")}.js")
     .javascript
       = yield :footer
+      javascript:
+        $(document).ready(function(){
+          (function(){ var widget_id = 'oDbWsTk2I6';
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();
+        })

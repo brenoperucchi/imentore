@@ -116,10 +116,12 @@ body#home{style='padding-top:75px;'}
             a.twitter href="http://twitter.com/imentore"
   javascript:
     $(document).ready(function(){
-      var uvOptions = {};
-      (function() {
-        var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-        uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/VI9HreXZC5OfCYBXzI4hdw.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-      })();
+      (function(){ var widget_id = 'A71Demzdwx';
+      var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();
+    //   var uvOptions = {};
+    //   (function() {
+    //     var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    //     uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/VI9HreXZC5OfCYBXzI4hdw.js';
+    //     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+    //   })();
     })
