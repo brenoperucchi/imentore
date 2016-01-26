@@ -22,7 +22,7 @@ module Imentore
         self.active.each do |admin_theme|
           admin_theme.install_store(store)
         end
-        store.themes.last.update_attribute(:active, true)
+        store.themes.first.update_attribute(:active, true)
       end
 
       def install_stores
