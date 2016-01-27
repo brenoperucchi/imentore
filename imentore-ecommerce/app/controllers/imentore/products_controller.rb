@@ -22,23 +22,31 @@ module Imentore
     def handle
       product = current_store.products.active.find_by_handle(params[:handle])
       @product = ProductDrop.new(product)
-      @variants = product.variants.map { |variant| ProductVariantDrop.new(variant) }
-      @images = product.all_images.map { |image| ImageDrop.new(image)}
-      @content_for_footer = render_to_controller("imentore/products/show", :header_view)
-      # @content_for_footer = render_to_string(template:(render_template_controller("imentore/products/show", :header_view)), layout:false)
       respond_to do |format|
-        format.html { render :show }
+        if not product.nil? and not product.try(:variants).nil?
+          @variants = product.variants.map { |variant| ProductVariantDrop.new(variant) }
+          @images = product.all_images.map { |image| ImageDrop.new(image)}
+          @content_for_footer = render_to_controller("imentore/products/show", :header_view)
+          format.html { render :show }
+        else
+          # @content_for_footer = render_to_string(template:(render_template_controller("imentore/products/show", :header_view)), layout:false)
+          format.html { render template: "_error_page" }
+        end
       end
     end
 
     def show
       product = current_store.products.active.find_by_handle(params[:handle])
-      @product = ProductDrop.new(Imentore::Product.find(params[:id]))
-      @variants = product.variants.map { |variant| ProductVariantDrop.new(variant) }
-      @images = product.all_images.map { |image| ImageDrop.new(image)}
+      @product = ProductDrop.new(Imentore::Product.find_by_id(params[:id]))
       respond_to do |format|
-        format.html { }
-        format.js 
+        if not product.nil? and not product.try(:variants).nil?
+          @variants = @product.variants.map { |variant| ProductVariantDrop.new(variant) }
+          @images = @product.all_images.map { |image| ImageDrop.new(image)}
+          format.html { }
+          format.js 
+        else
+          format.html { render template: "_error_page" }
+        end
       end
     end
 

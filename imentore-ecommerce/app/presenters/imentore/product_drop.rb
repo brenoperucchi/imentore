@@ -43,6 +43,7 @@ module Imentore
     end
 
     def variants
+      return nil if @product.try(:variants).nil?
       @product.variants.collect {|variant| ProductVariantDrop.new(variant)}
     end
 

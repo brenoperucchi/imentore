@@ -8,12 +8,15 @@ module Imentore
       #   aux ? aux : nil
       # end
       @category = current_store.categories.find_by_handle(categories.last)
-      @products_model = @category.products.active.order(sort_column)
-      @products = @category ? @products_model.map { |product| Imentore::ProductDrop.new(product) } : []
-      @ancestors = @category ? (@category.ancestors.map { |category| Imentore::CategoryDrop.new(category) } ) : []
-      @childrens = @category ? (@category.children.map { |category| Imentore::CategoryDrop.new(category) } ) : []
-      @category = Imentore::CategoryDrop.new(@category)
-    end
-    
+      if @category.try(:products)
+        @products_model = @category.products.active.order(sort_column)
+        @products = @category ? @products_model.map { |product| Imentore::ProductDrop.new(product) } : []
+        @ancestors = @category ? (@category.ancestors.map { |category| Imentore::CategoryDrop.new(category) } ) : []
+        @childrens = @category ? (@category.children.map { |category| Imentore::CategoryDrop.new(category) } ) : []
+        @category = Imentore::CategoryDrop.new(@category)        
+      else
+        render template: "_error_page" 
+      end
+    end 
   end
 end
