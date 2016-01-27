@@ -35,7 +35,7 @@ gem 'rb-readline', group: :development
 gem 'quiet_assets', group: :development
 gem 'sqlite3', group: :test
 
-gem "delocalize"
+gem "delocalize", "1.0.0"
 gem 'execjs'
 gem 'therubyracer'
 
@@ -87,7 +87,8 @@ gem 'imentore-manager',   path: '../imentore-manager'
 # Deploy with Capistrano
 group :development do
   gem 'pry', "0.10.3"
-  gem 'pry-nav', "0.2.4"
+  gem 'pry-remote', "0.1.7"
+  gem 'pry-byebug', "3.3.0"
   gem 'pry-meta'
   gem 'pry-stack_explorer', "0.4.9.2"
   gem 'capistrano', '3.2.1'
@@ -97,12 +98,13 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
+  # gem 'test-unit'
 end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-gem 'test-unit'
 group :test do
+  gem 'test-unit'
   # Pretty printed test output
   gem 'turn', '~> 0.8.3', :require => false
   gem 'fabrication', '2.11.3'

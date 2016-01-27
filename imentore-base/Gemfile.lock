@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: git://github.com/thoughtbot/paperclip.git
-  revision: bd016009dbf74fc8f999e78a68c9e5869eb0dd6a
+  revision: 37589f9b0c869c8df5be1ee4d83e14fb353a7dff
   specs:
     paperclip (4.3.1)
       activemodel (>= 3.2.0)
@@ -257,9 +257,7 @@ GEM
       pry
       pry-byebug
       pry-remote
-    pry-nav (0.2.4)
-      pry (>= 0.9.10, < 0.11.0)
-    pry-remote (0.1.8)
+    pry-remote (0.1.7)
       pry (~> 0.9)
       slop (~> 3.0)
     pry-stack_explorer (0.4.9.2)
@@ -349,7 +347,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
-    tinymce-rails (4.3.2)
+    tinymce-rails (4.3.3)
       railties (>= 3.1.1)
     turbolinks (2.5.3)
       coffee-rails
@@ -392,7 +390,7 @@ DEPENDENCIES
   coffee-script-source
   correios-frete (= 1.6.1)
   country_select (= 0.0.1)
-  delocalize
+  delocalize (= 1.0.0)
   devise (= 3.5.1)
   devise-encryptable
   execjs
@@ -421,8 +419,9 @@ DEPENDENCIES
   paranoia (~> 2.0)
   personhood!
   pry (= 0.10.3)
+  pry-byebug (= 3.3.0)
   pry-meta
-  pry-nav (= 0.2.4)
+  pry-remote (= 0.1.7)
   pry-stack_explorer (= 0.4.9.2)
   quiet_assets
   rails (= 4.0.13)

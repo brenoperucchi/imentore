@@ -1,11 +1,10 @@
 - content_for :header do
-  = stylesheet_link_tag    "cart"
   = javascript_include_tag "cart"
   = csrf_meta_tags
 
 - content_for :javascript do
   = javascript_include_tag "jquery_ujs"
-  = javascript_include_tag current_store.theme.assets.find_by_file('cart.js').try(:file_url)
+  
   javascript:
     $(document).ready(function(){
       function calculate_items(){
@@ -46,7 +45,6 @@
       if ($('select#delivery_method').find('option:selected').val() != "") {
         var zip_code = $('input#zip_code').val()
         var method = $('select#delivery_method').find('option:selected').val()
-        delivery_calculate(zip_code,method)
       }
       $('a#calculate_zip').click(function(e){
         var zip_code = $('input#zip_code').last().val()

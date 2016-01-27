@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121230832) do
+ActiveRecord::Schema.define(version: 20160127113750) do
 
   create_table "admin_imentore_assets", force: true do |t|
     t.string   "file"
@@ -91,8 +91,10 @@ ActiveRecord::Schema.define(version: 20160121230832) do
   add_index "imentore_assets", ["folder_id"], name: "index_imentore_assets_on_folder_id", using: :btree
 
   create_table "imentore_carts", force: true do |t|
-    t.text    "items"
-    t.integer "store_id"
+    t.text     "items"
+    t.integer  "store_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imentore_categories", force: true do |t|

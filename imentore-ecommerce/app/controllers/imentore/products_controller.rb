@@ -27,10 +27,10 @@ module Imentore
           @variants = product.variants.map { |variant| ProductVariantDrop.new(variant) }
           @images = product.all_images.map { |image| ImageDrop.new(image)}
           @content_for_footer = render_to_controller("imentore/products/show", :header_view)
+          # @content_for_footer = render_to_string(template:(render_template_controller("imentore/products/show", :header_view)), layout:false)
           format.html { render :show }
         else
-          # @content_for_footer = render_to_string(template:(render_template_controller("imentore/products/show", :header_view)), layout:false)
-          format.html { render template: "_error_page" }
+          format.html { render template: "_error_page", status: 404 }
         end
       end
     end
@@ -45,7 +45,7 @@ module Imentore
           format.html { }
           format.js 
         else
-          format.html { render template: "_error_page" }
+          format.html { render template: "_error_page", status: 404 }
         end
       end
     end

@@ -15,7 +15,7 @@ module Imentore
         @childrens = @category ? (@category.children.map { |category| Imentore::CategoryDrop.new(category) } ) : []
         @category = Imentore::CategoryDrop.new(@category)        
       else
-        render template: "_error_page" 
+        render template: "_error_page", status: 404
       end
     end 
   end
