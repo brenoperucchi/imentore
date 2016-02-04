@@ -9,7 +9,7 @@ class CreateTemplates < ActiveRecord::Migration
       t.string  :format, default: 'text/html'
       t.string  :locale, default: 'en'
       t.string  :handler, default: 'liquid'
-      t.references :theme
+      t.references :theme, :layout
       t.timestamps
     end
   end

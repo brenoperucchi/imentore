@@ -1,0 +1,370 @@
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+SQLite3::SQLException: cannot start a transaction within a transaction: begin transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+SQLite3::SQLException: cannot start a transaction within a transaction: begin transaction
+  [1m[35m (0.1ms)[0m  begin transaction
+SQLite3::SQLException: cannot start a transaction within a transaction: begin transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+SQLite3::SQLException: cannot start a transaction within a transaction: begin transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+SQLite3::SQLException: cannot start a transaction within a transaction: begin transaction
+  [1m[35m (0.1ms)[0m  begin transaction
+SQLite3::SQLException: cannot start a transaction within a transaction: begin transaction
+  [1m[36m (1.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.6ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateStores (20120419000538)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_stores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "brand" varchar(255), "url" varchar(255), "irs_id" varchar(255), "active" boolean DEFAULT 'f', "settings" text, "national_id" varchar(255), "date_initial_business" varchar(255), "where_meet_us" varchar(255), "email" varchar(255), "store_type" varchar(255), "plan_id" integer, "user_agent_id" integer, "state" varchar(255) DEFAULT 'pending', "disabled_at" datetime, "actived_at" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000538"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateEmployees (20120419000539)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_employees" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "brand" varchar(255), "irs_id" varchar(255), "birthdate" date, "national_id" varchar(255), "gender" varchar(255), "person_type" varchar(255), "store_id" integer, "department" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000539"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to AlterStoresAddConfig (20120419000540)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "imentore_stores" ADD "config" text[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000540"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateDomains (20120419000541)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "imentore_domains" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "store_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000541"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddHostingToDomains (20120419000542)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "imentore_domains" ADD "hosting" boolean DEFAULT 'false'[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000542"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProducts (20120419000544)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "imentore_products" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "permalink" varchar(255), "store_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000544"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOptionTypes (20120419000545)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "imentore_option_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "handle" varchar(255), "product_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000545"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProductVariants (20120419000546)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "imentore_product_variants" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "price" decimal, "quantity" integer, "sku" varchar(255), "weight" decimal, "height" decimal, "width" decimal, "depth" decimal, "deliverable" boolean, "product_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000546"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOptionValues (20120419000547)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_option_values" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "option_type_id" integer, "product_variant_id" integer, "value" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000547"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCarts (20120419000548)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "imentore_carts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "items" text) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000548"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOrders (20120419000549)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "imentore_orders" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "shipping_address" text, "billing_address" text, "status" varchar(255), "customer_email" varchar(255), "items" text, "store_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000549"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateInvoices (20120419000550)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "imentore_invoices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "order_id" integer, "provider_id" varchar(255), "payment_method_id" integer, "status" varchar(255), "amount" decimal, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000550"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to AlterDomainsAddEmails (20120419000551)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "imentore_domains" ADD "emails" text[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000551"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePaymentMethods (20120419000552)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "imentore_payment_methods" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "handle" varchar(255), "options" text, "store_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000552"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateDeliveryMethods (20120419000553)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_delivery_methods" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "store_id" integer, "handle" varchar(255), "options" text) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000553"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateDeliveries (20120419000554)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "imentore_deliveries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "order_id" integer, "address" text, "tracking_code" varchar(255), "status" varchar(255), "delivery_method_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000554"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAddresses (20120419000555)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_addresses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "street" varchar(255), "complement" varchar(255), "city" varchar(255), "state" varchar(255), "country" varchar(255), "zip_code" varchar(255), "phone" varchar(255), "addressable_id" integer, "addressable_type" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000555"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateUsers (20120419000556)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "confirmation_token" varchar(255), "confirmed_at" datetime, "confirmation_sent_at" datetime, "store_id" integer, "userable_id" integer, "userable_type" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000556"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateThemes (20120419000557)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_themes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "store_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000557"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateTemplates (20120419000558)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_templates" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "path" varchar(255), "body" text, "partial" boolean DEFAULT 'f', "layout" varchar(255), "format" varchar(255) DEFAULT 'text/html', "locale" varchar(255) DEFAULT 'en', "handler" varchar(255) DEFAULT 'liquid', "theme_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000558"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to AlterThemesAddDefault (20120419000559)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "imentore_themes" ADD "default" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000559"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAssets (20120419000560)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_assets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "file" varchar(255), "theme_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419000560"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mImentore::Store Exists (0.1ms)[0m  SELECT 1 AS one FROM "imentore_stores" WHERE "imentore_stores"."url" = 'myshop' LIMIT 1
+  [1m[36mImentore::User Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM "imentore_users" WHERE (LOWER("imentore_users"."email") = LOWER('owner@myshop.imentore.dev') AND "imentore_users"."email" = 'owner@myshop.imentore.dev' AND "imentore_users"."store_id" IS NULL) LIMIT 1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "imentore_stores" ("brand", "config", "created_at", "updated_at", "url") VALUES (?, ?, ?, ?, ?)  [["brand", "MyShop"], ["config", "--- !ruby/object:Imentore::Settings {}\n"], ["created_at", Sat, 30 Jan 2016 15:17:03 UTC +00:00], ["updated_at", Sat, 30 Jan 2016 15:17:03 UTC +00:00], ["url", "myshop"]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "imentore_employees" ("department", "name", "person_type", "store_id") VALUES (?, ?, ?, ?)[0m  [["department", "owner"], ["name", "MyShop Owner"], ["person_type", "person"], ["store_id", 1]]
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "imentore_users" ("created_at", "email", "encrypted_password", "updated_at", "userable_id", "userable_type") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Sat, 30 Jan 2016 15:17:03 UTC +00:00], ["email", "owner@myshop.imentore.dev"], ["encrypted_password", "$2a$04$xOi2EWlAOpQi/tOxYhWnKelm6x5xB3hcoMssjXi1yxbMNOTYsOQf."], ["updated_at", Sat, 30 Jan 2016 15:17:03 UTC +00:00], ["userable_id", 1], ["userable_type", "Imentore::Employee"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "imentore_themes" ("default", "name", "store_id") VALUES (?, ?, ?)[0m  [["default", true], ["name", "green"], ["store_id", 1]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mImentore::Store Exists (0.1ms)[0m  SELECT 1 AS one FROM "imentore_stores" WHERE "imentore_stores"."url" = 'myshop' LIMIT 1
+  [1m[36mImentore::User Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "imentore_users" WHERE (LOWER("imentore_users"."email") = LOWER('owner@myshop.imentore.dev') AND "imentore_users"."email" = 'owner@myshop.imentore.dev' AND "imentore_users"."store_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mImentore::Store Exists (0.1ms)[0m  SELECT 1 AS one FROM "imentore_stores" WHERE "imentore_stores"."url" = 'myshop' LIMIT 1
+  [1m[36mImentore::User Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "imentore_users" WHERE (LOWER("imentore_users"."email") = LOWER('owner@myshop.imentore.dev') AND "imentore_users"."email" = 'owner@myshop.imentore.dev' AND "imentore_users"."store_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+SQLite3::SQLException: cannot start a transaction within a transaction: begin transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (1.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateStores (20090228122247)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_stores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "brand" varchar(255), "url" varchar(255), "irs_id" varchar(255), "active" boolean DEFAULT 'f', "settings" text, "national_id" varchar(255), "date_initial_business" varchar(255), "where_meet_us" varchar(255), "email" varchar(255), "store_type" varchar(255), "plan_id" integer, "user_agent_id" integer, "state" varchar(255) DEFAULT 'pending', "disabled_at" datetime, "actived_at" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20090228122247"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateEmployees (20120119185811)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "imentore_employees" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "brand" varchar(255), "irs_id" varchar(255), "birthdate" date, "national_id" varchar(255), "gender" varchar(255), "person_type" varchar(255), "store_id" integer, "department" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120119185811"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to AlterStoresAddConfig (20120209184618)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "imentore_stores" ADD "config" text[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120209184618"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateDomains (20120302231906)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_domains" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "store_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120302231906"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddHostingToDomains (20120309222106)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddHostingToDomains (20120309222106)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "imentore_domains" ADD "hosting" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120309222106"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+Migrating to AddPleskIdToDomainsTable (20120319193757)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "imentore_domains" ADD "plesk_id" integer[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120319193757"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProducts (20120320142927)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_products" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "permalink" varchar(255), "store_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120320142927"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOptionTypes (20120320145502)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_option_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "handle" varchar(255), "product_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120320145502"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProductVariants (20120321120103)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_product_variants" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "price" decimal, "quantity" integer, "sku" varchar(255), "weight" decimal, "height" decimal, "width" decimal, "depth" decimal, "deliverable" boolean, "product_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120321120103"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOptionValues (20120321121424)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_option_values" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "option_type_id" integer, "product_variant_id" integer, "value" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120321121424"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCarts (20120328150616)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_carts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "items" text) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120328150616"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOrders (20120403115713)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_orders" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "shipping_address" text, "billing_address" text, "status" varchar(255), "customer_email" varchar(255), "items" text, "store_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120403115713"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateInvoices (20120411133231)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_invoices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "order_id" integer, "provider_id" varchar(255), "payment_method_id" integer, "status" varchar(255), "amount" decimal, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120411133231"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to AlterDomainsAddEmails (20120412220743)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "imentore_domains" ADD "emails" text[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120412220743"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePaymentMethods (20120413145541)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_payment_methods" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "handle" varchar(255), "options" text, "store_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120413145541"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateDeliveryMethods (20120416145709)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "imentore_delivery_methods" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "store_id" integer, "handle" varchar(255), "options" text) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120416145709"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateDeliveries (20120416151617)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_deliveries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "order_id" integer, "address" text, "tracking_code" varchar(255), "status" varchar(255), "delivery_method_id" integer) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120416151617"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateImages (20120419005729)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "imentore_images" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "picture" varchar(255), "imageable_id" integer, "imageable_type" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120419005729"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to AlterPaymentMethods (20120420132521)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "imentore_payment_methods" ADD "active" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120420132521"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to AlterDeliveryMethods (20120423143625)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "imentore_delivery_methods" ADD "active" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120423143625"]]
+  [1m[36m (0.3ms)[0m  [1mcommit transaction[0m
+Migrating to AlterDeliveryMethodsAddCalculator (20120424115236)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "imentore_delivery_methods" ADD "calculator" varchar(255)[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20120424115236"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m

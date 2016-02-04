@@ -1,6 +1,6 @@
 module Imentore
   class CheckoutsController < BaseController
-    include PagamentoDigital::Helper
+    # include PagamentoDigital::Helper
 
     before_action :authenticate_to_buy!, only: [:confirm]
     before_action :check_order, only: [:address, :shipping, :payment]

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content='{{csrf_token}}'>
+
+    <!-- Fav and touch icons -->
+    <!--     
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="assets/ico/favicon.png"> 
+    -->
+    <title>{{ store.name }}</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{{ 'bootstrap.css' | asset_source : '/assets' }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ 'style.css' | asset_source : '/assets' }}" rel="stylesheet">
+    <!-- NotifyBay for this template -->
+    <link href="{{ 'jquery.notifyBar.css' | asset_source : '/assets'}}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- include pace script for automatic web page progress bar  -->
+    <script src="{{ 'jquery-1.10.1.min.js' | asset_source : '/assets/'}}"></script>
+    <!-- <script src="assets/bootstrap/js/bootstrap.min.js"></script> -->
+    <script src="{{ 'bootstrap.min.js' | asset_source : '/assets/'}}"></script>
+
+    <script>
+        paceOptions = {
+            elements: true
+        };
+    </script>
+    <script src="{{ 'pace.min.js' | asset_source :'/assets'}}"></script>
+    {{ content_for_header }}
+    {{ 'jquery_ujs.js' | imentore_asset_url }}
+
+</head>
+
+<body>
+
+<!-- Modal Login start -->
+<div class="modal signUpContent fade" id="ModalLogin" tabindex="-1" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                <h3 class="modal-title-site text-center"> Login to TSHOP </h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group login-username">
+                    <div>
+                        <input name="log" id="login-user" class="form-control input" size="20"
+                               placeholder="Enter Username" type="text">
+                    </div>
+                </div>
+                <div class="form-group login-password">
+                    <div>
+                        <input name="Password" id="login-password" class="form-control input" size="20"
+                               placeholder="Password" type="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <div class="checkbox login-remember">
+                            <label>
+                                <input name="rememberme" value="forever" checked="checked" type="checkbox">
+                                Remember Me </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <input name="submit" class="btn  btn-block btn-lg btn-primary" value="LOGIN" type="submit">
+                    </div>
+                </div>
+                <!--userForm-->
+
+            </div>
+            <div class="modal-footer">
+                <p class="text-center"> Not here before? <a data-toggle="modal" data-dismiss="modal"
+                                                            href="#ModalSignup"> Sign Up. </a> <br>
+                    <a href="forgot-password.html"> Lost your password? </a></p>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+
+    </div>
+    <!-- /.modal-dialog -->
+
+</div>
+<!-- /.Modal Login -->
+
+<!-- Modal Signup start -->
+<div class="modal signUpContent fade" id="ModalSignup" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                <h3 class="modal-title-site text-center"> REGISTER </h3>
+            </div>
+            <div class="modal-body">
+                <div class="control-group"><a class="fb_button btn  btn-block btn-lg " href="#"> SIGNUP WITH
+                    FACEBOOK </a></div>
+                <h5 style="padding:10px 0 10px 0;" class="text-center"> OR </h5>
+
+                <div class="form-group reg-username">
+                    <div>
+                        <input name="login" class="form-control input" size="20" placeholder="Enter Username"
+                               type="text">
+                    </div>
+                </div>
+                <div class="form-group reg-email">
+                    <div>
+                        <input name="reg" class="form-control input" size="20" placeholder="Enter Email" type="text">
+                    </div>
+                </div>
+                <div class="form-group reg-password">
+                    <div>
+                        <input name="password" class="form-control input" size="20" placeholder="Password"
+                               type="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <div class="checkbox login-remember">
+                            <label>
+                                <input name="rememberme" id="rememberme" value="forever" checked="checked"
+                                       type="checkbox">
+                                Remember Me </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <input name="submit" class="btn  btn-block btn-lg btn-primary" value="REGISTER" type="submit">
+                    </div>
+                </div>
+                <!--userForm-->
+
+            </div>
+            <div class="modal-footer">
+                <p class="text-center"> Already member? <a data-toggle="modal" data-dismiss="modal" href="#ModalLogin">
+                    Sign in </a></p>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+
+    </div>
+    <!-- /.modal-dialog -->
+
+</div>
+<!-- /.ModalSignup End -->
+
+<!-- Fixed navbar start -->
+<div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
+    <div class="navbar-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
+                    <div class="pull-left ">
+                        <ul class="userMenu ">
+                            <li><a href="#"> <span class="hidden-xs">Ajuda?</span><i
+                                    class="glyphicon glyphicon-info-sign hide visible-xs "></i> </a></li>
+                            <li class="phone-number"><a href="callto:(47) 9278-4565"> <span> <i
+                                    class="glyphicon glyphicon-phone-alt "></i></span> <span class="hidden-xs"
+                                                                                             style="margin-left:5px">(47) 9278-4565 </span>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
+                    <div class="pull-right">
+                        <ul class="userMenu">
+<!--                             <li><a href="account-1.html"><span class="hidden-xs"> My Account</span> <i
+                                    class="glyphicon glyphicon-user hide visible-xs "></i></a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">Sign In</span>
+                                <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a></li>
+                            <li class="hidden-xs"><a href="#" data-toggle="modal" data-target="#ModalSignup"> Create
+                                Account </a></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.navbar-top-->
+
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
+                    class="sr-only"> Toggle navigation </span> <span class="icon-bar"> </span> <span
+                    class="icon-bar"> </span> <span class="icon-bar"> </span></button>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart"><i
+                    class="fa fa-shopping-cart colorWhite"> </i> <span
+                    class="cartRespons colorWhite"> {{ current_cart.amount }} </span></button>
+            <a class="navbar-brand " href="index.html"> {{ store.name }} </a>
+            <!-- <a class="navbar-brand " href="index.html"> <img src="{{ 'logo.png' | asset_source '}}" alt="TSHOP"> </a> -->
+
+            <!-- this part for mobile -->
+            <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
+                <div class="input-group">
+                    <button class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
+                </div>
+                <!-- /input-group -->
+
+            </div>
+        </div>
+
+        <!-- this part is duplicate from cartMenu  keep it for mobile -->
+        <div class="navbar-cart  collapse">
+            <div class="cartMenu  col-lg-4 col-xs-12 col-md-4 ">
+                <div class="w100 miniCartTable scroll-pane">
+                    <table>
+                        <tbody>
+                        {% assign counter = 0 %}
+                        {% for item in current_cart.items %}
+                        <tr class="miniCartProduct">
+                            <td style="width:20%" class="miniCartProductThumb">
+                                <div><a href="product-details.html"> 
+                                        <img src="{{ item.product | product_image_url :'original' }}" alt="{{item.name}}">
+                                    </a>
+                                </div>
+                            </td>
+                            <td style="width:40%">
+                                <div class="miniCartDescription">
+                                    <h4><a href="product-details.html"> {{item.product.name}}</a></h4>
+                                    <span class="size"> {{item.variant.name}} </span>
+
+                                    <div class="price"><span> {{item.product.price}} </span></div>
+                                </div>
+                            </td>
+                            <td style="width:10%" class="miniCartQuantity"><a> X {{item.quantity}} </a></td>
+                            <td style="width:15%" class="miniCartSubtotal"><span> {{item.value}} </span></td>
+                            <td style="width:5%" class="delete">
+                                {{ item | cart_remove_item :'fa fa-trash-o'}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!--/.miniCartTable-->
+
+                <div class="miniCartFooter  miniCartFooterInMobile text-right">
+                    <h3 class="text-right subtotal"> Subtotal: {{current_cart.amount}}</h3>
+                    <a class="btn btn-sm btn-danger" href="/cart"> 
+                        <i class="fa fa-shopping-cart"> </i> Carrinho
+                    </a>
+                    <!-- <a href="checkout-0.html"class="btn btn-sm btn-primary"> CHECKOUT </a> -->
+                </div>
+                <!--/.miniCartFooter-->
+
+            </div>
+            <!--/.cartMenu-->
+        </div>
+        <!--/.navbar-cart-->
+
+
+
+
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/"> Home </a></li>
+                {% for category in categories %}
+                    {% if category.has_children? %}
+                        <li class="dropdown megamenu-fullwidth">
+                        <a href="/"> {{ category.name }} </a>
+                            <ul class="dropdown-menu">
+                                <li class="megamenu-content ">
+                                    <ul class="col-lg-3  col-sm-3 col-md-3 unstyled noMarginLeft newCollectionUl">
+                                        <li class="no-border">
+                                            <p><strong> {{ category.name }} </strong></p>
+                                        </li>
+                                        {% for children in category.children %}
+                                            <li><a href="{{ children.url }}"> {{ children.name }} </a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <!-- <li><a href="{{ category.url }}" target="_blank"> {{ category.name }}</a></li> -->
+                        <li><a href="#" target="_blank"> {{ category.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+
+            <!--- this part will be hidden for mobile version -->
+            <div class="nav navbar-nav navbar-right hidden-xs">
+                <div id='mainCart' class="dropdown cartMenu ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+                        <i class="fa fa-shopping-cart"> </i> 
+                        <span class="cartRespons"> {{current_cart.amount}} </span> 
+                        <b class="caret"> </b> 
+                    </a>
+                    <div class="dropdown-menu col-lg-4 col-xs-12 col-md-4 ">
+                        <div class="w100 miniCartTable scroll-pane">
+                            <table>
+                                <tbody>
+                                {% for item in current_cart.items %}
+                                <tr class="miniCartProduct">
+                                    <td style="width:20%" class="miniCartProductThumb">
+                                        <div><a href="product-details.html"> 
+                                            <img src="{{ item.product | product_image_url :'original' }}" alt="{{item.name}}">
+                                        </a></div>
+                                    </td>
+                                    <td style="width:40%">
+                                        <div class="miniCartDescription">
+                                            <h4><a href="product-details.html"> {{item.product.name}} </a></h4>
+                                            <span class="size">{{item.variant.options_name}}</span>
+
+                                            <div class="price"><span> {{item.value}} </span></div>
+                                        </div>
+                                    </td>
+                                    <td style="width:10%" class="miniCartQuantity"><a> X {{item.quantity}}</a></td>
+                                    <td style="width:15%" class="miniCartSubtotal"><span> {{itertrm.amount}}</span></td>
+                                    <td style="width:5%" class="delete"><a> {{ item | cart_remove_item :'fa fa-trash-o'}} </a></td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--/.miniCartTable-->
+
+                        <div class="miniCartFooter text-right">
+                            <h3 class="text-right subtotal"> Subtotal: {{current_cart.amount}} </h3>
+                            <a class="btn btn-sm btn-danger" href="/cart"> <i class="fa fa-shopping-cart"> </i>     Carrinho
+                            </a>
+                            <!-- <a class="btn btn-sm btn-primary"> Carrinho </a> -->
+                        </div>
+                        <!--/.miniCartFooter-->
+
+                    </div>
+                    <!--/.dropdown-menu-->
+                </div>
+                <!--/.cartMenu-->
+
+                <div class="search-box">
+                    <div class="input-group">
+                        <button class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
+                    </div>
+                    <!-- /input-group -->
+
+                </div>
+                <!--/.search-box -->
+            </div>
+            <!--/.navbar-nav hidden-xs-->
+        </div>
+        <!--/.nav-collapse -->
+
+    </div>
+    <!--/.container -->
+
+    <div class="search-full text-right"><a class="pull-right search-close"> <i class=" fa fa-times-circle"> </i> </a>
+
+        <div class="searchInputBox pull-right">
+            <input type="search" data-searchurl="search?=" name="q" placeholder="start typing and hit enter to search"
+                   class="search-input">
+            <button class="btn-nobg search-btn" type="submit"><i class="fa fa-search"> </i></button>
+        </div>
+    </div>
+    <!--/.search-full-->
+
+</div>
+<!-- /.Fixed navbar  -->
+{{ content_for_layout }}
+
+
+<!-- Product Details Modal  -->
+<!-- Modal -->
+<div class="modal fade" id="productModalAjax" tabindex="-1" role="dialog"
+     aria-labelledby="productSetailsModalAjaxLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- End Modal -->
+
+<footer>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+<!--                 <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
+                    <h3> Support </h3>
+                    <ul>
+                        <li class="supportLi">
+                            <p> Lorem ipsum dolor sit amet, consectetur </p>
+                            <h4><a class="inline" href="callto:+12025550151"> <strong> <i class="fa fa-phone"> </i> +1-202-555-0151 </strong> </a></h4>
+                            <h4><a class="inline" href="mailto:help@yourweb.com"> <i class="fa fa-envelope-o"> </i>
+                                help@yourweb.com </a></h4>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> Shop </h3>
+                    <ul>
+                        <li><a href="#">
+                            Men's
+                        </a></li>
+                        <li><a href="#">
+                            Women's</a></li>
+                        <li><a href="#">
+                            Kids'
+                        </a></li>
+                        <li><a href="#">Shoes
+                        </a></li>
+                        <li><a href="#">
+                            Gift Cards
+                        </a></li>
+
+                    </ul>
+
+                </div>
+
+                <div style="clear:both" class="hide visible-xs"></div>
+
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> Information </h3>
+                    <ul class="list-unstyled footer-nav">
+                        <li><a href="#">Questions?
+                        </a></li>
+
+                        <li><a href="#"> Order Status
+                        </a></li>
+                        <li><a href="#"> Sizing Charts
+                        </a></li>
+                        <li><a href="#"> Return Policy </a></li>
+                        <li><a href="#">
+                            Contact Us
+                        </a></li>
+
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> My Account </h3>
+                    <ul>
+                        <li><a href="account.html"> My Account </a></li>
+                        <li><a href="my-address.html"> My Address </a></li>
+                        <li><a href="wishlist.html"> Wish List </a></li>
+                        <li><a href="order-list.html"> Order list </a></li>
+                        <li><a href="order-status.html"> Order Status </a></li>
+                    </ul>
+                </div>
+
+                <div style="clear:both" class="hide visible-xs"></div>
+
+                <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+                    <h3> Stay in touch </h3>
+                    <ul>
+                        <li>
+                            <div class="input-append newsLatterBox text-center">
+                                <input type="text" class="full text-center" placeholder="Email ">
+                                <button class="btn  bg-gray" type="button"> Subscribe <i
+                                        class="fa fa-long-arrow-right"> </i></button>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="social">
+                        <li><a href="http://facebook.com"> <i class=" fa fa-facebook"> &nbsp; </i> </a></li>
+                        <li><a href="http://twitter.com"> <i class="fa fa-twitter"> &nbsp; </i> </a></li>
+                        <li><a href="https://plus.google.com"> <i class="fa fa-google-plus"> &nbsp; </i> </a></li>
+                        <li><a href="http://youtube.com"> <i class="fa fa-pinterest"> &nbsp; </i> </a></li>
+                        <li><a href="http://youtube.com"> <i class="fa fa-youtube"> &nbsp; </i> </a></li>
+                    </ul>
+                </div>
+ -->            </div>
+            <!--/.row-->
+        </div>
+        <!--/.container-->
+    </div>
+    <!--/.footer-->
+
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="pull-left"> &copy; {{ store.name }} 2015. All right reserved. </p>
+
+        <!--     <div class="pull-right paymentMethodImg"><img height="30" class="pull-right"
+                                                          src="{{ payment/master_card.png | asset_source :'images/site/' }}" alt="img"> <img
+                    height="30" class="pull-right" src="{{ payment/visa_card.png | asset_source :'images/site/' }}" alt="img"><img height="30"
+                                                                                                          class="pull-right"
+                                                                                                          src="{{ payment/paypal.png | asset_source :'images/site/' }}"
+                                                                                                          alt="img">
+                <img height="30" class="pull-right" src="{{ payment/american_express_card.png | asset_source :'images/site/' }}" alt="img"> <img
+                        height="30" class="pull-right" src="{{ payment/discover_network_card.png | asset_source :'images/site/' }}" alt="img">
+                <img height="30" class="pull-right" src="{{ payment/google_wallet.png | asset_source :'images/site/' }}" alt="img">
+
+            </div> -->
+        </div>
+    </div>
+    <!--/.footer-bottom-->
+</footer>
+
+<!-- Le javascript
+================================================== -->
+
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- <script src="{{ 'jquery-1.10.1.min.js' | asset_source : '/assets/'}}"></script> -->
+
+<!-- <script src="{{ 'bootstrap.min.js' | asset_source : '/assets/'}}"></script> -->
+
+<script src="{{ 'idangerous.swiper-2.1.min.js' | asset_source : '/assets/'}}"></script>
+
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        pagination: '.box-pagination',
+        keyboardControl: true,
+        paginationClickable: true,
+        slidesPerView: 'auto',
+        autoResize: true,
+        resizeReInit: true,
+    })
+
+    $('.prevControl').on('click', function (e) {
+        e.preventDefault()
+        mySwiper.swipePrev()
+    })
+    $('.nextControl').on('click', function (e) {
+        e.preventDefault()
+        mySwiper.swipeNext()
+    })
+</script>
+
+<!-- include jqueryCycle plugin -->
+<script src="{{ 'jquery.cycle2.min.js' | asset_source : '/assets/'}}"></script>
+
+<!-- include easing plugin -->
+<!-- <script src="assets/js/jquery.easing.1.3.js"></script> -->
+<script src="{{ 'jquery.easing.1.3.js' | asset_source : '/assets/'}}"></script>
+
+<!-- include  parallax plugin -->
+<!-- <script type="text/javascript" src="assets/js/jquery.parallax-1.1.js"></script>\ -->
+<script src="{{ 'jquery.parallax-1.1.js' | asset_source : '/assets/'}}"></script>
+
+<!-- optionally include helper plugins -->
+<!-- <script type="text/javascript" src="assets/js/helper-plugins/jquery.mousewheel.min.js"></script> -->
+<script src="{{ 'jquery.mousewheel.min.js' | asset_source : '/assets/'}}"></script>
+
+<!-- include mCustomScrollbar plugin //Custom Scrollbar  -->
+<!-- <script type="text/javascript" src="assets/js/jquery.mCustomScrollbar.js"></script> -->
+<script src="{{ 'jquery.mCustomScrollbar.js' | asset_source : '/assets/'}}"></script>
+
+<!-- include icheck plugin // customized checkboxes and radio buttons   -->
+<!-- <script type="text/javascript" src="assets/plugins/icheck-1.x/icheck.min.js"></script> -->
+<script src="{{ 'icheck.min.js' | asset_source : '/assets/'}}"></script>
+
+<!-- include grid.js // for equal Div height  -->
+<!-- <script src="assets/js/grids.js"></script> -->
+<script src="{{ 'grids.js' | asset_source : '/assets/'}}"></script>
+
+<!-- include carousel slider plugin  -->
+<!-- <script src="assets/js/owl.carousel.min.js"></script> -->
+<script src="{{ 'owl.carousel.min.js' | asset_source : '/assets/'}}"></script>
+
+<!-- jQuery select2 // custom select   -->
+<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script> -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+<!-- include touchspin.js // touch friendly input spinner component   -->
+<script src="{{ 'bootstrap.touchspin.js' | asset_source : '/assets/'}}"></script>
+
+<!-- include custom script for only homepage  -->
+<script src="{{ 'home.js' | asset_source : '/assets/'}}"></script>
+
+<!-- include custom script for site  -->
+<script src="{{ 'script.js' | asset_source : '/assets/'}}"></script>
+
+<script src="{{ 'jquery.notifyBar.js' | asset_source :'/assets/'}}"></script>
+{{ content_for_footer }}
+</body>
+</html>

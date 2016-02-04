@@ -1,0 +1,332 @@
+<div class="container main-container headerOffset globalPaddingBottom" style="margin-top:135px">
+
+    <!-- Main component call to action -->
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="home-intro">
+                <h2>Discover a Better Shopping <span>Experience</span> - clothes, fashion & more </h2>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <div style="clear:both"></div>
+    <div class="row">
+        <div class="col-sm-10 show-case-wrapper center-block relative">
+            <div id="productShowCase" class="owl-carousel owl-theme">
+              {% for product in features | limit:30 %} 
+                <div class="product-slide">
+                    <div class="col-sm-5 product-slide-left"><a class="product-slide-img"> <img alt="img"
+                                                                                                src="{{ product | product_image_url :'original' }}"
+                                                                                                class="img-responsive"></a>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="product-slide-inner ">
+                            <h1 class="product-title"> {{ product.name }} </h1>
+
+                                <h3 class="product-code">Product Code : DEN1098</h3>
+                                {% if product.variant_deal? %}
+                                <div class="product-price"><span class="price-sales"> {{ product.price_deal }}</span> <span
+                                        class="price-standard">{{ product.price }}</span></div>
+                                {% else %}
+                                  <div class="product-price"><span class="price-sales"> {{ product.price }}</span>
+                                  </div>
+                                {% endif %}
+                                <div class="details-description">
+                                    <p>{{ product.description_preview }}</p>
+                                </div>
+                                <a title="Add to Cart" class="btn btn-stroke-dark" onclick="addToCart({{product.id}}, {{ product.variants.first.id }})"> <i
+                                        class="glyphicon glyphicon-shopping-cart"></i> Adicionar no Carrinho</a>
+                        </div>
+                    </div>
+                </div>
+              {% endfor %}
+            </div>
+            <!--/#productShowCase -->
+
+            <div style="clear:both;"></div>
+            <a id="ps-next" class="ps-nav"> <i class="fa fa-angle-right"></i> </a> <a id="ps-prev" class="ps-nav"> <i
+                class="fa fa-angle-left"></i> </a>
+        </div>
+        <!--/.show-case-wrapper -->
+    </div>
+
+    <div class="row featuredPostContainer ">
+        <div class="featured-category"></div>
+        <div class="col-lg-12">
+            <h3 class="boxes-title-1"><span>Destaques</span></h3>
+        </div>
+        <div style="clear:both;"></div>
+        <div id="productslider" class="owl-carousel owl-theme">
+            {% for product in features | limit:30 %}
+            <div class="item">
+                <div class="product"><a class="add-fav tooltipHere" data-toggle="tooltip"
+                                        data-original-title="Add to Wishlist" data-placement="left"> <i
+                        class="glyphicon glyphicon-heart"></i> </a>
+
+                    <div class="image">
+
+                        <div class="quickview">
+                            <a data-toggle="modal" data-remote="false" class="btn btn-xs btn-quickview" data-href="/product/render_template/_product?handle={{product.handle}}"
+                               data-target="#productModalAjax">Visualizar</a>
+                        </div>
+
+                        <a href="{{product.url}}"><img src="{{ product | product_image_url :'original' }}" alt="img"
+                                                            class="img-responsive"></a>
+
+                        <div class="promotion"><span class="new-product"> NEW</span> <span
+                                class="discount">OFF</span></div>
+                        {% if product.variant_deal? %}
+                        <div class="product-price">
+                            <div class="promotion">
+                                <!-- <span class="new-product"> NEW</span>  -->
+                                <span class="discount">OFF</span>
+                            </div>
+                        </div>
+                        {% else %}
+                          <div class="product-price"><span class="price-sales"> {{ product.price }}</span>
+                          </div>
+                        {% endif %}
+                    </div>
+                    <div class="description">
+                        <h4><a href="{{product.url}}">{{ product.name }} </a></h4>
+                        <p>{{ product.description_preview }} </p>
+                        <!-- <span class="size">XL / XXL / S </span> -->
+                    </div>
+                    {% if product.variant_deal? %}
+                        <div class="price"><span>{{ product.price_deal }}</span></div>
+                    {% else %}
+                      <div class="price"><span>{{ product.price }}</span></div>
+                    {% endif %}
+                    <div class="action-control">
+                        <a class="btn btn-primary" onclick="addToCart({{product.id}}, {{ product.variants.first.id }})"> 
+                            <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i>   Adicionar no Carrinho
+                            </span> 
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!--/.productslider-->
+
+    </div>
+    <!--/.featuredPostContainer-->
+</div>
+<!-- /main container -->
+
+<!-- <div class="w100 sectionCategory">
+    <div class="container">
+        <div class="sectionCategoryIntro text-center">
+            <h1>Featured Categories</h1>
+
+            <p> litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc
+                nobis videntur parum clari, fiant sollemnes in futurum.</p>
+        </div>
+        <div class="row subCategoryList clearfix">
+            <div class="col-md-2 col-sm-3 col-xs-4  col-xs-mini-6  text-center ">
+                <div class="thumbnail equalheight"><a class="subCategoryThumb" href="sub-category.html"><img
+                        src="{{ '3.jpg' | asset_source :'images/product/'}}" class="img-rounded " alt="img"> </a> <a
+                        class="subCategoryTitle"><span> T shirt </span></a></div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-4 col-xs-mini-6 text-center">
+                <div class="thumbnail equalheight"><a class="subCategoryThumb" href="sub-category.html"><img
+                        src="{{ 'casual.jpg' | asset_source :'images/site/'}}" class="img-rounded " alt="img"> </a> <a
+                        class="subCategoryTitle"><span> Shirt </span></a></div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-4 col-xs-mini-6 text-center">
+                <div class="thumbnail equalheight"><a class="subCategoryThumb" href="sub-category.html"><img
+                        src="{{ 'shoe.jpg' | asset_source :'images/site/'}}" class="img-rounded " alt="img"> </a> <a
+                        class="subCategoryTitle"><span> shoes </span></a></div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-4 col-xs-mini-6 text-center">
+                <div class="thumbnail equalheight"><a class="subCategoryThumb" href="sub-category.html"><img
+                        src="{{ 'jewelry.jpg' | asset_source :'images/site/'}}" class="img-rounded " alt="img"> </a> <a
+                        class="subCategoryTitle"><span> Accessories </span></a></div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-4 col-xs-mini-6 text-center">
+                <div class="thumbnail equalheight"><a class="subCategoryThumb" href="sub-category.html"><img
+                        src="{{ 'winter.jpg' | asset_source :'images/site/'}}" class="img-rounded  " alt="img"> </a> <a
+                        class="subCategoryTitle"><span> Winter Collection </span></a></div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-4 col-xs-mini-6 text-center">
+                <div class="thumbnail equalheight"><a class="subCategoryThumb" href="sub-category.html"><img
+                        src="{{ 'Male-Fragrances.jpg' | asset_source :'images/site/'}}" class="img-rounded " alt="img"> </a> <a
+                        class="subCategoryTitle"><span> Fragrances </span></a></div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div> -->
+<!--/.sectionCategory-->
+
+<div class="container main-container">
+
+    <!-- Main component call to action -->
+
+    <div class="morePost row featuredPostContainer style2 globalPaddingTop ">
+        <div class="col-lg-12">
+            <h3 class="boxes-title-1"><span>Novos Produtos</span></h3>
+        </div>
+        <div class="container">
+            <div class="row xsResponse">
+                {% for product in products | limit:30 %}
+                <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                    <div class="product"><a class="add-fav tooltipHere" data-toggle="tooltip"
+                                            data-original-title="Add to Wishlist" data-placement="left"> <i
+                            class="glyphicon glyphicon-heart"></i> </a>
+
+                        <div class="image">
+
+                            <div class="quickview">
+                                <a data-toggle="modal" data-remote="false" class="btn btn-xs btn-quickview" data-href="/product/render_template/_product?handle={{product.handle}}"
+                                   data-target="#productModalAjax">Quick View </a>
+                            </div>
+
+                            <a href="{{product.url}}"><img src="{{ product | product_image_url :'original' }}" alt="img"
+                                                                class="img-responsive"></a>
+
+                            <div class="promotion"><span class="new-product"> NEW</span> <span
+                                    class="discount">OFF</span></div>
+                            {% if product.variant_deal? %}
+                            <div class="product-price">
+                                <div class="promotion"><span class="new-product"> NEW</span> <span
+                                    class="discount">OFF</span></div>
+                            </div>
+                            {% else %}
+                              <div class="product-price"><span class="price-sales"> {{ product.price }}</span>
+                              </div>
+                            {% endif %}
+                        </div>
+                        <div class="description">
+                            <h4><a href="{{product.url}}">{{ product.name }} </a></h4>
+
+                            <p>{{ product.description_preview }} </p>
+                            <!-- <span class="size">XL / XXL / S </span> -->
+                        </div>
+                        
+                        {% if product.variant_deal? %}
+                            <div class="price"><span>{{ product.price_deal }}</span></div>
+                        {% else %}
+                          <div class="price"><span>{{ product.price }}</span></div>
+                        {% endif %}
+                        <div class="action-control">
+                            <a class="btn btn-primary" onclick="addToCart({{product.id}}, {{ product.variants.first.id }})"> 
+                                <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i>   Add to cart 
+                                </span> 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+<!--             <div class="row">
+                <div class="load-more-block text-center"><a class="btn btn-thin" href="#"> <i
+                        class="fa fa-plus-sign">+</i> load more products</a></div>
+            </div> -->
+        </div>
+        <!--/.container-->
+    </div>
+    <!--/.featuredPostContainer-->
+
+    <!-- <hr class="no-margin-top"> -->
+    <!-- <div class="width100 section-block  text-center">
+        <div class="row featuredImgLook2">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="inner" style="height: 414px;"><a href="category.html" class="img-link"><img alt="img"
+                                                                                                        class="img-responsive"
+                                                                                                        src="{{ '1.jpg' | asset_source :'images/featured/' }}"></a>
+
+                    <h3><span>Latest Arrivals</span> demonstraverunt lectores </h3>
+
+                    <p>We are very pleased to announce the availability of many new emerging designers</p>
+                    <a class="btn btn-link" href="blog-details.html"> See More <i class="fa fa-long-arrow-right"></i>
+                    </a></div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="inner" style="height: 414px;"><a href="category.html" class="img-link"><img alt="img"
+                                                                                                        class="img-responsive"
+                                                                                                        src="{{ '2.jpg' | asset_source :'images/featured/' }}"></a>
+
+                    <h3><span> Summer 2014 </span> demonstraverunt lectores </h3>
+
+                    <p>We are very pleased to announce the availability of many new emerging designers</p>
+                    <a class="btn btn-link" href="blog-details.html"> See More <i class="fa fa-long-arrow-right"></i>
+                    </a></div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="inner" style="height: 414px;"><a href="category.html" class="img-link"><img alt="img"
+                                                                                                        class="img-responsive"
+                                                                                                        src="{{ '3.jpg' | asset_source :'images/featured/' }}"></a>
+
+                    <h3><span> Latest Offers </span> demonstraverunt lectores </h3>
+
+                    <p>We are very pleased to announce the availability of many new emerging designers</p>
+                    <a class="btn btn-link" href="blog-details.html"> See More <i class="fa fa-long-arrow-right"></i>
+                    </a></div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="inner" style="height: 414px;"><a href="category.html" class="img-link"><img alt="img"
+                                                                                                        class="img-responsive"
+                                                                                                        src="{{ '4.jpg' | asset_source :'images/featured/' }}"></a>
+
+                    <h3><span> New Look </span> demonstraverunt lectores </h3>
+
+                    <p>We are very pleased to announce the availability of many new emerging designers </p>
+                    <a class="btn btn-link" href="blog-details.html"> See More <i class="fa fa-long-arrow-right"></i>
+                    </a></div>
+            </div>
+        </div>
+    </div> -->
+    <!--/.section-block-->
+
+    <!-- <div class="width100 section-block">
+        <h3 class="section-title"><span> BRAND</span> <a id="nextBrand" class="link pull-right carousel-nav"> <i
+                class="fa fa-angle-right"></i></a> <a id="prevBrand" class="link pull-right carousel-nav"> <i
+                class="fa fa-angle-left"></i> </a></h3>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="no-margin brand-carousel owl-carousel owl-theme">
+                    <li><a><img src="{{ '1.gif' | asset_source :'images/brand/' }}" alt="img"></a></li>
+                    <li><img src="{{ '2.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '3.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '4.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '5.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '6.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '7.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '8.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '1.gif' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '2.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '3.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '4.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '5.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '6.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '7.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                    <li><img src="{{ '8.png' | asset_source :'images/brand/' }}" alt="img"></li>
+                </ul>
+            </div>
+        </div>
+    </div> -->
+    <!--/.section-block-->
+
+</div>
+<!--main-container-->
+
+<!-- <div class="parallax-section parallax-image-2">
+    <div class="w100 parallax-section-overley">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="parallax-content clearfix">
+                        <h1 class="xlarge"> Trusted Seller 500+ </h1>
+                        <h5 class="parallaxSubtitle"> Lorem ipsum dolor sit amet consectetuer </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!--/.parallax-section-->

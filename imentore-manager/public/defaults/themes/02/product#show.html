@@ -1,0 +1,253 @@
+<div class="container main-container headerOffset" style="margin-top:135px">
+    <div class="row">
+        <div class="breadcrumbDiv col-lg-12">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+              {% for category in categories.ancestors %}
+                <li><a href="{{ category.url }}">{{ category.name }}</a></li>
+              {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="row transitionfx">
+
+        <!-- left column -->
+
+        <div class="col-lg-6 col-md-6 col-sm-6 productImageZoom">
+
+
+            <div class='zoom' id='zoomContent'>
+                <a class="gall-item" title="product-title" href="{{ product | product_image_url :'original' }}"><img
+                        class="zoomImage1 img-responsive" data-src="{{ product | product_image_url :'original' }}"
+                        src='{{ product | product_image_url :'big' }}' alt='Daisy on the Ohoopee'/></a>
+            </div>
+
+
+            <div class="zoomThumb ">
+              {% for image in images %}
+                <a class="zoomThumbLink">
+                    <img data-large="{{ image | image_source :'original' }}"
+                         src="{{ image | image_source :'small' }}" alt="Saleen" title=""/></a>
+              {% endfor %}
+            </div>
+
+        </div>
+        <!--/ left column end -->
+
+
+        <!-- right column -->
+        <div class="col-lg-6 col-md-6 col-sm-5">
+
+            <h1 class="product-title"> {{ product.name }} </h2>
+
+                <h3 class="product-code">Código do Produto: {{ product.id }}</h3>
+
+<!--                 <div class="rating">
+                    <p><span><i class="fa fa-star"></i></span> <span><i class="fa fa-star"></i></span> <span><i
+                            class="fa fa-star"></i></span> <span><i class="fa fa-star"></i></span> <span><i
+                            class="fa fa-star-o "></i></span> <span class="ratingInfo"> <span> / </span> <a
+                            data-toggle="modal" data-target="#modal-review"> Write a review</a> </span></p>
+                </div>
+ -->                <div class="product-price">
+                    {% if product.variant_deal? %}
+                      <span class="price-sales">R$ {{ product.price_deal }}</span>
+                      <span class="price-standard">R$ {{ product.price }}</span>
+                    {% else %}
+                      <span class="price-sales">R$ {{ product.price }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="details-description">
+                    <p>{{ product.description_preview }} </p>
+                </div>
+
+<!--                 <div class="color-details">
+                    <span class="selected-color"><strong>COLOR</strong></span>
+                    <ul class="swatches Color">
+                        <li class="selected"><a style="background-color:#f1f40e"> </a></li>
+                        <li><a style="background-color:#adadad"> </a></li>
+                        <li><a style="background-color:#4EC67F"> </a></li>
+                    </ul>
+                </div> -->
+                <!--/.color-details-->
+
+                <div class="productFilter productFilterLook2">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-xs-6">
+                            <div class="filterBox">
+                                {% assign counter = 0 %}
+                                <select id='variants' name="variants" class="form-control">
+                                  {% for variant in variants %}
+                                    {% for option in variant.options %}
+                                      <option data-value="{{variant.value}}" id="{{variant.id}}">{{ option.value }}</option>
+                                    {% endfor %}
+                                    {% capture temp %}{{ counter | plus:1 }}{% endcapture %}
+                                    {% assign counter = temp %}
+                                  {% endfor %}   
+                                </select>
+                            </div>
+                        </div>
+<!--                         <div class="col-lg-6 col-sm-6 col-xs-6">
+                            <div class="filterBox">
+                                <select class="form-control">
+                                    <option value="strawberries" selected>Size</option>
+                                    <option value="mango">XL</option>
+                                    <option value="bananas">XXL</option>
+                                    <option value="watermelon">M</option>
+                                    <option value="apples">L</option>
+                                    <option value="apples">S</option>
+                                </select>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- productFilter -->
+
+                <div class="cart-actions">
+                    <div class="addto row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <button onclick="addToCart({{product.id}});"
+                                    class="button btn-block btn-cart cart first" title="Add to Cart" type="button">Adicionar no Carrinho
+                            </button>
+                        </div>
+<!--                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><a class="link-wishlist wishlist btn-block ">Add
+                            to Wishlist</a></div> -->
+                    </div>
+
+                    <div style="clear:both"></div>
+
+                    
+                    {% if product.stock_available? %}
+                      <h3 class="incaps"> <i class="fa fa fa-check-circle-o color-in"></i> Em Estoque</h3>
+                    {% else %}
+                      <h3 style="display:none" class="incaps"><i class="fa fa-minus-circle color-out"></i> Sem estoque</h3>
+                    {% endif %}
+                    
+                    <!-- <h3 class="incaps"><i class="glyphicon glyphicon-lock"></i> Secure online ordering</h3> -->
+                </div>
+                <!--/.cart-actions-->
+
+                <div class="clear"></div>
+
+                <div class="product-tab w100 clearfix">
+
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#details" data-toggle="tab">Detalhes</a></li>
+                        <!-- <li><a href="#size" data-toggle="tab">Size</a></li> -->
+                        <!-- <li><a href="#shipping" data-toggle="tab">Shipping</a></li> -->
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="details">
+                          {{ product.description }}
+                        </div>
+                        <div class="tab-pane" id="size">
+                        </div>
+
+                        <div class="tab-pane" id="shipping">
+                        </div>
+                    </div>
+                    <!-- /.tab content -->
+
+                </div>
+                <!--/.product-tab-->
+
+                <div style="clear:both"></div>
+
+<!--                 <div class="product-share clearfix">
+                    <p> SHARE </p>
+
+                    <div class="socialIcon">
+                        <a href="#"> <i class="fa fa-facebook"></i></a>
+                        <a href="#"> <i class="fa fa-twitter"></i></a>
+                        <a href="#"> <i class="fa fa-google-plus"></i></a>
+                        <a href="#"> <i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div> -->
+                <!--/.product-share-->
+
+        </div>
+        <!--/ right column end -->
+
+    </div>
+    <!--/.row-->
+
+<!--     
+    <div class="row recommended">
+
+        <h1> YOU MAY ALSO LIKE </h1>
+
+        <div id="SimilarProductSlider">
+            <div class="item">
+                <div class="product"><a class="product-image"> <img src="" alt="img"> </a>
+
+                    <div class="description">
+                        <h4><a href="san-remo-spaghetti">YOUR LIFE</a></h4>
+
+                        <div class="price"><span>$57</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+-->
+    <div style="clear:both"></div>
+
+</div>
+<!-- /main-container -->
+
+
+
+
+<!-- Header -->
+<link href="{{ 'magnific-popup.css' | asset_source: '/stylesheets/'}}" rel="stylesheet">
+<script src="{{ 'jquery.zoom.js' | asset_source: '/javascripts/'}}"></script>
+<script>
+    $(document).ready(function () {
+        //$('.swipebox').zoom();
+
+        $('#zoomContent').zoom();
+        $(".zoomThumb a").click(function () {
+            var largeImage = $(this).find("img").attr('data-large');
+            $(".zoomImage1").attr('src', largeImage);
+            $(".zoomImg").attr('src', largeImage);
+            $(".gall-item").attr('href', largeImage);
+
+        });
+
+        $('.productImageZoomx').magnificPopup({
+            delegate: 'img', type: 'image', gallery: {enabled: true},
+
+            callbacks: {
+                elementParse: function () {
+                    this.item.src = this.item.el.attr('src');
+                }
+            }
+
+        });
+
+
+        $('.gall-item').magnificPopup({
+            type: 'image',
+            gallery: {
+                enabled: true
+            }
+        });
+
+        $("#zoomContent").click(function () {
+            //alert();
+            $('.gall-item').trigger('click');
+        });
+
+        // CHANGE IMAGE MODAL THUMB
+
+        $(".product-thumbList a").click(function () {
+            var largeImage = $(this).find("img").attr('data-large');
+            $(".mainImg").attr('src', largeImage);
+
+        });
+
+    });
+</script>
+<script src="{{ 'jquery.magnific-popup.min.js' | asset_source: '/javascripts/'}}"></script>

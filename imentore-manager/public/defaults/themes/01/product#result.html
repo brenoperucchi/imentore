@@ -1,0 +1,268 @@
+<div id="content">
+    <div class="container">
+
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li><a href="#">Home</a>
+                <li class='active'> Resultado da Procura </li>
+            </ul>
+
+            <div class="row">
+                <div class="box text-center">
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <h1>{{ @product.name }}</h1>
+                            <!-- <p class="text-muted">In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide. Pellentesque habitant morbi tristique senectus et netuss.</p> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+
+            <!-- *** LEFT COLUMN ***
+_________________________________________________________ -->
+        {% paginate products by 20 %}  
+            <div class="col-sm-12">
+                <div class="box info-bar no-border">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 products-showing">
+                            Mostrando <strong>{{ paginate | current_offset }}</strong> of <strong>{{ paginate | items_page }}</strong> produtos
+                        </div>
+
+                        <div class="col-sm-12 col-md-8  products-number-sort">
+                            <div class="row">
+                                <form class='form-inline' action="{{ category.url }}" method="get">
+                                    <input type="hidden" id="per_page" name="per_page" value="{{ 'per_page' | url_param }}" class="size-input">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="products-number">
+                                            <strong>Mostrar</strong>  <a href="{{ paginate | per_page_url :'20'}}" class="btn btn-default btn-sm {{ 'per_page' | param_active: '20','20' }}">20</a>  <a href="{{ paginate | per_page_url :'40'}}" class="btn btn-default btn-sm {{ 'per_page' | param_active: '40' }}">40</a>  <a href="{{ paginate | per_page_url :'9999'}}" class="btn btn-default btn-sm {{ 'per_page' | param_active: '9999' }}">All</a>  <span class="hidden-md">produtos</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="products-sort-by">
+                                            <strong>Listagem por:</strong>
+                                            {% capture sort-by %}{{ 'sort-by' | url_param }}{% endcapture %}
+                                            <select name="sort-by" id='4' class="form-control" onchange="this.form.submit()">
+                                                {{ sort-by | option_select: 'recent', 'Recente' }}
+                                                {{ sort-by | option_select: 'name_a_z', 'Crescente' }}
+                                                {{ sort-by | option_select: 'name_z_a', 'Decrescente' }}
+                                                {{ sort-by | option_select: 'price_low', 'Maior Valor' }}
+                                                {{ sort-by | option_select: 'price_high', 'Menor Valor' }}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row products">
+                  {% for product in products %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="product">
+                            <div class="image">
+                                <a href={{ product.url }}>
+                                    <img src="{{ product | product_image_url :'small' }}" alt="" class="img-responsive image1">
+                                </a>
+<!--                                 <div class="quick-view-button">
+                                    <a href="#" data-toggle="modal" data-target="#product-quick-view-modal" class="btn btn-default btn-sm">Quick view</a>
+                                </div> -->
+                            </div>
+                            <!-- /.image -->
+                            <div class="text">
+                                <h3><a href="{{ product.url }}" data-toggle="" data-target="">{{ product.name }}</a></h3> 
+                                <p class="price">{{ product.price }}</p>
+                            </div>
+                            <!-- /.text -->
+                        </div>
+                        <!-- /.product -->
+                    </div>
+                    <div class="modal fade" id="product-quick-view-modal" tabindex="-1" role="dialog" aria-hidden="false">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-body">
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                                    <div class="row quick-view product-main">
+                                        <div class="col-sm-6">
+                                            <div class="quick-view-main-image">
+                                                <img src="{{product | product_image_url :'small'}}" alt="" class="img-responsive">
+                                            </div>
+
+                                            <div class="row thumbs">
+                                                {% for image in product.images %}
+                                                <div class="col-xs-4">
+                                                    <a href="{{ image | image_source :'original' }}" class="thumb">
+                                                        <img src="{{ image | image_source :'small' }}" alt="" class="img-responsive">
+                                                    </a>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h2>{{product.name}}</h2>
+
+                                            <p class="text-muted text-small text-center">{{product.description}}</p>
+
+                                            <div class="box">
+                                                    <div class="sizes">
+
+                                                        <h3>Variações</h3>
+                                                        <input id='product_id' type='hidden' data-id='{{product.id}}'>
+                                                        <select id='variants' name="variants" class="form-control">
+                                                            {% for variant in product.variants %}
+                                                                {% for option in variant.options %}
+                                                                    <option data-value="{{variant.value}}" id="{{variant.id}}">{{ option.value }}</option>
+                                                                {% endfor %}
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <p class="price">{{ products.first.price }}</p>
+
+                                                    <p class="text-center">
+                                                        <button type="submit" class="btn btn-primary" id='add_cart'><i class="fa fa-shopping-cart"></i> Adicionar</button>
+                                                    </p>
+                                            </div>
+
+                                            <div class="quick-view-social">
+                                                <h4>Show it to your friends</h4>
+                                                <p>
+                                                    <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
+                                                    <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
+                                                    <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
+                                                    <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.modal-dialog-->
+                    </div>
+                    <!-- /.modal -->
+
+                {% endfor %}
+                </div>
+                <!-- /.products -->
+
+
+                <div class="pages">
+                     <ul class='pagination'>
+                         {{ paginate | default_pagination }}
+                     </ul>
+
+                </div>
+
+            </div>
+        {% endpaginate %}
+            <!-- /.col-md-12 -->
+
+            <!-- *** LEFT COLUMN END *** -->
+
+            <!-- *** RIGHT COLUMN ***
+_________________________________________________________ -->
+
+
+            <!-- *** RIGHT COLUMN END *** -->
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#content -->
+{{ 'front.js' | theme_include }}
+<script>
+    $(document).ready(function() {
+
+        // $("a[id='variant']").on('click', function(){
+        //     var price = $(this).nextAll('input#variant_id').val()
+        //     $('p.price').html(price);
+        // })
+
+        $('select#variants').on('change', function(){
+            var price = $(this).find('option:selected').data('value')
+            $('p.price').html(price);
+        })
+
+
+        $('#add_cart').on('click', function(){
+            // var variant_id = $("a[id='variant'].active").nextAll('input#variant_id').data('id')
+            var variant_id = $("select#variants option:selected" ).attr('id')
+            var product_id = $('input#product_id').data('id')
+            add_cart(variant_id, product_id, 1)
+        })
+
+        function add_cart(variant_id, product_id, quantity) {
+
+          $.ajax({
+            type:'POST',
+            cache: false,
+            data: {'[item][variant_id]':variant_id, '[item][product_id]':product_id, '[item][quantity]':quantity},
+            dataType:'json',
+            url:'/cart',
+            beforeSend: function() {
+              $('div.alert').hide()
+              // $('span#loading').html('<img src="images/site/loading.gif" />'); 
+            },
+            error: function(data){
+              data = JSON.parse(data.responseText)
+              $('div.alert-warning').show()
+              $('div.alert-warning').find('span.message').text(data.message.alert)
+
+            },
+            complete: function(data,txt) {
+              // $('span#loading').html(''); 
+            },
+            success: function(data) { 
+              $('div.alert-success').show()
+              $('div.alert-success').find('span.message').text(data.message.success)
+              $('span.hidden-sm').text(data.total_items + ' items no carrinho')          
+                 var check = function(){
+                     if($('a#cart').hasClass('active')){
+                        $('a#cart').removeClass('active')
+                     }
+                     else {
+                         setTimeout(check, 500);
+                        $('a#cart').addClass('active')
+                     }
+                 }
+                 check();            }
+          })
+        }
+          
+        // product index
+        $('#add_to_cart').bind('click',function(){
+           if ($(this).attr('id') == "no_cart"){
+           }else{
+            var quantity = '1'
+            var product_id = $(this).first().children('#product_id').val()
+            var variant_id = $(this).first().children('#variant_id').val()
+            render_add_to_cart(variant_id, product_id, quantity)
+          }
+        })
+        
+        // product show
+        $('a#add_to_cart').bind('click',function(){
+          if ($(this).attr('id') == "no_cart"){
+          }else{
+            var quantity = $('input#quantity').val()
+            var variant_id = $('select#options').find('option:selected').val()      
+            var product_id = $('input#product_id:hidden').val()
+            render_add_to_cart(variant_id, product_id, quantity)
+          }
+        })
+
+    });
+
+
+</script>

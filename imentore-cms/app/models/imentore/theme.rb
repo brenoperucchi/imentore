@@ -5,7 +5,7 @@ module Imentore
     
     has_many :folders, :class_name => Imentore::AssetFolder, :foreign_key => "theme_id", :dependent => :destroy
     has_many :templates, class_name: Imentore::Template, :dependent => :destroy
-    has_many :assets, :dependent => :destroy
+    has_many :assets, through: :folders, source: :assets
 
 
     scope :theme_system, -> { where(system: true) }

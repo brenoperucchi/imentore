@@ -67,7 +67,7 @@ module Imentore
       self.payment_methods.create(name: 'MoIP', handle: 'moip')
       self.payment_methods.create(name: 'PagSeguro', handle: 'pag_seguro')
       self.payment_methods.create(name: 'Pagamento Digital', handle: 'pagamento_digital')
-      self.payment_methods.create(name: 'Custom', handle: 'custom')
+      self.payment_methods.create(name: 'Custom', handle: 'custom', active: true)
 
       self.delivery_methods.create(name: 'SEDEX', handle: 'sedex', active: true)
       # self.delivery_methods.create(name: 'SEDEX 10', handle: 'sedex_dez', active: true)
@@ -88,8 +88,7 @@ module Imentore
       new_image = product.variants.first.images.new
       new_image.picture = File.open("#{Rails.root}/public/images/product2.jpg")
       new_image.save
-
-
+      
       Imentore::Manager::SendEmail.install_store(self)
       Imentore::Manager::Theme.install_store(self)
     end

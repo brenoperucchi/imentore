@@ -8,7 +8,13 @@ module Old
     end
 
     belongs_to :imageable, :polymorphic => true
+    before_destroy :remove_file
+
     mount_uploader :picture, PictureUploader
+
+    def remove_file
+      self.remove_file!
+    end
 
     # has_attached_file :picture,
     #   :url => "/system/images/:id_partition/:basename_:style.:extension",

@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
   create_table "admin_imentore_assets", force: true do |t|
     t.string   "file"
     t.integer  "theme_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "content_type"
   end
 
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "subject"
     t.text     "body"
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "notify",     default: false
   end
 
@@ -39,15 +39,15 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.text     "body"
     t.integer  "user_id"
     t.integer  "theme_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "admin_imentore_themes", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "active"
     t.string   "used_for"
   end
@@ -76,19 +76,19 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.integer  "theme_id"
   end
 
-  add_index "imentore_asset_folders", ["ancestry"], name: "index_imentore_asset_folders_on_ancestry", using: :btree
-  add_index "imentore_asset_folders", ["theme_id"], name: "index_imentore_asset_folders_on_theme_id", using: :btree
+  add_index "imentore_asset_folders", ["ancestry"], name: "index_imentore_asset_folders_on_ancestry"
+  add_index "imentore_asset_folders", ["theme_id"], name: "index_imentore_asset_folders_on_theme_id"
 
   create_table "imentore_assets", force: true do |t|
     t.string   "file"
     t.integer  "theme_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "content_type"
     t.integer  "folder_id"
   end
 
-  add_index "imentore_assets", ["folder_id"], name: "index_imentore_assets_on_folder_id", using: :btree
+  add_index "imentore_assets", ["folder_id"], name: "index_imentore_assets_on_folder_id"
 
   create_table "imentore_carts", force: true do |t|
     t.text     "items"
@@ -101,13 +101,13 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "name"
     t.string   "handle"
     t.integer  "store_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "ancestry"
     t.integer  "ancestry_depth", default: 0
   end
 
-  add_index "imentore_categories", ["ancestry"], name: "index_imentore_categories_on_ancestry", using: :btree
+  add_index "imentore_categories", ["ancestry"], name: "index_imentore_categories_on_ancestry"
 
   create_table "imentore_categories_products", force: true do |t|
     t.integer "product_id"
@@ -123,8 +123,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.integer  "limit_customer"
     t.integer  "limit_use"
     t.datetime "due_at"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imentore_coupons_orders", force: true do |t|
@@ -146,8 +146,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "person_type"
     t.integer  "store_id"
     t.string   "department"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "active",      default: true
   end
 
@@ -173,8 +173,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
   create_table "imentore_domains", force: true do |t|
     t.string   "name"
     t.integer  "store_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "hosting",    default: false
     t.integer  "plesk_id"
     t.text     "emails"
@@ -205,16 +205,16 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "feedbackable_type"
     t.integer  "user_id"
     t.integer  "store_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imentore_images", force: true do |t|
     t.string   "picture"
     t.integer  "imageable_id"
     t.string   "imageable_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imentore_invoices", force: true do |t|
@@ -222,9 +222,9 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "provider_id"
     t.integer  "payment_method_id"
     t.string   "status"
-    t.decimal  "amount",            precision: 10, scale: 0
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.decimal  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imentore_notices", force: true do |t|
@@ -233,8 +233,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "handle"
     t.text     "body"
     t.integer  "store_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imentore_option_types", force: true do |t|
@@ -254,8 +254,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.integer  "assetable_id"
     t.string   "assetable_type"
     t.integer  "store_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imentore_orders", force: true do |t|
@@ -265,15 +265,15 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "customer_email"
     t.text     "items"
     t.integer  "store_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "customer_name"
     t.datetime "deleted_at"
     t.boolean  "same_billing_address", default: false
   end
 
-  add_index "imentore_orders", ["deleted_at"], name: "index_imentore_orders_on_deleted_at", using: :btree
+  add_index "imentore_orders", ["deleted_at"], name: "index_imentore_orders_on_deleted_at"
 
   create_table "imentore_pages", force: true do |t|
     t.boolean  "active"
@@ -282,8 +282,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.text     "body"
     t.text     "html"
     t.integer  "store_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imentore_payment_methods", force: true do |t|
@@ -298,25 +298,25 @@ ActiveRecord::Schema.define(version: 20160127113750) do
   create_table "imentore_product_brands", force: true do |t|
     t.string   "name"
     t.integer  "store_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "imentore_product_variants", force: true do |t|
-    t.decimal  "price",       precision: 10, scale: 2
+    t.float    "price"
     t.integer  "quantity"
     t.string   "sku"
-    t.decimal  "weight",      precision: 10, scale: 3
-    t.decimal  "height",      precision: 10, scale: 3
-    t.decimal  "width",       precision: 10, scale: 3
-    t.decimal  "depth",       precision: 10, scale: 3
+    t.float    "weight"
+    t.float    "height"
+    t.float    "width"
+    t.float    "depth"
     t.boolean  "deliverable"
     t.integer  "product_id"
     t.decimal  "price_deal",  precision: 10, scale: 2
     t.datetime "deleted_at"
   end
 
-  add_index "imentore_product_variants", ["deleted_at"], name: "index_imentore_product_variants_on_deleted_at", using: :btree
+  add_index "imentore_product_variants", ["deleted_at"], name: "index_imentore_product_variants_on_deleted_at"
 
   create_table "imentore_products", force: true do |t|
     t.string   "name"
@@ -333,7 +333,7 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "description_preview"
   end
 
-  add_index "imentore_products", ["deleted_at"], name: "index_imentore_products_on_deleted_at", using: :btree
+  add_index "imentore_products", ["deleted_at"], name: "index_imentore_products_on_deleted_at"
 
   create_table "imentore_send_emails", force: true do |t|
     t.boolean  "active"
@@ -341,8 +341,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "subject"
     t.text     "body"
     t.integer  "store_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "notify",     default: false
   end
 
@@ -351,6 +351,7 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "brand"
     t.string   "url"
     t.string   "irs_id"
+    t.boolean  "active",                default: false
     t.text     "settings"
     t.string   "national_id"
     t.string   "date_initial_business"
@@ -362,8 +363,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "state",                 default: "pending"
     t.datetime "disabled_at"
     t.datetime "actived_at"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "config"
     t.integer  "old_store_id"
   end
@@ -377,22 +378,23 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.string   "locale",                     default: "en"
     t.string   "handler",                    default: "liquid"
     t.integer  "theme_id"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.integer  "layout_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "kind"
     t.boolean  "default",                    default: false
     t.integer  "admin_imentore_template_id"
-    t.integer  "layout_id"
     t.text     "header_view"
   end
 
   create_table "imentore_themes", force: true do |t|
-    t.string  "name"
-    t.integer "store_id"
-    t.boolean "default",                 default: false
-    t.boolean "active",                  default: false
-    t.boolean "system",                  default: false
-    t.integer "admin_imentore_theme_id"
+    t.string   "name"
+    t.integer  "store_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "active",                  default: false
+    t.boolean  "system",                  default: false
+    t.integer  "admin_imentore_theme_id"
   end
 
   create_table "imentore_users", force: true do |t|
@@ -412,8 +414,8 @@ ActiveRecord::Schema.define(version: 20160127113750) do
     t.integer  "store_id"
     t.integer  "userable_id"
     t.string   "userable_type"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "password_salt"
   end
 

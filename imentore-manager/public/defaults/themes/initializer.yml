@@ -1,0 +1,23 @@
+01:
+  name: Tema 1
+  layouts:
+    'layout.html': "default"
+  templates:
+    '_error_page.html': "_error_page"
+    'category#index': "imentore/categories/index"
+    'product#result.html': "imentore/products/result"
+    'product#show.html': "imentore/products/show"
+    'store#show.html': "imentore/stores/show"
+02:  
+  name: Tema 2
+  layouts:
+    layout.html: "default"
+  templates:
+    _error_page.html: "_error_page"
+    cart#show.html: "imentore/carts/show"
+    category#index: "imentore/categories/index"
+    product#result.html: "imentore/products/result"
+    product#show.html: "imentore/products/show"
+    store#show.html: "imentore/stores/show"
+    _product.html: "product.partial"
+    _cart_menu.html: "cart_menu.partial"

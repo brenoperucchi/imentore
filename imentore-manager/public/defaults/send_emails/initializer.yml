@@ -1,0 +1,53 @@
+order_placed:
+  name: "order_placed"
+  subject: "Pedido #pedido_codigo#: confirmação do pedido - #empresa_nome#"
+  body: |
+    <p>Prezado(a) <strong>#cliente_nome# (#cliente_email#)</strong>, <br /><br />Obrigado por comprar conosco ! Guarde bem este e-mail. <br /><br />Veja abaixo os detalhes de sua compra. Caso voc&ecirc; tenha alguma d&uacute;vida entre em contato conosco, atrav&eacute;s do link ATENDIMENTO ou FALE CONOSCO, em nossa loja. <br /><br />C&oacute;digo do pedido: <strong>#pedido_codigo#</strong> (sempre que entrar em contato conosco, utilize este c&oacute;digo para identificar seu pedido)<br />Data do pedido: <strong>#pedido_data#</strong> <br /><strong><br />Informa&ccedil;&otilde;es</strong></p>
+    <hr />
+    <p>#pedido_info_cliente#</p>
+    <hr />
+    <p><br /><strong>Produtos do pedido </strong></p>
+    <hr />
+    <p>#pedido_produtos#</p>
+    <hr />
+    <h4>Informa&ccedil;&otilde;es de Frete</h4>
+    <hr />
+    <p>#pedido_frete#</p>
+    <hr />
+    <p><br />Informa&ccedil;&otilde;es de Pagamento<br />#pedidoinfopagamento#</p>
+    <hr />
+    <p>#empresa_nome#<br />#empresa_email#<br />#empresa_url#</p>
+    <div class="transover-tooltip" style="background-color: #fcf7d9; color: #333333; text-align: left; border: 1px solid #cccccc; box-shadow: rgba(0, 0, 0, 0.199219) 0px 2px 5px; padding: 5px; font-family: Arial, Helmet, Freesans, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; position: fixed; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; z-index: 2147483638; display: none; background-position: initial initial; background-repeat: initial initial;">&nbsp;</div>
+invoice_paid:
+  name: invoice_paid
+  subject: "Pedido #pedido_codigo#: confirmação de recebimento - #empresa_nome#"
+  body: | 
+    <p>Prezado(a) <strong>#cliente_nome# (#cliente_email#)</strong>, <br /><br />Confirmamos o recebimento do seu pagamento e j&aacute; estaremos lhe enviando o pedido. Assim que o pedido for postado voc&ecirc; receber&aacute; um e-mail com o c&oacute;digo para rastreamento. </p>
+    <hr />
+    <p>#empresa_nome_loja# <br />#empresa_email# <br />#empresa_url#</p>
+delivery_sent:
+  name: delivery_sent
+  subject: "Pedido #pedido_codigo#: confirmação de envio - #empresa_nome#"
+  body: |
+    <p>Prezado(a) <strong>#cliente_nome# (#cliente_email#)</strong>, <br /><br />Comunicamos que o seu pedido <strong>#pedido_codigo#</strong> feito em nosso site <strong>#empresa_url#</strong> dia <strong>#pedido_data#</strong> foi despachado no dia <strong>#pedido_data_envio#</strong>. O c&oacute;digo de envio para rastreamento&nbsp;&eacute;: <strong>#pedido_codigo_rastreamento#</strong>. Para rastrear seu pedido clique sobre o <strong>link abaixo:</strong></p>
+    <p>#link_rastreamento#</p>
+    <p>Caso persistam d&uacute;vidas, pedimos que entre em contato.</p>
+    <hr />
+    <p>#empresa_nome# <br />#empresa_email# <br />#empresa_url#</p>
+    <div class="transover-tooltip" style="background-color: #fcf7d9; color: #333333; text-align: left; border: 1px solid #cccccc; box-shadow: rgba(0, 0, 0, 0.199219) 0px 2px 5px; padding: 5px; font-family: Arial, Helmet, Freesans, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; position: fixed; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; z-index: 2147483638; display: none; background-position: initial initial; background-repeat: initial initial;">&nbsp;</div>
+customer_create:
+  name: customer_create
+  subject: "Confirmação de email cadastrado na Loja: #empresa_nome#"
+  body: |
+    <p>Prezado(a) <strong>#cliente_nome# (#cliente_email#)</strong>, <br /><br /> <br /> Seja bem vindo(a) ao site de com&eacute;rcio eletr&ocirc;nico da <strong>#empresa_nome_loja#</strong> . O seu e-mail: <strong>#cliente_email#</strong> foi cadastrado na loja: <strong>#empresa_url#</strong></p>
+    <hr />
+    <p>#empresa_nome_loja# <br />#empresa_email# <br />#empresa_url#</p>
+notify_admin:
+  name: notify_admin
+  subject: "Notificação de Emails ao Administrador da Loja #empresa_nome#" 
+  body: |
+    <p>Prezado(a) <strong>Administrador da Loja (#administrador_email#)</strong>,</p>
+    <p>Foi enviado o seu #cliente_nome# no email #cliente_email# um email autom&aacute;tico ao seu cliente.</p>
+    <p>Assunto:<strong>#notificacao_loja#</strong></p>
+    <hr />
+    <p>#empresa_nome_loja# <br />#empresa_email# <br />#empresa_url#</p>

@@ -1,0 +1,143 @@
+<!DOCTYPE html><html><head><meta charset="utf-8" /><meta content="width=device-width, initial-scale=1.0" name="viewport" /><title></title><link data-turbolinks-track="true" href="../public/assets/checkout-c5eb27e329d5e537fc3357ae8449ac5ef7eb3e96fbe4fd81edeeb9f80749029e.css" media="all" rel="stylesheet" /><script data-turbolinks-track="true" src="../public/assets/checkout-f48348b51978a784fc9f982fc1c0abab98529b63ef9d05aab6fcb211d2d90482.js"></script><script>$(document).ready(function(){
+  $("input:radio[name='order[same_billing_address]']").change(function(){
+    if($(this).val() == '1'){
+      $('span#checkbox_billing_address').show()
+    }else{
+      $('span#checkbox_billing_address').hide()
+    }
+  })
+})</script><style type="text/css">.sidebar {
+    background-color: #f5f5f5;
+    border-right-color: #eee;
+    border-right-style: solid;
+    border-right-width: 1px;
+    bottom: 0;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    position: fixed;
+    top: 0px;
+    z-index: 1000;
+}</style><style type="text/css">.sidebar {
+    background-color: #f5f5f5;
+    border-right-color: #eee;
+    border-right-style: solid;
+    border-right-width: 1px;
+    bottom: 0;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    position: fixed;
+    top: 0px;
+    z-index: 1000;
+}</style><script>$(document).ready(function(){
+  $('div.alert').each(function(){
+    if ( $(this).find('p').text().length > 1 ) {
+     $(this).slideDown('slow')
+    }
+  })
+  $('.close').bind('click',function(){
+    $(this).parents('div.hide').first().slideUp('slow');
+  })
+})</script></head><body><div class="container"><div class="row"><div class="col-sm-12"><div class="row"><div class="col-md-5 pull-right"><div class="sidebar sidebar-nav-fixed pull-right affix col-md-5"><div class="row"><div class="col-sm-10 col-sm-offset-1"><table class="table table-condensed"><tbody><tr><td><img alt="Thumb fit product1" class="img-thumbnail" src="/uploads/imentore/image/picture/1/thumb_fit_product1.jpg" /></td><td><span>Produto Exemplo</span><span class="help-block">Padrão: Padrão</span></td><td>1</td><td>10,00</td></tr></tbody></table></div></div><div class="row"><div class="col-sm-10 col-sm-offset-1"><table class="table table-condensed"><tbody><tr><td class="text-left">Produtos</td><td class="text-right">10,00</td></tr><tr><td class="text-left">Valor do Envio</td><td class="text-right">0,00</td></tr><tr><td class="text-left">Valor Cupom</td><td class="text-right">0,00</td></tr><tr><td class="text-left">Valor Adicional</td><td class="text-right">0,00</td></tr><tr><td class="text-left"><h3><small>Total</small></h3></td><td class="text-right"><h3>R$ 10,00</h3></td></tr></tbody></table></div></div></div></div><div class="col-sm-7"><div class="row"><div class="col-sm-12"><h3 class="blog-title"></h3><small><ol class="breadcrumb"><li><a href="/cart"> Carrinho</a></li><li class="active">Endereço do envio</li><li><a href="/1/checkouts/1/shipping">Método de Envio</a></li><li><a href="/1/checkouts/1/payment">Método de Pagamento</a></li></ol></small></div></div><div class="row"><div class="col-sm-12"><form accept-charset="UTF-8" action="/1/checkouts/1/address" class="simple_form edit_order" id="checkout" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /></div><div class="alert alert-danger">Foi encontrado algum erro, por favor verifque.</div><div class="row"><div class="col-sm-12"><div class="row"><div class="col-sm-12"><div class="form-group string optional order_customer_name"><label class="string optional control-label" for="order_customer_name">Nome do Cliente</label><input class="string optional input-lg form-control" id="order_customer_name" name="order[customer_name]" placeholder="Nome do Cliente" type="text" value="name test" /></div><div class="form-group email optional order_customer_email"><label class="email optional control-label" for="order_customer_email">Email do Cliente</label><input class="string email optional input-lg form-control" id="order_customer_email" name="order[customer_email]" placeholder="Email" type="email" value="john@doe.com" /></div></div></div><div class="control-group boolean optional"><label class="boolean optional control-label">Endereço de envio</label></div><div class="row"><div class="col-sm-6"><div class="form-group string required order_shipping_address_name"><input class="string required input-lg form-control" id="order_shipping_address_name" name="order[shipping_address][name]" placeholder="Titulo do Endereço" type="text" value="title" /></div></div><div class="col-sm-6"><div class="form-group string required order_shipping_address_street"><input class="string required input-lg form-control" id="order_shipping_address_street" name="order[shipping_address][street]" placeholder="Rua" type="text" value="street" /></div></div><div class="col-sm-6"><div class="form-group string required order_shipping_address_complement"><input class="string required input-lg form-control" id="order_shipping_address_complement" name="order[shipping_address][complement]" placeholder="Número(casa/apto)" type="text" value="complement" /></div></div><div class="col-sm-6"><div class="form-group string required order_shipping_address_city"><input class="string required input-lg form-control" id="order_shipping_address_city" name="order[shipping_address][city]" placeholder="Cidade" type="text" value="city" /></div></div><div class="col-sm-6"><div class="form-group select required order_shipping_address_country"><select class="select required input-lg form-control" id="order_shipping_address_country" name="order[shipping_address][country]"><option value="AR">Argentina</option>
+<option value="AU">Australia</option>
+<option value="AT">Austria</option>
+<option value="BS">Bahamas</option>
+<option value="BE">Belgium</option>
+<option selected="selected" value="BR">Brazil</option>
+<option value="BG">Bulgaria</option>
+<option value="CA">Canada</option>
+<option value="CL">Chile</option>
+<option value="CN">China</option>
+<option value="CO">Colombia</option>
+<option value="CR">Costa Rica</option>
+<option value="HR">Croatia</option>
+<option value="CY">Cyprus</option>
+<option value="CZ">Czech Republic</option>
+<option value="DK">Denmark</option>
+<option value="EC">Ecuador</option>
+<option value="EE">Estonia</option>
+<option value="FI">Finland</option>
+<option value="FR">France</option>
+<option value="DE">Germany</option>
+<option value="GR">Greece</option>
+<option value="GP">Guadeloupe</option>
+<option value="HK">Hong Kong</option>
+<option value="HU">Hungary</option>
+<option value="IS">Iceland</option>
+<option value="IN">India</option>
+<option value="ID">Indonesia</option>
+<option value="IE">Ireland</option>
+<option value="IL">Israel</option>
+<option value="IT">Italy</option>
+<option value="JM">Jamaica</option>
+<option value="JP">Japan</option>
+<option value="KZ">Kazakhstan</option>
+<option value="LV">Latvia</option>
+<option value="LT">Lithuania</option>
+<option value="LU">Luxembourg</option>
+<option value="MY">Malaysia</option>
+<option value="MT">Malta</option>
+<option value="MX">Mexico</option>
+<option value="NL">Netherlands</option>
+<option value="NZ">New Zealand</option>
+<option value="NO">Norway</option>
+<option value="PE">Peru</option>
+<option value="PH">Philippines</option>
+<option value="PL">Poland</option>
+<option value="PT">Portugal</option>
+<option value="RO">Romania</option>
+<option value="RU">Russia</option>
+<option value="SG">Singapore</option>
+<option value="SK">Slovakia</option>
+<option value="SI">Slovenia</option>
+<option value="ZA">South Africa</option>
+<option value="KR">South Korea</option>
+<option value="ES">Spain</option>
+<option value="VC">St. Vincent</option>
+<option value="SE">Sweden</option>
+<option value="CH">Switzerland</option>
+<option value="SY">Syria</option>
+<option value="TW">Taiwan</option>
+<option value="TZ">Tanzania, United Republic Of</option>
+<option value="TH">Thailand</option>
+<option value="TT">Trinidad and Tobago</option>
+<option value="TR">Turkey</option>
+<option value="AE">United Arab Emirates</option>
+<option value="GB">United Kingdom</option>
+<option value="US">United States</option>
+<option value="UY">Uruguay</option>
+<option value="VE">Venezuela</option></select></div></div><div class="col-sm-6"><div class="form-group select required order_shipping_address_state"><select class="select required input-lg form-control" id="order_shipping_address_state" name="order[shipping_address][state]"><option value="AL">Alagoas</option>
+<option value="AP">Amapá</option>
+<option value="AM">Amazonas</option>
+<option value="BA">Bahia</option>
+<option value="CE">Ceará</option>
+<option value="DF">Distrito Federal</option>
+<option value="ES">Espírito Santo</option>
+<option value="GO">Goiás</option>
+<option value="MA">Maranhão</option>
+<option value="MT">Mato Grosso</option>
+<option value="MS">Mato Grosso do Sul</option>
+<option value="MG">Minas Gerais</option>
+<option value="PR">Paraná</option>
+<option value="PB">Paraíba</option>
+<option value="PA">Pará</option>
+<option value="PE">Pernambuco</option>
+<option value="PI">Piauí</option>
+<option value="RN">Rio Grande do Norte</option>
+<option value="RS">Rio Grande do Sul</option>
+<option value="RJ">Rio de Janeiro</option>
+<option value="RO">Rondônia</option>
+<option value="RR">Roraima</option>
+<option value="SC">Santa Catarina</option>
+<option value="SE">Sergipe</option>
+<option value="SP">São Paulo</option>
+<option selected="selected" value="TO">Tocantins</option></select></div></div><div class="col-sm-6"><div class="form-group string required order_shipping_address_zip_code"><input class="string required input-lg form-control" id="order_shipping_address_zip_code" name="order[shipping_address][zip_code]" placeholder="Cep" type="text" value="10000" /></div></div><div class="col-sm-6"><div class="form-group tel required order_shipping_address_phone has-error"><input class="string tel required input-lg form-control" id="order_shipping_address_phone" name="order[shipping_address][phone]" placeholder="Telefone" type="tel" value="" /><span class="help-block">não pode ficar em branco</span></div></div></div></div><div class="col-sm-12"><div class="pull-left"><a class="btn btn-default btn btn-link btn-lg" href="/cart"><i class="fa fa-chevron-left"></i>Voltar</a></div><div class="pull-right"><button class="btn btn-lg btn-success"><i class="fa fa-chevron-right"></i> Próximo</button></div></div></div></form></div></div></div></div></div></div></div><div class="footer"></div></body></html>

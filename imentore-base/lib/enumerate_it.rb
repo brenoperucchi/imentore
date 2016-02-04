@@ -1,3 +1,4 @@
+## https://github.com/cassiomarques/enumerate_it
 module EnumerateIt
 
   def self.included(base)
@@ -8,7 +9,7 @@ module EnumerateIt
     def associate_values(method, associates = {})
       associates.each {|name|
         define_method "#{name.to_s}?" do
-          handle == name.to_s
+          send(:method) == name.to_s
         end
       }
     end

@@ -1,0 +1,205 @@
+<!-- <div class="container main-container headerOffset" style="margin-top:135px"> -->
+<div class="container main-container headerOffset">
+<!--     <div class="row">
+        <div class="breadcrumbDiv col-lg-12">
+            <ul class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category.html">Category</a></li>
+                <li class="active">Cart</li>
+            </ul>
+        </div>
+    </div> -->
+    <!--/.row-->
+
+
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-7 col-xs-6 col-xxs-12 text-center-xs">
+        <div class="alert alert-warning alert-dismissable" style="display:none">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          <strong>Warning!</strong> Better check
+                          yourself, you're not looking too good.
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+
+        <div class="col-lg-9 col-md-9 col-sm-7 col-xs-6 col-xxs-12 text-center-xs">
+          <h1 class="section-title-inner"><span>
+            <i class="glyphicon glyphicon-shopping-cart"></i> Carrinho de Compras </span>
+          </h1>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar col-xs-6 col-xxs-12 text-center-xs">
+            <h4 class="caps"><a href="category.html"><i class="fa fa-chevron-left"></i> Voltar para as compras </a></h4>
+        </div>
+    </div>
+    <!--/.row-->
+<!--     <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-7 col-xs-6 col-xxs-12 text-center-xs">
+            {% if notification.message.size > 0 %}
+                  <ul class="note">
+                    {% for message in notification.message %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+            {% endif %}
+        </div>
+    </div> -->
+    <!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-7">
+            <div class="row userInfo">
+                <div class="col-xs-12 col-sm-12">
+                  <form id="cart" method="post" action="/cart" accept-charset="UTF-8">
+                    <input type="hidden" value="{{ _csrf_token }}" name="authenticity_token"/>
+                    <input name="_method" type="hidden" value="patch">
+                    <input type="hidden" value="" name="utf8"/>
+                    <div class="cartContent w100">
+                        <table class="cartTable table-responsive" style="width:100%">
+                            <tbody>
+
+                            <tr class="CartProduct cartTableHeader">
+                                <td style="width:15%"> Product</td>
+                                <td style="width:40%">Details</td>
+                                <td style="width:10%" class="delete">&nbsp;</td>
+                                <td style="width:10%">QNT</td>
+                                <td style="width:10%">Discount</td>
+                                <td style="width:15%">Total</td>
+                            </tr>
+                            {% assign counter = 0 %}
+                            {% for item in current_cart.items %}
+                              <tr class="CartProduct">
+                                  <td class="CartProductThumb">
+                                      <div><a href="{{ item.product.url }}"><img src="{{ item.product | product_image_url :'original' }}" alt="img"></a>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div class="CartDescription">
+                                          <h4><a href="{{ item.product.url }}">{{item.product.name}} </a></h4>
+                                          <span class="size">{{ item.variant.options_name }}</span>
+
+                                          <div class="price"><span>{{ item.value }}</span></div>
+                                      </div>
+                                  </td>
+                                  <td class="delete">
+                                    {{ item | cart_remove_item :'fa fa-trash-o'}}
+                                    
+                                  </td>
+                                  <td>
+                                    <input name="[items][{{ forloop.index }}]quantity" type="number" value="{{item.quantity}}" class="form-control">
+                                    <input type='hidden' name="[items][{{ forloop.index }}]product_id" value="{{ item.product.id }}"/>
+                                    <input type='hidden' name="[items][{{ forloop.index }}]variant_id" value="{{ item.variant.id }}"/>
+                                  </td>
+                                  <td>0</td>
+                                  <td class="price">{{ item.amount }}</td>
+                              </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--cartContent-->
+
+                    <div class="cartFooter w100">
+                        <div class="box-footer">
+                            <div class="pull-left">
+                                <a href="/" class="btn btn-default"> 
+                                  <i class="fa fa-arrow-left"></i> &nbsp; Continuar as compras
+                                </a>
+                            </div>
+                            <div class="pull-right">
+                              <button type="submit" class="btn btn-default"><i class="fa fa-refresh"></i> Update</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ cartFooter -->
+                  </form>
+                </div>
+            </div>
+            <!--/row end-->
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+            <div class="contentBox">
+                <div class="w100 costDetails">
+                    <div class="table-block" id="order-detail-content">
+                      <a class="btn btn-primary btn-lg btn-block "title="checkout" href="/checkouts"style="margin-bottom:20px"> 
+                        Finalizar Compra &nbsp; 
+                        <i class="fa fa-arrow-right"></i> 
+                      </a>
+                        <div class="w100 cartMiniTable">
+                            <table id="cart-summary" class="std table">
+                              <form action="/checkouts" method="post" novalidate class="cart">
+                                <input type="hidden" value="{{ _csrf_token }}" name="authenticity_token"/>
+                                <input type="hidden" value="" name="utf8"/>
+
+                                <tbody>
+                                <tr>
+                                    <td>Total Produtos</td>
+                                    <td class="price">{{ current_cart.amount }}</td>
+                                </tr>
+<!--                                 <tr style="">
+                                    <td>Envio</td>
+                                    <td class="price"><span class="success">{{ '' | cart_delivery_methods }}</span></td>
+                                </tr>
+                                 <tr class="cart-total-price ">
+                                    <td>Total (tax excl.)</td>
+                                    <td class="price">$216.51</td>
+                                </tr>
+                                <tr>
+                                    <td>Cupom</td>
+                                    <td class="price" id="total-tax">{{ current_cart.coupons_amount }}</td>
+                                </tr>
+                                <tr>
+                                    <td> Total</td>
+                                    <td class=" site-color" id="total-price">{{ current_cart.total_amount }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="input-append couponForm">
+                                            <input class="col-lg-8" id="appendedInputButton" type="text"
+                                                   placeholder="Coupon code">
+                                            <button class="col-lg-4 btn btn-success" type="button">Apply!</button>
+                                        </div>
+                                    </td>
+                                </tr>
+ -->                                </tbody>
+                                </form>
+                            </table>
+                        </div>
+                    </div>
+                  </form>
+                </div>
+            </div>
+            <!-- End popular -->
+
+        </div>
+        <!--/rightSidebar-->
+
+    </div>
+    <!--/row-->
+
+    <div style="clear:both"></div>
+</div>
+<!-- /.main-container -->
+
+<div class="gap"></div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var kind = "{{notification.kind}}"
+    var message = "{{notification.message}}"
+    if(kind == "success"){
+      $.notifyBar({
+        cssClass: "success",
+        html: message,
+        delay: 10000,
+        closeOnClick: true,
+        animationSpeed: "slow"
+      });  
+    }
+  })
+</script>

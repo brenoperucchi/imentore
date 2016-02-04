@@ -1,14 +1,4 @@
 GIT
-  remote: git://github.com/bperucchi/moip-ruby.git
-  revision: fe58b8b99607cc7909309546d942ad7c2441bad5
-  specs:
-    moip-ruby (0.1.3)
-      activesupport (>= 3.2.3)
-      httparty (~> 0.8.3)
-      nokogiri (~> 1.5.2)
-      rspec (~> 2.1.0)
-
-GIT
   remote: git://github.com/bperucchi/pagamento_digital.git
   revision: 4cd251b0bdcb237b383fe656c77aa2835edd3848
   specs:
@@ -74,11 +64,18 @@ PATH
   remote: ../imentore-ecommerce
   specs:
     imentore-ecommerce (0.0.1)
+      rails (~> 4.0.13)
 
 PATH
   remote: ../imentore-manager
   specs:
     imentore-manager (0.0.1)
+
+PATH
+  remote: ../imentore-testing
+  specs:
+    imentore-testing (0.0.1)
+      rails (~> 4.0.13)
 
 PATH
   remote: ../personhood
@@ -112,9 +109,9 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.4.0)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
-    ansi (1.5.0)
     arel (4.0.2)
     autoprefixer-rails (6.3.1)
       execjs
@@ -153,6 +150,16 @@ GEM
     capistrano-rbenv (2.0.4)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
+    capybara (2.6.2)
+      addressable
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    capybara-webkit (1.8.0)
+      capybara (>= 2.3.0, < 2.7.0)
+      json
     carrierwave (0.7.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -172,6 +179,7 @@ GEM
       sax-machine (~> 0.1)
     country_select (0.0.1)
     daemons (1.2.3)
+    database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     delocalize (1.0.0)
       rails (>= 2)
@@ -184,21 +192,42 @@ GEM
       warden (~> 1.2.3)
     devise-encryptable (0.2.0)
       devise (>= 2.1.0)
-    diff-lcs (1.1.3)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
     execjs (2.6.0)
-    fabrication (2.11.3)
+    fabrication (2.14.1)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
+    ffi (1.9.10)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
+    formatador (0.2.5)
     git-version-bump (0.15.1)
+    guard (2.13.0)
+      formatador (>= 0.2.4)
+      listen (>= 2.7, <= 4.0)
+      lumberjack (~> 1.0)
+      nenv (~> 0.1)
+      notiffany (~> 0.0)
+      pry (>= 0.9.12)
+      shellany (~> 0.0)
+      thor (>= 0.18.1)
+    guard-compat (1.2.1)
+    guard-rspec (4.6.4)
+      guard (~> 2.1)
+      guard-compat (~> 1.1)
+      rspec (>= 2.99.0, < 4.0)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     hpricot (0.8.6)
-    httparty (0.8.3)
-      multi_json (~> 1.0)
-      multi_xml
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     i18n_alchemy (0.2.2)
       activesupport (>= 3.2.0, < 5.0.0)
@@ -220,9 +249,15 @@ GEM
       railties (>= 3.2.16)
     json (1.8.3)
     kgio (2.10.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     libv8 (3.16.14.13)
     liquid (3.0.3)
+    listen (3.0.5)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
     log-me (0.0.10)
+    lumberjack (1.0.10)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     meta_request (0.3.4)
@@ -233,14 +268,20 @@ GEM
     mime-types (2.99)
     mimemagic (0.3.1)
     mini_magick (4.2.7)
+    mini_portile2 (2.0.0)
     minitest (4.7.5)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     mysql2 (0.3.20)
+    nenv (0.2.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.0.2)
-    nokogiri (1.5.11)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
+    notiffany (0.0.8)
+      nenv (~> 0.1)
+      shellany (~> 0.0)
     orm_adapter (0.5.0)
     paranoia (2.1.5)
       activerecord (~> 4.0)
@@ -288,18 +329,34 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.15.0)
     rake (10.5.0)
+    rb-fsevent (0.9.7)
+    rb-inotify (0.9.5)
+      ffi (>= 0.5.0)
     rb-readline (0.5.3)
     ref (2.0.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
-    rspec (2.1.0)
-      rspec-core (~> 2.1.0)
-      rspec-expectations (~> 2.1.0)
-      rspec-mocks (~> 2.1.0)
-    rspec-core (2.1.0)
-    rspec-expectations (2.1.0)
-      diff-lcs (~> 1.1.2)
-    rspec-mocks (2.1.0)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.2)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-rails (3.4.1)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     sass (3.4.21)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -307,8 +364,11 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sax-machine (0.1.0)
-      nokogiri (> 0.0.0)
+    sax-machine (0.3.0)
+      nokogiri (~> 1.6.0)
+    shellany (0.0.1)
+    shoulda-matchers (3.1.1)
+      activesupport (>= 4.0.0)
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -351,8 +411,6 @@ GEM
       railties (>= 3.1.1)
     turbolinks (2.5.3)
       coffee-rails
-    turn (0.8.3)
-      ansi
     tzinfo (0.3.46)
     uglifier (2.7.2)
       execjs (>= 0.3.0)
@@ -362,13 +420,15 @@ GEM
       rack
       raindrops (~> 0.7)
     uniform_notifier (1.9.0)
-    warden (1.2.4)
+    warden (1.2.5)
       rack (>= 1.0)
     will_paginate (3.0.7)
     will_paginate-bootstrap (0.2.5)
       will_paginate (>= 3.0.3)
     x-editable-rails (1.5.5)
       railties
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -385,17 +445,22 @@ DEPENDENCIES
   capistrano-bundler (~> 1.1.3)
   capistrano-rails (~> 1.1.1)
   capistrano-rbenv (~> 2.0.2)
+  capybara (= 2.6.2)
+  capybara-webkit
   carrierwave (= 0.7.0)
   coffee-rails!
   coffee-script-source
   correios-frete (= 1.6.1)
   country_select (= 0.0.1)
+  database_cleaner (= 1.5.1)
   delocalize (= 1.0.0)
   devise (= 3.5.1)
   devise-encryptable
   execjs
-  fabrication (= 2.11.3)
+  fabrication
+  factory_girl_rails (= 4.5.0)
   font-awesome-rails (= 4.3.0.0)
+  guard-rspec
   hpricot
   i18n_alchemy
   imentore-auth!
@@ -404,14 +469,15 @@ DEPENDENCIES
   imentore-dashboard!
   imentore-ecommerce!
   imentore-manager!
+  imentore-testing!
   inherited_resources (= 1.6.0)
   jquery-datatables-rails (= 3.3.0)
   jquery-rails (= 3.1.3)
   jquery-ui-rails (= 5.0.5)
+  launchy (= 2.4.3)
   liquid (= 3.0.3)
   meta_request
   mini_magick (= 4.2.7)
-  moip-ruby (= 0.1.3)!
   mysql2 (= 0.3.20)
   pag_seguro (= 0.1.18)!
   pagamento_digital!
@@ -426,9 +492,12 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.0.13)
   rails-observers
+  rb-fsevent
   rb-readline
   responders
+  rspec-rails (= 3.4.1)
   sass-rails (~> 5.0.1)
+  shoulda-matchers (= 3.1.1)
   simple_form (= 3.1.0)
   slim-rails
   sqlite3
@@ -438,7 +507,6 @@ DEPENDENCIES
   thin
   tinymce-rails
   turbolinks
-  turn (~> 0.8.3)
   uglifier
   unicorn
   will_paginate (= 3.0.7)
@@ -446,4 +514,4 @@ DEPENDENCIES
   x-editable-rails
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

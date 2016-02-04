@@ -1,0 +1,173 @@
+<!-- *** SLIDER ***
+_________________________________________________________ -->
+
+<div id="slider" class="owl-carousel owl-theme">
+
+<!--     <div class="item">
+        <a href="#">
+                <img src="{{ 'slide1.jpg' | asset_source }}" alt="" class="img-responsive">
+        </a>
+    </div>
+
+    <div class="item">
+        <a href="#">
+                <img src="{{ 'slide2.jpg' | asset_source }}" alt="" class="img-responsive">
+        </a>
+    </div>
+
+    <div class="item">
+        <a href="#">
+                <img src="{{ 'slide3.jpg' | asset_source }}" alt="" class="img-responsive">
+        </a>
+    </div>
+
+    <div class="item">
+        <a href="#">
+                <img src="{{ 'slide4.jpg' | asset_source }}" alt="" class="img-responsive">
+        </a>
+    </div>
+
+    <div class="item">
+        <a href="#">
+                <img src="{{ 'slide5.jpg' | asset_source }}" alt="" class="img-responsive">
+        </a>
+    </div>
+
+    <div class="item">
+        <a href="#">
+                <img src="{{ 'slide6.jpg' | asset_source }}" alt="" class="img-responsive">
+        </a>
+    </div> -->
+
+
+</div>
+<!-- /#slider -->
+
+<!-- *** SLIDER END *** -->
+
+
+<!-- *** CONTENT ***
+_________________________________________________________
+_________________________________________________________
+-->
+
+<!-- *** ADVANTAGES ***
+_________________________________________________________ -->
+
+<div id="advantages">
+
+    <div class="container">
+
+        <div class="col-md-12">
+
+        </div>
+
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /#advantages -->
+
+<!-- *** ADVANTAGES END *** -->
+
+
+<div id="content">
+    <div class="container">
+
+        <div class="col-sm-12">
+
+<!--             <div class="box text-center">
+                <h3 class="text-uppercase">New summer arrivals</h3>
+
+                <h4 class="text-muted"><span class="accent">Free shipping</span> on all</h4>
+            </div>
+ -->
+            <div class="row products">
+                            {% for product in products | limit:30 %} 
+                            <div class="col-md-3 col-sm-4">
+                                <div class="product">
+                                    <div class="image">
+                                        <a href="{{product.url}}">
+                                            <img src="{{ product | product_image_url :'small' }}" alt="" class="img-responsive image1">
+                                        </a>
+                                    </div>
+                                    <!-- /.image -->
+                                    <div class="text">
+                                        <h3><a href="{{product.url}}">{{ product.name }}</a></h3>
+                                        {% if product.variant_deal? %}
+                                            <p class="price"><del>{{ product.price }}</del> {{ product.price_deal }}</p>
+                                        {% else %}
+                                            <p class="price">{{ product.price }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <!-- /.text -->
+
+                                    <p class="buttons">
+                                        <a href="detail.html" class="btn btn-default">View detail</a>
+                                        <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    </p>
+                                    {% if product.variant_deal? %}
+                                        <div class="ribbon sale">
+                                            <div class="theribbon">PROMO</div>
+                                            <div class="ribbon-background"></div>
+                                        </div>
+                                    {% endif %}
+                                    <!-- /.ribbon -->
+
+                                </div>
+                                <!-- /.product -->
+                            </div>
+                            {% endfor %}
+                    <!-- /.col-md-4 -->
+            </div>
+            <!-- /.products -->
+
+            <!-- *** BLOG HOMEPAGE ***
+    _________________________________________________________ -->
+
+            <div class="box text-center">
+                <h3 class="text-uppercase">Do nosso blog </h3>
+
+                <p class="text-italic text-large">Quais são as novidades do mundo xyz <span class="accent">Olhe o nosso blog!</span>
+                </p>
+            </div>
+
+            <div id="blog-homepage" class="row">
+                <div class="col-sm-6">
+                    <div class="post">
+                        <h4><a href="http://www.imentore.com.br/">Noticias XYZ</a></h4>
+                        <p class="author-category">por <a href="">Blogger Nome</a> in <a href="http://www.imentore.com.br/">Sobre o Editor</a>
+                        </p>
+                        <hr>
+                        <p class="intro">Coloque aqui a sua inforamção sobre alguma notícia</p>
+                        <p class="read-more"><a href="http://www.imentore.com.br/" class="btn btn-primary">Continuar lendo</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="post">
+                        <h4><a href="http://www.imentore.com.br/">Noticias XYZ</a></h4>
+                        <p class="author-category">por <a href="">Blogger Nome</a> in <a href="http://www.imentore.com.br/">Sobre o Editor</a>
+                        </p>
+                        <hr>
+                        <p class="intro"><p class="intro">Coloque aqui a sua inforamção sobre alguma notícia</p></p>
+                        <p class="read-more"><a href="http://www.imentore.com.br/" class="btn btn-primary">Clique Aqui!</a>
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /#blog-homepage -->
+
+            <!-- *** BLOG HOMEPAGE END *** -->
+
+        </div>
+        <!-- /.col-sm-12 -->
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#content -->

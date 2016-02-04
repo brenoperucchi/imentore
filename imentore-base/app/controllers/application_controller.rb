@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  add_flash_types :error, :success
+  
+
   protect_from_forgery
 
   after_filter :logger

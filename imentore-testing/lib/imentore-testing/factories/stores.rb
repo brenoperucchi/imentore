@@ -1,14 +1,20 @@
 FactoryGirl.define do
-  factory :myshop, class: Imentore::Store do
-    brand 'MyShop'
-    url 'myshop'
+  setting = Imentore::Settings.new
+  setting.email_contact = 'john@doe.com'
+  factory :store_test, class: Imentore::Store do
+    brand 'brand'
+    url 'loja'
+    config setting
+    factory :config, class: 'Imentore::Setting' do
+
+    end
     association :owner, factory: 'myshop_owner', strategy: :build
 
-    after_create do |store|
-      FactoryGirl.create(:green_theme, store: store)
-      FactoryGirl.create(:mug, store: store)
-      FactoryGirl.create(:cielo, store: store)
-      FactoryGirl.create(:fedex, store: store)
+    after(:create) do |store|
+      store.create_defaults
+      # FactoryGirl.create(:mug, store: store)
+      # FactoryGirl.create(:cielo, store: store)
+      # FactoryGirl.create(:fedex, store: store)
     end
   end
 end

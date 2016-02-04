@@ -1,4 +1,4 @@
-require 'enumerate_it'
+require_relative '../../../../imentore-base/lib/enumerate_it'
 module Imentore
 
   class PaymentMethod < ActiveRecord::Base

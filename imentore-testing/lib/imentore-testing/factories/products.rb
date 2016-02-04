@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :mug, class: Imentore::Product do
-    name        "I <3 NY mug"
+    name        "Product"
     description "Goooorgeous NY mug!"
 
-    after_create do |product|
-      product.options.create(name: "Model")
+    after(:create) do |product|
+      # product.options.new(name: "Model")
       FactoryGirl.create(:default_mug, product: product)
     end
   end
@@ -16,9 +16,9 @@ FactoryGirl.define do
     quantity    50
     deliverable true
 
-    after_create do |variant|
+    after(:create) do |variant|
       option_type = variant.product.options.first
-      variant.options.create(value: "default", option_type: option_type)
+      variant.options.new(value: "default", option_type: option_type)
     end
   end
 end

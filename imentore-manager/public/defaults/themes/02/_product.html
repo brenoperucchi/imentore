@@ -1,0 +1,135 @@
+<button aria-hidden="true" data-dismiss="modal" class="close" type="button"> ×</button>
+<div class="col-lg-5 col-md-5 col-sm-5  col-xs-12">
+
+    <div class="main-image  col-lg-12 no-padding style3">
+        <a class="product-largeimg-link" href="{{ product.url }}"><img
+                src="{{ product | product_image_url :'original' }}"
+                class="img-responsive product-largeimg"
+                alt="img">
+        </a>
+    </div>
+    <!--/.main-image-->
+
+    <div class="modal-product-thumb">
+        {% for image in images %}
+            <a class="thumbLink selected"><img data-large="{{ image | image_source :'original' }}" alt="img"
+                                           class="img-responsive" src="{{ image | image_source :'original' }}">
+            </a>
+        {% endfor %}
+    </div>
+    <!--/.modal-product-thumb-->
+</div>
+<!--/ product Image-->
+
+
+<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 modal-details no-padding">
+    <div class="modal-details-inner">
+        <h1 class="product-title"> {{ product.name }}</h2>
+
+            <h3 class="product-code">{{ product.description_preview }}</h3>
+
+            {% if product.variant_deal? %}
+            <div class="product-price"><span class="price-sales"> {{ product.price_deal }}</span> <span
+                    class="price-standard">{{ product.price }}</span></div>
+            {% else %}
+              <div class="product-price"><span class="price-sales"> {{ product.price }}</span>
+              </div>
+            {% endif %}
+            <div class="details-description">
+                <p> {{ product.description }} </p>
+            </div>
+<!--             <div class="color-details"><span class="selected-color"><strong>COLOR</strong></span>
+                <ul class="swatches Color">
+                    <li class="selected">
+                        <a style="background-color:#f1f40e"> </a>
+                    </li>
+                    <li>
+                        <a style="background-color:#adadad"> </a>
+                    </li>
+                    <li>
+                        <a style="background-color:#4EC67F"> </a>
+                    </li>
+                </ul>
+            </div> -->
+            <!--/.color-details-->
+
+            <div class="productFilter productFilterLook2">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6 col-xs-6">
+                        <div class="filterBox">
+                            {% assign counter = 0 %}
+                            <input id='product_id' type='hidden' data-id='{{product.id}}'>
+                            <select id='variants' name="variants" class="form-control">
+                                {% for variant in variants %}
+                                    {% for option in variant.options %}
+                                    <!-- <label for="{{ variant.value }}"> -->
+                                        <option data-value="{{variant.value}}" id="{{variant.id}}">{{ option.value }}</option>
+                                    {% endfor %}
+                                    {% capture temp %}{{ counter | plus:1 }}{% endcapture %}
+                                    {% assign counter = temp %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+<!--                     <div class="col-lg-6 col-sm-6 col-xs-6">
+                        <div class="filterBox">
+                            <select class="form-control">
+                                <option value="strawberries" selected>Size</option>
+                                <option value="mango">XL</option>
+                                <option value="bananas">XXL</option>
+                                <option value="watermelon">M</option>
+                                <option value="apples">L</option>
+                                <option value="apples">S</option>
+                            </select>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!-- productFilter -->
+
+            <div class="cart-actions">
+                <div class="addto row">
+                    <div class="col-lg-6">
+                        <button onclick="addToCart({{product.id}});"
+                                class="button btn-block btn-cart cart first" title="Add to Cart"
+                                type="button">
+                            Adicionar no Carrinho
+                        </button>
+<!--                     </div>
+                    <div class="col-lg-6"><a class="link-wishlist wishlist btn-block ">Add to Wishlist</a>
+                    </div>
+ -->                </div>
+            </div>
+            <!--/.cart-actions-->
+
+<!--             <div class="product-share clearfix">
+                <p> SHARE </p>
+
+                <div class="socialIcon">
+                    <a href="#"> <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="#"> <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#"> <i class="fa fa-google-plus"></i>
+                    </a>
+                    <a href="#"> <i class="fa fa-pinterest"></i>
+                    </a>
+                </div>
+            </div> -->
+            <!--/.product-share-->
+    </div>
+    <!--/.modal-details-inner-->
+</div>
+<!--/.modal-details-->
+<script type="text/javascript">
+  $(".modal-product-thumb a").click(function () {
+      // alert();
+
+      $(".modal-product-thumb a.selected").removeClass("selected");
+      $(this).addClass('selected');
+      var largeImage = $(this).find("img").attr('data-large');
+      $(".product-largeimg").attr('src', largeImage);
+      $(".zoomImg").attr('src', largeImage);
+  });
+</script>
+<div class="clear"></div>

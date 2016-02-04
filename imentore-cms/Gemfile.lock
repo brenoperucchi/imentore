@@ -1,19 +1,4 @@
 PATH
-  remote: .
-  specs:
-    imentore-cms (0.0.1)
-      carrierwave (~> 0.7.0)
-      country_select
-      devise
-      inherited_resources (~> 1.6.0)
-      liquid (~> 3.0.3)
-      mini_magick (~> 4.2.7)
-      paranoia
-      rails (~> 4.0.13)
-      simple_form
-      slim
-
-PATH
   remote: ../imentore-auth
   specs:
     imentore-auth (0.0.1)
@@ -32,16 +17,33 @@ PATH
   remote: ../imentore-ecommerce
   specs:
     imentore-ecommerce (0.0.1)
+      rails (~> 4.0.13)
 
 PATH
   remote: ../imentore-testing
   specs:
     imentore-testing (0.0.1)
+      rails (~> 4.0.13)
 
 PATH
   remote: ../personhood
   specs:
     personhood (0.0.1)
+
+PATH
+  remote: .
+  specs:
+    imentore-cms (0.0.1)
+      carrierwave (~> 0.7.0)
+      country_select
+      devise
+      inherited_resources (~> 1.6.0)
+      liquid (~> 3.0.3)
+      mini_magick (~> 4.2.7)
+      paranoia
+      rails (~> 4.0.13)
+      simple_form
+      slim
 
 GEM
   remote: http://rubygems.org/
@@ -168,4 +170,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

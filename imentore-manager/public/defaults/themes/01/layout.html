@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content='{{csrf_token}}'>
+
+    <title>Sua Loja</title>
+
+    <meta name="keywords" content="">
+
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Merriweather:400,400italic' rel='stylesheet' type='text/css'>
+    <link href="{{ 'font-awesome.css' | asset_source: '/assets/'}}" rel="stylesheet">
+    <link href="{{ 'bootstrap.min.css' | asset_source: '/assets/test'}}" rel="stylesheet">
+    <link href="{{ 'style.default.css' | asset_source: '/assets/'}}" rel="stylesheet">
+    <link href="{{ 'custom.css' | asset_source: '/assets/'}}" rel="stylesheet">
+    <link href="{{ 'favicon.png' | asset_source }}" rel=("shortcut icon") />
+    <link href="{{ 'owl.carousel.css' | asset_source: '/assets/'}}" rel="stylesheet">
+    <link href="{{ 'owl.theme.css' | asset_source: '/assets/'}}" rel="stylesheet">
+
+    <!-- /#all -->
+
+    <!-- ## Javascript Files ## -->
+    <script src="{{ 'respond.min.js' | asset_source: '/assets/'}}"></script>
+    <script src="{{ 'jquery-1.11.0.min.js' | asset_source: '/assets/'}}"></script>
+    <script src="{{ 'bootstrap.min.js' | asset_source: '/assets/'}}"></script>
+    <script src="{{ 'jquery.cookie.js' | asset_source: '/assets/'}}"></script>
+    <!-- // <script src="js/jquery-1.11.0.min.js"></script> 
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/front.js"></script>-->
+
+    
+
+    <!-- owl carousel -->
+    <script src="{{ 'owl.carousel.min.js' | asset_source: '/assets/'}}"></script>
+    <!-- // <script src="js/owl.carousel.min.js"></script> -->
+    <script src="{{ 'jquery.session.js' | asset_source: '/assets/'}}"></script>
+    {{ content_for_header }}
+    {{ content_for_javascript }}
+
+    <style type="text/css">
+        .navbar-nav li a {
+            padding-top: 8px!important;
+            padding-bottom: 8px!important
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- *** NAVBAR ***
+_________________________________________________________ -->
+
+    <div class="navbar navbar-default navbar-fixed-top yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+
+                <div class="navbar-buttons">
+                    <button type="button" class="navbar-toggle btn-primary" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-align-justify"></i>
+                    </button>
+                    <button type="button" class="navbar-toggle btn-default" href="/cart">
+                        <i class="fa fa-shopping-cart"></i>  <span class="sr-only">{{ total_items}} items no carrinho</span>
+                    </a>
+                    <button type="button" class="navbar-toggle btn-default" data-toggle="collapse" data-target="#search">
+                        <span class="sr-only">Toggle search</span>
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <button type="button" class="navbar-toggle btn-default" data-toggle="modal" data-target="#login-modal">
+                        <span class="sr-only">User login</span>
+                        <i class="fa fa-users"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!--/.navbar-header -->
+
+            <div class="navbar-collapse collapse" id="navigation">
+
+                <ul class="nav navbar-nav navbar-left">
+                    <a class="navbar-brand home" href="/">
+                        <img src={{ 'logo.png' | asset_source }} alt="Minimal logo" class="hidden-xs hidden-sm">
+                        <img src="{{ 'logo-small.png' | asset_source }}" alt="Minimal logo" class="visible-xs visible-sm">
+                        <!-- <span class="sr-only">Minimal - go to homepage</span> -->
+                    </a>
+
+                     <li><a href="/">Home</a></li>
+<!-- <li class="active dropdown normal-dropdown"><a href="/" class="dropdown-toggle" data-toggle="dropdown">Home</a> -->
+<!--                     {% for category in categories %}
+                         
+                        <li class="dropdown yamm-fw">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{category.name}}<b class="caret"></b></a>
+                        {% if  category.has_children? %}
+                            <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h3>Clothing</h3>
+                                            <ul>
+                                                {% for children in category.children %}
+                                                    <li><a href="{{category.url}}">{{category.name}}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        {% endif %}
+                        </li>
+                    {%endfor%} -->
+
+                    {% assign categoryes = categories | sort: 'name' %}
+                    {% for category in categoryes %}
+                        {% if  category.has_children? %}
+                            <li class="dropdown yamm-fw">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }}<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="yamm-content">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <ul>
+                                                {% assign counter = 0 %}
+                                                {% assign childrens = category.children | sort: 'name' %}
+                                                {% for children in childrens %}
+                                                    {% if counter == '6' %}
+                                                        </ul>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                        <ul>
+                                                        {% assign counter = 0 %}
+                                                    {% endif %}
+                                                        <li><a href="{{ children.url }}">{{ children.name }}</a></li>
+                                                    {% capture temp %}{{ counter | plus:1 }}{% endcapture %}
+                                                    {% assign counter = temp %}
+                                                {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="footer clearfix hidden-xs">
+                                            <h4 class="pull-right">
+                                                <small> <a style='color:#EAB6D9' href="{{ category.url }}">Ver todos os produtos de</a></small>
+                                                {{ category.name }}
+                                            </h4>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li><a href="{{ category.url }}">{{ category.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    <!-- <li><a href="contact.html">Contact</a>        -->
+                    </li>
+                    <div class="navbar-collapse collapse right" id="basket-overview">
+                        <a href="/cart" id='cart' class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">{{ current_cart.amount }} items <span class="hidden-md">no carrinho </span></span></a>
+                        <button type="button" class="btn navbar-btn btn-default" data-toggle="collapse" data-target="#search">
+                            <span class="sr-only">Toggle search</span>
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <button type="button" class="btn navbar-btn btn-default" data-toggle="modal" data-target="#login-modal">
+                            <span class="sr-only">User login</span>
+                            <i class="fa fa-users"></i>
+                        </button>
+                    </div>
+                </ul>
+
+            </div>
+            <!--/.nav-collapse -->
+
+            <div class="collapse clearfix" id="search">
+                <form action='/products/search' class="navbar-form" role="search" method="post">
+                    <input type="hidden" value="{{ _csrf_token }}" name="authenticity_token">
+                    <div class="input-group">
+                        <input name="name" type="text" class="form-control" placeholder="Procurar Produto">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+
+    </div>
+    <!-- /#navbar -->
+
+    <!-- *** NAVBAR END *** -->
+
+    <!-- *** LOGIN MODAL ***
+_________________________________________________________ -->
+
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="Login">Acesso ao Cliente</h4>
+                </div>
+                {% unless user_signed? %}
+                    <div class="modal-body">
+                        <form action="/users/login" method="post">
+                            <input type="hidden" value="{{csrf_token}}" name="authenticity_token">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="email" placeholder="email" name='[user]email'>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" placeholder="password" name='[user]password'>
+                            </div>
+
+                            <p class="text-center">
+                                <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
+                            </p>
+
+                        </form>
+
+                        <p class="text-center text-muted">Not registered yet?</p>
+                        <p class="text-center text-muted"><a href="register.html"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!</p>
+                    </div>
+                {% else %}
+                    <div class="modal-body">
+                        Acesse <a href="/client">Sua conta</a> ou <a rel="nofollow", href="/client/logout" data-method="delete"> Sair</a>
+                    </div>
+
+                {% endunless %}
+
+            </div>
+        </div>
+    </div>
+
+    <!-- *** LOGIN MODAL END *** -->
+
+    <!-- *** ALL *** -->
+
+    <div id="all">
+        <div class="container" style='margin-top:30px'>
+            <div class="alert alert-warning" role="alert" style="display:none">
+                <button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <strong>
+                    <span class='message'>
+                    </span>
+                </strong>
+            </div>
+            <div class="alert alert-success" role="alert" style="display:none">
+                <button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <strong>
+                    <span class='message'>
+                    </span>
+                </strong>
+            </div>
+        </div>
+        <!-- *** CONTENT FOR LAYOUT (SYSTEM ECOMMERCE)  -->
+        {{ content_for_layout }}
+        <!-- *** END FOR CONTENT FOR LAYOUT -->
+
+
+        <!-- *** FOOTER ***
+_________________________________________________________ -->
+
+        <div id="footer">
+            <script>
+                $(document).ready(function() {
+                    $('button.close').on('click', function(){
+                        $(this).parents('div.alert').fadeOut('300');
+                    })
+                })
+
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('body').css('padding-top',($('div.navbar').height() - 10));
+                })
+            </script>
+
+
+            <div class="container">
+                <div class="col-md-3 col-sm-6">
+                    <h4>Páginas</h4>
+                    <ul>
+                        {% for page in pages %}
+                            <li><a href={{ page.url }} target="_self">{{ page.name }}</a></li>
+                        {% endfor %}
+<!-- 
+                        <li><a href="text.html">About us</a>
+                        </li>
+                        <li><a href="text-left.html">Terms and conditions</a>
+                        </li>
+                        <li><a href="faq.html">FAQ</a>
+                        </li>
+                        <li><a href="contact.html">Contact us</a>
+                        </li>
+ -->                    </ul>
+
+                    <hr>
+
+<!--                     <h4>User section</h4>
+
+                    <ul>
+                        <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+                        </li>
+                        <li><a href="register.html">Regiter</a>
+                        </li>
+                    </ul>
+
+                    <hr class="hidden-md hidden-lg hidden-sm">
+ -->
+                </div>
+                <!-- /.col-md-3 -->
+
+                <div class="col-md-3 col-sm-6">
+   <!--                  <h4>Nóticias</h4>
+                    {% for notice in notices %}
+                    <span class="conteudo_chamadas">
+                        <ul>
+                            <a href="{{ notice.url }}"><li>
+                                {{ notice.created_at}}
+                                -
+                                <strong>
+                                    {{ notice.name }} 
+                                </strong>
+                            </li>
+                            <li> {{ notice.body_strip }} </li>
+                        </a></ul>
+                    </span>
+                    {% endfor %} -->
+
+
+<!--                     <h4>Top categories</h4>
+
+
+                    <h5>Men</h5>
+
+                    <ul>
+                        <li><a href="category.html">T-shirts</a>
+                        </li>
+                        <li><a href="category.html">Shirts</a>
+                        </li>
+                        <li><a href="category.html">Accessories</a>
+                        </li>
+                    </ul>
+
+                    <h5>Ladies</h5>
+                    <ul>
+                        <li><a href="category.html">T-shirts</a>
+                        </li>
+                        <li><a href="category.html">Skirts</a>
+                        </li>
+                        <li><a href="category.html">Pants</a>
+                        </li>
+                        <li><a href="category.html">Accessories</a>
+                        </li>
+                    </ul>
+
+                    <hr class="hidden-md hidden-lg">
+ -->
+                </div>
+                <!-- /.col-md-3 -->
+
+                <div class="col-md-3 col-sm-6">
+
+                    <h4>Onde encontrar a gente</h4>
+
+                    <p><strong>WhatsApp (11) 9999-9999</strong>
+                        <br>(11) 1111-1111 
+                        <strong>seu-email@email.com.br</strong>
+                    </p>
+
+                    <!-- <a href="contact.html">Go to contact page</a> -->
+
+                    <hr class="hidden-md hidden-lg hidden-sm">
+
+                </div>
+                <!-- /.col-md-3 -->
+
+
+
+                <div class="col-md-3 col-sm-6">
+
+                    <!-- <h4>Get the news</h4> -->
+
+                    <!-- <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p> -->
+
+                    <hr>
+
+                    <h4>Fique em contato</h4>
+
+                    <p class="social">
+                        <a href="facebook/imentore"><i class="fa fa-facebook-square"></i></a>
+                        <a href="instagram.com/imentore"><i class="fa fa-instagram"></i></a>
+                    </p>
+
+
+                </div>
+                <!-- /.col-md-3 -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#footer -->
+
+        <!-- *** FOOTER END *** -->
+
+        <!-- *** COPYRIGHT ***
+_________________________________________________________ -->
+
+        <div id="copyright">
+            <div class="container">
+                <div class="col-md-12">
+                    <p class="pull-left">&copy; 2015 <a href="http://www.imentore.com.br" class="external">Imentore Ecommerce</a>.</p>
+                    <p class="pull-right">
+        <!--                 <img src="img/payment.png" alt="payments accepted"> -->
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <!-- /#copyright -->
+
+        <!-- *** COPYRIGHT END *** -->
+
+
+
+    </div>
+
+
+{{ content_for_footer }}
+</body>
+
+</html>

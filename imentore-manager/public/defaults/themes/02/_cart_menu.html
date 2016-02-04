@@ -1,0 +1,80 @@
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+                        <i class="fa fa-shopping-cart"> </i> 
+                        <span class="cartRespons"> {{current_cart.amount}} </span> 
+                        <b class="caret"> </b> 
+                    </a>
+                    <div class="dropdown-menu col-lg-4 col-xs-12 col-md-4 ">
+                        <div class="w100 miniCartTable scroll-pane">
+                            <table>
+                                <tbody>
+                                {% for item in current_cart.items %}
+                                <tr class="miniCartProduct">
+                                    <td style="width:20%" class="miniCartProductThumb">
+                                        <div><a href="product-details.html"> 
+                                            <img src="{{ item.product | product_image_url :'original' }}" alt="{{item.name}}">
+                                        </a></div>
+                                    </td>
+                                    <td style="width:40%">
+                                        <div class="miniCartDescription">
+                                            <h4><a href="product-details.html"> {{item.product.name}} </a></h4>
+                                            <span class="size">{{item.variant.options_name}}</span>
+
+                                            <div class="price"><span> {{item.value}} </span></div>
+                                        </div>
+                                    </td>
+                                    <td style="width:10%" class="miniCartQuantity"><a> X {{item.quantity}}</a></td>
+                                    <td style="width:15%" class="miniCartSubtotal"><span> {{item.amount}}</span></td>
+                                    <td style="width:5%" class="delete"><a> {{ item | cart_remove_item :'fa fa-trash-o'}} </a></td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--/.miniCartTable-->
+
+                        <div class="miniCartFooter text-right">
+              <h3 class="text-right subtotal"> Subtotal: {{current_cart.amount}} </h3>
+                            <a class="btn btn-sm btn-danger" href="/cart"> 
+                                <i class="fa fa-shopping-cart"> </i> Carrinho
+                            </a>
+                            <!-- <a class="btn btn-sm btn-primary"> CHECKOUT </a></div> -->
+                        <!--/.miniCartFooter-->
+
+                    </div>
+                    <!--/.dropdown-menu-->
+                    
+                    <script>     
+    /*==================================
+     Custom Scrollbar for Dropdown Cart
+     ====================================*/
+    $(".scroll-pane").mCustomScrollbar({
+        advanced: {
+            updateOnContentResize: true
+
+        },
+
+        scrollButtons: {
+            enable: false
+        },
+
+        mouseWheelPixels: "200",
+        theme: "dark-2"
+
+    });
+
+
+    $(".smoothscroll").mCustomScrollbar({
+        advanced: {
+            updateOnContentResize: true
+
+        },
+
+        scrollButtons: {
+            enable: false
+        },
+
+        mouseWheelPixels: "100",
+        theme: "dark-2"
+
+    });
+</script>

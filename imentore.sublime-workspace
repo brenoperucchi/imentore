@@ -527,10 +527,34 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 127.0,
-		"last_filter": "new fi",
+		"height": 167.0,
+		"last_filter": "runtest",
 		"selected_items":
 		[
+			[
+				"runtest",
+				"RubyTest: Run Single Test"
+			],
+			[
+				"pakcage remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"run test",
+				"RubyTest: Run Single Test"
+			],
+			[
+				"run",
+				"RubyTest: Run Single Test"
+			],
+			[
+				"package insta",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"File: Delete"
+			],
 			[
 				"new fi",
 				"File: New File Relative to Current View"
@@ -853,57 +877,23 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-auth/app",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-auth/app/controllers",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-auth/app/controllers/imentore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-auth/app/controllers/imentore/manager",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/app",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/app/models",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/controllers",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/controllers/imentore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/controllers/imentore/admin",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/views",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/views/imentore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/views/layouts",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/lib",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/lib/imentore-core",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-dashboard/app",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-dashboard/app/controllers",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-dashboard/app/controllers/imentore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers/imentore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/services/imentore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/admin",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/admin/orders",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/stores",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/config",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore/manager",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/models",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/models/imentore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/models/imentore/manager",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/imentore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/imentore/manager",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/imentore/manager/assets",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/imentore/manager/stores",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/imentore/manager/templates",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/imentore/manager/themes",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/layouts",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/lib/imentore-manager"
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore",
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce",
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/spec",
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/spec/models",
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/spec/models/imentore"
 	],
 	"file_history":
 	[
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/spec/models/imentore/cart_spec.rb",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/RubyTest.sublime-settings",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/cart.rb",
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-base/Gemfile",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/Terminal.sublime-settings",
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/Gemfile",
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore.sublime-project",
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-testing/lib/imentore-testing/spec_helper.rb",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/views/layouts/inspinia/_navigation.html.slim",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-auth/app/controllers/imentore/manager/sessions_controller.rb",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/db/migrate/20160121230832_add_content_type_to_admin_imentore_assets.rb",
@@ -971,7 +961,6 @@
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/views/imentore/site/_register.html.slim",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/.gitignore",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore.sublime-project",
-		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/Gemfile",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/.gitignore",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/carts/show.html.slim",
@@ -1023,15 +1012,7 @@
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/config/initializers/imentore_initializer.rb",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/presenters/imentore/cart_item_drop.rb",
 		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/address.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/app/helpers/checkouts_helper.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/address.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/db/migrate/20160105012321_add_different_billing_address_to_orders.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/inputs/list_group_radio_buttons_input.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/inputs/radio_buttons_left_label_input.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/delivery_handle.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/order.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/config/initializers/simple_form_bootstrap.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/app/views/imentore/admin/templates/new.html.slim"
+		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/app/helpers/checkouts_helper.rb"
 	],
 	"find":
 	{
@@ -1177,6 +1158,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"bye",
 			"asset",
 			"set_content_type",
 			"AdminImentore",
@@ -1303,8 +1285,7 @@
 			"método",
 			"Método",
 			"método",
-			"Método",
-			"método de pagametno"
+			"Método"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1449,7 +1430,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 154.0
+		"height": 584.0
 	},
 	"output.find_results":
 	{
@@ -1468,6 +1449,18 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"cartspec",
+				"imentore-ecommerce/spec/models/imentore/cart_spec.rb"
+			],
+			[
+				"gemfi",
+				"imentore-base/Gemfile"
+			],
+			[
+				"gemfile",
+				"imentore-ecommerce/Gemfile"
+			],
 			[
 				"engine.rb",
 				"imentore-manager/lib/imentore-manager/engine.rb"
@@ -1961,24 +1954,12 @@
 				"imentore-cms/lib/liquid_filter_paginate.rb"
 			],
 			[
-				"gemfi",
-				"imentore-base/Gemfile"
-			],
-			[
 				"cart",
 				"imentore-core/app/assets/stylesheets/cart.css"
 			],
 			[
 				"cart.js",
 				"imentore-core/app/assets/javascripts/cart.js"
-			],
-			[
-				"customerjs",
-				"imentore-core/app/assets/javascripts/inspinia/customers.js"
-			],
-			[
-				"customernew",
-				"imentore-auth/app/views/imentore/customers/new.html.slim"
 			]
 		],
 		"width": 0.0

@@ -1,0 +1,341 @@
+<div id="content">
+    <div class="container">
+        <div class="col-md-12">
+<!--             <ul class="breadcrumb">
+                <li><a href="#">Home</a>
+                </li>
+                <li><a href="#">Ladies</a>
+                </li>
+                <li><a href="#">Tops</a>
+                </li>
+                <li>White Blouse Armani</li>
+            </ul>
+ -->            <div class="box text-center">
+
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <h1>{{ product.name }}</h1>
+                        <p class="text-muted">{{product.description}}</p>
+                        <!-- <p class="goToDescription"><a href="#details" class="scroll-to">Clique aqui para rolar para ver detalhes do Produtos e Tamanhos</a></p> -->
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- *** LEFT COLUMN ***
+    _________________________________________________________ -->
+
+        <div class="col-md-12">
+
+            <div class="row" id="productMain">
+                <div class="col-sm-6">
+                    <div id="mainImage">
+                        <img src="{{ product | product_image_url :'original' }}" alt="" class="img-responsive">
+                    </div>
+                    {% if product.variant_deal? %}
+                    <div class="ribbon sale">
+                        <div class="theribbon">PROMO</div>
+                        <div class="ribbon-background"></div>
+                    </div>
+                    {% endif %}
+                    <!-- /.ribbon -->
+
+<!--                     <div class="ribbon new">
+                        <div class="theribbon">NEW</div>
+                        <div class="ribbon-background"></div>
+                    </div>
+ -->                    <!-- /.ribbon -->
+
+                </div>
+                <div class="col-sm-6">
+                    <div class="box">
+                        <form id="create_cart" method="post" action="/cart" accept-charset="UTF-8">
+                          <input type="hidden" value="{{ _csrf_token }}" name="authenticity_token"/>
+                          <input name="_method" type="hidden" value="post">
+                          <input type="hidden" value="" name="utf8"/>
+                          <input name='[item]product_id' type='hidden' data-id='{{product.id}}', value='{{product.id}}'>
+                          <input name='[item]quantity' type='hidden', value='1'>
+                            <div class="sizes">
+                                <h3>Variações disponíveis</h3>
+                                {% assign counter = 0 %}
+                                <select id='variants' name="[item]variant_id" class="form-control">
+                                    {% for variant in variants %}
+                                        {% for option in variant.options %}
+                                        <!-- <label for="{{ variant.value }}"> -->
+                                            <option value="{{variant.id}}" data-value="{{variant.value}}" id="{{variant.id}}">{{ option.value }}</option>
+
+
+<!--                                             {% if counter == 0 %}                
+                                                <a href="#" id='variant' class='active'>{{ option.value }}</a>
+                                            {% else %}
+                                                <a href="#" id='variant'>{{ option.value }}</a>
+                                            {% endif %}
+ --><!--                                             <input type="radio" id="variant_id" data-id='{{variant.id}}' name="size" value="{{ variant.price }}" class="size-input">
+                                            <input id='product_id' type='hidden' data-id='{{variant.product.id}}'>
+ -->                                        <!-- </label> -->
+                                        {% endfor %}
+                                        {% capture temp %}{{ counter | plus:1 }}{% endcapture %}
+                                        {% assign counter = temp %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <p class="price">{{ variants.first.price }}</p>
+
+
+                            <p class="text-center">
+                                <button type="submit" class="btn btn-primary" id="add_cart"><i class="fa fa-shopping-cart"></i> Adicionar</button>
+                                <!-- <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Add to wishlist"><i class="fa fa-heart-o"></i></button> -->
+                            </p>
+                        </form>
+                    </div>
+                    <div class="row" id="thumbs">
+                        {% for image in images %}
+                        <div class="col-xs-4">
+                            <a href="{{ image | image_source :'original' }}" class="thumb">
+                                <img src="{{ image | image_source :'larger' }}" alt="" class="img-responsive">
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                 </div>
+            </div>
+
+
+<!--             <div class="box" id="details">
+                <p>
+                    <h4>Product details</h4>
+                    <p>White lace top, woven, has a round neck, short sleeves, has knitted lining attached</p>
+                    <h4>Material & care</h4>
+                    <ul>
+                        <li>Polyester</li>
+                        <li>Machine wash</li>
+                    </ul>
+                    <h4>Size & Fit</h4>
+                    <ul>
+                        <li>Regular fit</li>
+                        <li>The model (height 5'8" and chest 33") is wearing a size S</li>
+                    </ul>
+
+                    <blockquote>
+                        <p><em>Define style this season with Armani's new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em>
+                        </p>
+                    </blockquote>
+            </div>
+ -->
+<!--             <div class="box social" id="product-social">
+                <h4>Show it to your friends</h4>
+                <p>
+                    <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
+                    <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                </p>
+            </div>
+ -->
+<!--             <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="box">
+                        <h3>You may also like these products</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="product">
+                        <div class="image">
+                            <a href="#">
+                                <img src="img/product2.jpg" alt="" class="img-responsive image1">
+                            </a>
+                        </div>
+                        <div class="text">
+                            <h3>Fur coat</h3>
+                            <p class="price">$143</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="product">
+                        <div class="image">
+                            <a href="#">
+                                <img src="img/product3.jpg" alt="" class="img-responsive image1">
+                            </a>
+                        </div>
+                        <div class="text">
+                            <h3>Fur coat</h3>
+                            <p class="price">$143</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="product">
+                        <div class="image">
+                            <a href="#">
+                                <img src="img/product1.jpg" alt="" class="img-responsive image1">
+                            </a>
+                        </div>
+                        <div class="text">
+                            <h3>Fur coat</h3>
+                            <p class="price">$143</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="box">
+                        <h3>Products viewed recently</h3>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="product">
+                        <div class="image">
+                            <a href="#">
+                                <img src="img/product3.jpg" alt="" class="img-responsive image1">
+                            </a>
+                        </div>
+                        <div class="text">
+                            <h3>Fur coat</h3>
+                            <p class="price">$143</p>
+                        </div>
+                    </div>`
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="product">
+                        <div class="image">
+                            <a href="#">
+                                <img src="img/product1.jpg" alt="" class="img-responsive image1">
+                            </a>
+                        </div>
+                        <div class="text">
+                            <h3>Fur coat</h3>
+                            <p class="price">$143</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="product">
+                        <div class="image">
+                            <a href="#">
+                                <img src="img/product2.jpg" alt="" class="img-responsive image1">
+                            </a>
+                        </div>
+                        <div class="text">
+                            <h3>Fur coat</h3>
+                            <p class="price">$143</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+ -->        <!-- /.col-md-9 -->
+
+
+        <!-- *** LEFT COLUMN END *** -->
+
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#content -->
+
+<script src="{{ 'front.js' | asset_source: '/assets/'}}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // $("a[id='variant']").on('click', function(){
+        //     var price = $(this).nextAll('input#variant_id').val()
+        //     $('p.price').html(price);
+        // })
+
+        $('select#variants').on('change', function(){
+            var price = $(this).find('option:selected').data('value')
+            $('p.price').html(price);
+        })
+
+
+        $('#add_cart').on('click', function(){
+            // var variant_id = $("a[id='variant'].active").nextAll('input#variant_id').data('id')
+            var variant_id = $("select#variants option:selected" ).attr('id')
+            var product_id = $('input#product_id').data('id')
+            add_cart(variant_id, product_id, 1)
+        })
+
+        function add_cart(variant_id, product_id, quantity) {
+
+          $.ajax({
+            type:'POST',
+            cache: false,
+            data: {'[item][variant_id]':variant_id, '[item][product_id]':product_id, '[item][quantity]':quantity},
+            dataType:'json',
+            url:'/cart',
+            beforeSend: function() {
+              $('div.alert').hide()
+              // $('span#loading').html('<img src="images/site/loading.gif" />'); 
+            },
+            error: function(data){
+              data = JSON.parse(data.responseText)
+              $('div.alert-warning').show()
+              $('div.alert-warning').find('span.message').text(data.message.alert)
+
+            },
+            complete: function(data,txt) {
+              // $('span#loading').html(''); 
+            },
+            success: function(data) { 
+              $('div.alert-success').show()
+              $('div.alert-success').find('span.message').text(data.message.success)
+              $('span.hidden-sm').text(data.total_items + ' items no carrinho')          
+                 var check = function(){
+                     if($('a#cart').hasClass('active')){
+                        $('a#cart').removeClass('active')
+                     }
+                     else {
+                         setTimeout(check, 500);
+                        $('a#cart').addClass('active')
+                     }
+                 }
+                 check();            }
+          })
+        }
+          
+        // product index
+        $('#add_to_cart').bind('click',function(){
+           if ($(this).attr('id') == "no_cart"){
+           }else{
+            var quantity = '1'
+            var product_id = $(this).first().children('#product_id').val()
+            var variant_id = $(this).first().children('#variant_id').val()
+            render_add_to_cart(variant_id, product_id, quantity)
+          }
+        })
+        
+        // product show
+        $('a#add_to_cart').bind('click',function(){
+          if ($(this).attr('id') == "no_cart"){
+          }else{
+            var quantity = $('input#quantity').val()
+            var variant_id = $('select#options').find('option:selected').val()      
+            var product_id = $('input#product_id:hidden').val()
+            render_add_to_cart(variant_id, product_id, quantity)
+          }
+        })
+
+    });
+
+
+</script>
