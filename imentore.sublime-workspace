@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"temp",
+				"templates"
+			],
+			[
+				"af",
+				"aftd	after_destroy"
+			],
+			[
+				"hm",
+				"hmt	has_many (through)"
+			],
+			[
+				"layo",
+				"layout"
+			],
+			[
+				"asset",
+				"asset_file"
+			],
+			[
+				"them",
+				"theme_directory"
+			],
+			[
+				"imentore",
+				"imentore-manager"
+			],
+			[
+				"send",
+				"send_emails_params"
+			],
+			[
+				"la",
+				"layout_template"
+			],
+			[
+				"layou",
+				"layout_id"
+			],
+			[
 				"invoice",
 				"invoice_attributes"
 			],
@@ -140,16 +180,8 @@
 				"folder_name"
 			],
 			[
-				"asset",
-				"asset_folder"
-			],
-			[
 				"asse",
 				"assets"
-			],
-			[
-				"hm",
-				"hm	has_many"
 			],
 			[
 				"prod",
@@ -482,38 +514,6 @@
 			[
 				"ledgers",
 				"ledgers_path"
-			],
-			[
-				"primar",
-				"primary_menu"
-			],
-			[
-				"prim",
-				"primary_menu"
-			],
-			[
-				"purc",
-				"purchase"
-			],
-			[
-				"addres",
-				"addresses"
-			],
-			[
-				"pur",
-				"purchase"
-			],
-			[
-				"supp",
-				"supplier"
-			],
-			[
-				"p",
-				"purchase"
-			],
-			[
-				"ger",
-				"generate_token"
 			]
 		]
 	},
@@ -527,57 +527,153 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 167.0,
-		"last_filter": "runtest",
+		"height": 87.0,
+		"last_filter": "package remove",
 		"selected_items":
 		[
 			[
-				"runtest",
-				"RubyTest: Run Single Test"
-			],
-			[
-				"pakcage remove",
+				"package remove",
 				"Package Control: Remove Package"
 			],
 			[
-				"run test",
-				"RubyTest: Run Single Test"
+				"rspec",
+				"Build With: RSpec"
 			],
 			[
-				"run",
-				"RubyTest: Run Single Test"
+				"	",
+				"Build With: RSpec"
+			],
+			[
+				"package list",
+				"Package Control: List Packages"
+			],
+			[
+				"terminal",
+				"Open in terminal"
+			],
+			[
+				"rails",
+				"Snippet: Require rails_helper"
+			],
+			[
+				"",
+				"Build With: RSpec"
+			],
+			[
+				"package ",
+				"Package Control: List Packages"
+			],
+			[
+				"package",
+				"Preferences: Browse Packages"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Discover Packages"
 			],
 			[
 				"package insta",
 				"Package Control: Install Package"
 			],
 			[
-				"",
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"delete",
 				"File: Delete"
 			],
 			[
-				"new fi",
-				"File: New File Relative to Current View"
+				"dupli",
+				"File: Duplicate"
+			],
+			[
+				"duplica",
+				"File: Duplicate"
+			],
+			[
+				"package inst",
+				"Package Control: Install Package"
+			],
+			[
+				"pakcage ",
+				"Package Control: Install Package"
+			],
+			[
+				"yaml",
+				"Set Syntax: YAML"
+			],
+			[
+				"rename",
+				"File: Rename"
 			],
 			[
 				"new file",
 				"File: New File Relative to Current View"
 			],
 			[
-				"packa",
+				"package install",
 				"Package Control: Install Package"
 			],
 			[
-				"rails",
+				"pakcage remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"ruby rais",
 				"Set Syntax: Ruby on Rails"
+			],
+			[
+				"run",
+				"RubyTest: Run Single Test"
+			],
+			[
+				"ruby",
+				"Set Syntax: Ruby"
+			],
+			[
+				"test conso",
+				"Set Syntax: TestConsole"
+			],
+			[
+				"run test",
+				"RubyTest: Switch between code and test"
+			],
+			[
+				"new ",
+				"File: New File Relative to Current View"
+			],
+			[
+				"duplic",
+				"File: Duplicate"
+			],
+			[
+				"ruby test",
+				"RubyTest: Run Single Test"
+			],
+			[
+				"pakcage",
+				"Package Control: List Packages"
+			],
+			[
+				"ruby ",
+				"RubyTest: Verify Syntax"
+			],
+			[
+				"runtest",
+				"RubyTest: Run Single Test"
+			],
+			[
+				"package ins",
+				"Package Control: Install Package"
+			],
+			[
+				"new fi",
+				"File: New File Relative to Current View"
 			],
 			[
 				"convert",
 				"HTML2Slim: Convert clipboard content"
-			],
-			[
-				"delete",
-				"File: Delete"
 			],
 			[
 				"html",
@@ -590,10 +686,6 @@
 			[
 				"java",
 				"Set Syntax: JavaScript"
-			],
-			[
-				"package",
-				"Preferences: Browse Packages"
 			],
 			[
 				"pack",
@@ -624,16 +716,8 @@
 				"Preferences: Package Control Settings – User"
 			],
 			[
-				"pakcage",
-				"Preferences: Package Control Settings – Default"
-			],
-			[
 				"pkac",
 				"Package Control: Discover Packages"
-			],
-			[
-				"rename",
-				"File: Rename"
 			],
 			[
 				"renam",
@@ -642,10 +726,6 @@
 			[
 				"want",
 				"Snippet: wants.format"
-			],
-			[
-				"ruby",
-				"Set Syntax: Ruby on Rails"
 			],
 			[
 				"ru",
@@ -732,10 +812,6 @@
 				"Package Control: Install Package"
 			],
 			[
-				"Package Control: ",
-				"Package Control: List Packages"
-			],
-			[
 				"js",
 				"Set Syntax: JavaScript (Rails)"
 			],
@@ -761,10 +837,6 @@
 			],
 			[
 				"paclage",
-				"Package Control: Install Package"
-			],
-			[
-				"package ",
 				"Package Control: Install Package"
 			],
 			[
@@ -810,10 +882,6 @@
 			[
 				"cucumber",
 				"Set Syntax: Cucumber Steps"
-			],
-			[
-				"rspec",
-				"Set Syntax: RSpec"
 			],
 			[
 				"g",
@@ -877,17 +945,129 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/brenoperucchi/Google Drive/03-Apps/imentore",
-		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce",
-		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/spec",
-		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/spec/models",
-		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/spec/models/imentore"
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore"
 	],
 	"file_history":
 	[
-		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/spec/models/imentore/cart_spec.rb",
-		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/RubyTest.sublime-settings",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore.sublime-project",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/Gemfile",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/config/initializers/better_config.rb",
+		"//Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/image.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-manager/app/models/imentore/manager/asset.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/order_asset.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/app/models/imentore/asset.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/app/models/old/image.rb",
 		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"//Users/brenoperucchi/.rbenv/versions/2.2.0/gemsets/imentore/gems/activerecord-4.0.13/lib/active_record/attribute_methods.rb",
+		"//Users/brenoperucchi/.rbenv/versions/2.2.0/gemsets/imentore/gems/activemodel-4.0.13/lib/active_model/attribute_methods.rb",
+		"/usr/local/bin/file",
+		"/usr/local/bin/+439",
+		"/Users/brenoperucchi/Downloads/subl-handler-master/README.md",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/spec/integration/imentore/checkouts_spec.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-manager/app/models/imentore/manager/theme.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/lib/imentore-testing/factories/stores.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/spec/integration/imentore/stores_spec.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/lib/imentore-testing/rails_helper.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/payment_method/moip.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-manager/public/defaults/themes/initializer.yml",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/.rspec",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/app/uploaders/file_uploader.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/image.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/app/models/imentore/theme.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/app/models/imentore/asset_folder.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-manager/app/models/imentore/manager/send_email.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/app/models/imentore/template.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/spec/models/imentore/theme_spec.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-core/app/views/layouts/site.html.slim",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-core/app/controllers/imentore/site_controller.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/controllers/imentore/stores_controller.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/views/layouts/checkout.html.slim",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-manager/public/defaults/send_emails/order_placed.yml",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/lib/send_emails/order_placed.yml",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-core/lib/imentore-core/base_helper.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/vendor/assets/javascripts/file-upload/js/jquery.fileupload-angular.js",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/config/environments/test.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/views/imentore/stores/new.html.slim",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-core/app/views/imentore/site/_register.html.slim",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/Guardfile",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/delivery_method/base.rb",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/MacTerminal/MacTerminal.sublime-settings",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-core/app/views/imentore/site/_pricing.html.slim",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/spec/integration/imentore/check_store_spec.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/lib/imentore-testing/factories/check_store_spec.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/lib/send_emails/order_placed/content.html",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/MacTerminal.sublime-settings",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/order.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/store.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-manager/app/controllers/imentore/manager/themes_controller.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-manager/app/controllers/imentore/manager/send_emails_controller.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/app/controllers/application_controller.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-manager/app/views/layouts/manager.html.slim",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/Gemfile",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/delivery_method/sedex.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-manager/app/models/imentore/manager/store.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/spec/support/integration_helpers.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/features/support/env.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/spec/spec_helper.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-core/app/assets/javascripts/inspinia/application.js",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-core/app/assets/stylesheets/inspinia/application.css.scss",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/.watchr",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/RubyTest/RubyTest.sublime-settings",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/RubyTest/Default (OSX).sublime-keymap",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/shipping_method.html.slim",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/config/application.rb",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/Gemfile",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/Guardfile",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/controllers/imentore/checkouts_controller.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/payment_method/pagamento_digital.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/address_shipping.html.slim",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/views/imentore/carts/show.html.slim",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/config/routes.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/config/routes.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/test/performance/browsing_test.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/test/controllers/asset_folders_controller_test.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/lib/imentore-testing/spec_helper.rb.old",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/config/environment.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-cms/lib/liquid_filter_cart.rb",
+		"/Users/brenoperucchi/.rbenv/versions/2.2.0/gemsets/imentore/gems/actionpack-4.0.13/lib/action_dispatch/routing/route_set.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/lib/imentore-testing/spec_helper.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/tmp/spec-results/index.html",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/controllers/imentore/carts_controller.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/lib/imentore-testing/factories/themes.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/features/step_definitions/stores_steps.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/controllers/imentore/products_controller.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/db/migrate/20120416124628_create_templates.imentore_cms.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/lib/imentore-testing/factories/products.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/.rbenv-gemsets",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/RubyTest/Default.sublime-keymap",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/db/migrate/20120416124629_alter_themes_add_default.imentore_cms.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/Gemfile",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/RubyTest.sublime-settings",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/db/migrate/20120625185332_alter_themes_add_active.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/db/migrate/20120621005732_alter_customers_add_active.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/db/schema.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/db/migrate/20120503002954_create_customers.imentore_auth.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-auth/db/migrate/20120502232943_create_customers.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-dashboard/spec/dummy/db/migrate/20120510233845_alter_themes_add_default.imentore_cms.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/spec/spec_helper.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/spec/integration/imentore/checkouts_spec.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/spec/models/imentore/cart_spec.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/spec/models/imentore/Test Results",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/cart.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/db/migrate/20120309222106_add_hosting_to_domains.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/db/migrate/20090228122247_create_stores.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/spec/dummy/db/migrate/20120419000538_create_stores.imentore_ecommerce.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/imentore-testing.gemspec",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/spec/dummy/config/boot.rb",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-ecommerce/imentore-ecommerce.gemspec",
+		"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/lib/imentore-testing.rb",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/Terminality.sublime-settings",
+		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/brenoperucchi/.rb",
+		"/Users/brenoperucchi/.rbenv/versions/2.2.0/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb",
+		"/Users/brenoperucchi/.rbenv/versions/2.2.0/gemsets/imentore/gems/rspec-core-3.4.2/lib/rspec/core/configuration.rb",
+		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/spec/models/imentore/cart_spec.rb",
 		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-ecommerce/app/models/imentore/cart.rb",
 		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-base/Gemfile",
 		"/Users/brenoperucchi/Library/Application Support/Sublime Text 3/Packages/User/Terminal.sublime-settings",
@@ -896,133 +1076,34 @@
 		"/Users/brenoperucchi/Google Drive/03-Apps/imentore/imentore-testing/lib/imentore-testing/spec_helper.rb",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/views/layouts/inspinia/_navigation.html.slim",
 		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-auth/app/controllers/imentore/manager/sessions_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/db/migrate/20160121230832_add_content_type_to_admin_imentore_assets.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/db/schema.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/lib/liquid_filter.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/controllers/imentore/site_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore/manager/assets_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore/manager/base_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore/manager/stores_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore/manager/templates_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore/manager/themes_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/uploaders/admin_file_uploader.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/imentore/manager/assets/new.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/imentore/manager/templates/new.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/config/routes.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/lib/imentore-manager/engine.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/views/layouts/inspinia/layout_2.html.erb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/layouts/manager.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/views/imentore/manager/templates/edit.html.slim",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore/manager/stores_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/models/imentore/manager/theme.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-auth/app/controllers/imentore/customers_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/app/uploaders/file_uploader.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/db/migrate/20160121224429_add_content_type_to_admin_imentore_assets.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-auth/app/controllers/base_controller_slice.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore/manager/themes_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/lib/imentore-core/base_helper.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers/imentore/admin/stores_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-auth/app/controllers/imentore/admin/base_controller_slice.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers/imentore/stores_controller.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/views/layouts/inspinia/_navigation.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/payment_method.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore/manager/base_controller.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/models/imentore/manager/theme.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-manager/app/controllers/imentore/manager/dashboard_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers/imentore/base_controller_slice.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/shipping_method.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/config/locales/pt-BR.yml",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/_sidebar.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/payment_method.html.slim",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/lib/resolver.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/order.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/store.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-dashboard/app/controllers/imentore/manager/dashboard_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/controllers/imentore/admin/base_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/db/migrate/20160121194828_change_header_view_default_on_templates.rb",
-		"//Users/brenoperucchi/.rbenv/versions/2.2.0/gemsets/imentore/gems/actionpack-4.0.13/lib/action_controller/metal/rendering.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers/imentore/checkouts_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers/imentore/carts_controller.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/app/uploaders/file_uploader.rb",
-		"/private/etc/hosts",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/services/imentore/checkout_service.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/config/application.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/app/models/order_observer.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_custom.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/stores/new.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers/imentore/admin/payment_methods_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_cielo.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_pag_seguro.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_pagamento_digital.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/admin/payment_methods/_moip.html.slim",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers/imentore/checkouts_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/app/models/old/order.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/store.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/views/imentore/site/_register.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/.gitignore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore.sublime-project",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/Gemfile",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/.gitignore",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/carts/show.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/config/routes.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/lib/liquid_filter_cart.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/db/migrate/20160112185833_add_store_id_to_cart.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/cart.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/complete.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/config/initializers/liquid.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/config/environments/development.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/config/environments/production.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/image.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/presenters/imentore/cart_drop.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/_sidebar.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/vendor/assets/stylesheets/inspinia/ionRangeSlider/ion.rangeSlider.css",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/db/migrate/20160112185807_add_store_id_to_cart.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/address_shipping.html.slim",
-		"/Users/brenoperucchi/Desktop/Old Firefox Data/9llg9kyh.default/adblockplus/patterns.ini",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/_notification.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/layouts/checkout.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/app/models/old/store.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers/imentore/products_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/delivery.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/datatables/imentore/orders_datatable.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/controllers/imentore/admin/delivery_methods_controller.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/app/helpers/application_helper.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/admin/orders/index.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/lib/liquid/form_tag.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/lib/resolver.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/confirm.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/app/models/imentore/asset_folder.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/shipping_method.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/payment_method/pag_seguro.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/order[Conflict].rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/app/models/imentore/address.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/app/models/old/address.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/app/views/imentore/admin/assets/_new.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/app/views/imentore/admin/asset_folders/index.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/app/views/imentore/admin/asset_folders/_index.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-cms/app/views/imentore/admin/templates/index.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/product_variant.rb",
-		"/Users/brenoperucchi/.gitignore",
-		"/Users/brenoperucchi/.rbenv/versions/2.2.0/gemsets/imentore/bundler/gems/moip-ruby-fe58b8b99607/lib/moip/client.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/db/migrate/20160105211530_add_same_billing_address_to_orders.rb",
-		"/Users/brenoperucchi/.rbenv/versions/2.2.0/gemsets/imentore/bundler/gems/pagseguro-f14d5492a3db/lib/pag_seguro.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/payment_method/moip.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/models/imentore/payment_method/pagamento_digital.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/confirm.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/config/initializers/imentore_initializer.rb",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/presenters/imentore/cart_item_drop.rb",
-		"//Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-ecommerce/app/views/imentore/checkouts/address.html.slim",
-		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/app/helpers/checkouts_helper.rb"
+		"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/db/migrate/20160121230832_add_content_type_to_admin_imentore_assets.rb"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 43.0
 	},
 	"find_in_files":
 	{
 		"height": 114.0,
 		"where_history":
 		[
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/, *.rb",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/, *",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/, *.rb",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/, *_spec.*",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/, *_spec.*",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/, *_spec.rb",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/, *spec.br",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/, *spec.br",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/, *.rb",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-testing/, *.spec",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/, *.rb",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/db, *.rb",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/, *.rb",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/imentore-base/db, *",
+			"/Users/brenoperucchi/Google-Drive/03-Apps/imentore/, *",
+			"/Users/brenoperucchi/GoogleDrive/03-Apps/imentore/, *",
+			"/Users/brenoperucchi/Google Drive/03-Apps/imentore/, *",
 			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *",
 			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *.rb",
 			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *.slim",
@@ -1133,24 +1214,7 @@
 			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *.js",
 			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *.slim",
 			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *.rb",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *.slim",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/*",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/*",
-			"",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/*.*",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/*",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-core/, *.erb",
-			"",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/, *",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *.html",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *.slim",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/imentore-base/, *",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *",
-			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *.css",
-			""
+			"/Users/brenoperucchi/Google Drive/03 - Apps/imentore/, *.slim"
 		]
 	},
 	"find_state":
@@ -1158,6 +1222,86 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"remove_file!",
+			"%2F",
+			"  gem 'pry', \"0.10.3\"\n  gem 'pry-remote', \"0.1.7\"\n  gem 'pry-byebug', \"3.3.0\"\n  gem 'pry-meta'\n  gem 'pry-stack_explorer', \"0.4.9.2\"\n",
+			"better",
+			"betterError",
+			".send(template)",
+			"mount_uploader",
+			"template",
+			"#{base_directory}/",
+			"install_themes",
+			"local_themes",
+			"themes.to_s.rjust(2,'0')",
+			"rjust",
+			"init",
+			"yaml",
+			"file",
+			"asset",
+			"\"#{Rails.root}/",
+			"themes/",
+			"get",
+			"DatabaseCleaner",
+			"debug",
+			"expect",
+			"\"",
+			"\"	",
+			"\"",
+			"update",
+			"\"",
+			"update",
+			"admin_imentore_send_emails_path",
+			"AdminImentore",
+			"-",
+			"- ",
+			"pry",
+			"send_emails",
+			"emails",
+			"=",
+			"asset",
+			"save_and_open_page",
+			"jquery",
+			"guard",
+			"include Imentore::Core::Engine.routes.url_helpers",
+			"Imentore::Base::Engine.routes.url_helpers",
+			"Imentore::Core::Engine.routes.url_helpers",
+			"include Imentore::Core::Engine.routes.url_helpers",
+			"watir",
+			"rake",
+			"cucumber",
+			"layout_id",
+			"layout",
+			"layout_id",
+			"local_themes",
+			"File.open",
+			"install_local",
+			"install_store",
+			"admin_theme",
+			"File.open",
+			"create_defaults",
+			"Capybara",
+			"  gem \"capybara-webkit\", \"1.8.0\"\ncapybara",
+			"capybara",
+			"\"",
+			"config/environment",
+			":template",
+			"Template",
+			"template",
+			"green_layout",
+			"factory_definition",
+			"proc",
+			"  config.include Imentore::Core::Engine.routes.url_helpers\n  config.include Devise::TestHelpers, type: :controller\n",
+			"after",
+			"imentore_customers",
+			"admin_imentore_theme_id",
+			"admin_imentore_theme",
+			"admin_imentore_theme_id",
+			".should",
+			"testing",
+			"config.before(:suite) do\n  DatabaseCleaner.strategy = :truncation\nend\n\nconfig.before(:each) do\n  DatabaseCleaner.start\nend\n\nconfig.after(:each) do\n  DatabaseCleaner.clean\nend",
+			"use_transactional_fixtures",
+			"should",
 			"bye",
 			"asset",
 			"set_content_type",
@@ -1205,87 +1349,7 @@
 			"_params",
 			"_attributes:",
 			"nested",
-			"validate_checkout",
-			"def current_cart",
-			"cart",
-			"check_store",
-			"current_cart",
-			"@order",
-			"valid_stock?",
-			"cart_path",
-			"setting_before_order",
-			"binding.pry",
-			"cart",
-			"jquery_ujs",
-			"capture",
-			"@current_cart",
-			"def current_cart",
-			"product1.jpg",
-			"amount",
-			"Rails.env",
-			"endereço de envio",
-			"de envio",
-			"informação",
-			"def button_order_status",
-			"def button_status",
-			"label",
-			"def button_status",
-			"short2",
-			"complete_checkout",
-			"redirect_to complete_checkout_url(host: current_store.url_site, store_id: current_store.id, order_id: @order.id)",
-			"delivery",
-			"params",
-			"mailto",
-			"delivery_calculate",
-			"delivery",
-			".address",
-			"delivery.address",
-			"order",
-			"order = current_order",
-			"payment_url",
-			"start",
-			"setting_before_order",
-			"def setting_before_order",
-			"before_order_placed",
-			"set_order",
-			"render_",
-			"hidden",
-			"validate_of",
-			"valid_addresses?",
-			"valid_addresses",
-			"try(:",
-			"billing_address",
-			"name",
-			"before_order_placed",
-			"charged?",
-			"before_order_placed",
-			"different_billing_address",
-			"before_order_placed",
-			"order.delivery_calculate",
-			"authorize_client",
-			"verify_authenticity_token",
-			"authorize_client",
-			"alert",
-			"notification",
-			"different_billing_address",
-			"flash",
-			"confirm",
-			"number_with_price",
-			"number_with_pr",
-			"number_with_precision",
-			"number_with_precision ",
-			"next",
-			"back",
-			"voltar",
-			"set_order_cart_default",
-			"before_order_placed",
-			"set_order_cart_default",
-			"confirm",
-			"authorize_client",
-			"método",
-			"Método",
-			"método",
-			"Método"
+			"validate_checkout"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1399,7 +1463,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 32.0
+		"height": 35.0
 	},
 	"input":
 	{
@@ -1430,7 +1494,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 584.0
+		"height": 415.0
 	},
 	"output.find_results":
 	{
@@ -1440,7 +1504,7 @@
 	"project": "imentore.sublime-project",
 	"replace":
 	{
-		"height": 60.0
+		"height": 66.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1450,24 +1514,232 @@
 		"selected_items":
 		[
 			[
-				"cartspec",
-				"imentore-ecommerce/spec/models/imentore/cart_spec.rb"
-			],
-			[
 				"gemfi",
 				"imentore-base/Gemfile"
 			],
 			[
+				"better",
+				"imentore-base/config/initializers/better_config.rb"
+			],
+			[
+				"gemf",
+				"imentore-base/Gemfile"
+			],
+			[
+				"checkoutspec",
+				"imentore-testing/spec/integration/imentore/checkouts_spec.rb"
+			],
+			[
+				"gem",
+				"imentore-base/Gemfile"
+			],
+			[
+				"moip",
+				"imentore-ecommerce/app/models/imentore/payment_method/moip.rb"
+			],
+			[
+				"asset",
+				"imentore-cms/app/models/imentore/asset.rb"
+			],
+			[
+				"asset.rb",
+				"imentore-manager/app/models/imentore/manager/asset.rb"
+			],
+			[
+				"fileup",
+				"imentore-cms/app/uploaders/file_uploader.rb"
+			],
+			[
+				"folder.rb",
+				"imentore-cms/app/models/imentore/asset_folder.rb"
+			],
+			[
+				"templte.rb",
+				"imentore-cms/app/models/imentore/template.rb"
+			],
+			[
+				"assetfolder",
+				"imentore-cms/app/models/imentore/asset_folder.rb"
+			],
+			[
+				"theme.rb",
+				"imentore-cms/app/models/imentore/theme.rb"
+			],
+			[
+				"fileu",
+				"imentore-cms/app/uploaders/file_uploader.rb"
+			],
+			[
+				"sitecontro",
+				"imentore-core/app/controllers/imentore/site_controller.rb"
+			],
+			[
+				"storecontro",
+				"imentore-ecommerce/app/controllers/imentore/stores_controller.rb"
+			],
+			[
+				"railshelper",
+				"imentore-testing/lib/imentore-testing/rails_helper.rb"
+			],
+			[
+				"test.rb",
+				"imentore-base/config/environments/test.rb"
+			],
+			[
+				"storenew",
+				"imentore-ecommerce/app/views/imentore/stores/new.html.slim"
+			],
+			[
+				"register.",
+				"imentore-core/app/views/imentore/site/_register.html.slim"
+			],
+			[
+				"pricin",
+				"imentore-core/app/views/imentore/site/_pricing.html.slim"
+			],
+			[
+				"factorie",
+				"imentore-testing/lib/imentore-testing/factories/stores.rb"
+			],
+			[
 				"gemfile",
-				"imentore-ecommerce/Gemfile"
+				"imentore-base/Gemfile"
+			],
+			[
+				"applicationcontro",
+				"imentore-base/app/controllers/application_controller.rb"
+			],
+			[
+				"managerhtml",
+				"imentore-manager/app/views/layouts/manager.html.slim"
+			],
+			[
+				"themecontrol",
+				"imentore-manager/app/controllers/imentore/manager/themes_controller.rb"
+			],
+			[
+				"managersend_emai",
+				"imentore-manager/app/models/imentore/manager/send_email.rb"
+			],
+			[
+				"store.rb",
+				"imentore-ecommerce/app/models/imentore/store.rb"
+			],
+			[
+				"guard",
+				"imentore-testing/Guardfile"
+			],
+			[
+				"checkout",
+				"imentore-ecommerce/app/views/layouts/checkout.html.slim"
+			],
+			[
+				"configtest.rb",
+				"imentore-base/config/environments/test.rb"
+			],
+			[
+				"featurev",
+				"imentore-testing/features/support/env.rb"
+			],
+			[
+				".wat",
+				"imentore-base/.watchr"
+			],
+			[
+				"shipping",
+				"imentore-ecommerce/app/views/imentore/checkouts/shipping_method.html.slim"
+			],
+			[
+				"pagament",
+				"imentore-ecommerce/app/models/imentore/payment_method/pagamento_digital.rb"
+			],
+			[
+				"gmefile",
+				"imentore-cms/Gemfile"
+			],
+			[
+				"route.rb",
+				"imentore-cms/config/routes.rb"
+			],
+			[
+				"cartshow",
+				"imentore-ecommerce/app/views/imentore/carts/show.html.slim"
+			],
+			[
+				"addresssh",
+				"imentore-ecommerce/app/views/imentore/checkouts/address_shipping.html.slim"
+			],
+			[
+				"addresshtml",
+				"imentore-ecommerce/app/views/imentore/checkouts/address_shipping.html.slim"
+			],
+			[
+				"checkou",
+				"imentore-ecommerce/app/controllers/imentore/checkouts_controller.rb"
+			],
+			[
+				"checkadres",
+				"imentore-ecommerce/app/views/imentore/checkouts/address_shipping.html.slim"
+			],
+			[
+				"cartcontro",
+				"imentore-ecommerce/app/controllers/imentore/carts_controller.rb"
+			],
+			[
+				"productcontrol",
+				"imentore-ecommerce/app/controllers/imentore/products_controller.rb"
+			],
+			[
+				"createtemplate",
+				"imentore-base/db/migrate/20120416124628_create_templates.imentore_cms.rb"
+			],
+			[
+				"managertheme",
+				"imentore-manager/app/models/imentore/manager/theme.rb"
+			],
+			[
+				"altertheme",
+				"imentore-base/db/migrate/20120416124629_alter_themes_add_default.imentore_cms.rb"
+			],
+			[
+				"altercustomersaddactive",
+				"imentore-base/db/migrate/20120621005732_alter_customers_add_active.rb"
+			],
+			[
+				"alterthemesaddactive",
+				"imentore-base/db/migrate/20120625185332_alter_themes_add_active.rb"
+			],
+			[
+				"dbmigratecreatecustomer",
+				"imentore-base/db/migrate/20120503002954_create_customers.imentore_auth.rb"
+			],
+			[
+				"imentore-basedbmigratethemes",
+				"imentore-base/db/migrate/20120416124629_alter_themes_add_default.imentore_cms.rb"
+			],
+			[
+				"dbcreate",
+				"imentore-auth/db/migrate/20120502232943_create_customers.rb"
+			],
+			[
+				"basecreatetheme",
+				"imentore-dashboard/spec/dummy/db/migrate/20120510233845_alter_themes_add_default.imentore_cms.rb"
+			],
+			[
+				"ecommercecreatestores",
+				"imentore-ecommerce/db/migrate/20090228122247_create_stores.rb"
+			],
+			[
+				"ecommercedbmigratecreatestores",
+				"imentore-ecommerce/spec/dummy/db/migrate/20120419000538_create_stores.imentore_ecommerce.rb"
+			],
+			[
+				"cartspec",
+				"imentore-ecommerce/spec/models/imentore/cart_spec.rb"
 			],
 			[
 				"engine.rb",
 				"imentore-manager/lib/imentore-manager/engine.rb"
-			],
-			[
-				"route.rb",
-				"imentore-manager/config/routes.rb"
 			],
 			[
 				"templatesnew",
@@ -1490,10 +1762,6 @@
 				"imentore-manager/app/controllers/imentore/manager/templates_controller.rb"
 			],
 			[
-				"storecontro",
-				"imentore-manager/app/controllers/imentore/manager/stores_controller.rb"
-			],
-			[
 				"basecontroller.rb",
 				"imentore-manager/app/controllers/imentore/manager/base_controller.rb"
 			],
@@ -1504,10 +1772,6 @@
 			[
 				"_nav",
 				"imentore-core/app/views/layouts/inspinia/_navigation.html.slim"
-			],
-			[
-				"sitecontro",
-				"imentore-core/app/controllers/imentore/site_controller.rb"
 			],
 			[
 				"liquid",
@@ -1642,10 +1906,6 @@
 				"imentore-ecommerce/app/models/imentore/payment_method.rb"
 			],
 			[
-				"shipping",
-				"imentore-ecommerce/app/views/imentore/checkouts/shipping_method.html.slim"
-			],
-			[
 				"order.rb",
 				"imentore-ecommerce/app/models/imentore/order.rb"
 			],
@@ -1660,10 +1920,6 @@
 			[
 				"regii",
 				"imentore-core/app/views/imentore/site/_register.html.slim"
-			],
-			[
-				"store.rb",
-				"imentore-ecommerce/app/models/imentore/store.rb"
 			],
 			[
 				"imentorebasehelper",
@@ -1690,24 +1946,8 @@
 				"imentore-ecommerce/app/controllers/imentore/checkouts_controller.rb"
 			],
 			[
-				"checkout",
-				"imentore-ecommerce/app/services/imentore/checkout_service.rb"
-			],
-			[
-				"gem",
-				"imentore-base/Gemfile"
-			],
-			[
-				"cartcontro",
-				"imentore-ecommerce/app/controllers/imentore/carts_controller.rb"
-			],
-			[
 				"liquidcart",
 				"imentore-cms/lib/liquid_filter_cart.rb"
-			],
-			[
-				"cartshow",
-				"imentore-ecommerce/app/views/imentore/carts/show.html.slim"
 			],
 			[
 				"developme",
@@ -1784,182 +2024,6 @@
 			[
 				"complete",
 				"imentore-ecommerce/app/views/imentore/checkouts/complete.html.slim"
-			],
-			[
-				"resolver",
-				"imentore-cms/lib/resolver.rb"
-			],
-			[
-				"productcontro",
-				"imentore-ecommerce/app/controllers/imentore/products_controller.rb"
-			],
-			[
-				"formtag",
-				"imentore-cms/lib/liquid/form_tag.rb"
-			],
-			[
-				"check",
-				"imentore-ecommerce/app/views/layouts/checkout.html.slim"
-			],
-			[
-				"pagseguro",
-				"imentore-ecommerce/app/models/imentore/payment_method/pag_seguro.rb"
-			],
-			[
-				"address",
-				"imentore-core/app/models/imentore/address.rb"
-			],
-			[
-				"tempalteindex",
-				"imentore-cms/app/views/imentore/admin/templates/index.html.slim"
-			],
-			[
-				"assetfolder.rb",
-				"imentore-cms/app/models/imentore/asset_folder.rb"
-			],
-			[
-				"assetindex",
-				"imentore-cms/app/views/imentore/admin/asset_folders/index.html.slim"
-			],
-			[
-				"variant.rb",
-				"imentore-ecommerce/app/models/imentore/product_variant.rb"
-			],
-			[
-				"fileuplaoder.rb",
-				"imentore-cms/app/uploaders/file_uploader.rb"
-			],
-			[
-				".git",
-				".gitignore"
-			],
-			[
-				"addsamebillingaddresstoorders",
-				"imentore-base/db/migrate/20160105211530_add_same_billing_address_to_orders.rb"
-			],
-			[
-				"adddifferentbillingaddresstoorders",
-				"imentore-base/db/migrate/20160105012321_add_different_billing_address_to_orders.rb"
-			],
-			[
-				"delivery",
-				"imentore-ecommerce/app/models/imentore/delivery_handle.rb"
-			],
-			[
-				"routre",
-				"imentore-ecommerce/config/routes.rb"
-			],
-			[
-				"simlpeform",
-				"imentore-core/config/initializers/simple_form_bootstrap.rb"
-			],
-			[
-				"controller.rb",
-				"imentore-auth/app/controllers/imentore/customers_controller.rb"
-			],
-			[
-				"paymencontr",
-				"imentore-ecommerce/app/controllers/imentore/admin/payment_methods_controller.rb"
-			],
-			[
-				"checkoutservice",
-				"imentore-ecommerce/app/services/imentore/checkout_service.rb"
-			],
-			[
-				"route.r",
-				"imentore-ecommerce/config/routes.rb"
-			],
-			[
-				"layoutcss",
-				"imentore-ecommerce/app/views/layouts/checkout.html.slim"
-			],
-			[
-				"checkout.js",
-				"imentore-core/app/assets/javascripts/checkout.js"
-			],
-			[
-				"admin.",
-				"imentore-core/app/assets/javascripts/admin.js"
-			],
-			[
-				"defa",
-				"imentore-core/app/assets/stylesheets/base-default.css.scss"
-			],
-			[
-				"base",
-				"imentore-core/app/assets/stylesheets/base-default.css.scss"
-			],
-			[
-				"checkout.",
-				"imentore-core/app/assets/stylesheets/checkout.css"
-			],
-			[
-				"insp",
-				"imentore-core/app/assets/stylesheets/inspinia.css"
-			],
-			[
-				"bootstrap",
-				"imentore-core/vendor/assets/stylesheets/bootstrap3.css"
-			],
-			[
-				"bottstrapcss",
-				"imentore-core/vendor/assets/stylesheets/inspinia/bootstrap-rtl/bootstrap-rtl.css"
-			],
-			[
-				"sharedadd",
-				"imentore-core/app/views/shared/_address.html.slim"
-			],
-			[
-				"simpleform",
-				"imentore-core/config/initializers/simple_form_bootstrap.rb"
-			],
-			[
-				"checkoutadd",
-				"imentore-ecommerce/app/views/imentore/checkouts/address.html.slim"
-			],
-			[
-				"inspinia",
-				"imentore-core/app/assets/stylesheets/inspinia.css"
-			],
-			[
-				"base-defau",
-				"imentore-core/app/assets/stylesheets/base-default.css.scss"
-			],
-			[
-				"inspin",
-				"imentore-core/app/views/layouts/inspinia.html.slim"
-			],
-			[
-				"checkout/",
-				"imentore-ecommerce/app/views/imentore/checkouts/address.html.slim"
-			],
-			[
-				"fileuploader",
-				"imentore-cms/app/uploaders/file_uploader.rb"
-			],
-			[
-				"customer.rb",
-				"imentore-auth/app/models/imentore/customer.rb"
-			],
-			[
-				"notificai",
-				"imentore-ecommerce/app/models/imentore/notification.rb"
-			],
-			[
-				"lquid",
-				"imentore-cms/lib/liquid_filter.rb"
-			],
-			[
-				"lqu",
-				"imentore-cms/lib/liquid_filter_paginate.rb"
-			],
-			[
-				"cart",
-				"imentore-core/app/assets/stylesheets/cart.css"
-			],
-			[
-				"cart.js",
-				"imentore-core/app/assets/javascripts/cart.js"
 			]
 		],
 		"width": 0.0
@@ -1984,11 +2048,15 @@
 		"selected_items":
 		[
 			[
+				"check_store",
+				"check_store"
+			],
+			[
 				"",
-				"String"
+				"$get"
 			]
 		],
-		"width": 494.0
+		"width": 683.0
 	},
 	"selected_group": 0,
 	"settings":
@@ -1998,7 +2066,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 314.0,
+	"side_bar_width": 251.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

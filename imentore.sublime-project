@@ -2,7 +2,7 @@
 	"folders":
 	[
 		{ 
-      "folder_exclude_patterns": ["tmp", "public/system","public/data", "public/assets", "public/uploads", "public/images", "javascripts", "log"],
+      "folder_exclude_patterns": ["tmp", "/imentore-base/tmp", "public/system","public/data", "public/assets", "public/uploads", "public/images", "javascripts", "log"],
 
 			"path": "/Users/brenoperucchi/Google-Drive/03-Apps/imentore",
       "file_exclude_patterns": ["*.ru", "RakeFile", ".log", "Notes", "go2b.tmproj", "*.sublime*", "README.*", "MIT-LICENSE", 

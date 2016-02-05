@@ -10,7 +10,7 @@ module Imentore
     mount_uploader :picture, PictureUploader
 
     def remove_file
-      self.remove_file!
+      self.remove_picture!
     end
 
     # validates :price, :quantity, presence: true

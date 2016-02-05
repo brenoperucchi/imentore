@@ -13,7 +13,7 @@ module Old
     mount_uploader :picture, PictureUploader
 
     def remove_file
-      self.remove_file!
+      self.remove_picture!
     end
 
     # has_attached_file :picture,

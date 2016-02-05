@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/bperucchi/moip-ruby.git
+  revision: 84f551258fc3cbf73da757214e2f59922044e39f
+  specs:
+    moip-ruby (0.1.4)
+      activesupport
+      httparty
+      nokogiri
+      rspec
+
+GIT
   remote: git://github.com/bperucchi/pagamento_digital.git
   revision: 4cd251b0bdcb237b383fe656c77aa2835edd3848
   specs:
@@ -478,6 +488,7 @@ DEPENDENCIES
   liquid (= 3.0.3)
   meta_request
   mini_magick (= 4.2.7)
+  moip-ruby (= 0.1.4)!
   mysql2 (= 0.3.20)
   pag_seguro (= 0.1.18)!
   pagamento_digital!
