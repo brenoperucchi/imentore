@@ -15,6 +15,10 @@ module Imentore
 
       protected
 
+      def page_params
+        params.require(:page).permit(:active, :name, :handle, :html, :body)
+      end
+
       def begin_of_association_chain
         current_store
       end

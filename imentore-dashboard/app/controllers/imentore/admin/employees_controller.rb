@@ -24,7 +24,7 @@ module Imentore
       end
 
       def create
-        @employee = current_store.employees.new(params[:employee])
+        @employee = current_store.employees.new(employee_params)
         @employee.user.store = current_store
         @employee.department = "admin"
         create! do |success, failure|
@@ -41,6 +41,11 @@ module Imentore
       end
 
       protected
+
+      def employee_params
+        params.require(:employee).permit(:active, :name, :brand, :irs_id, :national_id, user_attributes:[:email, :id, :password, :password_confirmation], addresses_attributes:[:name, :street, :complement, :city, :country, :state, :zip_code, :phone])
+      end
+
 
       def begin_of_association_chain
         current_store

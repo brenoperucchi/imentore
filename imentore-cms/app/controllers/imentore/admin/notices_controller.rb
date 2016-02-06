@@ -15,6 +15,10 @@ module Imentore
 
       protected
 
+      def notice_params
+        params.require(:notice).permit(:active, :name, :handle, :body)
+      end
+
       def begin_of_association_chain
         current_store
       end

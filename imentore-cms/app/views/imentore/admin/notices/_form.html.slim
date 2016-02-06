@@ -1,12 +1,23 @@
-legend= t(:newa) + ' ' + t(:notices).downcase
-= simple_form_for([:admin, @notice], :html => {:class => 'form-horizontal'}) do |f|
-  = f.error_notification
-  = f.input :active, as: :boolean
-  = f.input :name
-  = f.input :handle
-  = f.input :body, input_html: {style:'height:100px;', class: 'tinymce'}
-  = tinymce
-
-  .form-actions
-    = f.button :submit, :class => 'btn-primary'
-    / = f.input :calculator, collection: [["Flat rate", "flat_rate"]]
+= simple_form_for [:admin, @notice], :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5
+              = t(:customer_edit)
+          .ibox-content
+            .row
+              .col-md-12
+                = f.error_notification
+                = f.input :active, as: :boolean
+                = f.input :name
+                = f.input :handle
+                = f.input :body, input_html: {style:'height:100px;', class: 'tinymce'}
+                = tinymce
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-2
+                = f.submit nil, :class => 'btn btn-primary'
+                '
+                = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_notices_path, :class => 'btn btn-outline btn-danger'

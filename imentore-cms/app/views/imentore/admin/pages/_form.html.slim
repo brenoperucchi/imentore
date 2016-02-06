@@ -1,13 +1,26 @@
-legend= t(:newa) + ' ' + t(:page).downcase
-= simple_form_for([:admin, @page], :html => {:class => 'form-horizontal'}) do |f|
-  = f.error_notification
-  = f.input :active, as: :boolean
-  = f.input :name
-  = f.input :handle
-  = f.input :html, input_html: {style:'height:100px;'}
-  = f.input :body, input_html: {style:'height:100px;', class: 'tinymce'}
-  = tinymce
+= simple_form_for [:admin, @page], :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5
+              | Usuário do sistema
+              / small Simple login form example
+          .ibox-content
+            .row
+              .col-lg-12
+                = f.error_notification
+                = f.input :active, as: :boolean
+                = f.input :name
+                = f.input :handle
+                = f.input :html, input_html: {style:'height:100px;'}
+                = f.input :body, input_html: {style:'height:100px;', class: 'tinymce'}
+                = tinymce
 
-  .form-actions
-    = f.button :submit, :class => 'btn-primary'
-    / = f.input :calculator, collection: [["Flat rate", "flat_rate"]]
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-2
+                = f.submit nil, :class => 'btn btn-primary'
+                = " "
+                = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_pages_path, :class => 'btn btn-outline btn-danger'

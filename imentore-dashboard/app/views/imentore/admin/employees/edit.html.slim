@@ -30,4 +30,4 @@
               .col-sm-4.col-sm-offset-2
                 = f.submit nil, :class => 'btn btn-primary'
                 '
-                = submit_tag t(:cancel), :type => :reset, :class => "btn btn-danger"
+                = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_employees_path, :class => 'btn btn-outline btn-danger'

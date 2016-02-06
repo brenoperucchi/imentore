@@ -12,7 +12,8 @@ html
   body
     = render 'layouts/inspinia/skinconfig' 
     #wrapper[class="dashboards.dashboard_4_1"]
-      = render 'layouts/inspinia/navigation'
+      - if user_signed_in?
+        = render 'layouts/inspinia/navigation'
       #page-wrapper[class="gray-bg"]
         = render 'layouts/inspinia/topnavbar'
         = yield

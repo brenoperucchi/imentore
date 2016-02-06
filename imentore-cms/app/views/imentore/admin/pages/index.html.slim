@@ -1,34 +1,54 @@
-legend= t(:page_title)
-p
-  = link_to(new_admin_page_path, :class=>'btn btn-primary') do
-    i.icon-white.icon-plus
-    '
-    = t('newa') + ' ' + t('page')
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5= t(:pages)
+          .ibox-tools
+            a.collapse-link
+              i.fa.fa-chevron-up
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              i.fa.fa-wrench
+            ul.dropdown-menu.dropdown-user
+              / li
+              /   a href="#"  Config option 1
+              / li
+              /   a href="#"  Config option 2
+            a.close-link
+              i.fa.fa-times
+        .ibox-content
+          table.table.table-striped.table-bordered.table-hover
+            thead
+              tr
+                th= t(:active)
+                th= t(:name)
+                th= t(:handle)
+                th= t(:created_at)
+                th= t(:actions)
+            tbody
+              - @pages.each do |page|
+                tr
+                  td
+                    = button_status(page.active, '#')
+                  td= page.name
+                  td= page.handle
+                  td= l(time_zone(page.created_at), format: :short2)
+                  td
+                    = link_to(edit_admin_page_path(page), class: 'btn btn-outline btn-default btn-sm') do
+                      i.icon-black.icon-edit
+                      '
+                      = t(:edit)
+                    '
+                    = link_to(admin_page_path(page), class: 'btn btn-outline btn-sm btn-danger', method: :delete) do
+                      i.icon-white.icon-trash
+                      '
+                      = t(:remove)
+          .row 
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-0
+                = link_to(new_admin_page_path, :class=>'btn btn btn-primary') do
+                  i.icon-white.icon-plus
+                  '
+                  = t('newa') + ' ' + t('page')
 
-.table-responsive
-  table.table.table-striped
-    thead
-      tr
-        th= t(:active)
-        th= t(:name)
-        th= t(:handle)
-        th= t(:created_at)
-        th= t(:actions)
-    tbody
-      - @pages.each do |page|
-        tr
-          td
-            = button_status(page.active, '#')
-          td= page.name
-          td= page.handle
-          td= l(time_zone(page.created_at), format: :short2)
-          td
-            = link_to(edit_admin_page_path(page), class: 'btn') do
-              i.icon-black.icon-edit
-              '
-              = t(:edit)
-            '
-            = link_to(admin_page_path(page), class: 'btn btn-danger', method: :delete) do
-              i.icon-white.icon-trash
-              '
-              = t(:remove)

@@ -23,6 +23,7 @@
                       = user.input :password
                       = user.input :password_confirmation
                   .col-lg-6
+                    - f.object.addresses.build unless f.object.addresses.nil?
                     = f.simple_fields_for :addresses do |addr|
                       = render("shared/address", addr: addr)
             .hr-line-dashed
@@ -30,4 +31,4 @@
               .col-sm-4.col-sm-offset-2
                 = f.submit nil, :class => 'btn btn-primary'
                 '
-                = submit_tag t(:cancel), :type => :reset, :class => "btn btn-danger"
+                = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_employees_path, :class => 'btn btn-outline btn-danger'

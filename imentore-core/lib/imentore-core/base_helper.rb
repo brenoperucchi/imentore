@@ -26,7 +26,8 @@ module Imentore
 
     def check_store
       unless current_store
-        render template: 'imentore/site/show'
+        # render template: 'imentore/site/show', layout: 'site'
+        redirect_to site_path
       end
     end
 

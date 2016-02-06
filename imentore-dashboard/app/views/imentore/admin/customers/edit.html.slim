@@ -1,47 +1,29 @@
-.wrapper.wrapper-content.animated.fadeInRight
-  .row
-    .col-lg-12
-      .ibox.float-e-margins
-        .ibox-title
-          h5= t(:customers)
-          .ibox-tools
-            a.collapse-link
-              i.fa.fa-chevron-up
-            a.dropdown-toggle data-toggle="dropdown" href="#" 
-              i.fa.fa-wrench
-            ul.dropdown-menu.dropdown-user
-              / li
-              /   a href="#"  Config option 1
-              / li
-              /   a href="#"  Config option 2
-            a.close-link
-              i.fa.fa-times
-        .ibox-content
-          table.table.table-striped.table-bordered.table-hover.dataTables-example#datatable[data-source="#{admin_customers_url(format: 'json')}"]
-            thead
-              tr
-                th.input-mini= t(:active)
-                th= t(:id)
-                th= t(:name)
-                th= t(:email)
-                th= t(:created_at)
-                th= t(:actions)
-          /   tbody
-          /     - @customers.each do |customer|
-          /       tr
-          /         td
-          /           = button_status(customer.active, '#')
-          /         td= customer.name
-          /         td= customer.user.email
-          /         td= l(time_zone(customer.created_at), format: :short2)
-          /         td
-          /           = link_to(edit_admin_customer_path(customer), class: 'btn') do
-          /             i.icon-black.icon-edit
-          /             '
-          /             = t(:edit)
-          /           '
-          /           = link_to(admin_customer_path(customer), class: 'btn btn-danger', method: :delete) do
-          /             i.icon-white.icon-trash
-          /             '
-          /             = t(:remove)
-          / = will_paginate @customers, :renderer => BootstrapPagination::Rails
+= simple_form_for [:admin, @customer], :html => { :class => "form-horizontal" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f|
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5
+              = t(:customer_edit)
+          .ibox-content
+            .row
+              .col-md-12
+                .row
+                  .col-md-6
+                    = f.input :active
+                    = f.input :name
+                    = f.input :brand
+                    = f.input :irs_id
+                    = f.input :national_id
+                    = f.simple_fields_for :user do |user|
+                      = user.input :email
+                  .col-md-6
+                    = f.simple_fields_for :addresses do |addr|
+                      = render("shared/address", addr: addr)
+            .hr-line-dashed
+            .form-group
+              .col-sm-4.col-sm-offset-2
+                = f.submit nil, :class => 'btn btn-primary'
+                = " "
+                = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_customers_path, :class => 'btn btn-outline btn-danger'

@@ -1,3 +1,6 @@
+- content_for :header do
+  = javascript_include_tag('admin/datatable.js')
+
 .wrapper.wrapper-content.animated.fadeInRight
   .row
     .col-lg-12
@@ -21,7 +24,6 @@
             thead
               tr
                 th.input-mini= t(:active)
-                th= t(:id)
                 th= t(:name)
                 th= t(:email)
                 th= t(:created_at)
