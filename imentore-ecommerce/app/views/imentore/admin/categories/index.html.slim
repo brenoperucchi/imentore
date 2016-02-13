@@ -28,7 +28,7 @@
               / = categories_table(@categories)
               #nestable2.dd
                 ol.dd-list
-                  = render "children", categories: @categories
+                  = render "children", categories: @categories.roots
             .hr-line-dashed
             .form-group
               h3= t(:category_create)
