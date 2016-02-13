@@ -9,9 +9,9 @@ module Imentore
       end
       scope :active, -> { where(active: true) }
       def self.install_store(store)
-        init = YAML.load_file(File.expand_path("#{Rails.root}/../imentore-manager/public/defaults/send_emails/initializer.yml")  )
-        init.keys.each do |key|
-          store.send_emails.create(active: true, body: init[key]["body"], subject: init[key]["subject"], name: init[key]["name"])
+        conf = YAML.load_file(File.expand_path("#{Rails.root}/../imentore-manager/app/defaults/send_emails/configuration.yml")  )
+        conf.keys.each do |key|
+          store.send_emails.create(active: true, body: conf[key]["body"], subject: conf[key]["subject"], name: conf[key]["name"])
         end
         return true
       end  

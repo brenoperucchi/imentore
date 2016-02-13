@@ -456,7 +456,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.1.1)
   capistrano-rbenv (~> 2.0.2)
   capybara (= 2.6.2)
-  capybara-webkit
+  capybara-webkit (= 1.8.0)
   carrierwave (= 0.7.0)
   coffee-rails!
   coffee-script-source

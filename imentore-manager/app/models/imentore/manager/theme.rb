@@ -82,13 +82,13 @@ module Imentore
 
       def self.install_themes(store)
         # Remember, this runs on the current directory
-        base_directory = File.expand_path("#{Rails.root}/../imentore-manager/public/defaults/themes/")
-        init = YAML.load_file(File.expand_path("#{base_directory}/initializer.yml"))
-        init.keys.each do |themes|
+        base_directory = File.expand_path("#{Rails.root}/../imentore-manager/app/defaults/themes/")
+        conf = YAML.load_file(File.expand_path("#{base_directory}/configuration.yml"))
+        conf.keys.each do |themes|
           next if File.directory?(File.expand_path("#{base_directory}/#{themes}"))
           
           theme_directory = themes.to_s.rjust(2,'0')
-          theme = Imentore::Theme.create(name: init[themes]["name"], store: store, system: true)
+          theme = Imentore::Theme.create(name: conf[themes]["name"], store: store, system: true)
           folder = theme.folders.create(name: "assets", store: store)
 
           Dir.chdir File.expand_path("#{base_directory}/#{theme_directory}/assets")  
@@ -100,7 +100,7 @@ module Imentore
           ["layouts", "templates"].each do |template| 
             Dir.chdir File.expand_path("#{base_directory}/#{theme_directory}/")  
             Dir.glob("*").each do |file|
-              path = init[themes][template][file]
+              path = conf[themes][template][file]
               next if File.directory?(file) or File.exist?("#{Dir.pwd}/file") or path.nil?
               body = File.open("#{base_directory}/#{theme_directory}/#{file}", "rb").read
               if template == "layouts"
