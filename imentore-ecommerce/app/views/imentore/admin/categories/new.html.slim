@@ -1,0 +1,2 @@
+= simple_form_for [:admin, @category], :html=> {:class =>"well form-inline", id: 'edit', method: 'put'}, wrapper: :inline_form do |f|
+  = render "form", category: @category, f:f

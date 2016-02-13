@@ -6,7 +6,7 @@ module Imentore
     validates :name, presence: true
     # validates :handle, format: { with: /^[-A-Za-z\d_]+$/ }
 
-    has_many :categories_products
+    has_many :categories_products, dependent: :destroy
     has_many :products, :through => :categories_products, :source => :product
 
     def handle=(param)

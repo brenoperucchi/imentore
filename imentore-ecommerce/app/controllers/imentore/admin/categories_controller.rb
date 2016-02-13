@@ -3,6 +3,7 @@ module Imentore
     class CategoriesController < BaseController
       inherit_resources
       respond_to :json, only: [:index]
+      respond_to :js, only: [:destroy, :edit]
 
       def index
         @category = begin_of_association_chain.categories.new
@@ -17,6 +18,12 @@ module Imentore
       def new
         @category = build_resource
 
+      end
+
+      def edit
+        # @category = begin_of_association_chain.categories.new
+        @categories = collection
+        edit!
       end
 
       def create
@@ -43,7 +50,12 @@ module Imentore
       end
 
       def destroy
-        destroy! { admin_categories_path }
+        destroy! do |format|
+          format.html { admin_categories_path }
+          format.js do
+            @categories = collection
+          end
+        end
       end
 
       protected

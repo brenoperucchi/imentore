@@ -1,71 +1,43 @@
-- content_for :footer do
-  javascript:
-    $(document).ready(function(){
-      var action = $('form#edit').attr('action')
-      $('a#edit_category').click(function(e){
-        $('.div#edit').slideDown('slow')
-        var id = $(this).attr('category_id')
-        var parent_id = $(this).attr('parent_id')
-        var name = $(this).parents('tr').find('td#name').text()
-        var handle = $(this).parents('tr').find('td#handle').text()
-
-        $('form#edit').find('input#category_name').val(name)
-        $('form#edit').find('input#category_handle').val(handle)
-        if (parent_id == undefined) {
-          $('form#edit').find('select').find('option:selected').removeAttr('selected')
-          $('form#edit').find('select').find('option').first().attr('selected', 'selected')
-        }else{
-          $('form#edit').find('select').find('option').first().removeAttr('selected')
-          $('form#edit').find('select').find('option[value='+parent_id+']').attr('selected', true)
-        }
-        $('form#edit').attr('action', action+'/'+id)
-        $('form#edit').attr('method', 'post')
-        e.preventDefault();
-      })
+.modal-js
+  #myModal.modal.inmodal.fade aria-hidden="true" role="dialog" tabindex="-1" 
+    .modal-dialog.modal-lg
+      .modal-content
 
 
-    })
-
-.wrapper.wrapper-content.animated.fadeInRight
-  .row
-    .col-lg-12
-      .ibox.float-e-margins
-        .ibox-title
-          h5= t(:product_index)
-          .ibox-tools
-            a.collapse-link
-              i.fa.fa-chevron-up
-            a.dropdown-toggle data-toggle="dropdown" href="#" 
-              i.fa.fa-wrench
-            ul.dropdown-menu.dropdown-user
-              / li
-              /   a href="#"  Config option 1
-              / li
-              /   a href="#"  Config option 2
-            a.close-link
-              i.fa.fa-times
-        .ibox-content
-          .table-responsive
-            = categories_table(@categories)
-          .row 
+.index-js
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5= t(:categories)
+            .ibox-tools
+              a.collapse-link
+                i.fa.fa-chevron-up
+              a.dropdown-toggle data-toggle="dropdown" href="#" 
+                i.fa.fa-wrench
+              ul.dropdown-menu.dropdown-user
+                / li
+                /   a href="#"  Config option 1
+                / li
+                /   a href="#"  Config option 2
+              a.close-link
+                i.fa.fa-times
+          .ibox-content
+            .table-responsive
+              / = categories_table(@categories)
+              #nestable2.dd
+                ol.dd-list
+                  = render "children", categories: @categories
             .hr-line-dashed
             .form-group
-              .col-sm-8.col-sm-offset-0
-                .div.hide#edit
-                  h3= t(:category_edit)
-                  = simple_form_for [:admin, @category], :html=> {:class =>"well form-inline", id: 'edit', method: 'put'}, wrapper: :inline_form do |f|
-                    = f.error_notification
-                    = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => t(:select_parent), input_html: {:class =>  "inline"}, :label => false, :disabled => true
-                    = f.input :name, placeholder: t(:category_option_name), input_html: {:class =>  "inline"}, :label => false
-                    = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, :label => false
-                    .form-group
-                      = f.button :submit, t(:category_update)
-
-                h3= t(:category_create)
-                = simple_form_for [:admin, @category], :html=> {:class =>"well form-inline"}, wrapper: :inline_form do |f|
-                  = f.error_notification
-                  = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => t(:select_parent), input_html: {:class =>  "inline"}, :label => false
-                  = f.input :name, :placeholder => t(:category_option_name), input_html: {:class =>  "inline"}, :label => false
-                  = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, :label => false
-                  .form-group
-                    = f.button :submit
+              h3= t(:category_create)
+              = simple_form_for [:admin, @category], :html=> {:class =>"well form-inline"}, wrapper: :inline_form do |f|
+                = f.error_notification
+                = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => t(:select_parent), input_html: {:class =>  "inline"}
+                '
+                = f.input :name, placeholder: t(:category_option_name), input_html: {:class =>  "inline"}
+                / '
+                = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}, as: :hidden
+                .form-group
+                  = f.submit nil, :class => 'btn btn-default'

@@ -15,13 +15,9 @@ pt-BR:
   previous: Anterior
   email: E-mail
 
-  # user_for
-  'computer, clothing': 'Computadores, Roupas'
-
   variants: Variações
   options: Opções
   option: Opção
-
   order_placed: Pedido criado
   invoice_paid: Cobrança paga
   customer_create: Cliente criado
@@ -595,6 +591,8 @@ pt-BR:
         status: Situação
       imentore/invoice:
         status: Situação
+      imentore/category:
+          handle: Url Amigável
       errors:
         imentore_order:
           stock_null: Produto sem estoque

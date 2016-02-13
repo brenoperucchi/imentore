@@ -1,0 +1,15 @@
+ol.dd-list
+  - categories.each do |category|
+    li.dd-item data-id="2" 
+      .dd-handle.dd-nodrag
+        span.pull-right
+          / = link_to t('folders', :default => t("helpers.links.folders")),  new_admin_category_path(category), :class=>'btn btn-outline btn-info btn-xs', remote: true
+          / '
+          = link_to t('edit', :default => t("helpers.links.files")),  edit_admin_category_path(category), :class => 'btn btn-outline btn-info btn-xs', remote:true
+          '
+          = link_to t('destroy', :default => t('helpers.links.destroy')), admin_category_path(category), :method => :delete, remote: true, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-outline btn-danger btn-sm', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }", remote:true 
+        span.label.label-info
+          i.fa.fa-folder
+        = category.name
+      - if category.has_children?
+        = render "children", categories:category.children

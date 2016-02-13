@@ -1,0 +1,16 @@
+= simple_form_for [:admin, @category], :html => { :class => "form-horizontal", id: "my-awesome-dropzone" }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f| 
+  .modal-header
+    button.close data-dismiss="modal" type="button" 
+      span aria-hidden="true"  &times;
+      span.sr-only Close
+    h4.modal-title
+      = @category.name
+  .modal-body
+    = f.error_notification
+    / = f.input :ancestry, as: :select, collection: @categories.collect{|c| [c.name, c.id]}, :prompt => t(:select_parent), input_html: {:class =>  "inline"}, :disabled => true, selected: @category.id
+    = f.input :name, placeholder: t(:category_option_name), input_html: {:class =>  "inline"}
+    '
+    = f.input :handle, placeholder: t(:option_handle), input_html: {:class =>  "inline"}
+  .modal-footer
+    button.btn.btn-white data-dismiss="modal" type="button"  Close
+    = f.submit t(:save), :class => 'btn btn-primary'

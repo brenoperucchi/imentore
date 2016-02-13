@@ -1,0 +1,2 @@
+$("#myModal .modal-content").html("<%= escape_javascript(render template: 'imentore/admin/categories/edit.html.slim', locals: {category: @category}) %>");
+$('#myModal').modal('show')

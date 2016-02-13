@@ -27,7 +27,7 @@ Imentore::Core::Engine.routes.draw do
         put 'confirm_invoice', 'confirm_delivery', 'cancel', :on => :member
       end
 
-      resources :categories, only: [:edit, :index, :update, :create, :destroy]
+      resources :categories, only: [:edit, :index, :update, :create, :destroy, :new]
     end
 
     resources :stores, only: [:show] do
