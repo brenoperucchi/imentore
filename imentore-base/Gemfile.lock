@@ -311,9 +311,6 @@ GEM
     pry-remote (0.1.7)
       pry (~> 0.9)
       slop (~> 3.0)
-    pry-stack_explorer (0.4.9.2)
-      binding_of_caller (>= 0.7)
-      pry (>= 0.9.11)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.5.5)
@@ -499,7 +496,6 @@ DEPENDENCIES
   pry-byebug (= 3.3.0)
   pry-meta
   pry-remote (= 0.1.7)
-  pry-stack_explorer (= 0.4.9.2)
   quiet_assets
   rails (= 4.0.13)
   rails-observers

@@ -89,7 +89,7 @@ gem 'imentore-manager',   path: '../imentore-manager'
   gem 'pry-remote', "0.1.7"
   gem 'pry-byebug', "3.3.0"
   gem 'pry-meta'
-  gem 'pry-stack_explorer', "0.4.9.2"
+  # gem 'pry-stack_explorer', "0.4.9.2"
 # end
 
 # group :development do

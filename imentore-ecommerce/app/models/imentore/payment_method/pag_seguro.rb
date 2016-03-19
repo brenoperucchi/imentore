@@ -26,7 +26,7 @@ module Imentore
               :city => order.billing_address.city,
               :state => order.billing_address.state,
               :country => order.billing_address.country,
-              :postalCode => order.billing_address.zip_code,
+              :postalCode => order.billing_address.zip_code.gsub!(/[^0-9A-Za-z]/, ''),
               :currency => "BRL",
               :redirectURL =>  redirectURL,
               :shippingType => 3,
