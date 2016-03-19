@@ -90,18 +90,17 @@ module Imentore
         end
       elsif request.put?
         if CheckoutService.place_third(@order, order_params)
-          if @order.place
-            before_order_placed if charge? 
+          if charge? and @order.place
+            before_order_placed 
+            redirect_to @order.payment_url
           else
-            @order = current_order
-            flash[:alert] = @order.errors.full_messages.join(" / ")
-            complete
+            respond_to do |wants|
+              flash[:error] = @order.errors.full_messages.join(" / ")
+              wants.html { render :payment_method, layout: 'checkout' }
+            end
           end
         else
-          respond_to do |wants|
-            @order = current_order
-            wants.html { render :payment_method, layout: 'checkout' }
-          end
+          complete
         end   
       end
     end
@@ -161,43 +160,33 @@ module Imentore
         @order = current_store.orders.find(params[:order_id])
         @invoice = @order.invoice
         @prepare = @invoice.prepare
-        send("#{@invoice.payment_method.handle}".to_underscore)
+        @order.update_attribute(:payment_url, send("#{@invoice.payment_method.handle}".to_underscore))
         return true
       rescue Exception => msg
-        flash[:alert] = t(:checkout_charge_problem)
-        render :payment_method, layout: 'checkout' 
+        flash[:error] = t(:checkout_charge_problem)
         return false
       end
     end
 
     def custom
-      redirect_to complete_checkouts_url(host: current_store.url_site, store_id: current_store.id, order_id: @order.id)
+      complete_checkouts_url(host: current_store.url_site, store_id: current_store.id, order_id: @order.id)
     end
 
     def mo_ip
-      redirect_to @prepare['redirect_to'] if @prepare['redirect_to'].present?
+      @prepare['redirect_to'] if @prepare['redirect_to'].present?
     end
 
-    def pagamento_digital
-      pagamento_digital_form(@prepare)      
-    end
+    # def pagamento_digital
+    #   pagamento_digital_form(@prepare)      
+    # end
 
     def pag_seguro
-      redirect_to @prepare['redirect_to'] if @prepare['redirect_to'].present?
-    end
-
-    def payment_url(order)
-      case order.invoice.payment_method.handle 
-      when "pag_seguro", "mo_ip"
-        invoice = order.invoice
-        prepare = invoice.prepare
-        prepare['redirect_to']
-      end
+      @prepare['redirect_to'] if @prepare['redirect_to'].present?
     end
 
     def complete
       @order = current_order
-      @order.update_attribute(:payment_url, payment_url(@order))
+      @order.update_attribute(:payment_url, @order.payment_url)
       @items = @order.items.map {|item| CartItemDrop.new(item)}      
       render 'complete', layout: 'checkout', locals: {order: OrderDrop.new(@order)}
     end

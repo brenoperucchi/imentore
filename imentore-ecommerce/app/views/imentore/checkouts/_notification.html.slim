@@ -2,7 +2,7 @@
   javascript:
     $(document).ready(function(){
       $('div.alert').each(function(){
-        if ( $(this).find('p').text().length > 1 ) {
+        if ( $(this).find('p').text().length > 4 ) {
          $(this).slideDown('slow')
         }
       })
@@ -19,10 +19,12 @@
         button.close aria-label="Close" data-dismiss="alert" type="button" 
           span aria-hidden="true"  &times;
         strong= t(:warning)
-        p= flash[:alert]
+        - if flash[:error]
+          p= flash[:error]
       .alert.alert-success.alert-dismissible[role="alert" style="display:none"]
         button.close aria-label="Close" data-dismiss="alert" type="button" 
           span aria-hidden="true"  &times;
         strong= t(:success)
-        p= flash[:success]
+        - if flash[:success]
+          p= flash[:success]
         

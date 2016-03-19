@@ -41,7 +41,7 @@ module Imentore
       order.attributes = {invoice_attributes: params[:invoice_attributes]} if params[:invoice_attributes].present?
       order.invoice.amount = order.total_amount
       if order.placed? or order.canceled?
-        return true
+        return false
       else
         order.save
       end
