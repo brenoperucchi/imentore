@@ -25,7 +25,7 @@ module Imentore
 
       def create
         @theme = current_store.themes.find(params[:theme_id])
-        @asset = @theme.assets.new(asset_params)
+        @asset = @theme.assets.new(asset_params.merge(theme: @theme))
         respond_to do |format|
           if @asset.save
             format.json {

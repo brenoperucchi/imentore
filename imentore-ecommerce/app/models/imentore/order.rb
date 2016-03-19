@@ -34,7 +34,7 @@ module Imentore
   class Order < ActiveRecord::Base
     acts_as_paranoid
     
-    attr_accessor :shipping_checkbox, :payment_url, :valid_billing, :validate_step
+    attr_accessor :shipping_checkbox, :valid_billing, :validate_step
 
     mattr_accessor :sent_email
     self.sent_email = false

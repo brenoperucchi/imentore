@@ -95,7 +95,7 @@ module Imentore
           else
             @order = current_order
             flash[:alert] = @order.errors.full_messages.join(" / ")
-            render :complete, layout: 'checkout'
+            complete
           end
         else
           respond_to do |wants|
@@ -197,7 +197,7 @@ module Imentore
 
     def complete
       @order = current_order
-      @order.payment_url = payment_url(@order)
+      @order.update_attribute(:payment_url, payment_url(@order))
       @items = @order.items.map {|item| CartItemDrop.new(item)}      
       render 'complete', layout: 'checkout', locals: {order: OrderDrop.new(@order)}
     end
