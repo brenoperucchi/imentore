@@ -186,7 +186,6 @@ module Imentore
 
     def complete
       @order = current_order
-      @order.update_attribute(:payment_url, @order.payment_url)
       @items = @order.items.map {|item| CartItemDrop.new(item)}      
       render 'complete', layout: 'checkout', locals: {order: OrderDrop.new(@order)}
     end

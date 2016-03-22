@@ -32,7 +32,7 @@ gem "paranoia", "~> 2.0"
 gem 'unicorn', group: :production
 gem 'thin', group: :development
 gem 'rb-readline', group: :development
-gem 'quiet_assets', group: :development
+gem 'quiet_assets'
 gem 'sqlite3', group: :test
 
 gem "delocalize", "1.0.0"

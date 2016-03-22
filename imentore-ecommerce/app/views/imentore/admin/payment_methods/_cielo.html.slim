@@ -3,6 +3,6 @@
 = f.simple_fields_for :options do |fo|
   = fo.input :client_id, label: t(:client_id), input_html: { value: @payment_method.options["client_id"] }
   = fo.input :token, label: t(:token), input_html: { value: @payment_method.options["token"] }
-  = fo.input :overcharge, label: t(:overcharge), input_html: { overcharge: @payment_method.options["overcharge"] }
+  = fo.input :overcharge, as: :string, label: t(:overcharge), input_html: { value: f.object.options["overcharge"] }
 = f.input :description, input_html: { rows: 5, class: 'textarea'}
   / = fo.input :instruction,   input_html: { value: @payment_method.options["instruction"],  :rows => 5, :class => 'textarea' }, :as => :text

@@ -15,7 +15,7 @@
 .row-fluid
   = f.input :description, input_html: { rows: 5, class: 'textarea'}
   = f.simple_fields_for :options do |fo|
-    = fo.input :overcharge, label: t(:overcharge), input_html: { value: @payment_method.options["overcharge"] }
+    = fo.input :overcharge, as: :string, label: t(:overcharge), input_html: { value: f.object.options["overcharge"] }
   / = f.simple_fields_for :options do |fo|
   /   / = fo.input :instruction,   input_html: { value: @payment_method.options["instruction"],  :rows => 5, :class => 'textarea' }, :as => :text
   /   = fo.input :bank,   input_html: { checked: @payment_method.options["bank"] == "1", :id=>"bank"}, :as => :boolean
