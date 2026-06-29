@@ -1,5 +1,5 @@
-//= require iCheck/icheck.min.js
-//= require jquery-ui/jquery-ui-1.10.4.min.js
-//= require fullcalendar/moment.min.js
-//= require fullcalendar/fullcalendar.min.js
-//= require peity/jquery.peity.min.js
+//= require inspinia/iCheck/icheck.min.js
+//= require inspinia/jquery-ui/jquery-ui.min.js
+//= require inspinia/fullcalendar/moment.min.js
+//= require inspinia/fullcalendar/fullcalendar.min.js
+//= require inspinia/peity/jquery.peity.min.js

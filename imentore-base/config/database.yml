@@ -37,9 +37,9 @@ test:
 #   timeout: 5000
 development:
   adapter: mysql2
-  database: imentore
-  host: localhost
-  username: imentore
-  password: 123
+  database: <%= ENV.fetch("DATABASE_NAME", "imentore") %>
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  username: <%= ENV.fetch("DATABASE_USERNAME", "imentore") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "123") %>
   pool: 5
   timeout: 5000

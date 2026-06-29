@@ -1,0 +1,7 @@
+.git
+.bundle
+**/.DS_Store
+**/log/*
+**/tmp/*
+**/vendor/bundle
+docker-compose.override.yml

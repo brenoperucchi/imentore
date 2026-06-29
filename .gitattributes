@@ -1,0 +1,10 @@
+# Rails assets kept for Sprockets, but not representative of the project language.
+**/vendor/assets/** linguist-vendored
+imentore-core/app/assets/javascripts/inspinia/** linguist-vendored
+imentore-core/app/assets/stylesheets/inspinia/** linguist-vendored
+imentore-manager/app/defaults/themes/** linguist-vendored
+imentore-base/app/assets/javascripts/site/** linguist-vendored
+imentore-base/app/assets/javascripts/fileuploader.js linguist-vendored
+
+# Dummy app assets are Rails-generated scaffolding.
+**/spec/dummy/app/assets/** linguist-generated
